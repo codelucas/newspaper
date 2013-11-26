@@ -1,8 +1,7 @@
-*.py[cod]
 *.pyc
 
 .DS_Store # pycharm
-.idea/.* # pycharm
+.idea/ # pycharm
 
 # C extensions
 *.so

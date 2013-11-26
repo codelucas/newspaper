@@ -21,22 +21,25 @@ requires = [
     'tldextract==1.2.2'
 ]
 
-with open('README.rst') as f:
+with open('README.md') as f:
     readme = f.read()
 
 with open('LICENSE') as f:
     license = f.read()
 
+with open('HISTORY.md') as f:
+    history = f.read()
+
 setup(
     name='newspaper',
     version=VERSION,
-    description='Python HTTP for Humans.',
-    long_description=readme + '\r\n',
+    description='Python article extraction for humans.',
+    long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
     url='http://codelucas.com',
     packages=packages,
-    package_data={'': ['LICENSE', 'NOTICE'], 'newspaper': []},
+    package_data={'': ['LICENSE'], 'newspaper': []},
     package_dir={'newspaper': 'newspaper'},
     include_package_data=True,
     install_requires=requires,
