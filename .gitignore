@@ -2,8 +2,7 @@
 *.pyc
 
 *.DS_Store # pycharm
-*.idea # pycharm
-*settings.py # private information
+*.idea/* # pycharm
 
 # C extensions
 *.so

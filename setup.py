@@ -3,6 +3,8 @@
 import os
 import sys
 
+from .newspaper import VERSION
+
 try:
     from setuptools import setup
 except ImportError:
@@ -12,7 +14,12 @@ packages = [
     'newspaper'
 ]
 
-requires = []
+requires = [
+    'goose-extractor==1.0.2',
+    'requests==2.0.1',
+    'lxml==3.2.4',
+    'tldextract==1.2.2'
+]
 
 with open('README.rst') as f:
     readme = f.read()
@@ -22,7 +29,7 @@ with open('LICENSE') as f:
 
 setup(
     name='newspaper',
-    version='0.0.1',
+    version=VERSION,
     description='Python HTTP for Humans.',
     long_description=readme + '\r\n',
     author='Lucas Ou-Yang',
@@ -35,16 +42,4 @@ setup(
     install_requires=requires,
     license=license,
     zip_safe=False,
-    # classifiers=(
-    #    'Development Status :: 5 - Production/Stable',
-    #    'Intended Audience :: Developers',
-    #    'Natural Language :: English',
-    #    'License :: OSI Approved :: Apache Software License',
-    #    'Programming Language :: Python',
-    #    'Programming Language :: Python :: 2.6',
-    #    'Programming Language :: Python :: 2.7',
-    #    'Programming Language :: Python :: 3',
-    #    'Programming Language :: Python :: 3.3',
-
-    # ),
 )
