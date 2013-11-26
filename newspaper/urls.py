@@ -9,7 +9,6 @@ from urlparse import (
 
 log = logging.getLogger(__name__)
 
-
 MAX_FILE_MEMO = 20000
 
 good_paths = ['story', 'article', 'feature', 'featured', 'slides',
@@ -26,13 +25,11 @@ bad_domains = ['amazon', 'doubleclick', 'twitter']
 def remove_args(url, keep_params=(), frags=False):
     """remove all param arguments from a url"""
 
-    parsed= urlsplit(url)
+    parsed = urlsplit(url)
     filtered_query= '&'.join(
-        qry_item
-            for qry_item in parsed.query.split('&')
-                if qry_item.startswith(keep_params)
+        qry_item for qry_item in parsed.query.split('&')
+            if qry_item.startswith(keep_params)
     )
-
     if frags:
         frag = parsed[4:]
     else:
@@ -41,22 +38,24 @@ def remove_args(url, keep_params=(), frags=False):
     return urlunsplit(parsed[:3] + (filtered_query,) + frag)
 
 
-def redirect_back(url, domain):
+def redirect_back(url, source_domain):
     """some sites like pinterest have api's that cause news
     orgs to direct to their site with the real news url as a
     GET param. This method catches that and returns our param."""
 
     parse_data = urlparse(url)
-    udomain,  = parse_data.netloc
-    uquery = parse_data.query
+    domain = parse_data.netloc
+    query = parse_data.query
 
-    if domain in udomain or udomain in domain:
+    # If our url is even from a remotely similar domain or
+    # sub domain, we don't need to redirect.
+    if source_domain in domain or domain in source_domain:
         return url
 
-    dd = parse_qs(uquery)
-    if dd.get('url'):
-        # log.debug('caught redirect %s into %s' % (url, dd['url'][0]))
-        return dd['url'][0]
+    query_item = parse_qs(query)
+    if query_item.get('url'):
+        # log.debug('caught redirect %s into %s' % (url, query_item['url'][0]))
+        return query_item['url'][0]
 
     return url
 
@@ -182,3 +181,17 @@ def valid_url(url, verbose=False):
     return False
 
 
+def get_domain(abs_url):
+    """returns a url's domain, this method exists to
+    encapsulate all url code into this file."""
+
+    if abs_url is None:
+        return None
+    return urlparse(abs_url).netloc
+
+def get_scheme(abs_url):
+    """"""
+
+    if abs_url is None:
+        return None
+    return urlparse(abs_url).scheme

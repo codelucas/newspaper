@@ -1,6 +1,6 @@
 *.pyc
 
-.DS_Store # pycharm
+.DS_Store/ # pycharm
 .idea/ # pycharm
 
 # C extensions

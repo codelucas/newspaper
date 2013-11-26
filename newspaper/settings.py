@@ -9,7 +9,7 @@ from cookielib import CookieJar as cj
 VERSION = '0.0.1'
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
-POP_URLS_FN = os.path.join(PARENT_DIR, 'source/popular_urls.txt')
+POP_URLS_FILEN = os.path.join(PARENT_DIR, 'source/popular_urls.txt')
 
 DATA_DIR = '.newspaper_scraper'
 TOPDIR = os.path.join(os.path.expanduser("~"), DATA_DIR)
@@ -35,9 +35,9 @@ ANCHOR_DIR = os.path.join(TOPDIR, CFDIR)
 if not os.path.exists(ANCHOR_DIR):
     os.mkdir(ANCHOR_DIR)
 
-useragent = 'newspaper/%s' % VERSION
+USERAGENT = 'newspaper/%s' % VERSION
 
-kstopwords = {
+KEYW_STOPWORDS = {
     'monday':True,
     'tuesday':True,
     'wednesday':True,
@@ -63,3 +63,4 @@ kstopwords = {
     'action':True,
 }
 
+TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'

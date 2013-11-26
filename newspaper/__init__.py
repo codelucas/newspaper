@@ -8,7 +8,6 @@ __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 
 from . import utils
 from .api import build, popular_urls, build_article
-
 from .settings import VERSION
 
 

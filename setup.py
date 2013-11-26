@@ -18,7 +18,10 @@ requires = [
     'goose-extractor==1.0.2',
     'requests==2.0.1',
     'lxml==3.2.4',
-    'tldextract==1.2.2'
+    'tldextract==1.2.2',
+    'feedparser',
+    'pil',
+    'nltk'
 ]
 
 with open('README.md') as f:
