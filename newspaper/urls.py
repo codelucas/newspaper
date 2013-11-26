@@ -62,9 +62,8 @@ def redirect_back(url, domain):
 
 
 def prepare_url(url, source_url=None):
-    """operations that chrun a raw url
-    into something of our liking, no arguments, no
-    redirects, merging relatives with absolutes"""
+    """operations that purify a url, removes arguments,
+    redirects, and merges relatives with absolutes"""
 
     if source_url is None:
         source_domain = urlparse(source_url).netloc
