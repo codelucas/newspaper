@@ -1,7 +1,10 @@
 *.pyc
 
-.DS_Store # pycharm
-.idea # pycharm
+.DS_Store/ # pycharm
+.idea/ # pycharm
+
+build/
+dist/
 
 # C extensions
 *.so
