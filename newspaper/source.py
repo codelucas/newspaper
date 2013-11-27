@@ -28,7 +28,6 @@ class FeedObj(object):
         self.html = None
         self.lxml_root = None
 
-
 class Source(object):
     """Sources are abstractions of online news
     vendors like HuffingtonPost or cnn.

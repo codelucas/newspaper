@@ -1,5 +1,9 @@
 #!/bin/python2.7
 
+"""
+Setup guide: http://guide.python-distribute.org/creation.html
+
+"""
 import os
 import sys
 
@@ -10,6 +14,10 @@ try:
 except ImportError:
     from distutils.core import setup
 
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist upload')
+    sys.exit()
+
 packages = [
     'newspaper',
     'newspaper.data',
@@ -19,7 +27,6 @@ packages = [
     'newspaper.packages.feedparser',
     'newspaper.packages.feedparser.tests'
 ]
-
 requires = [
     'goose-extractor==1.0.2', # pre-installs: nltk, pil(pillow), lxml
     'grequests',              # pre-installs requests
@@ -48,11 +55,11 @@ setup(
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='http://codelucas.com',
+    url='http://pypi.python.org/pypi/newspaper/',
     packages=packages,
-    package_data={'': ['LICENSE'], 'newspaper': []},
-    package_dir={'newspaper': 'newspaper'},
-    include_package_data=True,
+    # package_data={'': ['LICENSE'], 'newspaper': []},
+    # package_dir={'newspaper': 'newspaper'},
+    # include_package_data=True,
     install_requires=requires,
     license=license,
     zip_safe=False,

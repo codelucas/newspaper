@@ -33,7 +33,6 @@ log = logging.getLogger(__name__)
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 URLS_FN = os.path.join(PARENT_DIR, 'sample_urls.txt')
 
-
 class Worker(Thread):
     """Thread executing tasks from a given tasks queue"""
 
@@ -57,7 +56,6 @@ class Worker(Thread):
                 log.critical('Critical multi-thread err %s' % e)
 
             self.tasks.task_done()
-
 
 class ThreadPool:
     """Pool of threads consuming tasks from a queue"""
@@ -139,6 +137,5 @@ def benchmark():
     # mthread_run(urls, req_kwargs)
     # t6 = time.time()
     # print('multi-threading finished in %d seconds' % (t6-t5))
-
 
 benchmark()

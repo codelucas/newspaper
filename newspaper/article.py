@@ -20,12 +20,9 @@ MAX_TITLE = 200
 MAX_TEXT = 10000
 MAX_KEYWORDS = 35
 
-
 class Article(object):
 
     def __init__(self, url, title=u'', source_url=None, from_feed=False):
-        """Abstraction of a news article"""
-
         if source_url is None:
             source_url = get_scheme(url) + '://' + get_domain(url)
 
