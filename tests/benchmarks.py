@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 
-"""Async IO vs multi-threading
+"""
+Async IO vs multi-threading
+
+Multi-thread:           30 secs (50 threads) for 50 requests
+Async-IO with Gevent:   7 secs  for 50 requests
+Single thread:          30 secs for 50 requests
+
 """
 
 import logging
@@ -71,7 +77,6 @@ class ThreadPool:
     def clear_threads(self):
         """"""
 
-
 def naive_run(urls, req_kwargs):
     """no multithreading or async io"""
 
@@ -81,12 +86,11 @@ def naive_run(urls, req_kwargs):
         responses.append(requests.get(url, **req_kwargs))
     print responses
 
-
 def mthread_run(urls, req_kwargs):
     """download a bunch of urls via multithreading"""
 
     responses = []
-    num_threads = 25
+    num_threads = 50
     pool = ThreadPool(num_threads)
     print('beginning batch job for mthreading, %s threads running' % activeCount())
 
@@ -95,7 +99,6 @@ def mthread_run(urls, req_kwargs):
 
     pool.wait_completion()
     print responses
-
 
 def asyncio_run(urls, req_kwargs):
     """download a bunch of urls via async io"""
@@ -108,9 +111,8 @@ def asyncio_run(urls, req_kwargs):
     responses = grequests.map(rs)
     print responses
 
-
 def benchmark():
-    """"""
+    """multi-threading vs async-io vs regular"""
 
     with open(URLS_FN, 'r') as f:
         urls = f.readlines()
@@ -124,19 +126,19 @@ def benchmark():
     }
 
     t1 = time.time()
-    mthread_run(urls, req_kwargs)
-    t2 = time.time()
-    print('multithreading finished in %d seconds' % (t2-t1))
-
-    t3 = time.time()
-    asyncio_run(urls, req_kwargs)
-    t4 = time.time()
-    print('async io finished in %d seconds' % (t4-t3))
-
-    t5 = time.time()
     naive_run(urls, req_kwargs)
-    t6 = time.time()
-    print('naive run finished in %d seconds' % (t6-t5))
+    t2 = time.time()
+    print('naive run finished in %d seconds' % (t2-t1))
+
+    # t3 = time.time()
+    # asyncio_run(urls, req_kwargs)
+    # t4 = time.time()
+    # print('async io finished in %d seconds' % (t4-t3))
+
+    # t5 = time.time()
+    # mthread_run(urls, req_kwargs)
+    # t6 = time.time()
+    # print('multi-threading finished in %d seconds' % (t6-t5))
 
 
 benchmark()

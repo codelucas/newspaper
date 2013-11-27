@@ -15,7 +15,6 @@ from .settings import MEMODIR, MAX_FILE_MEMO
 
 log = logging.getLogger(__name__)
 
-
 class TimeoutError(Exception):
     pass
 
@@ -48,7 +47,6 @@ def timelimit(timeout):
         return _2
     return _1
 
-
 def is_abs_url(url):
     """this regex was brought to you by django!"""
 
@@ -64,7 +62,6 @@ def is_abs_url(url):
     c_regex = re.compile(regex)
     return (c_regex.search(url) != None)
 
-
 def domain_to_filename(domain):
     """all '/' are turned into '-', no trailing. schema's
      are gone, only the raw domain + ".txt" remains"""
@@ -75,12 +72,10 @@ def domain_to_filename(domain):
     filename += ".txt"
     return filename
 
-
 def filename_to_domain(filename):
     """[:-4] for the .txt at end"""
 
     return filename.replace('-', '/')[:-4]
-
 
 def is_ascii(word):
     """true if a word is only ascii chars"""
@@ -96,14 +91,12 @@ def is_ascii(word):
             return False
     return True
 
-
 def to_valid_filename(s):
     """converts arbitrary string (for us domain name)
     into a valid file name for caching"""
 
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     return ''.join(c for c in s if c in valid_chars)
-
 
 def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
     """caching extracting category locations & rss feeds for 5 days"""
@@ -131,7 +124,6 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
         return inner_function
     return doCache
 
-
 def print_duration(method):
     """prints out the runtime duration of a method in seconds"""
 
@@ -145,7 +137,6 @@ def print_duration(method):
 
     return timed
 
-
 def chunks(l, n):
     """ Yield n successive chunks from l"""
 
@@ -154,14 +145,12 @@ def chunks(l, n):
         yield l[i*newn:i*newn+newn]
     yield l[n*newn-newn:]
 
-
 def purge(fn, pattern):
     """delete files in a dir matching pattern"""
     import os, re
     for f in os.listdir(fn):
         if re.search(pattern, f):
             os.remove(os.path.join(fn, f))
-
 
 def fix_unicode(inputstr):
     """returns unicode version of input"""
@@ -177,7 +166,6 @@ def fix_unicode(inputstr):
 
     inputstr = inputstr.strip()
     return inputstr
-
 
 def memoize_articles(articles, source_domain):
     """When we parse the <a> links in an <html> page, on the 2nd run

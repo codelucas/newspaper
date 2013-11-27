@@ -21,7 +21,6 @@ def build(url=u''):
     s = Source(url)
     return s
 
-
 def build_article(url=u''):
     """returns a constructed article object without
     downloading or parsing"""
@@ -29,14 +28,12 @@ def build_article(url=u''):
     a = Article(url)
     return a
 
-
 def popular_urls():
     """returns a list of pre-extracted popular source urls"""
 
     with open(POP_URLS_FILEN) as f:
         urls = ['http://'+u.strip() for u in f.readlines()]
         return urls
-
 
 def hot():
     """returns a list of hit terms via google trends"""

@@ -33,14 +33,12 @@ def lxml_wrapper(html):
 def soup_wrapper(html):
     return lxml.html.soupparser.fromstring(html)
 
-
 def get_lxml_root(html):
     """takes html returns lxml root"""
 
     if html is None:
         return None
     return lxml_wrapper(html)
-
 
 def get_urls(root_or_html, titles=True):
     """returns a list of urls on the html page or lxml_root"""
@@ -60,7 +58,6 @@ def get_urls(root_or_html, titles=True):
         return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
 
     return [ a.get('href') for a in a_tags if a.get('href') ]
-
 
 def valid_body(article, verbose=False):
     """performs a word-count check on article, checks for
@@ -103,13 +100,11 @@ def valid_body(article, verbose=False):
     log.debug('%s verified for default true' % article.url)
     return True
 
-
 def get_top_img(article, method='lxml'):
     """attempts to pull the top img of an article
     from 3 plausible locations"""
 
     root = article.lxml_root
-
     # analogous to lxml, but uses BeautifulSoup's root
     if method == 'soup':
         safe_img = (root.find('meta', attrs={'property':'og:image'})
@@ -127,7 +122,6 @@ def get_top_img(article, method='lxml'):
             safe_img = ''
 
         return safe_img
-
     # It's lxml
     try:
         return root.xpath('/html/head/meta'
@@ -148,7 +142,6 @@ def get_top_img(article, method='lxml'):
 
     return None
 
-
 def get_imgs(article, method='lxml'):
     """return all of the images on an html page, lxml root"""
 
@@ -162,7 +155,6 @@ def get_imgs(article, method='lxml'):
         img_links = [ urlparse.urljoin(article.href, url)
                 for url in article.lxml_root.xpath('//img/@src') ]
         return img_links
-
 
 def get_feed_urls(source):
     """REQUIRES: List of category lxml roots.
@@ -180,7 +172,6 @@ def get_feed_urls(source):
     feeds = list(set(feed_urls))
     source.feed_urls = feeds
 
-
 def get_category_urls(source):
     """REQUIRES: valid lxml root.
     takes a domain and finds all of the top level
@@ -191,7 +182,6 @@ def get_category_urls(source):
 
     urls = get_urls(source.lxml_root, titles=False)
     valid_categories = []
-
     for url in urls:
         scheme = get_scheme(url, allow_fragments=False)
         domain = get_domain(url, allow_fragments=False)
@@ -239,7 +229,6 @@ def get_category_urls(source):
         'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register']
 
     _valid_categories = []
-
     # TODO Stop spamming urlparse and tldextract calls...
 
     for url in valid_categories:
@@ -274,7 +263,6 @@ def get_category_urls(source):
     categories = [prepare_url(url, source.url) for url in _valid_categories]
     source.category_urls = categories
 
-
 class GooseObj(object):
     """encapsulation of goose output"""
 
@@ -288,5 +276,3 @@ class GooseObj(object):
         self.keywords = [w.strip() for w in keywords] # not actual keyw's
         self.title = goose_obj.title
         self.authors = goose_obj.authors
-
-

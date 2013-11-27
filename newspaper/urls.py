@@ -22,7 +22,6 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
-
 def remove_args(url, keep_params=(), frags=False):
     """remove all param arguments from a url"""
 
@@ -37,7 +36,6 @@ def remove_args(url, keep_params=(), frags=False):
         frag = ('',)
 
     return urlunsplit(parsed[:3] + (filtered_query,) + frag)
-
 
 def redirect_back(url, source_domain):
     """some sites like pinterest have api's that cause news
@@ -60,7 +58,6 @@ def redirect_back(url, source_domain):
 
     return url
 
-
 def prepare_url(url, source_url=None):
     """operations that purify a url, removes arguments,
     redirects, and merges relatives with absolutes"""
@@ -74,7 +71,6 @@ def prepare_url(url, source_url=None):
         proper_url = remove_args(url)
 
     return proper_url
-
 
 def valid_url(url, verbose=False):
     """Perform a regex check on a full url (scheme, domain, tld).
@@ -181,7 +177,6 @@ def valid_url(url, verbose=False):
     # log.debug('%s caught for default false' % url)
     return False
 
-
 def get_domain(abs_url, **kwargs):
     """returns a url's domain, this method exists to
     encapsulate all url code into this file."""
@@ -189,7 +184,6 @@ def get_domain(abs_url, **kwargs):
     if abs_url is None:
         return None
     return urlparse(abs_url, **kwargs).netloc
-
 
 def get_scheme(abs_url, **kwargs):
     """"""

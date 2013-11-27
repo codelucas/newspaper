@@ -6,13 +6,13 @@ from .network import get_html
 from .article import Article
 from .utils import fix_unicode, memoize_articles
 from .urls import get_domain, get_scheme, prepare_url
+from .packages.tldextract import tldextract
 from .parsers import (
     get_lxml_root, get_urls, get_feed_urls, get_category_urls)
 
 from .packages.feedparser import feedparser
 
 log = logging.getLogger(__name__)
-
 
 class Category(object):
 
@@ -42,7 +42,6 @@ class Source(object):
     """
 
     def __init__(self, url=None):
-
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception
 
@@ -62,6 +61,8 @@ class Source(object):
         self.html = u''
         self.lxml_root = None
 
+        self.brand = tldextract.extract(self.url).domain
+        self.description = u'' # TODO
 
     def fill(self, download=True, parse=True):
         """Encapsulates download and fill."""
@@ -73,17 +74,19 @@ class Source(object):
         self.download()
         self.parse()
 
-        self.category_urls = get_category_urls(self)
-        self.download_categories()
+        # can not merge category and feed tasks together because
+        # computing feed urls relies on the category urls!
+        self.set_category_urls()
+        self.download_categories() # async
         self.parse_categories()
 
-        self.feed_urls = get_feed_urls(self)
-        self.download_feeds()
+        self.set_feed_urls()
+        self.download_feeds()      # async
         self.parse_categories()
 
         self.generate_articles()
-
-
+        # download articles
+        # parse articles
 
     def purge_articles(self, articles=None):
         """delete rejected articles, if there is an articles
@@ -104,19 +107,17 @@ class Source(object):
 
         self.articles = ret
 
-
     def download(self, threads=1):
         """downloads html of source"""
 
         self.html = get_html(self.url)
 
-
     def parse(self, summarize=True, keywords=True, processes=1):
         """sets the lxml root, also sets lxml roots of all
-        children links"""
+        children links, also sets description"""
 
         self.lxml_root = get_lxml_root(self.html)
-
+        self.set_description()
 
     def download_categories(self):
         """individually download all category html, async io'ed"""
@@ -124,13 +125,11 @@ class Source(object):
         for url in self.category_urls:
             self.obj_categories.append( [url, get_html(url)] )
 
-
     def download_feeds(self):
         """individually download all feed html, async io'ed"""
 
         for url in self.feed_urls:
             self.obj_feeds.append( [url, get_html(url)] )
-
 
     def parse_categories(self):
         """parse out the lxml root in each category"""
@@ -140,7 +139,6 @@ class Source(object):
             lxml_root = get_lxml_root(category_obj[1])
             category_obj.append(lxml_root)
             self.obj_categories[index] = category_obj
-
 
     def parse_feeds(self):
         """use html of feeds to parse out their respective dom trees"""
@@ -162,7 +160,6 @@ class Source(object):
 
         self.obj_feeds = [ category_obj
                 for category_obj in self.obj_feeds if category_obj[2] ]
-
 
     def feeds_to_articles(self):
         """returns articles given the url of a feed"""
@@ -191,12 +188,9 @@ class Source(object):
 
         articles = self.purge_articles(articles)
         articles = memoize_articles(articles, self.domain)
-
         log.debug('%d from feeds at %s' %
                     (len(articles), str(self.feed_urls[:10])))
-
         return articles
-
 
     def categories_to_articles(self):
         """takes the categories, splays them into a big list of urls and churns
@@ -232,6 +226,22 @@ class Source(object):
 
         return total
 
+    def set_category_urls(self):
+        self.category_urls = get_category_urls(self)
+
+    def set_feed_urls(self):
+        self.feed_urls = get_feed_urls(self)
+
+    def set_description(self):
+        """sets a blub for this source, for now we just
+        query the desc html attribute"""
+
+        if self.lxml_root is not None:
+            _list = self.lxml_root.xpath('//meta[@name="description"]')
+            if len(_list) > 0:
+                content_list = _list[0].xpath('@content')
+                if len(content_list) > 0:
+                    self.description = content_list[0]
 
     def _generate_articles(self):
         """returns a list of all articles, from both categories and feeds"""
@@ -243,13 +253,11 @@ class Source(object):
         uniq = { article.href:article for article in articles }
         return uniq.values()
 
-
     def generate_articles(self, limit=5000):
         """saves all current articles of news source"""
 
         articles = self._generate_articles()
         self.articles = articles[:limit]
-
 
     def size(self):
         """number of articles linked to this news source"""

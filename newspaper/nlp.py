@@ -46,7 +46,6 @@ def summarize(url='', title='', text=''):
 
     return summaries
 
-
 def score(sentences, titleWords, keywords):
     """score sentences based on different features"""
 
@@ -62,10 +61,10 @@ def score(sentences, titleWords, keywords):
         frequency = (sbsFeature + dbsFeature) / 2.0 * 10.0
 
         # weighted average of scores from four categories
-        totalScore = (titleFeature*1.5 + frequency*2.0 + sentenceLength*1.0 + sentencePosition*1.0)/4.0
+        totalScore = (titleFeature*1.5 + frequency*2.0 +
+                      sentenceLength*1.0 + sentencePosition*1.0)/4.0
         ranks[s] = totalScore
     return ranks
-
 
 def sbs(words, keywords):
     """"""
@@ -78,13 +77,11 @@ def sbs(words, keywords):
             score += keywords[word]
     return (1.0 / math.fabs(len(words)) * score)/10.0
 
-
 def dbs(words, keywords):
     """"""
 
     if (len(words)==0):
         return 0
-
     summ = 0
     first = []
     second = []
@@ -104,7 +101,6 @@ def dbs(words, keywords):
     k = len(set(keywords.keys()).intersection(set(words)))+1
     return (1/(k*(k+1.0))*summ)
 
-
 def split_words(text):
     """split a string into array of words"""
     try:
@@ -113,12 +109,10 @@ def split_words(text):
     except TypeError:
         return None
 
-
 def keywords(text):
-    #get the top 10 keywords and their frequency scores
-    #ignores blacklisted words in stopWords,
-    #counts the number of occurrences of each word,
-    #and sorts them in reverse natural order (so descending) by number of occurrences
+    """get the top 10 keywords and their frequency scores ignores blacklisted
+    words in stopWords, counts the number of occurrences of each word, and
+    sorts them in reverse natural order (so descending) by number of occurrences"""
 
     import operator # sorting
     text = split_words(text)
@@ -140,7 +134,6 @@ def keywords(text):
     keywords.reverse()
     return dict(keywords)
 
-
 def split_sentences(text):
     """split a large string into sentences"""
 
@@ -152,10 +145,8 @@ def split_sentences(text):
     sentences = [x.replace('\n','') for x in sentences if len(x)>10]
     return sentences
 
-
 def length_score(sentence):
     return 1- math.fabs(ideal - len(sentence)) / ideal
-
 
 def title_score(title, sentence):
     title = [x for x in title if x not in stopWords]
@@ -165,9 +156,9 @@ def title_score(title, sentence):
             count+=1.0
     return count/len(title)
 
-
 def sentence_position(i, size):
-    """different sentence positions indicate different probability of being an important sentence"""
+    """different sentence positions indicate different
+    probability of being an important sentence"""
 
     normalized =  i*1.0 / size
     if (normalized > 0 and normalized <= 0.1):

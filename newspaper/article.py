@@ -60,7 +60,6 @@ class Article(object):
         if not from_feed:
             self.verify_url()
 
-
     def build(self):
         """build a lone article from a url independent of the
         source (newspaper). We won't normally call this method b/c
@@ -71,12 +70,10 @@ class Article(object):
         self.set_top_img()
         self.extract_nlp()
 
-
     def get_key(self):
         """returns a md5 representation of the url"""
 
         return base64.urlsafe_b64encode(hashlib.md5(self.url).digest())
-
 
     def download(self):
         """downloads the link's html content"""
@@ -84,7 +81,6 @@ class Article(object):
         if self.rejected:
             return
         self.html = get_html(self.url, timeout=7)
-
 
     def parse(self):
         """extracts the lxml root, if lxml fails, we also extract the
@@ -112,7 +108,6 @@ class Article(object):
             top_imgs = [ fix_unicode(t) for t in top_imgs ]
             self.imgs = top_imgs
 
-
     def verify_url(self):
         """performs a check on the url of this link to
         determine if a real news article or not"""
@@ -121,7 +116,6 @@ class Article(object):
             return
         self.rejected = not valid_url(self.url)
 
-
     def verify_body(self):
         """if the article's body text is long enough to meet
         standard article requirements, we keep the article"""
@@ -129,7 +123,6 @@ class Article(object):
         if self.rejected:
             return
         self.rejected = not valid_body(self)
-
 
     def is_media_news(self):
         """if the article is a gallery, video, etc related"""
@@ -143,7 +136,6 @@ class Article(object):
                 return True
         return False
 
-
     def extract_nlp(self):
         """keyword extraction wrapper"""
 
@@ -151,7 +143,6 @@ class Article(object):
             return
         # TODO keys = get_keywords(self)
         # TODO self.set_keywords(keys)
-
 
     def set_top_img(self):
         """wrapper for setting images, queries known image attributes
@@ -172,14 +163,12 @@ class Article(object):
         if title:
             self.title = title
 
-
     def set_text(self, text):
         """text is length limited"""
 
         text = fix_unicode(text)[:MAX_TEXT-5]
         if text:
             self.text = text
-
 
     def set_keywords(self, keywords):
         """keys are stored in list format"""
@@ -189,7 +178,6 @@ class Article(object):
 
         if keywords:
             self.keywords = [fix_unicode(k) for k in keywords[:MAX_KEYWORDS]]
-
 
     def set_authors(self, authors):
         """set authors, perhaps add a limit in future"""

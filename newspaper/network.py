@@ -7,7 +7,6 @@ from .settings import cj, USERAGENT
 
 log = logging.getLogger(__name__)
 
-
 def get_html(url, timeout=7):
     """downloads the html of a url"""
 
