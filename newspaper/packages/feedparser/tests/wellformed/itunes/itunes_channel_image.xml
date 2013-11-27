@@ -1,0 +1,9 @@
+<!--
+Description: iTunes channel image
+Expect:      not bozo and feed['image']['href'] == u'http://example.com/logo.jpg'
+-->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+  <itunes:image href="http://example.com/logo.jpg"></itunes:image>
+</channel>
+</rss>

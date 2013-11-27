@@ -1,0 +1,9 @@
+<!--
+Description: entry title language from xml:lang
+Expect:      not bozo and entries[0]['title_detail']['language'] == u'en'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <title xml:lang="en">Example Atom</title>
+</entry>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description: item description contains onmouseover
+Expect:      not bozo and entries[0]['description'] == u'<img src="http://www.ragingplatypus.com/i/cam-full.jpg" />'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;img src="http://www.ragingplatypus.com/i/cam-full.jpg" onmouseover="location.href='http://www.ragingplatypus.com/';" /></description>
+</item>
+</channel>
+</rss>

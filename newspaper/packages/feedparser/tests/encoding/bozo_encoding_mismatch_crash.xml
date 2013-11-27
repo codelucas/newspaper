@@ -1,0 +1,10 @@
+<!--
+SkipUnless:   __import__('sys').version.split()[0] >= '2.2.0'
+Description: crashes
+Expect:      1
+-->
+<rss>
+<item>
+<description><![CDATA[<a href="http://www.example.com/">¤</a><a href="&#38;"></a>]]></description>
+</item>
+</rss>

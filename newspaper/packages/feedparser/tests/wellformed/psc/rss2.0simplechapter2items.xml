@@ -1,0 +1,22 @@
+<!--
+Description:  Simple-Chapters: podlove.org/simple-chapters with two items
+Expect:       not bozo and entries[0]['psc_chapters']['chapters'][0]['title'] == u'Livekalender' and entries[0]['psc_chapters']['chapters'][0]['start_parsed'] == datetime.timedelta(0, 12)
+-->
+<rss version="2.0">
+  <channel>
+    <item>
+      <title>Vorhersage Donnerstag, 06.09.2012</title>
+      <psc:chapters version="1.1" xmlns:psc="http://podlove.org/simple-chapters">
+        <psc:chapter start="00:00:12.000" title="Livekalender" />
+        <psc:chapter start="00:02:24.000" title="Podcatcher" />
+      </psc:chapters>
+    </item>
+    <item>
+      <title>Vorhersage Donnerstag, 05.09.2012</title>
+      <psc:chapters version="1.1" xmlns:psc="http://podlove.org/simple-chapters">
+        <psc:chapter start="00:00:12.000" title="Livekalender" />
+        <psc:chapter start="00:00:46.000" title="Podcatcher" />
+      </psc:chapters>
+    </item>
+  </channel>
+</rss>

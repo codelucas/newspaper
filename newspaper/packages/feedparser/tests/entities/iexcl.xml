@@ -1,0 +1,9 @@
+<!--
+Description: iexcl
+Expect:      feed['title'] == u'testing \xa1 entity'
+-->
+<rss>
+<channel>
+<title>testing &iexcl; entity</title>
+</channel>
+</rss>

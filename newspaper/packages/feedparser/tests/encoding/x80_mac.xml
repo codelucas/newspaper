@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="mac"?>
+<!--
+SkipUnless:  __import__('codecs').lookup('mac')
+Description: \x80 character in mac encoding
+Expect:      not bozo and feed['title'] == u'\xc4'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>€</title>
+</feed>

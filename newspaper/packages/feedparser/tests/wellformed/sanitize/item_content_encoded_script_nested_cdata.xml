@@ -1,0 +1,11 @@
+<!--
+Description: ensure nested CDATA sections are sanitized properly
+Expect: not bozo and entries[0]['content'][0]['value'] == u'&lt;![CDATA[]]&gt;'
+-->
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+<channel>
+  <item>
+    <content:encoded><![CDATA[<![CDATA[<script></script>]]&gt;]]></content:encoded>
+  </item>
+</channel>
+</rss>

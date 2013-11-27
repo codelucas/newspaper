@@ -4,12 +4,13 @@ import logging
 import base64
 import hashlib
 
-from .utils import fix_unicode, timelimit
+from .utils import fix_unicode
 from .urls import prepare_url, get_domain, get_scheme, valid_url
-from .parsers import get_lxml_root, get_top_img, get_imgs, valid_body, GooseObj
-from .nlp import get_summary, get_keywords
+# TODO from .nlp import summarize, keywords
 from .network import get_html
 from .images import Scraper
+from .parsers import (
+    get_lxml_root, get_top_img, get_imgs, valid_body, GooseObj)
 
 log = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ MAX_KEYWORDS = 35
 class Article(object):
 
     def __init__(self, url, title=u'', source_url=None, from_feed=False):
-        """Abstraction of an article"""
+        """Abstraction of a news article"""
 
         if source_url is None:
             source_url = get_scheme(url) + '://' + get_domain(url)
@@ -32,14 +33,12 @@ class Article(object):
             self.rejected = True
             return
 
-        url = fix_unicode(url)
-        title = fix_unicode(title)
         source_url = fix_unicode(source_url)
 
-        url = prepare_url(url, source_url)
+        self.url = fix_unicode(url)
+        self.url = prepare_url(url, source_url)
+        self.title = fix_unicode(title)
 
-        self.url = url
-        self.title = title
         self.top_img = u''
         self.text = u''
         self.keywords = u''
@@ -150,8 +149,8 @@ class Article(object):
 
         if self.rejected:
             return
-        keys = get_keywords(self)
-        self.set_keywords(keys)
+        # TODO keys = get_keywords(self)
+        # TODO self.set_keywords(keys)
 
 
     def set_top_img(self):
@@ -160,15 +159,11 @@ class Article(object):
 
         if self.rejected or self.top_img != u'': # if we already have a top img...
             return
-
         try:
             s = Scraper(url=self.url, imgs=self.imgs, top_img=self.top_img)
-            img, img_url = s.thumbnail()
-            self.top_img = img_url
+            self.top_img = s.largest_image_url()
         except Exception, e:
-            log.debug(e)
-            print 'JPEG ERROR PIL', str(e)
-
+            log.critical('jpeg error with PIL, %s' % e)
 
     def set_title(self, title):
         """titles are length limited"""

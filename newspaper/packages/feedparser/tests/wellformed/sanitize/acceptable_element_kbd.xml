@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <kbd></kbd>
+Expect:       not bozo and entries[0]['description'] == '<kbd></kbd>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;kbd&gt;&lt;/kbd&gt;</content>
+</entry>
+</feed>

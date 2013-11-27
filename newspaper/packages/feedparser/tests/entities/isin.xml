@@ -1,0 +1,9 @@
+<!--
+Description: isin
+Expect:      feed['title'] == u'testing \u2208 entity'
+-->
+<rss>
+<channel>
+<title>testing &isin; entity</title>
+</channel>
+</rss>

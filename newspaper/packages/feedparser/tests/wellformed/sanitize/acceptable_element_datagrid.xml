@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <datagrid></datagrid>
+Expect:       not bozo and entries[0]['description'] == '<datagrid></datagrid>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;datagrid&gt;&lt;/datagrid&gt;</content>
+</entry>
+</feed>

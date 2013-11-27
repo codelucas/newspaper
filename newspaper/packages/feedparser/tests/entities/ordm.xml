@@ -1,0 +1,9 @@
+<!--
+Description: ordm
+Expect:      feed['title'] == u'testing \xba entity'
+-->
+<rss>
+<channel>
+<title>testing &ordm; entity</title>
+</channel>
+</rss>

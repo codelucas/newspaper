@@ -1,0 +1,163 @@
+# This is not a perfect replica of the command-line testing
+# environment, because apparently Apache normalizes the spacing
+# of the Content-type header.
+
+<Files http_application_atom_xml_charset.xml>
+  AddType "application/atom+xml;charset='us-ascii'" .xml
+</Files>
+
+<Files http_application_atom_xml_charset_overrides_encoding.xml>
+  AddType "application/atom+xml; charset='us-ascii'" .xml
+</Files>
+
+<Files http_application_atom_xml_default.xml>
+  AddType "application/atom+xml" .xml
+</Files>
+
+<Files http_application_atom_xml_encoding.xml>
+  AddType "application/atom+xml" .xml
+</Files>
+
+<Files http_application_rss_xml_charset.xml>
+  AddType "application/rss+xml;charset= 'us-ascii'" .xml
+</Files>
+
+<Files http_application_rss_xml_charset_overrides_encoding.xml>
+  AddType 'application/rss+xml;charset= "us-ascii"' .xml
+</Files>
+
+<Files http_application_rss_xml_default.xml>
+  AddType "application/rss+xml" .xml
+</Files>
+
+<Files http_application_rss_xml_encoding.xml>
+  AddType "application/rss+xml" .xml
+</Files>
+
+<Files http_application_xml_charset.xml>
+  AddType 'application/xml;charset= "us-ascii"' .xml
+</Files>
+
+<Files http_application_xml_charset_overrides_encoding.xml>
+  AddType "application/xml;charset = us-ascii" .xml
+</Files>
+
+<Files http_application_xml_default.xml>
+  AddType "application/xml" .xml
+</Files>
+
+<Files http_application_xml_dtd_charset.xml>
+  AddType 'application/xml-dtd; charset="us-ascii"' .xml
+</Files>
+
+<Files http_application_xml_dtd_charset_overrides_encoding.xml>
+  AddType 'application/xml-dtd; charset="us-ascii"' .xml
+</Files>
+
+<Files http_application_xml_dtd_default.xml>
+  AddType "application/xml-dtd" .xml
+</Files>
+
+<Files http_application_xml_dtd_encoding.xml>
+  AddType "application/xml-dtd" .xml
+</Files>
+
+<Files http_application_xml_encoding.xml>
+  AddType "application/xml" .xml
+</Files>
+
+<Files http_application_xml_epe_charset.xml>
+  AddType 'application/xml-external-parsed-entity; charset="us-ascii"' .xml
+</Files>
+
+<Files http_application_xml_epe_charset_overrides_encoding.xml>
+  AddType "application/xml-external-parsed-entity;charset=us-ascii" .xml
+</Files>
+
+<Files http_application_xml_epe_default.xml>
+  AddType "application/xml-external-parsed-entity" .xml
+</Files>
+
+<Files http_application_xml_epe_encoding.xml>
+  AddType "application/xml-external-parsed-entity" .xml
+</Files>
+
+<Files http_i18n.xml>
+  AddType "application/xml" .xml
+</Files>
+
+<Files http_text_atom_xml_charset.xml>
+  AddType "text/atom+xml;charset='us-ascii'" .xml
+</Files>
+
+<Files http_text_atom_xml_charset_overrides_encoding.xml>
+  AddType "text/atom+xml; charset='us-ascii'" .xml
+</Files>
+
+<Files http_text_atom_xml_default.xml>
+  AddType "text/atom+xml" .xml
+</Files>
+
+<Files http_text_atom_xml_encoding.xml>
+  AddType "text/atom+xml" .xml
+</Files>
+
+<Files http_text_rss_xml_charset.xml>
+  AddType "text/rss+xml;charset= 'us-ascii'" .xml
+</Files>
+
+<Files http_text_rss_xml_charset_overrides_encoding.xml>
+  AddType 'text/rss+xml;charset= "us-ascii"' .xml
+</Files>
+
+<Files http_text_rss_xml_default.xml>
+  AddType "text/rss+xml" .xml
+</Files>
+
+<Files http_text_rss_xml_encoding.xml>
+  AddType "text/rss+xml" .xml
+</Files>
+
+<Files http_text_xml_bogus_charset.xml>
+  AddType "text/xml;" .xml
+</Files>
+
+<Files http_text_xml_bogus_param.xml>
+  AddType "text/xml; charset:iso-8859-1" .xml
+</Files>
+
+<Files http_text_xml_charset.xml>
+  AddType 'text/xml;charset= "us-ascii"' .xml
+</Files>
+
+<Files http_text_xml_charset_2.xml>
+  AddType "text/xml; charset=windows-1252" .xml
+</Files>
+
+<Files http_text_xml_charset_overrides_encoding.xml>
+  AddType "text/xml;charset = us-ascii" .xml
+</Files>
+
+<Files http_text_xml_charset_overrides_encoding_2.xml>
+  AddType "text/xml; charset=windows-1252" .xml
+</Files>
+
+<Files http_text_xml_default.xml>
+  AddType "text/xml" .xml
+</Files>
+
+<Files http_text_xml_epe_charset.xml>
+  AddType 'text/xml-external-parsed-entity; charset="us-ascii"' .xml
+</Files>
+
+<Files http_text_xml_epe_charset_overrides_encoding.xml>
+  AddType "text/xml-external-parsed-entity;charset=us-ascii" .xml
+</Files>
+
+<Files http_text_xml_epe_default.xml>
+  AddType "text/xml-external-parsed-entity" .xml
+</Files>
+
+<Files http_text_xml_epe_encoding.xml>
+  AddType "text/xml-external-parsed-entity" .xml
+</Files>

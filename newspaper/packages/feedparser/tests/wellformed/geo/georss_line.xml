@@ -1,0 +1,14 @@
+<!--
+Description: item line where
+Expect:      entries[0]['where']['type'] == 'LineString' and entries[0]['where']['coordinates'][0] == (52.566592, 33.338611)
+-->
+<feed 
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  >
+  <entry>
+    <georss:line>
+      33.338611 52.566592 32.537546 52.527238 31.744196 52.409555
+    </georss:line>
+  </entry>
+</feed>

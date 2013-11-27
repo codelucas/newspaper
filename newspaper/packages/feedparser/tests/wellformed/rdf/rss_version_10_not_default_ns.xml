@@ -1,0 +1,8 @@
+<!--
+Description: RSS version 1.0
+Expect:      not bozo and version == 'rss10'
+-->
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rss="http://purl.org/rss/1.0/">
+<rss:channel rdf:about="http://www.osswatch.ac.uk/rss/summary.rss">
+</rss:channel>
+</rdf:RDF>

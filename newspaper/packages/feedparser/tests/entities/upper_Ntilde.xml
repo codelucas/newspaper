@@ -1,0 +1,9 @@
+<!--
+Description: Ntilde
+Expect:      feed['title'] == u'testing \xd1 entity'
+-->
+<rss>
+<channel>
+<title>testing &Ntilde; entity</title>
+</channel>
+</rss>

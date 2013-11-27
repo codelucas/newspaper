@@ -1,0 +1,9 @@
+<!--
+Description: entry summary content value
+Expect:      not bozo and entries[0]['summary_detail']['value'] == u'Example Atom'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <summary>Example Atom</summary>
+</entry>
+</feed>

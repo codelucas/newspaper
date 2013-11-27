@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="tcvn-5712"?>
+<!--
+SkipUnless:  __import__('codecs').lookup('tcvn-5712')
+Description: \x80 character in tcvn-5712 encoding
+Expect:      not bozo and feed['title'] == u'\xc0'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>€</title>
+</feed>

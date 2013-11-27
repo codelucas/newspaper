@@ -1,0 +1,9 @@
+<!--
+Description: entry summary inline XHTML with escaped markup
+Expect:      not bozo and entries[0]['summary'] == u'<div>History of the &lt;blink&gt; tag</div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <summary type="application/xhtml+xml"><div xmlns="http://www.w3.org/1999/xhtml">History of the &lt;blink&gt; tag</div></summary>
+</entry>
+</feed>

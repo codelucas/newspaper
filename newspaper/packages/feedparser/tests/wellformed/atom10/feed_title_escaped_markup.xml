@@ -1,0 +1,7 @@
+<!--
+Description: feed title escaped HTML
+Expect:      not bozo and feed['title'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">Example &lt;b&gt;Atom&lt;/b&gt;</title>
+</feed>

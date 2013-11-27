@@ -1,0 +1,18 @@
+<!--
+Description: item point where
+Expect: entries[0]['where']['type'] == 'Point' and entries[0]['where']['coordinates'] == (31.1732, 36.9382)
+-->
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  xmlns:gml="http://www.opengis.net/gml"
+  >
+  <entry>
+    <georss:where>
+      <gml:Point>
+        <gml:pos>36.9382 31.1732</gml:pos>
+      </gml:Point>
+    </georss:where>
+  </entry>
+</feed>
+

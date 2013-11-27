@@ -1,0 +1,9 @@
+<!--
+Description: feed language from language
+Expect:      not bozo and feed['language'] == u'en'
+-->
+<rss>
+<channel>
+<language>en</language>
+</channel>
+</rss>

@@ -1,0 +1,19 @@
+<Files "http_content_language.xml">
+  Header set Content-Language en
+</Files>
+
+<Files "http_content_language_entry_title_inherit.xml">
+  Header set Content-Language en
+</Files>
+
+<Files "http_content_language_entry_title_inherit_2.xml">
+  Header set Content-Language en
+</Files>
+
+<Files "http_content_language_feed_language.xml">
+  Header set Content-Language en
+</Files>
+
+<Files "http_content_language_feed_xml_lang.xml">
+  Header set Content-Language en
+</Files>

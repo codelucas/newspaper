@@ -1,0 +1,7 @@
+<!--
+Description: Atom namespace (pie)
+Expect:      not bozo and feed['title'] == u'Example Atom'
+-->
+<feed version="0.3" xmlns="http://purl.org/pie/">
+  <title>Example Atom</title>
+</feed>

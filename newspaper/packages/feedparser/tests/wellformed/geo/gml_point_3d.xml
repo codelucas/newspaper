@@ -1,0 +1,18 @@
+<!--
+Description: item point where 3D
+Expect: entries[0]['where']['coordinates'] == (-156.2342, 42.3453, 45.0)
+-->
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  xmlns:gml="http://www.opengis.net/gml"
+  >
+  <entry>
+    <georss:where>
+      <gml:Point srsName="urn:ogc:def:crs:EPSG:6.6:4979" srsDimension="3">
+        <gml:pos>42.3453 -156.2342 45</gml:pos>
+      </gml:Point>
+    </georss:where>
+  </entry>
+</feed>
+

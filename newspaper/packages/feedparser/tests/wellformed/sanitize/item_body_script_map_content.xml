@@ -1,0 +1,11 @@
+<!--
+Description: item xhtml:body contains script (maps to content)
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'safe description'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<body>safe<script type="text/javascript">location.href='http:/'+'/example.com/';</script> description</body>
+</item>
+</channel>
+</rss>

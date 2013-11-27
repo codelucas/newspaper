@@ -1,0 +1,7 @@
+<!--
+Description: feed generator url relative to document URI
+Expect:      not bozo and feed['generator_detail']['url'] == u'http://127.0.0.1:8097/relative/link'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<generator url="/relative/link" version="2.66">Movable Type</generator>
+</feed>

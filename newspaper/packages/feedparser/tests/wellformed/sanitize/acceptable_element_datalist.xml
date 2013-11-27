@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <datalist></datalist>
+Expect:       not bozo and entries[0]['description'] == '<datalist></datalist>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;datalist&gt;&lt;/datalist&gt;</content>
+</entry>
+</feed>

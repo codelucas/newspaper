@@ -1,0 +1,9 @@
+<!--
+Description: ouml
+Expect:      feed['title'] == u'testing \xf6 entity'
+-->
+<rss>
+<channel>
+<title>testing &ouml; entity</title>
+</channel>
+</rss>

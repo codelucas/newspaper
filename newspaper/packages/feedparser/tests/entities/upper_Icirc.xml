@@ -1,0 +1,9 @@
+<!--
+Description: Icirc
+Expect:      feed['title'] == u'testing \xce entity'
+-->
+<rss>
+<channel>
+<title>testing &Icirc; entity</title>
+</channel>
+</rss>

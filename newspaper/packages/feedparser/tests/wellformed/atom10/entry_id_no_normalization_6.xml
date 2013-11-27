@@ -1,0 +1,9 @@
+<!--
+Description: entry id not normalized (see Atom 1.0 section 4.2.6.1)
+Expect:      not bozo and entries[0]['id'] == u'http://www.example.com/%7ebob'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <id>http://www.example.com/%7ebob</id>
+</entry>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description: Scaron
+Expect:      feed['title'] == u'testing \u0160 entity'
+-->
+<rss>
+<channel>
+<title>testing &Scaron; entity</title>
+</channel>
+</rss>

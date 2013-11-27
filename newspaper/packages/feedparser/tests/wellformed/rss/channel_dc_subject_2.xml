@@ -1,0 +1,9 @@
+<!--
+Description: channel dc:subject maps to categories
+Expect:      not bozo and feed['tags'][0]['term'] == u'Example category'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:subject>Example category</dc:subject>
+</channel>
+</rss>

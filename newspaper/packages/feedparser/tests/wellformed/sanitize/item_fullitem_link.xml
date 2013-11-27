@@ -1,0 +1,11 @@
+<!--
+Description: item fullitem contains link
+Expect:      not bozo and entries[0]['description'] == u'safe description'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<fullitem>safe&lt;link rel="stylesheet" type="text/css" href="http://example.com/evil.css"> description</fullitem>
+</item>
+</channel>
+</rss>

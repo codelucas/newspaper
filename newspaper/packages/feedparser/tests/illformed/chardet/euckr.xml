@@ -1,0 +1,13 @@
+<!--
+SkipUnless:   __import__('chardet')
+Description:  EUC-KR with no encoding information
+Expect:       bozo and encoding == 'EUC-KR'
+-->
+<rss>
+<channel>
+<item>
+<title>EUC-KR 에서 TypeKey 한글닉네임 표시하기</title>
+<description>TypeKey 시스템이 UTF-8로 돌아가는데, 거기서 한글로 된 닉네임을 정할 경우에, EUC-KR로 된 무버블타입 블록에선 리다이렉트되어 전송되어오는 닉네임이 UTF라 당연히 깨어져 나타난다. 실제 블록 등에서 사용하는 필명 내지는 닉네임은 한글로 사용하는 많은 분들도 타입키에서의 닉네임은 이런 문제때문에 울며겨자먹기로 영어로 짓고 있다....</description>
+</item>
+</channel>
+</rss>

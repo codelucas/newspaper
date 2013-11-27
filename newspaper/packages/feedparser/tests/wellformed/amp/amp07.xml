@@ -1,0 +1,9 @@
+<!--
+Description: & test 7
+Expect:      not bozo and entries[0]['title_detail']['value'] == u'&'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+	  <title>&#x26;</title>
+</entry>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description:  style="padding-right: 0in;"
+Expect:       not bozo and entries[0]['description'] == '<span style="padding-right: 0in;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="padding-right: 0in;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

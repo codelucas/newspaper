@@ -1,0 +1,7 @@
+<!--
+Description: image attribute contains angle brackets
+Expect:      not bozo and feed['title_detail']['value'] == u'<img alt="cat&lt;br /&gt;dog" src="http://example.com/cat-dog.jpg" />'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html"><![CDATA[<img src="http://example.com/cat-dog.jpg" alt="cat<br />dog">]]></title>
+</feed>

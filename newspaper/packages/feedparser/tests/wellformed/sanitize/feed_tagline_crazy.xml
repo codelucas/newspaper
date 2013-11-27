@@ -1,0 +1,73 @@
+<!--
+Description: feed tagline is crazy
+Expect:      not bozo and feed['tagline'] == u'Crazy HTML -' + u'- Can Your Regex Parse This?\n\n\n\n<!-' + u'- <script> -' + u'->\n\n<!-' + u'- \n\t<script> \n-' + u'->\n\n\n\nfunction executeMe()\n{\n\n\n\n\n/* \n<h1>Did The Javascript Execute?</h1>\n<div>\nI will execute here, too, if you mouse over me\n</div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<tagline type="text/html" mode="escaped">
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+&lt;html xmlns="http://www.w3.org/1999/xhtml">
+&lt;head>
+&lt;title>Crazy HTML -- Can Your Regex Parse This?&lt;/title>
+
+&lt;/head>
+&lt;body    notRealAttribute="value"onload="executeMe();"foo="bar"
+
+>
+&lt;!-- &lt;script> -->
+
+&lt;!-- 
+	&lt;script> 
+-->
+
+&lt;/script>
+
+
+&lt;script
+
+
+>
+
+function executeMe()
+{
+
+
+
+
+/* &lt;script> 
+function am_i_javascript()
+{
+	var str = "Some innocuously commented out stuff";
+}
+&lt; /script>
+*/
+
+	
+	
+	
+	
+	
+	
+	
+	
+	alert("Executed");
+}
+
+                                   &lt;/script
+
+
+
+>
+&lt;h1>Did The Javascript Execute?&lt;/h1>
+&lt;div notRealAttribute="value
+"onmouseover="
+executeMe();
+"foo="bar">
+I will execute here, too, if you mouse over me
+&lt;/div>
+
+&lt;/body>
+
+&lt;/html>
+</tagline>
+</feed>

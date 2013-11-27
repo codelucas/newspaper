@@ -1,0 +1,9 @@
+<!--
+Description: channel dc:creator maps to author
+Expect:      not bozo and feed['author'] == u'Example editor'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:creator>Example editor</dc:creator>
+</channel>
+</rss>

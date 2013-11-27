@@ -1,0 +1,9 @@
+<!--
+Description: Aring
+Expect:      feed['title'] == u'testing \xc5 entity'
+-->
+<rss>
+<channel>
+<title>testing &Aring; entity</title>
+</channel>
+</rss>

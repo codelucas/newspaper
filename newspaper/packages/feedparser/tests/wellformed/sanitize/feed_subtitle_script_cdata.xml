@@ -1,0 +1,7 @@
+<!--
+Description: feed subtitle contains script
+Expect:      not bozo and feed['tagline'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<subtitle type="text/html" mode="escaped"><![CDATA[safe<script type="text/javascript">location.href='http:/'+'/example.com/';</script> description]]></subtitle>
+</feed>

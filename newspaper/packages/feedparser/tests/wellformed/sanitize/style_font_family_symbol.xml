@@ -1,0 +1,11 @@
+<!--
+Description:  style="font-family: Symbol;"
+Expect:       not bozo and entries[0]['description'] == '<span style="font-family: Symbol;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="font-family: Symbol;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

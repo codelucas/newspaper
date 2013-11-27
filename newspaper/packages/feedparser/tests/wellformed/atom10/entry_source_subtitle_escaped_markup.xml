@@ -1,0 +1,11 @@
+<!--
+Description: entry source subtitle escaped HTML
+Expect:      not bozo and entries[0]['source']['subtitle'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<source>
+  <subtitle type="html">Example &lt;b&gt;Atom&lt;/b&gt;</subtitle>
+</source>
+</entry>
+</feed>

@@ -1,0 +1,8 @@
+<!--
+Description: CDF item href maps to link
+Expect:      not bozo and entries[0]['link'] == u'http://www.example.org/'
+-->
+<CHANNEL>
+<ITEM HREF="http://www.example.org/">
+</ITEM>
+</CHANNEL>

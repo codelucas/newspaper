@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+Description:  utf-8 interpreted as iso-8859-1 and re-encoded as utf-8
+Expect:       bozo and ord(entries[0]['description']) == 8230
+-->
+<rss version="2.0">
+<channel>
+  <item>
+    <description>&acirc;&#128;&brvbar;</description>
+  </item>
+</channel>
+</rss>
+

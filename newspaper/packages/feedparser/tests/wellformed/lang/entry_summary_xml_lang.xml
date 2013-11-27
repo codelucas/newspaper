@@ -1,0 +1,9 @@
+<!--
+Description: entry summary content language from xml:lang
+Expect:      not bozo and entries[0]['summary_detail']['language'] == u'en'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <summary xml:lang="en">Example Atom</summary>
+</entry>
+</feed>

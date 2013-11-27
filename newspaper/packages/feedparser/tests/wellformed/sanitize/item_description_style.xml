@@ -1,0 +1,11 @@
+<!--
+Description: item description contains style
+Expect:      not bozo and entries[0]['description'] == u'<a href="http://www.ragingplatypus.com/" style="display: block; width: 100%; height: 100%; background-color: black; background-x: center; background-y: center;">never trust your upstream platypus</a>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;a href="http://www.ragingplatypus.com/" style="display:block; position:absolute; left:0; top:0; width:100%; height:100%; z-index:1; background-color:black; background-image:url(http://www.ragingplatypus.com/i/cam-full.jpg); background-x:center; background-y:center; background-repeat:repeat;">never trust your upstream platypus&lt;/a></description>
+</item>
+</channel>
+</rss>

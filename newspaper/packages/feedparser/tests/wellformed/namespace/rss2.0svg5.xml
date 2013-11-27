@@ -1,0 +1,11 @@
+<!--
+Description:  SVG
+Expect:       not bozo and entries[0]['description'] == '<svg baseProfile="full" height="200px" version="1.1" width="300px" xmlns="http://www.w3.org/2000/svg"><circle cx="150px" cy="100px" fill="#ff0000" r="50px" stroke="#000000" stroke-width="5px"></svg>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;svg version="1.1" baseProfile="full" width="300px" height="200px"&gt;&lt;circle cx="150px" cy="100px" r="50px" fill="#ff0000" stroke="#000000" stroke-width="5px" /&gt;&lt;/svg&gt;</description>
+</item>
+</channel>
+</rss>

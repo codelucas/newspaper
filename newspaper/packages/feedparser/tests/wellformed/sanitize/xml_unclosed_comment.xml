@@ -1,0 +1,7 @@
+<!--
+Description: unclosed comment
+Expect:      not bozo and feed['title'] == u'safe'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">safe&lt;!--</title>
+</feed>

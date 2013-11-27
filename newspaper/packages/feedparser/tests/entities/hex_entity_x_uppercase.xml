@@ -1,0 +1,9 @@
+<!--
+Description: test that lowercase x in &#x41 translates to 'A'
+Expect:      entries[0]['title'] == u'A'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+	  <title type="application/xhtml+xml" mode="xml">&#X41;</title>
+</entry>
+</feed

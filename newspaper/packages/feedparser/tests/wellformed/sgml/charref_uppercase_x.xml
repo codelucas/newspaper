@@ -1,0 +1,9 @@
+<!--
+Description: ensure an uppercase X in a hex charref doesn't crash feedparser
+Expect: not bozo and entries[0]['summary'] == u'&#x61;'
+-->
+<rss version="2.0">
+  <channel>
+    <item><description>&amp;#X61;</description></item>
+  </channel>
+</rss>

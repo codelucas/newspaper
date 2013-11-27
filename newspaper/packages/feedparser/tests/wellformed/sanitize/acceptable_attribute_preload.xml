@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain preload attribute
+Expect:       not bozo and entries[0]['description'] == '<video preload="auto"></video>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;video preload="auto"&gt;&lt;/video&gt;</content>
+</entry>
+</feed>

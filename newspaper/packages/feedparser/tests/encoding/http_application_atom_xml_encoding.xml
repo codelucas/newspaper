@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+Header:      Content-type: application/atom+xml
+Description: application/atom+xml + explicit encoding
+Expect:      not bozo and encoding == 'iso-8859-1'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+</feed>

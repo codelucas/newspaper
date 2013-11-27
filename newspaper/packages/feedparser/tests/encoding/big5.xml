@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="big5"?>
+<!--
+SkipUnless:   __import__('codecs').lookup('big5')
+Description:  big5
+Expect:       not bozo and encoding == 'big5'
+-->
+<rss>
+</rss>

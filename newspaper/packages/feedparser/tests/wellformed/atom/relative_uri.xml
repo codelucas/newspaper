@@ -1,0 +1,7 @@
+<!--
+Description: feed title contains relative URI resolved relative to xml:base
+Expect:      not bozo and feed['title_detail']['value'] == u'<div>Example <a href="http://example.com/test/test.html">test</a></div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <title type="application/xhtml+xml" xml:base="http://example.com/test/"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></title>
+</feed>

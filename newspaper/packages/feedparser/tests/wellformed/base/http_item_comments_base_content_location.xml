@@ -1,0 +1,12 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: item comments relative to Content-Location header
+Expect:      not bozo and entries[0]['comments'] == u'http://example.com/relative/uri'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<comments>/relative/uri</comments>
+</item>
+</channel>
+</rss>

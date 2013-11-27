@@ -1,0 +1,14 @@
+<!--
+SkipUnless:   __import__('chardet')
+Description:  windows-1255 with no encoding information
+Expect:       bozo and encoding == 'windows-1255'
+-->
+<rss>
+<channel>
+<item>
+<description>
+האם תדפיס נייר של אתר אינטרנט שמוצג על מסך משתמש הוא העתק נאמן למקור של אתר האינטרנט? רבים יגידו שכן, ולפעמים גם בתי המשפט יצטרפו אליהם שיקבלו פלט מאתר אינטרנט כראיה קבילה. אבל, זה ממש לא כך. ויש אפילו הוכחה מדהימה.
+</description>
+</item>
+</channel>
+</rss>

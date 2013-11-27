@@ -1,0 +1,9 @@
+<!--
+Description: channel docs relative to document URI
+Expect:      not bozo and feed['docs'] == u'http://127.0.0.1:8097/relative/uri'
+-->
+<rss version="2.0">
+<channel>
+<docs>/relative/uri</docs>
+</channel>
+</rss>

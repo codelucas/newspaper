@@ -1,0 +1,11 @@
+<!--
+Description:  MathML w/XLink
+Expect:       not bozo and entries[0]['description'] == '<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow xlink:href="http://golem.ph.utexas.edu" xlink:show="replace" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mrow></math>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;math xmlns='http://www.w3.org/1998/Math/MathML'&gt;&lt;mrow xlink:type="simple" xlink:show="replace" xlink:href="http://golem.ph.utexas.edu"&gt;&lt;mrow&gt;&lt;mi&gt;a&lt;/mi&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mi&gt;b&lt;/mi&gt;&lt;/mrow&gt;&lt;/mrow&gt;&lt;/math&gt;</description>
+</item>
+</channel>
+</rss>

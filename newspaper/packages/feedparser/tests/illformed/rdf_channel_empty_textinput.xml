@@ -1,0 +1,26 @@
+<!--
+Description: empty textinput element confuses regex parser and crashes on setting item title (thinks we're still in textinput)
+Expect:      bozo
+-->
+<?xml version="1.0"?>
+<rdf:RDF 
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+  xmlns="http://purl.org/rss/1.0/"
+> 
+  <channel rdf:about="http://example.com/">
+    <items>
+      <rdf:Seq>
+        <rdf:li rdf:resource="http://example.com/1" />
+      </rdf:Seq>
+    </items>
+    <textinput rdf:resource="http://example.com/" />
+  </channel>
+
+  <item rdf:about="http://example.com/1">
+    <title>crashes here</title>
+  </item>
+
+  <textinput rdf:about="http://meerkat.oreillynet.com/">
+  </textinput>
+
+</rdf:RDF

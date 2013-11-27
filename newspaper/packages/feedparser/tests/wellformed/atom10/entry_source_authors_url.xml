@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Description: entry contains multiple author urls
+Expect: not bozo and (entries[0]['source']['authors'][0]['url'] == u'http://one.com/') and (entries[0]['source']['authors'][1]['url'] == u'http://two.com/')
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <source>
+      <author>
+        <url>http://one.com/</url>
+      </author>
+      <author>
+        <url>http://two.com/</url>
+      </author>
+    </source>
+  </entry>
+</feed>

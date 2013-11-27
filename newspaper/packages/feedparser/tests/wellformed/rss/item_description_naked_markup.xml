@@ -1,0 +1,11 @@
+<!--
+Description: naked markup in item description
+Expect:      not bozo and entries[0]['description'] == u'<p>Example description</p>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description><p>Example description</p></description>
+</item>
+</channel>
+</rss>

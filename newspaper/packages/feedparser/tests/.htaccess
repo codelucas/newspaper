@@ -1,0 +1,7 @@
+Options +Indexes
+IndexOptions +NameWidth=* +FancyIndexing +SuppressDescription +SuppressHTMLPreamble
+
+# ---Apache 2.0 fancy directory listing---
+#IndexOptions +NameWidth=* +FancyIndexing +XHTML +HTMLTable +SuppressDescription +SuppressIcon +SuppressRules +SuppressHTMLPreamble
+#HeaderName /inc/directory_listing_header.html
+#ReadmeName /inc/directory_listing_footer.html

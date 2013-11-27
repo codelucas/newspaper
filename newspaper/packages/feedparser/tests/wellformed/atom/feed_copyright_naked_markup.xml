@@ -1,0 +1,7 @@
+<!--
+Description: feed copyright with undeclared unqualified inline markup
+Expect:      not bozo and feed['copyright'] == u'Example <b>Atom</b>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <copyright>Example <b>Atom</b></copyright>
+</feed>

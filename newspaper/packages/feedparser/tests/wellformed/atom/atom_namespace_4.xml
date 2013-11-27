@@ -1,0 +1,7 @@
+<!--
+Description: Atom namespace (echo)
+Expect:      not bozo and feed['title'] == u'Example Atom'
+-->
+<feed version="0.3" xmlns="http://purl.org/echo/">
+  <title>Example Atom</title>
+</feed>

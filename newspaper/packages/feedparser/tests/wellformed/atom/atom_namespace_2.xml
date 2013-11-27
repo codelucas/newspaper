@@ -1,0 +1,7 @@
+<!--
+Description: Atom namespace (example.com)
+Expect:      not bozo and feed['title'] == u'Example Atom'
+-->
+<feed version="0.3" xmlns="http://example.com/newformat#">
+  <title>Example Atom</title>
+</feed>

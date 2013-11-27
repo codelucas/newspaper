@@ -1,0 +1,9 @@
+<!--
+Description: channel author maps to author_detail name if both name and email are given (name in parens)
+Expect:      not bozo and feed['author_detail']['name'] == u'Example editor'
+-->
+<rss version="2.0">
+<channel>
+<author>me@example.com (Example editor)</author>
+</channel>
+</rss>

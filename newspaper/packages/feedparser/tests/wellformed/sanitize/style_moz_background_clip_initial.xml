@@ -1,0 +1,11 @@
+<!--
+Description:  style="-moz-background-clip: initial;"
+Expect:       not bozo and entries[0]['description'] == '<tr>Some text</tr>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;tr style="background: yellow none repeat scroll 0%; -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;"&gt;Some text&lt;/tr&gt;</description>
+</item>
+</channel>
+</rss>

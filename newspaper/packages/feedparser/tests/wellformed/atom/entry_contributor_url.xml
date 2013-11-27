@@ -1,0 +1,13 @@
+<!--
+Description: entry contributor url
+Expect:      not bozo and entries[0]['contributors'][0]['url'] == u'http://example.com/'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <contributor>
+    <name>Example contributor</name>
+    <email>me@example.com</email>
+    <url>http://example.com/</url>
+  </contributor>
+</entry>
+</feed>

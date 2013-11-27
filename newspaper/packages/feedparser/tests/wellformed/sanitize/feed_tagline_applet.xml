@@ -1,0 +1,7 @@
+<!--
+Description: feed tagline contains applet
+Expect:      not bozo and feed['tagline'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<tagline type="text/html" mode="escaped">safe&lt;applet code="foo.class" codebase="http://example.com/">&lt;/applet> description</tagline>
+</feed>

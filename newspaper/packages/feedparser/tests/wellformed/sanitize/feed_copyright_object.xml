@@ -1,0 +1,7 @@
+<!--
+Description: feed copyright contains object
+Expect:      not bozo and feed['copyright'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<copyright type="text/html" mode="escaped">safe&lt;object classid="clsid:C932BA85-4374-101B-A56C-00AA003668DC"> description</copyright>
+</feed>

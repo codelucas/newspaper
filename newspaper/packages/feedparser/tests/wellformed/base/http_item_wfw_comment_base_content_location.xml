@@ -1,0 +1,12 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: item wfw:comment relative to Content-Location header
+Expect:      not bozo and entries[0]['wfw_comment'] == u'http://example.com/relative/uri'
+-->
+<rss version="2.0" xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+<channel>
+<item>
+<wfw:comment>/relative/uri</wfw:comment>
+</item>
+</channel>
+</rss>

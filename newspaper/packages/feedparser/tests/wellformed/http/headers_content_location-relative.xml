@@ -1,0 +1,8 @@
+<!--
+Header:      Content-Location: /feed/pg.cgi
+Description: Content-Location header relative URI
+Expect:      not bozo and feed.link == u'http://127.0.0.1:8097/feed/absolute'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <link rel="alternate" href="absolute"/>
+</feed>

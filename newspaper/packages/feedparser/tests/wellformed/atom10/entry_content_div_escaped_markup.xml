@@ -1,0 +1,9 @@
+<!--
+Description: typepad style entry content escaped HTML with div
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <content type="html"><div xmlns="http://www.w3.org/1999/xhtml">Example &lt;b&gt;Atom&lt;/b&gt;</div></content>
+</entry>
+</feed>

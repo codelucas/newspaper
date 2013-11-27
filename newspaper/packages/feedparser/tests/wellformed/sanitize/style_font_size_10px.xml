@@ -1,0 +1,11 @@
+<!--
+Description:  style="font-size: 10px;"
+Expect:       not bozo and entries[0]['description'] == '<span style="font-size: 10px;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="font-size: 10px;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

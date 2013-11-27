@@ -1,0 +1,13 @@
+<!--
+SkipUnless:   __import__('chardet')
+Description:  EUC-JP with no encoding information
+Expect:       bozo and encoding == 'EUC-JP'
+-->
+<rss>
+<channel>
+<item>
+<title>ゲーム三昧な正月</title>
+<description>『SDガンダムGジェネレーションNEO』をずっとプレイしている。 『ウルトラマン』はストリーモードを終えて、ほぼやり尽くしてしまった。 GジェネNEOは、やっと面白くなりつつある。 なるほど、PS2ってすごい画像処理能力だなあと今頃感動している。 今年こそ遅れないようPS3とXBOX360を買おう（しかし、正月以外はゲームやる暇ないほど忙しいんだよね）。 それにしても、正月って食べてばっかりでマジ太るよね。...</description>
+</item>
+</channel>
+</rss>

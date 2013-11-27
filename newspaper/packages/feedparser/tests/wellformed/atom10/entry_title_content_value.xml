@@ -1,0 +1,9 @@
+<!--
+Description: entry title content value
+Expect:      not bozo and entries[0]['title_detail']['value'] == u'Example Atom'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <title>Example Atom</title>
+</entry>
+</feed>

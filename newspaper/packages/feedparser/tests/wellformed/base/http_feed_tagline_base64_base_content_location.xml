@@ -1,0 +1,10 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: feed tagline relative to Content-Location header
+Expect:      not bozo and feed['tagline'] == u'<div><a href="http://example.com/relative/uri">click here</a></div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<tagline type="text/html" mode="base64">
+PGRpdj48YSBocmVmPSIvcmVsYXRpdmUvdXJpIj5jbGljayBoZXJlPC9hPjwvZGl2Pg==
+</tagline>
+</feed>

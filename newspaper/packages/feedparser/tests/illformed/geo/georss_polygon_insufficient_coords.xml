@@ -1,0 +1,12 @@
+<!--
+Description: item polygon with insufficient number of coordinates
+Expect: entries[0].get('where') == {}
+-->
+<feed 
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  >
+  <entry>
+    <georss:polygon>33.338611 52.566592 32.537546 52.527238 31.744196 52.409555</georss:polygon>
+  </entry>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description: entry content contains onblur
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'<img src="http://www.ragingplatypus.com/i/cam-full.jpg" />'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="escaped">&lt;img src="http://www.ragingplatypus.com/i/cam-full.jpg" onblur="location.href='http://www.ragingplatypus.com/';" /></content>
+</entry>
+</feed>

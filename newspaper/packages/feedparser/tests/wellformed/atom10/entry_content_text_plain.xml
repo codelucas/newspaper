@@ -1,0 +1,9 @@
+<!--
+Description: entry content with explicit type='text'
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'Example Atom'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <content type="text">Example Atom</content>
+</entry>
+</feed>

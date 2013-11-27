@@ -11,18 +11,26 @@ except ImportError:
     from distutils.core import setup
 
 packages = [
-    'newspaper'
+    'newspaper',
+    'newspaper.data',
+    'newspaper.packages',
+    'newspaper.packages.tldextract',
+    'newspaper.packages.tldextract.tests',
+    'newspaper.packages.feedparser',
+    'newspaper.packages.feedparser.tests'
 ]
 
 requires = [
-    'goose-extractor==1.0.2',
-    'requests==2.0.1',
-    'lxml==3.2.4',
-    'tldextract==1.2.2',
-    'feedparser',
-    'pil',
-    'nltk'
+    'goose-extractor==1.0.2', # pre-installs: nltk, pil(pillow), lxml
+    'grequests',              # pre-installs requests
+    'lxml==3.2.4',            # version for lxml is important
 ]
+
+# 'feedparser',
+# 'tldextract==1.2.2',
+# 'pil',
+# 'nltk',
+# 'requests==2.0.1',
 
 with open('README.md') as f:
     readme = f.read()

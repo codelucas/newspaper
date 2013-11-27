@@ -1,0 +1,9 @@
+<!--
+Description: divide
+Expect:      feed['title'] == u'testing \xf7 entity'
+-->
+<rss>
+<channel>
+<title>testing &divide; entity</title>
+</channel>
+</rss>

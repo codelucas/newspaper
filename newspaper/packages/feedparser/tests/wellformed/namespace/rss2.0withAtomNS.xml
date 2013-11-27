@@ -1,0 +1,27 @@
+<!--
+Description:  rss feed with Atom namespace
+Expect:       not bozo and version == 'rss20'
+-->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://web.resource.org/cc/">
+  <channel>
+    <title>Delicious/wearehugh</title>
+    <link>http://delicious.com/wearehugh</link>
+    <description>bookmarks posted by wearehugh</description>
+    <atom:link rel="self" type="application/rss+xml" href="http://feeds.delicious.com/v2/rss/wearehugh"/>
+    <item>
+      <title>rsync and vfat | Geek at Play</title>
+      <pubDate>Fri, 25 Dec 2009 03:30:22 +0000</pubDate>
+      <guid isPermaLink="false">http://delicious.com/url/174603f9d836a1aafac49e28ace1c19e#wearehugh</guid>
+      <link>http://www.kylev.com/2005/03/29/rsync-and-vfat/</link>
+      <dc:creator><![CDATA[wearehugh]]></dc:creator>
+      <comments>http://delicious.com/url/174603f9d836a1aafac49e28ace1c19e</comments>
+      <wfw:commentRss>http://feeds.delicious.com/v2/rss/url/174603f9d836a1aafac49e28ace1c19e</wfw:commentRss>
+      <source url="http://feeds.delicious.com/v2/rss/wearehugh">wearehugh's bookmarks</source>
+      <category domain="http://delicious.com/wearehugh/">rsync</category>
+      <category domain="http://delicious.com/wearehugh/">vfat</category>
+      <category domain="http://delicious.com/wearehugh/">windows</category>
+      <category domain="http://delicious.com/wearehugh/">linux</category>
+      <category domain="http://delicious.com/wearehugh/">mount</category>
+    </item>
+  </channel>
+</rss>

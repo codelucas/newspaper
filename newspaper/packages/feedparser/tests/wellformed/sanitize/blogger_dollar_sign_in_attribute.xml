@@ -1,0 +1,11 @@
+<!--
+Description: Blogger's stupid invalid img attribute (circa August 2011)
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'<img border="0" src="http://site.invalid/img.jpg" />'
+-->
+<feed xmlns='http://www.w3.org/2005/Atom'>
+    <entry>
+        <content type='html'>
+            &lt;img border="0" i$="true" src="http://site.invalid/img.jpg" /&gt;
+        </content>
+    </entry>
+</feed>

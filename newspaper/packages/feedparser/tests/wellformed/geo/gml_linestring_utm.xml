@@ -1,0 +1,19 @@
+<!--
+Description: item line where, in fake UTM
+Expect: entries[0]['where']['type'] == 'LineString' and entries[0]['where']['coordinates'][0] == (33.338611, 52.566592)
+-->
+<feed 
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  xmlns:gml="http://www.opengis.net/gml"
+  >
+  <entry>
+    <georss:where>
+      <gml:LineString srsName="EPSG:26913">
+        <gml:posList>
+        33.338611 52.566592 32.537546 52.527238 31.744196 52.409555
+        </gml:posList>
+      </gml:LineString>
+    </georss:where>
+  </entry>
+</feed>

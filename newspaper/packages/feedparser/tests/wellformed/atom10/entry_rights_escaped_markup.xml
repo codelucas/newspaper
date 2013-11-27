@@ -1,0 +1,9 @@
+<!--
+Description: entry rights escaped HTML
+Expect:      not bozo and entries[0]['rights'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <rights type="html">Example &lt;b&gt;Atom&lt;/b&gt;</rights>
+</entry>
+</feed>

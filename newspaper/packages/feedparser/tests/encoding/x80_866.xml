@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="866"?>
+<!--
+SkipUnless:  __import__('codecs').lookup('866')
+Description: \x80 character in 866 encoding
+Expect:      not bozo and feed['title'] == u'\u0410'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>А</title>
+</feed>

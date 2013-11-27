@@ -1,0 +1,11 @@
+<!--
+Description: content:encoded
+Expect:      not bozo and entries[0]['content'][0]['language'] == u'en'
+-->
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xml:lang="en">
+<channel>
+<item>
+<content:encoded>&lt;p&gt;Example content&lt;/p&gt;</content:encoded>
+</item>
+</channel>
+</rss>

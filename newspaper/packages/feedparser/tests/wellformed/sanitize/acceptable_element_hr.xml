@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <hr></hr>
+Expect:       not bozo and entries[0]['description'] == '<hr />'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;hr&gt;&lt;/hr&gt;</content>
+</entry>
+</feed>

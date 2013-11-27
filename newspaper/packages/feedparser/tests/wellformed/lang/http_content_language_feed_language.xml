@@ -1,0 +1,10 @@
+<!--
+Header:      Content-Language: en
+Description: feed language overrides content-language
+Expect:      not bozo and feed['language'] == u'fr'
+-->
+<rss>
+<channel>
+<language>fr</language>
+</channel>
+</rss>

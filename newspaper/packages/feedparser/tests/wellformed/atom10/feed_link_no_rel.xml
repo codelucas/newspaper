@@ -1,0 +1,7 @@
+<!--
+Description: feed link rel defaults to 'alternate'
+Expect:      not bozo and feed['links'][0]['rel'] == u'alternate'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link type="text/html" href="http://www.example.com/"/>
+</feed>

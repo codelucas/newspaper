@@ -1,0 +1,9 @@
+<!--
+Description: entry link rel='related'
+Expect:      not bozo and entries[0]['links'][0]['rel'] == u'related'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <link rel="related" type="text/html" href="http://www.example.com/"/>
+</entry>
+</feed>

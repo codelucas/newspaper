@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <samp></samp>
+Expect:       not bozo and entries[0]['description'] == '<samp></samp>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;samp&gt;&lt;/samp&gt;</content>
+</entry>
+</feed>

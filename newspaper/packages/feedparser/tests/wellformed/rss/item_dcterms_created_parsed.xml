@@ -1,0 +1,11 @@
+<!--
+Description: item dcterms:created parsed
+Expect:      not bozo and entries[0]['created_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
+-->
+<rss version="2.0" xmlns:dcterms="http://purl.org/dc/terms/">
+<channel>
+<item>
+<dcterms:created>2003-12-31T10:14:55Z</dcterms:created>
+</item>
+</channel>
+</rss>

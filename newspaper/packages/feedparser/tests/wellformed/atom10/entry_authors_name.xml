@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Description: entry contains multiple author names
+Expect: not bozo and (entries[0]['authors'][0]['name'] == u'one') and (entries[0]['authors'][1]['name'] == u'two')
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <entry>
+    <author>
+      <name>one</name>
+    </author>
+    <author>
+      <name>two</name>
+    </author>
+  </entry>
+</feed>

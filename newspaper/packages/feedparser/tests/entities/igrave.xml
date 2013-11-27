@@ -1,0 +1,9 @@
+<!--
+Description: igrave
+Expect:      feed['title'] == u'testing \xec entity'
+-->
+<rss>
+<channel>
+<title>testing &igrave; entity</title>
+</channel>
+</rss>

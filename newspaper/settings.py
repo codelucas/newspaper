@@ -64,3 +64,5 @@ KEYW_STOPWORDS = {
 }
 
 TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
+
+MAX_FILE_MEMO = 20000

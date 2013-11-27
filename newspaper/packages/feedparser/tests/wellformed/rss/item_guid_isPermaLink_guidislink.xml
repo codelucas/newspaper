@@ -1,0 +1,11 @@
+<!--
+Description: guidislink when isPermaLink="true"
+Expect:      not bozo and entries[0]['guidislink']
+-->
+<rss version="2.0">
+<channel>
+<item>
+<guid isPermaLink="true">http://guid.example.com/</guid>
+</item>
+</channel>
+</rss>

@@ -1,0 +1,9 @@
+<!--
+Description: deg
+Expect:      feed['title'] == u'testing \xb0 entity'
+-->
+<rss>
+<channel>
+<title>testing &deg; entity</title>
+</channel>
+</rss>

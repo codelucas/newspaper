@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain dir attribute
+Expect:       not bozo and entries[0]['description'] == '<span dir=""></span>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;span dir=""&gt;&lt;/span&gt;</content>
+</entry>
+</feed>

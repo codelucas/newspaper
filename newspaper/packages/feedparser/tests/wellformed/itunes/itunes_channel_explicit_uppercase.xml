@@ -1,0 +1,9 @@
+<!--
+Description: iTunes explicit="YES"
+Expect:      not bozo and feed['itunes_explicit'] is None
+-->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+  <itunes:explicit>YES</itunes:explicit>
+</channel>
+</rss>

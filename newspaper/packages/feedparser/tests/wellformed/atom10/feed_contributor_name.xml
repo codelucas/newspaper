@@ -1,0 +1,11 @@
+<!--
+Description: feed contributor name
+Expect:      not bozo and feed['contributors'][0]['name'] == u'Example contributor'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <contributor>
+    <name>Example contributor</name>
+    <email>me@example.com</email>
+    <uri>http://example.com/</uri>
+  </contributor>
+</feed>

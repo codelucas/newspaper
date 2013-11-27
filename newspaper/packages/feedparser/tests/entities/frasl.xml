@@ -1,0 +1,9 @@
+<!--
+Description: frasl
+Expect:      feed['title'] == u'testing \u2044 entity'
+-->
+<rss>
+<channel>
+<title>testing &frasl; entity</title>
+</channel>
+</rss>

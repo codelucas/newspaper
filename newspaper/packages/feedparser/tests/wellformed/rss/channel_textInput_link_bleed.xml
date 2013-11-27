@@ -1,0 +1,12 @@
+<!--
+Description: textInput link does not bleed into channel link array
+Expect:      not bozo and len(feed['links']) == 1
+-->
+<rss version="2.0">
+<channel>
+<link>http://channel.example.com/</link>
+<textInput>
+<link>http://textinput.example.com/</link>
+</textInput>
+</channel>
+</rss>

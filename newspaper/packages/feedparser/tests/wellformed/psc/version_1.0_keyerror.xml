@@ -1,0 +1,13 @@
+<!--
+    Description: Ensure version 1.0 doesn't cause a KeyError
+    Expect: entries[0].psc_chapters.chapters
+-->
+<rss xmlns:psc="http://podlove.org/simple-chapters">
+    <channel>
+        <item>
+            <psc:chapters version="1.0">
+               <psc:chapter start="00:00:00" title="Example" />
+            </psc:chapters>
+        </item>
+    </channel>
+</rss>

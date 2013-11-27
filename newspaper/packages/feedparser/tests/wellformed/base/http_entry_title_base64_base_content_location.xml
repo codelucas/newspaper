@@ -1,0 +1,12 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: entry title relative to Content-Location header
+Expect:      not bozo and entries[0]['title'] == u'<div><a href="http://example.com/relative/uri">click here</a></div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<title type="text/html" mode="base64">
+PGRpdj48YSBocmVmPSIvcmVsYXRpdmUvdXJpIj5jbGljayBoZXJlPC9hPjwvZGl2Pg==
+</title>
+</entry>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description: entry source generator
+Expect:      not bozo and entries[0]['source']['generator'] == u'Example generator'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<source>
+  <generator uri="http://example.com/" version="2.65">Example generator</generator>
+</source>
+</entry>
+</feed>

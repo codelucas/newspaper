@@ -1,0 +1,9 @@
+<!--
+Description: forall
+Expect:      feed['title'] == u'testing \u2200 entity'
+-->
+<rss>
+<channel>
+<title>testing &forall; entity</title>
+</channel>
+</rss>

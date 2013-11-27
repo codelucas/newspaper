@@ -1,0 +1,13 @@
+<!--
+Description: entry source title base64-encoded
+Expect:      not bozo and entries[0]['source']['title'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<source>
+  <title type="application/octet-stream">
+    RXhhbXBsZSA8Yj5BdG9tPC9iPg==
+  </title>
+</source>
+</entry>
+</feed>

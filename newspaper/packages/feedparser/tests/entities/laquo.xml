@@ -1,0 +1,9 @@
+<!--
+Description: laquo
+Expect:      feed['title'] == u'testing \xab entity'
+-->
+<rss>
+<channel>
+<title>testing &laquo; entity</title>
+</channel>
+</rss>

@@ -1,0 +1,27 @@
+<!--
+Description:  Simple-Chapters: podlove.org/simple-chapters 
+Expect:       not bozo and entries[0]['links'][2]['href'] == u'http://podlove.org/examples/chapters.psc'
+-->
+<feed xmlns:atom="http://www.w3.org/2005/Atom">
+  <title>Podlove Podcast</title>
+
+  <link href="http://podlove.org/"/>
+  <updated>2012-03-26T23:25:19Z</updated>
+  <author>
+    <name>Tim Pritlove</name>
+  </author>
+  <id>urn:uuid:8d5261ba-bf62-ac81-946c-9276ea617917c</id>
+
+  <entry>
+    <title>Fiat Lux</title>
+    <link href="http://podlove.org/podcast/1"/>
+    <id>urn:uuid:3241ace2-ca21-dd12-2341-1412ce31fad2</id>
+    <updated>2012-03-26T23:25:19Z</updated>
+    <summary>First episode</summary>
+    <link rel="enclosure" type="audio/mpeg" length="12345"
+     href="http://podlove.org/files/fiatlux.mp3"/>
+
+    <!-- specify chapter information -->
+    <atom:link rel="http://podlove.org/simple-chapters" href="http://podlove.org/examples/chapters.psc" />
+  </entry>
+</feed>

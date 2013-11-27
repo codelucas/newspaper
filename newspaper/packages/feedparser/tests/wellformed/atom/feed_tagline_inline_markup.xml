@@ -1,0 +1,7 @@
+<!--
+Description: feed tagline inline XHTML
+Expect:      not bozo and feed['tagline'] == u'<div>Example <b>Atom</b></div>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <tagline type="application/xhtml+xml"><div xmlns="http://www.w3.org/1999/xhtml">Example <b>Atom</b></div></tagline>
+</feed>

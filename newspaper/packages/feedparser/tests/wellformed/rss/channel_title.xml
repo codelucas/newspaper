@@ -1,0 +1,9 @@
+<!--
+Description: normal title
+Expect:      not bozo and feed['title'] == u'Example feed'
+-->
+<rss version="2.0">
+<channel>
+<title>Example feed</title>
+</channel>
+</rss>

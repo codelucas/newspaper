@@ -1,0 +1,9 @@
+<!--
+Description: RSS Userland namespace #1
+Expect:      not bozo and feed['description'] == u'Example description'
+-->
+<rss xmlns="http://backend.userland.com/rss">
+<channel>
+<description>Example description</description>
+</channel>
+</rss>

@@ -1,0 +1,7 @@
+<!--
+Description: feed subtitle contains embed
+Expect:      not bozo and feed['tagline'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<subtitle type="text/html" mode="escaped">safe&lt;embed src="http://example.com/"> description</subtitle>
+</feed>

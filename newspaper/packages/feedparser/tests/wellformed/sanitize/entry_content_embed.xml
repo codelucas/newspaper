@@ -1,0 +1,9 @@
+<!--
+Description: entry content contains embed
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'safe <b>description</b>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="escaped">safe&lt;embed src="http://example.com/"> &lt;b>description&lt;/b></content>
+</entry>
+</feed>

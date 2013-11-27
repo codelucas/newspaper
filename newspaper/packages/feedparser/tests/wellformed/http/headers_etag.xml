@@ -1,0 +1,7 @@
+<!--
+Header:      ETag: foo
+Description: etag should only exist in results if present in HTTP headers
+Expect:      not bozo and etag
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+</feed>

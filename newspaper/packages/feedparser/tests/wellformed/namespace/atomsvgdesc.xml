@@ -1,0 +1,9 @@
+<!--
+Description:  SVG
+Expect:       not bozo and entries[0]['description'] == '<svg baseProfile="full" height="200px" version="1.1" width="300px" xmlns="http://www.w3.org/2000/svg"><desc><abbr>foo</abbr></desc><circle cx="150px" cy="100px" fill="#ff0000" r="50px" stroke="#000000" stroke-width="5px"></circle></svg>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><svg version="1.1" baseProfile="full" width="300px" height="200px" xmlns="http://www.w3.org/2000/svg"><desc><abbr>foo</abbr></desc><circle cx="150px" cy="100px" r="50px" fill="#ff0000" stroke="#000000" stroke-width="5px"/></svg></div></content>
+</entry>
+</feed>

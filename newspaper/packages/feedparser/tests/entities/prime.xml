@@ -1,0 +1,9 @@
+<!--
+Description: prime
+Expect:      feed['title'] == u'testing \u2032 entity'
+-->
+<rss>
+<channel>
+<title>testing &prime; entity</title>
+</channel>
+</rss>

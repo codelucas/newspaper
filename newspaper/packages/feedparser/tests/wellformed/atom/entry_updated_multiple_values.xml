@@ -1,0 +1,10 @@
+<!--
+Description: entry parsed updated, multiple values, ensure overwrite
+Expect:      not bozo and entries[0]['updated_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<updated>2010-12-01T10:14:55Z</updated>
+<updated>2003-12-31T10:14:55Z</updated>
+</entry>
+</feed>

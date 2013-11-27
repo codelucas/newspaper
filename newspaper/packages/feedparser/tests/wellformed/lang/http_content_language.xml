@@ -1,0 +1,7 @@
+<!--
+Header:      Content-Language: en
+Description: feed language from content-language
+Expect:      not bozo and feed['language'] == u'en'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+</feed>

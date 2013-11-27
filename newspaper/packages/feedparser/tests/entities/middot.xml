@@ -1,0 +1,9 @@
+<!--
+Description: middot
+Expect:      feed['title'] == u'testing \xb7 entity'
+-->
+<rss>
+<channel>
+<title>testing &middot; entity</title>
+</channel>
+</rss>

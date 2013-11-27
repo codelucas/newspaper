@@ -1,0 +1,11 @@
+<!--
+Description:  style="line-height: normal;"
+Expect:       not bozo and entries[0]['description'] == '<span style="line-height: normal;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="line-height: normal;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

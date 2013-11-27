@@ -1,0 +1,9 @@
+<!--
+Description: ograve
+Expect:      feed['title'] == u'testing \xf2 entity'
+-->
+<rss>
+<channel>
+<title>testing &ograve; entity</title>
+</channel>
+</rss>

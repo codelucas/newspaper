@@ -1,0 +1,6 @@
+<!--
+Description: illformed XML
+Expect:      bozo
+-->
+<rss version="2.0">
+</rss

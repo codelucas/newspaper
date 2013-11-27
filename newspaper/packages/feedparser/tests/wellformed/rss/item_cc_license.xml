@@ -1,0 +1,12 @@
+<!--
+Description: creative commons license
+Expect:      not bozo and entries[0]['license'] == u'http://www.creativecommons.org/licenses/by-nc/1.0'
+-->
+<rss version="2.0" xmlns:cc="http://web.resource.org/cc/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<channel>
+<item>
+<cc:license rdf:resource="http://www.creativecommons.org/licenses/by-nc/1.0"/>
+<link>http://example.com/</link>
+</item>
+</channel>
+</rss>

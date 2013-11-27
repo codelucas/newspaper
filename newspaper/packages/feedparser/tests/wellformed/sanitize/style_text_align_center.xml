@@ -1,0 +1,11 @@
+<!--
+Description:  style="text-align: center;"
+Expect:       not bozo and entries[0]['description'] == '<span style="text-align: center;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="text-align: center;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

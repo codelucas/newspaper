@@ -1,0 +1,13 @@
+<!--
+Description: Incomplete CDATA block
+Expect:      bozo
+-->
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+<title>can feedparser read this xml</title>
+<link>http://adcdefgh.com</link>
+<description>feedparser goes into infinite loop while parsing this file</description>
+<language>en-us</language>
+<copyright>2005-10-28</copyright>
+<item><title><![CD

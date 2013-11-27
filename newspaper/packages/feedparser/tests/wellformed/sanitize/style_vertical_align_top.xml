@@ -1,0 +1,11 @@
+<!--
+Description:  style="vertical-align: top;"
+Expect:       not bozo and entries[0]['description'] == '<span style="vertical-align: top;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="vertical-align: top;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

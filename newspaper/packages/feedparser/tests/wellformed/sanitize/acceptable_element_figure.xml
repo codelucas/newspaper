@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <figure></figure>
+Expect:       not bozo and entries[0]['description'] == '<figure></figure>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;figure&gt;&lt;/figure&gt;</content>
+</entry>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description: item content:encoded contains meta
+Expect:      not bozo and entries[0]['description'] == u'safe description'
+-->
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<channel>
+<item>
+<content:encoded>safe&lt;meta http-equiv="Refresh" content="0; URL=http://example.com/"> description</content:encoded>
+</item>
+</channel>
+</rss>

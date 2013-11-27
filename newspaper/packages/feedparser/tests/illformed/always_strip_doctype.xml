@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://site.invalid/">
+<!--
+Description: unstripped invalid doctype
+Expect:      not bozo and feed['title'] == u'found'
+-->
+<rss>
+    <channel>
+        <title>found</title>
+    </channel>
+</rss>

@@ -1,0 +1,9 @@
+<!--
+Description: channel dcterms:issued parsed
+Expect:      not bozo and feed['published_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
+-->
+<rss version="2.0" xmlns:dcterms="http://purl.org/dc/terms/">
+<channel>
+<dcterms:issued>2003-12-31T10:14:55Z</dcterms:issued>
+</channel>
+</rss>

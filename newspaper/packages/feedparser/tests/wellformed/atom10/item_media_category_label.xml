@@ -1,0 +1,11 @@
+<!--
+Description: multiple media:category tags - label
+Expect: not bozo and entries[0].tags[0].label == u'lab1'
+-->
+<rss version="2.0" xmlns:media="http://search.yahoo.com/mrss">
+   <channel>
+        <item>
+            <media:category label="lab1">cat1</media:category>
+        </item>
+    </channel>
+</rss>

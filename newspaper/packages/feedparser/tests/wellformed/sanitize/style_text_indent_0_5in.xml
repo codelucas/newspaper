@@ -1,0 +1,11 @@
+<!--
+Description:  style="TEXT-INDENT: 0.5in;"
+Expect:       not bozo and entries[0]['description'] == '<span style="TEXT-INDENT: 0.5in;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="TEXT-INDENT: 0.5in;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

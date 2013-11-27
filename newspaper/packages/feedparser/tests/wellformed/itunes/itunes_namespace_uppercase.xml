@@ -1,0 +1,9 @@
+<!--
+Description: iTunes namespace (uppercase)
+Expect:      not bozo and feed['itunes_block'] == 1
+-->
+<rss xmlns:itunes="HTTP://WWW.ITUNES.COM/DTDS/PODCAST-1.0.DTD">
+<channel>
+  <itunes:block>yes</itunes:block>
+</channel>
+</rss>

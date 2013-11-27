@@ -1,0 +1,12 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: item link relative to Content-Location header
+Expect:      not bozo and entries[0]['link'] == u'http://example.com/relative/uri'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<link>/relative/uri</link>
+</item>
+</channel>
+</rss>

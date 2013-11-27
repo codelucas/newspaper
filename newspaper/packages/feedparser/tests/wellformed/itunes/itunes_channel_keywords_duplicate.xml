@@ -1,0 +1,9 @@
+<!--
+Description: iTunes channel duplicate keywords
+Expect:      not bozo and len(feed['tags']) == 1
+-->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+<itunes:keywords>Technology,Technology</itunes:keywords>
+</channel>
+</rss>

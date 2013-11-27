@@ -1,0 +1,8 @@
+<!--
+Description: feed multiple links
+Expect:      not bozo and feed['links'][0] == {'rel': u'alternate', 'type': u'application/xhtml+xml', 'href': u'http://www.example.com/'} and feed['links'][1] == {'rel': u'service.post', 'type': u'application/atom+xml', 'href': 'http://www.example.com/post'}
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link rel="alternate" type="application/xhtml+xml" href="http://www.example.com/"/>
+  <link rel="service.post" type="application/atom+xml" href="http://www.example.com/post"/>
+</feed>

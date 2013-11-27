@@ -2,7 +2,8 @@
 
 import logging
 import re
-import tldextract
+
+from .packages.tldextract import tldextract
 
 from urlparse import (
     urlparse, urljoin, urlsplit, urlunsplit, parse_qs)
@@ -181,17 +182,25 @@ def valid_url(url, verbose=False):
     return False
 
 
-def get_domain(abs_url):
+def get_domain(abs_url, **kwargs):
     """returns a url's domain, this method exists to
     encapsulate all url code into this file."""
 
     if abs_url is None:
         return None
-    return urlparse(abs_url).netloc
+    return urlparse(abs_url, **kwargs).netloc
 
-def get_scheme(abs_url):
+
+def get_scheme(abs_url, **kwargs):
     """"""
 
     if abs_url is None:
         return None
-    return urlparse(abs_url).scheme
+    return urlparse(abs_url, **kwargs).scheme
+
+def get_path(abs_url, **kwargs):
+    """"""
+
+    if abs_url is None:
+        return None
+    return urlparse(abs_url, **kwargs).path

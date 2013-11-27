@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <textarea></textarea>
+Expect:       not bozo and entries[0]['description'] == '<textarea></textarea>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;textarea&gt;&lt;/textarea&gt;</content>
+</entry>
+</feed>

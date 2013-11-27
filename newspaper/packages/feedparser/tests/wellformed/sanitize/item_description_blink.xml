@@ -1,0 +1,11 @@
+<!--
+Description: item description contains blink
+Expect:      not bozo and entries[0]['description'] == u'safe description'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;blink>safe&lt;/blink> description</description>
+</item>
+</channel>
+</rss>

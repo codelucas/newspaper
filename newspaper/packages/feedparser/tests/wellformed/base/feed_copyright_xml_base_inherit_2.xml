@@ -1,0 +1,7 @@
+<!--
+Description: feed copyright content xml:base overrides parent element
+Expect:      not bozo and feed['copyright_detail']['base'] == u'http://example.com/test/'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:base="http://example.com/parent/">
+  <copyright type="application/xhtml+xml" xml:base="http://example.com/test/"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></copyright>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description:  style="white-space: nowrap;"
+Expect:       not bozo and entries[0]['description'] == '<span style="white-space: nowrap;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="white-space: nowrap;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

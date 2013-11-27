@@ -1,0 +1,12 @@
+<!--
+Description: item enclosure length
+Expect:      not bozo and entries[0]['enclosures'][0]['length'] == u'100000'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<enclosure url="http://example.com/" length="100000" type="image/jpeg" />
+<link>http://example.com/</link>
+</item>
+</channel>
+</rss>

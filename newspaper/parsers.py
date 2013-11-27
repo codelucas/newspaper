@@ -5,64 +5,58 @@ import urlparse
 
 import lxml.html
 import lxml.html.soupparser
-
 from goose import Goose
+
+from .urls import prepare_url, get_path, get_domain, get_scheme
+from .packages.tldextract import tldextract
 
 log = logging.getLogger(__name__)
 
 MIN_WORD_COUNT = 100
 MIN_SENT_COUNT = 3
 
+# try:
+#     lxml_root = lxml_wrapper(html)
+# except Exception, e:
+#     log.debug('urls html lxml failed out %s' % e)
+#     try:
+#         lxml_root = soup_wrapper(html)
+#     except Exception, e:
+#         log.debug('urls soup lxml failed out %s' % e)
+#         return []
+
+# Wrappers exist in case we need to add decorator methods.
 
 def lxml_wrapper(html):
     return lxml.html.fromstring(html)
-
 
 def soup_wrapper(html):
     return lxml.html.soupparser.fromstring(html)
 
 
-def get_lxml_root(article):
-    """"""
+def get_lxml_root(html):
+    """takes html returns lxml root"""
 
-    if article.html is None:
+    if html is None:
         return None
-    return lxml_wrapper(article.html)
+    return lxml_wrapper(html)
 
 
-def root_to_urls(lxml_root, titles=True):
-    """similar to below method but takes a lxml
-    html dom root to reduce recomputing roots"""
+def get_urls(root_or_html, titles=True):
+    """returns a list of urls on the html page or lxml_root"""
 
-    if not lxml_root:
+    if root_or_html is None:
+        log.critical('Must extract urls from either html or lxml_root!')
         return []
 
-    atags = lxml_root.xpath('//a')
-    if titles:
-        return [ (a.get('href'), a.text)
-                    for a in atags if a.get('href') ]
-
-    return [ a.get('href') for a in atags if a.get('href') ]
-
-
-def html_to_urls(html, titles=True):
-    """takes html, uses xpath to quickly retrieve all <a> tags.
-    returns tuples in the form of (url, title), the title does
-    not have to exist"""
-
-    try:
-        lxml_root = lxml_wrapper(html)
-    except Exception, e:
-        log.debug('urls html lxml failed out %s' % e)
-        try:
-            lxml_root = soup_wrapper(html)
-        except Exception, e:
-            log.debug('urls soup lxml failed out %s' % e)
-            return []
+    # If the input is html, parse it into a root
+    if isinstance(root_or_html, str) or isinstance(root_or_html, unicode):
+        lxml_root = lxml_wrapper(root_or_html)
+    else:
+        lxml_root = root_or_html
 
     a_tags = lxml_root.xpath('//a')
-
-    if titles:
+    if titles: # tries to find titles of link elements via tag text
         return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
 
     return [ a.get('href') for a in a_tags if a.get('href') ]
@@ -82,33 +76,31 @@ def valid_body(article, verbose=False):
     wordcount = article.text.split(' ')
     sentcount = article.text.split('.')
 
-    if og_art == 'article' and wordcount > \
-            (MIN_WORD_COUNT - 50):
-        #log.debug('%s verified for article and wc' % link.href)
+    if og_art == 'article' and wordcount > (MIN_WORD_COUNT - 50):
+        log.debug('%s verified for article and wc' % article.url)
         return True
 
     if not article.is_media_news() and not article.text:
-        #log.debug('%s caught for no media no text' % link.href)
+        log.debug('%s caught for no media no text' % article.url)
         return False
 
-    if article.title is None or \
-            len(article.title.split(' ')) < 2:
-        #log.debug('%s caught for bad title' % link.href)
+    if article.title is None or len(article.title.split(' ')) < 2:
+        log.debug('%s caught for bad title' % article.url)
         return False
 
     if len(wordcount) < MIN_WORD_COUNT:
-        #log.debug('%s caught for word cnt' % link.href)
+        log.debug('%s caught for word cnt' % article.url)
         return False
 
     if len(sentcount) < MIN_SENT_COUNT:
-        #log.debug('%s caught for sent cnt' % link.href)
+        log.debug('%s caught for sent cnt' % article.url)
         return False
 
-    if not article.html:
-        #log.debug('%s caught for no html' % link.href)
+    if article.html is None or article.html == u'':
+        log.debug('%s caught for no html' % article.url)
         return False
 
-    #log.debug('%s verified for default true' % link.href)
+    log.debug('%s verified for default true' % article.url)
     return True
 
 
@@ -170,6 +162,117 @@ def get_imgs(article, method='lxml'):
         img_links = [ urlparse.urljoin(article.href, url)
                 for url in article.lxml_root.xpath('//img/@src') ]
         return img_links
+
+
+def get_feed_urls(source):
+    """REQUIRES: List of category lxml roots.
+    two types of anchors, categories and feeds (rss)
+    we extract category urls first and then feeds"""
+
+    feed_urls = []
+    for category_obj in source.obj_categories:
+        root = category_obj[2]
+        feed_urls.extend(root.xpath('//*[@type="application/rss+xml"]/@href'))
+
+    feed_urls = feed_urls[:50]
+    feed_urls = [ prepare_url(f, source.url) for f in feed_urls ]
+
+    feeds = list(set(feed_urls))
+    source.feed_urls = feeds
+
+
+def get_category_urls(source):
+    """REQUIRES: valid lxml root.
+    takes a domain and finds all of the top level
+    urls, we are assuming that these are the category urls
+
+    cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
+    """
+
+    urls = get_urls(source.lxml_root, titles=False)
+    valid_categories = []
+
+    for url in urls:
+        scheme = get_scheme(url, allow_fragments=False)
+        domain = get_domain(url, allow_fragments=False)
+        path = get_path(url, allow_fragments=False)
+
+        if not domain and not path:
+            continue
+        if path and '#' in path:
+            continue
+        if scheme and (scheme!='http' and scheme!='https'):
+            continue
+
+        if domain:
+            child_tld = tldextract.extract(url)
+            domain_tld = tldextract.extract(source.url)
+
+            if child_tld.domain != domain_tld.domain:
+                continue
+            elif child_tld.subdomain in ['m', 'i']:
+                continue
+            else:
+                valid_categories.append(scheme+'://'+domain)
+
+        else:
+            # we want a path with just one subdir
+            # cnn.com/world and cnn.com/world/ are both valid_categories
+            path_chunks = [ x for x in path.split('/') if len(x) > 0 ]
+
+            if 'index.html' in path_chunks:
+                path_chunks.remove('index.html')
+
+            if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
+                valid_categories.append(domain+path)
+
+    stopwords = [
+        'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
+        'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
+        'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon', 'youtube',
+        'vimeo', 'store', 'mail', 'preferences', 'maps', 'password', 'imgur',
+        'flickr', 'search', 'subscription', 'itunes', 'siteindex', 'events',
+        'stop', 'jobs', 'careers', 'newsletter', 'subscribe', 'academy',
+        'shopping', 'purchase', 'site-map', 'shop', 'donate', 'newsletter',
+        'product', 'advert', 'info', 'tickets', 'coupons', 'forum', 'board',
+        'archive', 'browse', 'howto', 'how to', 'faq', 'terms', 'charts',
+        'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register']
+
+    _valid_categories = []
+
+    # TODO Stop spamming urlparse and tldextract calls...
+
+    for url in valid_categories:
+        path = get_path(url)
+        subdomain = tldextract.extract(url).subdomain
+        conjunction = path + ' ' + subdomain
+        bad=False
+        for badword in stopwords:
+            if badword.lower() in conjunction.lower():
+                bad=True
+                break
+        if not bad:
+            _valid_categories.append(url)
+
+    _valid_categories.append('/') # add the root!
+
+    for i, url in enumerate(_valid_categories):
+        if url.startswith('://') :
+            url = 'http' + url
+            _valid_categories[i] = url
+
+        elif url.startswith('//'):
+            url = 'http:' + url
+            _valid_categories[i] = url
+
+        if url.endswith('/'):
+            url = url[:-1]
+            _valid_categories[i] = url
+
+    _valid_categories = list(set(_valid_categories))
+
+    categories = [prepare_url(url, source.url) for url in _valid_categories]
+    source.category_urls = categories
 
 
 class GooseObj(object):

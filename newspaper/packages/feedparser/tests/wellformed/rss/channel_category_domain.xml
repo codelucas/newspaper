@@ -1,0 +1,9 @@
+<!--
+Description: channel single category with domain
+Expect:      not bozo and feed['tags'][0]['scheme'] == u'http://www.example.com/'
+-->
+<rss version="2.0">
+<channel>
+<category domain="http://www.example.com/">Example category</category>
+</channel>
+</rss>

@@ -1,0 +1,11 @@
+<!--
+Description: item guid
+Expect:      not bozo and entries[0]['guid'] == u'http://guid.example.com/'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<guid>http://guid.example.com/</guid>
+</item>
+</channel>
+</rss>

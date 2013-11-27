@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain choff attribute
+Expect:       not bozo and entries[0]['description'] == '<span choff=""></span>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;span choff=""&gt;&lt;/span&gt;</content>
+</entry>
+</feed>

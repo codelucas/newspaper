@@ -1,0 +1,9 @@
+<!--
+Description: channel dc:title
+Expect:      not bozo and feed['title'] == u'Example title'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:title>Example title</dc:title>
+</channel>
+</rss>

@@ -1,0 +1,9 @@
+<!--
+Description: iTunes treats non-iTunes element names as case-insensitive
+Expect:      not bozo and feed['title'] == u'Example title'
+-->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+<TiTlE>Example title</TiTlE>
+</channel>
+</rss>

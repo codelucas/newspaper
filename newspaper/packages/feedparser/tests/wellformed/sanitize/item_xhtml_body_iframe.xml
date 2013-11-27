@@ -1,0 +1,11 @@
+<!--
+Description: item xhtml:body contains iframe
+Expect:      not bozo and entries[0]['description'] == u'safe description'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<body xmlns="http://www.w3.org/1999/xhtml">safe<iframe src="http://example.com/"/> description</body>
+</item>
+</channel>
+</rss>

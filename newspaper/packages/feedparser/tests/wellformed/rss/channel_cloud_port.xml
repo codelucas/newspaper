@@ -1,0 +1,9 @@
+<!--
+Description: cloud port
+Expect:      not bozo and feed['cloud']['port'] == u'80'
+-->
+<rss version="2.0">
+<channel>
+<cloud domain="rpc.sys.com" port="80" path="/RPC2" registerProcedure="myCloud.rssPleaseNotify" protocol="xml-rpc" />
+</channel>
+</rss>

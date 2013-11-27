@@ -1,0 +1,10 @@
+<!--
+Description: entry parsed created, multiple values, ensure overwrite
+Expect:      not bozo and entries[0]['created_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<created>2010-12-01T10:14:55Z</created>
+<created>2003-12-31T10:14:55Z</created>
+</entry>
+</feed>

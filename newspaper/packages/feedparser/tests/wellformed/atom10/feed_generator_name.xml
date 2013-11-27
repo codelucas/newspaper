@@ -1,0 +1,7 @@
+<!--
+Description: feed generator name
+Expect:      not bozo and feed['generator_detail']['name'] == u'Example generator'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <generator uri="http://example.com/" version="2.65">Example generator</generator>
+</feed>

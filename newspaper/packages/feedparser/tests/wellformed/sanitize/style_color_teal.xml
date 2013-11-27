@@ -1,0 +1,11 @@
+<!--
+Description:  style="color: teal;"
+Expect:       not bozo and entries[0]['description'] == '<span style="color: teal;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="color: teal;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

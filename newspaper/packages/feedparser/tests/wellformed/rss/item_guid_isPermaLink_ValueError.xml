@@ -1,0 +1,7 @@
+<!--
+    Description: ensure ValueError from urljoin() is caught
+    Expect: not bozo
+-->
+<rss xml:base="http://example.test/"><channel><item>
+<guid isPermaLink="true">http://example.c[o.test/</guid>
+</item></channel></rss>

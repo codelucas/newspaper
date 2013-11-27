@@ -1,0 +1,13 @@
+<!--
+Description: entry author email
+Expect:      not bozo and entries[0]['author_detail']['email'] == u'me@example.com'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <author>
+    <name>Example author</name>
+    <email>me@example.com</email>
+    <uri>http://example.com/</uri>
+  </author>
+</entry>
+</feed>

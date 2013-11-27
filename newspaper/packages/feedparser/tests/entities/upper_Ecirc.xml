@@ -1,0 +1,9 @@
+<!--
+Description: Ecirc
+Expect:      feed['title'] == u'testing \xca entity'
+-->
+<rss>
+<channel>
+<title>testing &Ecirc; entity</title>
+</channel>
+</rss>

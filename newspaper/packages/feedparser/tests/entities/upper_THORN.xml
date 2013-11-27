@@ -1,0 +1,9 @@
+<!--
+Description: THORN
+Expect:      feed['title'] == u'testing \xde entity'
+-->
+<rss>
+<channel>
+<title>testing &THORN; entity</title>
+</channel>
+</rss>

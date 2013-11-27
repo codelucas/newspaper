@@ -1,0 +1,7 @@
+<!--
+Description: feed title content xml:base inherited from parent element
+Expect:      not bozo and feed['title_detail']['base'] == u'http://example.com/test/'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:base="http://example.com/test/">
+  <title type="application/xhtml+xml"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></title>
+</feed>

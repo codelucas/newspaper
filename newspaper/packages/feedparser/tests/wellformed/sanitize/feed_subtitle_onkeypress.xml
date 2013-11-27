@@ -1,0 +1,7 @@
+<!--
+Description: feed subtitle contains onkeypress
+Expect:      not bozo and feed['tagline'] == u'<img src="http://www.ragingplatypus.com/i/cam-full.jpg" />'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<subtitle type="text/html" mode="escaped">&lt;img src="http://www.ragingplatypus.com/i/cam-full.jpg" onkeypress="location.href='http://www.ragingplatypus.com/';" /></subtitle>
+</feed>

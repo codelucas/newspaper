@@ -1,0 +1,57 @@
+<!--
+Credits:     Simon Fell - http://www.pocketsoap.com/rssTests/rss2.0noNSwithModulesLocalNameClash.xml - included here with permission
+Description: RSS 2.0 with modules, local namespace clash
+Expect:      not bozo and entries[0]['description'] == u'correct description'
+-->
+<rss 		version="2.0" 
+		xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+		xmlns:admin="http://webns.net/mvcb/"
+		xmlns:ag="http://purl.org/rss/modules/aggregation/"
+		xmlns:dc="http://purl.org/dc/elements/1.1/"
+		xmlns:dcterms="http://purl.org/dc/terms/"
+		xmlns:l="http://purl.org/rss/1.0/modules/link/"
+		xmlns:szf="http://schemas.pocketsoap.com/rss/myDescModule/"
+		xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/">
+	<channel>
+		<title>RSS Tests - RSS2.0 no NS localName clash</title>
+		<link>http://www.pocketsoap.com/rssTests/rss2.0noNSwithModulesLocalNameClash.xml</link>
+		<description>A set of test RSS files for examining the state of extension support in RSS aggregators</description>
+		<language>en-gb</language>
+		<dc:language>en-gb</dc:language>
+
+		<copyright>Copyright 2002 Simon Fell</copyright>
+		<dc:rights>Copyright 2002 Simon Fell</dc:rights>
+		<dc:date>2002-09-28T21:00:02Z</dc:date>
+		<lastBuildDate>Sat, 28 Sep 2002 21:00:02 GMT</lastBuildDate>
+		<pubDate>Sat, 28 Sep 2002 21:00:02 GMT</pubDate>
+		<dc:creator>sf@zaks.demon.co.uk</dc:creator>
+
+		<managingEditor>sf@zaks.demon.co.uk</managingEditor>
+		<dc:publisher>sf@zaks.demon.co.uk</dc:publisher>
+		<generator>ultraedit-32</generator>
+		<admin:errorReportsTo rdf:resource="mailto:sf@zaks.demon.co.uk" />
+		<webMaster>sf@zaks.demon.co.uk (Simon Fell)</webMaster>
+		<dcterms:issued>2002-09-28T20:01:19Z</dcterms:issued>
+
+		<dcterms:created>2002-01-12T02:15:32Z</dcterms:created>
+		<dcterms:modified>2002-09-28T20:01:19Z</dcterms:modified>
+		<dcterms:dateCopyrighted>2002</dcterms:dateCopyrighted>
+		
+		<item>
+			<title>Test Item - RSS2.0 no NS localName clash</title>
+			<link>http://www.pocketsoap.com/weblog/rssTests/rss2.0noNSwithModulesLocalNameClash.xml#1</link>
+
+			<l:link l:rel="http://purl.org/rss/1.0/modules/proposed/link/#permalink"  l:type="text/html" rdf:resource="http://www.pocketsoap.com/weblog/rssTests/rss2.0noNSwithModulesLocalNameClash.xml#1" />
+			<szf:description>This is a extension module that is in a different namespace, but uses a localname from the RSS core spec. 
+			This shouldn't appear in your aggregator, but probably does. (pre rss:description - RSS2.0 no NS localName clash)
+			</szf:description>
+			<description>correct description</description>
+			<szf:description>This is a extension module that is in a different namespace, but uses a localname from the RSS core spec. 
+			This shouldn't appear in your aggregator, but probably does. (post rss:description - RSS2.0 no NS localName clash)
+			</szf:description>
+			<dcterms:modified>2002-09-28T20:01:19Z</dcterms:modified>
+			<dcterms:created>2002-09-28T20:01:19Z</dcterms:created>
+
+		</item>
+	</channel>
+</rss>

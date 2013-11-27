@@ -1,0 +1,12 @@
+<!--
+Description: item point with no coordinates
+Expect: entries[0].get('where') == {}
+-->
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  >
+  <entry>
+    <georss:point> </georss:point>
+  </entry>
+</feed>

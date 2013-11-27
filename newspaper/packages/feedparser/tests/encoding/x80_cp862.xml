@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="cp862"?>
+<!--
+SkipUnless:  __import__('codecs').lookup('cp862')
+Description: \x80 character in cp862 encoding
+Expect:      not bozo and feed['title'] == u'\u05d0'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<title>€</title>
+</feed>

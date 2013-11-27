@@ -1,0 +1,9 @@
+<!--
+Description: entry content contains applet
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'safe <b>description</b>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<content type="text/html" mode="escaped">safe&lt;applet code="foo.class" codebase="http://example.com/">&lt;/applet> &lt;b>description&lt;/b></content>
+</entry>
+</feed>

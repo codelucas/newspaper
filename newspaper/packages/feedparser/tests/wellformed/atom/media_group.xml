@@ -1,0 +1,16 @@
+<!--
+Description: media_group
+Expect:      entries[0]['description'] == u'Test Description' and entries[0]['media_credit'][0]['role'] == u'creator' and entries[0]['media_credit'][0]['content'] == u'Creator' and entries[0]['media_credit'][1]['role'] == u'writer' and entries[0]['media_credit'][1]['content'] == u'Writer' and entries[0]['media_restriction']['relationship'] == u'allow' and entries[0]['media_restriction']['content'] == u'au us' and entries[0]['media_license']['type'] == u'plain' and entries[0]['media_license']['href'] == u'http://example.com/' and entries[0]['media_license']['content'] == u'License'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xmlns:media="http://search.yahoo.com/mrss/">
+<entry>
+  <media:group>
+    <media:credit role="creator">Creator</media:credit>
+    <media:credit role="writer">Writer</media:credit>
+    <media:description type="plain">Test Description</media:description>
+    <media:license type="plain" href="http://example.com/">License</media:license>
+    <media:restriction relationship="allow" type="country">au us</media:restriction>
+  </media:group>
+  <title>Example Atom</title>
+</entry>
+</feed>

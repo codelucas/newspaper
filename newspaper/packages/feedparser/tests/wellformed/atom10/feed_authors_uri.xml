@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Description: feed contains multiple author uris
+Expect: not bozo and (feed['authors'][0]['url'] == u'http://one.com/') and (feed['authors'][1]['url'] == u'http://two.com/')
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <author>
+    <uri>http://one.com/</uri>
+  </author>
+  <author>
+    <uri>http://two.com/</uri>
+  </author>
+</feed>

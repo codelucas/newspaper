@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!--
+Description: no content-type and no encoding
+Expect:      not bozo and encoding == 'utf-8'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+</feed>

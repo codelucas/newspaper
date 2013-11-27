@@ -1,0 +1,12 @@
+<!--
+Description: not guidislink because guid is not permalink
+Expect:      not bozo and not entries[0]['guidislink']
+-->
+<rss version="2.0">
+<channel>
+<item>
+<link>http://link.example.com/</link>
+<guid isPermaLink="false">http://guid.example.com/</guid>
+</item>
+</channel>
+</rss>

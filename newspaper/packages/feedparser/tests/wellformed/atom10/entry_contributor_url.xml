@@ -1,0 +1,13 @@
+<!--
+Description: entry contributor url
+Expect:      not bozo and entries[0]['contributors'][0]['url'] == u'http://example.com/'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <contributor>
+    <name>Example contributor</name>
+    <email>me@example.com</email>
+    <url>http://example.com/</url>
+  </contributor>
+</entry>
+</feed>

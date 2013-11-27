@@ -1,0 +1,10 @@
+<!--
+Header:      Content-Location: http://example.com/
+Description: channel link relative to Content-Location header
+Expect:      not bozo and feed['link'] == u'http://example.com/relative/uri'
+-->
+<rss version="2.0">
+<channel>
+<link>/relative/uri</link>
+</channel>
+</rss>

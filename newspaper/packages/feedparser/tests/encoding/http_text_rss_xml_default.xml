@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<!--
+Header:      Content-type: text/rss+xml
+Description: text/rss+xml + no encoding
+Expect:      not bozo and encoding == 'us-ascii'
+-->
+<rss version="2.0">
+</rss>

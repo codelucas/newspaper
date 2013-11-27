@@ -6,9 +6,8 @@ import logging
 import urllib
 import StringIO
 import math
-import Image
-import ImageFile
 
+from PIL import Image, ImageFile
 from urllib2 import Request, HTTPError, URLError, build_opener
 from httplib import InvalidURL
 
@@ -68,14 +67,13 @@ def square_image(img):
 
 def clean_url(url):
     """url quotes unicode data out of urls"""
-    # url = unicode(url, 'utf8')
 
     url = url.encode('utf8')
     url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
     return url
 
-
 def fetch_url(url, referer=None, retries=1, dimension=False):
+    """"""
 
     cur_try = 0
     nothing = None if dimension else (None, None)
@@ -113,9 +111,8 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
                     try:
                         p.feed(new_data)
                     except IOError, e: # jpg error on some computers
-                        log.debug('jpeg misconfiguration reinstall '
-                                     'PIL on this machine, err: %s' % str(e))
-                        print 'err'
+                        log.critical('jpeg misconfiguration reinstall '
+                                'Pillow or PIL on this machine, err: %s' % str(e))
                         p = None
                         break
                     new_data = open_req.read(chunk_size)
@@ -137,9 +134,7 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
         except (URLError, HTTPError, InvalidURL), e:
             cur_try += 1
             if cur_try >= retries:
-                # logger.debug('error while fetching:
-                #    %s referer: %s' % (url, referer))
-                # logger.debug(e)
+                # log.debug('error while fetching: %s referer: %s' % (url, referer))
                 return nothing
         finally:
             if 'open_req' in locals():
@@ -196,10 +191,12 @@ class Scraper:
                 max_area = area
                 max_url = img_url
 
-        #logger.debug('using max img ' + max_url)
+        # log.debug('using max img ' + max_url)
         return max_url
 
     def thumbnail(self):
+        """Identifies top image, trims out a thumbnail and also has a url"""
+
         image_url = self.largest_image_url()
         if image_url:
             content_type, image_str = fetch_url(image_url, referer=self.url)

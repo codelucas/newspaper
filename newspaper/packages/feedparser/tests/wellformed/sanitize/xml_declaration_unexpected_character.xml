@@ -1,0 +1,7 @@
+<!--
+Description: xml declaration unexpected character
+Expect:      not bozo and feed['title'] == u'&lt;!DOCTYPE ~'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">&lt;!DOCTYPE ~</title>
+</feed>

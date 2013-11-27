@@ -1,0 +1,9 @@
+<!--
+Description: frac14
+Expect:      feed['title'] == u'testing \xbc entity'
+-->
+<rss>
+<channel>
+<title>testing &frac14; entity</title>
+</channel>
+</rss>

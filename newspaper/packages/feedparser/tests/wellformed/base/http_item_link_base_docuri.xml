@@ -1,0 +1,11 @@
+<!--
+Description: item link relative to document URI
+Expect:      not bozo and entries[0]['link'] == u'http://127.0.0.1:8097/relative/uri'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<link>/relative/uri</link>
+</item>
+</channel>
+</rss>

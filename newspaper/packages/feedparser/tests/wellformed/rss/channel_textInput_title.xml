@@ -1,0 +1,12 @@
+<!--
+Description: textInput title
+Expect:      not bozo and feed['textinput']['title'] == u'textInput title'
+-->
+<rss version="2.0">
+<channel>
+<title>Real title</title>
+<textInput>
+<title>textInput title</title>
+</textInput>
+</channel>
+</rss>

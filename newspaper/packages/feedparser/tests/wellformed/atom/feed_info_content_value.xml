@@ -1,0 +1,7 @@
+<!--
+Description: feed info content value
+Expect:      not bozo and feed['info_detail']['value'] == u'Example Atom'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <info>Example Atom</info>
+</feed>

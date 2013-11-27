@@ -1,0 +1,10 @@
+<!--
+Description: xmlns without prefix with xlink uri causes crash
+Expect: not bozo and feed['title'] == u'xlink'
+-->
+<rss>
+    <bogus xmlns="http://www.w3.org/1999/xlink"/>
+    <channel>
+        <title>xlink</title>
+    </channel>
+</rss>

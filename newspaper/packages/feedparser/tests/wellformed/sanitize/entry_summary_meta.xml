@@ -1,0 +1,9 @@
+<!--
+Description: entry summary contains meta
+Expect:      not bozo and entries[0]['summary'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<summary type="text/html" mode="escaped">safe&lt;meta http-equiv="Refresh" content="0; URL=http://example.com/"> description</summary>
+</entry>
+</feed>

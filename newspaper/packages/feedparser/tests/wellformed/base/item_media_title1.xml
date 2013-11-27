@@ -1,0 +1,11 @@
+<!--
+Description: media title as a fallback
+Expect:      not bozo and entries[0]['title'] == u'bar'
+-->
+<rss xmlns:media="http://search.yahoo.com/mrss/">
+  <channel>
+    <item>
+      <media:title>bar</media:title>
+    </item>
+  </channel>
+</rss>

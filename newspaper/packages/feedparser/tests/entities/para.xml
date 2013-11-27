@@ -1,0 +1,9 @@
+<!--
+Description: para
+Expect:      feed['title'] == u'testing \xb6 entity'
+-->
+<rss>
+<channel>
+<title>testing &para; entity</title>
+</channel>
+</rss>

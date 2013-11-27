@@ -1,0 +1,13 @@
+<!--
+Description: iTunes item nested category
+Expect:      not bozo and entries[0]['tags'][1]['term'] == u'Gadgets'
+-->
+<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
+<channel>
+<item>
+<itunes:category text="Technology">
+  <itunes:category text="Gadgets"></itunes:category>
+</itunes:category>
+</item>
+</channel>
+</rss>

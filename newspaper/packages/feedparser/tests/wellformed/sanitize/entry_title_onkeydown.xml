@@ -1,0 +1,9 @@
+<!--
+Description: entry title contains onkeydown
+Expect:      not bozo and entries[0]['title'] == u'<img src="http://www.ragingplatypus.com/i/cam-full.jpg" />'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<title type="text/html" mode="escaped">&lt;img src="http://www.ragingplatypus.com/i/cam-full.jpg" onkeydown="location.href='http://www.ragingplatypus.com/';" /></title>
+</entry>
+</feed>

@@ -1,0 +1,10 @@
+<!--
+XXX - THIS TEST SHOULD BE UPDATED WHEN SGML AND XML OUTPUT IS IDENTICAL
+Description: ensure apos is translated correctly
+Expect: not bozo and feed['title'] == u'it&apos;s correct' or feed['title'] == u"it's correct"
+-->
+<rss>
+<channel>
+    <title type="html">it&amp;apos;s correct</title>
+</channel>
+</rss>

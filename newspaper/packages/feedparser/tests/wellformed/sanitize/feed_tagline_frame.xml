@@ -1,0 +1,7 @@
+<!--
+Description: feed tagline contains frame
+Expect:      not bozo and feed['tagline'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<tagline type="text/html" mode="escaped">safe&lt;frameset rows="*">&lt;frame src="http://example.com/">&lt;/frameset> description</tagline>
+</feed>

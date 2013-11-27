@@ -1,0 +1,11 @@
+<!--
+Description:  style="float: right;"
+Expect:       not bozo and entries[0]['description'] == '<span style="float: right;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="float: right;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

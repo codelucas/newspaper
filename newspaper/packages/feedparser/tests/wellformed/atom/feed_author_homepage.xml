@@ -1,0 +1,11 @@
+<!--
+Description: feed author homepage
+Expect:      not bozo and feed['author_detail']['url'] == u'http://example.com/'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <author>
+    <name>Example author</name>
+    <email>me@example.com</email>
+    <homepage>http://example.com/</homepage>
+  </author>
+</feed>

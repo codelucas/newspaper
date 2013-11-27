@@ -1,0 +1,7 @@
+<!--
+Description: target for http status tests; no actual evaluation
+Expect:      1
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <item><title>target</title></item>
+</feed>

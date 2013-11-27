@@ -1,0 +1,9 @@
+<!--
+Description: euml
+Expect:      feed['title'] == u'testing \xeb entity'
+-->
+<rss>
+<channel>
+<title>testing &euml; entity</title>
+</channel>
+</rss>

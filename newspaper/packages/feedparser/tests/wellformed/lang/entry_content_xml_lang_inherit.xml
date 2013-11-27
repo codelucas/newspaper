@@ -1,0 +1,9 @@
+<!--
+Description: entry content xml:lang inherited from parent element
+Expect:      not bozo and entries[0]['content'][0]['language'] == u'en'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:lang="en">
+<entry>
+  <content type="application/xhtml+xml"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></content>
+</entry>
+</feed>

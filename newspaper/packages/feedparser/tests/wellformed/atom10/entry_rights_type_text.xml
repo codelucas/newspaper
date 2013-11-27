@@ -1,0 +1,9 @@
+<!--
+Description: entry rights type='text'
+Expect:      not bozo and entries[0]['rights_detail']['type'] == 'text/plain'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <rights type="text">Example Atom</rights>
+</entry>
+</feed>

@@ -1,0 +1,7 @@
+<!--
+Description: feed logo
+Expect:      not bozo and feed['logo'] == u'http://example.com/logo.jpg'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <logo>http://example.com/logo.jpg</logo>
+</feed>

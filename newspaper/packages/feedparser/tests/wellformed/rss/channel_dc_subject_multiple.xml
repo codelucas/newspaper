@@ -1,0 +1,10 @@
+<!--
+Description: multiple dc:subject
+Expect:      not bozo and feed['tags'][1]['term'] == u'Example category 2'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:subject>Example category 1</dc:subject>
+<dc:subject>Example category 2</dc:subject>
+</channel>
+</rss>

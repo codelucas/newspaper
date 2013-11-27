@@ -1,0 +1,11 @@
+<!--
+Description: unescaped ampersand in URL query variable doesn't affect entry URL
+Expect: entries[0].link == u'http://example/?a=1&b=2&c'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<link>http://example/?a=1&b=2&c</link>
+</item>
+</channel>
+</rss

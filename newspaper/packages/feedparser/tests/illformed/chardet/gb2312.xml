@@ -1,0 +1,12 @@
+<!--
+SkipUnless:   __import__('chardet')
+Description:  GB2312 with no encoding information
+Expect:       bozo and encoding == 'GB2312'
+-->
+<rss>
+<channel>
+<item>
+<title>不归移民漫画系列：专业工作</title>
+</item>
+</channel>
+</rss>

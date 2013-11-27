@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Note:         text/xml defaults to us-ascii, in conflict with the XML declaration of utf-8
+Header:       Content-type: text/xml
+Description:  Content-type with no charset (text/xml defaults to us-ascii)
+Expect:       bozo and isinstance(bozo_exception, feedparser.CharacterEncodingOverride)
+-->
+
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <title>Iñtërnâtiônàlizætiøn</title>
+</feed>

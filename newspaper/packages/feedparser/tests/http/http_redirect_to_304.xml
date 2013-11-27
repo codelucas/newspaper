@@ -1,0 +1,7 @@
+<!--
+Header:      Status: 302
+Header:      Location: http://localhost:8097/-/return-304.xml
+Description: ensure an http 302 redirect to an http 304 doesn't cause an xml parsing error
+Expect:      0
+-->
+<feed xmlns="http://www.w3.org/2005/Atom"></feed>

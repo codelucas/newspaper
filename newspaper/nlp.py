@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 import re
 import math
 from collections import Counter
@@ -144,6 +143,7 @@ def keywords(text):
 
 def split_sentences(text):
     """split a large string into sentences"""
+
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 

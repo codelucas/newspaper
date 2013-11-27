@@ -1,0 +1,7 @@
+<!--
+Description: feed tagline content language from xml:lang
+Expect:      not bozo and feed['tagline_detail']['language'] == u'en'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <tagline xml:lang="en">Example Atom</tagline>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description: channel author
+Expect:      not bozo and feed['author'] == u'Example editor (me@example.com)'
+-->
+<rss version="2.0">
+<channel>
+<author>Example editor (me@example.com)</author>
+</channel>
+</rss>

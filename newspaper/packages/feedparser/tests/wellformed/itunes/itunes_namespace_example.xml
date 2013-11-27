@@ -1,0 +1,9 @@
+<!--
+Description: iTunes namespace (example in 2005-07-07 spec)
+Expect:      not bozo and feed['itunes_block'] == 1
+-->
+<rss xmlns:itunes="http://example.com/DTDs/Podcast-1.0.dtd">
+<channel>
+  <itunes:block>yes</itunes:block>
+</channel>
+</rss>

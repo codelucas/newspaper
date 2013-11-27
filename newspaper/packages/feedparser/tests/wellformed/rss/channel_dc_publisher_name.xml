@@ -1,0 +1,9 @@
+<!--
+Description: channel dc:publisher
+Expect:      not bozo and feed['publisher_detail']['name'] == u'Example editor'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:publisher>Example editor (me@example.com)</dc:publisher>
+</channel>
+</rss>

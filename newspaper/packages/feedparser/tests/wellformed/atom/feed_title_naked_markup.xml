@@ -1,0 +1,7 @@
+<!--
+Description: feed title with undeclared unqualified inline markup
+Expect:      not bozo and feed['title'] == u'Example <b>Atom</b>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+  <title>Example <b>Atom</b></title>
+</feed>

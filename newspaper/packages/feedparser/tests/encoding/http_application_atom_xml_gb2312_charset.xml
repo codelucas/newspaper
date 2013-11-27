@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<!--
+SkipUnless:  __import__('codecs').lookup('gb2312')
+Header:      Content-type: application/atom+xml;charset='gb2312'
+Description: application/atom+xml + explicit charset
+Expect:      not bozo and encoding == 'gb18030'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+</feed>

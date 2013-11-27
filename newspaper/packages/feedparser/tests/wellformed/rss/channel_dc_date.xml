@@ -1,0 +1,9 @@
+<!--
+Description: channel dc:date
+Expect:      not bozo and feed['updated'] == u'2003-12-31T10:14:55Z'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<dc:date>2003-12-31T10:14:55Z</dc:date>
+</channel>
+</rss>

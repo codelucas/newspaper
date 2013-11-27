@@ -1,0 +1,7 @@
+<!--
+Description: feed copyright contains onreset
+Expect:      not bozo and feed['copyright'] == u'<img src="http://www.ragingplatypus.com/i/cam-full.jpg" />'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<copyright type="text/html" mode="escaped">&lt;img src="http://www.ragingplatypus.com/i/cam-full.jpg" onreset="location.href='http://www.ragingplatypus.com/';" /></copyright>
+</feed>

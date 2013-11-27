@@ -1,0 +1,11 @@
+<!--
+Description: item author
+Expect:      not bozo and entries[0]['author'] == u'Example editor'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<author>Example editor</author>
+</item>
+</channel>
+</rss>

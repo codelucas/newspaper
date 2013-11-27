@@ -1,0 +1,14 @@
+<!--
+Description: image link does not conflict with item link
+Expect: not bozo and entries[0]['link'] == u'http://item.TEST/'
+-->
+<rss version="2.0">
+<channel>
+    <item>
+        <link>http://item.TEST/</link>
+        <image>
+            <link>http://item.TEST/imagelink</link>
+        </image>
+    </item>
+</channel>
+</rss>

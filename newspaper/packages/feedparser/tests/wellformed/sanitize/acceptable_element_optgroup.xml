@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <optgroup></optgroup>
+Expect:       not bozo and entries[0]['description'] == '<optgroup></optgroup>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;optgroup&gt;&lt;/optgroup&gt;</content>
+</entry>
+</feed>

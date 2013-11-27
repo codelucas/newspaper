@@ -1,0 +1,9 @@
+<!--
+Description: zwnj
+Expect:      feed['title'] == u'testing \u200c entity'
+-->
+<rss>
+<channel>
+<title>testing &zwnj; entity</title>
+</channel>
+</rss>

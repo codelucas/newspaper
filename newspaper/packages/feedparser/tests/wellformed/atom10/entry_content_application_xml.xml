@@ -1,0 +1,9 @@
+<!--
+Description: entry content inline XML
+Expect:      not bozo and entries[0]['content'][0]['value'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+  <content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Example <b>Atom</b></div></content>
+</entry>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description: entry summary with undeclared unqualified inline markup
+Expect:      not bozo and entries[0]['summary'] == u'Example <b>Atom</b>'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+  <summary>Example <b>Atom</b></summary>
+</entry>
+</feed>

@@ -1,0 +1,11 @@
+<!--
+Description: fullitem type
+Expect:      not bozo and entries[0]['content'][0]['type'] == u'text/html'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<fullitem>&lt;p&gt;Example content&lt;/p&gt;</fullitem>
+</item>
+</channel>
+</rss>

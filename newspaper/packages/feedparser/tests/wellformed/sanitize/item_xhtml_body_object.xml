@@ -1,0 +1,11 @@
+<!--
+Description: item xhtml:body contains object
+Expect:      not bozo and entries[0]['description'] == u'safe description'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<body xmlns="http://www.w3.org/1999/xhtml">safe<object classid="clsid:C932BA85-4374-101B-A56C-00AA003668DC" /> description</body>
+</item>
+</channel>
+</rss>

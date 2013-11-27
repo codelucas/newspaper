@@ -1,0 +1,36 @@
+<!--
+Description:  Simple-Chapters: podlove.org/simple-chapters 
+Expect:       not bozo and entries[0]['psc_chapters']['chapters'][0]['title'] == 'Welcome' and entries[0]['psc_chapters']['chapters'][1]['start_parsed'] == datetime.timedelta(0, 187, 250000)
+-->
+<rss version = "2.0">
+<channel>
+  <title>Podlove Podcast</title>
+
+  <link href="http://podlove.org/"/>
+  <updated>2012-03-26T23:25:19Z</updated>
+  <author>
+    <name>Tim Pritlove</name>
+  </author>
+  <id>urn:uuid:8d5261ba-bf62-ac81-946c-9276ea617917c</id>
+
+  <item>
+    <title>Fiat Lux</title>
+    <link href="http://podlove.org/podcast/1"/>
+    <id>urn:uuid:3241ace2-ca21-dd12-2341-1412ce31fad2</id>
+    <updated>2012-03-26T23:25:19Z</updated>
+    <summary>First episode</summary>
+    <link rel="enclosure" type="audio/mpeg" length="12345"
+     href="http://podlove.org/files/fiatlux.mp3"/>
+
+    <!-- specify chapter information -->
+    <psc:chapters version="1.1" xmlns:psc="http://podlove.org/simple-chapters">
+      <psc:chapter start="00:00:00" title="Welcome" />
+      <psc:chapter start="00:03:07.250" title="Introducing Podlove"
+       href="http://podlove.org/" />
+      <psc:chapter start="08:26" title="Podlove WordPress Plugin"
+       href="http://podlove.org/wordpress-plugin" />
+      <psc:chapter start="12:42.345" title="Resumée" />
+    </psc:chapters>
+  </item>
+</channel>
+</rss>

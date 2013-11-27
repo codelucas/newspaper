@@ -1,0 +1,9 @@
+<!--
+Description: feed subtitle base64-encoded
+Expect:      not bozo and feed['subtitle'] == u'<p>History of the &lt;blink&gt; tag</p>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<subtitle type="application/octet-stream">
+PHA+SGlzdG9yeSBvZiB0aGUgJmx0O2JsaW5rJmd0OyB0YWc8L3A+
+</subtitle>
+</feed>

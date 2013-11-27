@@ -1,0 +1,11 @@
+<!--
+Description:  style contains url
+Expect:       not bozo and entries[0]['description'] == '<span style="background-color: #000;">Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="background-color: #000; background-image: url(/category/images/cafeneon_small.jpg); background-repeat: no-repeat;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

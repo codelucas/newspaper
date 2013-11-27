@@ -1,0 +1,11 @@
+<!--
+Description:  style="mso-bidi-font-weight: normal;"
+Expect:       not bozo and entries[0]['description'] == '<span>Some text</span>'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<description>&lt;span style="mso-bidi-font-weight: normal;"&gt;Some text&lt;/span&gt;</description>
+</item>
+</channel>
+</rss>

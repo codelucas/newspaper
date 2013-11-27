@@ -1,0 +1,7 @@
+<!--
+Description: feed title contains URI with an amperand
+Expect:      not bozo and feed['title_detail']['value'] == u'<a title="&quot;test&quot;">test</a>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><a title='"test"'>test</a></div></title>
+</feed>

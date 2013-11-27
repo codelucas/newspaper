@@ -1,0 +1,11 @@
+<!--
+Description: item source
+Expect:      not bozo and entries[0]['source']['title'] == 'Example source'
+-->
+<rss version="2.0">
+<channel>
+<item>
+<source url="http://example.com/">Example source</source>
+</item>
+</channel>
+</rss>

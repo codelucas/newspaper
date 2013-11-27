@@ -1,0 +1,7 @@
+<!--
+Description: feed copyright contains script
+Expect:      not bozo and feed['copyright'] == u'safe description'
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<copyright type="text/html" mode="escaped"><![CDATA[safe<script type="text/javascript">location.href='http:/'+'/example.com/';</script> description]]></copyright>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description: feed rights base64-encoded
+Expect:      not bozo and feed['rights'] == u'Example <b>Atom</b>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <rights type="application/octet-stream">
+    RXhhbXBsZSA8Yj5BdG9tPC9iPg==
+  </rights>
+</feed>

@@ -1,0 +1,9 @@
+<!--
+Description:  content may contain <audio></audio>
+Expect:       not bozo and entries[0]['description'] == '<audio></audio>'
+-->
+<feed xmlns="http://www.w3.org/2005/Atom">
+<entry>
+<content type="html">&lt;audio&gt;&lt;/audio&gt;</content>
+</entry>
+</feed>

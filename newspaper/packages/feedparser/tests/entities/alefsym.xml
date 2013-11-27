@@ -1,0 +1,9 @@
+<!--
+Description: alefsym
+Expect:      feed['title'] == u'testing \u2135 entity'
+-->
+<rss>
+<channel>
+<title>testing &alefsym; entity</title>
+</channel>
+</rss>

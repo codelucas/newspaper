@@ -1,0 +1,9 @@
+<!--
+Description: asymp
+Expect:      feed['title'] == u'testing \u2248 entity'
+-->
+<rss>
+<channel>
+<title>testing &asymp; entity</title>
+</channel>
+</rss>

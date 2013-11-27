@@ -1,0 +1,9 @@
+<!--
+Description: entry issued parsed
+Expect:      not bozo and entries[0]['published_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
+-->
+<feed version="0.3" xmlns="http://purl.org/atom/ns#">
+<entry>
+<issued>2003-12-31T10:14:55Z</issued>
+</entry>
+</feed>

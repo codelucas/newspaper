@@ -1,0 +1,11 @@
+<!--
+Description: item dc:author maps to author_detail email if both name and email are given
+Expect:      not bozo and entries[0]['author_detail']['email'] == u'me@example.com'
+-->
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<channel>
+<item>
+<dc:author>Example editor (me@example.com)</dc:author>
+</item>
+</channel>
+</rss>

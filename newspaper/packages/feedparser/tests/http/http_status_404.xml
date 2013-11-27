@@ -1,0 +1,6 @@
+<!--
+Header:      Status: 404
+Description: http status 404 (not found)
+Expect:      0
+-->
+<feed xmlns="http://www.w3.org/2005/Atom"></feed>

@@ -8,9 +8,13 @@ import pickle
 import time
 import logging
 import string
+import codecs
 from hashlib import sha1
 
+from .settings import MEMODIR, MAX_FILE_MEMO
+
 log = logging.getLogger(__name__)
+
 
 class TimeoutError(Exception):
     pass
@@ -66,7 +70,6 @@ def domain_to_filename(domain):
      are gone, only the raw domain + ".txt" remains"""
 
     filename =  domain.replace('/', '-')
-
     if filename[-1] == '-':
         filename = filename[:-1]
     filename += ".txt"
@@ -91,7 +94,6 @@ def is_ascii(word):
     for c in word:
         if not onlyascii(c):
             return False
-
     return True
 
 
@@ -175,3 +177,53 @@ def fix_unicode(inputstr):
 
     inputstr = inputstr.strip()
     return inputstr
+
+
+def memoize_articles(articles, source_domain):
+    """When we parse the <a> links in an <html> page, on the 2nd run
+    and later, check the <a> links of previous runs. If they match,
+    it means the link must not be an article, because article urls
+    change as time passes. This method also uniquifies articles."""
+
+    if len(articles) == 0:
+        return []
+
+    cur_articles = { article.url:article for article in articles }
+    memo = {}
+
+    d_pth = os.path.join(MEMODIR, domain_to_filename(source_domain))
+
+    if os.path.exists(d_pth):
+        f = codecs.open(d_pth, 'r', 'utf8')
+        memo = f.readlines() # list of urls, unicode
+        f.close()
+        memo = { href:True for href in memo }
+        # prev_length = len(memo)
+
+        for url, article in cur_articles.items():
+            if memo.get(url):
+                del cur_articles[url]
+
+        valid_urls = memo.keys() + cur_articles.keys()
+
+        memo_text = u'\r\n'.join(
+            [fix_unicode(href.strip()) for href in (valid_urls)])
+    # Our first run with memoization, save every url as valid
+    else:
+        memo_text = u'\r\n'.join(
+            [fix_unicode(href.strip()) for href in cur_articles.keys()])
+
+    # new_length = len(cur_articles)
+
+    if len(memo) > MAX_FILE_MEMO:
+        # We still keep current batch of articles though!
+        log.critical('memo overflow, dumping')
+        memo_text = ''
+
+    # TODO if source: source.write_upload_times(prev_length, new_length)
+    ff = codecs.open(d_pth, 'w', 'utf-8')
+    ff.write(memo_text)
+    ff.close()
+
+    return cur_articles.values() # articles returned
+

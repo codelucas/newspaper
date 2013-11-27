@@ -1,0 +1,7 @@
+<!--
+Description: CDF channel abstract maps to description
+Expect:      not bozo and feed['description'] == u'Example description'
+-->
+<CHANNEL>
+  <ABSTRACT>Example description</ABSTRACT>
+</CHANNEL>
