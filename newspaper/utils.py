@@ -14,12 +14,14 @@ from hashlib import sha1
 from .settings import MEMODIR, MAX_FILE_MEMO
 
 log = logging.getLogger(__name__)
+log.setLevel(logging.DEBUG)
 
 class TimeoutError(Exception):
     pass
 
 def timelimit(timeout):
     """ borrowed from web.py, rip Aaron Shwartz """
+
     def _1(function):
         def _2(*args, **kw):
             class Dispatch(threading.Thread):
@@ -85,7 +87,6 @@ def is_ascii(word):
             return ''
         else:
             return char
-
     for c in word:
         if not onlyascii(c):
             return False
@@ -98,17 +99,18 @@ def to_valid_filename(s):
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     return ''.join(c for c in s if c in valid_chars)
 
-def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
+def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
     """caching extracting category locations & rss feeds for 5 days"""
 
-    def doCache(f):
+    def do_cache(function):
         def inner_function(*args, **kwargs):
             """calculate a cache key based on the decorated method signature
             args[1] indicates the domain of the inputs, we hash on domain!"""
+
             key = sha1(str(args[1]) + str(kwargs)).hexdigest()
             filepath = os.path.join(cache_folder, key)
 
-            # verify that the cached object exists and is less than $seconds old
+            # verify that the cached object exists and is less than X seconds old
             if os.path.exists(filepath):
                 modified = os.path.getmtime(filepath)
                 age_seconds = time.time() - modified
@@ -116,13 +118,13 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
                     return pickle.load(open(filepath, "rb"))
 
             # call the decorated function...
-            result = f(*args, **kwargs)
+            result = function(*args, **kwargs)
             # ... and save the cached object for next time
             pickle.dump(result, open(filepath, "wb"))
-
             return result
+
         return inner_function
-    return doCache
+    return do_cache
 
 def print_duration(method):
     """prints out the runtime duration of a method in seconds"""
@@ -131,8 +133,7 @@ def print_duration(method):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-
-        log.debug('%r %2.2f sec' % (method.__name__, te-ts))
+        print '%r %2.2f sec' % (method.__name__, te-ts)
         return result
 
     return timed

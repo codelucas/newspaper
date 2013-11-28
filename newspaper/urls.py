@@ -62,7 +62,7 @@ def prepare_url(url, source_url=None):
     """operations that purify a url, removes arguments,
     redirects, and merges relatives with absolutes"""
 
-    if source_url is None:
+    if source_url is not None:
         source_domain = urlparse(source_url).netloc
         proper_url = urljoin(source_url, url)
         proper_url = redirect_back(proper_url, source_domain)

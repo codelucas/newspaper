@@ -38,7 +38,11 @@ def get_lxml_root(html):
 
     if html is None:
         return None
-    return lxml_wrapper(html)
+    try:
+        return lxml_wrapper(html)
+    except Exception, e:
+        print str(e)
+        return None
 
 def get_urls(root_or_html, titles=True):
     """returns a list of urls on the html page or lxml_root"""
@@ -49,9 +53,12 @@ def get_urls(root_or_html, titles=True):
 
     # If the input is html, parse it into a root
     if isinstance(root_or_html, str) or isinstance(root_or_html, unicode):
-        lxml_root = lxml_wrapper(root_or_html)
+        lxml_root = get_lxml_root(root_or_html)
     else:
         lxml_root = root_or_html
+
+    if lxml_root is None:
+        return []
 
     a_tags = lxml_root.xpath('//a')
     if titles: # tries to find titles of link elements via tag text
@@ -162,7 +169,7 @@ def get_feed_urls(source):
     we extract category urls first and then feeds"""
 
     feed_urls = []
-    for category_obj in source.obj_categories:
+    for category_obj in source.category_objs:
         root = category_obj[2]
         feed_urls.extend(root.xpath('//*[@type="application/rss+xml"]/@href'))
 
@@ -170,22 +177,23 @@ def get_feed_urls(source):
     feed_urls = [ prepare_url(f, source.url) for f in feed_urls ]
 
     feeds = list(set(feed_urls))
-    source.feed_urls = feeds
+    return feeds
 
+# extra url & lxml methods are for testing
 def get_category_urls(source):
-    """REQUIRES: valid lxml root.
+    """REQUIRES: source lxml root and source url
     takes a domain and finds all of the top level
     urls, we are assuming that these are the category urls
 
     cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
     """
 
-    urls = get_urls(source.lxml_root, titles=False)
+    page_urls = get_urls(source.lxml_root, titles=False)
     valid_categories = []
-    for url in urls:
-        scheme = get_scheme(url, allow_fragments=False)
-        domain = get_domain(url, allow_fragments=False)
-        path = get_path(url, allow_fragments=False)
+    for p_url in page_urls:
+        scheme = get_scheme(p_url, allow_fragments=False)
+        domain = get_domain(p_url, allow_fragments=False)
+        path = get_path(p_url, allow_fragments=False)
 
         if not domain and not path:
             continue
@@ -195,7 +203,7 @@ def get_category_urls(source):
             continue
 
         if domain:
-            child_tld = tldextract.extract(url)
+            child_tld = tldextract.extract(p_url)
             domain_tld = tldextract.extract(source.url)
 
             if child_tld.domain != domain_tld.domain:
@@ -231,9 +239,9 @@ def get_category_urls(source):
     _valid_categories = []
     # TODO Stop spamming urlparse and tldextract calls...
 
-    for url in valid_categories:
-        path = get_path(url)
-        subdomain = tldextract.extract(url).subdomain
+    for p_url in valid_categories:
+        path = get_path(p_url)
+        subdomain = tldextract.extract(p_url).subdomain
         conjunction = path + ' ' + subdomain
         bad=False
         for badword in stopwords:
@@ -241,27 +249,28 @@ def get_category_urls(source):
                 bad=True
                 break
         if not bad:
-            _valid_categories.append(url)
+            _valid_categories.append(p_url)
 
     _valid_categories.append('/') # add the root!
 
-    for i, url in enumerate(_valid_categories):
-        if url.startswith('://') :
-            url = 'http' + url
-            _valid_categories[i] = url
+    for i, p_url in enumerate(_valid_categories):
+        if p_url.startswith('://') :
+            p_url = 'http' + p_url
+            _valid_categories[i] = p_url
 
-        elif url.startswith('//'):
-            url = 'http:' + url
-            _valid_categories[i] = url
+        elif p_url.startswith('//'):
+            p_url = 'http:' + p_url
+            _valid_categories[i] = p_url
 
-        if url.endswith('/'):
-            url = url[:-1]
-            _valid_categories[i] = url
+        if p_url.endswith('/'):
+            p_url = p_url[:-1]
+            _valid_categories[i] = p_url
 
     _valid_categories = list(set(_valid_categories))
 
-    categories = [prepare_url(url, source.url) for url in _valid_categories]
-    source.category_urls = categories
+    categories = [prepare_url(p_url, source.url) for p_url in _valid_categories]
+    categories = [c for c in categories if c is not None]
+    return categories
 
 class GooseObj(object):
     """encapsulation of goose output"""

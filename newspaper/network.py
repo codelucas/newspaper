@@ -20,6 +20,7 @@ def get_html(url, timeout=7):
         html = requests.get(url=url, **req_kwargs).text
         if html is None:
             return u''
+        return html
     except Exception, e:
         log.debug('%s on %s' % (e, url))
         return u''

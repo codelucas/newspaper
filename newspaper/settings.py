@@ -22,7 +22,7 @@ LOGFILE = os.path.join(TOPDIR, 'newspaper_errors_%s.log' % VERSION)
 M_LOGFILE =  os.path.join(TOPDIR, 'newspaper_monitors_%s.log' % VERSION)
 
 # Memo directory (same for all concur crawlers)
-MEMO_FILE = "memoized"
+MEMO_FILE = 'memoized'
 MEMODIR = os.path.join(TOPDIR, MEMO_FILE)
 
 if not os.path.exists(MEMODIR):

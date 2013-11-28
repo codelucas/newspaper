@@ -33,7 +33,7 @@ class Article(object):
         source_url = fix_unicode(source_url)
 
         self.url = fix_unicode(url)
-        self.url = prepare_url(url, source_url)
+        self.url = prepare_url(self.url, source_url)
         self.title = fix_unicode(title)
 
         self.top_img = u''
