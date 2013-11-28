@@ -39,7 +39,7 @@ requires = [
 # 'nltk',
 # 'requests==2.0.1',
 
-with open('README.md') as f:
+with open('README.rst') as f:
     readme = f.read()
 
 with open('LICENSE') as f:
