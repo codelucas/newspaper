@@ -9,7 +9,7 @@ from newspaper.source import Source
 from newspaper.utils import print_duration
 from newspaper.settings import ANCHOR_DIR
 
-
+PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
 # class ArticleTestCase(unittest.TestCase):
 #
@@ -41,29 +41,62 @@ class SourceTestCase(unittest.TestCase):
         s.build()
         s.print_summary()
 
-    def test_cache_categories(self):
-        """builds two same source objects in a row examines speeds of both"""
 
-        @print_duration
-        def wrap_category_urls(source):
-            source.set_category_urls()
+    # def test_cache_categories(self):
+    #     """builds two same source objects in a row examines speeds of both"""
+    #
+    #     @print_duration
+    #     def wrap_category_urls(source):
+    #         source.set_category_urls()
+    #
+    #     s = Source('http://yahoo.com')
+    #     s.download()
+    #     s.parse()
+    #
+    #     print 'before',
+    #     wrap_category_urls(s)
+    #     print len(s.categories)
+    #     saved_urls = [c.url for c in s.categories]
+    #     s.category_urls = [] # reset and try again with caching
+    #     print 'after',
+    #     wrap_category_urls(s)
+    #     assert sorted([c.url for c in s.categories]) == sorted(saved_urls)
+    #
+    #     print os.listdir(ANCHOR_DIR), 'at', ANCHOR_DIR
 
-        s = Source('http://yahoo.com')
-        s.download()
-        s.parse()
+class UrlTestCase(unittest.TestCase):
 
-        saved_urls = []
-        print 'before',
-        wrap_category_urls(s)
-        print len(s.category_urls)
-        saved_urls = s.category_urls
-        s.category_urls = [] # reset and try again with caching
-        print 'after',
-        wrap_category_urls(s)
-        assert sorted(s.category_urls) == sorted(saved_urls)
+    def test_valid_urls(self):
+        """prints out a list of urls with our heuristic guess if it is a
+        valid news url purely based on the url"""
+        from newspaper.urls import valid_url
+        from newspaper.parsers import get_urls
+        import requests
 
-        print os.listdir(ANCHOR_DIR), 'at', ANCHOR_DIR
+        rss_fn = open(os.path.join(PARENT_DIR, 'data/cnn_rss_feeds.txt'), 'r')
+        rss_urls = rss_fn.readlines()
+        total_urls = []
+        for url in rss_urls:
+            text = requests.get(url).text
+            total_urls.extend(get_urls(text, istext=True))
 
+        rss_fn.close()
+        total_urls = list(set(total_urls))
+        urls_fn = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'w')
+        for url in total_urls:
+            urls_fn.write(url+'\r\n')
+        urls_fn.close()
+
+        # for url in rss_urls:
+        #   print valid_url(url), url
+
+        # urls_fn = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'r')
+        # urls = urls_fn.readlines()
+        # urls_fn.close()
+        # urls = list(set(urls))
+        # urls_fn2 = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'w')
+        # urls_fn2.write('\r\n'.join(urls))
+        # urls_fn2.close()
 
 
 if __name__ == '__main__':

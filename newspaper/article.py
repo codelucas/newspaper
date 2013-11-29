@@ -22,7 +22,7 @@ MAX_KEYWORDS = 35
 
 class Article(object):
 
-    def __init__(self, url, title=u'', source_url=None, from_feed=False):
+    def __init__(self, url, title=u'', source_url=None):
         if source_url is None:
             source_url = get_scheme(url) + '://' + get_domain(url)
 
@@ -45,7 +45,6 @@ class Article(object):
         self.domain = get_domain(source_url)
         self.scheme = get_scheme(source_url)
         self.rejected = False
-        self.from_feed = from_feed
 
         self.html = u''
         self.lxml_root = None
@@ -54,8 +53,8 @@ class Article(object):
 
         # If a url is from a feed, we know it's pre-validated,
         # otherwise, we need to make sure its a news article.
-        if not from_feed:
-            self.verify_url()
+        # if not from_feed: TODO Once we figure out feedparser again, restore this
+        self.verify_url()
 
     def build(self):
         """build a lone article from a url independent of the

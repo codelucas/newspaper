@@ -5,17 +5,9 @@ Newspaper: Article scraping & curation
     :target: http://badge.fury.io/py/textblob
         :alt: Latest version
 
-.. image:: https://travis-ci.org/sloria/TextBlob.png?branch=master
-    :target: https://travis-ci.org/sloria/TextBlob
-        :alt: Travis-CI
-
 .. image:: https://pypip.in/d/textblob/badge.png
     :target: https://crate.io/packages/textblob/
         :alt: Number of PyPI downloads
-
-.. image:: https://badge.waffle.io/sloria/TextBlob.png?label=Ready
-    :target: https://waffle.io/sloria/TextBlob
-        :alt: Issues in Ready
 
 
 Homepage: `https://textblob.readthedocs.org/ <https://textblob.readthedocs.org/>`_
@@ -62,7 +54,6 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
 
     print cnn_paper.brand
     # u'cnn'
-
 
     # Alternatively, you can use newspaper's lower level Article api
 

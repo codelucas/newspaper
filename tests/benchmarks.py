@@ -105,8 +105,10 @@ def asyncio_run(urls, req_kwargs):
     # Create a set of unsent Requests
     rs = (grequests.request('GET', u, **req_kwargs) for u in urls)
 
+    print 'before urls:', [u.decode('utf8') for u in urls]
     # Send them all at the same time
     responses = grequests.map(rs)
+    print 'after   urls', [r.url for r in responses]
     print responses
 
 def benchmark():
@@ -123,15 +125,15 @@ def benchmark():
         'allow_redirects' : True
     }
 
-    t1 = time.time()
-    naive_run(urls, req_kwargs)
-    t2 = time.time()
-    print('naive run finished in %d seconds' % (t2-t1))
+    # t1 = time.time()
+    # naive_run(urls, req_kwargs)
+    # t2 = time.time()
+    # print('naive run finished in %d seconds' % (t2-t1))
 
-    # t3 = time.time()
-    # asyncio_run(urls, req_kwargs)
-    # t4 = time.time()
-    # print('async io finished in %d seconds' % (t4-t3))
+    t3 = time.time()
+    asyncio_run(urls, req_kwargs)
+    t4 = time.time()
+    print('async io finished in %d seconds' % (t4-t3))
 
     # t5 = time.time()
     # mthread_run(urls, req_kwargs)

@@ -2,29 +2,32 @@
 
 import logging
 
-from .network import get_html
+from .network import get_html, async_request
 from .article import Article
-from .utils import fix_unicode, memoize_articles, cache_disk, print_duration
 from .urls import get_domain, get_scheme, prepare_url
 from .settings import ANCHOR_DIR
 from .packages.tldextract import tldextract
 from .packages.feedparser import feedparser
 from .parsers import (
     get_lxml_root, get_urls, get_feed_urls, get_category_urls)
+from .utils import (
+    fix_unicode, memoize_articles, cache_disk, print_duration)
 
 log = logging.getLogger(__name__)
 
 class Category(object):
+
     def __init__(self, url):
         self.url = url
         self.html = None
         self.lxml_root = None
 
-class FeedObj(object):
+class Feed(object):
+
     def __init__(self, url):
         self.url = url
-        self.html = None
-        self.lxml_root = None
+        self.rss = None
+        # self.dom = None TODO Speed up feedparser
 
 class Source(object):
     """Sources are abstractions of online news
@@ -48,13 +51,10 @@ class Source(object):
         self.domain = get_domain(self.url)
         self.scheme = get_scheme(self.url)
 
-        self.category_urls = []
-        self.feed_urls = []
-                                 # TODO: This is a bad approach, change soon!
-        self.category_objs = []  # [url, html, lxml] lists of lists
-        self.feed_objs = []      # [url, html, lxml] lists of lists
-
+        self.categories = []
+        self.feeds = []
         self.articles = []
+
         self.html = u''
         self.lxml_root = None
 
@@ -79,7 +79,7 @@ class Source(object):
 
         self.set_feed_urls()
         self.download_feeds()      # async
-        self.parse_feeds()
+        # self.parse_feeds()     TODO Speed up feedparser!!!
 
         self.generate_articles()
         # download articles
@@ -104,24 +104,61 @@ class Source(object):
 
         self.articles = ret
 
+    @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
+    def _get_category_urls(self, domain):
+        """the domain param is **necessary**, see .utils.cache_disk for reasons
+        boilerplate method so we can use this decorator right we are caching
+        categories for 1 DAY."""
+
+        return get_category_urls(self)
+
+    def set_category_urls(self):
+        """"""
+
+        urls = self._get_category_urls(self.domain)
+        self.categories = [Category(url=url) for url in urls]
+
+    def set_feed_urls(self):
+        """don't need to cache getting feed urls, it's almost
+        instant w/ xpath"""
+
+        urls = get_feed_urls(self)
+        self.feeds = [Feed(url=url) for url in urls]
+
+    def set_description(self):
+        """sets a blub for this source, for now we just
+        query the desc html attribute"""
+
+        if self.lxml_root is not None:
+            _list = self.lxml_root.xpath('//meta[@name="description"]')
+            if len(_list) > 0:
+                content_list = _list[0].xpath('@content')
+                if len(content_list) > 0:
+                    self.description = content_list[0]
+
     def download(self):
         """downloads html of source"""
 
         self.html = get_html(self.url)
 
     @print_duration
-    def download_categories(self, async=True, cache=True):
+    def download_categories(self):
         """individually download all category html, async io'ed"""
 
-        for url in self.category_urls:
-            self.category_objs.append( [url, get_html(url)] )
+        category_urls = [c.url for c in self.categories]
+        responses = async_request(category_urls)
+        # Note that the responses are returned in original order
+        for index, resp in enumerate(responses):
+            self.categories[index].html = resp.text
 
     @print_duration
-    def download_feeds(self, async=True, cache=True):
+    def download_feeds(self):
         """individually download all feed html, async io'ed"""
 
-        for url in self.feed_urls:
-            self.feed_objs.append( [url, get_html(url)] )
+        feed_urls = [f.url for f in self.feeds]
+        responses = async_request(feed_urls)
+        for index, resp in enumerate(responses):
+            self.feeds[index].rss = resp.text
 
     def parse(self, summarize=True, keywords=True, processes=1):
         """sets the lxml root, also sets lxml roots of all
@@ -133,63 +170,61 @@ class Source(object):
     def parse_categories(self):
         """parse out the lxml root in each category"""
 
-        log.debug('We are extracting from %d categories' % len(self.category_objs))
-        for index, category_obj in enumerate(self.category_objs):
-            # category_obj[1] is html, category_obj[0] is url
-            lxml_root = get_lxml_root(category_obj[1])
-            category_obj.append(lxml_root)
-            self.category_objs[index] = category_obj
+        log.debug('We are extracting from %d categories' % len(self.categories))
+        for category in self.categories:
+            lxml_root = get_lxml_root(category.html)
+            category.lxml_root = lxml_root
+        self.categories = [c for c in self.categories if c.lxml_root is not None]
 
     @print_duration
     def parse_feeds(self):
-        """use html of feeds to parse out their respective dom trees"""
+        """due to the slow speed of feedparser, we won't be dom parsing
+        our .rss feeds, but rather regex searching for urls in the .rss
+        text and then relying on our article logic to detect false urls"""
 
         def feedparse_wrapper(html):
             return feedparser.parse(html)
 
-        for index, feed_obj in enumerate(self.feed_objs):
+        for feed in self.feeds:
             try:
-                dom = feedparse_wrapper(feed_obj[1])
+                feed.dom = feedparse_wrapper(feed.html)
             except Exception, e:
                 log.critical('feedparser failed %s' % e)
-                print feed_obj[0]
-                feed_obj.append(None)
-            else:
-                feed_obj.append(dom)
-            self.feed_objs[index] = feed_obj
+                print feed.url
 
-        self.feed_objs = [ feed_obj
-                for feed_obj in self.feed_objs if feed_obj[2] is not None ]
+        self.feeds = [ feed for feed in self.feeds if feed.dom is not None ]
 
+    @print_duration
     def feeds_to_articles(self):
         """returns articles given the url of a feed"""
 
-        all_tuples = []
-        for feed_obj in self.feed_objs:
-            # feed_url = feed_obj[0]
-            # html = feed_obj[1]
-            dom = feed_obj[2]
+        # all_tuples = []
+        # for feed in self.feeds:
+        #     dom = feed.dom
+        #
+        #     if dom.get('entries'):
+        #         ll = dom['entries']
+        #         tuples = [(l['link'], l['title']) for l in ll
+        #                         if l.get('link') and l.get('title')]
+        #         all_tuples.extend(tuples)
 
-            if dom.get('entries'):
-                ll = dom['entries']
-                tuples = [(l['link'], l['title']) for l in ll
-                                if l.get('link') and l.get('title')]
-                all_tuples.extend(tuples)
+        urls = []
+        for feed in self.feeds:
+            urls.extend(get_urls(feed.rss, titles=False, istext=True))
 
         articles = []
-        for tup in all_tuples:
+        for url in urls:
             article = Article(
-                url=tup[0],
+                url=url,
                 source_url=self.url,
-                title=tup[1],
-                from_feed=True
+                # title=tup[1],
              )
             articles.append(article)
 
         articles = self.purge_articles(articles)
         articles = memoize_articles(articles, self.domain)
         log.debug('%d from feeds at %s' %
-                    (len(articles), str(self.feed_urls[:10])))
+                    (len(articles), str(self.feeds[:10])))
         return articles
 
     def categories_to_articles(self):
@@ -197,17 +232,15 @@ class Source(object):
         the articles out of each url with the url_to_article method"""
 
         total = []
-        for category_obj in self.category_objs:
-            category_url = category_obj[0]
-            # html = category_obj[1]
-            lxml_root = category_obj[2]
-
+        for category in self.categories:
             articles = []
-            tups = get_urls(lxml_root, titles=True) # (url, title) tuples
+            tups = get_urls(category.lxml_root, titles=True)
             before = len(tups)
 
             for tup in tups:
-                indiv_url, indiv_title = tup[0], tup[1]
+                indiv_url = tup[0]
+                indiv_title = tup[1]
+
                 _article = Article(
                     url=indiv_url,
                     source_url=self.url,
@@ -222,44 +255,15 @@ class Source(object):
             after_memo = len(articles)
 
             total.extend(articles)
-            log.debug('%d->%d->%d for %s' % (before, after, after_memo, category_url))
+            log.debug('%d->%d->%d for %s' % (before, after, after_memo, category.url))
 
         return total
-
-    @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
-    def _get_category_urls(self, domain):
-        """the domain param is **necessary**, see .utils.cache_disk for reasons
-        boilerplate method so we can use this decorator right we are caching
-        categories for 1 DAY."""
-
-        return get_category_urls(self)
-
-    def set_category_urls(self):
-        """"""
-
-        self.category_urls = self._get_category_urls(self.domain)
-
-    def set_feed_urls(self):
-        """don't need to cache getting feed urls, it's almost
-        instant w/ xpath"""
-
-        self.feed_urls = get_feed_urls(self)
-
-    def set_description(self):
-        """sets a blub for this source, for now we just
-        query the desc html attribute"""
-
-        if self.lxml_root is not None:
-            _list = self.lxml_root.xpath('//meta[@name="description"]')
-            if len(_list) > 0:
-                content_list = _list[0].xpath('@content')
-                if len(content_list) > 0:
-                    self.description = content_list[0]
 
     def _generate_articles(self):
         """returns a list of all articles, from both categories and feeds"""
 
         category_articles = self.categories_to_articles()
+        print 'before feeds'
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
@@ -293,10 +297,10 @@ class Source(object):
             print '\t', 'url:', a.url, 'title:', a.title,\
                    'length of text:', len(a.text), 'keywords:', a.keywords
 
-        for f in self.feed_urls:
-            print 'feed_url:', f
+        for f in self.feeds:
+            print 'feed_url:', f.url
 
-        for c in self.category_urls:
-            print 'category_url:', c
+        for c in self.categories:
+            print 'category_url:', c.url
 
 

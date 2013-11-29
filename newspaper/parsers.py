@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import re
 import logging
 import urlparse
 
@@ -44,18 +45,25 @@ def get_lxml_root(html):
         print str(e)
         return None
 
-def get_urls(root_or_html, titles=True):
+def get_urls(_input, titles=True, istext=False):
     """returns a list of urls on the html page or lxml_root"""
 
-    if root_or_html is None:
-        log.critical('Must extract urls from either html or lxml_root!')
+    if _input is None:
+        log.critical('Must extract urls from either html, text or lxml_root!')
         return []
 
+    # If we are extracting from raw text
+    if istext:
+        _input = re.sub('<[^<]+?>', ' ', _input)
+        _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
+        _input = [i.strip() for i in _input]
+        return _input or []
+
     # If the input is html, parse it into a root
-    if isinstance(root_or_html, str) or isinstance(root_or_html, unicode):
-        lxml_root = get_lxml_root(root_or_html)
+    if isinstance(_input, str) or isinstance(_input, unicode):
+        lxml_root = get_lxml_root(_input)
     else:
-        lxml_root = root_or_html
+        lxml_root = _input
 
     if lxml_root is None:
         return []
@@ -169,8 +177,8 @@ def get_feed_urls(source):
     we extract category urls first and then feeds"""
 
     feed_urls = []
-    for category_obj in source.category_objs:
-        root = category_obj[2]
+    for category in source.categories:
+        root = category.lxml_root
         feed_urls.extend(root.xpath('//*[@type="application/rss+xml"]/@href'))
 
     feed_urls = feed_urls[:50]
