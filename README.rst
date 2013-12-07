@@ -21,21 +21,21 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
 
     import newspaper
 
-    # Watch Newspaper extract out all recent articles on CNN, no ads or boilerplate
+    # Newspaper has a two step process for article extraction.
+    # 1. Input domain, identify/download all articles via nonblocking, "light" parse html via lxml
+    # 2. "Heavy" parse the html: Extract out body text, keywords, summaries
+
+    ############################################################
+    # Step 1: Identify valid articles, download, and light parse
+    ############################################################
 
     cnn_paper = newspaper.build('http://cnn.com')
 
+    print cnn_paper.articles[0].url   # <-- Cleaned url
+    # u'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
+
     print cnn_paper.articles[0].title
     # u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
-
-    print cnn_paper.articles[0].keywords
-    # [u'music', u'Tucson', ... ]
-
-    print cnn_paper.articles[0].text
-    # u'Three sisters who were imprisoned for possibly ... a constant barrage ...'
-
-    print cnn_paper.articles[0].summary
-    # u'... imprisoned for possibly ... a constant barrage ...'
 
     print cnn_paper.articles[0].top_img   # <-- Using Reddit's thumbnail alg to find top img
     # u'http://some.cdn.com/3424hfd4565sdfgdg436/
@@ -43,19 +43,37 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
     print cnn_paper.articles[0].authors
     # [u'Eliott C. McLaughlin', u'Some CoAuthor']
 
-    print cnn_paper.length() # <- Number of articles just crawled, we can limit this
-    # 3020
+    print cnn_paper.articles[0].html
+    # u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
     print cnn_paper.category_urls
     # [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
-    print cnn_paper.feeds_urls
-    # [u'http://rss.cnn.com/rss/cnn_crime.rss', ...] <-- We crawl CNN and search for feeds on every category page
+    print cnn_paper.feeds_urls     # <-- Crawl CNN and search for feeds on every category page
+    # [u'http://rss.cnn.com/rss/cnn_crime.rss', ...] 
 
     print cnn_paper.brand
     # u'cnn'
 
-    # Alternatively, you can use newspaper's lower level Article api
+    #####################################################################
+    # Step 2: "Heavy" parse. Extract out body txt, keywords, summary, etc
+    #####################################################################
+
+    for article in cnn_paper.articles:
+        article.parse() # <-- CPU heavy step, can take 3-6 seconds per article
+        
+        print cnn_paper.articles[0].keywords
+        # [u'music', u'Tucson', ... ]
+
+        print cnn_paper.articles[0].text
+        # u'Three sisters who were imprisoned for possibly ... a constant barrage ...'
+
+        print cnn_paper.articles[0].summary
+        # u'... imprisoned for possibly ... a constant barrage ...'
+
+    ################################################################
+    # Alternatively, you can use newspaper's lower level Article API
+    ################################################################
 
     from newspaper import Article
 
@@ -63,11 +81,15 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
     article.download()
     article.parse()
 
-    print article.url # Note that the argument is gone
+    print article.url # Note that the URL argument & clutter is gone
     # http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html
 
     print article.summary
     # u'blah blah blah'
+
+    # All the above features also work on this article object, try it out!
+    # You don't need to both download() and parse() the article, do whatever suits 
+    # your needs. Just note that download is pure IO and parse is pure CPU work.
 
 Newspaper stands on the giant shoulders of `lxml`_, `goose-extractor`_, `nltk`_, and `requests`_.
 
