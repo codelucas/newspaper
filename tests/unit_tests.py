@@ -2,7 +2,6 @@
 
 import os
 import unittest
-import logging
 
 from newspaper.article import Article
 from newspaper.source import Source
@@ -22,6 +21,8 @@ def read_urls(base_fn=os.path.join(PARENT_DIR, 'data/100K_urls.txt'), amount=100
     return lines[:amount]
 
 class GrequestsTestCase(unittest.TestCase):
+
+    @print_duration
     def test_ordering(self):
         """assert that responses return in same order as requests"""
         import requests
@@ -29,25 +30,32 @@ class GrequestsTestCase(unittest.TestCase):
 
         TEST_SIZE = 100
         dd = {}
-        urls = read_urls(amount=4)
-        for index, u in enumerate(urls):
+        urls = read_urls(amount=100)
+        for index, url in enumerate(urls):
             # ensure that first 200 chars of html is the same
-            dd[index] = requests.get(u).text[:TEST_SIZE]
+            dd[index] = url #requests.get(u).text[:TEST_SIZE]
 
-        responses = async_request(urls, timeout=5)
+        responses = async_request(urls, timeout=7)
+
         for index, resp in enumerate(responses):
             print dd[index]
-            print resp.text[:TEST_SIZE]
+            print resp.url # resp.text[:TEST_SIZE]
+            print '=============='
             #assert dd[index] == resp.text[:TEST_SIZE]
 
     @print_duration
     def test_capacity(self):
         """try to send out a bunch of requests, see if it works"""
-
-        urls = read_urls(amount=300)
-        responses = async_request(urls, timeout=7)
-        for r in responses:
-            print r.url
+        urls = read_urls(amount=1000)
+        responses = async_request(urls, timeout=3)
+        failed = 0
+        for index, r in enumerate(responses):
+            if r is not None:
+                print '[SUCCESS]', r.url
+            else:
+                print '[FAIL]', urls[index]
+                failed += 1
+        print '\r\n\r\ntotal:', len(urls), 'failed', failed
 
 class ArticleTestCase(unittest.TestCase):
     def setUp(self):
@@ -64,7 +72,6 @@ class ArticleTestCase(unittest.TestCase):
         print a.title
 
 class SourceTestCase(unittest.TestCase):
-
     def test_url_none(self):
         def failfunc():
             __ = Source(url=None)

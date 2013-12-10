@@ -2,8 +2,8 @@
 
 import logging
 import requests
-import grequests
-
+#import grequests
+from .packages import grequests
 from .settings import cj, USERAGENT
 
 log = logging.getLogger(__name__)
@@ -32,12 +32,12 @@ def async_request(urls, timeout=7):
     """receives a list of requests and sends them all
     asynchronously at once"""
 
-    req_kwargs = {
+    request_kwargs = {
         'headers' : {'User-Agent': USERAGENT},
         'cookies' : cj(),
         'timeout' : timeout,
         'allow_redirects' : True
     }
-    rs = (grequests.request('GET', url, **req_kwargs) for url in urls)
-    responses = grequests.map(rs) # send all requests at once async
+    rs = (grequests.request('GET', url, **request_kwargs) for url in urls)
+    responses = grequests.map(rs, size=None) # send all requests at once async
     return responses

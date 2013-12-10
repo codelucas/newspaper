@@ -29,8 +29,10 @@ packages = [
 ]
 requires = [
     'goose-extractor==1.0.2', # pre-installs: nltk, pil(pillow), lxml
-    'grequests',              # pre-installs requests
+    # 'grequests',              # pre-installs requests
     'lxml==3.2.4',            # version for lxml is important
+    'requests',
+    'gevent',
 ]
 
 # 'feedparser',
