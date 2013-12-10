@@ -1,9 +1,9 @@
 *.pyc
 
-.DS_Store # pycharm
-.idea # pycharm
+.DS_Store
 1M_urls.txt
 .idea
+
 # C extensions
 *.so
 

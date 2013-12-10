@@ -91,8 +91,11 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
     # You don't need to both download() and parse() the article, do whatever suits 
     # your needs. Just note that download is pure IO and parse is pure CPU work.
 
-Newspaper stands on the giant shoulders of `lxml`_, `goose-extractor`_, `nltk`_, and `requests`_.
+Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_.
 
+.. _`lxml`: https://textblob.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`nltk`: https://textblob.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`requests`: https://textblob.readthedocs.org/en/latest/quickstart.html#quickstart
 Features
 --------
 
@@ -116,20 +119,19 @@ Get it now
 ::
 
     $ pip install newspaper
-    $ curl https://raw.github.com/sloria/TextBlob/master/download_corpora.py | python
 
 Examples
 --------
 
 See more examples at the `Quickstart guide`_.
 
-.. _`Quickstart guide`: https://textblob.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart
 
 
 Documentation
 -------------
 
-Full documentation is available at https://textblob.readthedocs.org/.
+Full documentation is available at https://newspaper.readthedocs.org/.
 
 Requirements
 ------------
@@ -140,6 +142,3 @@ License
 -------
 
 MIT licensed. See the bundled `LICENSE <https://github.com/sloria/TextBlob/blob/master/LICENSE>`_ file for more details.
-
-.. _pattern: http://www.clips.ua.ac.be/pattern
-.. _NLTK: http://nltk.org/

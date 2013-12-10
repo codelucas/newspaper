@@ -46,15 +46,28 @@ def get_lxml_root(html):
         print str(e)
         return None
 
-def get_urls(_input, titles=True, istext=False):
-    """returns a list of urls on the html page or lxml_root"""
+def lxml_to_urls(lxml_root, titles):
+    """converts an lxml root into urls, may include <a> text as titles"""
+
+    if lxml_root is None:
+        return []
+
+    a_tags = lxml_root.xpath('//a')
+    if titles: # tries to find titles of link elements via tag text
+        return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
+
+    return [ a.get('href') for a in a_tags if a.get('href') ]
+
+def get_urls(_input, titles=True, regex=False):
+    """returns a list of urls on the html page or lxml_root the regex
+    flag indicates we don't parse via lxml and just search the html"""
 
     if _input is None:
         log.critical('Must extract urls from either html, text or lxml_root!')
         return []
 
     # If we are extracting from raw text
-    if istext:
+    if regex:
         _input = re.sub('<[^<]+?>', ' ', _input)
         _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
         _input = [i.strip() for i in _input]
@@ -66,14 +79,7 @@ def get_urls(_input, titles=True, istext=False):
     else:
         lxml_root = _input
 
-    if lxml_root is None:
-        return []
-
-    a_tags = lxml_root.xpath('//a')
-    if titles: # tries to find titles of link elements via tag text
-        return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
-
-    return [ a.get('href') for a in a_tags if a.get('href') ]
+    return lxml_to_urls(lxml_root, titles)
 
 def valid_body(article, verbose=False):
     """performs a word-count check on article, checks for

@@ -24,7 +24,7 @@ class Article(object):
 
     def __init__(self, url, title=u'', source_url=None):
         if source_url is None:
-            source_url = get_scheme(url) + '://' + get_domain(url)
+            source_url = get_scheme(url)+'://'+get_domain(url)
 
         if source_url is None or source_url == '':
             self.rejected = True
@@ -72,7 +72,8 @@ class Article(object):
         return base64.urlsafe_b64encode(hashlib.md5(self.url).digest())
 
     def download(self, timeout=7):
-        """downloads the link's html content"""
+        """downloads the link's html content, don't use if we are async
+        downloading batch articles"""
 
         if self.rejected:
             return

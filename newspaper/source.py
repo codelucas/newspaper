@@ -16,21 +16,20 @@ from .utils import (
 log = logging.getLogger(__name__)
 
 class Category(object):
-
     def __init__(self, url):
         self.url = url
         self.html = None
         self.lxml_root = None
 
 class Feed(object):
-
     def __init__(self, url):
         self.url = url
         self.rss = None
         # self.dom = None TODO Speed up feedparser
 
 class Source(object):
-    """Sources are abstractions of online news
+    """
+    Sources are abstractions of online news
     vendors like HuffingtonPost or cnn.
 
     domain     =  www.cnn.com
@@ -59,20 +58,16 @@ class Source(object):
         self.lxml_root = None
 
         self.brand = tldextract.extract(self.url).domain
-        self.description = u'' # TODO
+        self.description = u''
 
     def build(self, parse=True):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods."""
 
-        #if parse is True and download is False:
-        #    print 'ERR: Can\'t parse w/o downloading!'
-        #    return None
-
         self.download()
         self.parse()
 
-        # can not merge category and feed tasks together because
+        # Can not merge category and feed tasks together because
         # computing feed urls relies on the category urls!
         self.set_category_urls()
         self.download_categories() # async
@@ -80,11 +75,10 @@ class Source(object):
 
         self.set_feed_urls()
         self.download_feeds()      # async
-        # self.parse_feeds()     TODO Speed up feedparser!!!
+        # self.parse_feeds()  TODO We are directly regexing out feeds until we speed up feedparser!
 
-        # self.generate_articles()
-        # download articles
-        # parse articles
+        self.generate_articles()
+        self.async_download_articles()
 
     def purge_articles(self, articles=None):
         """delete rejected articles, if there is an articles param, we
@@ -107,9 +101,9 @@ class Source(object):
 
     @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
     def _get_category_urls(self, domain):
-        """the domain param is **necessary**, see .utils.cache_disk for reasons
-        boilerplate method so we can use this decorator right we are caching
-        categories for 1 DAY."""
+        """the domain param is **necessary**, see .utils.cache_disk for reasons.
+        the boilerplate method is so we can use this decorator right. We are
+        caching categories for 1 DAY."""
 
         return get_category_urls(self)
 
@@ -148,6 +142,7 @@ class Source(object):
 
         category_urls = [c.url for c in self.categories]
         responses = async_request(category_urls)
+
         # Note that the responses are returned in original order
         for index, resp in enumerate(responses):
             self.categories[index].html = resp.text
@@ -175,6 +170,7 @@ class Source(object):
         for category in self.categories:
             lxml_root = get_lxml_root(category.html)
             category.lxml_root = lxml_root
+
         self.categories = [c for c in self.categories if c.lxml_root is not None]
 
     @print_duration
@@ -195,7 +191,6 @@ class Source(object):
 
         self.feeds = [ feed for feed in self.feeds if feed.dom is not None ]
 
-    @print_duration
     def feeds_to_articles(self):
         """returns articles given the url of a feed"""
 
@@ -211,21 +206,20 @@ class Source(object):
 
         urls = []
         for feed in self.feeds:
-            urls.extend(get_urls(feed.rss, titles=False, istext=True))
+            urls.extend(get_urls(feed.rss, titles=False, regex=True))
 
         articles = []
         for url in urls:
             article = Article(
                 url=url,
                 source_url=self.url,
-                # title=tup[1],
+                # title=???, TODO
              )
             articles.append(article)
 
         articles = self.purge_articles(articles)
         articles = memoize_articles(articles, self.domain)
-        log.debug('%d from feeds at %s' %
-                    (len(articles), str(self.feeds[:10])))
+        log.debug('%d from feeds at %s' % (len(articles), str(self.feeds[:10])))
         return articles
 
     def categories_to_articles(self):
@@ -264,7 +258,7 @@ class Source(object):
         """returns a list of all articles, from both categories and feeds"""
 
         category_articles = self.categories_to_articles()
-        print 'before feeds'
+        # print 'before feeds'
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
@@ -276,6 +270,18 @@ class Source(object):
 
         articles = self._generate_articles()
         self.articles = articles[:limit]
+        log.debug('Saved', limit, 'articles and cut', (len(articles)-limit), 'articles')
+
+    @print_duration
+    def async_download_articles(self):
+        """downloads all articles attached to self async-io"""
+
+        article_urls = [a.url for a in self.articles][:500]
+        responses = async_request(article_urls)
+
+        # Note that the responses are returned in original order
+        for index, resp in enumerate(responses):
+            self.articles[index].html = resp.text
 
     def size(self):
         """number of articles linked to this news source"""
@@ -287,16 +293,17 @@ class Source(object):
     def print_summary(self):
         """prints out a summary of the data in our source instance"""
 
-        print '[source]: url', self.url
-        print '[source]: brand', self.brand
-        print '[source]: domain', self.domain
-        print '[source]: len(articles)', len(self.articles)
-        print '[source]: description[:50]', self.description[:50]
+        print '[source url]:',              self.url
+        print '[source brand]:',            self.brand
+        print '[source domain]:',           self.domain
+        print '[source len(articles)]:',    len(self.articles)
+        print '[source description[:50]]:', self.description[:50]
 
         print 'printing out 10 sample articles...'
         for a in self.articles[:10]:
-            print '\t', 'url:', a.url, 'title:', a.title,\
-                   'length of text:', len(a.text), 'keywords:', a.keywords
+            print '\t', '[url]:', a.url, '[title]:', a.title,\
+                   '[len of text]:', len(a.text), '[keywords]:', a.keywords,\
+                    '[len of html]:', len(a.html)
 
         for f in self.feeds:
             print 'feed_url:', f.url
