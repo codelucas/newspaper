@@ -61,12 +61,13 @@ class Source(object):
         self.brand = tldextract.extract(self.url).domain
         self.description = u'' # TODO
 
-    def build(self, download=True, parse=True):
-        """Encapsulates download and fill."""
+    def build(self, parse=True):
+        """Encapsulates download and basic parsing with lxml. May be a
+        good idea to split this into download() and parse() methods."""
 
-        if parse is True and download is False:
-            print 'ERR: Can\'t parse w/o downloading!'
-            return None
+        #if parse is True and download is False:
+        #    print 'ERR: Can\'t parse w/o downloading!'
+        #    return None
 
         self.download()
         self.parse()
@@ -81,7 +82,7 @@ class Source(object):
         self.download_feeds()      # async
         # self.parse_feeds()     TODO Speed up feedparser!!!
 
-        self.generate_articles()
+        # self.generate_articles()
         # download articles
         # parse articles
 

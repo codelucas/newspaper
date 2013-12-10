@@ -17,7 +17,7 @@ log = logging.getLogger(__name__)
 MIN_WORD_COUNT = 300
 MIN_SENT_COUNT = 7
 MAX_TITLE = 200
-MAX_TEXT = 10000
+MAX_TEXT = 100004
 MAX_KEYWORDS = 35
 
 class Article(object):
@@ -71,12 +71,12 @@ class Article(object):
 
         return base64.urlsafe_b64encode(hashlib.md5(self.url).digest())
 
-    def download(self):
+    def download(self, timeout=7):
         """downloads the link's html content"""
 
         if self.rejected:
             return
-        self.html = get_html(self.url, timeout=7)
+        self.html = get_html(self.url, timeout=timeout)
 
     def parse(self):
         """extracts the lxml root, if lxml fails, we also extract the

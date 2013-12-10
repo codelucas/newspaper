@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+"""
+Wherever smart people work, doors are unlocked. -- Steve Wozniak
+
+"""
+
 __title__ = 'newspaper'
 __version__ = '0.0.1'
 __author__ = 'Lucas Ou-Yang'
@@ -9,8 +14,6 @@ __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 from . import utils
 from .api import build, popular_urls, build_article
 from .settings import VERSION
-
-
 
 # Set default logging handler to avoid "No handler found" warnings.
 import logging

@@ -8,7 +8,8 @@ import lxml.html
 import lxml.html.soupparser
 from goose import Goose
 
-from .urls import prepare_url, get_path, get_domain, get_scheme
+from .urls import (
+    prepare_url, get_path, get_domain, get_scheme)
 from .packages.tldextract import tldextract
 
 log = logging.getLogger(__name__)

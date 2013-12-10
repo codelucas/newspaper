@@ -20,7 +20,7 @@ class TimeoutError(Exception):
     pass
 
 def timelimit(timeout):
-    """ borrowed from web.py, rip Aaron Shwartz """
+    """ borrowed from web.py, rip Aaron Swartz """
 
     def _1(function):
         def _2(*args, **kw):

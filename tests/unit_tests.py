@@ -11,6 +11,16 @@ from newspaper.settings import ANCHOR_DIR
 
 PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
 
+def read_urls(base_fn=os.path.join(PARENT_DIR, 'data/100K_urls.txt'), amount=100):
+    """extracts out a listing of sample urls"""
+    import codecs
+
+    f = codecs.open(base_fn, 'utf8', 'r')
+    lines = f.readlines()
+    lines = [l.strip() for l in lines]
+    return lines[:amount]
+    pass
+
 # class ArticleTestCase(unittest.TestCase):
 #
 #     def setUp(self):
