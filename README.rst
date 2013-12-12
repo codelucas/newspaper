@@ -10,9 +10,9 @@ Newspaper: Article scraping & curation
         :alt: Number of PyPI downloads
 
 
-Homepage: `https://textblob.readthedocs.org/ <https://textblob.readthedocs.org/>`_
+Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
-Inspired by `requests` for its simplicity and powered by `lxml` for its speed; `Newspaper` is a Python 2 library
+Inspired by `requests` for its simplicity and powered by `lxml` for its speed; `newspaper` is a Python 2 library
 for extracting articles from the web and curating text (NLP) for keywords, summaries, authors, etc.
 Newspaper utilizes async io and caching for speed. Everything is in unicode :)
 
@@ -75,10 +75,11 @@ Alternatively, you may use newspaper's lower level Article API.
 
     >>> article = Article('http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
     >>> article.download()
-    >>> article.parse()
 
-    >>> print article.url 
-    u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+    >>> print article.html 
+    u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
+
+    >>> article.parse()
 
     >>> print article.summary
     u'...and so that is how a great Thanksgiving meal is cooked...'
