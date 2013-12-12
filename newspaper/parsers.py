@@ -43,7 +43,7 @@ def get_lxml_root(html):
     try:
         return lxml_wrapper(html)
     except Exception, e:
-        print str(e)
+        log.critical(e)
         return None
 
 def lxml_to_urls(lxml_root, titles):
@@ -144,7 +144,7 @@ def get_top_img(article, method='lxml'):
             safe_img = ''
 
         return safe_img
-    # It's lxml
+    # Otherwise, lxml
     try:
         return root.xpath('/html/head/meta'
                 '[@property="og:image"][1]/@content')[0]

@@ -25,7 +25,7 @@ class Feed(object):
     def __init__(self, url):
         self.url = url
         self.rss = None
-        # self.dom = None TODO Speed up feedparser
+        # self.dom = None           TODO Speed up feedparser
 
 class Source(object):
     """
@@ -258,7 +258,6 @@ class Source(object):
         """returns a list of all articles, from both categories and feeds"""
 
         category_articles = self.categories_to_articles()
-        # print 'before feeds'
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
@@ -310,5 +309,3 @@ class Source(object):
 
         for c in self.categories:
             print 'category_url:', c.url
-
-
