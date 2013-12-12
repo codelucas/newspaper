@@ -60,6 +60,9 @@ class Source(object):
         self.brand = tldextract.extract(self.url).domain
         self.description = u''
 
+        self.is_parsed = False     # flags to warn users if they forgot to
+        self.is_downloaded = False # download() or parse()
+
     def build(self, parse=True):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods."""

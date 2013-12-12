@@ -51,6 +51,9 @@ class Article(object):
 
         self.imgs = []
 
+        self.is_parsed = False     # flags warning users incase they
+        self.is_downloaded = False # forget to download() or parse()
+
         # If a url is from a feed, we know it's pre-validated,
         # otherwise, we need to make sure its a news article.
         # if not from_feed: TODO Once we figure out feedparser again, restore this

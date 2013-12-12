@@ -73,7 +73,8 @@ def prepare_url(url, source_url=None):
     return proper_url
 
 def valid_url(url, verbose=False):
-    """Perform a regex check on a full url (scheme, domain, tld).
+    """
+    Perform a regex check on a full url (scheme, domain, tld).
     First search of a YYYY/MM/DD pattern in the url. News sites
     love to use this pattern, this is a very safe bet.
 
@@ -93,7 +94,9 @@ def valid_url(url, verbose=False):
     be a company link, like 'cnn is hiring new interns'.
 
     We also filter out articles with a subdomain or first degree path
-    on a registered bad keyword"""
+    on a registered bad keyword
+
+    """
 
     # 11 chars is shortest valid url length, eg: http://x.co
     if url is None or len(url) < 11:

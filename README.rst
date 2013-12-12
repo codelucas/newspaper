@@ -37,8 +37,7 @@ There are two API's available. The low level article API, and the newspaper API.
     >>> print cnn_paper.feeds_urls     
     [u'http://rss.cnn.com/rss/cnn_crime.rss', ... ] 
 
-    # download today's listing quickly with non-blocking io
-    >>> cnn_paper.download()                       
+    >>> cnn_paper.download() # Add a check, if trying to call html before downloading print msg
 
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
@@ -79,7 +78,7 @@ Alternatively, you may use newspaper's lower level Article API.
     >>> print article.html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> article.parse()
+    >>> article.parse() # Add a check, if trying to call text, etc before parsing, print msg
 
     >>> print article.summary
     u'...and so that is how a great Thanksgiving meal is cooked...'
