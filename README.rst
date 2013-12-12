@@ -65,7 +65,7 @@ There are two API's available. The low level article API, and the newspaper API.
     >>> print cnn_paper.articles[0].summary
     u'... imprisoned for possibly ... a constant barrage ...'
 
-    ## Alternatively, parse all article. But this will take a while...
+    ## Alternatively, parse all articles. But this will take a while...
     ## for article in cnn_paper.articles:
     ##     article.parse() 
 
