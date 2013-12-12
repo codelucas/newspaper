@@ -37,7 +37,7 @@ There are two API's available. The low level article API, and the newspaper API.
     >>> print cnn_paper.feeds_urls     
     [u'http://rss.cnn.com/rss/cnn_crime.rss', ... ] 
 
-    >>> cnn_paper.download() # DON'T FORGET
+    >>> cnn_paper.download() # DON'T FORGET, downloads all articles on CNN 
 
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
@@ -53,10 +53,9 @@ There are two API's available. The low level article API, and the newspaper API.
 
     >>> print cnn_paper.brand
     u'cnn'
-
-    >>> for article in cnn_paper.articles:
-    >>>     article.parse() # CPU heavy & long step
     
+    >>> cnn_paper.articles[0].parse()
+
     >>> print cnn_paper.articles[0].keywords
     [u'music', u'Tucson', ... ]
 
@@ -65,6 +64,10 @@ There are two API's available. The low level article API, and the newspaper API.
 
     >>> print cnn_paper.articles[0].summary
     u'... imprisoned for possibly ... a constant barrage ...'
+
+    ## Alternatively, parse all article. But this will take a while...
+    ## for article in cnn_paper.articles:
+    ##     article.parse() 
 
 Alternatively, you may use newspaper's lower level Article API.
 
@@ -78,7 +81,7 @@ Alternatively, you may use newspaper's lower level Article API.
     >>> print article.html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> article.parse() # DON'T FORGET
+    >>> article.parse() 
 
     >>> print article.summary
     u'...and so that is how a great Thanksgiving meal is cooked...'
