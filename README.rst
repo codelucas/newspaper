@@ -27,6 +27,8 @@ There are two API's available. The low level article API, and the newspaper API.
     >>> for article in cnn_paper.articles: 
     >>>     print article.url
     u'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
+    u'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html?hpt=hp_t1'
+    u'http://www.cnn.com/2013/12/07/us/life-pearl-harbor/?iref=obinsite'
     ...
 
     >>> print cnn_paper.category_urls
@@ -35,8 +37,8 @@ There are two API's available. The low level article API, and the newspaper API.
     >>> print cnn_paper.feeds_urls     
     [u'http://rss.cnn.com/rss/cnn_crime.rss', ... ] 
 
-    # Download CNN's listing today:
-    >>> cnn_paper.download() # IO Heavy, using async requests
+    # download today's listing quickly with non-blocking io
+    >>> cnn_paper.download()                       
 
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
@@ -54,7 +56,7 @@ There are two API's available. The low level article API, and the newspaper API.
     u'cnn'
 
     >>> for article in cnn_paper.articles:
-    >>>     article.parse()    # CPU heavy step, can take 3-6 seconds per 
+    >>>     article.parse() # CPU heavy & long step
     
     >>> print cnn_paper.articles[0].keywords
     [u'music', u'Tucson', ... ]
@@ -69,9 +71,9 @@ Alternatively, you may use newspaper's lower level Article API.
 
 .. code-block:: pycon
 
-    from newspaper import Article
+    >>> from newspaper import Article
 
-    >>> article = Article('http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html?hpt=hp_t1')
+    >>> article = Article('http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
     >>> article.download()
     >>> article.parse()
 
