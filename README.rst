@@ -18,7 +18,7 @@ Newspaper utilizes async io and caching for speed. Everything is in unicode :)
 
 There are two API's available. The low level article API, and the newspaper API.
 
-.. code-block:: python
+.. code-block:: pycon
 
     >>> import newspaper
 
@@ -67,7 +67,7 @@ There are two API's available. The low level article API, and the newspaper API.
 
 Alternatively, you may use newspaper's lower level Article API.
 
-.. code-block:: python
+.. code-block:: pycon
 
     from newspaper import Article
 
