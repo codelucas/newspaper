@@ -44,7 +44,8 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     >>> print cnn_paper.feeds_urls  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
-    ### download html for all articles **concurrently**, via async io
+
+    #### download html for all articles **concurrently**, via async io
     >>> cnn_paper.download() 
 
     >>> print cnn_paper.articles[0].html
@@ -53,7 +54,8 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     >>> print cnn_paper.articles[5].html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    ### parse html for text, authors, etc on a per article basis **not concurrent**
+
+    #### parse html for text, authors, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].parse() 
 
     >>> print cnn_paper.articles[0].text
@@ -68,7 +70,8 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
 
-    ### extract keywords, summaries, etc on a per article basis **not concurrent**
+
+    #### extract keywords, summaries, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].nlp()
 
     >>> print cnn_paper.articles[0].summary
