@@ -285,6 +285,8 @@ class Source(object):
         for index, resp in enumerate(responses):
             self.articles[index].html = resp.text
 
+        self.is_downloaded = True
+
     def size(self):
         """number of articles linked to this news source"""
 

@@ -40,7 +40,7 @@ class Article(object):
         self.text = u''
         self.keywords = u''
         self.authors = []
-        self.published = u'' # TODO
+        self.published = u'' # TODO, parse publishing date
 
         self.domain = get_domain(source_url)
         self.scheme = get_scheme(source_url)
@@ -66,7 +66,6 @@ class Article(object):
 
         self.download()
         self.parse()
-        self.set_top_img()
         self.extract_nlp()
 
     def get_key(self):
@@ -81,6 +80,7 @@ class Article(object):
         if self.rejected:
             return
         self.html = get_html(self.url, timeout=timeout)
+        self.is_downloaded = True
 
     def parse(self):
         """extracts the lxml root, if lxml fails, we also extract the
@@ -107,6 +107,9 @@ class Article(object):
             top_imgs = get_imgs(self)
             top_imgs = [ fix_unicode(t) for t in top_imgs ]
             self.imgs = top_imgs
+
+        self.set_reddit_top_img()
+        self.is_parsed = True
 
     def verify_url(self):
         """performs a check on the url of this link to
@@ -144,7 +147,7 @@ class Article(object):
         # TODO keys = get_keywords(self)
         # TODO self.set_keywords(keys)
 
-    def set_top_img(self):
+    def set_reddit_top_img(self):
         """wrapper for setting images, queries known image attributes
         first, uses reddit's img algorithm as a fallback."""
 
@@ -175,12 +178,13 @@ class Article(object):
 
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
-
         if keywords:
             self.keywords = [fix_unicode(k) for k in keywords[:MAX_KEYWORDS]]
 
     def set_authors(self, authors):
         """set authors, perhaps add a limit in future"""
 
-        if authors is not None and isinstance(authors, list):
+        if not isinstance(authors, list):
+            raise Exception("authors input must be list!")
+        if authors:
             self.authors = authors

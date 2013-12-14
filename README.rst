@@ -35,9 +35,9 @@ There are two API's available. The low level article API, and the newspaper API.
     [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
     >>> print cnn_paper.feeds_urls     
-    [u'http://rss.cnn.com/rss/cnn_crime.rss', ... ] 
+    [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
-    >>> cnn_paper.download() # DON'T FORGET, downloads all articles on CNN 
+    >>> cnn_paper.download() 
 
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
@@ -80,17 +80,22 @@ Alternatively, you may use newspaper's lower level Article API.
 
     >>> print article.html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
-
-    >>> article.parse() 
-
-    >>> print article.summary
-    u'...and so that is how a great Thanksgiving meal is cooked...'
+    
+    >>> article.parse()         # Just parsing gets you body text, title, authors
 
     >>> print article.text
     u'The purpose of this article is to introduce to you all how to...'
 
     >>> print article.authors
     [u'Martha Stewart', u'Bob Smith']
+
+    >>> article.extract_nlp()   # Gets you a summary, keywords, sentiment(s)?
+           
+    >>> print article.summary
+    u'...and so that is how a great Thanksgiving meal is cooked...'
+
+    >>> print article.keywords
+    [u'Thanksgiving', u'holliday', u'Walmart', ...]
 
 Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_.
 
