@@ -13,13 +13,12 @@ Newspaper: Article scraping & curation
 Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
 Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper** is a Python 2 library
-for extracting and curating articles from the web in a clear 3 step process defined below.
+for extracting & curating articles from the web in a 3 step process defined below.
+
 Newspaper utilizes async io and caching for speed. *Also, everything is in unicode :)*
+There are two API's available. Low level ``article`` objects and ``newspaper`` objects.
 
-There are two API's available. Low level article objects and newspaper objects.
-
-The core 3 methods are: *download(), parse(), and nlp()*.
-
+The core 3 methods are:
 * ``download()`` retrieves the html, with non blocking io whenever possible.
 * ``parse()`` extracts the body text, authors, titles, etc from the html.
 * ``nlp()`` extracts the summaries, keywords, sentiments from the text.
@@ -40,7 +39,7 @@ The core 3 methods are: *download(), parse(), and nlp()*.
     >>> print cnn_paper.category_urls    
     [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
-    >>> print cnn_paper.feeds_urls  # recursively searches cnn for all .rss feeds 
+    >>> print cnn_paper.feeds_urls  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
     # download html for all articles **concurrently**, via async io
