@@ -43,7 +43,8 @@ The core 3 methods are:
     >>> print cnn_paper.feeds_urls  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
-    # download html for all articles **concurrently**, via async io
+    ###
+    ### download html for all articles **concurrently**, via async io
     >>> cnn_paper.download() 
 
     >>> print cnn_paper.articles[0].html
@@ -52,7 +53,8 @@ The core 3 methods are:
     >>> print cnn_paper.articles[5].html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    # parse html for text, authors, etc on a per article basis **not concurrent**
+    ###
+    ### parse html for text, authors, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].parse() 
 
     >>> print cnn_paper.articles[0].text
@@ -67,7 +69,8 @@ The core 3 methods are:
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
 
-    # extract keywords, summaries, etc on a per article basis **not concurrent**
+    ###
+    ### extract keywords, summaries, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].nlp()
 
     >>> print cnn_paper.articles[0].summary
@@ -83,6 +86,11 @@ The core 3 methods are:
     ## for article in cnn_paper.articles:
     ##     article.parse() 
     ##     article.nlp()
+    ##
+    ## You could even download() articles on a per article basis but that becomes
+    ## very slow because it wont be concurrent.
+    ## for article in cnn_paper.articles:
+    ##     article.download()
 
 Alternatively, you may use newspaper's lower level Article api.
 
@@ -91,7 +99,6 @@ Alternatively, you may use newspaper's lower level Article api.
     >>> from newspaper import Article
 
     >>> article = Article('http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
-
     >>> article.download()      ## download html
 
     >>> print article.html 
