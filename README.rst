@@ -19,6 +19,7 @@ Newspaper utilizes async io and caching for speed. *Also, everything is in unico
 There are two API's available. Low level ``article`` objects and ``newspaper`` objects.
 
 The core 3 methods are:
+
 * ``download()`` retrieves the html, with non blocking io whenever possible.
 * ``parse()`` extracts the body text, authors, titles, etc from the html.
 * ``nlp()`` extracts the summaries, keywords, sentiments from the text.
