@@ -12,8 +12,8 @@ Newspaper: Article scraping & curation
 
 Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
-Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper** is a Python 2 library
-for extracting & curating articles from the web in a 3 step process defined below.
+Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper**
+is a Python 2 library for extracting & curating articles from the web in a 3 step process defined below.
 
 Newspaper utilizes async io and caching for speed. *Also, everything is in unicode :)*
 
@@ -45,7 +45,7 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
 
-    #### download html for all articles **concurrently**, via async io
+    #### download html for all articles **concurrently**
     >>> cnn_paper.download() 
 
     >>> print cnn_paper.articles[0].html
@@ -55,11 +55,11 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
 
-    #### parse html for text, authors, etc on a per article basis **not concurrent**
+    #### parse html on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].parse() 
 
     >>> print cnn_paper.articles[0].text
-    u'Three sisters who were imprisoned for possibly ... a constant barrage ...'
+    u'Three sisters who were imprisoned for possibly...'
 
     >>> print cnn_paper.articles[0].top_img  
     u'http://some.cdn.com/3424hfd4565sdfgdg436/
@@ -68,18 +68,20 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     [u'Eliott C. McLaughlin', u'Some CoAuthor']
     
     >>> print cnn_paper.articles[0].title
-    u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
+    u'Police: 3 sisters imprisoned in Tucson home'
 
 
-    #### extract keywords, summaries, etc on a per article basis **not concurrent**
+    #### extract nlp on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].nlp()
 
     >>> print cnn_paper.articles[0].summary
-    u'... imprisoned for possibly ... a constant barrage ...'
+    u'...imprisoned for possibly a constant barrage...'
 
     >>> print cnn_paper.articles[0].keywords
     [u'music', u'Tucson', ... ]
 
+
+    #### some other news-source level functionality
     >>> print cnn_paper.brand
     u'cnn'
 
@@ -89,8 +91,8 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     ##     article.parse() 
     ##     article.nlp()
     ##
-    ## You could even download() articles on a per article basis but that becomes
-    ## very slow because it wont be concurrent.
+    ## You could even download() articles on a per article basis but
+    ## that becomes very slow because it wont be concurrent.
     ##
     ## for article in cnn_paper.articles:
     ##     article.download()
@@ -102,28 +104,29 @@ Alternatively, you may use newspaper's lower level Article api.
     >>> from newspaper import Article
 
     >>> article = Article('http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
-    >>> article.download()      ## download html
+    >>> article.download()
 
     >>> print article.html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
     
-    >>> article.parse()         ## parse out body text, title, authors, etc
+    >>> article.parse()
 
     >>> print article.text
-    u'The purpose of this article is to introduce to you all how to...'
+    u'The purpose of this article is to introduce...'
 
     >>> print article.authors
     [u'Martha Stewart', u'Bob Smith']
 
-    >>> article.nlp()           ## extract out summary, keywords, sentiment, etc
+    >>> article.nlp()
            
     >>> print article.summary
-    u'...and so that is how a great Thanksgiving meal is cooked...'
+    u'...and so that's how a Thanksgiving meal is cooked...'
 
     >>> print article.keywords
     [u'Thanksgiving', u'holliday', u'Walmart', ...]
 
-``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.
+``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on
+all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.
 
 Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_.
 
