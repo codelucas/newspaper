@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
-
+import sys
 import os
 import unittest
+
+TEST_DIR = os.path.abspath(os.path.dirname(__file__))
+PARENT_DIR = os.path.join(TEST_DIR, '..')
+
+# parent dir needs to be manually inserted as tests
+# is a separate module
+sys.path.insert(0, PARENT_DIR)
 
 from newspaper.article import Article
 from newspaper.source import Source
@@ -9,9 +16,7 @@ from newspaper.utils import print_duration
 from newspaper.settings import ANCHOR_DIR
 from newspaper.network import async_request
 
-PARENT_DIR = os.path.abspath(os.path.dirname(__file__))
-
-def read_urls(base_fn=os.path.join(PARENT_DIR, 'data/100K_urls.txt'), amount=100):
+def read_urls(base_fn=os.path.join(TEST_DIR, 'data/100K_urls.txt'), amount=100):
     """extracts out a listing of sample urls"""
     import codecs
 
@@ -117,7 +122,7 @@ class UrlTestCase(unittest.TestCase):
         from newspaper.parsers import get_urls
         import requests
 
-        rss_fn = open(os.path.join(PARENT_DIR, 'data/cnn_rss_feeds.txt'), 'r')
+        rss_fn = open(os.path.join(TEST_DIR, 'data/cnn_rss_feeds.txt'), 'r')
         rss_urls = rss_fn.readlines()
         total_urls = []
         for url in rss_urls:
@@ -126,7 +131,7 @@ class UrlTestCase(unittest.TestCase):
 
         rss_fn.close()
         total_urls = list(set(total_urls))
-        urls_fn = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'w')
+        urls_fn = open(os.path.join(TEST_DIR, 'data/sample_urls_1.txt'), 'w')
         for url in total_urls:
             urls_fn.write(url+'\r\n')
         urls_fn.close()

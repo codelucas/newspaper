@@ -41,7 +41,7 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     >>> print cnn_paper.category_urls    
     [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
-    >>> print cnn_paper.feeds_urls  
+    >>> print cnn_paper.feed_urls  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
 
