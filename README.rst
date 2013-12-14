@@ -16,13 +16,14 @@ Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its spee
 for extracting & curating articles from the web in a 3 step process defined below.
 
 Newspaper utilizes async io and caching for speed. *Also, everything is in unicode :)*
-There are two API's available. Low level ``article`` objects and ``newspaper`` objects.
 
 The core 3 methods are:
 
 * ``download()`` retrieves the html, with non blocking io whenever possible.
 * ``parse()`` extracts the body text, authors, titles, etc from the html.
 * ``nlp()`` extracts the summaries, keywords, sentiments from the text.
+
+There are two API's available. Low level ``article`` objects and ``newspaper`` objects.
 
 .. code-block:: pycon
 
@@ -43,7 +44,6 @@ The core 3 methods are:
     >>> print cnn_paper.feeds_urls  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
-    ###
     ### download html for all articles **concurrently**, via async io
     >>> cnn_paper.download() 
 
@@ -53,7 +53,6 @@ The core 3 methods are:
     >>> print cnn_paper.articles[5].html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    ###
     ### parse html for text, authors, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].parse() 
 
@@ -69,7 +68,6 @@ The core 3 methods are:
     >>> print cnn_paper.articles[0].title
     u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
 
-    ###
     ### extract keywords, summaries, etc on a per article basis **not concurrent**
     >>> cnn_paper.articles[0].nlp()
 
@@ -83,12 +81,14 @@ The core 3 methods are:
     u'cnn'
 
     ## Alternatively, parse and nlp all articles together. Will take a while...
+    ##
     ## for article in cnn_paper.articles:
     ##     article.parse() 
     ##     article.nlp()
     ##
     ## You could even download() articles on a per article basis but that becomes
     ## very slow because it wont be concurrent.
+    ##
     ## for article in cnn_paper.articles:
     ##     article.download()
 
