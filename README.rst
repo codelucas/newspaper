@@ -12,11 +12,17 @@ Newspaper: Article scraping & curation
 
 Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
-Inspired by `requests` for its simplicity and powered by `lxml` for its speed; `newspaper` is a Python 2 library
-for extracting articles from the web and curating text (NLP) for keywords, summaries, authors, etc.
-Newspaper utilizes async io and caching for speed. Everything is in unicode :)
+Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper** is a Python 2 library
+for extracting and curating articles from the web in a clear 3 step process defined below.
+Newspaper utilizes async io and caching for speed. *Also, everything is in unicode :)*
 
-There are two API's available. The low level article API, and the newspaper API.
+There are two API's available. Low level article objects and newspaper objects.
+
+The core 3 methods are: *download(), parse(), and nlp()*.
+
+* ``download()`` retrieves the html, with non blocking io whenever possible.
+* ``parse()`` extracts the body text, authors, titles, etc from the html.
+* ``nlp()`` extracts the summaries, keywords, sentiments from the text.
 
 .. code-block:: pycon
 
@@ -31,57 +37,67 @@ There are two API's available. The low level article API, and the newspaper API.
     u'http://www.cnn.com/2013/12/07/us/life-pearl-harbor/?iref=obinsite'
     ...
 
-    >>> print cnn_paper.category_urls
+    >>> print cnn_paper.category_urls    
     [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
-    >>> print cnn_paper.feeds_urls     
+    >>> print cnn_paper.feeds_urls  # recursively searches cnn for all .rss feeds 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
-
+    
+    # download html for all articles **concurrently**, via async io
     >>> cnn_paper.download() 
-
-    >>> print cnn_paper.articles[0].title
-    u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
 
     >>> print cnn_paper.articles[0].html
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> print cnn_paper.articles[0].top_img   # via reddit's thumbnail alg  
-    u'http://some.cdn.com/3424hfd4565sdfgdg436/
+    >>> print cnn_paper.articles[5].html 
+    u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> print cnn_paper.articles[0].authors
-    [u'Eliott C. McLaughlin', u'Some CoAuthor']
-
-    >>> print cnn_paper.brand
-    u'cnn'
-    
-    >>> cnn_paper.articles[0].parse()
-
-    >>> print cnn_paper.articles[0].keywords
-    [u'music', u'Tucson', ... ]
+    # parse html for text, authors, etc on a per article basis **not concurrent**
+    >>> cnn_paper.articles[0].parse() 
 
     >>> print cnn_paper.articles[0].text
     u'Three sisters who were imprisoned for possibly ... a constant barrage ...'
 
+    >>> print cnn_paper.articles[0].top_img  
+    u'http://some.cdn.com/3424hfd4565sdfgdg436/
+
+    >>> print cnn_paper.articles[0].authors
+    [u'Eliott C. McLaughlin', u'Some CoAuthor']
+    
+    >>> print cnn_paper.articles[0].title
+    u'Police: 3 sisters imprisoned in Tucson home, tortured with music'
+
+    # extract keywords, summaries, etc on a per article basis **not concurrent**
+    >>> cnn_paper.articles[0].nlp()
+
     >>> print cnn_paper.articles[0].summary
     u'... imprisoned for possibly ... a constant barrage ...'
 
-    ## Alternatively, parse all articles. But this will take a while...
+    >>> print cnn_paper.articles[0].keywords
+    [u'music', u'Tucson', ... ]
+
+    >>> print cnn_paper.brand
+    u'cnn'
+
+    ## Alternatively, parse and nlp all articles together. Will take a while...
     ## for article in cnn_paper.articles:
     ##     article.parse() 
+    ##     article.nlp()
 
-Alternatively, you may use newspaper's lower level Article API.
+Alternatively, you may use newspaper's lower level Article api.
 
 .. code-block:: pycon
 
     >>> from newspaper import Article
 
     >>> article = Article('http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
-    >>> article.download()
+
+    >>> article.download()      ## download html
 
     >>> print article.html 
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
     
-    >>> article.parse()         # Just parsing gets you body text, title, authors
+    >>> article.parse()         ## parse out body text, title, authors, etc
 
     >>> print article.text
     u'The purpose of this article is to introduce to you all how to...'
@@ -89,13 +105,15 @@ Alternatively, you may use newspaper's lower level Article API.
     >>> print article.authors
     [u'Martha Stewart', u'Bob Smith']
 
-    >>> article.extract_nlp()   # Gets you a summary, keywords, sentiment(s)?
+    >>> article.nlp()           ## extract out summary, keywords, sentiment, etc
            
     >>> print article.summary
     u'...and so that is how a great Thanksgiving meal is cooked...'
 
     >>> print article.keywords
     [u'Thanksgiving', u'holliday', u'Walmart', ...]
+
+``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.
 
 Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_.
 
