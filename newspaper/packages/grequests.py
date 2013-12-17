@@ -68,9 +68,9 @@ class AsyncRequest(object):
         merged_kwargs.update(self.kwargs)
         merged_kwargs.update(kwargs)
         try:
-            self.response =  self.session.request(self.method,
-                                              self.url, **merged_kwargs)
+            self.response = self.session.request(self.method, self.url, **merged_kwargs)
         except Exception, e:
+            # print str(e)
             return None
         return self.response
 
@@ -112,7 +112,6 @@ def map(requests, stream=False, size=None):
     pool = Pool(size) if size else None
     jobs = [send(r, pool, stream=stream) for r in requests]
     gevent.joinall(jobs)
-
     return [r.response for r in requests]
 
 

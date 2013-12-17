@@ -1,83 +1,72 @@
 # -*- coding: utf-8 -*-
+
 import sys
 import os
 import unittest
+import time
+import codecs
+import urlparse
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
 
-# parent dir needs to be manually inserted as tests
-# is a separate module
+# tests is a separate module, insert parent dir manually
 sys.path.insert(0, PARENT_DIR)
+
+URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
 
 from newspaper.article import Article
 from newspaper.source import Source
-from newspaper.utils import print_duration
 from newspaper.settings import ANCHOR_DIR
 from newspaper.network import async_request
 
-def read_urls(base_fn=os.path.join(TEST_DIR, 'data/100K_urls.txt'), amount=100):
-    """extracts out a listing of sample urls"""
-    import codecs
+def print_test(method):
+    """utility method for print verbalizing test suite, prints out
+    time taken for test and functions name, and status"""
+
+    def run(*args, **kw):
+        ts = time.time()
+        print '\ttesting function %r' % method.__name__
+        method(*args, **kw)
+        te = time.time()
+        print '\t[OK] in %r %2.2f sec' % (method.__name__, te-ts)
+    return run
+
+def read_urls(base_fn=URLS_FN, amount=100):
+    """utility funct which extracts out a listing of sample urls"""
 
     f = codecs.open(base_fn, 'r', 'utf8')
     lines = f.readlines()
     lines = [l.strip() for l in lines]
     return lines[:amount]
 
-class GrequestsTestCase(unittest.TestCase):
-
-    @print_duration
-    def test_ordering(self):
-        """assert that responses return in same order as requests"""
-        import requests
-        # import goose
-
-        TEST_SIZE = 100
-        dd = {}
-        urls = read_urls(amount=100)
-        for index, url in enumerate(urls):
-            # ensure that first 200 chars of html is the same
-            dd[index] = url #requests.get(u).text[:TEST_SIZE]
-
-        responses = async_request(urls, timeout=7)
-
-        for index, resp in enumerate(responses):
-            print dd[index]
-            print resp.url # resp.text[:TEST_SIZE]
-            print '=============='
-            #assert dd[index] == resp.text[:TEST_SIZE]
-
-    @print_duration
-    def test_capacity(self):
-        """try to send out a bunch of requests, see if it works"""
-        urls = read_urls(amount=1000)
-        responses = async_request(urls, timeout=3)
-        failed = 0
-        for index, r in enumerate(responses):
-            if r is not None:
-                print '[SUCCESS]', r.url
-            else:
-                print '[FAIL]', urls[index]
-                failed += 1
-        print '\r\n\r\ntotal:', len(urls), 'failed', failed
-
 class ArticleTestCase(unittest.TestCase):
+    def runTest(self):
+        print 'testing article unit'
+        self.test_url()
+
     def setUp(self):
-        """initializer, create data set with headers"""
-        print 'setUp ArticleTestCase'
+        """called before the first test case of this unit begins"""
+        pass
 
     def tearDown(self):
-        """teardown and free components"""
-        print 'tearDown ArticleTestCase'
+        """called after all test cases finish of this unit"""
+        pass
 
+    @print_test
     def test_url(self):
         a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html?hpt=hp_t1')
         assert a.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
-        print a.title
 
 class SourceTestCase(unittest.TestCase):
-    def test_url_none(self):
+    def runTest(self):
+        print 'testing source unit'
+        self.source_url_input_none()
+        #self.test_source_build()
+        #self.test_cache_categories()
+
+    @print_test
+    def source_url_input_none(self):
         def failfunc():
             __ = Source(url=None)
         self.assertRaises(Exception, failfunc)
@@ -93,7 +82,7 @@ class SourceTestCase(unittest.TestCase):
     def test_cache_categories(self):
         """builds two same source objects in a row examines speeds of both"""
 
-        @print_duration
+        @print_test
         def wrap_category_urls(source):
             source.set_category_urls()
 
@@ -114,38 +103,85 @@ class SourceTestCase(unittest.TestCase):
         print os.listdir(ANCHOR_DIR), 'at', ANCHOR_DIR
 
 class UrlTestCase(unittest.TestCase):
+    def runTest(self):
+        print 'testing url unit'
+        self.test_valid_urls()
+
+    @print_test
     def test_valid_urls(self):
         """prints out a list of urls with our heuristic guess if it is a
         valid news url purely based on the url"""
 
         from newspaper.urls import valid_url
-        from newspaper.parsers import get_urls
-        import requests
 
-        rss_fn = open(os.path.join(TEST_DIR, 'data/cnn_rss_feeds.txt'), 'r')
-        rss_urls = rss_fn.readlines()
-        total_urls = []
-        for url in rss_urls:
-            text = requests.get(url).text
-            total_urls.extend(get_urls(text, regex=True))
+        with open(os.path.join(TEST_DIR, 'data/test_urls.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('1', 'url_goes_here') form, '1' means valid, '0' otherwise
 
-        rss_fn.close()
-        total_urls = list(set(total_urls))
-        urls_fn = open(os.path.join(TEST_DIR, 'data/sample_urls_1.txt'), 'w')
-        for url in total_urls:
-            urls_fn.write(url+'\r\n')
-        urls_fn.close()
-
-        # for url in rss_urls:
-        #   print valid_url(url), url
-
-        # urls_fn = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'r')
-        # urls = urls_fn.readlines()
-        # urls_fn.close()
-        # urls = list(set(urls))
-        # urls_fn2 = open(os.path.join(PARENT_DIR, 'data/sample_urls_1.txt'), 'w')
-        # urls_fn2.write('\r\n'.join(urls))
-        # urls_fn2.close()
+        for tup in test_tuples:
+            lst = int(tup[0])
+            url = tup[1]
+            assert len(tup) == 2
+            truth_val = True if lst == 1 else False
+            try:
+                assert truth_val == valid_url(url)
+            except AssertionError, e:
+                print '\t\turl: %s is supposed to be %s' % (url, truth_val)
+                raise
 
 if __name__ == '__main__':
-    unittest.main()
+    # unittest.main() # run all units and their cases
+    suite = unittest.TestSuite()
+
+    suite.addTest(ArticleTestCase())
+    suite.addTest(SourceTestCase())
+    suite.addTest(UrlTestCase())
+
+    unittest.TextTestRunner().run(suite) # run custom subset
+
+"""
+class GrequestsTestCase(unittest.TestCase):
+    def runTest(self):
+        print 'testing grequests unit'
+        #self.test_ordering()
+        self.test_capacity()
+
+    @print_test
+    def test_ordering(self):
+
+        TEST_SIZE = 25
+        dd = {}
+        urls = read_urls(amount=TEST_SIZE)
+
+        # don't count feeds, they always redirect to some other url
+        urls = [u for u in urls if 'feeds' not in urlparse.urlparse(u).netloc.split('.')]
+
+        for index, url in enumerate(urls):
+            _ul = urlparse.urlparse(url)
+            normalized = _ul.netloc + _ul.path
+            dd[index] = normalized
+
+        responses = async_request(urls, timeout=3)
+        for index, resp in enumerate(responses):
+            _ul = urlparse.urlparse(resp.url)
+            normalized = _ul.netloc + _ul.path
+            # print dd[index], '==', normalized
+            assert dd[index] == normalized
+
+    @print_test
+    def test_capacity(self):
+
+        TEST_SIZE = 450
+        urls = read_urls(amount=TEST_SIZE)
+        responses = async_request(urls, timeout=3)
+        failed = 0
+        for index, r in enumerate(responses):
+            if r is not None:
+                pass
+            else:
+                #print '[FAIL]', urls[index]
+                failed += 1
+        print '\t\ttotal:', len(urls), 'failed', failed
+
+"""

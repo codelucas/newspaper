@@ -32,7 +32,7 @@ requires = [
     # 'grequests',              # pre-installs requests
     'lxml==3.2.4',            # version for lxml is important
     'requests',
-    'gevent',
+    #'gevent',
 ]
 
 # 'feedparser',

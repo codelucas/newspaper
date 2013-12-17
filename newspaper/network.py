@@ -2,11 +2,26 @@
 
 import logging
 import requests
-#import grequests
-from .packages import grequests
-from .settings import cj, USERAGENT
+import math
+
+from threading import activeCount
+
+from .packages import grequests # use overridden modified version
+from .settings import cj
+from .utils import chunks, ThreadPool, print_duration, get_useragent
 
 log = logging.getLogger(__name__)
+
+def get_request_kwargs(timeout):
+    """wrapper method because some values in this dictionary are methods
+    which need to be called every time we make a request"""
+
+    return {
+        'headers' : {'User-Agent': get_useragent()},
+        'cookies' : cj(),
+        'timeout' : timeout,
+        'allow_redirects' : True
+    }
 
 def get_html(url, response=None, timeout=7):
     """retrieves the html for either a url or a response object"""
@@ -14,30 +29,69 @@ def get_html(url, response=None, timeout=7):
     if response is not None:
         return response.text
     try:
-        req_kwargs = {
-            'headers' : {'User-Agent': USERAGENT},
-            'cookies' : cj(),
-            'timeout' : timeout,
-            'allow_redirects' : True
-        }
-        html = requests.get(url=url, **req_kwargs).text
+        html = requests.get(url=url, **get_request_kwargs(timeout)).text
         if html is None:
-            return u''
+            html = u''
         return html
     except Exception, e:
         log.debug('%s on %s' % (e, url))
         return u''
 
+def sync_request(urls_or_url, timeout=7):
+    """wrapper for a regular request, no asyn nor multithread"""
+
+    if isinstance(urls_or_url, list):
+        resps = [requests.get(url, **get_request_kwargs(timeout)) for url in urls_or_url]
+        return resps
+    else:
+        return requests.get(urls_or_url, **get_request_kwargs(timeout))
+
 def async_request(urls, timeout=7):
     """receives a list of requests and sends them all
     asynchronously at once"""
 
-    request_kwargs = {
-        'headers' : {'User-Agent': USERAGENT},
-        'cookies' : cj(),
-        'timeout' : timeout,
-        'allow_redirects' : True
-    }
-    rs = (grequests.request('GET', url, **request_kwargs) for url in urls)
-    responses = grequests.map(rs, size=None) # send all requests at once async
+    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
+    responses = grequests.map(rs, size=10)
+
     return responses
+
+class MRequest(object):
+    """
+    Wrapper for request object for multithreading.
+    If the domain we are crawling is under heavy load,
+    the self.resp will be left as None. If this is the case,
+    we still want to report the url which has failed so (perhaps)
+    we can try again later.
+
+    """
+
+    def __init__(self, url, **req_kwargs):
+        self.url = url
+        self.req_kwargs = req_kwargs
+        self.resp = None
+
+    def send(self):
+        try:
+            self.resp = requests.get(self.url, **self.req_kwargs)
+        except Exception, e:
+            print '[REQUEST FAILED]', str(e) # TODO, do something with url when we fail!
+            # leave the response as None
+
+def multithread_request(urls, timeout=7, num_threads=10):
+    """request multiple urls via multithreading"""
+
+    pool = ThreadPool(num_threads)
+    responses = []
+    print 'beginning of mthreading, %s threads running' % activeCount()
+
+    m_requests = []
+    for url in urls:
+        m_requests.append(MRequest(url, **get_request_kwargs(timeout)))
+
+    for req in m_requests:
+        pool.add_task(req.send)
+
+    pool.wait_completion()
+    return [req.resp for req in m_requests]
+
+

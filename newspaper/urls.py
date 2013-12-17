@@ -125,7 +125,7 @@ def valid_url(url, verbose=False):
 
         # set the ending file to the file minus file type
         if len(last_chunk) > 1:
-            path_chunks[-1] = last_chunk[:-1]
+            path_chunks[-1] = last_chunk[-2]
 
     # Index gives us no information
     if 'index' in path_chunks:
@@ -149,7 +149,7 @@ def valid_url(url, verbose=False):
 
     # If the url has a news slug title
     if path_chunks and len(path_chunks[-1]) > 20 and \
-        (dash_count > 5 or underscore_count > 5):
+        (dash_count > 4 or underscore_count > 4):
 
         if dash_count >= underscore_count:
             if tld not in [ x.lower() for x in path_chunks[-1].split('-') ]:

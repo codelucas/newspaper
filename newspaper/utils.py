@@ -9,9 +9,13 @@ import time
 import logging
 import string
 import codecs
-from hashlib import sha1
+import random
+import Queue
 
-from .settings import MEMODIR, MAX_FILE_MEMO
+from hashlib import sha1
+from threading import Thread
+
+from .settings import MEMODIR, MAX_FILE_MEMO, USERAGENTS_FN
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -215,4 +219,59 @@ def memoize_articles(articles, source_domain):
     ff.close()
 
     return cur_articles.values() # articles returned
+
+def get_useragent():
+    """uses generator to return next useragent in saved file"""
+
+    with open(USERAGENTS_FN, 'r') as f:
+        agents = f.readlines()
+        selection = random.randint(0, len(agents)-1)
+        agent = agents[selection]
+        return agent.strip()
+
+class Worker(Thread):
+    """Thread executing tasks from a given tasks queue"""
+
+    def __init__(self, tasks):
+        Thread.__init__(self)
+        self.tasks = tasks
+        self.daemon = True
+        self.start()
+
+    def run(self):
+        while True:
+            try:
+                func, args, kargs = self.tasks.get()
+            except Queue.Empty:
+                print 'thread breaking b/c queue is empty'
+                break
+            try:
+                func(*args, **kargs)
+            except Exception, e:
+                print 'critical multi-thread err %s' % e
+
+            self.tasks.task_done()
+
+class ThreadPool:
+    """Pool of threads consuming tasks from a queue"""
+
+    def __init__(self, num_threads):
+        self.tasks = Queue.Queue(num_threads)
+        for _ in range(num_threads):
+            Worker(self.tasks)
+
+    def add_task(self, func, *args, **kargs):
+        """Add a task to the queue"""
+
+        self.tasks.put((func, args, kargs))
+
+    def wait_completion(self):
+        """Wait for completion of all the tasks in the queue"""
+
+        self.tasks.join()
+
+    def clear_threads(self):
+        """"""
+
+        pass
 

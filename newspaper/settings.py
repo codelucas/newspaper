@@ -9,7 +9,8 @@ from cookielib import CookieJar as cj
 VERSION = '0.0.1'
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
-POP_URLS_FILEN = os.path.join(PARENT_DIR, 'source/popular_urls.txt')
+POP_URLS_FILEN = os.path.join(PARENT_DIR, 'data/popular_urls.txt')
+USERAGENTS_FN = os.path.join(PARENT_DIR, 'data/useragents.txt')
 
 DATA_DIR = '.newspaper_scraper'
 TOPDIR = os.path.join(os.path.expanduser("~"), DATA_DIR)
@@ -29,14 +30,20 @@ if not os.path.exists(MEMODIR):
     os.mkdir(MEMODIR)
 
 # category and feed cache
-CFDIR = 'feed_category_cache'
-ANCHOR_DIR = os.path.join(TOPDIR, CFDIR)
+CF_CACHE_DIR = 'feed_category_cache'
+ANCHOR_DIR = os.path.join(TOPDIR, CF_CACHE_DIR)
 
 if not os.path.exists(ANCHOR_DIR):
     os.mkdir(ANCHOR_DIR)
 
 USERAGENT = 'newspaper/%s' % VERSION
 
+TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
+
+MAX_FILE_MEMO = 20000
+
+
+"""
 KEYW_STOPWORDS = {
     'monday':True,
     'tuesday':True,
@@ -61,8 +68,4 @@ KEYW_STOPWORDS = {
     'use':True,
     'questions':True,
     'action':True,
-}
-
-TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
-
-MAX_FILE_MEMO = 20000
+}"""

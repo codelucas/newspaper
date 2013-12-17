@@ -6,7 +6,7 @@ import hashlib
 
 from .utils import fix_unicode
 from .urls import prepare_url, get_domain, get_scheme, valid_url
-# TODO from .nlp import summarize, keywords
+#from .nlp import summarize, keywords
 from .network import get_html
 from .images import Scraper
 from .parsers import (
@@ -19,6 +19,7 @@ MIN_SENT_COUNT = 7
 MAX_TITLE = 200
 MAX_TEXT = 100004
 MAX_KEYWORDS = 35
+MAX_AUTHORS = 10
 
 class Article(object):
 
@@ -182,9 +183,9 @@ class Article(object):
             self.keywords = [fix_unicode(k) for k in keywords[:MAX_KEYWORDS]]
 
     def set_authors(self, authors):
-        """set authors, perhaps add a limit in future"""
+        """authors are in ["firstName lastName", "firsrtName lastName"] format"""
 
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
         if authors:
-            self.authors = authors
+            self.authors = authors[:MAX_AUTHORS]
