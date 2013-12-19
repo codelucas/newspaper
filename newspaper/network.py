@@ -5,8 +5,7 @@ import requests
 import math
 
 from threading import activeCount
-
-from .packages import grequests # use overridden modified version
+# from .packages import grequests # use overridden modified version
 from .settings import cj
 from .utils import chunks, ThreadPool, print_duration, get_useragent
 
@@ -19,8 +18,8 @@ def get_request_kwargs(timeout):
     return {
         'headers' : {'User-Agent': get_useragent()},
         'cookies' : cj(),
-        'timeout' : timeout,
-        'allow_redirects' : True
+        'timeout' : timeout
+        #'allow_redirects' : True
     }
 
 def get_html(url, response=None, timeout=7):
@@ -46,14 +45,14 @@ def sync_request(urls_or_url, timeout=7):
     else:
         return requests.get(urls_or_url, **get_request_kwargs(timeout))
 
-def async_request(urls, timeout=7):
-    """receives a list of requests and sends them all
-    asynchronously at once"""
-
-    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
-    responses = grequests.map(rs, size=10)
-
-    return responses
+# def async_request(urls, timeout=7):
+#    """receives a list of requests and sends them all
+#    asynchronously at once"""
+#
+#    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
+#    responses = grequests.map(rs, size=10)
+#
+#    return responses
 
 class MRequest(object):
     """
@@ -74,15 +73,17 @@ class MRequest(object):
         try:
             self.resp = requests.get(self.url, **self.req_kwargs)
         except Exception, e:
+            logging.critical('[REQUEST FAILED] ' + str(e))
             print '[REQUEST FAILED]', str(e) # TODO, do something with url when we fail!
             # leave the response as None
 
 def multithread_request(urls, timeout=7, num_threads=10):
-    """request multiple urls via multithreading"""
+    """request multiple urls via mthreading, order of urls & requests is stable
+    returns same requests but with response variables filled"""
 
     pool = ThreadPool(num_threads)
     responses = []
-    print 'beginning of mthreading, %s threads running' % activeCount()
+    # print 'beginning of mthreading, %s threads running' % activeCount()
 
     m_requests = []
     for url in urls:
@@ -92,6 +93,6 @@ def multithread_request(urls, timeout=7, num_threads=10):
         pool.add_task(req.send)
 
     pool.wait_completion()
-    return [req.resp for req in m_requests]
+    return m_requests
 
 

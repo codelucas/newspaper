@@ -58,7 +58,7 @@ def lxml_to_urls(lxml_root, titles):
 
     return [ a.get('href') for a in a_tags if a.get('href') ]
 
-def get_urls(_input, titles=True, regex=False):
+def get_urls(_input, titles=False, regex=False):
     """returns a list of urls on the html page or lxml_root the regex
     flag indicates we don't parse via lxml and just search the html"""
 
@@ -174,14 +174,15 @@ def get_imgs(article, method='lxml'):
                             for url in img_links ]
         return img_links
     else:
-        img_links = [ urlparse.urljoin(article.href, url)
+        img_links = [ urlparse.urljoin(article.url, url)
                 for url in article.lxml_root.xpath('//img/@src') ]
         return img_links
 
 def get_feed_urls(source):
-    """REQUIRES: List of category lxml roots.
-    two types of anchors, categories and feeds (rss)
-    we extract category urls first and then feeds"""
+    """
+    Requires: List of category lxml roots, two types of anchors: categories
+    and feeds (rss). we extract category urls first and then feeds
+    """
 
     feed_urls = []
     for category in source.categories:
@@ -194,16 +195,19 @@ def get_feed_urls(source):
     feeds = list(set(feed_urls))
     return feeds
 
-# extra url & lxml methods are for testing
-def get_category_urls(source):
-    """REQUIRES: source lxml root and source url
-    takes a domain and finds all of the top level
-    urls, we are assuming that these are the category urls
+# extra source_url and source_urls methods are for testing
+def get_category_urls(source, source_url=None, page_urls=None):
+    """
+    REQUIRES: source lxml root and source url takes a domain and finds all of the
+    top level urls, we are assuming that these are the category urls
 
     cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
     """
 
-    page_urls = get_urls(source.lxml_root, titles=False)
+    source_url = source.url if source_url is None else source_url
+    page_urls = get_urls(source.lxml_root) if page_urls is None else page_urls
+    print 'yahho test cur:', source_url, len(page_urls)
+
     valid_categories = []
     for p_url in page_urls:
         scheme = get_scheme(p_url, allow_fragments=False)
@@ -219,7 +223,7 @@ def get_category_urls(source):
 
         if domain:
             child_tld = tldextract.extract(p_url)
-            domain_tld = tldextract.extract(source.url)
+            domain_tld = tldextract.extract(source_url)
 
             if child_tld.domain != domain_tld.domain:
                 continue
@@ -227,7 +231,6 @@ def get_category_urls(source):
                 continue
             else:
                 valid_categories.append(scheme+'://'+domain)
-
         else:
             # we want a path with just one subdir
             # cnn.com/world and cnn.com/world/ are both valid_categories
@@ -252,13 +255,14 @@ def get_category_urls(source):
         'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register']
 
     _valid_categories = []
+
     # TODO Stop spamming urlparse and tldextract calls...
 
     for p_url in valid_categories:
         path = get_path(p_url)
         subdomain = tldextract.extract(p_url).subdomain
         conjunction = path + ' ' + subdomain
-        bad=False
+        bad = False
         for badword in stopwords:
             if badword.lower() in conjunction.lower():
                 bad=True
@@ -283,7 +287,7 @@ def get_category_urls(source):
 
     _valid_categories = list(set(_valid_categories))
 
-    categories = [prepare_url(p_url, source.url) for p_url in _valid_categories]
+    categories = [prepare_url(p_url, source_url) for p_url in _valid_categories]
     categories = [c for c in categories if c is not None]
     return categories
 
@@ -299,4 +303,4 @@ class GooseObj(object):
         keywords = goose_obj.meta_keywords.split(',')
         self.keywords = [w.strip() for w in keywords] # not actual keyw's
         self.title = goose_obj.title
-        self.authors = goose_obj.authors
+        # self.authors = goose_obj.authors

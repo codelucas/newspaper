@@ -9,12 +9,15 @@ from cookielib import CookieJar as cj
 VERSION = '0.0.1'
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 POP_URLS_FILEN = os.path.join(PARENT_DIR, 'data/popular_urls.txt')
 USERAGENTS_FN = os.path.join(PARENT_DIR, 'data/useragents.txt')
+STOPWORDS_EN_FN = os.path.join(PARENT_DIR, 'data/stopwords_en.txt')
+STOPWORDS_EN_FN_2 = os.path.join(PARENT_DIR, 'data/stopwords_en2.txt')
 
 DATA_DIR = '.newspaper_scraper'
-TOPDIR = os.path.join(os.path.expanduser("~"), DATA_DIR)
 
+TOPDIR = os.path.join(os.path.expanduser("~"), DATA_DIR)
 if not os.path.exists(TOPDIR):
     os.mkdir(TOPDIR)
 
@@ -43,29 +46,3 @@ TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
 MAX_FILE_MEMO = 20000
 
 
-"""
-KEYW_STOPWORDS = {
-    'monday':True,
-    'tuesday':True,
-    'wednesday':True,
-    'thursday':True,
-    'friday':True,
-    'saturday':True,
-    'sunday':True,
-
-    'january':True,
-    'february':True,
-    'april':True,
-    'may':True,
-    'june':True,
-    'july':True,
-    'august':True,
-    'september':True,
-    'october':True,
-    'november':True,
-    'december':True,
-
-    'use':True,
-    'questions':True,
-    'action':True,
-}"""

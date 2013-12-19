@@ -1,7 +1,6 @@
 *.pyc
 
 .DS_Store
-1M_urls.txt
 .idea
 
 # C extensions

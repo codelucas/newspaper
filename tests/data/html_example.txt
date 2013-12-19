@@ -1,0 +1,851 @@
+<!DOCTYPE HTML>
+<html itemscope itemtype="http://schema.org/NewsArticle" lang="en-US">
+<head>
+<title>After storm, forecasters see smooth sailing for Thanksgiving - CNN.com</title>
+<meta charset="UTF-8"/>
+<meta content="2013-11-28T02:03:23Z" http-equiv="last-modified"/>
+<meta content="index,follow" name="robots"/>
+<meta content="noarchive" name="googlebot"/>
+<meta content="width=1024" name="viewport"/>
+<meta content="news" itemprop="genre" name="medium"/>
+<meta content="en-US" itemprop="inLanguage"/>
+<meta content="After storm, forecasters see smooth sailing for Thanksgiving - CNN.com" name="title"/>
+<meta content="A strong storm struck much of the eastern United States on Wednesday, complicating holiday plans for many of the 43 million Americans expected to travel." itemprop="description" name="description" property="og:description"/>
+<meta content="winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm" itemprop="keywords" name="keywords"/>
+<meta content="winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm" name="news_keywords"/>
+<meta content="Dana Ford and Tom Watkins, CNN" itemprop="author" name="author"/>
+<meta content="travel" itemprop="articleSection" name="section"/>
+<meta content="CNN" itemprop="sourceOrganization" name="source"/>
+<meta content="" name="subsection"/>
+<meta content="2013-11-27T08:36:32Z" itemprop="datePublished" name="pubdate"/>
+<meta content="2013-11-28T02:03:23Z" itemprop="dateModified" name="lastmod"/>
+<meta content="2013-11-27T08:36:32Z" itemprop="dateCreated"/>
+<meta content="" itemprop="contentLocation"/>
+<meta content="After storm, forecasters see smooth sailing for Thanksgiving" itemprop="headline" property="og:title" />
+<meta content="article" property="og:type"/>
+<meta content="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html" itemprop="url" property="og:url"/>
+<meta content="CNN" property="og:site_name"/>
+<meta content="http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg" itemprop="thumbnailUrl" property="og:image"/>
+<meta property="vr:canonical" content="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html">
+<meta content="129343697106537" property="fb:page_id"/>
+<meta content="CNN" property="og:site_name"/>
+<meta content="80401312489" property="fb:app_id"/>
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:site" content="@CNN"/>
+<meta property="twitter:site:id" content="759251"/>
+<meta property="twitter:creator" content="@cnntravel"/>
+<meta property="twitter:creator:id" content="174377718"/>
+<link href="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html" rel="canonical"/>
+<link href="/" rel="Start"/>
+<link href="http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/apple-touch-icon.png" rel="apple-touch-icon" type="image/png"/>
+<link href="/tools/search/cnncom.xml" rel="search" title="CNN.com" type="application/opensearchdescription+xml"/>
+<link href="/tools/search/cnncomvideo.xml" rel="search" title="CNN.com Video" type="application/opensearchdescription+xml"/>
+<link href="http://rss.cnn.com/rss/cnn_travel.rss" rel="alternate" title="CNN - Travel [RSS]" type="application/rss+xml"/>
+<link href="http://z.cdn.turner.com/cnn/tmpl_asset/static/www_article/1824/css/artlib-min.css" rel="stylesheet" type="text/css"/>
+<link href="http://mediacdn.disqus.com/1296789715/styles/dtpl/defaults.css" rel="stylesheet" type="text/css"/>
+<link href="http://disqus.com/forums/cnn/styles.css" rel="stylesheet" type="text/css"/>
+<link href="http://widgets.outbrain.com/mu/css/outbrainWidget.css?v=33961" id="cssLinkID" rel="stylesheet" type="text/css"/>
+<link href="https://plus.google.com/u/0/b/117515799321987910349/117515799321987910349/posts" rel="publisher"/>
+<script>
+var cnnCurrTime=new Date(1387361782000),
+cnnCurrHour=5,
+cnnCurrMin=16,
+cnnCurrDay="Wed",
+cnnIsIntl=false,
+clickID=211911,
+cnn_cvpAdpre="",
+cnnCVPAdSectionT1="cnn.com_travel_t1",
+cnnCVPAdSectionInPage="cnn.com_travel_inpage",
+cnnShareUrl="%2F2013%2F11%2F27%2Ftravel%2Fweather-thanksgiving%2Findex.html",
+cnnShareTitle="After%20storm%2C%20forecasters%20see%20smooth%20sailing%20for%20Thanksgiving",
+cnnShareDesc="",
+cnnFirstPub=new Date('Wednesday Nov 27 03:36:32 EST 2013'),
+cnnSectionName="travel",
+sectionName="travel",
+cnnSubSectionName="trv : news",
+cnnPageType="Story",
+cnnBrandingValue="default";
+cnnPartnerValue="";
+cnnOmniBranding="",
+cnnAuthor="Dana Ford and Tom Watkins, CNN",
+disqus_category_id=207582,
+disqus_identifier="/2013/11/27/travel/weather-thanksgiving/index.html",
+disqus_title="After storm, forecasters see smooth sailing for Thanksgiving",
+cnn_edtnswtchver="www",
+cnnIsStoryPage=true,
+cnn_metadata = {},
+cnn_shareconfig = [];
+cnn_metadata = {
+section: [
+"travel",
+"trv : news"
+],
+friendly_name: "After storm, forecasters see smooth sailing for Thanksgiving",
+template_type: "content",
+template_type_content: "gallery",
+business: {
+cnn: {
+page: {
+author: "Dana Ford and Tom Watkins, CNN",
+broadcast_franchise: "",
+video_embed_count: "4",
+publish_date: "2013/11/27",
+photo_gallery: "After storm, forecasters see smooth sailing for Thanksgiving"
+},
+video: {
+video_player: ""
+}
+}
+},
+user: {
+authenticated: "",
+segment: {
+age: "",
+zip: "",
+gender: ""
+}
+}
+};
+if (typeof(cnnOmniPartner) !== "undefined") {
+if (cnn_metadata.template_type_content === "") {
+cnn_metadata.template_type_content = "partner";
+}
+}
+var photo_gallery = "After storm, forecasters see smooth sailing for Thanksgiving";
+</script>
+<script src="http://z.cdn.turner.com/cnn/tmpl_asset/static/www_article/1824/js/artlib-min.js"></script>
+<script>
+if(typeof CNN==='undefined'){var CNN=Class.create();}
+CNN.expandableMap=[''];
+function _loginOptions(){};
+var disqus_url=(typeof disqus_identifier!=='undefined') ? 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html' : 'http://www.cnn.com'+location.pathname;
+cnnad_newTileIDGroup(['607x95_adlinks','336x280_adlinks']);
+</script>
+<!--
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+-->
+<!--adType:mmst-->
+</head>
+<body>
+<a name="top_of_page"></a><a href="#ContentArea"><img src="http://i.cdn.turner.com/cnn/images/1.gif" align="right" alt="Skip to main content" border="0" height="1" hspace="0" style="display:none;" vspace="0" width="10"/></a>
+<div id="cnn_hdr"> <div id="cnn_hdr-prompt" style="display:none"><div class="hdr-wrap" id="cnn_hdr-promptcntnt"></div></div> <div id="cnn_hdr-main"> <div class="hdr-wrap"> <div id="hdr-banner"> <a href="/TRAVEL/" id="hdr-banner-title"><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/header/us/hdr-travel.gif" alt="CNN Travel" border="0" height="82" style="border: none;" width="202"/></a> </div> <div id="hdr-editions"> <ul> <li class="no-pad-left"><span><a href="javascript:cnn_initeditionhtml(3);" class="cnn_hdr-editionlnk">SET EDITION</a>: &nbsp;U.S.</span></li> <li><a id="cnn_switchEdition_intl" href="http://edition.cnn.com/?hpt=ed_Intl" title="CNN INTERNATIONAL">INTERNATIONAL</a></li> <li><a href="http://mexico.cnn.com/?hpt=ed_Mexico" hreflang="es" title="CNN M&#201;XICO">M&#201;XICO</a></li> <li class="no-border"><a href="http://arabic.cnn.com/?hpt=ed_Arabic" hreflang="ar" title="CNN ARABIC">ARABIC</a></li> </ul> <div class="cnn_clear"></div><div style="padding-top:2px"> <ul> <li class="no-pad-left no-border no-pad-right"><span><a href="/CNN/Programs" class="cnn_hdr-editionlnk">TV</a>: &nbsp;</span></li> <li class="no-pad-left"><a href="/cnn/programs/" title="CNN TV programming schedule">CNN</a></li> <li><a href="/cnni/" title="CNN International TV programming schedule">CNNi</a></li> <li><a href="http://cnnespanol.cnn.com/" hreflang="es" title="CNN in Spanish">CNN en Espa&#241;ol</a></li> <li class="no-border"><a href="http://www.hlntv.com">HLN</a></li> </ul> </div> </div> <div id="hdr-auth"> <ul> <li><a href="javascript:void(0);" onclick="showOverlay('profile_signup_overlay');return false;" title="Sign up">Sign up</a></li> <li class="no-border no-pad-right"><a href="javascript:void(0);" onclick="showOverlay('profile_signin_overlay');return false;" title="Log in">Log in</a></li> </ul> </div> <div id="hdr-search"> <form method="get" action="http://www.cnn.com/search/" onsubmit="return cnnSearch(this);"> <div class="ftr-search-datacntr"> <div class="ftr-search-tfield"><input id="hdr-search-box" maxlength="100" name="query" size="12" type="text" value=""/></div> <div class="ftr-search-sicon"><input alt="Search" height="21" src="http://i.cdn.turner.com/cnn/.e/img/3.0/search/btn_search_hp_text.gif" type="image" width="55"/></div> </div> <input name="primaryType" type="hidden" value="mixed"/><input name="sortBy" type="hidden" value="relevance"/><input name="intl" type="hidden" value="false"/> </form> </div> </div> </div> <div id="cnn_hdr-nav"> <ul id="us-menu"> <li class="no-border"><a href="/?hpt=sitenav" class="nav-media no-border" id="nav-home" title=""><span>Home</span></a></li> <li class="no-border"><a href="/video/?hpt=sitenav" class="nav-media no-border" id="nav-video" title="Video Breaking News Videos from CNN.com"><span>TV &amp; Video</span></a></li> <li class="no-border"><a href="/trends/?hpt=sitenav" class="nav-media" id="nav-trends" title="CNN Trends powered by Zite"><span>CNN Trends</span></a></li> <li class=""><a href="/US/?hpt=sitenav" class="" id="nav-us" title="U.S. News, Headlines, Stories, and Video from CNN.com"><span>U.S.</span></a></li> <li class=""><a href="/WORLD/?hpt=sitenav" class="" id="nav-world" title="World News International Headlines Stories and Video from CNN.com"><span>World</span></a></li> <li class=""><a href="/POLITICS/?hpt=sitenav" class="" id="nav-politics" title="Election and Politics News from CNN.com"><span>Politics</span></a></li> <li class=""><a href="/JUSTICE/?hpt=sitenav" class="" id="nav-justice" title="Justice News Courts Celebrity Docket and Law News from CNN.com"><span>Justice</span></a></li> <li class=""><a href="/SHOWBIZ/?hpt=sitenav" class="" id="nav-entertainment" title="Entertainment News Celebrities Movies and TV from CNN.com"><span>Entertainment</span></a></li> <li class=""><a href="/TECH/?hpt=sitenav" class="" id="nav-tech" title="Technology Computers Internet and Personal Tech News from CNN.com"><span>Tech</span></a></li> <li class=""><a href="/HEALTH/?hpt=sitenav" class="" id="nav-health" title="Health News Medicine Diet Fitness and Parenting from CNN.com"><span>Health</span></a></li> <li class=""><a href="/LIVING/?hpt=sitenav" class="" id="nav-living" title="Living News Personal Work and Home from CNN.com"><span>Living</span></a></li> <li class=""><a href="/TRAVEL/" class="nav-on" id="nav-travel" title="Travel News Vacations Destinations and Video from CNN.com">Travel</a></li> <li class=""><a href="/OPINION/?hpt=sitenav" class="" id="nav-opinion" title="Opinion Editorial Analysis and Insight from CNN.com"><span>Opinion</span></a></li> <li class=""><a href="http://ireport.cnn.com/?hpt=sitenav" class="" id="nav-ireport" title="CNN iReport &#8211; Share your story, discuss the issues with CNN.com"><span>iReport</span></a></li> <li class=""><a href="http://money.cnn.com/?hpt=sitenav" class="" id="nav-money" title="Business financial personal finance news from CNNMoney"><span>Money</span><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/header/nav-arrow.gif" width="3" height="5" alt="" /></a></li> <li class=""><a href="http://bleacherreport.com/?utm_source=cnn.com&utm_medium=referral&utm_campaign=cnn-nav" class="" id="nav-sports" title="The latest sports news and insights on all of your teams and today's hot topics from Bleacher Report (BleacherReport.com)."><span>Sports</span><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/header/nav-arrow.gif" width="3" height="5" alt="" /></a></li> <!--include virtual="/.element/ssi/www/misc/3.0/header/menu.bleacher.html"--> </ul> </div> </div><div align="center" id="cnnContainer"><div class="cnn_maincntnr"><div class="cnn_containerwht cnn_contentarea">
+<!-- this is where the breaking news CSI code will go -->
+<div id="cnnBannerContainer" class="cnn_www_banner"></div>
+<script type="text/javascript">
+CSIManager.getInstance().call('/.element/ssi/www/breaking_news/3.0/banner.html','','cnnBannerContainer',cnnRenderDomesticBanner);
+</script>
+<div id="cnnSetEditionContainer"></div>
+<div id="cnnMakeHPContainer"></div>
+
+
+<div class="cnn_storyarea" id="cnnContentContainer">
+<div class="cnn_stryarblkbr"></div>
+<div class="cnn_strybtntools">
+<div id="cnn_sharebar1">
+<div class="c_sharebar_cntr c_sharebar_loading">
+<div class="c_sharelftcol">
+<div class="c_sharetitle">SHARE THIS</div>
+<div class="c_sharebtns">
+<ul>
+<li class="c_sharebtn c_sharebtnfb"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'facebook');"></a></li>
+<li class="c_sharebtn c_sharebtntwtr"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'twitter');"></a></li>
+<li class="c_sharebtn c_sharebtngplus"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'googleplus');"></a></li>
+<li class="c_sharebtn c_sharebtnlnkn"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'linkedin');"></a></li>
+</ul>
+<div class="cnn_clear"></div>
+</div>
+<div class="fb-like" data-send="false" data-layout="button_count" data-width="150" data-show-faces="false" data-action="recommend" href="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html"></div>
+</div><!-- /c_sharelftcol -->
+<div class="c_sharedivcol"></div>
+<div class="c_shareweb c_sharergtcol">
+<ul>
+<li class="cnn_sswdgtweb1"><a href="#" onclick="if(typeof CleanPrintPrintHtml!='undefined' && CleanPrintPrintHtml) CleanPrintPrintHtml(); else window.print(); return false;">Print</a></li>
+<li class="cnn_sswdgtweb2"><a href="#" onclick="return(ET());">Email</a></li>
+<li class="cnn_sswdgtweb3"><a href="javascript:void(0);" onclick="$j('#cnn_sharebarmore1').toggle();">More sharing</a>
+<div id="cnn_sharebarmore1" class="sharebar_othersites sharebar_othersitesl" style="display:none;">
+<div class="shareProp">
+<div class="sharebutton_reddit" title="Reddit"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'reddit');">Reddit</a></div>
+</div>
+<div class="shareProp">
+<div class="sharebutton_stumbleupon" title="StumbleUpon"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'stumbleupon');">StumbleUpon</a></div>
+</div>
+<div class="shareProp">
+<div class="sharebutton_delicious" title="Delicious"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar1', 'delicious');">Delicious</a></div>
+</div>
+</div>
+</li>
+</ul>
+</div><!-- /c_sharergtcol -->
+<div class="cnn_clear"></div>
+</div>
+</div>
+</div>
+<script>
+/* push in config for this share instance */
+cnn_shareconfig.push({
+"id" : "cnn_sharebar1",
+"url" : "http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html",
+"title" : "After storm, forecasters see smooth sailing for Thanksgiving"
+});
+</script>
+<!--google_ad_section_start--><!--startclickprintinclude-->
+<h1>After storm, forecasters see smooth sailing for Thanksgiving</h1>
+<!--endclickprintinclude--><!--startclickprintexclude-->
+<!--no partner-->
+<div class="cnn_stryathrtmp">
+<div class="cnnByline">By <strong>Dana Ford </strong>and<strong> Tom Watkins, </strong>CNN</div>
+<div class="cnn_strytmstmp">updated 9:03 PM EST, Wed November 27, 2013</div>
+</div>
+<!--google_ad_section_end-->
+<div class="cnn_strycntntlft">
+<!--startclickprintexclude-->
+<script>
+if (typeof cnnArticleGallery=="undefined"){
+var cnnArticleGallery={};
+if(typeof cnnArticleGallery.currentImageList=="undefined"){
+cnnArticleGallery.currentImageList=[];
+}
+}
+var expGalleryPT00=new ArticleExpandableGallery();
+expGalleryPT00.setImageCount(14);
+expGalleryPT00.setAdsRefreshCount(2);
+//cnn_adbptrackpgalimg("Weather threatens holiday plans", 1);
+</script>
+<style type="text/css">
+.cnn_html_slideshow_metadata > .cnn_html_media_utility::before{color:red;content:'>>';font-size:9px;line-height:12px;padding-right:1px}
+.cnnstrylccimg640{margin:0 27px 14px 0}
+.captionText{filter:alpha(opacity=100);opacity:1}
+.cnn_html_slideshow_media_caption a,.cnn_html_slideshow_media_caption a:visited,.cnn_html_slideshow_media_caption a:link,.captionText a,.captionText a:visited,.captiontext a:link{color:#004276;outline:medium none}
+.cnnVerticalGalleryPhoto{margin:0 auto;padding-right:68px;width:270px}
+</style>
+<div class="cnnExplainer cnn_html_slideshow">
+<div class="cnnstrylccimg640"><div class="cnn_stryichgfull"><div class="cnn_stryichgflg">
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-horizontal-gallery.jpg" alt="Police officers adjust a barricade as people wait in cold weather along the route of the Macy's Thanksgiving Day Parade on Thursday, November 28, in New York. " border="0" height="360" id="articleGalleryPhoto001" style="margin:0 auto;" width="640"/>
+<cite style="" id="galleryCaption001">Police officers adjust a barricade as people wait in cold weather along the route of the Macy's Thanksgiving Day Parade on Thursday, November 28, in New York. </cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":true,"x":0,"y":0,"pos":1,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131129201158-02-weather-1128-horizontal-gallery.jpg" alt="Passengers wait for a BoltBus to arrive during a light rain on Wednesday, November 27, in New York. A wall of storms packing ice, sleet and rain threatened to suspend holiday travel plans as millions of Americans took to the roads, skies and rails. " border="0" height="360" id="articleGalleryPhoto002" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption002">Passengers wait for a BoltBus to arrive during a light rain on Wednesday, November 27, in New York. A wall of storms packing ice, sleet and rain threatened to suspend holiday travel plans as millions of Americans took to the roads, skies and rails. </cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":2,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127180330-01-macys-weather-horizontal-gallery.jpg" alt="The Snoopy balloon for the Macy's Parade is partially inflated on Wednesday, November 27, in New York. High winds threatened to keep the balloons on the ground during Thursday's Macy's Thanksgiving parade. A colossal storm system that began in California complicated Thanksgiving travel plans all the way to the Atlantic, causing many transportation delays." border="0" height="360" id="articleGalleryPhoto003" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption003">The Snoopy balloon for the Macy's Parade is partially inflated on Wednesday, November 27, in New York. High winds threatened to keep the balloons on the ground during Thursday's Macy's Thanksgiving parade. A colossal storm system that began in California complicated Thanksgiving travel plans all the way to the Atlantic, causing many transportation delays.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":3,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127064752-02-weather-1127-horizontal-gallery.jpg" alt="An employee signals a plane out of the gate at Ronald Reagan National Airport outside of Washington on Tuesday, November 26." border="0" height="360" id="articleGalleryPhoto004" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption004">An employee signals a plane out of the gate at Ronald Reagan National Airport outside of Washington on Tuesday, November 26.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":4,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127064601-01-weather-1127-horizontal-gallery.jpg" alt="Travelers wait in security lines at Reagan National Airport on November 26." border="0" height="360" id="articleGalleryPhoto005" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption005">Travelers wait in security lines at Reagan National Airport on November 26.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":5,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071921-06-weather-1127-horizontal-gallery.jpg" alt="Vehicles pick up passengers in heavy rain at Reagan National Airport on November 26." border="0" height="360" id="articleGalleryPhoto006" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption006">Vehicles pick up passengers in heavy rain at Reagan National Airport on November 26.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":6,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127072336-07-weather-1127-horizontal-gallery.jpg" alt="A pedestrian walks through snow showers along Penn Ave in Pittsburgh on November 26." border="0" height="360" id="articleGalleryPhoto007" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption007">A pedestrian walks through snow showers along Penn Ave in Pittsburgh on November 26.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":7,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131126134827-winter-weather-1126-horizontal-gallery.jpg" alt="Mark Swigart uses a leaf blower to remove snow from the sidewalks November 26 in Pittsburgh." border="0" height="360" id="articleGalleryPhoto008" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption008">Mark Swigart uses a leaf blower to remove snow from the sidewalks November 26 in Pittsburgh.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":8,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071253-04-weather-1127-horizontal-gallery.jpg" alt="Holiday travelers make their way to their car on November 26 after arriving at Pittsburgh International Airport." border="0" height="360" id="articleGalleryPhoto009" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption009">Holiday travelers make their way to their car on November 26 after arriving at Pittsburgh International Airport.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":9,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071625-05-weather-1127-horizontal-gallery.jpg" alt="People walk in the rain through Union Square in Manhattan on November 26. New York was bracing for severe weather as the storm made its way east." border="0" height="360" id="articleGalleryPhoto0010" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption0010">People walk in the rain through Union Square in Manhattan on November 26. New York was bracing for severe weather as the storm made its way east.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":10,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131126082136-01-holiday-weather-1026-horizontal-gallery.jpg" alt="Employees at Dallas-Fort Worth International Airport de-ice a plane before departure on Monday, November 25." border="0" height="360" id="articleGalleryPhoto0011" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption0011">Employees at Dallas-Fort Worth International Airport de-ice a plane before departure on Monday, November 25.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":11,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131125140556-01-snow-storm-1125-horizontal-gallery.jpg" alt="A fallen tree is removed from a car in Odessa, Texas, on November 25." border="0" height="360" id="articleGalleryPhoto0012" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption0012">A fallen tree is removed from a car in Odessa, Texas, on November 25.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":12,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131124205202-05-weather-1124-horizontal-gallery.jpg" alt="A plow and sanding truck heads up Paseo del Norte in Albuquerque, New Mexico, on Sunday, November 24." border="0" height="360" id="articleGalleryPhoto0013" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption0013">A plow and sanding truck heads up Paseo del Norte in Albuquerque, New Mexico, on Sunday, November 24.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":13,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnnArticleGalleryPhotoContainer">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131124203216-01-weather-1124-horizontal-gallery.jpg" alt="Cars slide on Paseo del Norte in Albuquerque on November 24." border="0" height="360" id="articleGalleryPhoto0014" style="margin:0 auto;display:none" width="640"/>
+<cite style="display:none" id="galleryCaption0014">Cars slide on Paseo del Norte in Albuquerque on November 24.</cite>
+<script>cnnArticleGallery.currentImageList[cnnArticleGallery.currentImageList.length]={"currentPicture":false,"x":0,"y":0,"pos":14,"title":"Weather threatens holiday plans"}</script>
+</div>
+<div class="cnn_clear"></div>
+<div class="cnnArticleGalleryCaptionControl">
+<div class="cnnArticleGalleryCaptionControlText" id="galleryCaptionControl00" onclick="expGalleryPT00.toggleArticleGalleryCaption(0,0)">HIDE CAPTION</div>
+<div class="cnn_clear"></div>
+</div>
+<div class="cnn_html_media_title_new" id="gallerySlideTitle001">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle002">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle003">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle004">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle005">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle006">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle007">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle008">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle009">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle0010">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle0011">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle0012">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle0013">Weather threatens holiday plans</div>
+<div class="cnn_html_media_title_new cnn_html_media_title_none" id="gallerySlideTitle0014">Weather threatens holiday plans</div>
+</div></div></div>
+<div class="cnn_gallery_divline"></div>
+<div style="background-color:#000;color:#FFF;height:27px">
+<div id="articleGalleryNav00JumpPrev" class="cnnArticleGalleryNavPrevNextDisabled"><span>&lt;&lt;</span></div>
+<div id="articleGalleryNav00Prev" onclick="expGalleryPT00.galleryPrev(0,0)" class="cnnArticleGalleryNavPrevNextDisabled"><span>&lt;</span></div>
+<div class="articleGalleryNavContainer">
+<div id="articleGalleryNav001" class="cnnArticleGalleryNavOn" onmouseout="expGalleryPT00.hideArticleThumb(0,0,1)" onmouseover="expGalleryPT00.showArticleThumb(0,0,1)" onclick="expGalleryPT00.changePage(0,0,1)">
+<div id="articleGalleryThumb001" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:0px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">1</span>
+</div>
+<div id="articleGalleryNav002" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,2)" onmouseover="expGalleryPT00.showArticleThumb(0,0,2)" onclick="expGalleryPT00.changePage(0,0,2)">
+<div id="articleGalleryThumb002" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:27px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131129201158-02-weather-1128-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">2</span>
+</div>
+<div id="articleGalleryNav003" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,3)" onmouseover="expGalleryPT00.showArticleThumb(0,0,3)" onclick="expGalleryPT00.changePage(0,0,3)">
+<div id="articleGalleryThumb003" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:54px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127180330-01-macys-weather-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">3</span>
+</div>
+<div id="articleGalleryNav004" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,4)" onmouseover="expGalleryPT00.showArticleThumb(0,0,4)" onclick="expGalleryPT00.changePage(0,0,4)">
+<div id="articleGalleryThumb004" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:81px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127064752-02-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">4</span>
+</div>
+<div id="articleGalleryNav005" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,5)" onmouseover="expGalleryPT00.showArticleThumb(0,0,5)" onclick="expGalleryPT00.changePage(0,0,5)">
+<div id="articleGalleryThumb005" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:108px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127064601-01-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">5</span>
+</div>
+<div id="articleGalleryNav006" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,6)" onmouseover="expGalleryPT00.showArticleThumb(0,0,6)" onclick="expGalleryPT00.changePage(0,0,6)">
+<div id="articleGalleryThumb006" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:135px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071921-06-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">6</span>
+</div>
+<div id="articleGalleryNav007" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,7)" onmouseover="expGalleryPT00.showArticleThumb(0,0,7)" onclick="expGalleryPT00.changePage(0,0,7)">
+<div id="articleGalleryThumb007" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:162px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127072336-07-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">7</span>
+</div>
+<div id="articleGalleryNav008" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,8)" onmouseover="expGalleryPT00.showArticleThumb(0,0,8)" onclick="expGalleryPT00.changePage(0,0,8)">
+<div id="articleGalleryThumb008" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:189px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131126134827-winter-weather-1126-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">8</span>
+</div>
+<div id="articleGalleryNav009" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,9)" onmouseover="expGalleryPT00.showArticleThumb(0,0,9)" onclick="expGalleryPT00.changePage(0,0,9)">
+<div id="articleGalleryThumb009" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:216px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071253-04-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">9</span>
+</div>
+<div id="articleGalleryNav0010" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,10)" onmouseover="expGalleryPT00.showArticleThumb(0,0,10)" onclick="expGalleryPT00.changePage(0,0,10)">
+<div id="articleGalleryThumb0010" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:243px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131127071625-05-weather-1127-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">10</span>
+</div>
+<div id="articleGalleryNav0011" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,11)" onmouseover="expGalleryPT00.showArticleThumb(0,0,11)" onclick="expGalleryPT00.changePage(0,0,11)">
+<div id="articleGalleryThumb0011" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:270px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131126082136-01-holiday-weather-1026-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">11</span>
+</div>
+<div id="articleGalleryNav0012" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,12)" onmouseover="expGalleryPT00.showArticleThumb(0,0,12)" onclick="expGalleryPT00.changePage(0,0,12)">
+<div id="articleGalleryThumb0012" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:297px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131125140556-01-snow-storm-1125-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">12</span>
+</div>
+<div id="articleGalleryNav0013" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,13)" onmouseover="expGalleryPT00.showArticleThumb(0,0,13)" onclick="expGalleryPT00.changePage(0,0,13)">
+<div id="articleGalleryThumb0013" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:324px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131124205202-05-weather-1124-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">13</span>
+</div>
+<div id="articleGalleryNav0014" class="cnnArticleGalleryNav" onmouseout="expGalleryPT00.hideArticleThumb(0,0,14)" onmouseover="expGalleryPT00.showArticleThumb(0,0,14)" onclick="expGalleryPT00.changePage(0,0,14)">
+<div id="articleGalleryThumb0014" style="position:absolute;width:60px;height:60px;border:2px solid #444;bottom:24px;display:none;left:351px">
+<img src="http://i2.cdn.turner.com/cnn/dam/assets/131124203216-01-weather-1124-topics.jpg" border="0"/>
+</div>
+<span style="height:21px;padding:4px 0 0 0">14</span>
+</div>
+</div>
+<div id="articleGalleryNav00Next" onclick="expGalleryPT00.galleryNext(0,0)" class="cnnArticleGalleryNavPrevNext"><span>&gt;</span></div>
+<div id="articleGalleryNav00JumpNext" class="cnnArticleGalleryNavPrevNextDisabled"><span>&gt;&gt;</span></div>
+<div class="cnn_clear"></div>
+</div>
+</div>
+<script>
+Event.observe(window,'load',function(){
+if(typeof(cnn_adbptrackpgalimg) == 'function' && typeof(cnnArticleGallery) != 'undefined'){
+cnn_adbptrackpgalimg(cnnArticleGallery.currentImageList[0].image,"After storm, forecasters see smooth sailing for Thanksgiving");
+}
+});
+</script>
+<a name="em0"></a>
+<div class="cnn_strylftcntnt"><div class="cnn_strylctcntr">
+<div><strong>STORY HIGHLIGHTS</strong></div>
+<ul class="cnn_bulletbin cnnStryHghLght">
+<!--google_ad_section_start-->
+<li><b>NEW:</b> The worst of holiday travel fears fail to materialize</li>
+<li><b>NEW:</b> "Tomorrow will be a quieter day," says CNN meteorologist</li>
+<li>Fate of Macy's Thanksgiving Day Parade balloons still up in the air </li>
+<!--google_ad_section_end-->
+</ul>
+</div></div>
+<div class="cnn_strylftcntnt adtag15090">
+<!-- CALLOUT|http://ads.cnn.com/html.ng/site=cnn&cnn_position=150x90_spon1&cnn_rollup=us&page.allowcompete=no&params.styles=fs|CALLOUT -->
+<!-- ADSPACE: us/spon1.150x90 -->
+<div id="ad-179cc9ea480c1691" align="center" style="padding: 0; margin: 0; border: 0;"></div>
+<script type="text/javascript">
+cnnad_createAd("179cc9ea480c1691","http://ads.cnn.com/html.ng/site=cnn&cnn_position=150x90_spon1&cnn_rollup=us&page.allowcompete=no&params.styles=fs","90","150");
+cnnad_registerSpace("179cc9ea480c1691","150","90");
+</script>
+<!-- ADSPACE-END -->
+</div>
+<!--endclickprintexclude--><!--google_ad_section_start--><!--startclickprintinclude-->
+<p class="cnnEditorialNote"><em>Are you in the grips of the wintry storm sweeping across the country? Please share <a href='http://ireport.cnn.com/topics/1060026'>your videos, pictures and stories at iReport</a>.</em></p>
+<p><strong>(CNN)</strong> -- The Pennsylvania official was just talking about one area, but he summed up a winter storm that struck much of the eastern United States on Wednesday.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph2">"We dodged a bullet," said Steve Cowan, a spokesman for the Pennsylvania Department of Transportation.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph3">As night fell, travelers and transportation authorities breathed a collective sigh of relief as the worst of holiday travel fears failed to materialize. The storm caused some complications and inconveniences, but no major delays or breakdowns.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph4">Forecasters see mostly smooth sailing into Thanksgiving.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph5">CNN meteorologist Todd Borek predicted some lake-effect snowfall over the Great Lakes and fresh snow from a weak disturbance for the Upper Midwest.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph6">But, he added: "The worst in terms of widespread snow and rain is over. Tomorrow will be a quieter day, although wind gusts will continue to be a problem overnight and Thursday for the Northeast."</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph7">That's good news for people like Latasha Abney, who joined the more than 43 million Americans expected by AAA to travel over the Thanksgiving holiday weekend.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph8">Abney said Wednesday that she arrived more than two hours early at Washington's Reagan National Airport to catch a flight to New York's JFK.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph9">"I thought the lines were going to be ridiculous," she said in an e-mail. "I was second in line checking my bag with Delta (checked into my flight last night) and security was a breeze. I walked right up, the TSA agent checked my info and I immediately started the security process. And now the wait begins. It's pretty quiet by the gates. Not too many people roaming around. So far, so good! Happy Thanksgiving!!!!"</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph10">Brian M. Good said he, too, was expecting a horrible trip when he departed New York for Newark to get a flight to San Diego.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph11">"Instead the roads were dead," he said in an e-mail. "It's warm outside and it stopped raining. No lines at the airport and flight is on time. Wish the forecasters were wrong all the time :)"</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph13"><strong>Will winds whip parade balloons?</strong></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph14">Though the worst of the storm has passed, winds could still pose a problem.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph15"><a href='http://www.cnn.com/2013/11/27/travel/thanksgiving-parade-balloons/index.html'>The forecast has left up in the air the fate of the balloons in Macy's Thanksgiving Day Parade</a>. They are to be grounded if sustained winds reach 23 mph or gusts exceed 34 mph -- both slightly above predicted strength.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph16">A decision will be made Thursday morning before the parade's 9 a.m. ET scheduled start.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph17">"Tomorrow before the event, we'll make a determination -- the police department, the incident commander -- whether the balloons will fly or not," Patrol Chief James Hall with the New York Police Department said Wednesday.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph18">"It looks good. It looks very good," he said about the possibility of balloons in the air.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph19">But there is ample reason to support the caution.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph20">In 1997, a woman spent more than three weeks in a coma after the Cat in the Hat balloon -- tossed by heavy winds -- struck a pole that hit her. In 2005, two other people were hurt in a similar incident involving the M&amp;Ms balloon.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph21">Officials say that improved weather monitoring devices en route and a police sergeant assigned to each balloon will minimize any danger.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph22">"We came all the way from Puerto Rico to see the parade, so it will be a disappointment if we don't see the balloons," said Jose Ramirez, who was in New York with his family.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph23">Either way, the parade -- with or without the balloons -- will go on, organizers say.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph25"><strong>Planes, trains ...</strong></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph26">Delays were reported at several airports in the Northeast on Wednesday.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph27"><a href='http://www.cnn.com/2013/11/26/travel/thanksgiving-travel-weather/index.html' target='_blank'>Don't get trapped by bad Thanksgiving weather: Top tips</a></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph28">Heavy winds at all three New York-area airports -- LaGuardia, John F. Kennedy and Newark-Liberty -- resulted in delays of 30 minutes to an hour, according to the <a href='http://www.fly.faa.gov/flyfaa/usmap.jsp' target='_blank'>Federal Aviation Administration</a>. Departure delays from Philadelphia International Airport averaged nearly two hours.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph29">American Airlines' Kent Powell reported three cancellations, none of them related to the weather.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph30">At US Airways, Todd Lehmacher called the impact of the weather "pretty minimal, at this point," with six weather-related cancellations and an on-time performance of about 67%. The impact was more pronounced at US Airways Express, which tallied 56 cancellations because of the weather, he said.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph31">"The real story is people are getting to their destinations, albeit a little delayed in some but not all cases," he said.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph32"><a href='http://www.cnn.com/interactive/2013/11/travel/atl24/' target='_blank'>#ATL24: A day in the life of the world's busiest airport</a></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph33">Amtrak reported no major delays systemwide. Using the <a href='http://www.amtrak.com/ccurl/199/45/Some%20Amtrak%20Seats%20Still%20Available%20for%20Thanksgiving%20Travel%20in%20Northeast%20ATK-13-148.pdf ' target='_blank'>weather as a marketing tool</a>, the nation's rail system was adding seats on some routes.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph34">"Rail travel remains one of the most reliable and comfortable transportation options, especially in weather conditions that negatively impact other modes," Amtrak said.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph35">There may be something to that.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph36">"QUIET CAR. Window seat. Polite seatmate. I have hit the Amtrak travel trifecta. #blessed,"<a href='https://twitter.com/ellievhall/status/405605508989861888' target='_blank'> Ellie Hall tweeted </a>early Wednesday.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph37"><a href='http://www.cnn.com/2013/11/26/health/healthy-eating-traveling-holidays/index.html' target='_blank'>5 healthy eating tips for holiday travelers</a></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph39"><strong>... </strong><strong>a</strong><strong>nd automobiles</strong></p>
+<p class="cnn_storypgraphtxt cnn_storypgraph40">Snow blanketed parts of the Midwest, where crews scrambled to clear roads. The storm was blamed for scores of accidents.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph41">Up to a foot of snow fell in parts of Pennsylvania, and it was falling from upstate New York into Canada, where more than a foot was possible. Snow also continued to fly in the central Appalachians and around the Great Lakes as cold air moved in and produced lake-effect snows.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph42">Road conditions were not great in much of the Northeast.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph43">"It's sleet; it's rain; it's 31 degrees. It's ugly out there," CNN meteorologist Chad Myers said.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph44">Still, a call for anecdotes elicited a number of comments, but no horror stories.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph45">"Well, since the forecast said we would be hitting an ice storm on our way, we ended up leaving the night before we had planned and took an alternate route," Sarah Martini said in an e-mail. "This morning we took smaller roads to avoid DC traffic and have made great progress! We managed to avoid bad weather and traffic and are getting close to getting to Pittsburgh from NC!"</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph46">The National Highway Traffic Safety Administration said that 416 motorists died during Thanksgiving weekend last year, that 60% of the dead had not been wearing seat belts and that 42% of the accidents involved a drunken driver.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph47">Last week, 12 people died, most of them in car crashes, when one of the fronts making up the current storm iced roads from the Rockies to Texas and Oklahoma. More than 100 vehicles ended up in wrecks.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph48">"I get on the highway, and the next thing I know I'm spinning," said Seqret Watson, among the dozens of drivers in Northwest Arkansas sent sliding when their cars hit icy bridges and roads.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph49">"I try to grab my wheel and then I just hit the wall. Just jumped out to make sure my kids were OK," Watson told affiliate KFSM.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph50">The Peterson family had initially planned to drive from Northern Virginia to Massachusetts. But after seeing the forecast, they booked seats on a flight at the last minute.</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph51">"It was a small fortune," Jennifer Peterson told CNN affiliate WUSA. "We could've gone to the Bahamas for what we paid!"</p>
+<p class="cnn_storypgraphtxt cnn_storypgraph52"><a href='http://money.cnn.com/2013/11/26/pf/thanksgiving-airline-travel/index.html'>Storm prompts airlines to relax travel policies</a></p>
+<script type="text/javascript">if(typeof CNN.expElements==='object'){CNN.expElements.init();}</script>
+<p class="cnn_strycbftrtxt">CNN's Jason Carroll, Ben Brumfield, Dave Hennen, Aaron Cooper, Alexandra Field, Shannon Travis and Greg Botelho contributed to this report.</p>
+<!--endclickprintinclude--><!--google_ad_section_end-->
+<!--no partner-->
+<div class="cnn_stryshrwdgtbtm">
+<div id="cnn_sharebar2">
+<div class="c_sharebar_cntr c_sharebar_loading">
+<div class="cnn_stryswdgtbtm1">
+<div class="cnn_stryswdgtbtm1a"><a href="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html#disqus_thread">0</a></div>
+<div class="cnn_stryswdgtbtm1b"><a href="#cnn-disqus-area">Comments &raquo;</a></div>
+</div><!-- /cnn_stryswdgtbtm1 -->
+<div class="cnn_stryswdgtbtm2">
+<div class="c_sharebtmcol1">
+<div class="c_sharetitle">SHARE THIS</div>
+<div class="c_sharebtns">
+<ul>
+<li class="c_sharebtn c_sharebtnfb"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'facebook');"></a></li>
+<li class="c_sharebtn c_sharebtntwtr"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'twitter');"></a></li>
+<li class="c_sharebtn c_sharebtngplus"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'googleplus');"></a></li>
+<li class="c_sharebtn c_sharebtnlnkn"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'linkedin');"></a></li>
+</ul>
+<div class="cnn_clear"></div>
+</div>
+</div><!-- /c_sharebtmcol1 -->
+<div class="c_sharebtmdiv"></div>
+<div class="c_sharebtmcol2">
+<div class="fb-like" data-send="false" data-layout="box_count" data-width="90" data-show-faces="false" data-action="recommend" href="http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html"></div>
+</div><!-- /c_sharebtmcol2 -->
+<div class="c_sharebtmdiv"></div>
+<div class="c_shareweb c_sharebtmcol3">
+<ul>
+<li class="cnn_sswdgtweb1"><a href="#" onclick="if(typeof CleanPrintPrintHtml!='undefined' && CleanPrintPrintHtml) CleanPrintPrintHtml(); else window.print(); return false;">Print</a></li>
+<li class="cnn_sswdgtweb2"><a href="#" onclick="return(ET());">Email</a></li>
+<li class="cnn_sswdgtweb3"><a href="javascript:void(0);" onclick="$j('#cnn_sharebarmore2').toggle();">More sharing</a>
+<div id="cnn_sharebarmore2" class="sharebar_othersites sharebar_othersitesl" style="display:none;">
+<div class="shareProp">
+<div class="sharebutton_reddit" title="Reddit"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'reddit');">Reddit</a></div>
+</div>
+<div class="shareProp">
+<div class="sharebutton_stumbleupon" title="StumbleUpon"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'stumbleupon');">StumbleUpon</a></div>
+</div>
+<div class="shareProp">
+<div class="sharebutton_delicious" title="Delicious"><a href="javascript:void(0);" onclick="cnnsocial.share.click('cnn_sharebar2', 'delicious');">Delicious</a></div>
+</div>
+</div>
+</li>
+</ul>
+</div><!-- /c_sharebtmcol3 -->
+<div class="cnn_clear"></div>
+</div>
+<div class="cnn_clear"></div>
+</div>
+</div>
+</div>
+<script>
+/* push in config for this share instance */
+cnn_shareconfig.push({
+"id" : "cnn_sharebar2",
+"url" : "http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html",
+"title" : "After storm, forecasters see smooth sailing for Thanksgiving"
+});
+</script>
+<div class="cnn_strybtmcntnt">
+<div class="cnn_divline"></div>
+<div class="cnn_divline"></div>
+<div class="cnn_strybtmmorebx" id="outbrain_ext_element">
+<div class="OUTBRAIN" data-src="http://www.cnn.com//2013/11/27/travel/weather-thanksgiving/index.html" data-widget-id="AR_2" data-ob-template="cnn" ></div>
+<script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script>
+</div>
+</div>
+<script>cnnad_newTileIDGroup(['607x95_adlinks','336x280_adlinks']);</script>
+<!-- ADSPACE: travel/mmst/adlinks.607x95 -->
+<!-- CALLOUT|http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=607x95_adlinks&cnn_rollup=travel&page.allowcompete=no&params.styles=fs|CALLOUT -->
+<div id="ad-d5f8bb1a3e5a8087" align="center" style="padding: 0; margin: 0; border: 0;"></div>
+<script type="text/javascript">
+cnnad_createAd("d5f8bb1a3e5a8087","http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=607x95_adlinks&cnn_rollup=travel&page.allowcompete=no&params.styles=fs","95","607");
+cnnad_registerSpace("d5f8bb1a3e5a8087","607","95");
+</script>
+<!-- ADSPACE-END -->
+<div class="cnn_divline cnn_divln3pxblck" style="margin-top:20px;" id="cnn-disqus-area"></div>
+<div id="disqus_thread"></div>
+<script src="http://cnn.disqus.com/embed.js"></script>
+</div>
+</div>
+<div class="cnn_strycntntrgt">
+<div>
+<span id="medium_rectangle" class="_fwph">
+<form id="_fw_form_medium_rectangle" style="display:none">
+<input type="hidden" name="_fw_input_medium_rectangle" id="_fw_input_medium_rectangle" value="w=336&h=280&envp=g_js&sflg=-nrpl&cd=336,280|300,250;">
+</form>
+<span id="_fw_container_medium_rectangle" class="_fwac">
+<div><!-- CALLOUT|http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=336x850_rgt&cnn_rollup=travel&page.allowcompete=no&params.styles=fs|CALLOUT -->
+<!-- ADSPACE: travel/mmst/rgt.336x850 -->
+<div id="ad-57291d5d8b3b20e1" align="center" style="padding: 0; margin: 0; border: 0;"></div>
+<script type="text/javascript">
+cnnad_createAd("57291d5d8b3b20e1","http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=336x850_rgt&cnn_rollup=travel&page.allowcompete=no&params.styles=fs","850","336");
+cnnad_registerSpace("57291d5d8b3b20e1","336","850");
+</script>
+<!-- ADSPACE-END --></div>
+<div class="cnn_adtitle"><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/advertisement.gif" alt="ADVERTISEMENT" border="0" height="5" width="58"/></div>
+<div class="cnn_divline cnn_divlscrct"></div>
+</span>
+</span>
+</div>
+<div class="cnn_strycrcntr">
+<div class="cnn_stryspcvh6">
+<div class="cnn_stryspcvh2">Part of complete coverage on </div>
+<div class="cnn_stryspcvh3">Severe weather</div>
+</div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/03/05/world/gallery/weather-around-world/index.html?iid=article_sidebar">Photos: Weather around the world</a></div>
+<div class="cnn_stryscbx2">
+updated 10:46 AM EDT, Wed August 7, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/03/05/world/gallery/weather-around-world/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130319084810-02-weather-0319-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Get a glimpse of the weather events happening around the world by clicking through our photo gallery.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/03/08/travel/weather-dulles/index.html?iid=article_sidebar">Snowstorms and airports, planning and plowing</a></div>
+<div class="cnn_stryscbx2">
+updated 3:18 PM EDT, Mon March 11, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/03/08/travel/weather-dulles/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/131029095518-13-airport-names-1029-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Christopher Browne gets ready for snow long before any falls in Washington, which hasn't seen a stormy winter for a few years now.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/02/09/tech/mobile/apps-winter-storm/index.html?iid=article_sidebar">Eight apps to get you through a winter storm</a></div>
+<div class="cnn_stryscbx2">
+updated 10:41 AM EST, Mon February 11, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/02/09/tech/mobile/apps-winter-storm/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/131031114923-blackberry-smartphones-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Mobile devices have changed how we handle severe weather. </div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/03/06/us/hate-and-love-for-snow/index.html?iid=article_sidebar">How do you really feel about the snow?</a></div>
+<div class="cnn_stryscbx2">
+updated 5:32 PM EST, Wed March 6, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/03/06/us/hate-and-love-for-snow/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/131025185500-women-walk-along-a-snow-covered-street-finland-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">You love making snowmen and sledding. You hate the way the white stuff feels when it creeps into your boots and traps you inside for days.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2012/10/29/tech/mobile/sandy-charge-devices/index.html?iid=article_sidebar">Keep your phone charged in a power outage</a></div>
+<div class="cnn_stryscbx2">
+updated 5:57 AM EST, Sat February 9, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2012/10/29/tech/mobile/sandy-charge-devices/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/111018044407-connected-cellphones-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">In our increasingly digital world, a mobile phone or other portable device is often a one-stop communication device.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2012/08/29/health/hurricane-power-outage/index.html?iid=article_sidebar">Staying safe when the lights go out</a></div>
+<div class="cnn_stryscbx2">
+updated 7:29 AM EDT, Mon October 29, 2012
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2012/08/29/health/hurricane-power-outage/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/121029111906-hurricane-sandy-supplies-flashlight-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Water jugs and batteries are not the only things to consider when extreme weather threatens.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="http://eatocracy.cnn.com/emergency/?iid=article_sidebar">Food in a weather emergency</a></div>
+<div class="cnn_stryscbx2">
+</div>
+<div class="cnn_stryscbx3">
+<a href="http://eatocracy.cnn.com/emergency/?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/120827060017-can-opener-video-tease.jpg" alt="can opener" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">All you need to know about keeping your food safe to eat and what to have on hand in the event of a weather emergency.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/04/12/tech/mobile/tornado-apps/index.html?iid=article_sidebar">7 mobile tools to help you survive tornado season</a></div>
+<div class="cnn_stryscbx2">
+updated 8:19 AM EDT, Wed May 22, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/04/12/tech/mobile/tornado-apps/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130411155143-red-cross-tornado-app-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Getting the latest warnings when tornadoes are headed your way and knowing what to do before, during and after one hits are all key to staying safe. A handful of apps can help you stay on top of impending dangerous weather. </div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/05/25/us/tornado-safety/index.html?iid=article_sidebar">A tornado's heading your way: Now what?</a></div>
+<div class="cnn_stryscbx2">
+updated 11:31 AM EDT, Thu May 30, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/05/25/us/tornado-safety/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130520093610-09-tornado-0520-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">You've just that heard a tornado is headed directly toward you. You don't have a safe room, and you're not near a shelter. Do you hunker down and hope for the best or do you flee?</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/01/30/us/deadliest-tornadoes/index.html?iid=article_sidebar">The 10 deadliest U.S. tornadoes on record</a></div>
+<div class="cnn_stryscbx2">
+updated 12:09 PM EDT, Tue May 21, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/01/30/us/deadliest-tornadoes/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130130130421-tri-state-tornado-1925-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Here are the 10 deadliest tornadoes to touch down in the United States, according to the National Oceanic and Atmospheric Administration: </div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/07/17/us/us-lightning-strikes/index.html?iid=article_sidebar">In electrical storms, few safe places</a></div>
+<div class="cnn_stryscbx2">
+updated 7:07 PM EDT, Wed July 17, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/07/17/us/us-lightning-strikes/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130711090816-florida-lightning-0709-irpt-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4">Weather experts agree: When lightning strikes, it's best to go indoors.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_stryspcvbx"><div class="cnn_stryspcvbxcntr"><div class="cnn_stryscbx1">
+<div><a href="/2013/05/20/us/tornadoes-fast-facts/index.html?iid=article_sidebar">What to know about tornadoes</a></div>
+<div class="cnn_stryscbx2">
+updated 11:03 AM EST, Mon November 18, 2013
+</div>
+<div class="cnn_stryscbx3">
+<a href="/2013/05/20/us/tornadoes-fast-facts/index.html?iid=article_sidebar"><img src="http://i2.cdn.turner.com/cnn/dam/assets/130521094054-irpt-tornado-stormchaser-oklahoma-video-tease.jpg" alt="" border="0" height="68" width="120"/></a>
+</div>
+<div class="cnn_stryscbx4"> A tornado is a funnel-shaped cloud that forms under thunderclouds and contains rapidly rotating air.</div>
+<div class="cnn_clear"></div>
+</div></div></div>
+<div class="cnn_divline cnn_divlscrc"></div>
+<div class="cnn_divline cnn_divlscrc"></div>
+<div class="cnn_sectbincntnt cnn_zitemodule"></div>
+<div class="cnn_divline cnn_divlscrc"></div>
+<div style="padding-bottom:17px;padding-top:17px;" class="cnn_strycrcntrpad">
+<div class="OUTBRAIN" data-src="http://www.cnn.com//2013/11/27/travel/weather-thanksgiving/index.html" data-widget-id="AR_6" data-ob-template="cnn" ></div>
+<script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script>
+<div class="OUTBRAIN" data-src="http://www.cnn.com//2013/11/27/travel/weather-thanksgiving/index.html" data-widget-id="AR_4" data-ob-template="cnn" ></div>
+<script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script>
+<div class="OUTBRAIN" data-src="http://www.cnn.com//2013/11/27/travel/weather-thanksgiving/index.html" data-widget-id="AR_5" data-ob-template="cnn" ></div>
+<script type="text/javascript" async="async" src="http://widgets.outbrain.com/outbrain.js"></script>
+</div>
+<style>
+.OB_SB_1, .OB_SB_2 { padding:0px; }
+#outbrain_container_1_stripBox .strip-like, #outbrain_container_2_stripBox .strip-like { font-size:18px; }
+#ob_strip_container_rel_1_stripBox { }
+#ob_strip_container_rel_1_stripBox .item-container, #ob_strip_container_rel_2_stripBox .item-container { padding-top:8px;border-top:1px solid #E5E5E5; }
+</style>
+<div class="cnn_divline"></div>
+<div class="cnn_strycrcntrad">
+<div><!-- CALLOUT|http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=300x150_rgt&cnn_rollup=travel&page.allowcompete=no&params.styles=fs|CALLOUT -->
+<!-- ADSPACE: travel/mmst/rgt.300x150 -->
+<div id="ad-7a51c92a4620a4f0" align="center" style="padding: 0; margin: 0; border: 0;"></div>
+<script type="text/javascript">
+cnnad_createAd("7a51c92a4620a4f0","http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=300x150_rgt&cnn_rollup=travel&page.allowcompete=no&params.styles=fs","150","300");
+cnnad_registerSpace("7a51c92a4620a4f0","300","150");
+</script>
+<!-- ADSPACE-END --></div>
+<div class="cnn_adtitle"><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/advertisement.gif" alt="ADVERTISEMENT" border="0" height="5" width="58"/></div>
+</div>
+<div class="cnn_divline"></div>
+<div class="cnn_divline cnn_divlscrc"></div>
+<div style="padding:0 0 0 6px;">
+<!-- ADSPACE: travel/mmst/adlinks.336x280 -->
+<!-- CALLOUT|http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=336x280_adlinks&cnn_rollup=travel&page.allowcompete=no&params.styles=fs|CALLOUT -->
+<div id="ad-73813283f2e22ab6" align="center" style="padding: 0; margin: 0; border: 0;"></div>
+<script type="text/javascript">
+cnnad_createAd("73813283f2e22ab6","http://ads.cnn.com/html.ng/site=cnn&cnn_pagetype=mmst&cnn_position=336x280_adlinks&cnn_rollup=travel&page.allowcompete=no&params.styles=fs","280","336");
+cnnad_registerSpace("73813283f2e22ab6","336","280");
+</script>
+<!-- ADSPACE-END -->
+</div>
+</div>
+</div><div class="cnn_clear"></div>
+</div>
+</div></div></div>
+<div id="fb-root"></div>
+<div align="center"> <div class="cnn_pad6top"></div> <div class='cnn_containerwht' style='width:990px'> <div id="cnn_ftrcntnt"><div class="clearfix" id="cnn_ftrcntntinner"> <div class="cnn_ftrdivl1"></div> <div id="pmWeatherFooter" style="visibility:visible"><p><strong></strong></p></div> <div id="ftr-search"> <form action="http://www.cnn.com/search/" method="get" onsubmit="return cnnSearch(this);"> <div class="ftr-search-datacntr"> <div class="ftr-search-tfield"><input id="ftr-search-box" maxlength="100" name="query" size="12" type="text" value=""/></div> <div class="ftr-search-sicon"><input alt="Search" src="http://i.cdn.turner.com/cnn/.e/img/3.0/search/search_btn_footer.gif" type="image"/></div> </div> <input id="cnnFtrSrchType" name="primaryType" type="hidden" value="mixed"/> <input name="sortBy" type="hidden" value="relevance"/> <input name="intl" type="hidden" value="false"/> <div class="cnn_ftrggle"><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/footer/pngs/footer_google.png" alt="Powered by Google" border="0" class="cnn_ie6png" height="13" width="88"/></div> </form> </div> <div class="cnn_clear"></div> <div class="cnn_divline" style="background-color:#ebebeb;margin-top:3px"></div> <div class="cnn_ftrnvlnks"> <div><a href="/">Home</a> | <a href="/video/">Video</a> | <a href="/trends/">CNN Trends</a> | <a href="/US/">U.S.</a> | <a href="/WORLD/">World</a> | <a href="/POLITICS/">Politics</a> | <a href="/JUSTICE/">Justice</a> | <a href="/SHOWBIZ/">Entertainment</a> | <a href="/TECH/">Tech</a> | <a href="/HEALTH/">Health</a> | <a href="/LIVING/">Living</a> | <a href="/TRAVEL/">Travel</a> | <a href="/OPINION/">Opinion</a> | <a href="http://ireport.cnn.com/?cnn=yes">iReport</a> | <a href="http://money.cnn.com/?cnn=yes">Money</a> | <a href="http://bleacherreport.com/?utm_source=cnn.com&utm_medium=referral&utm_campaign=cnn-footer">Sports</a></div> <div><a href="/tools/index.html">Tools &amp; widgets</a> | <a href="/services/rss/">RSS</a> | <a href="/services/podcasting/">Podcasts</a> | <a href="/exchange/blogs/index.html">Blogs</a> | <a href="/mobile/">CNN mobile</a> | <a href="/profile/">My profile</a> | <a href="/profile/">E-mail alerts</a> | <a href=" /macalerts/">Desktop Alerts</a> | <a href="http://www.turnerstoreonline.com/">CNN shop</a> | <a href="/sitemap/">Site map</a> | <a href="/feedback/">Contact us</a> </div> </div> <div class="cnn_ftrdivl2"></div> <div class="cnn_ftrlnggcntr"> <div><a href="/espanol/" hreflang="es" title="CNN in Spanish">CNN en ESPA&Ntilde;OL</a> | <a href="http://mexico.cnn.com" hreflang="es">CNN M&eacute;xico</a> | <a href="http://www.cnnchile.com" hreflang="es">CNN Chile</a> | <a href="http://www.cnnexpansion.com" hreflang="es">CNN Expansi&oacute;n</a></div> <div><a href="http://arabic.cnn.com/" hreflang="ar" title="CNN Arabic">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</a> | <a href="http://www.cnn.co.jp/" hreflang="ja" title="CNN Japan">&#26085;&#26412;&#35486;</a> | <a href="http://www.cnnturk.com/" hreflang="tr" title="CNN Turkey">T&uuml;rk&ccedil;e</a></div> <div><a href="/CNN/Programs/" title="CNN TV programming schedule">CNN TV</a> | <a href="/HLN/">HLN</a> | <a href="http://transcripts.cnn.com/TRANSCRIPTS/">Transcripts</a> | </div> </div> <div class="cnn_ftrlgcpy"> <div><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/footer/pngs/footer_cnn_logo.png" alt="CNN" border="0" class="cnn_ie6png" height="11" width="23"/>&copy; 2013 Cable News Network. <a href="http://www.turner.com/" class="cnn_ftrtbslink">Turner Broadcasting System, Inc.</a> All Rights Reserved.</div> <div class="cnn_ftrlgcpy1"><a href="/interactive_legal.html" rel="nofollow">Terms of service</a> | <a href="/privacy.html" rel="nofollow">Privacy guidelines</a> | <a id="cnn_cnsnt_trst"><script type="text/javascript" src="//consent.truste.com/notice?domain=turner.com&c=cnn_cnsnt_trst&text=true&country=us"></script></a><img src="http://i.cdn.turner.com/cnn/.e/img/3.0/global/misc/logo_ad_choices_footer.png" alt="" border="0" class="cnn_ie6png" height="12" style="margin:0pt 0pt 0pt 4px;" width="12"/> | <a href="/services/advertise/main.html" rel="nofollow">Advertise with us</a> | <a href="/about/" rel="nofollow">About us</a> | <a href="http://www.turner.com/careers/">Work for us</a> | <a href="/help/" rel="help">Help</a></div> <div class="cnn_ftrlgcpy1"><a href="http://www.cnnnewsource.com" rel="nofollow">CNN Newsource</a> | <a href="http://www.cnnimagesource.com" rel="nofollow">License Footage</a></div><div class="cnn_clear"></div> </div><div class="cnn_clear"></div> </div></div> </div> </div> <script src="http://z.cdn.turner.com/cnn/tmpl_asset/static/www_global/915/js/globallib-min.js"></script> <script src="http://content.dl-rms.com/rms/mother/5721/nodetag.js"></script> <script src="http://icompass.insightexpressai.com/97.js"></script> <script src="http://js.revsci.net/gateway/gw.js?csid=A09801"></script> <script>cnnad_sendADMData();cnnad_ugsync();if(ms_isLoggedIn()){CNN_setCookie('CNN_member',true,854400,'/',document.domain);}</script> <div id="csimanagerdiv"><div id="csiIframeObjscsi2"><iframe style="visibility:hidden;position:absolute;top:0px;left:-100px;" name="csiDataIframecsi2" id="csiDataIframecsi2" src="http://svcs.cnn.com/weather/getForecast?time=24&amp;mode=json_html&amp;zipCode=30303&amp;locCode=&amp;celcius=false&amp;csiID=csi2" width="10" height="10"></iframe></div></div> <div id="csimanagerdivdelayed"></div>
+<!--jsmd-->
+<script src="http://z.cdn.turner.com/cnn/.e/js/libs/jsmd-10.min.js"></script>
+
+<script>
+var jsmd=_jsmd.init(),pageURL=location.href.toLowerCase();
+if (pageURL.indexOf("/.element/ssi/ads.iframes/")==-1&&pageURL.indexOf("/doubleclick/dartiframe.html")==-1&&pageURL.indexOf("/search/")==-1){
+if (_jsmd.plugin.gQuery("refresh")){
+jsmd.trackMetrics("dynamic-autoRefresh","autorefresh","cnn-autorefresh");
+} else if (_jsmd.plugin.gQuery("is_LR")){
+} else if (cnn_metadata.template_type_content!="gallery"){
+jsmd.send();
+}
+}
+</script>
+<!--/jsmd-->
+<script>
+/*globals FOOTERTOOLS*/
+$j(window).load(function () {
+'use strict';
+FOOTERTOOLS.init();
+});
+</script>
+<script>
+/*globals CNN_CB, cnnsocial, cnnzite_mod, sectionName */
+/* configure apis to load and specify their callbacks */
+cnnsocial.setapiconfig([
+{
+'site' : 'facebook',
+'success' : function() {
+/* trigger connect-cnnsocial.js calls */
+window.cnn_fbAsyncInit();
+}
+},
+{ 'site' : 'twitter' }
+]);
+<!--Visual Revenue Reader Response Tracking Script (v6) -->
+var _vrq = _vrq || [];
+var vrId = 6;
+if(cnn_edtnswtchver === 'edition'){
+vrId = 396;
+}
+_vrq.push(['id', vrId]);
+_vrq.push(['automate', false]);
+_vrq.push(['track', function(){}]);
+(function(d, a){
+var s = d.createElement(a),
+x = d.getElementsByTagName(a)[0];
+s.async = true;
+s.src = 'http://a.visualrevenue.com/vrs.js';
+x.parentNode.insertBefore(s, x);
+})(document, 'script');
+<!-- End of VR RR Tracking Script - All rights reserved -->
+/* add the multiple config instance for sharebars */
+cnnsocial.share.setconfig(cnn_shareconfig);
+$j(document).ready(function () {
+'use strict';
+loadChartbeat("travel", "Dana Ford and Tom Watkins, CNN");
+cnnzite_mod.init();
+CNN.initFlipperTicker();
+/* initialize cnnsocial */
+cnnsocial.init();
+});
+</script>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'cnn'; // required: replace example with your forum shortname
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function () {
+var s = document.createElement('script'); s.async = true;
+s.type = 'text/javascript';
+s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+<script src="http://cache-02.cleanprint.net/cpf/cleanprint?key=cnn" name="cleanprintloader"></script>
+</body>
+</html>

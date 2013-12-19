@@ -2,7 +2,7 @@
 
 import logging
 
-from .network import get_html, async_request
+from .network import get_html, multithread_request
 from .article import Article
 from .urls import get_domain, get_scheme, prepare_url
 from .settings import ANCHOR_DIR
@@ -25,7 +25,7 @@ class Feed(object):
     def __init__(self, url):
         self.url = url
         self.rss = None
-        # self.dom = None           TODO Speed up feedparser
+        # self.dom = None    TODO Speed up feedparser
 
 class Source(object):
     """
@@ -42,7 +42,7 @@ class Source(object):
 
     def __init__(self, url=None):
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
-            raise Exception
+            raise Exception('Input url is bad!')
 
         self.url = fix_unicode(url)
         self.url = prepare_url(url)
@@ -81,26 +81,24 @@ class Source(object):
         # self.parse_feeds()  TODO We are directly regexing out feeds until we speed up feedparser!
 
         self.generate_articles()
-        self.async_download_articles()
+        # self.download_articles()
 
-    def purge_articles(self, articles=None):
+    def purge_articles(self, reason, in_articles=None):
         """delete rejected articles, if there is an articles param, we
         purge from there, otherwise purge from our source instance"""
 
-        ret = []
-        if articles is not None:
-            for article in articles:
-                if not article.rejected:
-                    ret.append(article)
-                else:
-                    pass # Maybe something here in future
-            return ret
+        cur_articles = self.articles if in_articles is None else in_articles
 
-        for article in self.articles:
-            if not article.rejected:
-                ret.append(article)
+        for index, article in enumerate(cur_articles):
+            if reason == 'url' and not article.is_valid_url():
+                del cur_articles[index]
+            elif reason == 'body' and not article.is_valid_body():
+                del cur_articles[index]
 
-        self.articles = ret
+        if in_articles is not None: # if they give an input, output filtered
+            return cur_articles
+        else: # no input, we are playing with self.articles
+            self.articles = cur_articles
 
     @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
     def _get_category_urls(self, domain):
@@ -139,25 +137,28 @@ class Source(object):
 
         self.html = get_html(self.url)
 
-    @print_duration
+    # @print_duration
     def download_categories(self):
         """individually download all category html, async io'ed"""
 
         category_urls = [c.url for c in self.categories]
-        responses = async_request(category_urls)
+        requests = multithread_request(category_urls)
 
         # Note that the responses are returned in original order
-        for index, resp in enumerate(responses):
-            self.categories[index].html = resp.text
+        for index, req in enumerate(requests):
+            if req.resp is not None:
+                self.categories[index].html = req.resp.text
 
-    @print_duration
+    # @print_duration
     def download_feeds(self):
         """individually download all feed html, async io'ed"""
 
         feed_urls = [f.url for f in self.feeds]
-        responses = async_request(feed_urls)
-        for index, resp in enumerate(responses):
-            self.feeds[index].rss = resp.text
+        requests = multithread_request(feed_urls)
+
+        for index, req in enumerate(requests):
+            if req.resp is not None:
+                self.feeds[index].rss = req.resp.text
 
     def parse(self, summarize=True, keywords=True, processes=1):
         """sets the lxml root, also sets lxml roots of all
@@ -176,7 +177,6 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.lxml_root is not None]
 
-    @print_duration
     def parse_feeds(self):
         """due to the slow speed of feedparser, we won't be dom parsing
         our .rss feeds, but rather regex searching for urls in the .rss
@@ -192,7 +192,7 @@ class Source(object):
                 log.critical('feedparser failed %s' % e)
                 print feed.url
 
-        self.feeds = [ feed for feed in self.feeds if feed.dom is not None ]
+        self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 
     def feeds_to_articles(self):
         """returns articles given the url of a feed"""
@@ -209,7 +209,7 @@ class Source(object):
 
         urls = []
         for feed in self.feeds:
-            urls.extend(get_urls(feed.rss, titles=False, regex=True))
+            urls.extend(get_urls(feed.rss, regex=True))
 
         articles = []
         for url in urls:
@@ -220,7 +220,7 @@ class Source(object):
              )
             articles.append(article)
 
-        articles = self.purge_articles(articles)
+        articles = self.purge_articles('url', articles)
         articles = memoize_articles(articles, self.domain)
         log.debug('%d from feeds at %s' % (len(articles), str(self.feeds[:10])))
         return articles
@@ -246,7 +246,7 @@ class Source(object):
                 )
                 articles.append(_article)
 
-            articles = self.purge_articles(articles)
+            articles = self.purge_articles('url', articles)
             after = len(articles)
 
             articles = memoize_articles(articles, self.domain)
@@ -267,25 +267,44 @@ class Source(object):
         uniq = { article.url:article for article in articles }
         return uniq.values()
 
-    def generate_articles(self, limit=5000):
-        """saves all current articles of news source"""
+    def generate_articles(self, limit=200):
+        """saves all current articles of news source, filter out bad urls"""
 
         articles = self._generate_articles()
         self.articles = articles[:limit]
-        log.debug('Saved', limit, 'articles and cut', (len(articles)-limit), 'articles')
+
+        log.critical('total', len(articles), 'articles and cutoff was at', limit)
 
     @print_duration
-    def async_download_articles(self):
-        """downloads all articles attached to self async-io"""
+    def download_articles(self, multithread=True):
+        """downloads all articles attached to self via mthreading"""
 
-        article_urls = [a.url for a in self.articles][:500]
-        responses = async_request(article_urls)
+        urls = [a.url for a in self.articles]
+        filled_requests = multithread_request(urls)
 
+        failed_articles = []
         # Note that the responses are returned in original order
-        for index, resp in enumerate(responses):
-            self.articles[index].html = resp.text
+        for index, req in enumerate(filled_requests):
+            if req.resp is not None:
+                self.articles[index].html = req.resp.text
+            else:
+                failed_articles.append(self.articles[index])
+                del self.articles[index] # TODO iffy using del here
 
         self.is_downloaded = True
+
+        if len(failed_articles) > 0:
+            print '[ERROR], these article urls failed the download:', \
+                [a.url for a in failed_articles]
+
+    def parse_articles(self):
+        """sync parse all articles, delete if too small"""
+
+        for index, article in enumerate(self.articles):
+            article.parse()
+
+        self.purge_articles('body')
+        self.is_parsed = True
 
     def size(self):
         """number of articles linked to this news source"""

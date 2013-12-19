@@ -4,9 +4,9 @@ import logging
 import base64
 import hashlib
 
+from . import nlp
 from .utils import fix_unicode
 from .urls import prepare_url, get_domain, get_scheme, valid_url
-#from .nlp import summarize, keywords
 from .network import get_html
 from .images import Scraper
 from .parsers import (
@@ -20,45 +20,47 @@ MAX_TITLE = 200
 MAX_TEXT = 100004
 MAX_KEYWORDS = 35
 MAX_AUTHORS = 10
+MAX_SUMMARY = 5000
+
+class ArticleException(Exception):
+    pass
 
 class Article(object):
+    def __init__(self, url, title=u'', source_url=None, is_attached=False):
+        """
+        """
 
-    def __init__(self, url, title=u'', source_url=None):
         if source_url is None:
-            source_url = get_scheme(url)+'://'+get_domain(url)
+            source_url = get_scheme(url) + '://' + get_domain(url)
 
         if source_url is None or source_url == '':
-            self.rejected = True
-            return
+            raise ArticleException('input url bad format')
 
-        source_url = fix_unicode(source_url)
+        self.source_url = fix_unicode(source_url)
 
         self.url = fix_unicode(url)
-        self.url = prepare_url(self.url, source_url)
+        self.url = prepare_url(self.url, self.source_url)
         self.title = fix_unicode(title)
 
         self.top_img = u''
         self.text = u''
         self.keywords = u''
         self.authors = []
-        self.published = u'' # TODO, parse publishing date
+        self.published_date = u'' # TODO
+        self.summary = u''
 
-        self.domain = get_domain(source_url)
-        self.scheme = get_scheme(source_url)
-        self.rejected = False
+        self.domain = get_domain(self.source_url)
+        self.scheme = get_scheme(self.source_url)
 
         self.html = u''
         self.lxml_root = None
 
         self.imgs = []
 
-        self.is_parsed = False     # flags warning users incase they
-        self.is_downloaded = False # forget to download() or parse()
+        self.is_parsed = False          # flags warning users incase they
+        self.is_downloaded = False      # forget to download() or parse()
 
-        # If a url is from a feed, we know it's pre-validated,
-        # otherwise, we need to make sure its a news article.
-        # if not from_feed: TODO Once we figure out feedparser again, restore this
-        self.verify_url()
+        # TODO After feedparser works again, we won't need to verify feed urls
 
     def build(self):
         """build a lone article from a url independent of the
@@ -67,7 +69,7 @@ class Article(object):
 
         self.download()
         self.parse()
-        self.extract_nlp()
+        self.nlp()
 
     def get_key(self):
         """returns a md5 representation of the url"""
@@ -78,8 +80,6 @@ class Article(object):
         """downloads the link's html content, don't use if we are async
         downloading batch articles"""
 
-        if self.rejected:
-            return
         self.html = get_html(self.url, timeout=timeout)
         self.is_downloaded = True
 
@@ -88,15 +88,15 @@ class Article(object):
         BeautifulSoup root. We also parse images to keep cpu bound
         tasks all in one place."""
 
+        if not self.is_downloaded:
+            print 'You must download an article before parsing it! run download()'
+            raise ArticleException()
+
         goose_obj = GooseObj(self)
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
-        self.set_authors(goose_obj.authors)
-
-        self.verify_body()
-        if self.rejected:
-            return
+        #self.set_authors(goose_obj.authors)
 
         # Parse xpath tree and query top imgs
         self.lxml_root = get_lxml_root(self.html)
@@ -112,21 +112,20 @@ class Article(object):
         self.set_reddit_top_img()
         self.is_parsed = True
 
-    def verify_url(self):
+    def is_valid_url(self):
         """performs a check on the url of this link to
         determine if a real news article or not"""
 
-        if self.rejected:
-            return
-        self.rejected = not valid_url(self.url)
+        return valid_url(self.url)
 
-    def verify_body(self):
+    def is_valid_body(self):
         """if the article's body text is long enough to meet
         standard article requirements, we keep the article"""
 
-        if self.rejected:
-            return
-        self.rejected = not valid_body(self)
+        if not self.is_parsed:
+            raise ArticleException('must parse article before checking \
+                                    if it\'s body is valid!')
+        return valid_body(self)
 
     def is_media_news(self):
         """if the article is a gallery, video, etc related"""
@@ -140,19 +139,27 @@ class Article(object):
                 return True
         return False
 
-    def extract_nlp(self):
+    def nlp(self):
         """keyword extraction wrapper"""
 
-        if self.rejected:
-            return
-        # TODO keys = get_keywords(self)
-        # TODO self.set_keywords(keys)
+        if not self.is_downloaded or not self.is_parsed:
+            print 'You must download and parse an article before parsing it!'
+            raise ArticleException()
+
+        text_keyws = nlp.keywords(self.text).keys()
+        title_keyws = nlp.keywords(self.title).keys()
+        keyws = list(set(title_keyws + text_keyws))
+        self.set_keywords(keyws)
+
+        summary_sents = nlp.summarize(title=self.title, text=self.text)
+        summary = '\r\n'.join(summary_sents)
+        self.set_summary(summary)
 
     def set_reddit_top_img(self):
         """wrapper for setting images, queries known image attributes
         first, uses reddit's img algorithm as a fallback."""
 
-        if self.rejected or self.top_img != u'': # if we already have a top img...
+        if self.top_img != u'': # if we already have a top img...
             return
         try:
             s = Scraper(url=self.url, imgs=self.imgs, top_img=self.top_img)
@@ -189,3 +196,8 @@ class Article(object):
             raise Exception("authors input must be list!")
         if authors:
             self.authors = authors[:MAX_AUTHORS]
+
+    def set_summary(self, summary):
+        """summary is a paragraph of text from the title + body text"""
+
+        self.summary = summary[:MAX_SUMMARY]

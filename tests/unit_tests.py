@@ -15,10 +15,9 @@ sys.path.insert(0, PARENT_DIR)
 
 URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
 
-from newspaper.article import Article
+from newspaper.article import Article, ArticleException
 from newspaper.source import Source
-from newspaper.settings import ANCHOR_DIR
-from newspaper.network import async_request
+from newspaper.network import multithread_request
 
 def print_test(method):
     """utility method for print verbalizing test suite, prints out
@@ -44,10 +43,18 @@ class ArticleTestCase(unittest.TestCase):
     def runTest(self):
         print 'testing article unit'
         self.test_url()
+        self.test_download_html()
+        self.test_pre_download_parse()
+        self.test_parse_html()
+        self.test_article_hash_key()
+        self.test_pre_parse_nlp()
+        self.test_nlp_body()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
-        pass
+
+        self.article = Article(
+            url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html?iref=allsearch')
 
     def tearDown(self):
         """called after all test cases finish of this unit"""
@@ -55,15 +62,80 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_url(self):
-        a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html?hpt=hp_t1')
-        assert a.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+        assert self.article.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+
+    @print_test
+    def test_download_html(self):
+        self.article.download()
+        # can't compare html because it changes on every page as time goes on
+        assert len(self.article.html) > 5000
+
+    @print_test
+    def test_pre_download_parse(self):
+        """before we download an article you should not be parsing!"""
+
+        a2 = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
+        def failfunc():
+            a2.parse()
+        self.assertRaises(ArticleException, failfunc)
+
+    @print_test
+    def test_parse_html(self):
+        TOP_IMG = 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg'
+        DOMAIN = 'www.cnn.com'
+        SCHEME = 'http'
+        AUTHORS = ['Dana Ford', 'Tom Watkins']
+        TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
+        LEN_IMGS = 49 # list is too big, we just check size of images arr
+
+        self.article.parse()
+
+        with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
+            assert self.article.text == f.read()
+        assert self.article.top_img == TOP_IMG
+        # assert self.article.authors == AUTHORS TODO add my goose in!
+        assert self.article.domain == DOMAIN
+        assert self.article.scheme == SCHEME
+        assert self.article.title == TITLE
+        assert len(self.article.imgs) == LEN_IMGS
+
+    @print_test
+    def test_pre_parse_nlp(self):
+        a2 = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
+        a2.download()
+        a3 = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
+        def failfunc():
+            a2.nlp()
+        def failfunc2():
+            a3.nlp()
+        self.assertRaises(ArticleException, failfunc)
+        self.assertRaises(ArticleException, failfunc2)
+
+    @print_test
+    def test_nlp_body(self):
+        SUMMARY = """Wish the forecasters were wrong all the time :)"Though the worst of the storm has passed, winds could still pose a problem.\r\nForecasters see mostly smooth sailing into Thanksgiving.\r\nThe forecast has left up in the air the fate of the balloons in Macy's Thanksgiving Day Parade.\r\nThe storm caused some complications and inconveniences, but no major delays or breakdowns.\r\n"That's good news for people like Latasha Abney, who joined the more than 43 million Americans expected by AAA to travel over the Thanksgiving holiday weekend."""
+
+        KEYWORDS = [u'great', u'good', u'flight', u'sailing', u'delays', u'smooth', u'thanksgiving',
+                    u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
+
+        self.article.nlp()
+
+        # print self.article.summary
+        # print self.article.keywords
+        assert self.article.summary == SUMMARY
+        assert self.article.keywords == KEYWORDS
+
+    @print_test
+    def test_article_hash_key(self):
+        KEY = 'jyYRJb9K6kN4-oiKfZvM1Q=='
+        assert self.article.get_key() == KEY
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
         print 'testing source unit'
         self.source_url_input_none()
-        #self.test_source_build()
-        #self.test_cache_categories()
+        self.test_cache_categories()
+        self.test_source_build()
 
     @print_test
     def source_url_input_none(self):
@@ -71,18 +143,19 @@ class SourceTestCase(unittest.TestCase):
             __ = Source(url=None)
         self.assertRaises(Exception, failfunc)
 
+    @print_test
     def test_source_build(self):
         """builds a source object, validates it has no errors, prints out
         all valid categories and feed urls"""
 
         s = Source('http://cnn.com')
         s.build()
-        s.print_summary()
+        # s.print_summary()
 
+    @print_test
     def test_cache_categories(self):
         """builds two same source objects in a row examines speeds of both"""
 
-        @print_test
         def wrap_category_urls(source):
             source.set_category_urls()
 
@@ -90,17 +163,14 @@ class SourceTestCase(unittest.TestCase):
         s.download()
         s.parse()
 
-        print 'before',
         wrap_category_urls(s)
-        print len(s.categories)
         saved_urls = [c.url for c in s.categories]
 
         s.category_urls = [] # reset and try again with caching
-        print 'after',
         wrap_category_urls(s)
         assert sorted([c.url for c in s.categories]) == sorted(saved_urls)
 
-        print os.listdir(ANCHOR_DIR), 'at', ANCHOR_DIR
+        print '[CATEGORIES]', [c.url for c in s.categories]
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
