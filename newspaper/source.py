@@ -79,11 +79,11 @@ class Source(object):
 
         # Can not merge category and feed tasks together because
         # computing feed urls relies on the category urls!
-        self.set_category_urls()
+        self.set_categories()
         self.download_categories() # mthread
         self.parse_categories()
 
-        self.set_feed_urls()
+        self.set_feeds()
         self.download_feeds()      # mthread
         # self.parse_feeds()       # TODO regexing out feeds until fix feedparser!
 
@@ -96,7 +96,7 @@ class Source(object):
 
         # TODO TODO Figure out why using the 'del' command on input list reference
         # isn't actually filtering the list?!
-        #cur_articles = self.articles if in_articles is None else in_articles
+        # cur_articles = self.articles if in_articles is None else in_articles
         new_articles = []
 
         for index, article in enumerate(in_articles):
@@ -127,13 +127,13 @@ class Source(object):
 
         return parsers.get_category_urls(self)
 
-    def set_category_urls(self):
+    def set_categories(self):
         """"""
 
         urls = self._get_category_urls(self.domain)
         self.categories = [Category(url=url) for url in urls]
 
-    def set_feed_urls(self):
+    def set_feeds(self):
         """don't need to cache getting feed urls, it's almost
         instant w/ xpath"""
 
@@ -324,7 +324,7 @@ class Source(object):
 
         # log.critical('total', len(articles), 'articles and cutoff was at', limit)
 
-    @print_duration
+    # @print_duration
     def download_articles(self, multithread=False):
         """downloads all articles attached to self"""
 
@@ -378,17 +378,17 @@ class Source(object):
 
         clear_memo_cache(self)
 
-    def get_feed_urls(self):
+    def feed_urls(self):
         """
         """
         return [feed.url for feed in self.feeds]
 
-    def get_category_urls(self):
+    def category_urls(self):
         """
         """
         return [category.url for category in self.categories]
 
-    def get_article_urls(self):
+    def article_urls(self):
         """
         """
 
@@ -413,6 +413,6 @@ class Source(object):
             print '\t[len of html]:', len(a.html)
             print '\t=============='
 
-        print 'feed_urls:', self.get_feed_urls()
+        print 'feed_urls:', self.feed_urls()
         print '\r\n'
-        print 'category_urls:', self.get_category_urls()
+        print 'category_urls:', self.category_urls()

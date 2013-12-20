@@ -118,7 +118,8 @@ def keywords(text):
 
     import operator # sorting
     text = split_words(text)
-    numWords = len(text) # of words before removing blacklist words
+    # of words before removing blacklist words
+    num_words = len(text)
     text = [x for x in text if x not in stopwords]
     freq = Counter()
     for word in text:
@@ -129,7 +130,7 @@ def keywords(text):
     keywords = dict((x,y) for x, y in keywords) # recreate a dict
 
     for k in keywords:
-        articleScore = keywords[k]*1.0 / numWords
+        articleScore = keywords[k]*1.0 / num_words
         keywords[k] = articleScore * 1.5 + 1
 
     keywords = sorted(keywords.iteritems(), key=operator.itemgetter(1))

@@ -167,21 +167,18 @@ class SourceTestCase(unittest.TestCase):
     def test_cache_categories(self):
         """builds two same source objects in a row examines speeds of both"""
 
-        def wrap_category_urls(source):
-            source.set_category_urls()
-
         s = Source('http://yahoo.com')
         s.download()
         s.parse()
+        s.set_categories()
 
-        wrap_category_urls(s)
-        saved_urls = s.get_category_urls()
+        saved_urls = s.category_urls()
+        s.categories = [] # reset and try again with caching
 
-        s.category_urls = [] # reset and try again with caching
-        wrap_category_urls(s)
+        s.set_categories()
 
-        assert sorted(s.get_category_urls()) == sorted(saved_urls)
-        # print '[CATEGORIES]', s.get_category_urls()
+        assert sorted(s.category_urls()) == sorted(saved_urls)
+        # print '[CATEGORIES]', s.category_urls()
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
@@ -223,6 +220,8 @@ class APITestCase(unittest.TestCase):
         print 'testing API unit'
         self.test_source_build()
         self.test_article_build()
+        self.test_hot_trending()
+        self.test_popular_urls()
 
     @print_test
     def test_source_build(self):
@@ -243,14 +242,15 @@ class APITestCase(unittest.TestCase):
 
     @print_test
     def test_hot_trending(self):
-        """grab google trending"""
+        """grab google trending, just make sure this runs"""
 
-        print newspaper.hot()
+        newspaper.hot()
 
     @print_test
     def test_popular_urls(self):
+        """just make sure this runs"""
 
-        print newspaper.popular_urls()
+        newspaper.popular_urls()
 
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases

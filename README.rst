@@ -19,7 +19,7 @@ Newspaper utilizes async io and caching for speed. *Also, everything is in unico
 
 The core 3 methods are:
 
-* ``download()`` retrieves the html, with non blocking io whenever possible.
+* ``download()`` retrieves the html, with multithreading whenever possible.
 * ``parse()`` extracts the body text, authors, titles, etc from the html.
 * ``nlp()`` extracts the summaries, keywords, sentiments from the text.
 
@@ -29,7 +29,7 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
 
     >>> import newspaper
 
-    >>> cnn_paper = newspaper.build('http://cnn.com')
+    >>> cnn_paper = newspaper.build('http://cnn.com') # this takes 10 seconds ish
 
     >>> for article in cnn_paper.articles: 
     >>>     print article.url
@@ -38,25 +38,30 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     u'http://www.cnn.com/2013/12/07/us/life-pearl-harbor/?iref=obinsite'
     ...
 
-    >>> print cnn_paper.category_urls    
+    >>> print cnn_paper.size() # number of articles we extracted and cached
+    3100 
+
+    # category & feed urls extracted once, then cached for a day (adjustable) 
+    >>> print cnn_paper.category_urls() 
     [u'http://lifestyle.cnn.com', u'http://cnn.com/world', u'http://tech.cnn.com' ...]
 
-    >>> print cnn_paper.feed_urls  
+    >>> print cnn_paper.feed_urls()  
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
     
 
-    #### download html for all articles **concurrently**
-    >>> cnn_paper.download() 
+    #### build articles, then download, parse, and perform NLP 
+    >>> for article in cnn_paper.articles[:5]:
+         article.download() 
 
     >>> print cnn_paper.articles[0].html
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> print cnn_paper.articles[5].html 
-    u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
+    >>> print cnn_paper.articles[7].html 
+    u'' # we only decided to download 5 articles
 
 
-    #### parse html on a per article basis **not concurrent**
-    >>> cnn_paper.articles[0].parse() 
+    ### parse an article for it's body text, top image, authors, and title
+    >>> cnn_paper.articles[0].parse() # just one article this time
 
     >>> print cnn_paper.articles[0].text
     u'Three sisters who were imprisoned for possibly...'
@@ -71,7 +76,7 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     u'Police: 3 sisters imprisoned in Tucson home'
 
 
-    #### extract nlp on a per article basis **not concurrent**
+    #### extract nlp (must be on an already parsed article
     >>> cnn_paper.articles[0].nlp()
 
     >>> print cnn_paper.articles[0].summary
@@ -80,22 +85,20 @@ There are two API's available. Low level ``article`` objects and ``newspaper`` o
     >>> print cnn_paper.articles[0].keywords
     [u'music', u'Tucson', ... ]
 
+    # not we try nlp() on an article that has not been downloaded
+    >>> print cnn_paper.articles[100].nlp()
+    Traceback (...
+       ...
+    ArticleException: You must parse an article before you try to nlpify is
+
 
     #### some other news-source level functionality
     >>> print cnn_paper.brand
     u'cnn'
 
-    ## Alternatively, parse and nlp all articles together. Will take a while...
-    ##
-    ## for article in cnn_paper.articles:
-    ##     article.parse() 
-    ##     article.nlp()
-    ##
-    ## You could even download() articles on a per article basis but
-    ## that becomes very slow because it wont be concurrent.
-    ##
-    ## for article in cnn_paper.articles:
-    ##     article.download()
+    >>> print cnn_paper.description
+    u'CNN.com delivers the latest breaking news and information on the latest...'
+
 
 Alternatively, you may use newspaper's lower level Article api.
 
@@ -116,6 +119,12 @@ Alternatively, you may use newspaper's lower level Article api.
 
     >>> print article.authors
     [u'Martha Stewart', u'Bob Smith']
+
+    >>> print article.top_img
+    u'http://some.cdn.com/3424hfd4565sdfgdg436/
+
+    >>> print article.title
+    u'Thanksgiving Weather Guide Travel ...'
 
     >>> article.nlp()
            

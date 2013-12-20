@@ -10,7 +10,7 @@ VERSION = '0.0.1'
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 
-POP_URLS_FILEN = os.path.join(PARENT_DIR, 'data/popular_urls.txt')
+POP_URLS_FILEN = os.path.join(PARENT_DIR, 'data/popular_sources.txt')
 USERAGENTS_FN = os.path.join(PARENT_DIR, 'data/useragents.txt')
 STOPWORDS_EN_FN = os.path.join(PARENT_DIR, 'data/stopwords_en.txt')
 STOPWORDS_EN_FN_2 = os.path.join(PARENT_DIR, 'data/stopwords_en2.txt')
