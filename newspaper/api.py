@@ -6,8 +6,7 @@ from .source import Source
 from .article import Article
 from .settings import POP_URLS_FILEN, TRENDING_URL
 
-
-def build(url=u''):
+def build(url=u'', is_memo=True, verbose=False):
     """returns a constructed source object without
     downloading or parsing the articles"""
 
@@ -18,7 +17,7 @@ def build(url=u''):
         print 'ERR: provide valid url'
         return None
 
-    s = Source(url, is_memo_articles=True, verbose=False)
+    s = Source(url, is_memo=is_memo, verbose=verbose)
     s.build()
     return s
 

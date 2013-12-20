@@ -40,7 +40,7 @@ class Source(object):
 
     """
 
-    def __init__(self, url=None, is_memo_articles=True, verbose=False):
+    def __init__(self, url=None, is_memo=True, verbose=False):
 
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
@@ -53,7 +53,7 @@ class Source(object):
         self.domain = get_domain(self.url)
         self.scheme = get_scheme(self.url)
 
-        self.is_memo_articles = is_memo_articles
+        self.is_memo = is_memo
 
         self.categories = []
         self.feeds = []
@@ -256,7 +256,7 @@ class Source(object):
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.is_memo_articles:
+            if self.is_memo:
                 cur_articles = memoize_articles(cur_articles, self.domain)
             after_memo = len(cur_articles)
 
@@ -291,7 +291,7 @@ class Source(object):
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.is_memo_articles:
+            if self.is_memo:
                 cur_articles = memoize_articles(cur_articles, self.domain)
             after_memo = len(cur_articles)
 
