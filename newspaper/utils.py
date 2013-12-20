@@ -172,6 +172,15 @@ def fix_unicode(inputstr):
     inputstr = inputstr.strip()
     return inputstr
 
+def clear_memo_cache(source):
+    """clears the memoization cache for this specific news domain"""
+
+    d_pth = os.path.join(MEMODIR, domain_to_filename(source.domain))
+    if os.path.exists(d_pth):
+        os.remove(d_pth)
+    else:
+        print 'memo file for', source.domain, 'has already been deleted!'
+
 def memoize_articles(articles, source_domain):
     """When we parse the <a> links in an <html> page, on the 2nd run
     and later, check the <a> links of previous runs. If they match,
@@ -183,16 +192,18 @@ def memoize_articles(articles, source_domain):
 
     cur_articles = { article.url:article for article in articles }
     memo = {}
+    #print '******current article urls!', cur_articles.keys()[:10]
 
     d_pth = os.path.join(MEMODIR, domain_to_filename(source_domain))
 
     if os.path.exists(d_pth):
         f = codecs.open(d_pth, 'r', 'utf8')
-        memo = f.readlines() # list of urls, unicode
+        urls = f.readlines() # list of urls, unicode
         f.close()
-        memo = { href:True for href in memo }
-        # prev_length = len(memo)
+        urls = [u.strip() for u in urls]
 
+        memo = { url:True for url in urls }
+        # prev_length = len(memo)
         for url, article in cur_articles.items():
             if memo.get(url):
                 del cur_articles[url]
@@ -217,7 +228,7 @@ def memoize_articles(articles, source_domain):
     ff = codecs.open(d_pth, 'w', 'utf-8')
     ff.write(memo_text)
     ff.close()
-
+    #print '***** final article urls', cur_articles.keys()[:10]
     return cur_articles.values() # articles returned
 
 def get_useragent():

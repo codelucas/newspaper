@@ -5,9 +5,9 @@ import requests
 import math
 
 from threading import activeCount
-# from .packages import grequests # use overridden modified version
 from .settings import cj
 from .utils import chunks, ThreadPool, print_duration, get_useragent
+# from .packages import grequests # use overridden modified version
 
 log = logging.getLogger(__name__)
 
@@ -16,10 +16,10 @@ def get_request_kwargs(timeout):
     which need to be called every time we make a request"""
 
     return {
-        'headers' : {'User-Agent': get_useragent()},
+        #'headers' : {'User-Agent': get_useragent()},
         'cookies' : cj(),
-        'timeout' : timeout
-        #'allow_redirects' : True
+        'timeout' : timeout,
+        'allow_redirects' : True
     }
 
 def get_html(url, response=None, timeout=7):
@@ -33,7 +33,8 @@ def get_html(url, response=None, timeout=7):
             html = u''
         return html
     except Exception, e:
-        log.debug('%s on %s' % (e, url))
+        print '[REQUEST FAILED]', str(e)
+        # log.debug('%s on %s' % (e, url))
         return u''
 
 def sync_request(urls_or_url, timeout=7):
@@ -44,15 +45,6 @@ def sync_request(urls_or_url, timeout=7):
         return resps
     else:
         return requests.get(urls_or_url, **get_request_kwargs(timeout))
-
-# def async_request(urls, timeout=7):
-#    """receives a list of requests and sends them all
-#    asynchronously at once"""
-#
-#    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
-#    responses = grequests.map(rs, size=10)
-#
-#    return responses
 
 class MRequest(object):
     """
@@ -95,4 +87,12 @@ def multithread_request(urls, timeout=7, num_threads=10):
     pool.wait_completion()
     return m_requests
 
+# def async_request(urls, timeout=7):
+#    """receives a list of requests and sends them all
+#    asynchronously at once"""
+#
+#    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
+#    responses = grequests.map(rs, size=10)
+#
+#    return responses
 

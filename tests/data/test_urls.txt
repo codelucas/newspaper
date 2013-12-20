@@ -20,3 +20,5 @@
 1 http://www.techhive.com/article/2052610/sony-exec-ps4-controllers-will-work-on-pcs.html
 0 http://www.hlntv.com/shows/jane-velez-mitchell/?hpt=hp_livenow
 0 http://i.cdn.turner.com/cnn/.e/img/3.0/global/header/nav-arrow.gif
+0 javascript:cnnHideOverlay('cnnMyUniqueId1')
+0 'javascript:window.open('https://twitter.com/intent/tweet?url=http://cnnphotos.blogs.cnn.com/2013/12/03/an-indigenous-group-under-threat/&text=An%20indigenous%20group%20under%20threat:','twitter_popup','width=600,height=400');%20void(0);'

@@ -148,9 +148,19 @@ class SourceTestCase(unittest.TestCase):
         """builds a source object, validates it has no errors, prints out
         all valid categories and feed urls"""
 
-        s = Source('http://cnn.com')
+        DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
+        BRAND = 'cnn'
+
+        s = Source('http://cnn.com', verbose=True)
+        s.clean_memo_cache()
         s.build()
-        # s.print_summary()
+
+        assert s.brand == BRAND
+        assert s.description == DESC
+
+        # We are printing the contents of a source instead of
+        # assert checking because the results are always varying
+        s.print_summary()
 
     @print_test
     def test_cache_categories(self):
@@ -164,13 +174,13 @@ class SourceTestCase(unittest.TestCase):
         s.parse()
 
         wrap_category_urls(s)
-        saved_urls = [c.url for c in s.categories]
+        saved_urls = s.get_category_urls()
 
         s.category_urls = [] # reset and try again with caching
         wrap_category_urls(s)
-        assert sorted([c.url for c in s.categories]) == sorted(saved_urls)
 
-        print '[CATEGORIES]', [c.url for c in s.categories]
+        assert sorted(s.get_category_urls()) == sorted(saved_urls)
+        # print '[CATEGORIES]', s.get_category_urls()
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):

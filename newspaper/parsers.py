@@ -206,7 +206,6 @@ def get_category_urls(source, source_url=None, page_urls=None):
 
     source_url = source.url if source_url is None else source_url
     page_urls = get_urls(source.lxml_root) if page_urls is None else page_urls
-    print 'yahho test cur:', source_url, len(page_urls)
 
     valid_categories = []
     for p_url in page_urls:
@@ -287,9 +286,9 @@ def get_category_urls(source, source_url=None, page_urls=None):
 
     _valid_categories = list(set(_valid_categories))
 
-    categories = [prepare_url(p_url, source_url) for p_url in _valid_categories]
-    categories = [c for c in categories if c is not None]
-    return categories
+    category_urls = [prepare_url(p_url, source_url) for p_url in _valid_categories]
+    category_urls = [c for c in category_urls if c is not None]
+    return category_urls
 
 class GooseObj(object):
     """encapsulation of goose output"""

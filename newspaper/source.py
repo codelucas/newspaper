@@ -2,16 +2,16 @@
 
 import logging
 
-from .network import get_html, multithread_request
+from . import parsers
+from . import network
 from .article import Article
 from .urls import get_domain, get_scheme, prepare_url
 from .settings import ANCHOR_DIR
 from .packages.tldextract import tldextract
 from .packages.feedparser import feedparser
-from .parsers import (
-    get_lxml_root, get_urls, get_feed_urls, get_category_urls)
 from .utils import (
-    fix_unicode, memoize_articles, cache_disk, print_duration)
+    fix_unicode, memoize_articles, cache_disk, print_duration,
+    clear_memo_cache)
 
 log = logging.getLogger(__name__)
 
@@ -29,26 +29,31 @@ class Feed(object):
 
 class Source(object):
     """
-    Sources are abstractions of online news
-    vendors like HuffingtonPost or cnn.
+    Sources are abstractions of online news vendors like HuffingtonPost or cnn.
 
-    domain     =  www.cnn.com
-    scheme     =  http, https
+    domain     =  'www.cnn.com'
+    scheme     =  'http'
     categories =  ['http://cnn.com/world', 'http://money.cnn.com']
     feeds      =  ['http://cnn.com/rss.atom', ..]
-    links      =  [<link obj>, <link obj>, ..]
+    articles   =  [<article obj>, <article obj>, ..]
+    brand      =  'cnn'
 
     """
 
-    def __init__(self, url=None):
+    def __init__(self, url=None, is_memo_articles=True, verbose=False):
+
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
+
+        self.verbose = verbose
 
         self.url = fix_unicode(url)
         self.url = prepare_url(url)
 
         self.domain = get_domain(self.url)
         self.scheme = get_scheme(self.url)
+
+        self.is_memo_articles = is_memo_articles
 
         self.categories = []
         self.feeds = []
@@ -57,6 +62,8 @@ class Source(object):
         self.html = u''
         self.lxml_root = None
 
+        self.logo_url = u''
+        self.favicon = u''
         self.brand = tldextract.extract(self.url).domain
         self.description = u''
 
@@ -78,7 +85,7 @@ class Source(object):
 
         self.set_feed_urls()
         self.download_feeds()      # async
-        # self.parse_feeds()  TODO We are directly regexing out feeds until we speed up feedparser!
+        # self.parse_feeds() # TODO We are directly regexing out feeds until we speed up feedparser!
 
         self.generate_articles()
         # self.download_articles()
@@ -91,6 +98,7 @@ class Source(object):
 
         for index, article in enumerate(cur_articles):
             if reason == 'url' and not article.is_valid_url():
+                print 'deleting article', cur_articles[index].url
                 del cur_articles[index]
             elif reason == 'body' and not article.is_valid_body():
                 del cur_articles[index]
@@ -106,7 +114,7 @@ class Source(object):
         the boilerplate method is so we can use this decorator right. We are
         caching categories for 1 DAY."""
 
-        return get_category_urls(self)
+        return parsers.get_category_urls(self)
 
     def set_category_urls(self):
         """"""
@@ -118,7 +126,7 @@ class Source(object):
         """don't need to cache getting feed urls, it's almost
         instant w/ xpath"""
 
-        urls = get_feed_urls(self)
+        urls = parsers.get_feed_urls(self)
         self.feeds = [Feed(url=url) for url in urls]
 
     def set_description(self):
@@ -135,36 +143,49 @@ class Source(object):
     def download(self):
         """downloads html of source"""
 
-        self.html = get_html(self.url)
+        self.html = network.get_html(self.url)
 
     # @print_duration
     def download_categories(self):
         """individually download all category html, async io'ed"""
 
         category_urls = [c.url for c in self.categories]
-        requests = multithread_request(category_urls)
+        requests = network.multithread_request(category_urls)
 
-        # Note that the responses are returned in original order
-        for index, req in enumerate(requests):
+        # the weird for loop is like this because the del keyword auto adjusts
+        # the list index after deletion only if the list being iterated contains elem deleted
+        for index, _ in enumerate(self.categories):
+            req = requests[index]
             if req.resp is not None:
                 self.categories[index].html = req.resp.text
+            else:
+                if self.verbose:
+                    print 'deleting category', self.categories[index].url, 'due to download err'
+                del self.categories[index] # TODO
 
     # @print_duration
     def download_feeds(self):
         """individually download all feed html, async io'ed"""
 
         feed_urls = [f.url for f in self.feeds]
-        requests = multithread_request(feed_urls)
+        requests = network.multithread_request(feed_urls)
 
-        for index, req in enumerate(requests):
+        # the weird for loop is like this because the del keyword auto adjusts
+        # the list index after deletion only if the list being iterated contains elem deleted
+        for index, _ in enumerate(self.feeds):
+            req = requests[index]
             if req.resp is not None:
                 self.feeds[index].rss = req.resp.text
+            else:
+                if self.verbose:
+                    print 'deleting feed', self.categories[index].url, 'due to download err'
+                del self.feeds[index] # TODO
 
     def parse(self, summarize=True, keywords=True, processes=1):
         """sets the lxml root, also sets lxml roots of all
         children links, also sets description"""
 
-        self.lxml_root = get_lxml_root(self.html)
+        self.lxml_root = parsers.get_lxml_root(self.html)
         self.set_description()
 
     def parse_categories(self):
@@ -172,7 +193,7 @@ class Source(object):
 
         log.debug('We are extracting from %d categories' % len(self.categories))
         for category in self.categories:
-            lxml_root = get_lxml_root(category.html)
+            lxml_root = parsers.get_lxml_root(category.html)
             category.lxml_root = lxml_root
 
         self.categories = [c for c in self.categories if c.lxml_root is not None]
@@ -207,22 +228,32 @@ class Source(object):
         #                         if l.get('link') and l.get('title')]
         #         all_tuples.extend(tuples)
 
-        urls = []
-        for feed in self.feeds:
-            urls.extend(get_urls(feed.rss, regex=True))
-
         articles = []
-        for url in urls:
-            article = Article(
-                url=url,
-                source_url=self.url,
-                # title=???, TODO
-             )
-            articles.append(article)
+        for feed in self.feeds:
+            urls = parsers.get_urls(feed.rss, regex=True)
+            cur_articles = []
+            before_purge = len(urls)
 
-        articles = self.purge_articles('url', articles)
-        articles = memoize_articles(articles, self.domain)
-        log.debug('%d from feeds at %s' % (len(articles), str(self.feeds[:10])))
+            for url in urls:
+                article = Article(
+                    url=url,
+                    source_url=self.url,
+                    # title=???, TODO
+                 )
+                cur_articles.append(article)
+
+            cur_articles = self.purge_articles('url', cur_articles)
+            after_purge = len(cur_articles)
+
+            if self.is_memo_articles:
+                cur_articles = memoize_articles(cur_articles, self.domain)
+            after_memo = len(cur_articles)
+
+            articles.extend(cur_articles)
+
+            if self.verbose:
+                print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url)
+            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url))
         return articles
 
     def categories_to_articles(self):
@@ -232,8 +263,8 @@ class Source(object):
         total = []
         for category in self.categories:
             articles = []
-            tups = get_urls(category.lxml_root, titles=True)
-            before = len(tups)
+            tups = parsers.get_urls(category.lxml_root, titles=True)
+            before_purge = len(tups)
 
             for tup in tups:
                 indiv_url = tup[0]
@@ -247,13 +278,16 @@ class Source(object):
                 articles.append(_article)
 
             articles = self.purge_articles('url', articles)
-            after = len(articles)
+            after_purge = len(articles)
 
-            articles = memoize_articles(articles, self.domain)
+            if self.is_memo_articles:
+                articles = memoize_articles(articles, self.domain)
             after_memo = len(articles)
 
             total.extend(articles)
-            log.debug('%d->%d->%d for %s' % (before, after, after_memo, category.url))
+            if self.verbose:
+                print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)
+            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
 
         return total
 
@@ -267,31 +301,45 @@ class Source(object):
         uniq = { article.url:article for article in articles }
         return uniq.values()
 
-    def generate_articles(self, limit=200):
+    def generate_articles(self, limit=5000):
         """saves all current articles of news source, filter out bad urls"""
 
         articles = self._generate_articles()
         self.articles = articles[:limit]
 
-        log.critical('total', len(articles), 'articles and cutoff was at', limit)
+        #for a in self.articles:
+        #    print 'test examine url:', a.url
+
+        # log.critical('total', len(articles), 'articles and cutoff was at', limit)
 
     @print_duration
-    def download_articles(self, multithread=True):
+    def download_articles(self, multithread=False):
         """downloads all articles attached to self via mthreading"""
 
         urls = [a.url for a in self.articles]
-        filled_requests = multithread_request(urls)
-
         failed_articles = []
-        # Note that the responses are returned in original order
-        for index, req in enumerate(filled_requests):
-            if req.resp is not None:
-                self.articles[index].html = req.resp.text
-            else:
-                failed_articles.append(self.articles[index])
-                del self.articles[index] # TODO iffy using del here
-
         self.is_downloaded = True
+
+        # TODO IN MORNING, del statements are not working because outer loop
+        # is on urls while we are deleting from the article list!!!
+        if not multithread:
+            for index, article in enumerate(self.articles):
+                url = urls[index]
+                html = network.get_html(url)
+                if html:
+                    self.articles[index].html = html
+                else:
+                    failed_articles.append(self.articles[index])
+                    del self.articles[index] # TODO iffy using del here
+        else:
+            filled_requests = network.multithread_request(urls)
+            # Note that the responses are returned in original order
+            for index, req in enumerate(filled_requests):
+                if req.resp is not None:
+                    self.articles[index].html = req.resp.text
+                else:
+                    failed_articles.append(self.articles[index])
+                    del self.articles[index] # TODO iffy using del here
 
         if len(failed_articles) > 0:
             print '[ERROR], these article urls failed the download:', \
@@ -313,6 +361,21 @@ class Source(object):
             return 0
         return len(self.articles)
 
+    def clean_memo_cache(self):
+        """clears the memoization cache for this specific news domain"""
+
+        clear_memo_cache(self)
+
+    def get_feed_urls(self):
+        """
+        """
+        return [feed.url for feed in self.feeds]
+
+    def get_category_urls(self):
+        """
+        """
+        return [category.url for category in self.categories]
+
     def print_summary(self):
         """prints out a summary of the data in our source instance"""
 
@@ -323,13 +386,15 @@ class Source(object):
         print '[source description[:50]]:', self.description[:50]
 
         print 'printing out 10 sample articles...'
+
         for a in self.articles[:10]:
-            print '\t', '[url]:', a.url, '[title]:', a.title,\
-                   '[len of text]:', len(a.text), '[keywords]:', a.keywords,\
-                    '[len of html]:', len(a.html)
+            print '\t', '[url]:', a.url
+            print '\t[title]:', a.title
+            print '\t[len of text]:', len(a.text)
+            print '\t[keywords]:', a.keywords
+            print '\t[len of html]:', len(a.html)
+            print '\t=============='
 
-        for f in self.feeds:
-            print 'feed_url:', f.url
-
-        for c in self.categories:
-            print 'category_url:', c.url
+        print 'feed_urls:', self.get_feed_urls()
+        print '\r\n'
+        print 'category_urls:', self.get_category_urls()
