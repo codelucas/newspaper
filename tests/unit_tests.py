@@ -15,8 +15,9 @@ sys.path.insert(0, PARENT_DIR)
 
 URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
 
+import newspaper
 from newspaper.article import Article, ArticleException
-from newspaper.source import Source
+from newspaper.source import Source, Article
 from newspaper.network import multithread_request
 
 def print_test(method):
@@ -157,7 +158,7 @@ class SourceTestCase(unittest.TestCase):
         assert s.brand == BRAND
         assert s.description == DESC
 
-        print 'We have %d articles currently!' % s.size()
+        print '\t\tWe have %d articles currently!' % s.size()
         # We are printing the contents of a source instead of
         # assert checking because the results are always varying
         # s.print_summary()
@@ -210,12 +211,54 @@ class UrlTestCase(unittest.TestCase):
                 print '\t\turl: %s is supposed to be %s' % (url, truth_val)
                 raise
 
+    @print_test
+    def test_prepare_url(self):
+        """normalizes a url, removes arguments, hashtags. If a relative url, it
+        merges it with the source domain to make an abs url, etc"""
+
+        pass
+
+class APITestCase(unittest.TestCase):
+    def runTest(self):
+        print 'testing API unit'
+        self.test_source_build()
+        self.test_article_build()
+
+    @print_test
+    def test_source_build(self):
+        huff_paper = newspaper.build('http://www.huffingtonpost.com/')
+        assert isinstance(huff_paper, Source) == True
+
+    @print_test
+    def test_article_build(self):
+        url = 'http://abcnews.go.com/blogs/politics/2013/12/states-cite-surge-in-obamacare-sign-ups-ahead-of-first-deadline/'
+        article = newspaper.build_article(url)
+        assert isinstance(article, Article) == True
+        article.download()
+        article.parse()
+        article.nlp()
+        #print article.title
+        #print article.summary
+        #print article.keywords
+
+    @print_test
+    def test_hot_trending(self):
+        """grab google trending"""
+
+        print newspaper.hot()
+
+    @print_test
+    def test_popular_urls(self):
+
+        print newspaper.popular_urls()
+
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
     suite = unittest.TestSuite()
 
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
+    suite.addTest(APITestCase())
     suite.addTest(SourceTestCase())
 
     unittest.TextTestRunner().run(suite) # run custom subset

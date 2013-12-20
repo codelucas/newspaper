@@ -12,7 +12,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 
 from . import utils
-from .api import build, popular_urls, build_article
+from .api import build, build_article, popular_urls, hot
 from .settings import VERSION
 
 # Set default logging handler to avoid "No handler found" warnings.

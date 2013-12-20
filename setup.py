@@ -23,9 +23,18 @@ packages = [
     'newspaper.data',
     'newspaper.packages',
     'newspaper.packages.tldextract',
-    'newspaper.packages.tldextract.tests',
+    # 'newspaper.packages.tldextract.tests',
     'newspaper.packages.feedparser',
-    'newspaper.packages.feedparser.tests'
+    # 'newspaper.packages.feedparser.tests'
+    'newspaper.packages.goose',
+    'newspaper.packages.goose.utils',
+    'newspaper.packages.goose.videos',
+    'newspaper.packages.goose.images',
+    # 'newspaper.packages.python-goose-documents',
+    'newspaper.packages.jieba',
+    'newspaper.packages.jieba.posseg',
+    'newspaper.packages.jieba.finalseg',
+    'newspaper.packages.jieba.analyse'
 ]
 requires = [
     'lxml==3.2.4',            # version for lxml is important

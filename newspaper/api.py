@@ -18,12 +18,16 @@ def build(url=u''):
         print 'ERR: provide valid url'
         return None
 
-    s = Source(url)
+    s = Source(url, is_memo_articles=True, verbose=False)
+    s.build()
     return s
 
 def build_article(url=u''):
     """returns a constructed article object without
     downloading or parsing"""
+
+    url = url or '' # empty string precedence over None
+    valid_href = ('://' in url) and (url[:4] == 'http')
 
     a = Article(url)
     return a
@@ -32,7 +36,7 @@ def popular_urls():
     """returns a list of pre-extracted popular source urls"""
 
     with open(POP_URLS_FILEN) as f:
-        urls = ['http://'+u.strip() for u in f.readlines()]
+        urls = ['http://' + u.strip() for u in f.readlines()]
         return urls
 
 def hot():
@@ -42,5 +46,6 @@ def hot():
         listing = feedparser.parse(TRENDING_URL)['entries']
         trends = [item['title'] for item in listing]
         return trends
-    except:
+    except Exception, e:
+        print 'ERR hot terms failed!', str(e)
         return None

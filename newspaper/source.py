@@ -192,7 +192,7 @@ class Source(object):
                     print 'deleting feed', self.categories[index].url, 'due to download err'
                 del self.feeds[index] # TODO
 
-    def parse(self, summarize=True, keywords=True, processes=1):
+    def parse(self, summarize=True, keywords=True):
         """sets the lxml root, also sets lxml roots of all
         children links, also sets description"""
 
@@ -222,7 +222,7 @@ class Source(object):
                 feed.dom = feedparse_wrapper(feed.html)
             except Exception, e:
                 log.critical('feedparser failed %s' % e)
-                print feed.url
+                if self.verbose: print feed.url
 
         self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 
@@ -326,7 +326,7 @@ class Source(object):
 
     @print_duration
     def download_articles(self, multithread=False):
-        """downloads all articles attached to self via mthreading"""
+        """downloads all articles attached to self"""
 
         urls = [a.url for a in self.articles]
         failed_articles = []
@@ -387,6 +387,12 @@ class Source(object):
         """
         """
         return [category.url for category in self.categories]
+
+    def get_article_urls(self):
+        """
+        """
+
+        return [article.url for article in self.articles]
 
     def print_summary(self):
         """prints out a summary of the data in our source instance"""

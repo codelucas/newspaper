@@ -33,7 +33,7 @@ def get_html(url, response=None, timeout=7):
             html = u''
         return html
     except Exception, e:
-        print '[REQUEST FAILED]', str(e)
+        # print '[REQUEST FAILED]', str(e)
         # log.debug('%s on %s' % (e, url))
         return u''
 
@@ -65,8 +65,9 @@ class MRequest(object):
         try:
             self.resp = requests.get(self.url, **self.req_kwargs)
         except Exception, e:
-            logging.critical('[REQUEST FAILED] ' + str(e))
-            print '[REQUEST FAILED]', str(e) # TODO, do something with url when we fail!
+            pass
+            log.critical('[REQUEST FAILED] ' + str(e))
+            # print '[REQUEST FAILED]', str(e) # TODO, do something with url when we fail!
             # leave the response as None
 
 def multithread_request(urls, timeout=7, num_threads=10):
