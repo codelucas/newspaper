@@ -42,6 +42,7 @@ requires = [
     'nltk',
     'Pillow',
     'cssselect',
+    'BeautifulSoup'
 ]
 
 # 'feedparser',

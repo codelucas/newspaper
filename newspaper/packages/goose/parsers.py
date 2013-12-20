@@ -236,9 +236,9 @@ class Parser(object):
 
 
 class ParserSoup(Parser):
-
     @classmethod
     def fromstring(self, html):
         html = encodeValue(html)
         self.doc = soupparser.fromstring(html)
         return self.doc
+

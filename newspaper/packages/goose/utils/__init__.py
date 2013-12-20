@@ -20,14 +20,18 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 """
+
 import time
 import hashlib
 import re
 import os
-import goose
 import codecs
 import urlparse
 
+_TEST_DIR = os.path.abspath(os.path.dirname(__file__)) # goose/utils
+_PARENT_DIR = os.path.join(_TEST_DIR, '..') # packages/goose
+
+import goose
 
 class BuildURL(object):
     def __init__(self, url, finalurl=None):
