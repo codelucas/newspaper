@@ -95,24 +95,34 @@ class Source(object):
         purge from there, otherwise purge from our source instance"""
 
         cur_articles = self.articles if in_articles is None else in_articles
+        print 'before article length', len(cur_articles)
+        new_articles = []
 
         for index, article in enumerate(cur_articles):
             if reason == 'url' and not article.is_valid_url():
-                # print 'deleting article', cur_articles[index].url
-                del cur_articles[index]
-            elif reason == 'body' and not article.is_valid_body():
-                del cur_articles[index]
+                #print 'deleting article', cur_articles[index].url
+                #del cur_articles[index]
+                pass
+            else:
+                new_articles.append(cur_articles[index])
 
+            #if reason == 'body' and not article.is_valid_body():
+                #del cur_articles[index]
+            #    pass
+            #else:
+            #    new_articles.append(cur_articles[index])
+
+        print 'after length', len(new_articles)
         if in_articles is not None: # if they give an input, output filtered
-            return cur_articles
+            return new_articles
         else: # no input, we are playing with self.articles
-            self.articles = cur_articles
+            self.articles = new_articles
 
     @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
     def _get_category_urls(self, domain):
         """the domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right. We are
-        caching categories for 1 DAY."""
+        caching categories for 1 day."""
 
         return parsers.get_category_urls(self)
 
@@ -198,7 +208,7 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.lxml_root is not None]
 
-    def parse_feeds(self):
+    def parse_feeds(self): # TODO Use this method after we figure out how to make it fast
         """due to the slow speed of feedparser, we won't be dom parsing
         our .rss feeds, but rather regex searching for urls in the .rss
         text and then relying on our article logic to detect false urls"""
@@ -282,9 +292,10 @@ class Source(object):
 
             if self.is_memo_articles:
                 articles = memoize_articles(articles, self.domain)
-            after_memo = len(articles)
 
+            after_memo = len(articles)
             total.extend(articles)
+
             if self.verbose:
                 print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)
             log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
@@ -307,8 +318,8 @@ class Source(object):
         articles = self._generate_articles()
         self.articles = articles[:limit]
 
-        for a in self.articles:
-            print 'test examine url:', a.url
+        # for a in self.articles:
+        #   print 'test examine url:', a.url
 
         # log.critical('total', len(articles), 'articles and cutoff was at', limit)
 
@@ -320,8 +331,8 @@ class Source(object):
         failed_articles = []
         self.is_downloaded = True
 
-        # TODO IN MORNING, del statements are not working because outer loop
-        # is on urls while we are deleting from the article list!!!
+        # TODO Note that del statements automatically handle index movement,
+        # but only if the elem deleted is consistent with element(s) of loop
         if not multithread:
             for index, article in enumerate(self.articles):
                 url = urls[index]
