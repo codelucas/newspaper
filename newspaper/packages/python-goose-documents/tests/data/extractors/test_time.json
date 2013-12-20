@@ -1,0 +1,14 @@
+{
+    "url": "http://www.time.com/time/health/article/0,8599,2011497,00.html", 
+    "expected": {
+        "meta_description": "Researchers at the University of Georgia  believe that much of the oil from the BP spill is still present underwater in the Gulf of Mexico, where its impact on aquatic life is far from clear", 
+        "domain": "www.time.com", 
+        "final_url": "http://www.time.com/time/health/article/0,8599,2011497,00.html", 
+        "meta_keywords": "bp, oil, spill, gulf, mexico, invisible, dispersed, deepwater horizon, Charles Hopkinson", 
+        "cleaned_text": "This month, the federal government released", 
+        "title": "Invisible Oil from BP Spill May Threaten Gulf Aquatic Life", 
+        "authors": ["Bryan Walsh"],
+        "meta_favicon": "http://img.timeinc.net/time/favicon.ico", 
+        "meta_lang": null
+    }
+}

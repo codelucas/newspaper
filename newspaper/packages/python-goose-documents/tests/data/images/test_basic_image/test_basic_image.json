@@ -1,0 +1,14 @@
+{
+    "url": "http://blogs.kusp.org/filmgang/2013/02/08/stand-up-guys/", 
+    "expected": {
+        "top_image": {
+            "extraction_type": "bigimage", 
+            "src": "http://md0.libe.com/photo/465395/?modified_at=1351411813&ratio_x=03&ratio_y=02&width=476", 
+            "confidence_score": 100, 
+            "bytes": 0, 
+            "height": 0, 
+            "width": 0, 
+            "top_image_node": null
+        }
+    }
+}

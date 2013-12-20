@@ -1,0 +1,23 @@
+{
+    "url": "http://foo.bar/index.html", 
+    "expected": {
+        "movies": [
+            {
+                "src": "http://www.dailymotion.com/embed/video/x130bpf", 
+                "embed_code": "<iframe frameborder=\"0\" width=\"480\" height=\"270\" src=\"http://www.dailymotion.com/embed/video/x130bpf\"/>", 
+                "height": "270", 
+                "width": "480", 
+                "provider": "dailymotion", 
+                "embed_type": "iframe"
+            },
+            {
+                "src": "http://www.dailymotion.com/embed/video/x130bpf", 
+                "embed_code": "<iframe frameborder=\"0\" width=\"480\" height=\"270\" src=\"http://www.dailymotion.com/embed/video/x130bpf\"/>", 
+                "height": "270", 
+                "width": "480", 
+                "provider": "dailymotion", 
+                "embed_type": "iframe"
+            }
+        ]
+    }
+}

@@ -1,0 +1,547 @@
+#-----------------------------------------------------------------------
+# translated
+#-----------------------------------------------------------------------
+
+kunna
+om
+ovan
+enligt
+i enlighet med detta
+över
+faktiskt
+efter
+efteråt
+igen
+mot
+är inte
+alla
+tillåta
+tillåter
+nästan
+ensam
+längs
+redan
+också
+även om
+alltid
+am
+bland
+bland
+en
+och
+en annan
+någon
+någon
+hur som helst
+någon
+något
+ändå
+ändå
+var som helst
+isär
+visas
+uppskatta
+lämpligt
+är
+inte
+runt
+som
+åt sidan
+be
+frågar
+associerad
+vid
+tillgängliga
+bort
+väldigt
+vara
+blev
+eftersom
+bli
+blir
+blir
+varit
+innan
+förhand
+bakom
+vara
+tro
+nedan
+bredvid
+förutom
+bäst
+bättre
+mellan
+bortom
+både
+kort
+men
+genom
+c
+c'mon
+c: s
+kom
+kampanj
+kan
+kan inte
+kan inte
+cant
+orsaka
+orsaker
+viss
+säkerligen
+förändringar
+klart
+co
+com
+komma
+kommer
+om
+följaktligen
+överväga
+överväger
+innehålla
+innehållande
+innehåller
+motsvarande
+kunde
+kunde inte
+kurs
+närvarande
+definitivt
+beskrivits
+trots
+gjorde
+inte
+olika
+göra
+gör
+inte
+gör
+inte
+gjort
+ned
+nedåt
+under
+varje
+edu
+åtta
+antingen
+annars
+någon annanstans
+tillräckligt
+godkändes
+helt
+speciellt
+et
+etc
+även
+någonsin
+varje
+alla
+alla
+allt
+överallt
+ex
+exakt
+exempel
+utom
+långt
+få
+femte
+först
+finansiella
+fem
+följt
+efter
+följer
+för
+fd
+tidigare
+framåt
+fyra
+från
+ytterligare
+dessutom
+få
+blir
+få
+given
+ger
+gå
+går
+gå
+borta
+fick
+fått
+hälsningar
+hade
+hade inte
+händer
+knappast
+har
+har inte
+ha
+har inte
+med
+han
+han är
+hallå
+hjälpa
+hence
+henne
+här
+här finns
+härefter
+härmed
+häri
+härpå
+hennes
+själv
+hej
+honom
+själv
+hans
+hit
+förhoppningsvis
+hur
+howbeit
+dock
+jag skulle
+jag ska
+jag är
+jag har
+om
+ignoreras
+omedelbar
+i
+eftersom
+inc
+indeed
+indikera
+indikerade
+indikerar
+inre
+mån
+istället
+in
+inåt
+är
+är inte
+den
+det skulle
+det ska
+det är
+dess
+själv
+bara
+hålla
+håller
+hålls
+vet
+vet
+känd
+sista
+nyligen
+senare
+senare
+latterly
+minst
+mindre
+lest
+låt
+låt oss
+liknande
+gillade
+sannolikt
+lite
+ser
+ser
+ser
+ltd
+huvudsakligen
+många
+kan
+kanske
+mig
+betyda
+under tiden
+endast
+kanske
+mer
+dessutom
+mest
+mestadels
+mycket
+måste
+min
+själv
+namn
+nämligen
+nd
+nära
+nästan
+nödvändigt
+behöver
+behov
+varken
+aldrig
+ändå
+ny
+nästa
+nio
+ingen
+ingen
+icke
+ingen
+ingen
+eller
+normalt
+inte
+ingenting
+roman
+nu
+ingenstans
+uppenbarligen
+av
+off
+ofta
+oh
+ok
+okay
+gammal
+på
+en gång
+ett
+ettor
+endast
+på
+eller
+andra
+andra
+annars
+borde
+vår
+vårt
+oss
+ut
+utanför
+över
+övergripande
+egen
+särskilt
+särskilt
+per
+kanske
+placeras
+vänligen
+plus
+möjligt
+förmodligen
+förmodligen
+ger
+ganska
+citera
+kvartalsvis
+snarare
+verkligen
+rimligen
+om
+oavsett
+gäller
+relativt
+respektive
+höger
+sa
+samma
+såg
+säga
+säger
+säger
+andra
+det andra
+se
+ser
+verkar
+verkade
+informationsproblem
+verkar
+sett
+själv
+själva
+förnuftig
+skickas
+allvarlig
+allvarligt
+sju
+flera
+skall
+hon
+bör
+bör inte
+eftersom
+sex
+så
+några
+någon
+på något sätt
+någon
+något
+sometime
+ibland
+något
+någonstans
+snart
+sorry
+specificerade
+ange
+ange
+fortfarande
+sub
+sådan
+sup
+säker
+t s
+ta
+tas
+berätta
+tenderar
+än
+tacka
+tack
+thanx
+att
+det är
+brinner
+den
+deras
+deras
+dem
+själva
+sedan
+därifrån
+där
+det finns
+därefter
+därigenom
+därför
+däri
+theres
+därpå
+dessa
+de
+de hade
+de kommer
+de är
+de har
+tror
+tredje
+detta
+grundlig
+grundligt
+de
+though
+tre
+genom
+hela
+thru
+sålunda
+till
+tillsammans
+alltför
+tog
+mot
+mot
+försökte
+försöker
+verkligt
+försök
+försöker
+två gånger
+två
+enligt
+tyvärr
+såvida inte
+osannolikt
+tills
+åt
+upp
+på
+oss
+använda
+används
+användbar
+använder
+användning
+vanligtvis
+uucp
+värde
+olika
+mycket
+via
+viz
+vs
+vill
+vill
+var
+var inte
+sätt
+vi
+vi skulle
+vi kommer
+vi är
+vi har
+välkommen
+väl
+gick
+var
+var inte
+vad
+vad är
+oavsett
+när
+varifrån
+närhelst
+där
+var är
+varefter
+medan
+varigenom
+vari
+varpå
+varhelst
+huruvida
+som
+medan
+dit
+som
+vem är
+vem
+hela
+vem
+vars
+varför
+kommer
+villig
+önskar
+med
+inom
+utan
+kommer inte
+undrar
+skulle
+skulle inte
+ja
+ännu
+ni
+du skulle
+kommer du
+du är
+du har
+din
+själv
+er
+noll
+tjänsteman
+skarpt
+kritiserade

@@ -1,0 +1,12 @@
+{
+    "url": "http://www.politico.com/news/stories/1010/43352.html", 
+    "expected": {
+        "meta_description": "Demographic changes are likely to alter the route Obama took to victory in 2008.", 
+        "domain": "www.politico.com", 
+        "final_url": "http://www.politico.com/news/stories/1010/43352.html", 
+        "meta_keywords": "2012, Maggie Haberman and Shira Toeplitz", 
+        "cleaned_text": "If the newest Census Bureau estimates stay close to form", 
+        "meta_favicon": "http://www.politico.com/favicon.ico", 
+        "meta_lang": "en"
+    }
+}

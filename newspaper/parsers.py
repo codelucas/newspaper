@@ -6,11 +6,11 @@ import urlparse
 
 import lxml.html
 import lxml.html.soupparser
-from goose import Goose
 
 from .urls import (
     prepare_url, get_path, get_domain, get_scheme)
 from .packages.tldextract import tldextract
+from .packages.goose import Goose
 
 log = logging.getLogger(__name__)
 
@@ -302,4 +302,4 @@ class GooseObj(object):
         keywords = goose_obj.meta_keywords.split(',')
         self.keywords = [w.strip() for w in keywords] # not actual keyw's
         self.title = goose_obj.title
-        # self.authors = goose_obj.authors
+        self.authors = goose_obj.authors

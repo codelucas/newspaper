@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""this file was borrowed from an old copy of Reddit's source code"""
+"""borrowed from an old copy of Reddit's source code"""
 
 import logging
 import urllib
@@ -111,8 +111,8 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
                     try:
                         p.feed(new_data)
                     except IOError, e: # jpg error on some computers
-                        log.critical('jpeg misconfiguration reinstall '
-                                'Pillow or PIL on this machine, err: %s' % str(e))
+                        log.critical('***jpeg misconfiguration! check pillow or pil'
+                                'installation this machine: %s' % str(e))
                         p = None
                         break
                     new_data = open_req.read(chunk_size)

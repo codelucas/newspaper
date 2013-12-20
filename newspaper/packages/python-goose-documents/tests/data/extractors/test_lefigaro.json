@@ -1,0 +1,22 @@
+{
+    "url": "http://www.lefigaro.fr/conjoncture/2013/04/05/20002-20130405ARTFIG00473-montebourg-envisage-des-privatisations-partielles.php", 
+    "target_language": "fr",
+    "expected": {
+        "meta_description": "Selon le ministre du Redressement productif interview\u00e9 par le Wall Street Journal, le gouvernement r\u00e9fl\u00e9chit \u00e0 des changements dans les participations d\u00e9tenues par l'\u00c9tat.", 
+        "domain": "www.lefigaro.fr", 
+        "final_url": "http://www.lefigaro.fr/conjoncture/2013/04/05/20002-20130405ARTFIG00473-montebourg-envisage-des-privatisations-partielles.php", 
+        "meta_keywords": "Actualit\u00e9 \u00e9conomique, entreprises, \u00e9conomie, bourse, emploi, imp\u00f4ts, cac 40, creation d'entreprise, chef d'entreprise, grands patrons, consommation, multinationales, privatisation, d\u00e9localisations, concurrence, monopole, crise, bourse, licenciements, union europ\u00e9enne, etats-unis, chine, pmi, pme, tpe, salaires, relance, pib, pnb, aides sociales, japon, r\u00e9cession, \u00e9conomie verte, fmi, reprise, croissance, news, actu", 
+        "cleaned_text": "Selon le ministre du Redressement productif interview\u00e9 par le Wall Street Journal, le gouvernement", 
+        "tags": [
+            "EDF", 
+            "Privatisation", 
+            "Arnaud Montebourg", 
+            "Pierre Moscovici", 
+            "Participations de l'Etat", 
+            "Entreprises publiques", 
+            "AREVA"
+        ], 
+        "meta_favicon": "http://www.lefigaro.fr/icones/favicon.ico", 
+        "meta_lang": null
+    }
+}

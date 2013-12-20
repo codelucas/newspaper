@@ -96,7 +96,7 @@ class Article(object):
         self.set_text(goose_obj.body_text)
         self.set_title(goose_obj.title)
         self.set_keywords(goose_obj.keywords)
-        #self.set_authors(goose_obj.authors)
+        self.set_authors(goose_obj.authors)
 
         # Parse xpath tree and query top imgs
         self.lxml_root = get_lxml_root(self.html)

@@ -1,0 +1,12 @@
+{
+    "url": "http://www.businessweek.com/technology/here-comes-apples-real-tv-09132011.html", 
+    "expected": {
+        "meta_description": "A bold, new Apple TV set would replace today\u2019s cable systems, game consoles, and 3D goggles\u2014and launch a war with cable providers", 
+        "domain": "www.businessweek.com", 
+        "final_url": "http://www.businessweek.com/technology/here-comes-apples-real-tv-09132011.html", 
+        "meta_keywords": "Apple, Apple CEO, Google, Television, Cable & Wireless, Netflix, Steve Jobs, Comcast, cable, cable TV, hulu, Roku", 
+        "cleaned_text": "Get ready, America, because by Christmas 2012 you will have an Apple TV in your living room", 
+        "meta_favicon": "", 
+        "meta_lang": null
+    }
+}

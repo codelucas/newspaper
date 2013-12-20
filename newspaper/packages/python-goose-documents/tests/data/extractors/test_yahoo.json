@@ -1,0 +1,12 @@
+{
+    "url": "http://news.yahoo.com/apple-says-steve-jobs-resigning-ceo-224628633.html", 
+    "expected": {
+        "meta_description": "Read 'Apple says Steve Jobs resigning as CEO' on Yahoo! News. Steve Jobs, the mind behind the iPhone, iPad and other devices that turned Apple Inc. into one of the world's most powerful companies, resigned as CEO on Wednesday, saying he can no longer handle the job but will continue to play a leadership role.", 
+        "domain": "news.yahoo.com", 
+        "final_url": "http://news.yahoo.com/apple-says-steve-jobs-resigning-ceo-224628633.html", 
+        "meta_keywords": "", 
+        "cleaned_text": "SAN FRANCISCO (AP) \u2014 Steve Jobs, the mind behind the iPhone", 
+        "meta_favicon": "", 
+        "meta_lang": "en"
+    }
+}

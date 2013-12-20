@@ -1,0 +1,12 @@
+{
+    "url": "http://www.businessinsider.com/goldman-on-the-fed-announcement-2011-9", 
+    "expected": {
+        "meta_description": "Here it is.", 
+        "domain": "www.businessinsider.com", 
+        "final_url": "http://www.businessinsider.com/goldman-on-the-fed-announcement-2011-9", 
+        "meta_keywords": "Federal Reserve, Joe Weisenthal", 
+        "cleaned_text": "From Goldman on the FOMC operation twist announcement", 
+        "meta_favicon": "http://static7.businessinsider.com/assets/images/faviconBI.ico", 
+        "meta_lang": "en"
+    }
+}

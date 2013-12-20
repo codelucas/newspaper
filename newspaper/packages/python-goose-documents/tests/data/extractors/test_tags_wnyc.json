@@ -1,0 +1,13 @@
+{
+    "url": "http://www.wnyc.org/shows/heresthething/2013/may/27/", 
+    "expected": {
+        "tags": [
+            "Life", 
+            "alec baldwin", 
+            "other desert cities", 
+            "News", 
+            "Music", 
+            "stacy keach"
+        ]
+    }
+}

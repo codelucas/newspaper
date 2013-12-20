@@ -94,29 +94,30 @@ class Source(object):
         """delete rejected articles, if there is an articles param, we
         purge from there, otherwise purge from our source instance"""
 
-        cur_articles = self.articles if in_articles is None else in_articles
-        print 'before article length', len(cur_articles)
+        # TODO TODO Figure out why using the 'del' command on input list reference
+        # isn't actually filtering the list?!
+        #cur_articles = self.articles if in_articles is None else in_articles
         new_articles = []
 
-        for index, article in enumerate(cur_articles):
+        for index, article in enumerate(in_articles):
             if reason == 'url' and not article.is_valid_url():
                 #print 'deleting article', cur_articles[index].url
                 #del cur_articles[index]
+                #del in_articles[index]
                 pass
-            else:
+            elif reason == 'url':
+                new_articles.append(in_articles[index])
+
+            if reason == 'body' and not article.is_valid_body():
+                #del cur_articles[index]
+                pass
+            elif reason == 'body':
                 new_articles.append(cur_articles[index])
 
-            #if reason == 'body' and not article.is_valid_body():
-                #del cur_articles[index]
-            #    pass
-            #else:
-            #    new_articles.append(cur_articles[index])
-
-        print 'after length', len(new_articles)
         if in_articles is not None: # if they give an input, output filtered
             return new_articles
-        else: # no input, we are playing with self.articles
-            self.articles = new_articles
+        #else: # no input, we are playing with self.articles
+        #    self.articles = new_articles
 
     @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
     def _get_category_urls(self, domain):
@@ -270,13 +271,13 @@ class Source(object):
         """takes the categories, splays them into a big list of urls and churns
         the articles out of each url with the url_to_article method"""
 
-        total = []
+        articles = []
         for category in self.categories:
-            articles = []
-            tups = parsers.get_urls(category.lxml_root, titles=True)
-            before_purge = len(tups)
+            cur_articles = []
+            url_title_tups = parsers.get_urls(category.lxml_root, titles=True)
+            before_purge = len(url_title_tups)
 
-            for tup in tups:
+            for tup in url_title_tups:
                 indiv_url = tup[0]
                 indiv_title = tup[1]
 
@@ -285,22 +286,22 @@ class Source(object):
                     source_url=self.url,
                     title=indiv_title
                 )
-                articles.append(_article)
+                cur_articles.append(_article)
 
-            articles = self.purge_articles('url', articles)
-            after_purge = len(articles)
+            cur_articles = self.purge_articles('url', cur_articles)
+            after_purge = len(cur_articles)
 
             if self.is_memo_articles:
-                articles = memoize_articles(articles, self.domain)
+                cur_articles = memoize_articles(cur_articles, self.domain)
+            after_memo = len(cur_articles)
 
-            after_memo = len(articles)
-            total.extend(articles)
+            articles.extend(cur_articles)
 
             if self.verbose:
                 print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)
             log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
 
-        return total
+        return articles
 
     def _generate_articles(self):
         """returns a list of all articles, from both categories and feeds"""
@@ -362,7 +363,7 @@ class Source(object):
         for index, article in enumerate(self.articles):
             article.parse()
 
-        self.purge_articles('body')
+        self.articles = self.purge_articles('body', self.articles)
         self.is_parsed = True
 
     def size(self):

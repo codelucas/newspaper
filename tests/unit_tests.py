@@ -89,11 +89,10 @@ class ArticleTestCase(unittest.TestCase):
         LEN_IMGS = 49 # list is too big, we just check size of images arr
 
         self.article.parse()
-
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
             assert self.article.text == f.read()
         assert self.article.top_img == TOP_IMG
-        # assert self.article.authors == AUTHORS TODO add my goose in!
+        assert self.article.authors == AUTHORS
         assert self.article.domain == DOMAIN
         assert self.article.scheme == SCHEME
         assert self.article.title == TITLE
@@ -151,16 +150,17 @@ class SourceTestCase(unittest.TestCase):
         DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
         BRAND = 'cnn'
 
-        s = Source('http://cnn.com', verbose=True)
+        s = Source('http://cnn.com', verbose=False)
         s.clean_memo_cache()
         s.build()
 
         assert s.brand == BRAND
         assert s.description == DESC
 
+        print 'We have %d articles currently!' % s.size()
         # We are printing the contents of a source instead of
         # assert checking because the results are always varying
-        s.print_summary()
+        # s.print_summary()
 
     @print_test
     def test_cache_categories(self):

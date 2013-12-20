@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/loose.dtd"><html>
+<html>
+    <head>
+        <title>Paragraph Order Test</title>
+    </head>
+
+    <body>
+        <div>
+            TextNode 1 - The Scala supported IDE is one of the few pain points of developers who want to start using Scala in their Java project. On existing long term project developed by a team its hard to step in and introduce a new language that is not supported by the existing IDE. On way to go about it is to hid the fact that you use Scala from the Java world by using one way dependency injection. Still, if you wish to truly absorb Scala into your existing java environment then you'll soon introduced cross language dependencies.
+
+ Most of our team is using Eclipse as the main IDE, its incrimental compilation in Java with its tight JUnit integration are great for fast TDD programming. Unfortunately the Eclipse Scala plugin is not there yet, it may hangs the IDE and messes up Java compilation - especially in large (more then 1000 source files) Java/Scala projects. Though the plugin is getting better over time some developers would find the plugin as a majore drag on their productivity.
+ For developers who do not write Scala at all or rather edit Scala with other editors, you can use this alternate path which lets them work on their Java or Scala code without messing with the plugin.
+            <p>Paragraph 1 - The Following script is using the Fast Scala Compiler (fsc). The fsc is a compilation server which always run in the background, as in a warm scalac always ready to receive new work. Is will reduce compilation time dramatically.
+ The classpath for compilation is taken from the Eclipse project .classpath file. You may take the source directory from there as well if you wish (exercise to the reader).
+ The params are not passed to the fsc in the command line since in my project's case the line is too long for the OS to handle. The alternative is to put it into a file and let fsc handle it for you.</p>
+
+            TextNode 2 - As you may know, kaChing is an test driven engineering organization. Test driven is not an option, its a must. We move fast and push code to production few dozens of times a day in a five minutes release cycle, so we must have high confidence in our code.
+ In complex systems there is no end to testings, each test system is an another line of defense which eventually gets broken but the more you have, the less chances bugs will reach production. We do not have QA team and do not want to have one, the reasoning is that if a human is involved in testing then there is a higher chance of missing things and you simply can't test all the site dozens of times a day.
+            <p>Paragraph 2 - In the next few weeks we are adding a new rule from the "not critical" list every few days. The goal is to have all the rules we think are important without the common "its to noisy, lets ignore it" approche. Only after we're done with that we're going to add the next static analysis tool to build. The good thing about these tools and hudson is that you can run them in parallel to the unit/integration tests, on another machine, so they won't slow down the overall release cycle.</p>
+        </div>
+    </body>
+</html>

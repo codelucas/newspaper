@@ -1,0 +1,9 @@
+latimes.com^thumbnail
+cnn.com^storytext|cnn_strycntntlft
+foxnews.com^entry-content
+msn.com^articleText
+go.com^mediaimage
+lefigaro.fr^photo center
+cadres.apec.fr^noFieldsTable
+emploi.lesechos.fr^offerHeader
+linkfinance.fr^offerHeader

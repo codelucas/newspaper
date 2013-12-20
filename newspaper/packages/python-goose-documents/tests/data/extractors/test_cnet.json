@@ -1,0 +1,20 @@
+{
+    "url": "http://news.cnet.com/8301-30686_3-20014053-266.html?tag=topStories1", 
+    "expected": {
+        "meta_description": "The phone company is adding bells and whistles to its Fios TV service, including an app that turns an iPad into a TV and several other new options for taking your video content on the go. Read this blog post by Marguerite Reardon on Signal Strength.", 
+        "domain": "news.cnet.com", 
+        "final_url": "http://news.cnet.com/8301-30686_3-20014053-266.html?tag=topStories1", 
+        "authors": ["Marguerite Reardon"],
+        "meta_keywords": "Marguerite Reardon, wireless, broadband, telecom", 
+        "cleaned_text": "NEW YORK--Verizon Communications is prepping a new", 
+        "tags": [
+            "iPad", 
+            "Verizon Communications", 
+            "Verizon Fios TV", 
+            "Fios", 
+            "Apple iPad"
+        ], 
+        "meta_favicon": "", 
+        "meta_lang": null
+    }
+}

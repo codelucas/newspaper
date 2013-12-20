@@ -1,0 +1,14 @@
+{
+    "url": "http://www.cnn.com/2010/POLITICS/08/13/democrats.social.security/index.html", 
+    "expected": {
+        "meta_description": "Democrats pledged Friday to not only keep Social Security in place, but use the historic program against Republicans ahead of the midterm election.", 
+        "domain": "www.cnn.com", 
+        "final_url": "http://www.cnn.com/2010/POLITICS/08/13/democrats.social.security/index.html", 
+        "meta_keywords": "", 
+        "cleaned_text": "Washington (CNN) -- Democrats pledged ", 
+        "title": "Democrats to use Social Security against GOP this fall", 
+        "authors": ["Ed Hornick"],
+        "meta_favicon": "http://i.cdn.turner.com/cnn/.element/img/3.0/global/misc/apple-touch-icon.png", 
+        "meta_lang": "en"
+    }
+}
