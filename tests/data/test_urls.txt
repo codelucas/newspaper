@@ -22,3 +22,13 @@
 0 http://i.cdn.turner.com/cnn/.e/img/3.0/global/header/nav-arrow.gif
 0 javascript:cnnHideOverlay('cnnMyUniqueId1')
 0 'javascript:window.open('https://twitter.com/intent/tweet?url=http://cnnphotos.blogs.cnn.com/2013/12/03/an-indigenous-group-under-threat/&text=An%20indigenous%20group%20under%20threat:','twitter_popup','width=600,height=400');%20void(0);'
+0 http://cnnespanol.cnn.com/page/2/
+0 http://cnn.com/CNN/Programs
+0 http://ht.cdn.turner.com/ireport/big/prod/2013/12/19/WE01046455/3082870/6790afa068f611e3bc57126ade7ad13a-3082870_web_flv_edge.mp4
+0 http://cnn.com/Programs/
+0 http://cnn.com/trends
+1 http://edition.cnn.com/2013/12/19/world/europe/uk-soldier-killing-profiles/index.html
+0 http://ht.cdn.turner.com/ireport/big/prod/2013/12/19/WE01046444/3082844/BlueManorPromo2mp4-3082844_web_flv.flv
+0 http://eatocracy.cnn.com/category/make/recipes/
+1 http://eatocracy.cnn.com/2013/12/12/kolachi-nut-roll/
+1 http://ac360.blogs.cnn.com/2013/06/04/ridiculist-prancercise-rocks/

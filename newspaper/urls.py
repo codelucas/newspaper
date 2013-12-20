@@ -72,10 +72,17 @@ def prepare_url(url, source_url=None):
 
     return proper_url
 
-def valid_url(url, verbose=False):
+def valid_url(url, verbose=False, test=False):
     """
-    Perform a regex check on a full url (scheme, domain, tld).
-    First search of a YYYY/MM/DD pattern in the url. News sites
+    Perform a regex check on an absolute url
+
+    First, perform a few basic checks like making sure the format of the url
+    is right, (scheme, domain, tld).
+
+    Second, make sure that the url isn't some static resource, check the
+    file type.
+
+    Then, search of a YYYY/MM/DD pattern in the url. News sites
     love to use this pattern, this is a very safe bet.
 
     Separators can be [\.-/_]. Years can be 2 or 4 digits, must
@@ -86,7 +93,8 @@ def valid_url(url, verbose=False):
     We permit alphanumeric, _ and -.
 
     Our next check makes sure that a keyword is within one of the
-    separators in a url. cnn.com/story/blah-blah-blah is a given.
+    separators in a url (subdomain or early path separator).
+    cnn.com/story/blah-blah-blah would pass due to "story".
 
     We filter out articles in this stage by aggressively checking to
     see if any resemblance of the source& domain's name or tld is
@@ -98,11 +106,24 @@ def valid_url(url, verbose=False):
 
     """
 
+    DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
+    ALLOWED_TYPES = ['html', 'htm', 'md', 'rst'] # TODO help add more please!
+
+    # if we are testing this method in the testing suite, we actually
+    # need to preprocess the url like we do in the article's constructor!
+    if test:
+        url = prepare_url(url)
+
     # 11 chars is shortest valid url length, eg: http://x.co
     if url is None or len(url) < 11:
+        if verbose: print '\t%s rejected because len of url is less than 11' % url
         return False
 
-    if 'mailto:' in url:
+    r1 = ('mailto:' in url) # TODO not sure if these rules are redundant
+    r2 = ('http://' not in url) and ('https://' not in url)
+
+    if r1 or r2:
+        if verbose: print '\t%s rejected because len of url structure' % url
         return False
 
     path = urlparse(url).path
@@ -111,19 +132,25 @@ def valid_url(url, verbose=False):
     if not path.startswith('/'):
         return False
 
+    # the '/' which may exist at the end of the url provides us no information
     if path.endswith('/'):
         path = path[:-1]
 
-    date_re = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
-    match_date = re.search(date_re, url)
-
-    path_chunks = [ x for x in path.split('/') if len(x) > 0 ]
+    # '/story/cnn/blahblah/index.html' --> ['story', 'cnn', 'blahblah', 'index.html']
+    path_chunks = [x for x in path.split('/') if len(x) > 0]
 
     # siphon out the file type. eg: .html, .htm, .md
     if len(path_chunks) > 0:
-        last_chunk = path_chunks[-1].split('.')
 
-        # set the ending file to the file minus file type
+        last_chunk = path_chunks[-1].split('.') # last chunk == file usually
+        file_type = last_chunk[-1] if len(last_chunk) >= 2 else None
+
+        # if the file type is a media type, reject instantly
+        if file_type and file_type not in ALLOWED_TYPES:
+            if verbose: print '\t%s rejected due to bad filetype' % url
+            return False
+
+        # the file type is not of use to use anymore, remove from url
         if len(last_chunk) > 1:
             path_chunks[-1] = last_chunk[-2]
 
@@ -136,48 +163,51 @@ def valid_url(url, verbose=False):
     subd = tld_dat.subdomain
     tld = tld_dat.domain.lower()
 
+    url_slug = path_chunks[-1] if path_chunks else u''
+
     if tld in bad_domains:
-        # log.debug('%s caught for a bad tld' % url)
+        if verbose: print '%s caught for a bad tld' % url
         return False
 
     if  len(path_chunks) == 0:
         dash_count, underscore_count = 0, 0
-
     else:
-        dash_count = path_chunks[-1].count('-')
-        underscore_count = path_chunks[-1].count('_')
+        dash_count = url_slug.count('-')
+        underscore_count = url_slug.count('_')
 
     # If the url has a news slug title
-    if path_chunks and len(path_chunks[-1]) > 20 and \
-        (dash_count > 4 or underscore_count > 4):
+    if url_slug and (dash_count > 4 or underscore_count > 4):
 
         if dash_count >= underscore_count:
-            if tld not in [ x.lower() for x in path_chunks[-1].split('-') ]:
-                # log.debug('%s verified for being a slug' % url)
+            if tld not in [ x.lower() for x in url_slug.split('-') ]:
+                if verbose: print '%s verified for being a slug' % url
                 return True
 
         if underscore_count > dash_count:
-            if tld not in [ x.lower() for x in path_chunks[-1].split('_') ]:
-                # log.debug('%s verified for being a slug' % url)
+            if tld not in [ x.lower() for x in url_slug.split('_') ]:
+                if verbose: print '%s verified for being a slug' % url
                 return True
 
     # There must be at least 2 subpaths
     if len(path_chunks) <= 1:
-        # log.debug('%s caught for path chunks too small' % url)
+        if verbose: print '%s caught for path chunks too small' % url
         return False
 
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
     for b in bad_chunks:
         if b in path_chunks or b == subd:
-            # log.debug('%s caught for bad chunks' % url)
+            if verbose: print '%s caught for bad chunks' % url
             return False
 
+    match_date = re.search(DATE_REGEX, url)
+
+    # if we caught the verified date above, it's an article
     if match_date is not None:
-        # log.debug('%s verified for date' % url)
+        if verbose: print '%s verified for date' % url
         return True
 
-    # log.debug('%s caught for default false' % url)
+    if verbose: print '%s caught for default false' % url
     return False
 
 def get_domain(abs_url, **kwargs):

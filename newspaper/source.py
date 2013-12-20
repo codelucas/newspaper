@@ -80,12 +80,12 @@ class Source(object):
         # Can not merge category and feed tasks together because
         # computing feed urls relies on the category urls!
         self.set_category_urls()
-        self.download_categories() # async
+        self.download_categories() # mthread
         self.parse_categories()
 
         self.set_feed_urls()
-        self.download_feeds()      # async
-        # self.parse_feeds() # TODO We are directly regexing out feeds until we speed up feedparser!
+        self.download_feeds()      # mthread
+        # self.parse_feeds()       # TODO regexing out feeds until fix feedparser!
 
         self.generate_articles()
         # self.download_articles()
@@ -98,7 +98,7 @@ class Source(object):
 
         for index, article in enumerate(cur_articles):
             if reason == 'url' and not article.is_valid_url():
-                print 'deleting article', cur_articles[index].url
+                # print 'deleting article', cur_articles[index].url
                 del cur_articles[index]
             elif reason == 'body' and not article.is_valid_body():
                 del cur_articles[index]
@@ -238,7 +238,7 @@ class Source(object):
                 article = Article(
                     url=url,
                     source_url=self.url,
-                    # title=???, TODO
+                    # title=?  # TODO
                  )
                 cur_articles.append(article)
 
@@ -307,8 +307,8 @@ class Source(object):
         articles = self._generate_articles()
         self.articles = articles[:limit]
 
-        #for a in self.articles:
-        #    print 'test examine url:', a.url
+        for a in self.articles:
+            print 'test examine url:', a.url
 
         # log.critical('total', len(articles), 'articles and cutoff was at', limit)
 

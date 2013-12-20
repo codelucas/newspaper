@@ -205,7 +205,7 @@ class UrlTestCase(unittest.TestCase):
             assert len(tup) == 2
             truth_val = True if lst == 1 else False
             try:
-                assert truth_val == valid_url(url)
+                assert truth_val == valid_url(url, test=True)
             except AssertionError, e:
                 print '\t\turl: %s is supposed to be %s' % (url, truth_val)
                 raise
@@ -214,9 +214,9 @@ if __name__ == '__main__':
     # unittest.main() # run all units and their cases
     suite = unittest.TestSuite()
 
+    suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(SourceTestCase())
-    suite.addTest(UrlTestCase())
 
     unittest.TextTestRunner().run(suite) # run custom subset
 
