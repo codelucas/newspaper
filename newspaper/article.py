@@ -170,14 +170,16 @@ class Article(object):
     def set_title(self, title):
         """titles are length limited"""
 
-        title = fix_unicode(title)[:MAX_TITLE]
+        title = title[:MAX_TITLE]
+        title = fix_unicode(title)
         if title:
             self.title = title
 
     def set_text(self, text):
         """text is length limited"""
 
-        text = fix_unicode(text)[:MAX_TEXT-5]
+        text = text[:MAX_TEXT-5]
+        text = fix_unicode(text)
         if text:
             self.text = text
 
@@ -195,9 +197,11 @@ class Article(object):
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
         if authors:
-            self.authors = authors[:MAX_AUTHORS]
+            authors = authors[:MAX_AUTHORS]
+            self.authors = [fix_unicode(author) for author in authors]
 
     def set_summary(self, summary):
         """summary is a paragraph of text from the title + body text"""
 
-        self.summary = summary[:MAX_SUMMARY]
+        summary = summary[:MAX_SUMMARY]
+        self.summary = fix_unicode(summary)

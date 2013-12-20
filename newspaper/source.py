@@ -149,7 +149,7 @@ class Source(object):
             if len(_list) > 0:
                 content_list = _list[0].xpath('@content')
                 if len(content_list) > 0:
-                    self.description = content_list[0]
+                    self.description = fix_unicode(content_list[0])
 
     def download(self):
         """downloads html of source"""
