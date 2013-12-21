@@ -1,10 +1,13 @@
 Newspaper: Article scraping & curation
 ======================================
 
+.. image:: https://badge.fury.io/py/newspaper.png
+    :target: http://badge.fury.io/py/newspaper
+        :alt: Latest version
+
 .. image:: https://pypip.in/d/newspaper/badge.png
     :target: https://crate.io/packages/newspaper/
         :alt: Number of PyPI downloads
-
 
 Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
