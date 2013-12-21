@@ -187,13 +187,13 @@ Get it now
     $ pip install newspaper
 
 Examples TODO
---------
+-------------
 
 See more examples at the `Quickstart guide`_.
 
 
 Documentation TODO
--------------
+------------------
 
 Full documentation is available at `Quickstart guide`_.
 

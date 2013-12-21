@@ -55,20 +55,17 @@ requires = [
 try:
     with open('README.rst') as f:
         readme = f.read()
-except:
-    readme = u''
+except: readme = u''
 
 try:
     with open('LICENSE') as f:
         license = f.read()
-except:
-    license = u''
+except: license = u''
 
 try:
     with open('HISTORY.md') as f:
         history = f.read()
-except:
-    history = u''
+except: history = u''
 
 setup(
     name='newspaper',
