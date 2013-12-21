@@ -52,14 +52,23 @@ requires = [
 # 'nltk',
 # 'requests==2.0.1',
 
-with open('README.rst') as f:
-    readme = f.read()
+try:
+    with open('README.rst') as f:
+        readme = f.read()
+except:
+    readme = u''
 
-with open('LICENSE') as f:
-    license = f.read()
+try:
+    with open('LICENSE') as f:
+        license = f.read()
+except:
+    license = u''
 
-with open('HISTORY.md') as f:
-    history = f.read()
+try:
+    with open('HISTORY.md') as f:
+        history = f.read()
+except:
+    history = u''
 
 setup(
     name='newspaper',
