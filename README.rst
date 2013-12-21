@@ -9,7 +9,6 @@ Newspaper: Article scraping & curation
     :target: https://crate.io/packages/newspaper/
         :alt: Number of PyPI downloads
 
-Homepage: `https://newspaper.readthedocs.org/ <https://newspaper.readthedocs.org/>`_
 
 Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper**
 is a Python 2 library for extracting & curating articles from the web.
@@ -192,13 +191,11 @@ Examples TODO
 
 See more examples at the `Quickstart guide`_.
 
-.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart
-
 
 Documentation TODO
 -------------
 
-Full documentation is available at https://newspaper.readthedocs.org/.
+Full documentation is available at `Quickstart guide`_.
 
 Requirements
 ------------
@@ -208,6 +205,8 @@ Requirements
 License
 -------
 
-MIT licensed. See the bundled `LICENSE <https://github.com/codelucas/newspaper/blob/master/LICENSE>`_ file for more details.
+MIT licensed. 
 Also, view the LICENSE for our internally used libraries at: `goose-license`_
+
 .. _`goose-license`: https://github.com/codelucas/newspaper/tree/master/newspaper/packages/python-goose-documents
+.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart

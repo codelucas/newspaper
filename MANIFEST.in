@@ -1,2 +1,3 @@
 recursive-include newspaper *
 recursive-include tests *
+recursive-include *
