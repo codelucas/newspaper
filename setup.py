@@ -69,12 +69,12 @@ except: history = u''
 
 setup(
     name='newspaper',
-    version='0.0.1',
+    version='0.0.2',
     description='Simplified python article discovery & extraction.',
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='https://github.com/codelucas/newspaper/tarball/0.0.1', #'http://pypi.python.org/pypi/newspaper/',
+    url='https://github.com/codelucas/newspaper/tarball/0.0.2',
     packages=packages,
     # package_data={'': ['LICENSE'], 'newspaper': []},
     # package_dir={'newspaper': 'newspaper'},
@@ -83,3 +83,8 @@ setup(
     license=license,
     zip_safe=False,
 )
+
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+
