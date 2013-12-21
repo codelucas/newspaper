@@ -1,6 +1,8 @@
 #!/bin/python2.7
 
 """
+Lucas Ou-Yang 2014 -- http://codelucas.com
+
 Setup guide: http://guide.python-distribute.org/creation.html
 
 """
@@ -62,11 +64,11 @@ with open('HISTORY.md') as f:
 setup(
     name='newspaper',
     version='0.0.1',
-    description='Python article extraction for humans.',
+    description='Simplified python article discovery & extraction.',
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='http://pypi.python.org/pypi/newspaper/',
+    url='https://github.com/codelucas/newspaper/tarball/0.0.1', #'http://pypi.python.org/pypi/newspaper/',
     packages=packages,
     # package_data={'': ['LICENSE'], 'newspaper': []},
     # package_dir={'newspaper': 'newspaper'},
