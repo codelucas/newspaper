@@ -14,21 +14,8 @@ ideal = 20.0
 def summarize(url='', title='', text=''):
     """"""
 
-    article = None
-
-    if title == '' or text == '':
-        return None
-
-    a_title, a_text = '', ''
-    if article is not None:
-        a_title = article.title
-        a_text = article.cleaned_text
-
-    text = a_text or text
-    title = a_title or title
-
     if (text == '' or title == ''):
-        return None
+        return []
 
     if isinstance(title, unicode):
         title = title.encode('utf-8', 'ignore')
