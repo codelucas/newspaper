@@ -74,7 +74,7 @@ setup(
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='https://github.com/codelucas/newspaper/tarball/0.0.2',
+    url='https://github.com/codelucas/newspaper/', #tarball/0.0.2',
     packages=packages,
     # package_data={'': ['LICENSE'], 'newspaper': []},
     # package_dir={'newspaper': 'newspaper'},
@@ -84,7 +84,9 @@ setup(
     zip_safe=False,
 )
 
-import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
+
+print 'Please run:',
+    "curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python",
+    'to download the required nltk corpora'
+
 

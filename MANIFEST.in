@@ -1,3 +1,6 @@
+include *.rst
+include *.md
+include *.txt
+include *.py
 recursive-include newspaper *
 recursive-include tests *
-include README.rst LICENSE AUTHORS.md CHANGES.txt HISTORY.md

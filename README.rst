@@ -162,6 +162,8 @@ all of your articles! In some cases, if you just need urls, even ``download()`` 
 Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Newspaper also uses much of
 `goose`_'s code internally. 
 
+**Sorry for the sloppy set-up so far, this is my first real package uploaded to pip i'm trying to fix the dist!**
+
 .. _`lxml`: http://lxml.de/
 .. _`nltk`: http://nltk.org/
 .. _`requests`: http://docs.python-requests.org/en/latest/
@@ -185,6 +187,7 @@ Get it now
 ::
 
     $ pip install newspaper
+    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python
 
 Examples TODO
 -------------
