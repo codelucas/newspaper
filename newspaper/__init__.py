@@ -12,6 +12,8 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 
 from . import utils
+from .article import Article, ArticleException
+from .source import Source
 from .api import build, build_article, popular_urls, hot
 from .settings import VERSION
 

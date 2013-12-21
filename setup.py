@@ -6,8 +6,7 @@ Setup guide: http://guide.python-distribute.org/creation.html
 """
 import os
 import sys
-
-from .newspaper import VERSION
+# from .newspaper import VERSION TODO fix relative import error
 
 try:
     from setuptools import setup
@@ -62,7 +61,7 @@ with open('HISTORY.md') as f:
 
 setup(
     name='newspaper',
-    version=VERSION,
+    version='0.0.1',
     description='Python article extraction for humans.',
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',
@@ -71,7 +70,7 @@ setup(
     packages=packages,
     # package_data={'': ['LICENSE'], 'newspaper': []},
     # package_dir={'newspaper': 'newspaper'},
-    # include_package_data=True,
+    include_package_data=True,
     install_requires=requires,
     license=license,
     zip_safe=False,

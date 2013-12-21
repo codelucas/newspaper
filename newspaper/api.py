@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import feedparser
-
+from .packages.feedparser import feedparser
 from .source import Source
 from .article import Article
 from .settings import POP_URLS_FILEN, TRENDING_URL

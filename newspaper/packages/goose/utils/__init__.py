@@ -27,11 +27,11 @@ import re
 import os
 import codecs
 import urlparse
+import sys
 
-_TEST_DIR = os.path.abspath(os.path.dirname(__file__)) # goose/utils
-_PARENT_DIR = os.path.join(_TEST_DIR, '..') # packages/goose
-
-import goose
+#from .. import goose
+#sys.path.insert(0, _PARENT_DIR)
+#from newspaper.packages import goose
 
 class BuildURL(object):
     def __init__(self, url, finalurl=None):
@@ -70,7 +70,11 @@ class FileHelper(object):
     @classmethod
     def loadResourceFile(self, filename):
         if not os.path.isabs('filename'):
-            dirpath = os.path.dirname(goose.__file__)
+            #_PARENT_DIR = os.path.join(_TEST_DIR, '../..') # packages/goose
+            #dirpath = os.path.dirname(goose.__file__)
+            dirpath = os.path.abspath(os.path.dirname(__file__)) # goose/utils
+            dirpath = os.path.join(dirpath, '..')
+            #dirpath = os.path.dirname(os.path.join(dirpath, '..'))
             path = os.path.join(dirpath, 'resources', filename)
         else:
             path = filename

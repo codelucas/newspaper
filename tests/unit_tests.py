@@ -16,8 +16,8 @@ sys.path.insert(0, PARENT_DIR)
 URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
 
 import newspaper
-from newspaper.article import Article, ArticleException
-from newspaper.source import Source, Article
+from newspaper import Article, ArticleException
+from newspaper import Source, Article
 from newspaper.network import multithread_request
 
 def print_test(method):
