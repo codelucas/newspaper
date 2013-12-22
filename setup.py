@@ -65,7 +65,7 @@ except: history = u''
 
 setup(
     name='newspaper',
-    version='0.0.2',
+    version='0.0.3',
     description='Simplified python article discovery & extraction.',
     long_description=readme + '\r\n' + history,
     author='Lucas Ou-Yang',

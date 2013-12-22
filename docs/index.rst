@@ -176,6 +176,7 @@ Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Ne
 .. _`nltk`: http://nltk.org/
 .. _`requests`: http://docs.python-requests.org/en/latest/
 .. _`goose`: https://github.com/grangier/python-goose
+.. _'Newspaper Docs': http://newspaper.readthedocs.org/en/latest/
 
 Features
 --------
