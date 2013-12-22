@@ -14,7 +14,7 @@ Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its spee
 is a Python 2 library for extracting & curating articles from the web.
 
 Newspaper wants to change the way people handle ``article extraction`` with ``a new, more precise
-layer of abstraction``. 
+layer of abstraction``.  Visit our homepage at: `Newspaper Docs`_.
 
 Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
 
@@ -41,9 +41,9 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
-    first_article = cnn_paper.articles[0]
+    >>> first_article = cnn_paper.articles[0]
 
-    first_article.download()
+    >>> first_article.download()
 
     >>> print first_article.html # html fetched from download()
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
@@ -201,10 +201,10 @@ Examples TODO
 See more examples at the `Quickstart guide`_.
 
 
-Documentation TODO
-------------------
+Documentation
+-------------
 
-Full documentation is available at `Quickstart guide`_.
+Full documentation is available at `Newspaper Docs`_.
 
 Requirements
 ------------
@@ -219,3 +219,4 @@ Also, view the LICENSE for our internally used libraries at: `goose-license`_
 
 .. _`goose-license`: https://github.com/codelucas/newspaper/tree/master/newspaper/packages/python-goose-documents
 .. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`Newspaper Docs`: http://newspaper.readthedocs.org

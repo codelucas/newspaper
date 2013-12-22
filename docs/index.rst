@@ -36,9 +36,9 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
-    first_article = cnn_paper.articles[0]
+    >>> first_article = cnn_paper.articles[0]
 
-    first_article.download()
+    >>> first_article.download()
 
     >>> print first_article.html # html fetched from download()
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
