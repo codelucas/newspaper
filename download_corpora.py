@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 '''Downloads the necessary NLTK models and corpora required to support
-all of TextBlob's features. Modify for your own needs.
+all of newspaper's features. Modify for your own needs.
 '''
 import nltk
 

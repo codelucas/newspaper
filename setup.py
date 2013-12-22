@@ -4,6 +4,7 @@
 Lucas Ou-Yang 2014 -- http://codelucas.com
 
 Setup guide: http://guide.python-distribute.org/creation.html
+python setup.py sdist bdist_wininst upload
 
 """
 import os
