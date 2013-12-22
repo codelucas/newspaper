@@ -1,15 +1,9 @@
-Newspaper: Article scraping & curation
-======================================
-
-.. image:: https://badge.fury.io/py/newspaper.png
-    :target: http://badge.fury.io/py/newspaper
-        :alt: Latest version
-
-.. image:: https://pypip.in/d/newspaper/badge.png
-    :target: https://crate.io/packages/newspaper/
-        :alt: Number of PyPI downloads
-
-
+.. newspaper documentation master file, created by
+   sphinx-quickstart on Sat Dec 21 22:26:51 2013.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+Welcome to newspaper's documentation!
+=====================================
 Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its speed; **newspaper**
 is a Python 2 library for extracting & curating articles from the web.
 
@@ -17,6 +11,7 @@ Newspaper wants to change the way people handle ``article extraction`` with ``a 
 layer of abstraction``. 
 
 Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
+
 
 .. code-block:: pycon
 
@@ -170,6 +165,7 @@ Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Ne
 .. _`requests`: http://docs.python-requests.org/en/latest/
 .. _`goose`: https://github.com/grangier/python-goose
 
+
 Features
 --------
 
@@ -195,27 +191,18 @@ Get it now
 
     $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
-Examples TODO
--------------
 
-See more examples at the `Quickstart guide`_.
+Contents:
+
+.. toctree::
+   :maxdepth: 2
 
 
-Documentation TODO
-------------------
 
-Full documentation is available at `Quickstart guide`_.
+Indices and tables
+==================
 
-Requirements
-------------
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
-- Python >= 2.6 and <= 2.7*
-
-License
--------
-
-MIT licensed. 
-Also, view the LICENSE for our internally used libraries at: `goose-license`_
-
-.. _`goose-license`: https://github.com/codelucas/newspaper/tree/master/newspaper/packages/python-goose-documents
-.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart

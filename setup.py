@@ -8,16 +8,11 @@ Setup guide: http://guide.python-distribute.org/creation.html
 """
 import os
 import sys
-# from .newspaper import VERSION TODO fix relative import error
 
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
-
-if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload')
-    sys.exit()
 
 packages = [
     'newspaper',
@@ -37,6 +32,7 @@ packages = [
     'newspaper.packages.jieba.finalseg',
     'newspaper.packages.jieba.analyse'
 ]
+
 requires = [
     'lxml==3.2.4',            # version for lxml is important
     'requests',
@@ -83,8 +79,4 @@ setup(
     license=license,
     zip_safe=False,
 )
-
-
-print 'Please run:',"curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python", 'to download the required nltk corpora'
-
 
