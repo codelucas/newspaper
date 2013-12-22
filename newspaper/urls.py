@@ -62,13 +62,18 @@ def prepare_url(url, source_url=None):
     """operations that purify a url, removes arguments,
     redirects, and merges relatives with absolutes"""
 
-    if source_url is not None:
-        source_domain = urlparse(source_url).netloc
-        proper_url = urljoin(source_url, url)
-        proper_url = redirect_back(proper_url, source_domain)
-        proper_url = remove_args(proper_url)
-    else:
-        proper_url = remove_args(url)
+    try:
+        if source_url is not None:
+            source_domain = urlparse(source_url).netloc
+            proper_url = urljoin(source_url, url)
+            proper_url = redirect_back(proper_url, source_domain)
+            proper_url = remove_args(proper_url)
+        else:
+            proper_url = remove_args(url)
+    except ValueError, e:
+        log.critical('url %s failed on err %s' % (url, str(e)))
+        # print 'url %s failed on err %s' % (url, str(e))
+        proper_url = u''
 
     return proper_url
 

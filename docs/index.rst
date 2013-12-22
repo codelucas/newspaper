@@ -8,10 +8,9 @@ Inspired by ``requests`` for its simplicity and powered by ``lxml`` for its spee
 is a Python 2 library for extracting & curating articles from the web.
 
 Newspaper wants to change the way people handle ``article extraction`` with ``a new, more precise
-layer of abstraction``. 
+layer of abstraction``.  Visit our homepage at: `Newspaper Docs`_.
 
 Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
-
 
 .. code-block:: pycon
 
@@ -36,6 +35,10 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
+The first step is to ``download()`` an article.    
+    
+.. code-block:: pycon
+
     >>> first_article = cnn_paper.articles[0]
 
     >>> first_article.download()
@@ -43,10 +46,16 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print first_article.html # html fetched from download()
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
     
-    >>> print cnn_paper.articles[7].html # won't work, only downloaded 5 articles
+    # we have not downloaded this article yet, it will fail
+    >>> print cnn_paper.articles[7].html 
     u'' 
 
-    >>> first_article.parse()  # parse html for body txt, authors, title..
+We may also extract meaningful content from the html, like authors, body-text..
+You must called ``download()`` on the article before calling ``parse()``.
+
+.. code-block:: pycon
+
+    >>> first_article.parse()  
 
     >>> print first_article.text
     u'Three sisters who were imprisoned for possibly...'
@@ -60,6 +69,10 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print first_article.title
     u'Police: 3 sisters imprisoned in Tucson home'
 
+Finally, you may extract out natural language properties from the text. You must have
+called both ``download()`` and ``parse()`` the article before calling ``nlp()``.
+
+.. code-block:: pycon
 
     >>> first_article.nlp() # must be on an already parse()'ed article
 
@@ -75,7 +88,9 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     ArticleException: You must parse an article before you try to..
 
 
-    >>> # some other news-source level functionality
+Some other news-source level functionality
+
+.. code-block:: pycon
 
     >>> print cnn_paper.brand
     u'cnn'
@@ -83,16 +98,13 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.description
     u'CNN.com delivers the latest breaking news and information on the latest...'
 
-
-    >>> # a few hopefully useful easter eggs:
-
-    >>> newspaper.hot()[:5]
+    >>> newspaper.hot()[:5] # top google trending terms
     ['Ned Vizzini', Brian Boitano', Crossword Inventor', 'Alex and Sierra', 'Claire Davis']
 
     >>> newspaper.popular_urls() 
     ['http://slate.com', 'http://cnn.com', 'http://huffingtonpost.com', ...]
 
-    ^ just a few friendly suggestions if you forget the popular news sites!
+^ Just a few friendly suggestions if you forget the popular news sites!
 
 
 **IMPORTANT**
@@ -164,7 +176,6 @@ Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Ne
 .. _`nltk`: http://nltk.org/
 .. _`requests`: http://docs.python-requests.org/en/latest/
 .. _`goose`: https://github.com/grangier/python-goose
-
 
 Features
 --------
