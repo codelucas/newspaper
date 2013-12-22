@@ -187,7 +187,12 @@ Get it now
 ::
 
     $ pip install newspaper
-    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python
+
+    ### IMPORTANT ###
+    # If you KNOW for sure you will use the natural language features, nlp(), you must
+    # download some seperate nltk corpora below, it may take a while!
+
+    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
 Examples TODO
 -------------

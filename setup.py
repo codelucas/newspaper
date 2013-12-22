@@ -85,8 +85,6 @@ setup(
 )
 
 
-print 'Please run:',
-    "curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python",
-    'to download the required nltk corpora'
+print 'Please run:',"curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python", 'to download the required nltk corpora'
 
 
