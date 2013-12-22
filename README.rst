@@ -41,6 +41,10 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
+The first step is to download the article.    
+    
+.. code-block:: pycon
+
     >>> first_article = cnn_paper.articles[0]
 
     >>> first_article.download()
@@ -48,10 +52,16 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print first_article.html # html fetched from download()
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
     
-    >>> print cnn_paper.articles[7].html # won't work, only downloaded 5 articles
+    # we have not downloaded this article yet, it will fail
+    >>> print cnn_paper.articles[7].html 
     u'' 
 
-    >>> first_article.parse()  # parse html for body txt, authors, title..
+We can also extract meaningful content from the html like authors, body text..
+You must download the article before calling ``parse()``.
+
+.. code-block:: pycon
+
+    >>> first_article.parse()  
 
     >>> print first_article.text
     u'Three sisters who were imprisoned for possibly...'
@@ -65,6 +75,10 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print first_article.title
     u'Police: 3 sisters imprisoned in Tucson home'
 
+Finally, extract out natural language properties from the text. You must have
+both downloaded and parsed the article before calling ``nlp()``.
+
+.. code-block:: pycon
 
     >>> first_article.nlp() # must be on an already parse()'ed article
 
@@ -80,7 +94,9 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     ArticleException: You must parse an article before you try to..
 
 
-    >>> # some other news-source level functionality
+Some other news-source level functionality
+
+.. code-block:: pycon
 
     >>> print cnn_paper.brand
     u'cnn'
@@ -97,7 +113,7 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> newspaper.popular_urls() 
     ['http://slate.com', 'http://cnn.com', 'http://huffingtonpost.com', ...]
 
-    ^ just a few friendly suggestions if you forget the popular news sites!
+^ Just a few friendly suggestions if you forget the popular news sites!
 
 
 **IMPORTANT**
