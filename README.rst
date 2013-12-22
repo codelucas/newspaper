@@ -41,7 +41,7 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
-The first step is to download the article.    
+The first step is to ``download()`` the article.    
     
 .. code-block:: pycon
 
@@ -56,8 +56,8 @@ The first step is to download the article.
     >>> print cnn_paper.articles[7].html 
     u'' 
 
-We can also extract meaningful content from the html like authors, body text..
-You must download the article before calling ``parse()``.
+We may also extract meaningful content from the html, like authors, body-text..
+You must called ``download()`` on the article before calling ``parse()``.
 
 .. code-block:: pycon
 
@@ -75,8 +75,8 @@ You must download the article before calling ``parse()``.
     >>> print first_article.title
     u'Police: 3 sisters imprisoned in Tucson home'
 
-Finally, extract out natural language properties from the text. You must have
-both downloaded and parsed the article before calling ``nlp()``.
+Finally, you may extract out natural language properties from the text. You must have
+called both ``download()`` and ``parse()`` the article before calling ``nlp()``.
 
 .. code-block:: pycon
 
@@ -104,10 +104,7 @@ Some other news-source level functionality
     >>> print cnn_paper.description
     u'CNN.com delivers the latest breaking news and information on the latest...'
 
-
-    >>> # a few hopefully useful easter eggs:
-
-    >>> newspaper.hot()[:5]
+    >>> newspaper.hot()[:5] # top google trending terms
     ['Ned Vizzini', Brian Boitano', Crossword Inventor', 'Alex and Sierra', 'Claire Davis']
 
     >>> newspaper.popular_urls() 
