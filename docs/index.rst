@@ -51,7 +51,7 @@ The first step is to ``download()`` an article.
     u'' 
 
 We may also extract meaningful content from the html, like authors, body-text..
-You must called ``download()`` on the article before calling ``parse()``.
+You must have called ``download()`` on the article before calling ``parse()``.
 
 .. code-block:: pycon
 
@@ -70,7 +70,7 @@ You must called ``download()`` on the article before calling ``parse()``.
     u'Police: 3 sisters imprisoned in Tucson home'
 
 Finally, you may extract out natural language properties from the text. You must have
-called both ``download()`` and ``parse()`` the article before calling ``nlp()``.
+called both ``download()`` and ``parse()`` on the article before calling ``nlp()``.
 
 .. code-block:: pycon
 
