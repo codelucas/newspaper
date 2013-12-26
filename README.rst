@@ -202,16 +202,26 @@ Get it now
 
     $ pip install newspaper
 
-    ### IMPORTANT ###
+    # IMPORTANT
     # If you KNOW for sure you will use the natural language features, nlp(), you must
     # download some seperate nltk corpora below, it may take a while!
 
     $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
-Examples TODO
--------------
+Todo List
+---------
 
-See more examples at the `Quickstart guide`_.
+- Fully integrate the goose library into our own article class 
+- Add multiple article download (concurrently with gevent or multithread) example
+- Bake in the CSSSelect and BeautifulSoup dependencies 
+- Add in an examples seciton on README
+- Make the documentation much better, still learning how to use sphinx docs!
+
+
+.. Examples TODO
+.. -------------
+
+.. See more examples at the `Quickstart guide`_.
 
 
 Documentation
@@ -231,5 +241,5 @@ MIT licensed.
 Also, view the LICENSE for our internally used libraries at: `goose-license`_
 
 .. _`goose-license`: https://github.com/codelucas/newspaper/tree/master/newspaper/packages/python-goose-documents
-.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/quickstart.html#quickstart
+.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
 .. _`Newspaper Docs`: http://newspaper.readthedocs.org
