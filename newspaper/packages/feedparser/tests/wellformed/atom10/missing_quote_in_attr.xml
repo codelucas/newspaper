@@ -1,7 +1,0 @@
-<!--
-Description: href is missing a quote
-Expect:      not bozo and feed['title_detail']['value'] == u'<a href="http://example.com/&quot;">example</a>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="html"><![CDATA[<a href=http://example.com/">example</a>]]></title>
-</feed>

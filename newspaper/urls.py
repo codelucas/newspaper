@@ -1,30 +1,36 @@
 # -*- coding: utf-8 -*-
 
+"""
+Newspaper treats urls for news articles as critical components.
+Hence, we have an entire module dedicated to them.
+"""
+
 import logging
 import re
 
-from .packages.tldextract import tldextract
-
 from urlparse import (
     urlparse, urljoin, urlsplit, urlunsplit, parse_qs)
+
+from .packages.tldextract import tldextract
 
 log = logging.getLogger(__name__)
 
 MAX_FILE_MEMO = 20000
 
-good_paths = ['story', 'article', 'feature', 'featured', 'slides',
+GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
               'v', 'radio', 'press']
 
-bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
+BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
               'account', 'subscribe', 'donate', 'shop', 'admin']
 
-bad_domains = ['amazon', 'doubleclick', 'twitter']
+BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
 
 def remove_args(url, keep_params=(), frags=False):
-    """remove all param arguments from a url"""
-
+    """
+    remove all param arguments from a url
+    """
     parsed = urlsplit(url)
     filtered_query= '&'.join(
         qry_item for qry_item in parsed.query.split('&')
@@ -38,10 +44,11 @@ def remove_args(url, keep_params=(), frags=False):
     return urlunsplit(parsed[:3] + (filtered_query,) + frag)
 
 def redirect_back(url, source_domain):
-    """some sites like pinterest have api's that cause news
-    orgs to direct to their site with the real news url as a
-    GET param. This method catches that and returns our param."""
-
+    """
+    some sites like Pinterest have api's that cause news
+    args to direct to their site with the real news url as a
+    GET param. This method catches that and returns our param
+    """
     parse_data = urlparse(url)
     domain = parse_data.netloc
     query = parse_data.query
@@ -59,9 +66,10 @@ def redirect_back(url, source_domain):
     return url
 
 def prepare_url(url, source_url=None):
-    """operations that purify a url, removes arguments,
-    redirects, and merges relatives with absolutes"""
-
+    """
+    operations that purify a url, removes arguments,
+    redirects, and merges relatives with absolutes
+    """
     try:
         if source_url is not None:
             source_domain = urlparse(source_url).netloc
@@ -108,11 +116,9 @@ def valid_url(url, verbose=False, test=False):
 
     We also filter out articles with a subdomain or first degree path
     on a registered bad keyword
-
     """
-
     DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
-    ALLOWED_TYPES = ['html', 'htm', 'md', 'rst'] # TODO help add more please!
+    ALLOWED_TYPES = ['html', 'htm', 'md', 'rst'] # TODO add more!
 
     # if we are testing this method in the testing suite, we actually
     # need to preprocess the url like we do in the article's constructor!
@@ -170,7 +176,7 @@ def valid_url(url, verbose=False, test=False):
 
     url_slug = path_chunks[-1] if path_chunks else u''
 
-    if tld in bad_domains:
+    if tld in BAD_DOMAINS:
         if verbose: print '%s caught for a bad tld' % url
         return False
 
@@ -200,7 +206,7 @@ def valid_url(url, verbose=False, test=False):
 
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
-    for b in bad_chunks:
+    for b in BAD_CHUNKS:
         if b in path_chunks or b == subd:
             if verbose: print '%s caught for bad chunks' % url
             return False
@@ -216,23 +222,24 @@ def valid_url(url, verbose=False, test=False):
     return False
 
 def get_domain(abs_url, **kwargs):
-    """returns a url's domain, this method exists to
-    encapsulate all url code into this file."""
-
+    """
+    returns a url's domain, this method exists to
+    encapsulate all url code into this file
+    """
     if abs_url is None:
         return None
     return urlparse(abs_url, **kwargs).netloc
 
 def get_scheme(abs_url, **kwargs):
-    """"""
-
+    """
+    """
     if abs_url is None:
         return None
     return urlparse(abs_url, **kwargs).scheme
 
 def get_path(abs_url, **kwargs):
-    """"""
-
+    """
+    """
     if abs_url is None:
         return None
     return urlparse(abs_url, **kwargs).path

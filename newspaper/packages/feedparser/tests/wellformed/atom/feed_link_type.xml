@@ -1,7 +1,0 @@
-<!--
-Description: feed link type
-Expect:      not bozo and feed['links'][0]['type'] == u'text/html'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <link rel="alternate" type="text/html" href="http://www.example.com/"/>
-</feed>

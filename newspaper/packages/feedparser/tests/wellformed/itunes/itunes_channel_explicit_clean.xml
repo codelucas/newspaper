@@ -1,9 +1,0 @@
-<!--
-Description: iTunes explicit='clean'
-Expect:      not bozo and feed['itunes_explicit'] is False
--->
-<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
-<channel>
-  <itunes:explicit>clean</itunes:explicit>
-</channel>
-</rss>

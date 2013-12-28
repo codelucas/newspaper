@@ -1,9 +1,0 @@
-<!--
-Description: channel dc:author
-Expect:      not bozo and feed['author'] == u'Example editor' and feed['author_detail']['name'] == u'Example editor'
--->
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<channel>
-<dc:author>Example editor</dc:author>
-</channel>
-</rss>

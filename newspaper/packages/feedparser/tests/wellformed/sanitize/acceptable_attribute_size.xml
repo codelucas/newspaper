@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain size attribute
-Expect:       not bozo and entries[0]['description'] == '<span size=""></span>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;span size=""&gt;&lt;/span&gt;</content>
-</entry>
-</feed>

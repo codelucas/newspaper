@@ -1,9 +1,0 @@
-<!--
-Description: Ouml
-Expect:      feed['title'] == u'testing \xd6 entity'
--->
-<rss>
-<channel>
-<title>testing &Ouml; entity</title>
-</channel>
-</rss>

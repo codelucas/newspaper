@@ -1,7 +1,0 @@
-<!--
-Description: xml:base is an IRI
-Expect:      not bozo and feed['links'][0]['href'] == u'http://www.\u8a79\u59c6\u65af.com/feed'
--->
-<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://www.詹姆斯.com/feed">
-  <link rel="self" type="application/atom+xml" href=""/>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: plusmn
-Expect:      feed['title'] == u'testing \xb1 entity'
--->
-<rss>
-<channel>
-<title>testing &plusmn; entity</title>
-</channel>
-</rss>

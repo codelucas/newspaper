@@ -1,3 +1,0 @@
-<Files headers_foo.xml>
-  Header set X-Foo "bar"
-</Files>

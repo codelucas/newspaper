@@ -1,9 +1,0 @@
-<!--
-Description: channel managingEditor maps to author
-Expect:      not bozo and feed['author'] == u'Example editor'
--->
-<rss version="2.0">
-<channel>
-<managingEditor>Example editor</managingEditor>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description: upsilon
-Expect:      feed['title'] == u'testing \u03c5 entity'
--->
-<rss>
-<channel>
-<title>testing &upsilon; entity</title>
-</channel>
-</rss>

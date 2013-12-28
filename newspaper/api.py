@@ -4,6 +4,7 @@ from .packages.feedparser import feedparser
 from .source import Source
 from .article import Article
 from .settings import POP_URLS_FILEN, TRENDING_URL
+from .configuration import Configuration
 
 def build(url=u'', is_memo=True, verbose=False):
     """returns a constructed source object without
@@ -13,10 +14,13 @@ def build(url=u'', is_memo=True, verbose=False):
     valid_href = ('://' in url) and (url[:4] == 'http')
 
     if not valid_href:
-        print 'ERR: provide valid url'
+        print 'ERR: provide a valid url'
         return None
 
-    s = Source(url, is_memo=is_memo, verbose=verbose)
+    test_configs = Configuration()
+    test_configs.verbose = verbose
+    test_configs.is_memoize_articles = is_memo
+    s = Source(url, configs=test_configs)
     s.build()
     return s
 
@@ -25,8 +29,6 @@ def build_article(url=u''):
     downloading or parsing"""
 
     url = url or '' # empty string precedence over None
-    valid_href = ('://' in url) and (url[:4] == 'http')
-
     a = Article(url)
     return a
 

@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!--
-Header:      Content-type: application/xml-dtd; charset="us-ascii"
-Description: application/xml-dtd + explicit charset
-Expect:      not bozo and encoding == 'us-ascii'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-</feed>

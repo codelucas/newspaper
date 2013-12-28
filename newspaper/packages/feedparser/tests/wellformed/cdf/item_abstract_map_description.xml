@@ -1,9 +1,0 @@
-<!--
-Description: CDF item abstract maps to description
-Expect:      not bozo and entries[0]['description'] == u'Example description'
--->
-<CHANNEL>
-<ITEM>
-  <ABSTRACT>Example description</ABSTRACT>
-</ITEM>
-</CHANNEL>

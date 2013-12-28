@@ -1,9 +1,0 @@
-<!--
-Description: entry title with undeclared unqualified inline markup
-Expect:      not bozo and entries[0]['title'] == u'Example <b>Atom</b>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <title>Example <b>Atom</b></title>
-</entry>
-</feed>

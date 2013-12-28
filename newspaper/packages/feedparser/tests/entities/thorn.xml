@@ -1,9 +1,0 @@
-<!--
-Description: thorn
-Expect:      feed['title'] == u'testing \xfe entity'
--->
-<rss>
-<channel>
-<title>testing &thorn; entity</title>
-</channel>
-</rss>

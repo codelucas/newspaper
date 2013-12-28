@@ -1,9 +1,0 @@
-<!--
-Description: unescaped ampersand in URL query variable doesn't affect feed URL
-Expect: feed.link == u'http://example/?a=1&b=2&c'
--->
-<rss version="2.0">
-<channel>
-<link>http://example/?a=1&b=2&c</link>
-</channel>
-</rss

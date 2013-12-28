@@ -1,6 +1,0 @@
-<!--
-Description: CDF channel lastmod
-Expect:      not bozo and feed['updated'] == u'2004-04-06T23:05:43-05:00'
--->
-<CHANNEL LASTMOD="2004-04-06T23:05:43-05:00">
-</CHANNEL>

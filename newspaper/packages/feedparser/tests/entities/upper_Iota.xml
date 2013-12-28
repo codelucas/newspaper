@@ -1,9 +1,0 @@
-<!--
-Description: Iota
-Expect:      feed['title'] == u'testing \u0399 entity'
--->
-<rss>
-<channel>
-<title>testing &Iota; entity</title>
-</channel>
-</rss>

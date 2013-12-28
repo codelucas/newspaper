@@ -1,9 +1,0 @@
-<!--
-Description: sdot
-Expect:      feed['title'] == u'testing \u22c5 entity'
--->
-<rss>
-<channel>
-<title>testing &sdot; entity</title>
-</channel>
-</rss>

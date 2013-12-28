@@ -1,9 +1,0 @@
-<!--
-Description: omicron
-Expect:      feed['title'] == u'testing \u03bf entity'
--->
-<rss>
-<channel>
-<title>testing &omicron; entity</title>
-</channel>
-</rss>

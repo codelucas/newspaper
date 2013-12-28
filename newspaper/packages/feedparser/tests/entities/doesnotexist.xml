@@ -1,9 +1,0 @@
-<!--
-Description: doesnotexist
-Expect:      feed['title'] == u'testing &doesnotexist; entity'
--->
-<rss>
-<channel>
-<title>testing &doesnotexist; entity</title>
-</channel>
-</rss>

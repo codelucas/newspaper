@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <table></table>
-Expect:       not bozo and entries[0]['description'] == '<table></table>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;table&gt;&lt;/table&gt;</content>
-</entry>
-</feed>

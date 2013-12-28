@@ -1,7 +1,0 @@
-<!--
-Description: feed link rel='via'
-Expect:      not bozo and feed['links'][0]['rel'] == u'via'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <link rel="via" type="text/html" href="http://www.example.com/"/>
-</feed>

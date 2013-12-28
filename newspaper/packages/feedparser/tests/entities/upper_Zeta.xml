@@ -1,9 +1,0 @@
-<!--
-Description: Zeta
-Expect:      feed['title'] == u'testing \u0396 entity'
--->
-<rss>
-<channel>
-<title>testing &Zeta; entity</title>
-</channel>
-</rss>

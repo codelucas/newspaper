@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <fieldset></fieldset>
-Expect:       not bozo and entries[0]['description'] == '<fieldset></fieldset>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;fieldset&gt;&lt;/fieldset&gt;</content>
-</entry>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: iTunes channel category scheme
-Expect:      not bozo and feed['tags'][0]['scheme'] == u'http://www.itunes.com/'
--->
-<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
-<channel>
-<itunes:category text="Technology"></itunes:category>
-</channel>
-</rss>

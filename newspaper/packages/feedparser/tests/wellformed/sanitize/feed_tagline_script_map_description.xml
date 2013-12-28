@@ -1,7 +1,0 @@
-<!--
-Description: feed tagline contains script (maps to description)
-Expect:      not bozo and feed['description'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<tagline type="text/html" mode="escaped">safe&lt;script type="text/javascript">location.href='http:/'+'/example.com/';&lt;/script> description</tagline>
-</feed>

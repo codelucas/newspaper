@@ -1,8 +1,0 @@
-<!--
-SkipUnless:   __import__('chardet')
-Description:  Big5 with no encoding information
-Expect:       bozo and encoding == 'Big5'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<title>¡m11¤ëªº¿½¨¹¡n</title>
-</feed>

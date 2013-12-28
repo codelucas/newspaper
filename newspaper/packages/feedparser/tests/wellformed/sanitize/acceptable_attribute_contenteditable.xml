@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain contenteditable attribute
-Expect:       not bozo and entries[0]['description'] == '<span contenteditable=""></span>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;span contenteditable=""&gt;&lt;/span&gt;</content>
-</entry>
-</feed>

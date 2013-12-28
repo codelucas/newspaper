@@ -1,9 +1,0 @@
-<!--
-Description: channel webMaster maps to publisher
-Expect:      not bozo and feed['publisher'] == u'Example editor'
--->
-<rss version="2.0">
-<channel>
-<webMaster>Example editor</webMaster>
-</channel>
-</rss>

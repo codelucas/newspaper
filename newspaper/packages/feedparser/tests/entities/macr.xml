@@ -1,9 +1,0 @@
-<!--
-Description: macr
-Expect:      feed['title'] == u'testing \xaf entity'
--->
-<rss>
-<channel>
-<title>testing &macr; entity</title>
-</channel>
-</rss>

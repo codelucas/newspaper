@@ -1,7 +1,0 @@
-<!--
-Description: feed link href relative to document URI
-Expect:      not bozo and feed['links'][0]['href'] == u'http://127.0.0.1:8097/relative/link'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <link rel="alternate" type="text/html" href="/relative/link"/>
-</feed>

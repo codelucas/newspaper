@@ -1,9 +1,0 @@
-<!--
-Description: OElig
-Expect:      feed['title'] == u'testing \u0152 entity'
--->
-<rss>
-<channel>
-<title>testing &OElig; entity</title>
-</channel>
-</rss>

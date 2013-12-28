@@ -1,9 +1,0 @@
-<!--
-Description: entry content contains frameset
-Expect:      not bozo and entries[0]['content'][0]['value'] == u'safe <b>description</b>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-<content type="text/html" mode="escaped">safe&lt;frameset rows="*">&lt;frame src="http://example.com/">&lt;/frameset> &lt;b>description&lt;/b></content>
-</entry>
-</feed>

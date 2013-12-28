@@ -1,9 +1,0 @@
-<!--
-Description: epsilon
-Expect:      feed['title'] == u'testing \u03b5 entity'
--->
-<rss>
-<channel>
-<title>testing &epsilon; entity</title>
-</channel>
-</rss>

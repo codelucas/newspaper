@@ -1,9 +1,0 @@
-<!--
-Description: emsp
-Expect:      feed['title'] == u'testing \u2003 entity'
--->
-<rss>
-<channel>
-<title>testing &emsp; entity</title>
-</channel>
-</rss>

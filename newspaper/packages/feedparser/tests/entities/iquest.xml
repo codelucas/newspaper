@@ -1,9 +1,0 @@
-<!--
-Description: iquest
-Expect:      feed['title'] == u'testing \xbf entity'
--->
-<rss>
-<channel>
-<title>testing &iquest; entity</title>
-</channel>
-</rss>

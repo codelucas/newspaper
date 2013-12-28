@@ -1,9 +1,0 @@
-<!--
-Description: normal link
-Expect:      not bozo and feed['link'] == u'http://example.com/'
--->
-<rss version="2.0">
-<channel>
-<link>http://example.com/</link>
-</channel>
-</rss>

@@ -1,8 +1,0 @@
-<!--
-Description: CDF item lastmod
-Expect:      not bozo and entries[0]['updated'] == u'2004-04-06T23:05:43-05:00'
--->
-<CHANNEL>
-<ITEM LASTMOD="2004-04-06T23:05:43-05:00">
-</ITEM>
-</CHANNEL>

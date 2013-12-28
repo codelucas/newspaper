@@ -1,9 +1,0 @@
-<!--
-Description: not
-Expect:      feed['title'] == u'testing \xac entity'
--->
-<rss>
-<channel>
-<title>testing &not; entity</title>
-</channel>
-</rss>

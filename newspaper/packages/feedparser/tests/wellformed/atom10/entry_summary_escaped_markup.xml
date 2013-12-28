@@ -1,9 +1,0 @@
-<!--
-Description: entry summary escaped HTML
-Expect:      not bozo and entries[0]['summary'] == u'Example <b>Atom</b>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-  <summary type="html">Example &lt;b&gt;Atom&lt;/b&gt;</summary>
-</entry>
-</feed>

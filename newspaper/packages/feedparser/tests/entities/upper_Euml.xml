@@ -1,9 +1,0 @@
-<!--
-Description: Euml
-Expect:      feed['title'] == u'testing \xcb entity'
--->
-<rss>
-<channel>
-<title>testing &Euml; entity</title>
-</channel>
-</rss>

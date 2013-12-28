@@ -19,6 +19,7 @@ import newspaper
 from newspaper import Article, ArticleException
 from newspaper import Source, Article
 from newspaper.network import multithread_request
+from newspaper.configuration import Configuration
 
 def print_test(method):
     """utility method for print verbalizing test suite, prints out
@@ -47,7 +48,6 @@ class ArticleTestCase(unittest.TestCase):
         self.test_download_html()
         self.test_pre_download_parse()
         self.test_parse_html()
-        self.test_article_hash_key()
         self.test_pre_parse_nlp()
         self.test_nlp_body()
 
@@ -94,8 +94,6 @@ class ArticleTestCase(unittest.TestCase):
             assert self.article.text == f.read()
         assert self.article.top_img == TOP_IMG
         assert self.article.authors == AUTHORS
-        assert self.article.domain == DOMAIN
-        assert self.article.scheme == SCHEME
         assert self.article.title == TITLE
         assert len(self.article.imgs) == LEN_IMGS
 
@@ -125,11 +123,6 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
 
-    @print_test
-    def test_article_hash_key(self):
-        KEY = 'jyYRJb9K6kN4-oiKfZvM1Q=='
-        assert self.article.get_key() == KEY
-
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
         print 'testing source unit'
@@ -151,7 +144,9 @@ class SourceTestCase(unittest.TestCase):
         DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
         BRAND = 'cnn'
 
-        s = Source('http://cnn.com', verbose=False)
+        configs = Configuration()
+        configs.verbose = False
+        s = Source('http://cnn.com', configs=configs)
         s.clean_memo_cache()
         s.build()
 
@@ -165,8 +160,9 @@ class SourceTestCase(unittest.TestCase):
 
     @print_test
     def test_cache_categories(self):
-        """builds two same source objects in a row examines speeds of both"""
-
+        """
+        builds two same source objects in a row examines speeds of both
+        """
         s = Source('http://yahoo.com')
         s.download()
         s.parse()
@@ -187,9 +183,10 @@ class UrlTestCase(unittest.TestCase):
 
     @print_test
     def test_valid_urls(self):
-        """prints out a list of urls with our heuristic guess if it is a
-        valid news url purely based on the url"""
-
+        """
+        prints out a list of urls with our heuristic guess if it is a
+        valid news url purely based on the url
+        """
         from newspaper.urls import valid_url
 
         with open(os.path.join(TEST_DIR, 'data/test_urls.txt'), 'r') as f:
@@ -210,9 +207,10 @@ class UrlTestCase(unittest.TestCase):
 
     @print_test
     def test_prepare_url(self):
-        """normalizes a url, removes arguments, hashtags. If a relative url, it
-        merges it with the source domain to make an abs url, etc"""
-
+        """
+        normalizes a url, removes arguments, hashtags. If a relative url, it
+        merges it with the source domain to make an abs url, etc
+        """
         pass
 
 class APITestCase(unittest.TestCase):
@@ -236,20 +234,22 @@ class APITestCase(unittest.TestCase):
         article.download()
         article.parse()
         article.nlp()
-        #print article.title
-        #print article.summary
-        #print article.keywords
+        # print article.title
+        # print article.summary
+        # print article.keywords
 
     @print_test
     def test_hot_trending(self):
-        """grab google trending, just make sure this runs"""
-
+        """
+        grab google trending, just make sure this runs
+        """
         newspaper.hot()
 
     @print_test
     def test_popular_urls(self):
-        """just make sure this runs"""
-
+        """
+        just make sure this runs
+        """
         newspaper.popular_urls()
 
 if __name__ == '__main__':

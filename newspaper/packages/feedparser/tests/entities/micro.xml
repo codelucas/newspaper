@@ -1,9 +1,0 @@
-<!--
-Description: micro
-Expect:      feed['title'] == u'testing \xb5 entity'
--->
-<rss>
-<channel>
-<title>testing &micro; entity</title>
-</channel>
-</rss>

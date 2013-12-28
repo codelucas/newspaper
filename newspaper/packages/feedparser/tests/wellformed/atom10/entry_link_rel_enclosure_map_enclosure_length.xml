@@ -1,9 +1,0 @@
-<!--
-Description: entry link rel='enclosure'
-Expect:      not bozo and entries[0]['enclosures'][0]['length'] == u'42301'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-  <link rel="enclosure" type="video/mpeg4" href="http://www.example.com/movie.mp4" length="42301"/>
-</entry>
-</feed>

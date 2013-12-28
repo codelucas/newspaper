@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!--
-Header:      Content-type: text/plain; charset=utf-8
-Description: text/plain + charset
-Expect:      bozo and encoding == 'utf-8'
--->
-<rss version="2.0">
-</rss>

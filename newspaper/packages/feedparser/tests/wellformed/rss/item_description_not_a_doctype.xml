@@ -1,9 +1,0 @@
-<!--
-Description: item description is not a DOCTYPE (but HTML parser thinks it is)
-Expect:      not bozo and entries[0]['description'] == """&lt;!' <a href="foo">"""
--->
-<rss>
-<item>
-<description>&lt;!' &lt;a href="foo"&gt;</description>
-</item>
-</rss>

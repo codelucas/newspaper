@@ -1,9 +1,0 @@
-<!--
-Description: & test 57
-Expect:      not bozo and entries[0]['title_detail']['value'] == u'<strong>&#x26;</strong>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-	  <title type="text/html" mode="escaped"><![CDATA[<strong>&#x26;</strong>]]></title>
-</entry>
-</feed>

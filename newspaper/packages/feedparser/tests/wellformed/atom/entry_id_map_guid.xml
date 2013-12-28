@@ -1,9 +1,0 @@
-<!--
-Description: entry id maps to guid
-Expect:      not bozo and entries[0]['guid'] == u'http://example.com/'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <id>http://example.com/</id>
-</entry>
-</feed>

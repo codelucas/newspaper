@@ -1,7 +1,0 @@
-<!--
-Description: feed copyright contains applet
-Expect:      not bozo and feed['copyright'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<copyright type="text/html" mode="escaped">safe&lt;applet code="foo.class" codebase="http://www.example.com/">&lt;/applet> description</copyright>
-</feed>

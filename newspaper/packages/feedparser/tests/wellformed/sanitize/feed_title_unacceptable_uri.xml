@@ -1,7 +1,0 @@
-<!--
-Description: anchor href contains unacceptable uri scheme
-Expect:      not bozo and feed['title'] == u'<a href="">safe</a>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="html">&lt;a href="javascript:alert(1)"&gt;safe&lt;/a&gt;</title>
-</feed>

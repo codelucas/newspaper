@@ -1,9 +1,0 @@
-<!--
-Description: zwj
-Expect:      feed['title'] == u'testing \u200d entity'
--->
-<rss>
-<channel>
-<title>testing &zwj; entity</title>
-</channel>
-</rss>

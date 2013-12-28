@@ -1,9 +1,0 @@
-<!--
-Description: frac12
-Expect:      feed['title'] == u'testing \xbd entity'
--->
-<rss>
-<channel>
-<title>testing &frac12; entity</title>
-</channel>
-</rss>

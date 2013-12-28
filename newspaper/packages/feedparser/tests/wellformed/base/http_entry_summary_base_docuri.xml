@@ -1,9 +1,0 @@
-<!--
-Description: entry summary relative to document URI
-Expect:      not bozo and entries[0]['summary'] == u'<div><a href="http://127.0.0.1:8097/relative/uri">click here</a></div>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-<summary type="text/html" mode="escaped">&lt;div>&lt;a href="/relative/uri">click here&lt;/a>&lt;/div></summary>
-</entry>
-</feed>

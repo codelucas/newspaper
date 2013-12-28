@@ -1,9 +1,0 @@
-<!--
-Description: clubs
-Expect:      feed['title'] == u'testing \u2663 entity'
--->
-<rss>
-<channel>
-<title>testing &clubs; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description: channel title contains apos entity
-Expect:      not bozo and feed['title'] == u"Mark's title"
--->
-<rss version="0.91">
-<channel>
-<title>Mark&apos;s title</title>
-</channel>
-</rss>

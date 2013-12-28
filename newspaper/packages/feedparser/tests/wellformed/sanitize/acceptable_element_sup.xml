@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <sup></sup>
-Expect:       not bozo and entries[0]['description'] == '<sup></sup>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;sup&gt;&lt;/sup&gt;</content>
-</entry>
-</feed>

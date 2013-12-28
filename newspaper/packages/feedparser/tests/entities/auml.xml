@@ -1,9 +1,0 @@
-<!--
-Description: auml
-Expect:      feed['title'] == u'testing \xe4 entity'
--->
-<rss>
-<channel>
-<title>testing &auml; entity</title>
-</channel>
-</rss>

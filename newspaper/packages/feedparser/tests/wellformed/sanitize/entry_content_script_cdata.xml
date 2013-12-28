@@ -1,9 +1,0 @@
-<!--
-Description: entry content contains script (cdata)
-Expect:      not bozo and entries[0]['content'][0]['value'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-<content type="text/html" mode="escaped"><![CDATA[safe<script type="text/javascript">location.href='http:/'+'/example.com/';</script> description]]></content>
-</entry>
-</feed>

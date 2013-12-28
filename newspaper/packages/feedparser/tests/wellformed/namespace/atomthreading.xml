@@ -1,5 +1,0 @@
-<!--
-Description:  Atom threading extension
-Expect:       not bozo and feed['thr_in-reply-to']['href'] == u'http://salmon-test.blogspot.com/2009/10/test-post.html' and feed['thr_in-reply-to']['ref'] == u'tag:blogger.com,1999:blog-893591374313312737.post-3861663258538857954' and feed['thr_in-reply-to']['source'] == u'http://www.blogger.com/feeds/893591374313312737/posts/default/3861663258538857954' and feed['thr_in-reply-to']['type'] == u'text/html'
--->
-<feed xmlns="http://www.w3.org/2005/Atom"><thr:in-reply-to xmlns:thr='http://purl.org/syndication/thread/1.0' href='http://salmon-test.blogspot.com/2009/10/test-post.html' ref='tag:blogger.com,1999:blog-893591374313312737.post-3861663258538857954' source='http://www.blogger.com/feeds/893591374313312737/posts/default/3861663258538857954' type='text/html'/></feed>

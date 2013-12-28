@@ -1,9 +1,0 @@
-<!--
-Description: lfloor
-Expect:      feed['title'] == u'testing \u230a entity'
--->
-<rss>
-<channel>
-<title>testing &lfloor; entity</title>
-</channel>
-</rss>

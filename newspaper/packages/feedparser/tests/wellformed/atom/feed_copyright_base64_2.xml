@@ -1,9 +1,0 @@
-<!--
-Description: feed copyright base64-encoded
-Expect:      not bozo and feed['copyright'] == u'<p>History of the &lt;blink&gt; tag</p>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<copyright mode="base64">
-PHA+SGlzdG9yeSBvZiB0aGUgJmx0O2JsaW5rJmd0OyB0YWc8L3A+
-</copyright>
-</feed>

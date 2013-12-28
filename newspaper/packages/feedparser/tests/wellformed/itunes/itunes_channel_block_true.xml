@@ -1,9 +1,0 @@
-<!--
-Description: iTunes block="true"
-Expect:      not bozo and feed['itunes_block'] == 0
--->
-<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
-<channel>
-  <itunes:block>true</itunes:block>
-</channel>
-</rss>

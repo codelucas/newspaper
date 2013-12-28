@@ -1,9 +1,0 @@
-<!--
-Description: notin
-Expect:      feed['title'] == u'testing \u2209 entity'
--->
-<rss>
-<channel>
-<title>testing &notin; entity</title>
-</channel>
-</rss>

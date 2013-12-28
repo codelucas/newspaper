@@ -1,6 +1,0 @@
-<!--
-Description: CDF channel href maps to links
-Expect:      not bozo and feed['links'][0]['href'] == u'http://www.example.org/'
--->
-<CHANNEL HREF="http://www.example.org/">
-</CHANNEL>

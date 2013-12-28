@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<!--
-Header:      Content-type: application/xml;charset= "us-ascii"
-Description: application/xml + explicit charset
-Expect:      not bozo and encoding == 'us-ascii'
--->
-<rss version="2.0">
-</rss>

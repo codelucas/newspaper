@@ -1,9 +1,0 @@
-<!--
-Description: entry title with explicit type='text/plain' contains brackets that are not markup
-Expect:      not bozo and entries[0]['title'] == u'History of the <blink> tag'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <title type="text/plain">History of the &lt;blink&gt; tag</title>
-</entry>
-</feed>

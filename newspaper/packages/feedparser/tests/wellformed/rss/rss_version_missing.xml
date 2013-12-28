@@ -1,9 +1,0 @@
-<!--
-Description: missing RSS version number
-Expect:      not bozo and version == u'rss'
--->
-<rss>
-<channel>
-<description>Example description</description>
-</channel>
-</rss>

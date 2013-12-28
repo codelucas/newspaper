@@ -1,9 +1,0 @@
-<!--
-Description: Igrave
-Expect:      feed['title'] == u'testing \xcc entity'
--->
-<rss>
-<channel>
-<title>testing &Igrave; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description: tilde
-Expect:      feed['title'] == u'testing \u02dc entity'
--->
-<rss>
-<channel>
-<title>testing &tilde; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description:  MathML w/XLink
-Expect:       not bozo and entries[0]['description'] == '<math xmlns="http://www.w3.org/1998/Math/MathML"><mrow xlink:href="http://golem.ph.utexas.edu" xlink:show="replace" xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mrow></math>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry xmlns:xlink="http://www.w3.org/1999/xlink">
-<content type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow xlink:type="simple" xlink:show="replace" xlink:href="http://golem.ph.utexas.edu"><mrow><mi>a</mi><mo>+</mo><mi>b</mi></mrow></mrow></math></div></content>
-</entry>
-</feed>

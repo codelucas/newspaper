@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="cspc850multilingual"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('cspc850multilingual')
-Description: \x80 character in cspc850multilingual encoding
-Expect:      not bozo and feed['title'] == u'\xc7'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

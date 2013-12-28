@@ -1,9 +1,0 @@
-<!--
-Description: crashes
-Expect:      1
--->
-<rss>
-<item>
-<description>&lt;a href=&quot;http://example.com&quot;&gt;&lt;img src=&quot;http://example.com/logo.gif&quot; alt=&quot;The image &amp;acirc;&amp;#128;&amp;#156;http://example.com/logo.gif&amp;acirc;&amp;#128;&amp;#65533; cannot be displayed, because it contains errors.&quot;&gt;&lt;/a&gt;&lt;br&gt;</description>
-</item>
-</rss>

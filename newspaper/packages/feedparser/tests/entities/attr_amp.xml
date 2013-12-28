@@ -1,7 +1,0 @@
-<!--
-Description: Resolve &amp; in attributes
-Expect: feed.link == u"http://domain/?a=1&b=2"
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <link rel="alternate" href="http://domain/?a=1&amp;b=2" />
-</feed

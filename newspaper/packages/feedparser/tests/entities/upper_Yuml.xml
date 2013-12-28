@@ -1,9 +1,0 @@
-<!--
-Description: Yuml
-Expect:      feed['title'] == u'testing \u0178 entity'
--->
-<rss>
-<channel>
-<title>testing &Yuml; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description: dagger
-Expect:      feed['title'] == u'testing \u2020 entity'
--->
-<rss>
-<channel>
-<title>testing &dagger; entity</title>
-</channel>
-</rss>

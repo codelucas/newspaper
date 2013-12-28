@@ -1,7 +1,0 @@
-<!--
-Description: feed title relative to document URI
-Expect:      not bozo and feed['title'] == u'<div><a href="http://127.0.0.1:8097/relative/uri">click here</a></div>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title type="application/xhtml+xml" mode="xml"><div xmlns="http://www.w3.org/1999/xhtml"><a href="/relative/uri">click here</a></div></title>
-</feed>

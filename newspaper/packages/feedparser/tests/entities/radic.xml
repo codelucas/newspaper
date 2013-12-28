@@ -1,9 +1,0 @@
-<!--
-Description: radic
-Expect:      feed['title'] == u'testing \u221a entity'
--->
-<rss>
-<channel>
-<title>testing &radic; entity</title>
-</channel>
-</rss>

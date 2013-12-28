@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <nextid></nextid>
-Expect:       not bozo and entries[0]['description'] == '<nextid></nextid>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;nextid&gt;&lt;/nextid&gt;</content>
-</entry>
-</feed>

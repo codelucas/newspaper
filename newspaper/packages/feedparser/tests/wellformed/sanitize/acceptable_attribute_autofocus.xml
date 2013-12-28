@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain autofocus attribute
-Expect:       not bozo and entries[0]['description'] == '<span autofocus=""></span>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;span autofocus=""&gt;&lt;/span&gt;</content>
-</entry>
-</feed>

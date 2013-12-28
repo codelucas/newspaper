@@ -1,7 +1,0 @@
-<!--
-Description: feed info escaped HTML
-Expect:      not bozo and feed['info'] == u'Example <b>Atom</b>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <info type="text/html" mode="escaped">Example &lt;b&gt;Atom&lt;/b&gt;</info>
-</feed>

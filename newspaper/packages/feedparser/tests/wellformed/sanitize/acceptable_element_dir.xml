@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <dir></dir>
-Expect:       not bozo and entries[0]['description'] == '<dir></dir>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;dir&gt;&lt;/dir&gt;</content>
-</entry>
-</feed>

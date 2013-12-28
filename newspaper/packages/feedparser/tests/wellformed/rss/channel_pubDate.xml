@@ -1,9 +1,0 @@
-<!--
-Description: channel pubDate
-Expect:      not bozo and feed['published'] == u'Thu, 01 Jan 2004 19:48:21 GMT'
--->
-<rss version="2.0">
-<channel>
-<pubDate>Thu, 01 Jan 2004 19:48:21 GMT</pubDate>
-</channel>
-</rss>

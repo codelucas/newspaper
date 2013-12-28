@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <multicol></multicol>
-Expect:       not bozo and entries[0]['description'] == '<multicol></multicol>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;multicol&gt;&lt;/multicol&gt;</content>
-</entry>
-</feed>

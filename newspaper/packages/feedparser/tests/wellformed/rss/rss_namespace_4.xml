@@ -1,9 +1,0 @@
-<!--
-Description: RSS Userland namespace #4
-Expect:      not bozo and feed['description'] == u'Example description'
--->
-<rss xmlns="http://blogs.law.harvard.edu/tech/rss">
-<channel>
-<description>Example description</description>
-</channel>
-</rss>

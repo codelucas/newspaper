@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="857"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('857')
-Description: \x80 character in 857 encoding
-Expect:      not bozo and feed['title'] == u'\xc7'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

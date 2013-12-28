@@ -1,8 +1,0 @@
-<!--
-Description: feed copyright content xml:base inherits properly on new element
-Expect:      not bozo and feed['copyright_detail']['base'] == u'http://example.com/parent/'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:base="http://example.com/parent/">
-  <info type="application/xhtml+xml" xml:base="http://example.com/info/"><div xmlns="http://www.w3.org/1999/xhtml">blah blah blah</div></info>
-  <copyright type="application/xhtml+xml"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></copyright>
-</feed>

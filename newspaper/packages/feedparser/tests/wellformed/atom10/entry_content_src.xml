@@ -1,9 +1,0 @@
-<!--
-Description: entry content src
-Expect:      not bozo and entries[0]['content'][0]['src'] == u'http://example.com/movie.mp4'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-  <content src="http://example.com/movie.mp4"/>
-</entry>
-</feed>

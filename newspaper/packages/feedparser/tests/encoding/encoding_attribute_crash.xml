@@ -1,9 +1,0 @@
-<!--
-Description: crashes
-Expect:      1
--->
-<rss>
-<item>
-<description><![CDATA[<img alt="&#169;" />]]></description>
-</item>
-</rss>

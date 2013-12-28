@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <center></center>
-Expect:       not bozo and entries[0]['description'] == '<center></center>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;center&gt;&lt;/center&gt;</content>
-</entry>
-</feed>

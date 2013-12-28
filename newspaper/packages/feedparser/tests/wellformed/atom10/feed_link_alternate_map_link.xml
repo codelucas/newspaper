@@ -1,7 +1,0 @@
-<!--
-Description: feed link href maps to link if rel="alternate" and type="text/html"
-Expect:      not bozo and feed['link'] == u'http://www.example.com/'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <link rel="alternate" type="text/html" href="http://www.example.com/"/>
-</feed>

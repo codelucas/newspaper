@@ -1,9 +1,0 @@
-<!--
-Description: entry content mode=escaped
-Expect:      1
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <content type="text/html" mode="escaped">Example &lt;b&gt;Atom&lt;/b&gt;</content>
-</entry>
-</feed>

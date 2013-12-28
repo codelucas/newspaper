@@ -1,9 +1,0 @@
-<!--
-Description: feed title mode=base64
-Expect:      1
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <title mode="base64">
-    RXhhbXBsZSA8Yj5BdG9tPC9iPg==
-  </title>
-</feed>

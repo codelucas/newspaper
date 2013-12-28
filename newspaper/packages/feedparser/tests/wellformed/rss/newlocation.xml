@@ -1,9 +1,0 @@
-<!--
-Description: rss newLocation
-Expect: not bozo and feed.newlocation == u'http://example/new'
--->
-<rss version="2.0">
-<redirect>
-   <newLocation>http://example/new</newLocation>
-</redirect>
-</rss>

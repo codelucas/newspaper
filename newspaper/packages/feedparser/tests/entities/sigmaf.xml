@@ -1,9 +1,0 @@
-<!--
-Description: sigmaf
-Expect:      feed['title'] == u'testing \u03c2 entity'
--->
-<rss>
-<channel>
-<title>testing &sigmaf; entity</title>
-</channel>
-</rss>

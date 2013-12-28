@@ -1,7 +1,0 @@
-<!--
-Description: Atom namespace (official)
-Expect:      not bozo and feed['title'] == u'Example Atom'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Example Atom</title>
-</feed>

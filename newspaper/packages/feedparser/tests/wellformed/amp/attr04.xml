@@ -1,9 +1,0 @@
-<!--
-Description: & attr test 4
-Expect:      not bozo and entries[0]['title_detail']['value'] == u'<a title="&amp;">&amp;</a>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-	  <title type="application/xhtml+xml" mode="xml"><div xmlns="http://www.w3.org/1999/xhtml"><a title="&#38;">&#38;</a></div></title>
-</entry>
-</feed>

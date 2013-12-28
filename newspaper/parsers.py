@@ -1,305 +1,378 @@
 # -*- coding: utf-8 -*-
 
+"""
+Parser objects will only contain operations that manipulate
+or query an lxml or soup dom object generated from an article's
+html.
+"""
 import re
 import logging
-import urlparse
 
 import lxml.html
-import lxml.html.soupparser
+from lxml.html import soupparser
+from lxml import etree
+from copy import deepcopy
 
-from .urls import (
-    prepare_url, get_path, get_domain, get_scheme)
-from .packages.tldextract import tldextract
-from .packages.goose import Goose
+from .text import innerTrim
+from .text import encodeValue
 
 log = logging.getLogger(__name__)
 
-MIN_WORD_COUNT = 100
-MIN_SENT_COUNT = 3
+class Parser(object):
 
-# try:
-#     lxml_root = lxml_wrapper(html)
-# except Exception, e:
-#     log.debug('urls html lxml failed out %s' % e)
-#     try:
-#         lxml_root = soup_wrapper(html)
-#     except Exception, e:
-#         log.debug('urls soup lxml failed out %s' % e)
-#         return []
+    @classmethod
+    def xpath_re(cls, node, expression):
+        regexp_namespace = "http://exslt.org/regular-expressions"
+        items = node.xpath(expression, namespaces={'re': regexp_namespace})
+        return items
 
-# Wrappers exist in case we need to add decorator methods.
+    @classmethod
+    def drop_tag(cls, nodes):
+        if isinstance(nodes, list):
+            for node in nodes:
+                node.drop_tag()
+        else:
+            nodes.drop_tag()
 
-def lxml_wrapper(html):
-    return lxml.html.fromstring(html)
+    @classmethod
+    def root_to_urls(cls, doc, titles):
+        """
+        Return a list of urls from an lxml root
+        """
+        if doc is None:
+            return []
 
-def soup_wrapper(html):
-    return lxml.html.soupparser.fromstring(html)
+        a_tags = doc.xpath('//a')
+        # tries to find titles of link elements via tag text
+        if titles:
+            return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
 
-def get_lxml_root(html):
-    """takes html returns lxml root"""
+        return [ a.get('href') for a in a_tags if a.get('href') ]
 
-    if html is None:
-        return None
-    try:
-        return lxml_wrapper(html)
-    except Exception, e:
-        log.critical(e)
-        return None
+    @classmethod
+    def get_urls(cls, _input, titles=False, regex=False):
+        """
+        inputs html page or doc and returns list of urls, the regex
+        flag indicates we don't parse via lxml and just search the html
+        """
+        if _input is None:
+            log.critical('Must extract urls from either html, text or doc!')
+            return []
 
-def lxml_to_urls(lxml_root, titles):
-    """converts an lxml root into urls, may include <a> text as titles"""
+        # If we are extracting from raw text
+        if regex:
+            _input = re.sub('<[^<]+?>', ' ', _input)
+            _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
+            _input = [i.strip() for i in _input]
+            return _input or []
 
-    if lxml_root is None:
-        return []
+        # If the input is html, parse it into a root
+        if isinstance(_input, str) or isinstance(_input, unicode):
+            doc = cls.fromstring(_input)
+        else:
+            doc = _input
 
-    a_tags = lxml_root.xpath('//a')
-    if titles: # tries to find titles of link elements via tag text
-        return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
+        return cls.root_to_urls(doc, titles)
 
-    return [ a.get('href') for a in a_tags if a.get('href') ]
-
-def get_urls(_input, titles=False, regex=False):
-    """returns a list of urls on the html page or lxml_root the regex
-    flag indicates we don't parse via lxml and just search the html"""
-
-    if _input is None:
-        log.critical('Must extract urls from either html, text or lxml_root!')
-        return []
-
-    # If we are extracting from raw text
-    if regex:
-        _input = re.sub('<[^<]+?>', ' ', _input)
-        _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
-        _input = [i.strip() for i in _input]
-        return _input or []
-
-    # If the input is html, parse it into a root
-    if isinstance(_input, str) or isinstance(_input, unicode):
-        lxml_root = get_lxml_root(_input)
-    else:
-        lxml_root = _input
-
-    return lxml_to_urls(lxml_root, titles)
-
-def valid_body(article, verbose=False):
-    """performs a word-count check on article, checks for
-    gallery/video makes sure title length is over 2 words,
-    makes sure fb og: is article"""
-
-    try:
-        og_art=article.lxml_root.xpath('/html/head/meta'
-                    '[@property="og:type"][1]/@content')[0]
-    except:
-        og_art = ''
-
-    wordcount = article.text.split(' ')
-    sentcount = article.text.split('.')
-
-    if og_art == 'article' and wordcount > (MIN_WORD_COUNT - 50):
-        log.debug('%s verified for article and wc' % article.url)
-        return True
-
-    if not article.is_media_news() and not article.text:
-        log.debug('%s caught for no media no text' % article.url)
-        return False
-
-    if article.title is None or len(article.title.split(' ')) < 2:
-        log.debug('%s caught for bad title' % article.url)
-        return False
-
-    if len(wordcount) < MIN_WORD_COUNT:
-        log.debug('%s caught for word cnt' % article.url)
-        return False
-
-    if len(sentcount) < MIN_SENT_COUNT:
-        log.debug('%s caught for sent cnt' % article.url)
-        return False
-
-    if article.html is None or article.html == u'':
-        log.debug('%s caught for no html' % article.url)
-        return False
-
-    log.debug('%s verified for default true' % article.url)
-    return True
-
-def get_top_img(article, method='lxml'):
-    """attempts to pull the top img of an article
-    from 3 plausible locations"""
-
-    root = article.lxml_root
-    # analogous to lxml, but uses BeautifulSoup's root
-    if method == 'soup':
-        safe_img = (root.find('meta', attrs={'property':'og:image'})
-                        or root.find('meta', attrs={'name':'og:image'}))
-        if safe_img:
-            safe_img = safe_img.get('content')
-
-        if not safe_img:
-            safe_img = (root.find('link', attrs={'rel':'img_src'})
-                            or root.find('link', attrs={'rel':'icon'}))
+    @classmethod
+    def get_top_img_url(cls, doc, method):
+        """
+        takes an lxml doc and returns the top img url
+        running as method == 'soup' assumes lxml's soupparser
+        """
+        if method == 'soup':
+            safe_img = (doc.find('meta', attrs={'property':'og:image'})
+                            or doc.find('meta', attrs={'name':'og:image'}))
             if safe_img:
                 safe_img = safe_img.get('content')
 
-        if not safe_img:
-            safe_img = ''
+            if not safe_img:
+                safe_img = (doc.find('link', attrs={'rel':'img_src'})
+                                or doc.find('link', attrs={'rel':'icon'}))
+                if safe_img:
+                    safe_img = safe_img.get('content')
 
-        return safe_img
-    # Otherwise, lxml
-    try:
-        return root.xpath('/html/head/meta'
-                '[@property="og:image"][1]/@content')[0]
-    except: pass
-    try:
-        return root.xpath('/html/head/link'
-                '[@rel="icon"][1]/@href')[0]
-    except: pass
-    try:
-        return root.xpath('/html/head/link'
-                '[@rel="img_src"][1]/@href')[0]
-    except: pass
-    try:
-        return root.xpath('/html/head/meta'
-                '[@name="og:image"][1]/@content')[0]
-    except: pass
+            if not safe_img:
+                safe_img = ''
 
-    return None
+            return safe_img
 
-def get_imgs(article, method='lxml'):
-    """return all of the images on an html page, lxml root"""
+        # Otherwise, lxml root
+        try:
+            return doc.xpath('/html/head/meta'
+                    '[@property="og:image"][1]/@content')[0]
+        except: pass
+        try:
+            return doc.xpath('/html/head/link'
+                    '[@rel="icon"][1]/@href')[0]
+        except: pass
+        try:
+            return doc.xpath('/html/head/link'
+                    '[@rel="img_src"][1]/@href')[0]
+        except: pass
+        try:
+            return doc.xpath('/html/head/meta'
+                    '[@name="og:image"][1]/@content')[0]
+        except: pass
 
-    if method == 'soup':
-        img_links = article.soup_root.findAll('img')
-        img_links = [ i.get('src') for i in img_links if i.get('src')  ]
-        img_links = [ urlparse.urljoin(article.href, url)
-                            for url in img_links ]
-        return img_links
-    else:
-        img_links = [ urlparse.urljoin(article.url, url)
-                for url in article.lxml_root.xpath('//img/@src') ]
-        return img_links
+        return None
 
-def get_feed_urls(source):
-    """
-    Requires: List of category lxml roots, two types of anchors: categories
-    and feeds (rss). we extract category urls first and then feeds
-    """
-
-    feed_urls = []
-    for category in source.categories:
-        root = category.lxml_root
-        feed_urls.extend(root.xpath('//*[@type="application/rss+xml"]/@href'))
-
-    feed_urls = feed_urls[:50]
-    feed_urls = [ prepare_url(f, source.url) for f in feed_urls ]
-
-    feeds = list(set(feed_urls))
-    return feeds
-
-# extra source_url and source_urls methods are for testing
-def get_category_urls(source, source_url=None, page_urls=None):
-    """
-    REQUIRES: source lxml root and source url takes a domain and finds all of the
-    top level urls, we are assuming that these are the category urls
-
-    cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
-    """
-
-    source_url = source.url if source_url is None else source_url
-    page_urls = get_urls(source.lxml_root) if page_urls is None else page_urls
-
-    valid_categories = []
-    for p_url in page_urls:
-        scheme = get_scheme(p_url, allow_fragments=False)
-        domain = get_domain(p_url, allow_fragments=False)
-        path = get_path(p_url, allow_fragments=False)
-
-        if not domain and not path:
-            continue
-        if path and '#' in path:
-            continue
-        if scheme and (scheme!='http' and scheme!='https'):
-            continue
-
-        if domain:
-            child_tld = tldextract.extract(p_url)
-            domain_tld = tldextract.extract(source_url)
-
-            if child_tld.domain != domain_tld.domain:
-                continue
-            elif child_tld.subdomain in ['m', 'i']:
-                continue
+    @classmethod
+    def get_img_urls(cls, doc, method):
+        """
+        return all of the images on an html page, lxml root
+        """
+        try:
+            if method == 'soup':
+                img_tags = doc.findAll('img')
+                img_links = [ i.get('src') for i in img_tags if i.get('src')  ]
             else:
-                valid_categories.append(scheme+'://'+domain)
-        else:
-            # we want a path with just one subdir
-            # cnn.com/world and cnn.com/world/ are both valid_categories
-            path_chunks = [ x for x in path.split('/') if len(x) > 0 ]
+                img_links = doc.xpath('//img/@src')
+        except Exception, e:
+            print str(e)
+            log.critical(e)
+            return []
 
-            if 'index.html' in path_chunks:
-                path_chunks.remove('index.html')
+        return img_links
 
-            if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
-                valid_categories.append(domain+path)
+    @classmethod
+    def get_feed_urls(cls, doc):
+        """
+        returns list of feed urls on an lxml root
+        """
+        try:
+            return doc.xpath('//*[@type="application/rss+xml"]/@href')
+        except Exception, e:
+            print str(e)
+            log.critical(e)
+            return []
 
-    stopwords = [
-        'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
-        'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
-        'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon', 'youtube',
-        'vimeo', 'store', 'mail', 'preferences', 'maps', 'password', 'imgur',
-        'flickr', 'search', 'subscription', 'itunes', 'siteindex', 'events',
-        'stop', 'jobs', 'careers', 'newsletter', 'subscribe', 'academy',
-        'shopping', 'purchase', 'site-map', 'shop', 'donate', 'newsletter',
-        'product', 'advert', 'info', 'tickets', 'coupons', 'forum', 'board',
-        'archive', 'browse', 'howto', 'how to', 'faq', 'terms', 'charts',
-        'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register']
+    @classmethod
+    def get_meta_type(cls, doc):
+        """
+        returns the meta "type" of an article
+        """
+        try:
+            return doc.xpath('/html/head/meta[@property="og:type"][1]/@content')[0]
+        except Exception, e:
+            print str(e)
+            log.critical(e)
+            return u''
+    @classmethod
+    def get_description(cls, doc):
+        """
+        returns meta description
+        """
+        try:
+            _list = doc.xpath('//meta[@name="description"]')
+            if len(_list) > 0:
+                content_list = _list[0].xpath('@content')
+                if len(content_list) > 0:
+                    return content_list[0]
+        except Exception, e:
+            print str(e)
+            log.critical(e)
+            return u''
 
-    _valid_categories = []
+    @classmethod
+    def css_select(cls, node, selector):
+        return node.cssselect(selector)
 
-    # TODO Stop spamming urlparse and tldextract calls...
+    @classmethod
+    def fromstring(cls, html):
+        html = encodeValue(html)
+        cls.doc = lxml.html.fromstring(html)
+        return cls.doc
 
-    for p_url in valid_categories:
-        path = get_path(p_url)
-        subdomain = tldextract.extract(p_url).subdomain
-        conjunction = path + ' ' + subdomain
-        bad = False
-        for badword in stopwords:
-            if badword.lower() in conjunction.lower():
-                bad=True
+    # @classmethod
+    # def set_doc(cls, html):
+    #    cls.doc = cls.fromstring(html)
+
+    @classmethod
+    def nodeToString(cls, node):
+        return etree.tostring(node)
+
+    @classmethod
+    def replaceTag(cls, node, tag):
+        node.tag = tag
+
+    @classmethod
+    def stripTags(cls, node, *tags):
+        etree.strip_tags(node, *tags)
+
+    @classmethod
+    def getElementById(cls, node, idd):
+        selector = '//*[@id="%s"]' % idd
+        elems = node.xpath(selector)
+        if elems:
+            return elems[0]
+        return None
+
+    @classmethod
+    def getElementsByTag(cls, node, tag=None, attr=None, value=None, childs=False):
+        NS = "http://exslt.org/regular-expressions"
+        # selector = tag or '*'
+        selector = 'descendant-or-self::%s' % (tag or '*')
+        if attr and value:
+            selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
+        elems = node.xpath(selector, namespaces={"re": NS})
+        # remove the root node
+        # if we have a selection tag
+        if node in elems and (tag or childs):
+            elems.remove(node)
+        return elems
+
+    @classmethod
+    def appendChild(cls, node, child):
+        node.append(child)
+
+    @classmethod
+    def childNodes(cls, node):
+        return list(node)
+
+    @classmethod
+    def childNodesWithText(cls, node):
+        root = node
+        # create the first text node
+        # if we have some text in the node
+        if root.text:
+            t = lxml.html.HtmlElement()
+            t.text = root.text
+            t.tag = 'text'
+            root.text = None
+            root.insert(0, t)
+        # loop childs
+        for c, n in enumerate(list(root)):
+            idx = root.index(n)
+            # don't process texts nodes
+            if n.tag == 'text':
+                continue
+            # create a text node for tail
+            if n.tail:
+                t = cls.createElement(tag='text', text=n.tail, tail=None)
+                root.insert(idx + 1, t)
+        return list(root)
+
+    @classmethod
+    def textToPara(cls, text):
+        return cls.fromstring(text)
+
+    @classmethod
+    def getChildren(cls, node):
+        return node.getchildren()
+
+    @classmethod
+    def getElementsByTags(cls, node, tags):
+        selector = ','.join(tags)
+        elems = cls.css_select(node, selector)
+        # remove the root node
+        # if we have a selection tag
+        if node in elems:
+            elems.remove(node)
+        return elems
+
+    @classmethod
+    def createElement(cls, tag='p', text=None, tail=None):
+        t = lxml.html.HtmlElement()
+        t.tag = tag
+        t.text = text
+        t.tail = tail
+        return t
+
+    @classmethod
+    def getComments(cls, node):
+        return node.xpath('//comment()')
+
+    @classmethod
+    def getParent(cls, node):
+        return node.getparent()
+
+    @classmethod
+    def remove(cls, node):
+        parent = node.getparent()
+        if parent is not None:
+            if node.tail:
+                prev = node.getprevious()
+                if prev is None:
+                    if not parent.text:
+                        parent.text = ''
+                    parent.text += u' ' + node.tail
+                else:
+                    if not prev.tail:
+                        prev.tail = ''
+                    prev.tail += u' ' + node.tail
+            node.clear()
+            parent.remove(node)
+
+    @classmethod
+    def getTag(cls, node):
+        return node.tag
+
+    @classmethod
+    def getText(cls, node):
+        txts = [i for i in node.itertext()]
+        return innerTrim(u' '.join(txts).strip())
+
+    @classmethod
+    def previousSiblings(cls, node):
+        nodes = []
+        for c, n in enumerate(node.itersiblings(preceding=True)):
+            nodes.append(n)
+        return nodes
+
+    @classmethod
+    def previousSibling(cls, node):
+        nodes = []
+        for c, n in enumerate(node.itersiblings(preceding=True)):
+            nodes.append(n)
+            if c == 0:
                 break
-        if not bad:
-            _valid_categories.append(p_url)
+        return nodes[0] if nodes else None
 
-    _valid_categories.append('/') # add the root!
+    @classmethod
+    def nextSibling(cls, node):
+        nodes = []
+        for c, n in enumerate(node.itersiblings(preceding=False)):
+            nodes.append(n)
+            if c == 0:
+                break
+        return nodes[0] if nodes else None
 
-    for i, p_url in enumerate(_valid_categories):
-        if p_url.startswith('://') :
-            p_url = 'http' + p_url
-            _valid_categories[i] = p_url
+    @classmethod
+    def isTextNode(cls, node):
+        return True if node.tag == 'text' else False
 
-        elif p_url.startswith('//'):
-            p_url = 'http:' + p_url
-            _valid_categories[i] = p_url
+    @classmethod
+    def getAttribute(cls, node, attr=None):
+        if attr:
+            return node.attrib.get(attr, None)
+        return attr
 
-        if p_url.endswith('/'):
-            p_url = p_url[:-1]
-            _valid_categories[i] = p_url
+    @classmethod
+    def delAttribute(cls, node, attr=None):
+        if attr:
+            _attr = node.attrib.get(attr, None)
+            if _attr:
+                del node.attrib[attr]
 
-    _valid_categories = list(set(_valid_categories))
+    @classmethod
+    def setAttribute(cls, node, attr=None, value=None):
+        if attr and value:
+            node.set(attr, value)
 
-    category_urls = [prepare_url(p_url, source_url) for p_url in _valid_categories]
-    category_urls = [c for c in category_urls if c is not None]
-    return category_urls
+    @classmethod
+    def outerHtml(cls, node):
+        e0 = node
+        if e0.tail:
+            e0 = deepcopy(e0)
+            e0.tail = None
+        return cls.nodeToString(e0)
 
-class GooseObj(object):
-    """encapsulation of goose output"""
 
-    def __init__(self, article):
-        g = Goose()
-        # g2 = Goose({'parser_class':'soup'})
+class ParserSoup(Parser):
+    @classmethod
+    def fromstring(cls, html):
+        html = encodeValue(html)
+        cls.doc = soupparser.fromstring(html)
+        return cls.doc
 
-        goose_obj = g.extract(raw_html=article.html)
-        self.body_text = goose_obj.cleaned_text
-        keywords = goose_obj.meta_keywords.split(',')
-        self.keywords = [w.strip() for w in keywords] # not actual keyw's
-        self.title = goose_obj.title
-        self.authors = goose_obj.authors

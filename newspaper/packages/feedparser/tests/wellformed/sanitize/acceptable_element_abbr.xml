@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <abbr></abbr>
-Expect:       not bozo and entries[0]['description'] == '<abbr></abbr>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;abbr&gt;&lt;/abbr&gt;</content>
-</entry>
-</feed>

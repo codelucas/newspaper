@@ -1,7 +1,0 @@
-<!--
-Header:      X-Foo: bar
-Description: etag should not exist in results if not present in HTTP headers
-Expect:      not bozo and not 'etag' in locals()
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-</feed>

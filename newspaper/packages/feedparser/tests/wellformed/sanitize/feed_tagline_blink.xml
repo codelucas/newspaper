@@ -1,7 +1,0 @@
-<!--
-Description: feed tagline contains blink
-Expect:      not bozo and feed['tagline'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<tagline type="text/html" mode="escaped">&lt;blink>safe&lt;/blink> description</tagline>
-</feed>

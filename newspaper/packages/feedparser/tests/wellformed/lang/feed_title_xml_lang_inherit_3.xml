@@ -1,8 +1,0 @@
-<!--
-Description: feed title xml:lang resets properly on new element
-Expect:      not bozo and feed['title_detail']['language'] == u'de'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#" xml:lang="en">
-  <info type="application/xhtml+xml" xml:lang="fr"><div xmlns="http://www.w3.org/1999/xhtml">blah blah blah</div></info>
-  <title type="application/xhtml+xml" xml:lang="de"><div xmlns="http://www.w3.org/1999/xhtml">Example <a href="test.html">test</a></div></title>
-</feed>

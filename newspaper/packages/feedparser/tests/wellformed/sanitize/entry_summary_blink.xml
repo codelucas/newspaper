@@ -1,9 +1,0 @@
-<!--
-Description: entry summary contains blink
-Expect:      not bozo and entries[0]['summary'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-<summary type="text/html" mode="escaped">&lt;blink>safe&lt;/blink> description</summary>
-</entry>
-</feed>

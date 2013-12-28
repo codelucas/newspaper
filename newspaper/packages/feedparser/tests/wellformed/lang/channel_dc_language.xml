@@ -1,9 +1,0 @@
-<!--
-Description: channel dc:language
-Expect:      not bozo and feed['language'] == u'en'
--->
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<channel>
-<dc:language>en</dc:language>
-</channel>
-</rss>

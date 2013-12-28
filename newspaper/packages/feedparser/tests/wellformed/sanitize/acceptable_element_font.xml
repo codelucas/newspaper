@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <font></font>
-Expect:       not bozo and entries[0]['description'] == '<font></font>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;font&gt;&lt;/font&gt;</content>
-</entry>
-</feed>

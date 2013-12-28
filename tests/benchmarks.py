@@ -33,7 +33,7 @@ PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(PARENT_DIR, '..'))
 
 from newspaper.network import multithread_request, sync_request
-from newspaper.utils import print_duration
+from newspaper.text_utils import print_duration
 
 @print_duration
 def naive_run(urls):

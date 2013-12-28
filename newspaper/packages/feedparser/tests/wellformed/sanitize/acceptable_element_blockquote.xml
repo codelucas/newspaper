@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <blockquote></blockquote>
-Expect:       not bozo and entries[0]['description'] == '<blockquote></blockquote>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;blockquote&gt;&lt;/blockquote&gt;</content>
-</entry>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: spades
-Expect:      feed['title'] == u'testing \u2660 entity'
--->
-<rss>
-<channel>
-<title>testing &spades; entity</title>
-</channel>
-</rss>

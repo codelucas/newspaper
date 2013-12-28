@@ -1,9 +1,0 @@
-<!--
-Description: shy
-Expect:      feed['title'] == u'testing \xad entity'
--->
-<rss>
-<channel>
-<title>testing &shy; entity</title>
-</channel>
-</rss>

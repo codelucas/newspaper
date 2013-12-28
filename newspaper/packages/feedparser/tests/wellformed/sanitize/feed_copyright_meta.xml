@@ -1,7 +1,0 @@
-<!--
-Description: feed copyright contains meta
-Expect:      not bozo and feed['copyright'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<copyright type="text/html" mode="escaped">safe&lt;meta http-equiv="Refresh" content="0; URL=http://example.com/"> description</copyright>
-</feed>

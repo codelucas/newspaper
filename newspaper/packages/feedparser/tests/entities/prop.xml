@@ -1,9 +1,0 @@
-<!--
-Description: prop
-Expect:      feed['title'] == u'testing \u221d entity'
--->
-<rss>
-<channel>
-<title>testing &prop; entity</title>
-</channel>
-</rss>

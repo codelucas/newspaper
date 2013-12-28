@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <source />
-Expect:       not bozo and entries[0]['description'] == '<source />'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;source&gt;&lt;/source&gt;</content>
-</entry>
-</feed>

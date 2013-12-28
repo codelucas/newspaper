@@ -1,9 +1,0 @@
-<!--
-Description: entry link rel='enclosure'
-Expect:      not bozo and entries[0]['links'][0]['rel'] == u'license' and entries[0]['links'][0]['href'] == u'http://www.creativecommons.org/licenses/by-nc/1.0'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-  <link rel="license" href="http://www.creativecommons.org/licenses/by-nc/1.0"/>
-</entry>
-</feed>

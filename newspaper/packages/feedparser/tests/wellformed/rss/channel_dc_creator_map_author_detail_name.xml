@@ -1,9 +1,0 @@
-<!--
-Description: channel dc:creator maps to author_detail name if both name and email are given
-Expect:      not bozo and feed['author_detail']['name'] == u'Example editor'
--->
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/">
-<channel>
-<dc:creator>Example editor (me@example.com)</dc:creator>
-</channel>
-</rss>

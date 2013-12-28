@@ -1,9 +1,0 @@
-<!--
-Description: entry published parsed
-Expect:      not bozo and entries[0]['published_parsed'] == (2003, 12, 31, 10, 14, 55, 2, 365, 0)
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<published>2003-12-31T10:14:55Z</published>
-</entry>
-</feed>

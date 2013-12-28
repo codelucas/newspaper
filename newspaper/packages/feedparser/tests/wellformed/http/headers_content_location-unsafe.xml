@@ -1,9 +1,0 @@
-<!--
-SkipUnless:  feedparser.ACCEPTABLE_URI_SCHEMES
-Header:      Content-Location: javascript:alert('unsafe');
-Description: Content-Location header unsafe URI
-Expect:      not bozo and feed.link == u'http://127.0.0.1:8097/abs'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <link rel="alternate" href="/abs"/>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: ordf
-Expect:      feed['title'] == u'testing \xaa entity'
--->
-<rss>
-<channel>
-<title>testing &ordf; entity</title>
-</channel>
-</rss>

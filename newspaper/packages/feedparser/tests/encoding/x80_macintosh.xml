@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="macintosh"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('macintosh')
-Description: \x80 character in macintosh encoding
-Expect:      not bozo and feed['title'] == u'\xc4'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>Ä</title>
-</feed>

@@ -1,7 +1,0 @@
-<!--
-Description: feed tagline
-Expect:      not bozo and feed['tagline'] == u'Example Atom'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <tagline>Example Atom</tagline>
-</feed>

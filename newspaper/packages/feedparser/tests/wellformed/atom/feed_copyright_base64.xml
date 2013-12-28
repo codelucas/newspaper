@@ -1,9 +1,0 @@
-<!--
-Description: feed copyright base64-encoded
-Expect:      not bozo and feed['copyright'] == u'Example <b>Atom</b>'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <copyright mode="base64">
-    RXhhbXBsZSA8Yj5BdG9tPC9iPg==
-  </copyright>
-</feed>

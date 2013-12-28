@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain poster attribute
-Expect:       not bozo and entries[0]['description'] == '<video poster="http://d.test/p.jpeg"></video>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom" xml:base="http://d.test/">
-<entry>
-<content type="html">&lt;video poster="p.jpeg"&gt;&lt;/video&gt;</content>
-</entry>
-</feed>

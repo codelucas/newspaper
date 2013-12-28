@@ -1,7 +1,0 @@
-<!--
-Description: feed subtitle type='text'
-Expect:      not bozo and feed['subtitle_detail']['type'] == 'text/plain'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <subtitle type="text">Example Atom</subtitle>
-</feed>

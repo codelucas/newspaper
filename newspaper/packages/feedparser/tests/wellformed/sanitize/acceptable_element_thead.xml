@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <thead></thead>
-Expect:       not bozo and entries[0]['description'] == '<thead></thead>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;thead&gt;&lt;/thead&gt;</content>
-</entry>
-</feed>

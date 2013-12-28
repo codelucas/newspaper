@@ -1,8 +1,0 @@
-<!--
-Header:      Content-Location: http://example.com/
-Description: feed link href relative to Content-Location header
-Expect:      not bozo and feed['links'][0]['href'] == u'http://example.com/relative/link'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-  <link rel="alternate" type="text/html" href="/relative/link"/>
-</feed>

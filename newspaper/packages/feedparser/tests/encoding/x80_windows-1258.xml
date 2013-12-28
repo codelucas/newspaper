@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="windows-1258"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('windows-1258')
-Description: \x80 character in windows-1258 encoding
-Expect:      not bozo and feed['title'] == u'\u20ac'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: item description is not a DOCTYPE (but HTML parser thinks it is)
-Expect:      not bozo and entries[0]['description'] == "<!DOCTYPE"
--->
-<rss>
-<item>
-<description><![CDATA[ <!DOCTYPE ]]></description>
-</item>
-</rss>

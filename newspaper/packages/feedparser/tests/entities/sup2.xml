@@ -1,9 +1,0 @@
-<!--
-Description: sup2
-Expect:      feed['title'] == u'testing \xb2 entity'
--->
-<rss>
-<channel>
-<title>testing &sup2; entity</title>
-</channel>
-</rss>

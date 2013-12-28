@@ -6,7 +6,7 @@ import os
 
 from cookielib import CookieJar as cj
 
-VERSION = '0.0.1'
+VERSION = '0.0.3'
 
 PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
 

@@ -1,9 +1,0 @@
-<!--
-Description: normal language
-Expect:      not bozo and feed['language'] == u'en-us'
--->
-<rss version="2.0">
-<channel>
-<language>en-us</language>
-</channel>
-</rss>

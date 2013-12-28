@@ -1,6 +1,0 @@
-<!--
-Description: Atom 1.0 version from namespace
-Expect:      not bozo and version == u'atom10'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-</feed>

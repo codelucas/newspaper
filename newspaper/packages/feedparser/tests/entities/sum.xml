@@ -1,9 +1,0 @@
-<!--
-Description: sum
-Expect:      feed['title'] == u'testing \u2211 entity'
--->
-<rss>
-<channel>
-<title>testing &sum; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<!--
-Description: fnof
-Expect:      feed['title'] == u'testing \u0192 entity'
--->
-<rss>
-<channel>
-<title>testing &fnof; entity</title>
-</channel>
-</rss>

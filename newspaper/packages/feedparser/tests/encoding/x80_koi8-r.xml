@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="koi8-r"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('koi8-r')
-Description: \x80 character in koi8-r encoding
-Expect:      not bozo and feed['title'] == u'\u2500'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>─</title>
-</feed>

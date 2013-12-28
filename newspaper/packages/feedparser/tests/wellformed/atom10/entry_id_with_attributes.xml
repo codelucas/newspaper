@@ -1,9 +1,0 @@
-<!--
-Description: entry id retrieved when element contains attributes
-Expect: not bozo and entries[0]['id'] == u'right'
--->
-<feed xmlns:bogus="http://dom.test/ns">
-    <entry>
-        <id bogus:attr="wrong">right</id>
-    </entry>
-</feed>

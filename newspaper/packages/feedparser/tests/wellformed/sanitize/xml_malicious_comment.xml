@@ -1,7 +1,0 @@
-<!--
-Description: malicious comment
-Expect:      not bozo and feed['title'] == u'safe'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="html">sa&lt;!-- -- nonwhitespace &gt;fe&lt;script&gt;alert(1);&lt;/script&gt;</title>
-</feed>

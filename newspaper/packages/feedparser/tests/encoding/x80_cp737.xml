@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="cp737"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('cp737')
-Description: \x80 character in cp737 encoding
-Expect:      not bozo and feed['title'] == u'\u0391'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

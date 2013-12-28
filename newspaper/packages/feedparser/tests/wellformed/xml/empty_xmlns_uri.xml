@@ -1,9 +1,0 @@
-<!--
-Description: empty xmlns uri
-Expect:      not bozo and feed['title'] == u'empty'
--->
-<rss xmlns="">
-    <channel>
-        <title>empty</title>
-    </channel>
-</rss>

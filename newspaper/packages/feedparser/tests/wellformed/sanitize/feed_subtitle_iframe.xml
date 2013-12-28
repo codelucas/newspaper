@@ -1,7 +1,0 @@
-<!--
-Description: feed subtitle contains iframe
-Expect:      not bozo and feed['tagline'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<subtitle type="text/html" mode="escaped">safe&lt;iframe src="http://example.com/"> description&lt;/iframe></subtitle>
-</feed>

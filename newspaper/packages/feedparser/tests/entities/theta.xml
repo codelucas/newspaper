@@ -1,9 +1,0 @@
-<!--
-Description: theta
-Expect:      feed['title'] == u'testing \u03b8 entity'
--->
-<rss>
-<channel>
-<title>testing &theta; entity</title>
-</channel>
-</rss>

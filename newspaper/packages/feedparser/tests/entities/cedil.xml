@@ -1,9 +1,0 @@
-<!--
-Description: cedil
-Expect:      feed['title'] == u'testing \xb8 entity'
--->
-<rss>
-<channel>
-<title>testing &cedil; entity</title>
-</channel>
-</rss>

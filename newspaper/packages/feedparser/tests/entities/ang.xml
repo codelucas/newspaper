@@ -1,9 +1,0 @@
-<!--
-Description: ang
-Expect:      feed['title'] == u'testing \u2220 entity'
--->
-<rss>
-<channel>
-<title>testing &ang; entity</title>
-</channel>
-</rss>

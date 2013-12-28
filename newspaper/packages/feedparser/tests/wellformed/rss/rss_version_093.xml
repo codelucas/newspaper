@@ -1,6 +1,0 @@
-<!--
-Description: RSS version 0.93
-Expect:      not bozo and version == u'rss093'
--->
-<rss version="0.93">
-</rss>

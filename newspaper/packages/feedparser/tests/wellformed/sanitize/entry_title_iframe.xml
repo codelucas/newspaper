@@ -1,9 +1,0 @@
-<!--
-Description: entry title contains iframe
-Expect:      not bozo and entries[0]['title'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-<title type="text/html" mode="escaped">safe&lt;iframe src="http://www.example.com/">&lt;/iframe> description</title>
-</entry>
-</feed>

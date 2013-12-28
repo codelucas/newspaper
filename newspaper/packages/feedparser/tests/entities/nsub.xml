@@ -1,9 +1,0 @@
-<!--
-Description: nsub
-Expect:      feed['title'] == u'testing \u2284 entity'
--->
-<rss>
-<channel>
-<title>testing &nsub; entity</title>
-</channel>
-</rss>

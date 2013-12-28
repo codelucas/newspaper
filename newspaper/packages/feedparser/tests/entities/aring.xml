@@ -1,9 +1,0 @@
-<!--
-Description: aring
-Expect:      feed['title'] == u'testing \xe5 entity'
--->
-<rss>
-<channel>
-<title>testing &aring; entity</title>
-</channel>
-</rss>

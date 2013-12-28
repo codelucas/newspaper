@@ -1,9 +1,0 @@
-<!--
-Description: nabla
-Expect:      feed['title'] == u'testing \u2207 entity'
--->
-<rss>
-<channel>
-<title>testing &nabla; entity</title>
-</channel>
-</rss>

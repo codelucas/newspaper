@@ -1,9 +1,0 @@
-<!--
-Description: entry title with explicit type='text' contains brackets that are not markup
-Expect:      not bozo and entries[0]['title'] == u'History of the <blink> tag'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-  <title type="text">History of the &lt;blink&gt; tag</title>
-</entry>
-</feed>

@@ -6,16 +6,15 @@ Wherever smart people work, doors are unlocked. -- Steve Wozniak
 """
 
 __title__ = 'newspaper'
-__version__ = '0.0.1'
+__version__ = '0.0.3'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 
-from . import utils
 from .article import Article, ArticleException
 from .source import Source
 from .api import build, build_article, popular_urls, hot
-from .settings import VERSION
+from .version import __version__
 
 # Set default logging handler to avoid "No handler found" warnings.
 import logging

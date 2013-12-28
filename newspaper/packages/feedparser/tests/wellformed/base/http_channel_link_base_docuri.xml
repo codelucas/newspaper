@@ -1,9 +1,0 @@
-<!--
-Description: channel link relative to document URI
-Expect:      not bozo and feed['link'] == u'http://127.0.0.1:8097/relative/uri'
--->
-<rss version="2.0">
-<channel>
-<link>/relative/uri</link>
-</channel>
-</rss>

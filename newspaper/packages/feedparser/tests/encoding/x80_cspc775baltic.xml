@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="cspc775baltic"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('cspc775baltic')
-Description: \x80 character in cspc775baltic encoding
-Expect:      not bozo and feed['title'] == u'\u0106'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

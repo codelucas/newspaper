@@ -1,6 +1,0 @@
-<!--
-Description: RSS version 0.90
-Expect:      not bozo and version == u'rss090'
--->
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://my.netscape.com/rdf/simple/0.9/">
-</rdf:RDF>

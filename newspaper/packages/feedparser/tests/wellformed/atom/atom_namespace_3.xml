@@ -1,7 +1,0 @@
-<!--
-Description: Atom namespace (necho)
-Expect:      not bozo and feed['title'] == u'Example Atom'
--->
-<feed version="0.3" xmlns="http://example.com/necho">
-  <title>Example Atom</title>
-</feed>

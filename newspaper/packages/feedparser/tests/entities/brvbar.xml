@@ -1,9 +1,0 @@
-<!--
-Description: brvbar
-Expect:      feed['title'] == u'testing \xa6 entity'
--->
-<rss>
-<channel>
-<title>testing &brvbar; entity</title>
-</channel>
-</rss>

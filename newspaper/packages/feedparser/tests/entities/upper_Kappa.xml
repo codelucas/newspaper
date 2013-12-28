@@ -1,9 +1,0 @@
-<!--
-Description: Kappa
-Expect:      feed['title'] == u'testing \u039a entity'
--->
-<rss>
-<channel>
-<title>testing &Kappa; entity</title>
-</channel>
-</rss>

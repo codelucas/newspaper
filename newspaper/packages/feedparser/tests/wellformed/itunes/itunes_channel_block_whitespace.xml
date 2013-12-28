@@ -1,9 +1,0 @@
-<!--
-Description: iTunes block with spurious whitespace, see http://lists.apple.com/faq/pub/syndication-dev/index.php?sid=359&aktion=artikel&rubrik=001&id=3&lang=en
-Expect:      not bozo and feed['itunes_block'] == 0
--->
-<rss xmlns:itunes="http://www.itunes.com/DTDs/Podcast-1.0.dtd">
-<channel>
-  <itunes:block> yes </itunes:block>
-</channel>
-</rss>

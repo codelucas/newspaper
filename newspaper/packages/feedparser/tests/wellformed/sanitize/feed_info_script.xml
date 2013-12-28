@@ -1,7 +1,0 @@
-<!--
-Description: feed info contains script
-Expect:      not bozo and feed['info'] == u'safe description'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<info type="text/html" mode="escaped">safe&lt;script type="text/javascript">location.href='http:/'+'/example.com/';&lt;/script> description</info>
-</feed>

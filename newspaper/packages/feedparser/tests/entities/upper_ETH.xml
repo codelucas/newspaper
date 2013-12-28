@@ -1,9 +1,0 @@
-<!--
-Description: ETH
-Expect:      feed['title'] == u'testing \xd0 entity'
--->
-<rss>
-<channel>
-<title>testing &ETH; entity</title>
-</channel>
-</rss>

@@ -32,7 +32,7 @@ def str_to_image(s):
 
 def prepare_image(image):
     image = square_image(image)
-    image.thumbnail(thumbnail_size, Image.ANTIALIAS) # this one is inplace
+    image.thumbnail(thumbnail_size, Image.ANTIALIAS) # inplace
     return image
 
 def image_entropy(img):
@@ -110,8 +110,10 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
                 while not p.image and new_data:
                     try:
                         p.feed(new_data)
-                    except IOError, e: # jpg error on some computers
-                        log.critical('***jpeg misconfiguration! check pillow or pil'
+                    except IOError, e:
+                        # pil failed to install, jpeg codec broken
+                        # **should work if you install via pillow
+                        print ('***jpeg misconfiguration! check pillow or pil'
                                 'installation this machine: %s' % str(e))
                         p = None
                         break
@@ -134,7 +136,7 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
         except (URLError, HTTPError, InvalidURL), e:
             cur_try += 1
             if cur_try >= retries:
-                # log.debug('error while fetching: %s referer: %s' % (url, referer))
+                log.debug('error while fetching: %s refer: %s' % (url, referer))
                 return nothing
         finally:
             if 'open_req' in locals():
@@ -144,16 +146,16 @@ def fetch_size(url, referer=None, retries=1):
     return fetch_url(url, referer, retries, dimension=True)
 
 class Scraper:
-    def __init__(self, url, imgs, top_img):
-        self.url = url
-        self.imgs = imgs
-        self.top_img = top_img
+    def __init__(self, article):
+
+        self.url = article.url # if not url else url
+        self.imgs = article.imgs # if not imgs else imgs
+        self.top_img = article.top_img # if not top_img else top_img
 
     def largest_image_url(self):
         if not self.imgs and not self.top_img:
             return None
 
-        # either og:img tag or link rel-src
         if self.top_img:
             return self.top_img
 
@@ -169,7 +171,7 @@ class Scraper:
 
             # ignore little images
             if area < 5000:
-                # logger.debug('ignore little %s' % img_url)
+                log.debug('ignore little %s' % img_url)
                 continue
 
             # PIL won't scale up, so we set a min width and
@@ -179,19 +181,19 @@ class Scraper:
 
             # ignore excessively long/wide images
             if max(size) / min(size) > 1.5:
-                # logger.debug('ignore dims %s' % img_url)
+                log.debug('ignore dims %s' % img_url)
                 continue
 
             # penalize images with "sprite" in their name
             if 'sprite' in img_url.lower():
-                # logger.debug('penalizing sprite %s' % img_url)
+                log.debug('penalizing sprite %s' % img_url)
                 area /= 10
 
             if area > max_area:
                 max_area = area
                 max_url = img_url
 
-        # log.debug('using max img ' + max_url)
+        log.debug('using max img ' + max_url)
         return max_url
 
     def thumbnail(self):
@@ -205,31 +207,11 @@ class Scraper:
                 try:
                     image = prepare_image(image)
                 except IOError, e:
-                    # print 'can\'t read interlaced PNGs, ignore'
                     if 'interlaced' in e.message:
                         return None
-                    #raise
+                    # raise
                 return image, image_url
 
         return None, None
 
-
-if __name__ == '__main__':
-    import urlparse
-    import lxml.html
-    import requests
-
-    url = 'http://www.cnn.com/'
-    html = requests.get(url).text
-    lxml_root = lxml.html.fromstring(html)
-
-    imgs = [ urlparse.urljoin(url, u)
-             for u in lxml_root.xpath('//img/@src') ]
-    print imgs
-
-    s = Scraper(url, imgs=imgs, top_img=None)
-    img, url = s.thumbnail()
-
-    print 'top img', url
-    # img.save('cnn.png')
 

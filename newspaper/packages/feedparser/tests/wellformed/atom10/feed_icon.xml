@@ -1,7 +1,0 @@
-<!--
-Description: feed icon
-Expect:      not bozo and feed['icon'] == u'http://example.com/favicon.ico'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <icon>http://example.com/favicon.ico</icon>
-</feed>

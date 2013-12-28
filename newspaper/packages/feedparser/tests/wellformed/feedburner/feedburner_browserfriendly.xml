@@ -1,9 +1,0 @@
-<!--
-Description: FeedBurner browserFriendly maps to info
-Expect:      not bozo and feed['info'] == u'This is an XML content feed. It is intended to be viewed in a newsreader or syndicated to another site.'
--->
-<rss version="2.0" xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0">
-<channel>
-  <feedburner:browserFriendly>This is an XML content feed. It is intended to be viewed in a newsreader or syndicated to another site.</feedburner:browserFriendly>
-</channel>
-</rss>

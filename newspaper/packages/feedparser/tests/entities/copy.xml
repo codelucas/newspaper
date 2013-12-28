@@ -1,9 +1,0 @@
-<!--
-Description: copy
-Expect:      feed['title'] == u'testing \xa9 entity'
--->
-<rss>
-<channel>
-<title>testing &copy; entity</title>
-</channel>
-</rss>

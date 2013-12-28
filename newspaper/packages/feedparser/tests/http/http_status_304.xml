@@ -1,9 +1,0 @@
-<!--
-Header:      ETag: "abc123"
-Header:      Last-Modified: Thu, 21 Apr 2011 19:02:20 GMT
-Description: http status 304 (not modified)
-Expect:      0
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-    <item><title>title 304</title></item>
-</feed>

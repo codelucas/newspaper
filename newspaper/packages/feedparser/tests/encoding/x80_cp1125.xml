@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="cp1125"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('cp1125')
-Description: \x80 character in cp1125 encoding
-Expect:      not bozo and feed['title'] == u'\u0410'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

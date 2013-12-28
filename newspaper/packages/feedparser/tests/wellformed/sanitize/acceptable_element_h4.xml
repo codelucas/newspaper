@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <h4></h4>
-Expect:       not bozo and entries[0]['description'] == '<h4></h4>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;h4&gt;&lt;/h4&gt;</content>
-</entry>
-</feed>

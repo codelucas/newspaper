@@ -1,9 +1,0 @@
-<!--
-Description: entry link title
-Expect:      not bozo and entries[0]['links'][0]['title'] == u'Example title'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <link rel="alternate" type="text/html" title="Example title" href="http://www.example.com/"/>
-</entry>
-</feed>

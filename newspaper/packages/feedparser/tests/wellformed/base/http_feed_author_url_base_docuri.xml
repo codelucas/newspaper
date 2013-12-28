@@ -1,9 +1,0 @@
-<!--
-Description: feed author url relative to document URI
-Expect:      not bozo and feed['author_detail']['url'] == u'http://127.0.0.1:8097/relative/link'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<author>
-  <url>/relative/link</url>
-</author>
-</feed>

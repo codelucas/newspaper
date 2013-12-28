@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <ins></ins>
-Expect:       not bozo and entries[0]['description'] == '<ins></ins>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;ins&gt;&lt;/ins&gt;</content>
-</entry>
-</feed>

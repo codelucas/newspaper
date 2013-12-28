@@ -1,7 +1,0 @@
-<!--
-Description: feed title inline XHTML
-Expect:      not bozo and feed['title'] == u'Example <b>Atom</b>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title type="xhtml"><div xmlns="http://www.w3.org/1999/xhtml">Example <b>Atom</b></div></title>
-</feed>

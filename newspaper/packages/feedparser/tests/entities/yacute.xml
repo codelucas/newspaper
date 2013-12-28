@@ -1,9 +1,0 @@
-<!--
-Description: yacute
-Expect:      feed['title'] == u'testing \xfd entity'
--->
-<rss>
-<channel>
-<title>testing &yacute; entity</title>
-</channel>
-</rss>

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ms-arab"?>
-<!--
-SkipUnless:  __import__('codecs').lookup('ms-arab')
-Description: \x80 character in ms-arab encoding
-Expect:      not bozo and feed['title'] == u'\u20ac'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<title>€</title>
-</feed>

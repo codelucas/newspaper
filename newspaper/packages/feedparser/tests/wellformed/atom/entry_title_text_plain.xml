@@ -1,9 +1,0 @@
-<!--
-Description: entry title with explicit type='text/plain'
-Expect:      not bozo and entries[0]['title'] == u'Example Atom'
--->
-<feed version="0.3" xmlns="http://purl.org/atom/ns#">
-<entry>
-  <title type="text/plain">Example Atom</title>
-</entry>
-</feed>

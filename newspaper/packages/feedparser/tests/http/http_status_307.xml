@@ -1,7 +1,0 @@
-<!--
-Header:      Status: 307
-Header:      Location: http://localhost:8097/tests/http/target.xml
-Description: http status 307 (moved permanently)
-Expect:      0
--->
-<feed xmlns="http://www.w3.org/2005/Atom"></feed>

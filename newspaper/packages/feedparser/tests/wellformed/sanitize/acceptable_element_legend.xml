@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <legend></legend>
-Expect:       not bozo and entries[0]['description'] == '<legend></legend>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;legend&gt;&lt;/legend&gt;</content>
-</entry>
-</feed>

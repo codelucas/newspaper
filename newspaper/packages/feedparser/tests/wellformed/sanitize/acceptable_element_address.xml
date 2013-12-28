@@ -1,9 +1,0 @@
-<!--
-Description:  content may contain <address></address>
-Expect:       not bozo and entries[0]['description'] == '<address></address>'
--->
-<feed xmlns="http://www.w3.org/2005/Atom">
-<entry>
-<content type="html">&lt;address&gt;&lt;/address&gt;</content>
-</entry>
-</feed>

@@ -1,9 +1,0 @@
-<!--
-Description: tau
-Expect:      feed['title'] == u'testing \u03c4 entity'
--->
-<rss>
-<channel>
-<title>testing &tau; entity</title>
-</channel>
-</rss>
