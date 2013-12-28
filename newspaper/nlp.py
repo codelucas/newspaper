@@ -12,8 +12,8 @@ with open(STOPWORDS_EN_FN_2, 'r') as f:
 ideal = 20.0
 
 def summarize(url='', title='', text=''):
-    """"""
-
+    """
+    """
     if (text == '' or title == ''):
         return []
 
@@ -36,8 +36,9 @@ def summarize(url='', title='', text=''):
     return summaries
 
 def score(sentences, titleWords, keywords):
-    """score sentences based on different features"""
-
+    """
+    score sentences based on different features
+    """
     senSize = len(sentences)
     ranks = Counter()
     for i, s in enumerate(sentences):
@@ -56,8 +57,8 @@ def score(sentences, titleWords, keywords):
     return ranks
 
 def sbs(words, keywords):
-    """"""
-
+    """
+    """
     score = 0.0
     if (len(words) == 0):
         return 0
@@ -91,7 +92,9 @@ def dbs(words, keywords):
     return (1/(k*(k+1.0))*summ)
 
 def split_words(text):
-    """split a string into array of words"""
+    """
+    split a string into array of words
+    """
     try:
         text = re.sub(r'[^\w ]', '', text) #strip special chars
         return [x.strip('.').lower() for x in text.split()]
@@ -99,10 +102,11 @@ def split_words(text):
         return None
 
 def keywords(text):
-    """get the top 10 keywords and their frequency scores ignores blacklisted
+    """
+    get the top 10 keywords and their frequency scores ignores blacklisted
     words in stopwords, counts the number of occurrences of each word, and
-    sorts them in reverse natural order (so descending) by number of occurrences"""
-
+    sorts them in reverse natural order (so descending) by number of occurrences
+    """
     import operator # sorting
     text = split_words(text)
     # of words before removing blacklist words
@@ -125,20 +129,25 @@ def keywords(text):
     return dict(keywords)
 
 def split_sentences(text):
-    """split a large string into sentences"""
-
+    """
+    split a large string into sentences
+    """
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-    #text = re.sub(r'[^\w .]', '', text)
+    # text = re.sub(r'[^\w .]', '', text)
     sentences = tokenizer.tokenize(text)
     sentences = [x.replace('\n','') for x in sentences if len(x)>10]
     return sentences
 
 def length_score(sentence):
+    """
+    """
     return 1- math.fabs(ideal - len(sentence)) / ideal
 
 def title_score(title, sentence):
+    """
+    """
     title = [x for x in title if x not in stopwords]
     count = 0.0
     for word in sentence:
@@ -147,9 +156,10 @@ def title_score(title, sentence):
     return count/len(title)
 
 def sentence_position(i, size):
-    """different sentence positions indicate different
-    probability of being an important sentence"""
-
+    """
+    different sentence positions indicate different
+    probability of being an important sentence
+    """
     normalized =  i*1.0 / size
     if (normalized > 0 and normalized <= 0.1):
         return 0.17

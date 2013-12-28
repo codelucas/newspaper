@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""borrowed from an old copy of Reddit's source code"""
-
 import logging
 import urllib
 import StringIO
@@ -36,17 +34,19 @@ def prepare_image(image):
     return image
 
 def image_entropy(img):
-    """calculate the entropy of an image"""
-
+    """
+    calculate the entropy of an image
+    """
     hist = img.histogram()
     hist_size = sum(hist)
     hist = [float(h) / hist_size for h in hist]
     return -sum([p * math.log(p, 2) for p in hist if p != 0])
 
 def square_image(img):
-    """if the image is taller than it is wide, square it off. determine
-    which pieces to cut off based on the entropy pieces."""
-
+    """
+    if the image is taller than it is wide, square it off. determine
+    which pieces to cut off based on the entropy pieces
+    """
     x,y = img.size
     while y > x:
         # slice 10px at a time until square
@@ -66,15 +66,16 @@ def square_image(img):
     return img
 
 def clean_url(url):
-    """url quotes unicode data out of urls"""
-
+    """
+    url quotes unicode data out of urls
+    """
     url = url.encode('utf8')
     url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
     return url
 
 def fetch_url(url, referer=None, retries=1, dimension=False):
-    """"""
-
+    """
+    """
     cur_try = 0
     nothing = None if dimension else (None, None)
     url = clean_url(url)

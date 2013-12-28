@@ -12,9 +12,10 @@ from .utils import chunks, ThreadPool, print_duration, get_useragent
 log = logging.getLogger(__name__)
 
 def get_request_kwargs(timeout):
-    """wrapper method because some values in this dictionary are methods
-    which need to be called every time we make a request"""
-
+    """
+    wrapper method because some values in this dictionary are methods
+    which need to be called every time we make a request
+    """
     return {
         #'headers' : {'User-Agent': get_useragent()},
         'cookies' : cj(),
@@ -23,8 +24,9 @@ def get_request_kwargs(timeout):
     }
 
 def get_html(url, response=None, timeout=7):
-    """retrieves the html for either a url or a response object"""
-
+    """
+    retrieves the html for either a url or a response object
+    """
     if response is not None:
         return response.text
     try:
@@ -38,8 +40,9 @@ def get_html(url, response=None, timeout=7):
         return u''
 
 def sync_request(urls_or_url, timeout=7):
-    """wrapper for a regular request, no asyn nor multithread"""
-
+    """
+    wrapper for a regular request, no asyn nor multithread
+    """
     if isinstance(urls_or_url, list):
         resps = [requests.get(url, **get_request_kwargs(timeout)) for url in urls_or_url]
         return resps
@@ -53,9 +56,7 @@ class MRequest(object):
     the self.resp will be left as None. If this is the case,
     we still want to report the url which has failed so (perhaps)
     we can try again later.
-
     """
-
     def __init__(self, url, **req_kwargs):
         self.url = url
         self.req_kwargs = req_kwargs
