@@ -4,7 +4,7 @@
 
 """
 
-from .text_utils import ReplaceSequence
+from .utils import ReplaceSequence
 
 
 class DocumentCleaner(object):

@@ -10,11 +10,10 @@ import glob
 
 from . import nlp
 from . import images
-from . import utils
 from . import network
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .text_utils import URLHelper, RawHelper
+from .utils import URLHelper, RawHelper, encodeValue
 from .cleaners import StandardDocumentCleaner
 from .outputformatters import StandardOutputFormatter
 from .videos.extractors import VideoExtractor
@@ -27,12 +26,12 @@ class ArticleException(Exception):
     pass
 
 class Article(object):
-
-    def __init__(self, url, title=u'', source_url=None, configs=None):
-
-        self.configs = Configuration() if not configs else configs
-        self.parser = self.configs.get_parser()
-        self.extractor = StandardContentExtractor(config=self.configs)
+    def __init__(self, url, title=u'', source_url=None, config=None):
+        """
+        """
+        self.config = Configuration() if not config else config
+        self.parser = self.config.get_parser()
+        self.extractor = StandardContentExtractor(config=self.config)
 
         if source_url is None:
             source_url = get_scheme(url) + '://' + get_domain(url)
@@ -41,12 +40,12 @@ class Article(object):
             raise ArticleException('input url bad format')
 
         # if no attached source object, we just fallback on scheme + domain of url
-        self.source_url = utils.fix_unicode(source_url)
+        self.source_url = encodeValue(source_url)
 
-        self.url = utils.fix_unicode(url)
-        self.url = prepare_url(self.url, self.source_url)
+        url = encodeValue(url)
+        self.url = prepare_url(url, self.source_url)
 
-        self.title = utils.fix_unicode(title)
+        self.title = encodeValue(title)
 
         # the url of the "best image" to represent this article
         self.top_img = u''
@@ -68,6 +67,7 @@ class Article(object):
         # summary generated from the article's body txt
         self.summary = u''
 
+        # the article's unchanged and raw html
         self.html = u''
 
         # flags warning users in-case they forget to download() or parse()
@@ -132,26 +132,26 @@ class Article(object):
         returns a md5 representation of the url
         """
         if not self.is_parsed:
-            raise ArticleException('You must parse an article '
-                                   'before asking for a link_hash')
+            raise ArticleException(
+                'You must parse an article before asking for a link_hash')
         return self.link_hash
 
-    def download(self, timeout=7):
+    def download(self):
         """
         downloads the link's html content, don't use if we are async
         downloading batch articles
         """
-        self.html = network.get_html(self.url, timeout=timeout)
+        self.html = network.get_html(self.url, self.config)
         self.is_downloaded = True
 
     def parse(self):
         """
-        extracts the lxml root (doc), if lxml fails, we also extract the
+        extracts the lxml root (doc), if it fails, we also extract the
         BeautifulSoup root. We also parse images to keep cpu bound
         tasks all in one place
         """
         if not self.is_downloaded:
-            print 'You must download an article before parsing it! run download()'
+            print 'You must download() an article before parsing it!'
             raise ArticleException()
 
         self.doc = self.parser.fromstring(self.html)
@@ -174,7 +174,6 @@ class Article(object):
         self.meta_description = self.extractor.get_meta_description(self)
         self.canonical_link = self.extractor.get_canonical_link(self)
         self.tags = self.extractor.extract_tags(self)
-
         meta_keywords = self.extractor.get_meta_keywords(self)
         self.meta_keywords = [k.strip() for k in meta_keywords.split(',')]
 
@@ -200,10 +199,10 @@ class Article(object):
 
         if self.raw_doc is not None:
             img_url = self.extractor.get_top_img_url(self)
-            self.top_img = utils.fix_unicode(img_url)
+            self.top_img = encodeValue(img_url)
 
             top_imgs = self.extractor.get_img_urls(self)
-            top_imgs = [ utils.fix_unicode(t) for t in top_imgs ]
+            top_imgs = [ encodeValue(t) for t in top_imgs ]
             self.imgs = top_imgs
 
         self.set_reddit_top_img()
@@ -228,7 +227,7 @@ class Article(object):
         wordcount = self.text.split(' ')
         sentcount = self.text.split('.')
 
-        if meta_type == 'article' and wordcount > (self.configs.MIN_WORD_COUNT - 50):
+        if meta_type == 'article' and wordcount > (self.config.MIN_WORD_COUNT - 50):
             log.debug('%s verified for article and wc' % self.url)
             return True
 
@@ -240,11 +239,11 @@ class Article(object):
             log.debug('%s caught for bad title' % self.url)
             return False
 
-        if len(wordcount) < self.configs.MIN_WORD_COUNT:
+        if len(wordcount) < self.config.MIN_WORD_COUNT:
             log.debug('%s caught for word cnt' % self.url)
             return False
 
-        if len(sentcount) < self.configs.MIN_SENT_COUNT:
+        if len(sentcount) < self.config.MIN_SENT_COUNT:
             log.debug('%s caught for sent cnt' % self.url)
             return False
 
@@ -259,9 +258,8 @@ class Article(object):
         """
         if the article is a gallery, video, etc related
         """
-        safe_urls = [
-            '/video', '/slide', '/gallery', '/powerpoint', '/fashion',
-            '/glamour', '/cloth']
+        safe_urls = ['/video', '/slide', '/gallery', '/powerpoint',
+                     '/fashion', '/glamour', '/cloth']
         for s in safe_urls:
             if s in self.url:
                 return True
@@ -295,21 +293,21 @@ class Article(object):
         return URLHelper.get_parsing_candidate(crawl_candidate.url)
 
     def get_video_extractor(self, article):
-        return VideoExtractor(article, self.configs)
+        return VideoExtractor(article, self.config)
 
     def get_output_formatter(self):
-        return StandardOutputFormatter(self.configs)
+        return StandardOutputFormatter(self.config)
 
     def get_document_cleaner(self):
-        return StandardDocumentCleaner(self.configs)
+        return StandardDocumentCleaner(self.config)
 
     def get_extractor(self):
-        return StandardContentExtractor(self.configs)
+        return StandardContentExtractor(self.config)
 
     def relase_resources(self, article):
         """
         """
-        path = os.path.join(self.configs.local_storage_path, '%s_*' % article.link_hash)
+        path = os.path.join(self.config.local_storage_path, '%s_*' % article.link_hash)
         for fname in glob.glob(path):
             try:
                 os.remove(fname)
@@ -334,8 +332,8 @@ class Article(object):
         """
         titles are length limited
         """
-        title = title[:self.configs.MAX_TITLE]
-        title = utils.fix_unicode(title)
+        title = title[:self.config.MAX_TITLE]
+        title = encodeValue(title)
         if title:
             self.title = title
 
@@ -343,8 +341,8 @@ class Article(object):
         """
         text is length limited
         """
-        text = text[:self.configs.MAX_TEXT-5]
-        text = utils.fix_unicode(text)
+        text = text[:self.config.MAX_TEXT-5]
+        text = encodeValue(text)
         if text:
             self.text = text
 
@@ -355,7 +353,7 @@ class Article(object):
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
         if keywords:
-            self.keywords = [utils.fix_unicode(k) for k in keywords[:self.configs.MAX_KEYWORDS]]
+            self.keywords = [encodeValue(k) for k in keywords[:self.config.MAX_KEYWORDS]]
 
     def set_authors(self, authors):
         """
@@ -364,12 +362,12 @@ class Article(object):
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
         if authors:
-            authors = authors[:self.configs.MAX_AUTHORS]
-            self.authors = [utils.fix_unicode(author) for author in authors]
+            authors = authors[:self.config.MAX_AUTHORS]
+            self.authors = [encodeValue(author) for author in authors]
 
     def set_summary(self, summary):
         """
         summary is a paragraph of text from the title + body text
         """
-        summary = summary[:self.configs.MAX_SUMMARY]
-        self.summary = utils.fix_unicode(summary)
+        summary = summary[:self.config.MAX_SUMMARY]
+        self.summary = encodeValue(summary)

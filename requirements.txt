@@ -1,0 +1,6 @@
+lxml
+requests
+nltk
+Pillow
+cssselect
+BeautifulSoup

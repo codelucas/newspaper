@@ -9,8 +9,6 @@ from PIL import Image, ImageFile
 from urllib2 import Request, HTTPError, URLError, build_opener
 from httplib import InvalidURL
 
-from settings import USERAGENT
-
 log = logging.getLogger(__name__)
 
 chunk_size = 1024
@@ -73,7 +71,7 @@ def clean_url(url):
     url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
     return url
 
-def fetch_url(url, referer=None, retries=1, dimension=False):
+def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
     """
     """
     cur_try = 0
@@ -86,7 +84,7 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
     while True:
         try:
             req = Request(url)
-            req.add_header('User-Agent', USERAGENT)
+            req.add_header('User-Agent', useragent)
             if referer:
                 req.add_header('Referer', referer)
 
@@ -143,8 +141,8 @@ def fetch_url(url, referer=None, retries=1, dimension=False):
             if 'open_req' in locals():
                 open_req.close()
 
-def fetch_size(url, referer=None, retries=1):
-    return fetch_url(url, referer, retries, dimension=True)
+def fetch_size(url, useragent, referer=None, retries=1):
+    return fetch_url(url, useragent, referer, retries, dimension=True)
 
 class Scraper:
     def __init__(self, article):
@@ -152,6 +150,8 @@ class Scraper:
         self.url = article.url # if not url else url
         self.imgs = article.imgs # if not imgs else imgs
         self.top_img = article.top_img # if not top_img else top_img
+        self.config = article.config
+        self.useragent = self.config.browser_user_agent
 
     def largest_image_url(self):
         if not self.imgs and not self.top_img:
@@ -164,7 +164,7 @@ class Scraper:
         max_url = None
 
         for img_url in self.imgs:
-            size = fetch_size(img_url, referer=self.url)
+            size = fetch_size(img_url, self.useragent, referer=self.url)
             if not size:
                 continue
 

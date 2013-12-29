@@ -14,7 +14,7 @@ from lxml import etree
 from copy import deepcopy
 
 from .text import innerTrim
-from .text import encodeValue
+from .utils import encodeValue
 
 log = logging.getLogger(__name__)
 

@@ -13,7 +13,10 @@ __copyright__ = 'Copyright 2014 Lucas Ou-Yang'
 
 from .article import Article, ArticleException
 from .source import Source
+
 from .api import build, build_article, popular_urls, hot
+from .api import NewsPool as news_pool
+
 from .version import __version__
 
 # Set default logging handler to avoid "No handler found" warnings.

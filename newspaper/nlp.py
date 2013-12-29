@@ -4,9 +4,9 @@ import re
 import math
 
 from collections import Counter, OrderedDict
-from .settings import STOPWORDS_EN_FN, STOPWORDS_EN_FN_2
+from . import settings
 
-with open(STOPWORDS_EN_FN_2, 'r') as f:
+with open(settings.STOPWORDS_EN_FN_2, 'r') as f:
     stopwords = [ w.strip() for w in f.readlines()]
 
 ideal = 20.0

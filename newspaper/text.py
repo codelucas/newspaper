@@ -7,13 +7,9 @@ import os
 import re
 import string
 
-from .text_utils import FileHelper
-from .text_utils.encoding import smart_unicode
-from .text_utils.encoding import smart_str
-from .text_utils.encoding import DjangoUnicodeDecodeError
+from .utils import FileHelper
 
 TABSSPACE = re.compile(r'[\s\t]+')
-
 
 def innerTrim(value):
     if isinstance(value, (unicode, str)):
@@ -22,16 +18,6 @@ def innerTrim(value):
         value = ''.join(value.splitlines())
         return value.strip()
     return ''
-
-def encodeValue(value):
-    string_org = value
-    try:
-        value = smart_unicode(value)
-    except (UnicodeEncodeError, DjangoUnicodeDecodeError):
-        value = smart_str(value)
-    except:
-        value = string_org
-    return value
 
 class WordStats(object):
 

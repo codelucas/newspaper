@@ -8,7 +8,7 @@ import logging
 
 from . import network
 from .article import Article
-from .settings import ANCHOR_DIR
+from .settings import ANCHOR_DIRECTORY
 from .packages.tldextract import tldextract
 from .packages.feedparser import feedparser
 from .configuration import Configuration
@@ -16,7 +16,7 @@ from .extractors import StandardContentExtractor
 from .urls import (
     get_domain, get_scheme, prepare_url)
 from .utils import (
-    fix_unicode, memoize_articles, cache_disk, clear_memo_cache)
+    memoize_articles, cache_disk, clear_memo_cache, encodeValue)
 
 log = logging.getLogger(__name__)
 
@@ -43,16 +43,16 @@ class Source(object):
     articles   =  [<article obj>, <article obj>, ..]
     brand      =  'cnn'
     """
-    def __init__(self, url=None, configs=None):
+    def __init__(self, url=None, config=None):
 
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
 
-        self.configs = Configuration() if not configs else configs
-        self.parser = self.configs.get_parser()
-        self.extractor = StandardContentExtractor(config=self.configs)
+        self.config = Configuration() if not config else config
+        self.parser = self.config.get_parser()
+        self.extractor = StandardContentExtractor(config=self.config)
 
-        self.url = fix_unicode(url)
+        self.url = encodeValue(url)
         self.url = prepare_url(url)
 
         self.domain = get_domain(self.url)
@@ -124,10 +124,10 @@ class Source(object):
         #else: # no input, we are playing with self.articles
         #    self.articles = new_articles
 
-    @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIR)
+    @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
         """
-        the domain param is **necessary**, see .text_utils.cache_disk for reasons.
+        the domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right. We are caching
         categories for 1 day
         """
@@ -153,13 +153,13 @@ class Source(object):
         query the desc html attribute
         """
         desc = self.parser.get_description(self.doc)
-        self.description = fix_unicode(desc)
+        self.description = encodeValue(desc)
 
     def download(self):
         """
         downloads html of source
         """
-        self.html = network.get_html(self.url)
+        self.html = network.get_html(self.url, self.config)
 
     # @print_duration
     def download_categories(self):
@@ -167,7 +167,7 @@ class Source(object):
         download all category html, can use mthreading
         """
         category_urls = [c.url for c in self.categories]
-        requests = network.multithread_request(category_urls)
+        requests = network.multithread_request(category_urls, self.config)
 
         # the weird for loop is like this because the del keyword auto adjusts
         # the list index after deletion only if the list being iterated contains elem deleted
@@ -176,7 +176,7 @@ class Source(object):
             if req.resp is not None:
                 self.categories[index].html = req.resp.text
             else:
-                if self.configs.verbose:
+                if self.config.verbose:
                     print 'deleting category', self.categories[index].url, 'due to download err'
                 del self.categories[index] # TODO
 
@@ -186,7 +186,7 @@ class Source(object):
         download all feed html, can use mthreading
         """
         feed_urls = [f.url for f in self.feeds]
-        requests = network.multithread_request(feed_urls)
+        requests = network.multithread_request(feed_urls, self.config)
 
         # the weird for loop is like this because the del keyword auto adjusts
         # the list index after deletion only if the list being iterated contains elem deleted
@@ -195,7 +195,7 @@ class Source(object):
             if req.resp is not None:
                 self.feeds[index].rss = req.resp.text
             else:
-                if self.configs.verbose:
+                if self.config.verbose:
                     print 'deleting feed', self.categories[index].url, 'due to download err'
                 del self.feeds[index] # TODO
 
@@ -233,7 +233,7 @@ class Source(object):
                 feed.dom = feedparse_wrapper(feed.html)
             except Exception, e:
                 log.critical('feedparser failed %s' % e)
-                if self.configs.verbose: print feed.url
+                if self.config.verbose: print feed.url
 
         self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 
@@ -261,6 +261,7 @@ class Source(object):
                 article = Article(
                     url=url,
                     source_url=self.url,
+                    config=self.config
                     # title=?  # TODO
                  )
                 cur_articles.append(article)
@@ -268,13 +269,13 @@ class Source(object):
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.configs.is_memoize_articles:
-                cur_articles = memoize_articles(cur_articles, self.domain)
+            if self.config.is_memoize_articles:
+                cur_articles = memoize_articles(self)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)
 
-            if self.configs.verbose:
+            if self.config.verbose:
                 print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url)
             log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url))
         return articles
@@ -297,20 +298,21 @@ class Source(object):
                 _article = Article(
                     url=indiv_url,
                     source_url=self.url,
-                    title=indiv_title
+                    title=indiv_title,
+                    config=self.config
                 )
                 cur_articles.append(_article)
 
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.configs.is_memoize_articles:
-                cur_articles = memoize_articles(cur_articles, self.domain)
+            if self.config.is_memoize_articles:
+                cur_articles = memoize_articles(self)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)
 
-            if self.configs.verbose:
+            if self.config.verbose:
                 print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)
             log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
 
@@ -346,27 +348,27 @@ class Source(object):
         urls = [a.url for a in self.articles]
         failed_articles = []
         self.is_downloaded = True
-
+        # TODO get rid of useless multithread
         # TODO Note that del statements automatically handle index movement,
         # but only if the elem deleted is consistent with element(s) of loop
         if not multithread:
             for index, article in enumerate(self.articles):
                 url = urls[index]
-                html = network.get_html(url)
+                html = network.get_html(url, self.config)
                 if html:
                     self.articles[index].html = html
                 else:
                     failed_articles.append(self.articles[index])
                     del self.articles[index] # TODO iffy using del here
-        else:
-            filled_requests = network.multithread_request(urls)
-            # Note that the responses are returned in original order
-            for index, req in enumerate(filled_requests):
-                if req.resp is not None:
-                    self.articles[index].html = req.resp.text
-                else:
-                    failed_articles.append(self.articles[index])
-                    del self.articles[index] # TODO iffy using del here
+        # else:
+        #     filled_requests = network.multithread_request(urls, self.config)
+        #     # Note that the responses are returned in original order
+        #     for index, req in enumerate(filled_requests):
+        #         if req.resp is not None:
+        #             self.articles[index].html = req.resp.text
+        #         else:
+        #             failed_articles.append(self.articles[index])
+        #             del self.articles[index] # TODO iffy using del here
 
         if len(failed_articles) > 0:
             print '[ERROR], these article urls failed the download:', \

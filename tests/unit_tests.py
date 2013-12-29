@@ -5,7 +5,6 @@ import os
 import unittest
 import time
 import codecs
-import urlparse
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
@@ -20,6 +19,8 @@ from newspaper import Article, ArticleException
 from newspaper import Source, Article
 from newspaper.network import multithread_request
 from newspaper.configuration import Configuration
+from newspaper.utils.encoding import smart_str, smart_unicode
+from newspaper.utils import encodeValue
 
 def print_test(method):
     """utility method for print verbalizing test suite, prints out
@@ -144,9 +145,9 @@ class SourceTestCase(unittest.TestCase):
         DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
         BRAND = 'cnn'
 
-        configs = Configuration()
-        configs.verbose = False
-        s = Source('http://cnn.com', configs=configs)
+        config = Configuration()
+        config.verbose = False
+        s = Source('http://cnn.com', config=config)
         s.clean_memo_cache()
         s.build()
 
@@ -252,9 +253,35 @@ class APITestCase(unittest.TestCase):
         """
         newspaper.popular_urls()
 
+class EncodingTestCase(unittest.TestCase):
+    def runTest(self):
+        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
+        self.normal_string = "∆ƒˆƒ´´lucas yang"
+        self.test_encode_val()
+        self.test_smart_unicode()
+        self.test_smart_str()
+
+    @print_test
+    def test_encode_val(self):
+        assert encodeValue(self.uni_string) == self.uni_string
+        assert encodeValue(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+
+    @print_test
+    def test_smart_unicode(self):
+        assert smart_unicode(self.uni_string) == self.uni_string
+        assert smart_unicode(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+
+    @print_test
+    def test_smart_str(self):
+        assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
+        assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
+
+
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
     suite = unittest.TestSuite()
+
+    suite.addTest(EncodingTestCase())
 
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())

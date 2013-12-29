@@ -5,15 +5,13 @@
 
 import os
 import tempfile
+import logging
 
 from .text import StopWords
-from .parsers import Parser
-from .parsers import ParserSoup
+from .parsers import Parser, ParserSoup
 from .version import __version__
 
-parent_directory = os.path.dirname(os.path.abspath(__file__))
-data_directory = '.newspaper_scraper'
-top_directory = os.path.join(os.path.expanduser("~"), data_directory)
+log = logging.getLogger(__name__)
 
 class Configuration(object):
 
@@ -51,37 +49,13 @@ class Configuration(object):
 
         self.stopwords_class = StopWords
 
-        self.popular_urls_fn = os.path.join(parent_directory, 'data/popular_sources.txt')
-        self.useragents_fn = os.path.join(parent_directory, 'data/useragents.txt')
-        self.stopwords_en_fn = os.path.join(parent_directory, 'data/stopwords_en.txt')
-        self.stopwords_en_fn_2 = os.path.join(parent_directory, 'data/stopwords_en2.txt')
-
-        if not os.path.exists(top_directory):
-            os.mkdir(top_directory)
-
-        self.logfile = os.path.join(top_directory, 'newspaper_errors_%s.log' % __version__)
-        self.m_logfile =  os.path.join(top_directory, 'newspaper_monitors_%s.log' % __version__)
-
-        # Memo directory (same for all concur crawlers)
-        memo_file = 'memoized'
-        memo_dir = os.path.join(top_directory, memo_file)
-
-        if not os.path.exists(memo_dir):
-            os.mkdir(memo_dir)
-
-        category_feed_directory = 'feed_category_cache'
-        self.anchor_directory = os.path.join(top_directory, category_feed_directory)
-
-        if not os.path.exists(self.anchor_directory):
-            os.mkdir(self.anchor_directory)
-
-        self.TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
-
         self.max_file_memo = 20000
 
         self.browser_user_agent = 'newspaper/%s' % __version__
+        self.request_timeout = 7
+        self.number_threads = 10
 
-        self.debug = False # TODO remove unneeded
+        # self.debug = False # TODO remove unneeded
         self.verbose = False # this one is for my code, merge later i'm tired
 
         self.parser_class = 'lxml' # lxml vs soup

@@ -8,7 +8,7 @@ import copy
 import urlparse
 
 from .packages.tldextract import tldextract
-from .text_utils import (
+from .utils import (
     StringSplitter, StringReplacement, ReplaceSequence)
 from .urls import (
     get_path, get_domain, get_scheme, prepare_url)
@@ -509,7 +509,7 @@ class ContentExtractor(object):
             if parent_node not in parent_nodes:
                 parent_nodes.append(parent_node)
 
-            # parentparent node
+            # parent of parent node
             parent_parent_node = self.parser.getParent(parent_node)
             if parent_parent_node is not None:
                 self.update_node_count(parent_parent_node, 1)
@@ -539,7 +539,7 @@ class ContentExtractor(object):
         it should be connected to other paragraphs,
         at least for the first n paragraphs so we'll want to make sure that
         the next sibling is a paragraph and has at
-        least some substatial weight to it
+        least some substantial weight to it
         """
         para = "p"
         steps_away = 0

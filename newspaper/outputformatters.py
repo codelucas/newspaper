@@ -2,7 +2,6 @@
 
 """
 """
-
 from HTMLParser import HTMLParser
 from .text import innerTrim
 
@@ -61,7 +60,7 @@ class OutputFormatter(object):
         self.parser.stripTags(self.get_top_node(), 'a')
 
     def remove_negativescores_nodes(self):
-        """\
+        """
         if there are elements inside our top node
         that have a negative gravity score,
         let's give em the boot

@@ -175,7 +175,7 @@ Alternatively, you may use newspaper's lower level Article api.
 ``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on
 all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.
 
-Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Newspaper also uses much of
+Newspaper stands on the giant shoulders of `lxml`_, `nltk`_, and `requests`_. Newspaper also uses chunks of
 `goose`_'s code internally. 
 
 .. _`lxml`: http://lxml.de/
@@ -210,11 +210,13 @@ Get it now
 
 Todo List
 ---------
+X Means done
 
-- Fully integrate the goose library into our own article class 
-- Add multiple article download (concurrently with gevent or multithread) example
-- Bake in the CSSSelect and BeautifulSoup dependencies 
-- Add in an examples seciton on README
+- X Fully integrate the goose library into our own article class
+- X Add multiple article download (concurrently with gevent or multithread) example
+- Add a "follow_robots.txt" option in the config object.
+- Bake in the CSSSelect and BeautifulSoup dependencies
+- Add in an examples section on README
 - Make the documentation much better, still learning how to use sphinx docs!
 
 

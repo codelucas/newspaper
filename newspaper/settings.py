@@ -1,48 +1,45 @@
 # -*- coding: utf-8 -*-
-
-import random
+"""
+"""
 import logging
 import os
 
+from .version import __version__
+
 from cookielib import CookieJar as cj
 
-VERSION = '0.0.3'
+log = logging.getLogger(__name__)
 
-PARENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
-POP_URLS_FILEN = os.path.join(PARENT_DIR, 'data/popular_sources.txt')
-USERAGENTS_FN = os.path.join(PARENT_DIR, 'data/useragents.txt')
-STOPWORDS_EN_FN = os.path.join(PARENT_DIR, 'data/stopwords_en.txt')
-STOPWORDS_EN_FN_2 = os.path.join(PARENT_DIR, 'data/stopwords_en2.txt')
+POPULAR_URLS = os.path.join(PARENT_DIRECTORY, 'data/popular_sources.txt')
+USERAGENTS = os.path.join(PARENT_DIRECTORY, 'data/useragents.txt')
+STOPWORDS_EN = os.path.join(PARENT_DIRECTORY, 'data/stopwords_en.txt')
+STOPWORDS_EN_FN_2 = os.path.join(PARENT_DIRECTORY, 'data/stopwords_en2.txt')
 
-DATA_DIR = '.newspaper_scraper'
+DATA_DIRECTORY = '.newspaper_scraper'
 
-TOPDIR = os.path.join(os.path.expanduser("~"), DATA_DIR)
-if not os.path.exists(TOPDIR):
-    os.mkdir(TOPDIR)
+TOP_DIRECTORY = os.path.join(os.path.expanduser("~"), DATA_DIRECTORY)
+if not os.path.exists(TOP_DIRECTORY):
+    os.mkdir(TOP_DIRECTORY)
 
 # Error log
-LOGFILE = os.path.join(TOPDIR, 'newspaper_errors_%s.log' % VERSION)
-M_LOGFILE =  os.path.join(TOPDIR, 'newspaper_monitors_%s.log' % VERSION)
+LOGFILE = os.path.join(TOP_DIRECTORY, 'newspaper_errors_%s.log' % __version__)
+MONITOR_LOGFILE =  os.path.join(TOP_DIRECTORY, 'newspaper_monitors_%s.log' % __version__)
 
 # Memo directory (same for all concur crawlers)
 MEMO_FILE = 'memoized'
-MEMODIR = os.path.join(TOPDIR, MEMO_FILE)
+MEMO_DIR = os.path.join(TOP_DIRECTORY, MEMO_FILE)
 
-if not os.path.exists(MEMODIR):
-    os.mkdir(MEMODIR)
+if not os.path.exists(MEMO_DIR):
+    os.mkdir(MEMO_DIR)
 
 # category and feed cache
-CF_CACHE_DIR = 'feed_category_cache'
-ANCHOR_DIR = os.path.join(TOPDIR, CF_CACHE_DIR)
+CF_CACHE_DIRECTORY = 'feed_category_cache'
+ANCHOR_DIRECTORY = os.path.join(TOP_DIRECTORY, CF_CACHE_DIRECTORY)
 
-if not os.path.exists(ANCHOR_DIR):
-    os.mkdir(ANCHOR_DIR)
-
-USERAGENT = 'newspaper/%s' % VERSION
+if not os.path.exists(ANCHOR_DIRECTORY):
+    os.mkdir(ANCHOR_DIRECTORY)
 
 TRENDING_URL = 'http://www.google.com/trends/hottrends/atom/feed?pn=p1'
-
-MAX_FILE_MEMO = 20000
-
 

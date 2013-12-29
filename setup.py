@@ -24,10 +24,9 @@ packages = [
     'newspaper.packages.feedparser',
     # 'newspaper.packages.feedparser.tests'
     #'newspaper.packages.goose',
-    #'newspaper.packages.goose.text_utils',
+    #'newspaper.packages.goose.utils',
     #'newspaper.packages.goose.videos',
     #'newspaper.packages.goose.images',
-    # 'newspaper.packages.python-goose-documents',
     'newspaper.packages.jieba',
     'newspaper.packages.jieba.posseg',
     'newspaper.packages.jieba.finalseg',

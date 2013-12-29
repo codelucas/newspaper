@@ -1,53 +1,62 @@
 # -*- coding: utf-8 -*-
-
+"""
+"""
 import logging
 import requests
-import math
 
-from threading import activeCount
 from .settings import cj
-from .utils import chunks, ThreadPool, print_duration, get_useragent
-# from .packages import grequests # use overridden modified version
+from .configuration import Configuration
+from .mthreading import ThreadPool
+# from .packages import grequests
 
 log = logging.getLogger(__name__)
+default_config = Configuration()
 
-def get_request_kwargs(timeout):
+def get_request_kwargs(timeout, useragent):
     """
     wrapper method because some values in this dictionary are methods
     which need to be called every time we make a request
     """
     return {
-        #'headers' : {'User-Agent': get_useragent()},
+        'headers' : {'User-Agent': useragent},
         'cookies' : cj(),
         'timeout' : timeout,
         'allow_redirects' : True
     }
 
-def get_html(url, response=None, timeout=7):
+def get_html(url, config=None, response=None):
     """
     retrieves the html for either a url or a response object
     """
+    config = default_config if not config else config
+    useragent = config.browser_user_agent
+    timeout = config.request_timeout
+
     if response is not None:
         return response.text
     try:
-        html = requests.get(url=url, **get_request_kwargs(timeout)).text
+        html = requests.get(url=url, **get_request_kwargs(timeout, useragent)).text
         if html is None:
             html = u''
         return html
     except Exception, e:
         # print '[REQUEST FAILED]', str(e)
-        # log.debug('%s on %s' % (e, url))
+        log.debug('%s on %s' % (e, url))
         return u''
 
-def sync_request(urls_or_url, timeout=7):
+def sync_request(urls_or_url, config=None):
     """
     wrapper for a regular request, no asyn nor multithread
     """
+    config = default_config if not config else config
+    useragent = config.browser_user_agent
+    timeout = config.request_timeout
     if isinstance(urls_or_url, list):
-        resps = [requests.get(url, **get_request_kwargs(timeout)) for url in urls_or_url]
+        resps = [requests.get(url, **get_request_kwargs(timeout, useragent))
+                                                for url in urls_or_url]
         return resps
     else:
-        return requests.get(urls_or_url, **get_request_kwargs(timeout))
+        return requests.get(urls_or_url, **get_request_kwargs(timeout, useragent))
 
 class MRequest(object):
     """
@@ -57,31 +66,35 @@ class MRequest(object):
     we still want to report the url which has failed so (perhaps)
     we can try again later.
     """
-    def __init__(self, url, **req_kwargs):
+    def __init__(self, url, config=None):
         self.url = url
-        self.req_kwargs = req_kwargs
+        config = default_config if not config else config
+        self.useragent = config.browser_user_agent
+        self.timeout = config.request_timeout
         self.resp = None
 
     def send(self):
         try:
-            self.resp = requests.get(self.url, **self.req_kwargs)
+            self.resp = requests.get(self.url, **get_request_kwargs(
+                                    self.timeout, self.useragent))
         except Exception, e:
             pass
             log.critical('[REQUEST FAILED] ' + str(e))
-            # print '[REQUEST FAILED]', str(e) # TODO, do something with url when we fail!
-            # leave the response as None
+            # TODO, do something with url when we fail!
+            # print '[REQUEST FAILED]', str(e)
 
-def multithread_request(urls, timeout=7, num_threads=10):
+def multithread_request(urls, config=None):
     """request multiple urls via mthreading, order of urls & requests is stable
     returns same requests but with response variables filled"""
+    config = default_config if not config else config
+    num_threads = config.number_threads
 
     pool = ThreadPool(num_threads)
-    responses = []
     # print 'beginning of mthreading, %s threads running' % activeCount()
 
     m_requests = []
     for url in urls:
-        m_requests.append(MRequest(url, **get_request_kwargs(timeout)))
+        m_requests.append(MRequest(url, config))
 
     for req in m_requests:
         pool.add_task(req.send)
