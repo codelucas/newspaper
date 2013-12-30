@@ -60,7 +60,7 @@ The first step is to ``download()`` an article.
     >>> print cnn_paper.articles[7].html 
     u'' 
 
-We may also extract meaningful content from the html, like authors, body-text..
+You may also extract meaningful content from the html, like authors, body-text..
 You must have called ``download()`` on the article before calling ``parse()``.
 
 .. code-block:: pycon
