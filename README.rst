@@ -41,6 +41,10 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
+    Note that the above category urls & feeds are cached for speed, feel free 
+    to change cache time via config objects.. explained later in this readme.
+
+
 The first step is to ``download()`` an article.    
     
 .. code-block:: pycon
@@ -110,8 +114,74 @@ Some other news-source level functionality
     >>> newspaper.popular_urls() 
     ['http://slate.com', 'http://cnn.com', 'http://huffingtonpost.com', ...]
 
-^ Just a few friendly suggestions if you forget the popular news sites!
+    ^ Just a few friendly suggestions if you forget the popular news sites!
 
+
+Downloading articles one at a time is slow... But spamming a single news source
+like cnn.com with tons of threads or with ASYNC-IO will cause rate limiting
+and also doing that is very mean..
+
+We solve this problem by allocating 1-2 threads per news source to both greatly
+speed up the download time while being respectful.
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> from newspaper import news_pool
+
+    >>> # The more sources we download from concurrently, the better
+
+    >>> slate_paper = newspaper.build('http://slate.com')
+    >>> tc_paper = newspaper.build('http://techcrunch.com')
+    >>> espn_paper = newspaper.build('http://espn.com')
+
+    >>> papers = [slate_paper, tc_paper, espn_paper]
+    >>> news_pool.set(papers)
+    >>> news_pool.go()
+
+    >>> # All done!! Check out slate_paper.articles[100].html :)
+
+You may also customize how newspaper extracts articles at a much deeper level
+via config objects. View newspaper/configuration.py for details.
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> from newspaper import Config
+
+    >>> config = Config()
+    >>> config.verbose = True
+    >>> config.MAX_KEYWORDS = 10
+    >>> config.MAX_AUTHORS = 2
+    >>> config.browser_user_agent = 'new dude'
+    >>> config.number_threads = 2
+    >>> config.request_timeout = 5
+
+    >>> espn = newspaper.build('http://espn.com', config=config)
+    >>> # WOOT, config objects are still under heavy development!
+
+
+Config objects are highly flexible, you can pass them into
+newspaper.build(..) methods, Source(..) constructors, and also
+Article(..) constructors.
+
+A Config object passed into a Source is also respectively passed
+into all of that Source's children Article's.
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> from newspaper import Config, Article, Source
+    >>> config = Config()
+
+    >>> a = Article(url='http://..', config)
+    >>> a.download()
+    >>> a.parse()
+
+    >>> s = Source('http://latimes.com', config)
+    >>> s.build()
+
+TADA :D
 
 **IMPORTANT**
     
