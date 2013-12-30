@@ -8,8 +8,6 @@ python setup.py sdist bdist_wininst upload
 
 """
 
-from newspaper.version import __version__
-
 try:
     from setuptools import setup
 except ImportError:
@@ -64,7 +62,7 @@ except:
 
 setup(
     name='newspaper',
-    version=__version__,
+    version='0.0.4',
     description='Simplified python article discovery & extraction.',
     long_description=readme+'\r\n'+history,
     author='Lucas Ou-Yang',

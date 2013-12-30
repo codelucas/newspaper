@@ -98,10 +98,38 @@ called both ``download()`` and ``parse()`` on the article before calling ``nlp()
     ArticleException: You must parse an article before you try to..
 
 
-Some other news-source level functionality
+**Downloading articles one at a time is slow.** But spamming a single news source
+like cnn.com with tons of threads or with ASYNC-IO will cause rate limiting
+and also doing that is very mean.
+
+We solve this problem by allocating 1-2 threads per news source to both greatly
+speed up the download time while being respectful.
 
 .. code-block:: pycon
 
+    >>> import newspaper
+    >>> from newspaper import news_pool
+
+    >>> slate_paper = newspaper.build('http://slate.com')
+    >>> tc_paper = newspaper.build('http://techcrunch.com')
+    >>> espn_paper = newspaper.build('http://espn.com')
+
+    >>> papers = [slate_paper, tc_paper, espn_paper]
+    >>> news_pool.set(papers)
+    >>> news_pool.go()
+
+    At this point, you can safely assume that download() has been
+    called on every single article for all 3 sources.
+    
+    >>> print slate_paper.articles[10].html
+    u'<html> ...' 
+
+
+Some other useful news-source level functionality.
+
+.. code-block:: pycon
+
+    >>> cnn_paper = newspaper.build('http://cnn.com')
     >>> print cnn_paper.brand
     u'cnn'
 
@@ -114,32 +142,6 @@ Some other news-source level functionality
     >>> newspaper.popular_urls() 
     ['http://slate.com', 'http://cnn.com', 'http://huffingtonpost.com', ...]
 
-    ^ Just a few friendly suggestions if you forget the popular news sites!
-
-
-Downloading articles one at a time is slow... But spamming a single news source
-like cnn.com with tons of threads or with ASYNC-IO will cause rate limiting
-and also doing that is very mean..
-
-We solve this problem by allocating 1-2 threads per news source to both greatly
-speed up the download time while being respectful.
-
-.. code-block:: pycon
-
-    >>> import newspaper
-    >>> from newspaper import news_pool
-
-    >>> # The more sources we download from concurrently, the better
-
-    >>> slate_paper = newspaper.build('http://slate.com')
-    >>> tc_paper = newspaper.build('http://techcrunch.com')
-    >>> espn_paper = newspaper.build('http://espn.com')
-
-    >>> papers = [slate_paper, tc_paper, espn_paper]
-    >>> news_pool.set(papers)
-    >>> news_pool.go()
-
-    >>> # All done!! Check out slate_paper.articles[100].html :)
 
 You may also customize how newspaper extracts articles at a much deeper level
 via config objects. View newspaper/configuration.py for details.
@@ -158,7 +160,8 @@ via config objects. View newspaper/configuration.py for details.
     >>> config.request_timeout = 5
 
     >>> espn = newspaper.build('http://espn.com', config=config)
-    >>> # WOOT, config objects are still under heavy development!
+    
+    However, config objects are still under heavy development!
 
 
 Config objects are highly flexible, you can pass them into
