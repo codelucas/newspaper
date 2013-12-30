@@ -185,7 +185,7 @@ TADA :D
 
 **IMPORTANT**
     
-Unless told not to in the constructor via the ``is_memo_articles`` param (default true), 
+Unless told not to in the configs via the ``is_memoize_articles`` value (default true), 
 newspaper automatically caches all category, feed, and article urls. 
 This is both to avoid duplicate articles and for speed.
 
