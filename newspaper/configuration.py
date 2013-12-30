@@ -5,7 +5,6 @@ Pass these in (optionally) via the constructors. Or
 else a default Configuration() object will be used.
 """
 
-import os
 import logging
 
 from .text import StopWords

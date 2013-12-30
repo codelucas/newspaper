@@ -15,12 +15,12 @@ sys.path.insert(0, PARENT_DIR)
 URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
 
 import newspaper
-from newspaper import Article, ArticleException
-from newspaper import Source, Article
+from newspaper import Article, Source, ArticleException, news_pool
 from newspaper.network import multithread_request
 from newspaper.configuration import Configuration
 from newspaper.utils.encoding import smart_str, smart_unicode
 from newspaper.utils import encodeValue
+
 
 def print_test(method):
     """utility method for print verbalizing test suite, prints out
@@ -152,9 +152,10 @@ class SourceTestCase(unittest.TestCase):
 
     @print_test
     def test_source_build(self):
-        """builds a source object, validates it has no errors, prints out
-        all valid categories and feed urls"""
-
+        """
+        builds a source object, validates it has no errors, prints out
+        all valid categories and feed urls
+        """
         DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
         BRAND = 'cnn'
 
@@ -289,29 +290,47 @@ class EncodingTestCase(unittest.TestCase):
         assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
         assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
 
+
 class MThreadingTestCase(unittest.TestCase):
     def runTest(self):
-        pass
+        self.test_download_works()
+
 
     @print_test
     def test_download_works(self):
         """
         """
-        pass
+        cnn_paper = newspaper.build('http://cnn.com')
+        tc_paper = newspaper.build('http://techcrunch.com')
+        espn_paper = newspaper.build('http://espn.com')
+
+        print 'cnn has %d articles tc has %d articles espn has %d articles' \
+                % (cnn_paper.size(), tc_paper.size(), espn_paper.size())
+        papers = [cnn_paper, tc_paper, espn_paper]
+        news_pool.set(papers)
+
+        news_pool.go()
+
+        print 'Downloaded mthread len', len(cnn_paper.articles[0].html)
+        assert len(cnn_paper.articles[0].html) > 5000
+        assert len(espn_paper.articles[-1].html) > 5000
+        assert len(tc_paper.articles[1].html) > 5000
+
 
 
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
     suite = unittest.TestSuite()
 
+    #suite.addTest(MThreadingTestCase())
     suite.addTest(EncodingTestCase())
-    suite.addTest(MThreadingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
     suite.addTest(SourceTestCase())
-
     unittest.TextTestRunner().run(suite) # run custom subset
+
+
 
 """
 class GrequestsTestCase(unittest.TestCase):

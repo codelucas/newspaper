@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-
 """
 Source objects abstract online news source websites & domains.
 www.cnn.com would be its own source.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import logging
 
 from . import network
@@ -264,7 +268,7 @@ class Source(object):
             after_purge = len(cur_articles)
 
             if self.config.is_memoize_articles:
-                cur_articles = memoize_articles(self)
+                cur_articles = memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)
@@ -301,7 +305,7 @@ class Source(object):
             after_purge = len(cur_articles)
 
             if self.config.is_memoize_articles:
-                cur_articles = memoize_articles(self)
+                cur_articles = memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)

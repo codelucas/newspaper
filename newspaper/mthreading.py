@@ -7,6 +7,7 @@ also, it will deserve its own gevent file.
 import Queue
 from threading import Thread
 
+
 class Worker(Thread):
     """
     Thread executing tasks from a given tasks queue
@@ -30,6 +31,7 @@ class Worker(Thread):
                 print 'critical multi-thread err %s' % e
 
             self.tasks.task_done()
+
 
 class ThreadPool:
     """
@@ -57,7 +59,9 @@ class ThreadPool:
         """
         pass
 
+
 class NewsPool(object):
+
     def __init__(self):
         """
         Abstraction of a threadpool. A newspool can accept any number of
@@ -81,7 +85,6 @@ class NewsPool(object):
         # all of your papers should have their articles html all populated now.
         >>> cnn_paper.articles[50].html
         u'<html>blahblah ... '
-
         """
         self.papers = []
 

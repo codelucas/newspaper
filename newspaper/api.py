@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""
+"""
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from .packages.feedparser import feedparser
 from .source import Source

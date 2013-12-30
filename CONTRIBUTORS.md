@@ -19,3 +19,7 @@ https://github.com/xiaoxu193/PyTeaser/graphs/contributors
 Thanks to all who have contributed to gravity-goose.
 You can find the contributors list here:
 https://github.com/GravityLabs/goose/graphs/contributors
+
+Thanks to all who have contributed to python-jieba.
+You can find the contributors list here:
+https://github.com/fxsjy/jieba/graphs/contributors

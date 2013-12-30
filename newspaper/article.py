@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
-
 """
 Article objects abstract an online news article page.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import logging
 import copy
 import os

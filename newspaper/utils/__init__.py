@@ -270,14 +270,13 @@ def encodeValue(value):
         value = string_org
     return value
 
-def memoize_articles(source):
+def memoize_articles(source, articles):
     """
     When we parse the <a> links in an <html> page, on the 2nd run
     and later, check the <a> links of previous runs. If they match,
     it means the link must not be an article, because article urls
     change as time passes. This method also uniquifies articles.
     """
-    articles = source.articles
     source_domain = source.domain
     config = source.config
 

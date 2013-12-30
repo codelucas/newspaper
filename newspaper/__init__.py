@@ -7,13 +7,15 @@ Wherever smart people work, doors are unlocked. -- Steve Wozniak
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
-__copyright__ = 'Copyright 2014 Lucas Ou-Yang'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from .article import Article, ArticleException
 from .source import Source
 
 from .api import build, build_article, popular_urls, hot
-from .api import NewsPool as news_pool
+from .api import NewsPool
+
+news_pool = NewsPool()
 
 from .version import __version__
 
