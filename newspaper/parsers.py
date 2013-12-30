@@ -156,7 +156,12 @@ class Parser(object):
     @classmethod
     def fromstring(cls, html):
         html = encodeValue(html)
-        cls.doc = lxml.html.fromstring(html)
+        try:
+            cls.doc = lxml.html.fromstring(html)
+        except Exception, e:
+            print 'Parse lxml err', str(e)
+            return None
+
         return cls.doc
 
     # @classmethod

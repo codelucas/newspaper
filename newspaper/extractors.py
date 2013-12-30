@@ -329,9 +329,8 @@ class ContentExtractor(object):
         cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
         """
 
-        source_url = source.url if source_url is None else source_url
-        page_urls = self.parser.get_urls(source.doc) if page_urls is None \
-                                                            else page_urls
+        source_url = source.url if not source_url else source_url
+        page_urls = self.parser.get_urls(source.doc) if not page_urls else page_urls
         valid_categories = []
         for p_url in page_urls:
             scheme = get_scheme(p_url, allow_fragments=False)
@@ -339,22 +338,40 @@ class ContentExtractor(object):
             path = get_path(p_url, allow_fragments=False)
 
             if not domain and not path:
+                if source.config.verbose: print 'elim category url %s for no domain and path' % p_url
                 continue
-            if path and '#' in path:
+            if path and path.startswith('#'):
+                if source.config.verbose: print 'elim category url %s path starts with #' % p_url
                 continue
             if scheme and (scheme!='http' and scheme!='https'):
+                if source.config.verbose: print 'elim category url %s for bad scheme, not http nor https' % p_url
                 continue
 
             if domain:
                 child_tld = tldextract.extract(p_url)
                 domain_tld = tldextract.extract(source_url)
 
-                if child_tld.domain != domain_tld.domain:
-                    continue
+                child_subdomain_parts = child_tld.subdomain.split('.')
+                subdomain_contains = False
+                for part in child_subdomain_parts:
+                    if part == domain_tld.domain:
+                        if source.config.verbose: print 'subdomain contains at %s and %s' % (str(part), str(domain_tld.domain))
+                        subdomain_contains = True
+                        break
+
+                # microsoft.com is definitely not related to espn.com, but espn.go.com is probably
+                # related to espn.com
+                if not subdomain_contains and (child_tld.domain != domain_tld.domain):
+                    if source.config.verbose:
+                        print 'elim category url %s for domain mismatch' % p_url
+                        continue
                 elif child_tld.subdomain in ['m', 'i']:
+                    if source.config.verbose:
+                        print 'elim category url %s for mobile subdomain' % p_url
                     continue
                 else:
                     valid_categories.append(scheme+'://'+domain)
+                    # TODO account for case where category is in form http://subdomain.domain.tld/category/ <-- it's still legal!
             else:
                 # we want a path with just one subdir
                 # cnn.com/world and cnn.com/world/ are both valid_categories
@@ -365,6 +382,9 @@ class ContentExtractor(object):
 
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
                     valid_categories.append(domain+path)
+                else:
+                    if source.config.verbose: print 'elim category url %s for >1 path chunks or size path chunks' % p_url
+
 
         stopwords = [
             'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
@@ -376,7 +396,8 @@ class ContentExtractor(object):
             'shopping', 'purchase', 'site-map', 'shop', 'donate', 'newsletter',
             'product', 'advert', 'info', 'tickets', 'coupons', 'forum', 'board',
             'archive', 'browse', 'howto', 'how to', 'faq', 'terms', 'charts',
-            'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register']
+            'services', 'contact', 'plus', 'admin', 'login', 'signup', 'register',
+            'developer', 'proxy']
 
         _valid_categories = []
 
@@ -389,6 +410,7 @@ class ContentExtractor(object):
             bad = False
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
+                    if source.config.verbose: print 'elim category url %s for subdomain contain stopword!' % p_url
                     bad=True
                     break
             if not bad:

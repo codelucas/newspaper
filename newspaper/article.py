@@ -147,6 +147,10 @@ class Article(object):
         self.doc = self.parser.fromstring(self.html)
         self.raw_doc = copy.deepcopy(self.doc)
 
+        if self.doc is None:
+            print '%s failed to parse' % self.url
+            return
+
         # stores the final URL that we're going to try
         # and fetch content against, this would be expanded if any
         parse_candidate = self.get_parse_candidate()

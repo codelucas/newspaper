@@ -213,6 +213,10 @@ class Source(object):
         children links, also sets description
         """
         self.doc = self.parser.fromstring(self.html)
+        # TODO: This is a terrible idea, ill try to fix it when i'm more rested
+        if self.doc is None:
+            print '%s has failed to parse' % self.url
+            return
         self.set_description()
 
     def parse_categories(self):
@@ -370,8 +374,9 @@ class Source(object):
 
         self.is_downloaded = True
         if len(failed_articles) > 0:
-            print '[ERROR], these article urls failed the download:', \
-                [a.url for a in failed_articles]
+            if self.config.verbose:
+                print '[ERROR], these article urls failed the download:', \
+                    [a.url for a in failed_articles]
 
     def parse_articles(self):
         """
@@ -414,6 +419,22 @@ class Source(object):
         returns a list of article urls
         """
         return [article.url for article in self.articles]
+
+    def get_key(self):
+        """
+        """
+        # TODO
+        pass
+
+    def clear_anchor_directory(self):
+        """
+        clears out all files in our directory where we cache anchors
+        the key is sha1(self.domain).hexdigest()
+        fn is ANCHOR_DIR/key
+        """
+        # TODO tomorow
+        #d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source_domain))
+        #os.path.remove(ANCHOR_DIRECTORY)
 
     def print_summary(self):
         """

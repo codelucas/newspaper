@@ -13,7 +13,7 @@ from .article import Article, ArticleException
 from .source import Source
 
 from .api import build, build_article, popular_urls, hot
-from .api import NewsPool
+from .api import NewsPool, Configuration as Config
 
 news_pool = NewsPool()
 

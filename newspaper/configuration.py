@@ -39,6 +39,9 @@ class Configuration(object):
         # set this to false if you don't care about getting images
         self.enable_image_fetching = True
 
+        # TODO: Make this work
+        self.use_cached_categories = True
+
         # set this var to False if you want to force
         # the article language. Otherwise it will attempt to
         # find meta language and use the correct stopwords dictionary

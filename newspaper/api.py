@@ -12,12 +12,14 @@ from .article import Article
 from .settings import POPULAR_URLS, TRENDING_URL
 from .configuration import Configuration
 from .mthreading import NewsPool
+from .configuration import Configuration
 
-def build(url=u'', is_memo=True, verbose=False):
+def build(url=u'', config=None):
     """
     returns a constructed source object without
     downloading or parsing the articles
     """
+    config = Configuration() if not config else config
     url = url or '' # empty string precedence over None
     valid_href = ('://' in url) and (url[:4] == 'http')
 
@@ -25,10 +27,7 @@ def build(url=u'', is_memo=True, verbose=False):
         print 'ERR: provide a valid url'
         return None
 
-    test_configs = Configuration()
-    test_configs.verbose = verbose
-    test_configs.is_memoize_articles = is_memo
-    s = Source(url, config=test_configs)
+    s = Source(url, config)
     s.build()
     return s
 
