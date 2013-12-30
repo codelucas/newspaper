@@ -68,8 +68,8 @@ def sbs(words, keywords):
     return (1.0 / math.fabs(len(words)) * score)/10.0
 
 def dbs(words, keywords):
-    """"""
-
+    """
+    """
     if (len(words)==0):
         return 0
     summ = 0

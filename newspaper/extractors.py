@@ -304,29 +304,22 @@ class ContentExtractor(object):
                     return href
         return article.final_url
 
-    # TODO def get_domain(self, url):
-
-    def get_img_urls(self, article, method='xml'):
+    def get_img_urls(self, article):
         """
         return all of the images on an html page, lxml root
         """
         doc = article.raw_doc
-        if method == 'soup':
-            img_links = self.parser.get_img_urls(doc, method)
-            img_links = [ urlparse.urljoin(article.url, url) for url in img_links ]
-            return img_links
-        else:
-            img_links = [ urlparse.urljoin(article.url, url)
-                    for url in doc.xpath('//img/@src') ]
+        urls = self.parser.get_img_urls(doc)
+        img_links = [ urlparse.urljoin(article.url, url) for url in urls ]
 
-            return img_links
+        return img_links
 
-    def get_top_img_url(self, article, method='lxml'):
+    def get_top_img_url(self, article):
         """
         """
         # !important, we must use raw_doc because at this point doc has been cleaned
         doc = article.raw_doc
-        return self.parser.get_top_img_url(doc, method=method)
+        return self.parser.get_top_img_url(doc)
 
     def get_category_urls(self, source, source_url=None, page_urls=None):
         """

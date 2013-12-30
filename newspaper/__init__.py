@@ -2,11 +2,9 @@
 
 """
 Wherever smart people work, doors are unlocked. -- Steve Wozniak
-
 """
 
 __title__ = 'newspaper'
-__version__ = '0.0.3'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014 Lucas Ou-Yang'

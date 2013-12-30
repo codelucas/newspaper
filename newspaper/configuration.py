@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-
 """
+Config settings for both Source and Article objects.
+Pass these in (optionally) via the constructors. Or
+else a default Configuration() object will be used.
 """
 
 import os
-import tempfile
 import logging
 
 from .text import StopWords
@@ -16,8 +17,9 @@ log = logging.getLogger(__name__)
 class Configuration(object):
 
     def __init__(self):
-        # modify any of these Article properties
-
+        """
+        modify any of these Article properties
+        """
         self.MIN_WORD_COUNT  = 300      # num of word tokens in text
         self.MIN_SENT_COUNT  = 7        # num of sentence tokens
         self.MAX_TITLE       = 200      # num of chars
@@ -55,14 +57,15 @@ class Configuration(object):
         self.request_timeout = 7
         self.number_threads = 10
 
-        # self.debug = False # TODO remove unneeded
-        self.verbose = False # this one is for my code, merge later i'm tired
+        self.verbose = False # turn this on when debugging
 
         self.parser_class = 'lxml' # lxml vs soup
 
-    @property
-    def local_storage_path(self):
-        return os.path.join(tempfile.gettempdir(), 'newspaper')
+    # TODO: Can someone help: storing data in the python tempfile directories vs
+    # TODO: just creating a directory in the ~/.newspaper/* directory path?
+    # @property
+    # def local_storage_path(self):
+    #     return os.path.join(tempfile.gettempdir(), 'newspaper')
 
     def get_parser(self):
         return Parser if self.parser_class == 'lxml' else ParserSoup
@@ -100,3 +103,4 @@ class ArticleConfiguration(Configuration):
 
 class SourceConfiguration(Configuration):
     pass
+

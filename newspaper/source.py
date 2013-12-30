@@ -20,17 +20,22 @@ from .utils import (
 
 log = logging.getLogger(__name__)
 
+
 class Category(object):
+
     def __init__(self, url):
         self.url = url
         self.html = None
         self.doc = None
 
+
 class Feed(object):
+
     def __init__(self, url):
         self.url = url
         self.rss = None
         # TODO self.dom = None ;; speed up Feedparser
+
 
 class Source(object):
     """
@@ -89,10 +94,9 @@ class Source(object):
 
         self.set_feeds()
         self.download_feeds()      # mthread
-        # self.parse_feeds()       # TODO regexing out feeds until fix feedparser!
+        # self.parse_feeds()       # TODO regexing out feeds until we fix feedparser!
 
         self.generate_articles()
-        # self.download_articles()
 
     def purge_articles(self, reason, in_articles=None):
         """
@@ -199,7 +203,7 @@ class Source(object):
                     print 'deleting feed', self.categories[index].url, 'due to download err'
                 del self.feeds[index] # TODO
 
-    def parse(self, summarize=True, keywords=True):
+    def parse(self):
         """
         sets the lxml root, also sets lxml roots of all
         children links, also sets description
@@ -241,16 +245,6 @@ class Source(object):
         """
         returns articles given the url of a feed
         """
-        # all_tuples = []
-        # for feed in self.feeds:
-        #     dom = feed.dom
-        #
-        #     if dom.get('entries'):
-        #         ll = dom['entries']
-        #         tuples = [(l['link'], l['title']) for l in ll
-        #                         if l.get('link') and l.get('title')]
-        #         all_tuples.extend(tuples)
-
         articles = []
         for feed in self.feeds:
             urls = self.parser.get_urls(feed.rss, regex=True)
@@ -262,7 +256,7 @@ class Source(object):
                     url=url,
                     source_url=self.url,
                     config=self.config
-                    # title=?  # TODO
+                    # title=?  # TODO: It **must** be fast
                  )
                 cur_articles.append(article)
 
@@ -338,20 +332,17 @@ class Source(object):
 
         # for a in self.articles:
         #   print 'test examine url:', a.url
-
         # log.critical('total', len(articles), 'articles and cutoff was at', limit)
 
     # @print_duration
-    def download_articles(self, multithread=False):
-        """downloads all articles attached to self"""
-
+    def download_articles(self, threads=1):
+        """
+        downloads all articles attached to self
+        """
         urls = [a.url for a in self.articles]
         failed_articles = []
-        self.is_downloaded = True
-        # TODO get rid of useless multithread
-        # TODO Note that del statements automatically handle index movement,
-        # but only if the elem deleted is consistent with element(s) of loop
-        if not multithread:
+
+        if threads == 1:
             for index, article in enumerate(self.articles):
                 url = urls[index]
                 html = network.get_html(url, self.config)
@@ -360,16 +351,20 @@ class Source(object):
                 else:
                     failed_articles.append(self.articles[index])
                     del self.articles[index] # TODO iffy using del here
-        # else:
-        #     filled_requests = network.multithread_request(urls, self.config)
-        #     # Note that the responses are returned in original order
-        #     for index, req in enumerate(filled_requests):
-        #         if req.resp is not None:
-        #             self.articles[index].html = req.resp.text
-        #         else:
-        #             failed_articles.append(self.articles[index])
-        #             del self.articles[index] # TODO iffy using del here
+        else:
+            print ('Alert! We recommend you not multithread individual sources as '
+                  'you will probably get rate limited. Instead, use newspapers custom '
+                  'multithread framework')
+            filled_requests = network.multithread_request(urls, self.config)
+            # Note that the responses are returned in original order
+            for index, req in enumerate(filled_requests):
+                if req.resp is not None:
+                    self.articles[index].html = req.resp.text
+                else:
+                    failed_articles.append(self.articles[index])
+                    del self.articles[index] # TODO iffy using del here
 
+        self.is_downloaded = True
         if len(failed_articles) > 0:
             print '[ERROR], these article urls failed the download:', \
                 [a.url for a in failed_articles]
@@ -400,16 +395,19 @@ class Source(object):
 
     def feed_urls(self):
         """
+        returns a list of feed urls
         """
         return [feed.url for feed in self.feeds]
 
     def category_urls(self):
         """
+        returns a list of category urls
         """
         return [category.url for category in self.categories]
 
     def article_urls(self):
         """
+        returns a list of article urls
         """
         return [article.url for article in self.articles]
 

@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-
 """
 
 class Video(object):
-    """\
+    """
     Video object
     """
-
     def __init__(self):
 
         # type of embed

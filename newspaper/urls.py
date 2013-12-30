@@ -259,3 +259,4 @@ def is_abs_url(url):
 
     c_regex = re.compile(regex)
     return (c_regex.search(url) != None)
+

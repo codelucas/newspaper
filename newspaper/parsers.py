@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 """
 Parser objects will only contain operations that manipulate
-or query an lxml or soup dom object generated from an article's
-html.
+or query an lxml or soup dom object generated from an article's html.
 """
 import re
 import logging
@@ -75,59 +73,36 @@ class Parser(object):
         return cls.root_to_urls(doc, titles)
 
     @classmethod
-    def get_top_img_url(cls, doc, method):
+    def get_top_img_url(cls, doc):
         """
         takes an lxml doc and returns the top img url
         running as method == 'soup' assumes lxml's soupparser
         """
-        if method == 'soup':
-            safe_img = (doc.find('meta', attrs={'property':'og:image'})
-                            or doc.find('meta', attrs={'name':'og:image'}))
-            if safe_img:
-                safe_img = safe_img.get('content')
-
-            if not safe_img:
-                safe_img = (doc.find('link', attrs={'rel':'img_src'})
-                                or doc.find('link', attrs={'rel':'icon'}))
-                if safe_img:
-                    safe_img = safe_img.get('content')
-
-            if not safe_img:
-                safe_img = ''
-
-            return safe_img
-
-        # Otherwise, lxml root
         try:
-            return doc.xpath('/html/head/meta'
-                    '[@property="og:image"][1]/@content')[0]
-        except: pass
+            return doc.xpath('/html/head/meta[@property="og:image"][1]/@content')[0]
+        except:
+            pass
         try:
-            return doc.xpath('/html/head/link'
-                    '[@rel="icon"][1]/@href')[0]
-        except: pass
+            return doc.xpath('/html/head/link[@rel="icon"][1]/@href')[0]
+        except:
+            pass
         try:
-            return doc.xpath('/html/head/link'
-                    '[@rel="img_src"][1]/@href')[0]
-        except: pass
+            return doc.xpath('/html/head/link[@rel="img_src"][1]/@href')[0]
+        except:
+            pass
         try:
-            return doc.xpath('/html/head/meta'
-                    '[@name="og:image"][1]/@content')[0]
-        except: pass
-
+            return doc.xpath('/html/head/meta[@name="og:image"][1]/@content')[0]
+        except:
+            pass
         return None
 
     @classmethod
-    def get_img_urls(cls, doc, method):
+    def get_img_urls(cls, doc):
         """
         return all of the images on an html page, lxml root
         """
         try:
-            if method == 'soup':
-                img_tags = doc.findAll('img')
-                img_links = [ i.get('src') for i in img_tags if i.get('src')  ]
-            else:
-                img_links = doc.xpath('//img/@src')
+            img_links = doc.xpath('//img/@src')
         except Exception, e:
             print str(e)
             log.critical(e)

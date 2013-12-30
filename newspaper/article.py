@@ -11,9 +11,10 @@ import glob
 from . import nlp
 from . import images
 from . import network
+from . import settings
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .utils import URLHelper, RawHelper, encodeValue
+from .utils import URLHelper, encodeValue, RawHelper
 from .cleaners import StandardDocumentCleaner
 from .outputformatters import StandardOutputFormatter
 from .videos.extractors import VideoExtractor
@@ -26,6 +27,7 @@ class ArticleException(Exception):
     pass
 
 class Article(object):
+
     def __init__(self, url, title=u'', source_url=None, config=None):
         """
         """
@@ -100,14 +102,6 @@ class Article(object):
         # list of any movies found on the page like: youtube & vimeo
         self.movies = []
 
-        # stores the final URL that we're going to try
-        # and fetch content against, this would be expanded if any
-        self.final_url = u""
-
-        # stores the MD5 hash of the url
-        # to use for various identification tasks
-        self.link_hash = u""
-
         # the lxml doc object
         self.doc = None
 
@@ -116,6 +110,7 @@ class Article(object):
 
         # A property bucket for consumers of goose to store custom data extractions.
         self.additional_data = {}
+
 
     def build(self):
         """
@@ -126,15 +121,6 @@ class Article(object):
         self.download()
         self.parse()
         self.nlp()
-
-    def get_key(self):
-        """
-        returns a md5 representation of the url
-        """
-        if not self.is_parsed:
-            raise ArticleException(
-                'You must parse an article before asking for a link_hash')
-        return self.link_hash
 
     def download(self):
         """
@@ -157,12 +143,17 @@ class Article(object):
         self.doc = self.parser.fromstring(self.html)
         self.raw_doc = copy.deepcopy(self.doc)
 
-        parse_candidate = self.get_parse_candidate(self)
+        # stores the final URL that we're going to try
+        # and fetch content against, this would be expanded if any
+        parse_candidate = self.get_parse_candidate()
+        self.final_url = parse_candidate.url
+        # stores the MD5 hash of the url
+        # to use for various identification tasks
+        self.link_hash = parse_candidate.link_hash
+
         document_cleaner = self.get_document_cleaner()
         output_formatter = self.get_output_formatter()
 
-        self.final_url = parse_candidate.url
-        self.link_hash = parse_candidate.link_hash
         title = self.extractor.get_title(self)
         authors = self.extractor.get_authors(self)
 
@@ -194,9 +185,6 @@ class Article(object):
         self.set_text(text)
         self.set_keywords(self.meta_keywords)
 
-        # cleanup tmp file
-        self.relase_resources(self)
-
         if self.raw_doc is not None:
             img_url = self.extractor.get_top_img_url(self)
             self.top_img = encodeValue(img_url)
@@ -207,6 +195,7 @@ class Article(object):
 
         self.set_reddit_top_img()
         self.is_parsed = True
+        self.release_resources()
 
     def is_valid_url(self):
         """
@@ -282,15 +271,15 @@ class Article(object):
         summary = '\r\n'.join(summary_sents)
         self.set_summary(summary)
 
-    def get_parse_candidate(self, crawl_candidate):
+    def get_parse_candidate(self):
         """
         A parse candidate is a wrapper object holding a link hash of this
         article and a final_url
         """
-        if crawl_candidate.html:
-            return RawHelper.get_parsing_candidate(
-                crawl_candidate.url, crawl_candidate.html)
-        return URLHelper.get_parsing_candidate(crawl_candidate.url)
+        # TODO: Should we actually compute a hash using the html? It is more inconvenient if we do that
+        if self.html:
+            return RawHelper.get_parsing_candidate(self.url, self.html)
+        return URLHelper.get_parsing_candidate(self.url)
 
     def get_video_extractor(self, article):
         return VideoExtractor(article, self.config)
@@ -304,16 +293,37 @@ class Article(object):
     def get_extractor(self):
         return StandardContentExtractor(self.config)
 
-    def relase_resources(self, article):
+    def build_resource_path(self):
         """
+        must be called after we compute html/final url
         """
-        path = os.path.join(self.config.local_storage_path, '%s_*' % article.link_hash)
+        res_path = self.get_resource_path()
+        if not os.path.exists(res_path):
+            os.mkdir(res_path)
+
+    def get_resource_path(self):
+        """
+        every article object has a special directory to store data in from
+        initialization to garbage collection.
+        """
+        res_dir_fn = 'article_resources'
+        resource_directory = os.path.join(settings.TOP_DIRECTORY, res_dir_fn)
+        if not os.path.exists(resource_directory):
+            os.mkdir(resource_directory)
+        dir_path = os.path.join(resource_directory, '%s_' % self.link_hash)
+        return dir_path
+
+    def release_resources(self):
+        """
+        TODO: Actually implement this properly.
+        """
+        path = self.get_resource_path()
         for fname in glob.glob(path):
             try:
                 os.remove(fname)
             except OSError:
-                # TODO better log handling
                 pass
+        # os.remove(path)
 
     def set_reddit_top_img(self):
         """

@@ -104,9 +104,8 @@ class StopWordsChinese(StopWords):
         super(StopWordsChinese, self).__init__(language='zh')
 
     def candiate_words(self, stripped_input):
-        # jieba build a tree that takes sometime
-        # avoid building the tree if we don't use
-        # chinese language
+        # jieba builds a tree that takes a while. avoid building
+        # this tree if we don't use the chinese language
         from .packages import jieba
         return jieba.cut(stripped_input, cut_all=True)
 

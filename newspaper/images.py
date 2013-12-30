@@ -145,8 +145,8 @@ def fetch_size(url, useragent, referer=None, retries=1):
     return fetch_url(url, useragent, referer, retries, dimension=True)
 
 class Scraper:
-    def __init__(self, article):
 
+    def __init__(self, article):
         self.url = article.url # if not url else url
         self.imgs = article.imgs # if not imgs else imgs
         self.top_img = article.top_img # if not top_img else top_img

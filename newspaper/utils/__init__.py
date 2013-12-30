@@ -21,6 +21,7 @@ from .. import settings
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+
 class FileHelper(object):
     @classmethod
     def loadResourceFile(self, filename):
@@ -39,10 +40,13 @@ class FileHelper(object):
         except IOError:
             raise IOError("Couldn't open file %s" % path)
 
+
 class ParsingCandidate(object):
+
     def __init__(self, urlString, link_hash):
         self.urlString = self.url = urlString
         self.link_hash = link_hash
+
 
 class RawHelper(object):
     @classmethod
@@ -52,6 +56,7 @@ class RawHelper(object):
         link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
         return ParsingCandidate(url, link_hash)
 
+
 class URLHelper(object):
     @classmethod
     def get_parsing_candidate(self, url_to_crawl):
@@ -60,6 +65,7 @@ class URLHelper(object):
                     if '#!' in url_to_crawl else url_to_crawl
         link_hash = '%s.%s' % (hashlib.md5(final_url).hexdigest(), time.time())
         return ParsingCandidate(final_url, link_hash)
+
 
 class StringSplitter(object):
     """
@@ -72,6 +78,7 @@ class StringSplitter(object):
             return []
         return self.pattern.split(string)
 
+
 class StringReplacement(object):
     def __init__(self, pattern, replaceWith):
         self.pattern = pattern
@@ -81,6 +88,7 @@ class StringReplacement(object):
         if not string:
             return u''
         return string.replace(self.pattern, self.replaceWith)
+
 
 class ReplaceSequence(object):
     def __init__(self):
@@ -105,8 +113,10 @@ class ReplaceSequence(object):
             mutatedString = rp.replaceAll(mutatedString)
         return mutatedString
 
+
 class TimeoutError(Exception):
     pass
+
 
 def timelimit(timeout):
     """

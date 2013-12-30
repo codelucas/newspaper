@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-
 """
 
 from .videos import Video
@@ -10,7 +9,7 @@ VIDEO_PROVIDERS = ['youtube', 'vimeo', 'dailymotion', 'kewego']
 
 
 class VideoExtractor(object):
-    """\
+    """
     Extracts a list of video from Article top node
     """
     def __init__(self, article, config):

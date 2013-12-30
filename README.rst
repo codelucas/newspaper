@@ -5,7 +5,7 @@ Newspaper: Article scraping & curation
     :target: http://badge.fury.io/py/newspaper
         :alt: Latest version
 
-.. image:: https://pypip.in/d/newspaper/badge.png
+.. .. image:: https://pypip.in/d/newspaper/badge.png
     :target: https://crate.io/packages/newspaper/
         :alt: Number of PyPI downloads
 

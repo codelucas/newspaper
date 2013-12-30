@@ -51,6 +51,7 @@ class ArticleTestCase(unittest.TestCase):
         self.test_parse_html()
         self.test_pre_parse_nlp()
         self.test_nlp_body()
+        self.test_resource_pathing()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
@@ -118,11 +119,23 @@ class ArticleTestCase(unittest.TestCase):
                     u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
 
         self.article.nlp()
-
         # print self.article.summary
         # print self.article.keywords
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
+
+    def test_resource_pathing(self):
+        """
+        ignore the time hash because time is changing always
+        """
+        pass
+        # TODO below test does not work, figure out how to unit test this.
+        # res_path = self.article.get_resource_path()
+        # RES_LINK_HASH = 'fca15800fe9782c1e6ba205f28c89174'
+        # print res_path
+        # print RES_LINK_HASH
+        # assert res_path.split('/')[-1].split('.')[0] == RES_LINK_HASH
+
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
@@ -276,13 +289,23 @@ class EncodingTestCase(unittest.TestCase):
         assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
         assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
 
+class MThreadingTestCase(unittest.TestCase):
+    def runTest(self):
+        pass
+
+    @print_test
+    def test_download_works(self):
+        """
+        """
+        pass
+
 
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
     suite = unittest.TestSuite()
 
     suite.addTest(EncodingTestCase())
-
+    suite.addTest(MThreadingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())

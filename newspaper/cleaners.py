@@ -42,7 +42,8 @@ class DocumentCleaner(object):
                                             .append("^\\s+$")
 
     def clean(self, article):
-
+        """
+        """
         doc_to_clean = article.doc
         doc_to_clean = self.clean_article_tags(doc_to_clean)
         doc_to_clean = self.clean_em_tags(doc_to_clean)

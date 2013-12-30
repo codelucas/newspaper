@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 """
 To change the version of entire package, just edit this one location.
 """
