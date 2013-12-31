@@ -9,9 +9,9 @@ Inspired by `requests`_ for its **simplicity** and powered by `lxml`_ for its **
 is a Python 2 library for extracting & curating articles from the web.
 
 Newspaper wants to change the way people handle article extraction with a new, more precise
-layer of abstraction. Please refer to `The Documentation`_ for a quickstart tutorial!
+layer of abstraction. Newspaper caches whatever it can for speed. *Also, everything is in unicode*
 
-Newspaper caches whatever it can for speed. *Also, everything is in unicode*
+Please refer to **`The Documentation`_** for a quickstart tutorial!
 
 A Glance:
 ---------
@@ -67,6 +67,11 @@ A Glance:
     >>> first.summary
     u'The study shows that 93% of people ...'
 
+Documentation
+-------------
+
+Check out `The Documentation`_ for full and detailed guides using newspaper.
+
 Features
 --------
 
@@ -98,11 +103,6 @@ Todo List
 
 - Add a "follow_robots.txt" option in the config object.
 - Bake in the CSSSelect and BeautifulSoup dependencies
-
-Documentation
--------------
-
-Check out `The Documentation`_ for full and detailed guides using newspaper.
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
 .. _`The Documentation`: http://newspaper.readthedocs.org
