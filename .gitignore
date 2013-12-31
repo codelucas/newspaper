@@ -12,6 +12,7 @@
 *.egg-info
 dist
 build
+_build
 eggs
 parts
 bin

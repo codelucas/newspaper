@@ -1,4 +1,0 @@
-.. _api:
-
-Newspaper API
-=============
