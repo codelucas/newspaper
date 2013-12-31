@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,24 +6,26 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; newspaper 0.0.2 documentation</title>
+    <title>Installation &mdash; newspaper 0.0.2 documentation</title>
     
-    <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/flasky.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    './',
+        URL_ROOT:    '../',
         VERSION:     '0.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="newspaper 0.0.2 documentation" href="index.html" />
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="newspaper 0.0.2 documentation" href="../index.html" />
+    <link rel="next" title="Quickstart" href="quickstart.html" />
+    <link rel="prev" title="Newspaper: Article scraping &amp; curation" href="../index.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -36,9 +37,15 @@
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
-          <a href="#" title="General Index"
+          <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li><a href="index.html">newspaper 0.0.2 documentation</a> &raquo;</li> 
+        <li class="right" >
+          <a href="quickstart.html" title="Quickstart"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Newspaper: Article scraping &amp; curation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">newspaper 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -47,11 +54,35 @@
         <div class="bodywrapper">
           <div class="body">
             
+  <div class="section" id="installation">
+<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>This part of the documentation covers the installation of newspaper.
+The first step to using any software package is getting it properly installed.</p>
+<div class="section" id="distribute-pip">
+<h2>Distribute &amp; Pip<a class="headerlink" href="#distribute-pip" title="Permalink to this headline">¶</a></h2>
+<p>Installing newspaper is simple with <a class="reference external" href="http://www.pip-installer.org/">pip</a>:</p>
+<div class="highlight-python"><pre>$ pip install newspaper
 
-<h1 id="index">Index</h1>
+IMPORTANT
+If you know for sure that you'll use the natural language features,
+nlp(), you must download some separate nltk corpora below.
+You must download everything in python 2.6 - 2.7!
 
-<div class="genindex-jumpbox">
- 
+$ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7</pre>
+</div>
+</div>
+<div class="section" id="get-the-code">
+<h2>Get the Code<a class="headerlink" href="#get-the-code" title="Permalink to this headline">¶</a></h2>
+<p>newspaper is actively developed on GitHub, where the code is
+<a class="reference external" href="https://github.com/codelucas/newspaper">always available</a>.</p>
+<p>You can clone the public repository:</p>
+<div class="highlight-python"><pre>git clone git://github.com/codelucas/newspaper.git</pre>
+</div>
+<p>Once you have a copy of the source, you can embed it in your Python package,
+or install it into your site-packages easily:</p>
+<div class="highlight-python"><pre>$ python setup.py install</pre>
+</div>
+</div>
 </div>
 
 
@@ -60,8 +91,8 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper"><p class="logo">
-  <a href="index.html">
-    <img class="logo" style="margin-right:40px;" src="_static/newspaper.jpg" title="Newspaper logo."/>
+  <a href="../index.html">
+    <img class="logo" style="margin-right:40px;" src="../_static/newspaper.jpg" title="Newspaper logo."/>
   </a>
 </p>
 
@@ -75,14 +106,30 @@
   <li><a href="http://github.com/codelucas/newspaper">Newspaper @ GitHub</a></li>
   <li><a href="http://pypi.python.org/pypi/newspaper">Newspaper @ PyPI</a></li>
   <li><a href="http://github.com/codelucas/newspaper/issues">Issue Tracker</a></li>
-</ul><h3>Related Topics</h3>
+</ul>
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#distribute-pip">Distribute &amp; Pip</a></li>
+<li><a class="reference internal" href="#get-the-code">Get the Code</a></li>
+</ul>
+</li>
+</ul>
+<h3>Related Topics</h3>
 <ul>
-  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Newspaper: Article scraping &amp; curation</a></li>
+      <li>Next: <a href="quickstart.html" title="next chapter">Quickstart</a></li>
   </ul></li>
 </ul>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/user_guide/install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
+    <form class="search" action="../search.html" method="get">
       <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />

@@ -1,4 +1,5 @@
 {%- extends "basic/layout.html" %}
+
 {%- block extrahead %}
   {{ super() }}
   {% if theme_touch_icon %}
@@ -7,7 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
   <script type="text/javascript" src="https://gumroad.com/js/gumroad.js"></script>
 {% endblock %}
+
 {%- block relbar2 %}{% endblock %}
+
 {%- block footer %}
     <div class="footer">
       &copy; Copyright {{ copyright }}.
@@ -67,6 +70,5 @@
         s.parentNode.insertBefore(t, s);
       })();
     </script>
-
 
 {%- endblock %}

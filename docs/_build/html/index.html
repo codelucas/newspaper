@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to newspaper’s documentation! &mdash; newspaper 0.0.2 documentation</title>
+    <title>Newspaper: Article scraping &amp; curation &mdash; newspaper 0.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -24,6 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="newspaper 0.0.2 documentation" href="#" />
+    <link rel="next" title="Installation" href="user_guide/install.html" />
    
   
   <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
@@ -37,6 +38,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="user_guide/install.html" title="Installation"
+             accesskey="N">next</a> |</li>
         <li><a href="#">newspaper 0.0.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -46,187 +50,116 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-newspaper-s-documentation">
-<h1>Welcome to newspaper&#8217;s documentation!<a class="headerlink" href="#welcome-to-newspaper-s-documentation" title="Permalink to this headline">¶</a></h1>
-<p>Inspired by <tt class="docutils literal"><span class="pre">requests</span></tt> for its simplicity and powered by <tt class="docutils literal"><span class="pre">lxml</span></tt> for its speed; <strong>newspaper</strong>
+  <div class="section" id="newspaper-article-scraping-curation">
+<h1>Newspaper: Article scraping &amp; curation<a class="headerlink" href="#newspaper-article-scraping-curation" title="Permalink to this headline">¶</a></h1>
+<a class="reference external image-reference" href="http://badge.fury.io/py/newspaper:alt:Latestversion"><img alt="https://badge.fury.io/py/newspaper.png" src="https://badge.fury.io/py/newspaper.png" /></a>
+<p>Inspired by <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a> for its <strong>simplicity</strong> and powered by <a class="reference external" href="http://lxml.de/">lxml</a> for its <strong>speed</strong>; <em>newspaper</em>
 is a Python 2 library for extracting &amp; curating articles from the web.</p>
-<p>Newspaper wants to change the way people handle <tt class="docutils literal"><span class="pre">article</span> <span class="pre">extraction</span></tt> with <tt class="docutils literal"><span class="pre">a</span> <span class="pre">new,</span> <span class="pre">more</span> <span class="pre">precise</span>
-<span class="pre">layer</span> <span class="pre">of</span> <span class="pre">abstraction</span></tt>.</p>
-<p>Newspaper utilizes lxml and caching for speed. <em>Also, everything is in unicode</em></p>
+<p>Newspaper wants to change the way people handle article extraction with a new, more precise
+layer of abstraction.</p>
+<p>Newspaper caches whatever it can for speed. <em>Also, everything is in unicode</em></p>
+<div class="section" id="a-glance">
+<h2>A Glance:<a class="headerlink" href="#a-glance" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">newspaper</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper</span> <span class="o">=</span> <span class="n">newspaper</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;http://cnn.com&#39;</span><span class="p">)</span> <span class="c"># ~15 seconds</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper</span> <span class="o">=</span> <span class="n">newspaper</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;http://cnn.com&#39;</span><span class="p">)</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">articles</span><span class="p">:</span> <span class="c"># filters urls</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">article</span> <span class="ow">in</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">articles</span><span class="p">:</span>
 <span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">url</span>
-
 <span class="go">u&#39;http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/&#39;</span>
 <span class="go">u&#39;http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html&#39;</span>
-<span class="go">u&#39;http://www.cnn.com/2013/12/07/us/life-pearl-harbor/&#39;</span>
 <span class="gp">...</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="c"># number of articles</span>
-<span class="go">3100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">category</span> <span class="ow">in</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">category_urls</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="k">print</span> <span class="n">category</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">category_urls</span><span class="p">()</span>
-<span class="go">[u&#39;http://lifestyle.cnn.com&#39;, u&#39;http://cnn.com/world&#39;, u&#39;http://tech.cnn.com&#39; ...]</span>
+<span class="go">u&#39;http://lifestyle.cnn.com&#39;</span>
+<span class="go">u&#39;http://cnn.com/world&#39;</span>
+<span class="go">u&#39;http://tech.cnn.com&#39;</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span> <span class="o">=</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">feed_urls</span><span class="p">()</span>
-<span class="go">[u&#39;http://rss.cnn.com/rss/cnn_crime.rss&#39;, u&#39;http://rss.cnn.com/rss/cnn_tech.rss&#39;, ...]</span>
-
-<span class="go">first_article = cnn_paper.articles[0]</span>
-
-<span class="go">first_article.download()</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">html</span> <span class="c"># html fetched from download()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">html</span>
 <span class="go">u&#39;&lt;!DOCTYPE HTML&gt;&lt;html itemscope itemtype=&quot;http://...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">html</span> <span class="c"># won&#39;t work, only downloaded 5 articles</span>
-<span class="go">u&#39;&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_article</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>  <span class="c"># parse html for body txt, authors, title..</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">text</span>
-<span class="go">u&#39;Three sisters who were imprisoned for possibly...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">top_img</span>
-<span class="go">u&#39;http://some.cdn.com/3424hfd4565sdfgdg436/</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">authors</span>
-<span class="go">[u&#39;Eliott C. McLaughlin&#39;, u&#39;Some CoAuthor&#39;]</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">title</span>
-<span class="go">u&#39;Police: 3 sisters imprisoned in Tucson home&#39;</span>
-
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">first_article</span><span class="o">.</span><span class="n">nlp</span><span class="p">()</span> <span class="c"># must be on an already parse()&#39;ed article</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">summary</span>
-<span class="go">u&#39;...imprisoned for possibly a constant barrage...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">first_article</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">[u&#39;music&#39;, u&#39;Tucson&#39;, ... ]</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">articles</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">nlp</span><span class="p">()</span> <span class="c"># fail, not been downloaded yet</span>
-<span class="go">Traceback (...</span>
-<span class="go">   ...</span>
-<span class="go">ArticleException: You must parse an article before you try to..</span>
-
-
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># some other news-source level functionality</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">brand</span>
-<span class="go">u&#39;cnn&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">cnn_paper</span><span class="o">.</span><span class="n">description</span>
-<span class="go">u&#39;CNN.com delivers the latest breaking news and information on the latest...&#39;</span>
-
-
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># a few hopefully useful easter eggs:</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">newspaper</span><span class="o">.</span><span class="n">hot</span><span class="p">()[:</span><span class="mi">5</span><span class="p">]</span>
-<span class="go">[&#39;Ned Vizzini&#39;, Brian Boitano&#39;, Crossword Inventor&#39;, &#39;Alex and Sierra&#39;, &#39;Claire Davis&#39;]</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">newspaper</span><span class="o">.</span><span class="n">popular_urls</span><span class="p">()</span>
-<span class="go">[&#39;http://slate.com&#39;, &#39;http://cnn.com&#39;, &#39;http://huffingtonpost.com&#39;, ...]</span>
-
-<span class="go">^ just a few friendly suggestions if you forget the popular news sites!</span>
 </pre></div>
 </div>
-<p><strong>IMPORTANT</strong></p>
-<p>Unless told not to in the constructor via the <tt class="docutils literal"><span class="pre">is_memo_articles</span></tt> param (default true),
-newspaper automatically caches all category, feed, and article urls.
-This is both to avoid duplicate articles and for speed.</p>
-<div class="highlight-pycon"><div class="highlight"><pre><span class="go">Suppose the above code has already been run on the cnn domain once. Previous</span>
-<span class="go">article urls are cached and dupes are removed so we only get new articles.</span>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">newspaper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">authors</span>
+<span class="go">[u&#39;Leigh Ann Caldwell&#39;, &#39;John Honway&#39;]</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper</span> <span class="o">=</span> <span class="n">newspaper</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;http://cnn.com&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
-<span class="go">60    # since we last ran build(), cnn published 60 new articles!</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="c"># If you&#39;d like to opt out of memoization, init newspapers with</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper2</span> <span class="o">=</span> <span class="n">newspaper</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="s">&#39;http://cnn.com&#39;</span><span class="p">,</span> <span class="n">is_memo</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cnn_paper2</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
-<span class="go">3100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">text</span>
+<span class="go">u&#39;Washington (CNN) -- Not everyone subscribes to a New Year&#39;s resolution...&#39;</span>
 </pre></div>
 </div>
-<p>Alternatively, you may use newspaper&#8217;s lower level Article api.</p>
-<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">newspaper</span> <span class="kn">import</span> <span class="n">Article</span>
+<div class="highlight-pycon"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">nlp</span><span class="p">()</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="n">article</span> <span class="o">=</span> <span class="n">Article</span><span class="p">(</span><span class="s">&#39;http://cnn.com/2013/11/27/travel/weather-thanksgiving/index.html&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">article</span><span class="o">.</span><span class="n">download</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">keywords</span>
+<span class="go">[&#39;New Years&#39;, &#39;resolution&#39;, ...]</span>
 
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">html</span>
-<span class="go">u&#39;&lt;!DOCTYPE HTML&gt;&lt;html itemscope itemtype=&quot;http://...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">article</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">text</span>
-<span class="go">u&#39;The purpose of this article is to introduce...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">authors</span>
-<span class="go">[u&#39;Martha Stewart&#39;, u&#39;Bob Smith&#39;]</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">top_img</span>
-<span class="go">u&#39;http://some.cdn.com/3424hfd4565sdfgdg436/</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">title</span>
-<span class="go">u&#39;Thanksgiving Weather Guide Travel ...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="n">article</span><span class="o">.</span><span class="n">nlp</span><span class="p">()</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">summary</span>
-<span class="go">u&#39;...and so that&#39;s how a Thanksgiving meal is cooked...&#39;</span>
-
-<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">article</span><span class="o">.</span><span class="n">keywords</span>
-<span class="go">[u&#39;Thanksgiving&#39;, u&#39;holliday&#39;, u&#39;Walmart&#39;, ...]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">first</span><span class="o">.</span><span class="n">summary</span>
+<span class="go">u&#39;The study shows that 93% of people ...&#39;</span>
 </pre></div>
 </div>
-<p><tt class="docutils literal"><span class="pre">nlp()</span></tt> is expensive, as is <tt class="docutils literal"><span class="pre">parse()</span></tt>, make sure you actually need them before calling them on
-all of your articles! In some cases, if you just need urls, even <tt class="docutils literal"><span class="pre">download()</span></tt> is not necessary.</p>
-<p>Newspaper stands on the giant shoulders of <a class="reference external" href="http://lxml.de/">lxml</a>, <a class="reference external" href="http://nltk.org/">nltk</a>, and <a class="reference external" href="http://docs.python-requests.org/en/latest/">requests</a>. Newspaper also uses much of
-<a class="reference external" href="https://github.com/grangier/python-goose">goose</a>&#8216;s code internally.</p>
+</div>
+<div class="section" id="user-guide">
+<h2>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/install.html#distribute-pip">Distribute &amp; Pip</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/install.html#get-the-code">Get the Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/quickstart.html">Quickstart</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#building-a-news-source">Building a news source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#extracting-articles">Extracting articles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#article-caching">Article caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#extracting-source-categories">Extracting Source categories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#extracting-source-feeds">Extracting Source feeds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#extracting-source-brand-description">Extracting Source brand &amp; description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#news-articles">News Articles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#downloading-an-article">Downloading an Article</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#parsing-an-article">Parsing an Article</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#performing-nlp-on-an-article">Performing NLP on an Article</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/quickstart.html#easter-eggs">Easter Eggs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/advanced.html">Advanced</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/advanced.html#multi-threading-article-downloads">Multi-threading article downloads</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/advanced.html#explicitly-building-a-news-source">Explicitly building a news source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/advanced.html#config-objects">Config objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/advanced.html#caching">Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user_guide/advanced.html#specifications">Specifications</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="user_guide/contributors.html">Contributors</a></li>
+</ul>
+</div>
+</div>
 <div class="section" id="features">
 <h2>Features<a class="headerlink" href="#features" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li>News url identification</li>
+<li>Quick article downloads via multi-threading</li>
 <li>Text extraction from html</li>
 <li>Keyword extraction from text</li>
 <li>Summary extraction from text</li>
 <li>Author extraction from text</li>
-<li>Top Image &amp; All image extraction from html</li>
-<li>Top Google trending terms</li>
-<li>News article extraction from news domain</li>
-<li>Quick html downloads via multithreading</li>
+<li>Top Image extraction from html</li>
+<li>All image extraction from html</li>
+<li>Google trending terms extraction</li>
 </ul>
 </div>
-<div class="section" id="get-it-now">
-<h2>Get it now<a class="headerlink" href="#get-it-now" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-python"><pre>$ pip install newspaper
-
-### IMPORTANT ###
-# If you KNOW for sure you will use the natural language features, nlp(), you must
-# download some seperate nltk corpora below, it may take a while!
-
-$ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7</pre>
-</div>
-<p>Contents:</p>
-<div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
-</div>
-</div>
-</div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
-<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
-<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
-</ul>
 </div>
 
 
@@ -234,22 +167,22 @@ $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | p
         </div>
       </div>
       <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Welcome to newspaper&#8217;s documentation!</a><ul>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#get-it-now">Get it now</a><ul>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
-</ul>
-<h3>Related Topics</h3>
+        <div class="sphinxsidebarwrapper"><p class="logo">
+  <a href="#">
+    <img class="logo" style="margin-right:40px;" src="_static/newspaper.jpg" title="Newspaper logo."/>
+  </a>
+</p>
+
+<p>
+  <iframe src="http://ghbtns.com/github-btn.html?user=codelucas&repo=newspaper&type=watch&count=true&size=large"
+    allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+<h3>Useful Links</h3>
 <ul>
-  <li><a href="#">Documentation overview</a><ul>
-  </ul></li>
+  <li><a href="http://github.com/codelucas/newspaper">Newspaper @ GitHub</a></li>
+  <li><a href="http://pypi.python.org/pypi/newspaper">Newspaper @ PyPI</a></li>
+  <li><a href="http://github.com/codelucas/newspaper/issues">Issue Tracker</a></li>
 </ul>
   <h3>This Page</h3>
   <ul class="this-page-menu">
@@ -276,7 +209,7 @@ $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | p
     <div class="footer">
       &copy; Copyright 2013, Lucas Ou-Yang.
     </div>
-    <a href="https://github.com/kennethreitz/requests" class="github">
+    <a href="https://github.com/codelucas/newspaper" class="github">
         <img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"  class="github"/>
     </a>
     <script type="text/javascript">
@@ -305,7 +238,7 @@ $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | p
     <script type="text/javascript">
 
       var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-8742933-11']);
+      _gaq.push(['_setAccount', 'UA-46664963-1']);
       _gaq.push(['_setDomainName', 'none']);
       _gaq.push(['_setAllowLinker', true]);
       _gaq.push(['_trackPageview']);
