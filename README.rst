@@ -9,7 +9,7 @@ Inspired by `requests`_ for its **simplicity** and powered by `lxml`_ for its **
 is a Python 2 library for extracting & curating articles from the web.
 
 Newspaper wants to change the way people handle article extraction with a new, more precise
-layer of abstraction. Newspaper caches whatever it can for speed. *Also, everything is in unicode*
+layer of abstraction. Newspaper caches whatever it can for speed. *Also, everything is in unicode*.
 
 Please refer to `The Documentation`_ for a quickstart tutorial!
 

@@ -1,9 +1,7 @@
 Newspaper: Article scraping & curation
 ======================================
 
-.. image:: https://badge.fury.io/py/newspaper.png
-    :target: http://badge.fury.io/py/newspaper
-        :alt: Latest version
+Release v0.0.4. :ref:`(Installation) <install>`.
 
 Inspired by `requests`_ for its **simplicity** and powered by `lxml`_ for its **speed**; *newspaper*
 is a Python 2 library for extracting & curating articles from the web.
