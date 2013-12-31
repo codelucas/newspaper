@@ -38,33 +38,33 @@ A Glance:
 
 .. code-block:: pycon
 
-    >>> first = cnn_paper.articles[0]
+    >>> article = cnn_paper.articles[0]
 
 .. code-block:: pycon
 
-    >>> first.download()
+    >>> article.download()
 
-    >>> first.html
+    >>> article.html
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
 .. code-block:: pycon
 
-    >>> first.parse()
+    >>> article.parse()
 
-    >>> first.authors
+    >>> article.authors
     [u'Leigh Ann Caldwell', 'John Honway']
 
-    >>> first.text
+    >>> article.text
     u'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
 
 .. code-block:: pycon
 
-    >>> first.nlp()
+    >>> article.nlp()
 
-    >>> first.keywords
+    >>> article.keywords
     ['New Years', 'resolution', ...]
 
-    >>> first.summary
+    >>> article.summary
     u'The study shows that 93% of people ...'
 
 User Guide
