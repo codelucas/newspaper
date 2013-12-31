@@ -338,13 +338,16 @@ class ContentExtractor(object):
             path = get_path(p_url, allow_fragments=False)
 
             if not domain and not path:
-                if source.config.verbose: print 'elim category url %s for no domain and path' % p_url
+                if source.config.verbose:
+                    print 'elim category url %s for no domain and path' % p_url
                 continue
             if path and path.startswith('#'):
-                if source.config.verbose: print 'elim category url %s path starts with #' % p_url
+                if source.config.verbose:
+                    print 'elim category url %s path starts with #' % p_url
                 continue
             if scheme and (scheme!='http' and scheme!='https'):
-                if source.config.verbose: print 'elim category url %s for bad scheme, not http nor https' % p_url
+                if source.config.verbose:
+                    print 'elim category url %s for bad scheme, not http nor https' % p_url
                 continue
 
             if domain:
@@ -355,7 +358,8 @@ class ContentExtractor(object):
                 subdomain_contains = False
                 for part in child_subdomain_parts:
                     if part == domain_tld.domain:
-                        if source.config.verbose: print 'subdomain contains at %s and %s' % (str(part), str(domain_tld.domain))
+                        if source.config.verbose:
+                            print 'subdomain contains at %s and %s' % (str(part), str(domain_tld.domain))
                         subdomain_contains = True
                         break
 
@@ -383,7 +387,8 @@ class ContentExtractor(object):
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
                     valid_categories.append(domain+path)
                 else:
-                    if source.config.verbose: print 'elim category url %s for >1 path chunks or size path chunks' % p_url
+                    if source.config.verbose:
+                        print 'elim category url %s for >1 path chunks or size path chunks' % p_url
 
 
         stopwords = [
@@ -410,7 +415,8 @@ class ContentExtractor(object):
             bad = False
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
-                    if source.config.verbose: print 'elim category url %s for subdomain contain stopword!' % p_url
+                    if source.config.verbose:
+                        print 'elim category url %s for subdomain contain stopword!' % p_url
                     bad=True
                     break
             if not bad:

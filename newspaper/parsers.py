@@ -159,7 +159,7 @@ class Parser(object):
         try:
             cls.doc = lxml.html.fromstring(html)
         except Exception, e:
-            print 'Parse lxml err', str(e)
+            print '[Parse lxml ERR]', str(e)
             return None
 
         return cls.doc

@@ -41,9 +41,7 @@ Newspaper utilizes lxml and caching for speed. *Also, everything is in unicode*
     >>> print cnn_paper.feed_urls() 
     [u'http://rss.cnn.com/rss/cnn_crime.rss', u'http://rss.cnn.com/rss/cnn_tech.rss', ...] 
 
-    Note that the above category urls & feeds are cached for speed, feel free 
-    to change cache time via config objects.. explained later in this readme.
-
+    Note that the above category urls & feeds are cached for speed.
 
 The first step is to ``download()`` an article.    
     
@@ -115,8 +113,8 @@ speed up the download time while being respectful.
     >>> espn_paper = newspaper.build('http://espn.com')
 
     >>> papers = [slate_paper, tc_paper, espn_paper]
-    >>> news_pool.set(papers)
-    >>> news_pool.go()
+    >>> news_pool.set(papers, threads_per_source=2) # (3*2) = 6 threads total
+    >>> news_pool.join()
 
     At this point, you can safely assume that download() has been
     called on every single article for all 3 sources.
@@ -124,6 +122,33 @@ speed up the download time while being respectful.
     >>> print slate_paper.articles[10].html
     u'<html> ...' 
 
+
+**IMPORTANT**
+Unless told not to in the configs via ``is_memoize_articles`` (default true), 
+newspaper auto caches all article urls for speed & duplicates.
+.. code-block:: pycon
+
+    >>> cbs_paper = newspaper.build('http://cbs.com')
+    >>> cbs_paper.size()
+    1030 # cbs has 1030 articles as of now
+
+    >>> cbs_paper = newspaper.build('http://cbs.com')
+    >>> cbs_paper.size()
+    60 # since we last ran build(), cbs published 60 new articles
+       # we ignore old articles
+
+    If you'd like to opt out of memoization, modify the Config object
+
+    >>> from newspaper import Config
+
+    >>> config = Config()
+    >>> config.is_memoize_articles = False
+    >>> cbs_paper = newspaper.build('http://cbs.com', config)
+    >>> cbs_paper.size()
+    1030
+    >>> cbs_paper = newspaper.build('http://cbs.com', config)
+    >>> cbs_paper.size()
+    1030
 
 Some other useful news-source level functionality.
 
@@ -185,30 +210,6 @@ into all of that Source's children Article's.
     >>> s.build()
 
 TADA :D
-
-**IMPORTANT**
-    
-Unless told not to in the configs via the ``is_memoize_articles`` value (default true), 
-newspaper automatically caches all category, feed, and article urls. 
-This is both to avoid duplicate articles and for speed.
-
-.. code-block:: pycon
-
-    Suppose the above code has already been run on the cnn domain once. Previous
-    article urls are cached and dupes are removed so we only get new articles.
-
-    >>> import newspaper
-
-    >>> cnn_paper = newspaper.build('http://cnn.com')
-    >>> cnn_paper.size()
-    60    # since we last ran build(), cnn published 60 new articles!
-
-    >>> # If you'd like to opt out of memoization, init newspapers with
-
-    >>> cnn_paper2 = newspaper.build('http://cnn.com', is_memo=False)
-    >>> cnn_paper2.size()
-    3100
-
 
 Alternatively, you may use newspaper's lower level Article api.
 
@@ -312,9 +313,7 @@ Requirements
 License
 -------
 
-MIT licensed. 
-Also, view the LICENSE for our internally used libraries at: `goose-license`_
+MIT licensed. View our LICENSE file in the top level directory.
 
-.. _`goose-license`: https://github.com/codelucas/newspaper/tree/master/newspaper/packages/python-goose-documents
 .. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
 .. _`Newspaper Docs`: http://newspaper.readthedocs.org

@@ -80,26 +80,34 @@ class NewsPool(object):
 
         >>> papers = [cnn_paper, tc_paper, espn_paper]
         >>> news_pool.set(papers)
-        >>> news_pool.go()
+        >>> news_pool.join()
 
         # all of your papers should have their articles html all populated now.
         >>> cnn_paper.articles[50].html
         u'<html>blahblah ... '
         """
         self.papers = []
+        self.pool = None
 
-    def go(self):
+    def join(self):
         """
         runs the mtheading and returns when all threads have joined
+        resets the task
         """
+        if self.pool is None:
+            print 'Please call set(..) with a list of source objects before .join(..)'
+            raise
         self.pool.wait_completion()
+        self.papers = []
+        self.pool = None
 
-    def set(self, paper_list):
+    def set(self, paper_list, threads_per_source=1):
         """
         sets the job batch
         """
         self.papers = paper_list
-        self.pool = ThreadPool(len(self.papers))
+        num_threads = threads_per_source * len(self.papers)
+        self.pool = ThreadPool(num_threads)
 
         for paper in self.papers:
             self.pool.add_task(paper.download_articles)

@@ -1,9 +1,10 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
-'''Downloads the necessary NLTK models and corpora required to support
+"""
+Downloads the necessary NLTK models and corpora required to support
 all of newspaper's features. Modify for your own needs.
-'''
+"""
 import nltk
 
 REQUIRED_CORPORA = [

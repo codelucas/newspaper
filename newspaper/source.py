@@ -212,10 +212,10 @@ class Source(object):
         sets the lxml root, also sets lxml roots of all
         children links, also sets description
         """
-        self.doc = self.parser.fromstring(self.html)
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
+        self.doc = self.parser.fromstring(self.html)
         if self.doc is None:
-            print '%s has failed to parse' % self.url
+            print '[Source parse ERR]', self.url
             return
         self.set_description()
 
@@ -227,6 +227,8 @@ class Source(object):
         for category in self.categories:
             doc = self.parser.fromstring(category.html)
             category.doc = doc
+            if category.doc is None:
+                print '[Category parse ERR]', category.url
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
@@ -237,15 +239,13 @@ class Source(object):
         our .rss feeds, but rather regex searching for urls in the .rss
         text and then relying on our article logic to detect false urls
         """
-        def feedparse_wrapper(html):
-            return feedparser.parse(html)
-
         for feed in self.feeds:
             try:
-                feed.dom = feedparse_wrapper(feed.html)
+                feed.dom = feedparser.parse(feed.html)
             except Exception, e:
                 log.critical('feedparser failed %s' % e)
-                if self.config.verbose: print feed.url
+                if self.config.verbose:
+                    print 'feed %s has failed parsing' % feed.url
 
         self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 

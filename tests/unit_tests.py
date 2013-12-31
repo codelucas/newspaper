@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-
+"""
+All unit tests for the newspaper library should be contained in this file.
+"""
 import sys
 import os
 import unittest
@@ -199,7 +201,6 @@ class SourceTestCase(unittest.TestCase):
         s.set_categories()
 
         assert sorted(s.category_urls()) == sorted(saved_urls)
-        # print '[CATEGORIES]', s.category_urls()
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
@@ -312,24 +313,21 @@ class MThreadingTestCase(unittest.TestCase):
         """
         config = Configuration()
         config.is_memoize_articles = False
-        cnn_paper = newspaper.build('http://cnn.com', config)
+        slate_paper = newspaper.build('http://slate.com', config)
         tc_paper = newspaper.build('http://techcrunch.com', config)
         espn_paper = newspaper.build('http://espn.com', config)
 
-        print 'cnn has %d articles tc has %d articles espn has %d articles' \
-                % (cnn_paper.size(), tc_paper.size(), espn_paper.size())
+        print 'slate has %d articles tc has %d articles espn has %d articles' \
+                % (slate_paper.size(), tc_paper.size(), espn_paper.size())
 
-        papers = [cnn_paper, tc_paper, espn_paper]
-        news_pool.set(papers)
+        papers = [slate_paper, tc_paper, espn_paper]
+        news_pool.set(papers, threads_per_source=2)
 
-        news_pool.go()
+        news_pool.join()
 
-        print 'Downloaded cnn mthread len', len(cnn_paper.articles[0].html)
+        print 'Downloaded slate mthread len', len(slate_paper.articles[0].html)
         print 'Downloaded espn mthread len', len(espn_paper.articles[-1].html)
         print 'Downloaded tc mthread len', len(tc_paper.articles[1].html)
-        #assert len(cnn_paper.articles[0].html) > 5000
-        #assert len(espn_paper.articles[-1].html) > 5000
-        #assert len(tc_paper.articles[1].html) > 5000
 
 
 if __name__ == '__main__':
@@ -337,13 +335,12 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    suite.addTest(SourceTestCase())
     # suite.addTest(MThreadingTestCase())
+    suite.addTest(SourceTestCase())
     suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
-
     unittest.TextTestRunner().run(suite) # run custom subset
 
 

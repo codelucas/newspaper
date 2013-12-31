@@ -148,7 +148,7 @@ class Article(object):
         self.raw_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
-            print '%s failed to parse' % self.url
+            print '[Article parse ERR] %s' % self.url
             return
 
         # stores the final URL that we're going to try
