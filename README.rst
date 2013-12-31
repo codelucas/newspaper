@@ -126,6 +126,7 @@ speed up the download time while being respectful.
 **IMPORTANT**
 Unless told not to in the configs via ``is_memoize_articles`` (default true), 
 newspaper auto caches all article urls for speed & duplicates.
+
 .. code-block:: pycon
 
     >>> cbs_paper = newspaper.build('http://cbs.com')
