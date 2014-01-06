@@ -34,7 +34,12 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 
 It is also important to note that the line
-``$ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7`` 
+
+::
+
+    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+
+
 is not needed unless you need the natural language, ``nlp()`` features like keywords extraction and summarization.
 
 If you are using ubuntu and are still running into gcc compile errors when installing lxml, try installing
