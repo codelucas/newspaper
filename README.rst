@@ -87,16 +87,36 @@ Features
 
 Get it now
 ----------
+
+Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_
+However, you will run into (fixable) issues if you are trying to install in a virtualenv on ubuntu or any other debian system.
+
+If you are not using ubuntu or debian, install with the following:
+
 ::
 
     $ pip install newspaper
 
-    IMPORTANT
-    If you know for sure that you'll use the natural language features,
-    nlp(), you must download some separate nltk corpora below.
-    You must download everything in python 2.6 - 2.7!
+    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+
+
+If you are, install using the following:
+
+::
+
+    $ apt-get install libxml2-dev libxslt-dev
+
+    $ easy_install lxml  # NOT PIP
+    
+    $ pip install newspaper 
 
     $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+
+
+It is also important to note that the line ``$ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7`` is not needed unless you need the natural language, ``nlp()`` features like keywords and summarization.
+
+If you are using ubuntu and are still running into gcc compile errors when installing lxml, try installing
+``libxslt1-dev`` instead of ``libxslt-dev``.
 
 Todo List
 ---------
