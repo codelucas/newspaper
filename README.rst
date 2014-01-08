@@ -75,14 +75,15 @@ Check out `The Documentation`_ for full and detailed guides using newspaper.
 Features
 --------
 
+- Works in 10+ languages (English, Chinese, German, Arabic, ...)
+- Multi-threaded article download framework
 - News url identification
 - Text extraction from html
+- Top image extraction from html
+- All image extraction from html
 - Keyword extraction from text
 - Summary extraction from text
 - Author extraction from text
-- Top image extraction from html
-- All image extraction from html
-- Multi-threaded article download framework
 - Google trending terms extraction
 
 Get it now
@@ -135,3 +136,4 @@ Todo List
 .. _`The Documentation`: http://newspaper.readthedocs.org
 .. _`lxml`: http://lxml.de/
 .. _`requests`: http://docs.python-requests.org/en/latest/
+

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
-
 """
 """
-
 import os
 import re
 import string
@@ -22,15 +20,13 @@ def innerTrim(value):
 class WordStats(object):
 
     def __init__(self):
-        # total number of stopwords or
-        # good words that we can calculate
+        # total number of stopwords or good words we calc
         self.stop_word_count = 0
 
         # total number of words on a node
         self.word_count = 0
 
-        # holds an actual list
-        # of the stop words we found
+        # holds an actual list of stop words we have
         self.stop_words = []
 
     def get_stop_words(self):
@@ -97,10 +93,9 @@ class StopWords(object):
 
 class StopWordsChinese(StopWords):
     """
-    Chinese segmentation
+    Chinese segmentation.
     """
     def __init__(self, language='zh'):
-        # force zh languahe code
         super(StopWordsChinese, self).__init__(language='zh')
 
     def candiate_words(self, stripped_input):
@@ -112,7 +107,7 @@ class StopWordsChinese(StopWords):
 
 class StopWordsArabic(StopWords):
     """
-    Arabic segmentation
+    Arabic segmentation.
     """
     def __init__(self, language='ar'):
         # force ar languahe code
@@ -128,3 +123,30 @@ class StopWordsArabic(StopWords):
         for word in nltk.tokenize.wordpunct_tokenize(stripped_input):
             words.append(s.stem(word))
         return words
+
+
+class StopWordsKorean(StopWords):
+    """
+    Korean segmentation.
+    """
+    def __init__(self, language='ko'):
+        super(StopWordsKorean, self).__init__(language='ko')
+
+    def get_stopword_count(self, content):
+        if not content:
+            return WordStats()
+        ws = WordStats()
+        stripped_input = self.remove_punctuation(content)
+        candiate_words = self.candiate_words(stripped_input)
+        overlapping_stopwords = []
+        c = 0
+        for w in candiate_words:
+            c += 1
+            for stop_word in self.STOP_WORDS:
+                overlapping_stopwords.append(stop_word)
+
+        ws.set_word_count(c)
+        ws.set_stopword_count(len(overlapping_stopwords))
+        ws.set_stop_words(overlapping_stopwords)
+        return ws
+

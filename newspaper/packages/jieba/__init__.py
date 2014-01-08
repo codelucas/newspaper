@@ -13,7 +13,6 @@ from math import log
 import random
 import threading
 from functools import wraps
-import logging
 
 DICTIONARY = "dict.txt"
 DICT_LOCK = threading.RLock()
@@ -23,16 +22,6 @@ min_freq = 0.0
 total =0.0
 user_word_tag_tab={}
 initialized = False
-
-
-log_console = logging.StreamHandler(sys.stderr)
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-logger.addHandler(log_console)
-
-def setLogLevel(log_level):
-    global logger
-    logger.setLevel(log_level)
 
 def gen_trie(f_name):
     lfreq = {}
@@ -49,13 +38,13 @@ def gen_trie(f_name):
                 ltotal+=freq
                 p = trie
                 for c in word:
-                    if c not in p:
+                    if not c in p:
                         p[c] ={}
                     p = p[c]
                 p['']='' #ending flag
             except ValueError, e:
-                logger.debug('%s at line %s %s' % (f_name,  lineno, line))
-                raise ValueError, e
+                print >> sys.stderr, f_name, ' at line', lineno, line
+                raise e
     return trie, lfreq,ltotal
 
 def initialize(*args):
@@ -73,7 +62,7 @@ def initialize(*args):
         _curpath=os.path.normpath( os.path.join( os.getcwd(), os.path.dirname(__file__) )  )
 
         abs_path = os.path.join(_curpath,dictionary)
-        logger.debug("Building Trie..., from %s" % abs_path)
+        print >> sys.stderr, "Building Trie..., from " + abs_path
         t1 = time.time()
         if abs_path == os.path.join(_curpath,"dict.txt"): #defautl dictionary
             cache_file = os.path.join(tempfile.gettempdir(),"jieba.cache")
@@ -82,7 +71,7 @@ def initialize(*args):
 
         load_from_cache_fail = True
         if os.path.exists(cache_file) and os.path.getmtime(cache_file)>os.path.getmtime(abs_path):
-            logger.debug("loading model from cache %s" % cache_file)
+            print >> sys.stderr, "loading model from cache " + cache_file
             try:
                 trie,FREQ,total,min_freq = marshal.load(open(cache_file,'rb'))
                 load_from_cache_fail = False
@@ -93,7 +82,7 @@ def initialize(*args):
             trie,FREQ,total = gen_trie(abs_path)
             FREQ = dict([(k,log(float(v)/total)) for k,v in FREQ.iteritems()]) #normalize
             min_freq = min(FREQ.itervalues())
-            logger.debug("dumping model to file cache %s" % cache_file)
+            print >> sys.stderr, "dumping model to file cache " + cache_file
             try:
                 tmp_suffix = "."+str(random.random())
                 with open(cache_file+tmp_suffix,'wb') as temp_cache_file:
@@ -105,20 +94,21 @@ def initialize(*args):
                     replace_file = os.rename
                 replace_file(cache_file+tmp_suffix,cache_file)
             except:
-                logger.error("dump cache file failed.")
-                logger.exception("")
+                print >> sys.stderr, "dump cache file failed."
+                import traceback
+                print >> sys.stderr, traceback.format_exc()
 
         initialized = True
 
-        logger.debug("loading model cost %s seconds." % (time.time() - t1))
-        logger.debug("Trie has been built succesfully.")
+        print >> sys.stderr, "loading model cost ", time.time() - t1, "seconds."
+        print >> sys.stderr, "Trie has been built succesfully."
 
 
 def require_initialized(fn):
+    global initialized,DICTIONARY
 
     @wraps(fn)
     def wrapped(*args, **kwargs):
-        global initialized
         if initialized:
             return fn(*args, **kwargs)
         else:
@@ -160,7 +150,7 @@ def get_DAG(sentence):
         if c in p:
             p = p[c]
             if '' in p:
-                if i not in DAG:
+                if not i in DAG:
                     DAG[i]=[]
                 DAG[i].append(j)
             j+=1
@@ -173,33 +163,10 @@ def get_DAG(sentence):
             i+=1
             j=i
     for i in xrange(len(sentence)):
-        if i not in DAG:
+        if not i in DAG:
             DAG[i] =[i]
     return DAG
 
-def __cut_DAG_NO_HMM(sentence):
-    re_eng = re.compile(ur'[a-zA-Z0-9]',re.U)
-    DAG = get_DAG(sentence)
-    route ={}
-    calc(sentence,DAG,0,route=route)
-    x = 0
-    N = len(sentence)
-    buf = u''
-    while x<N:
-        y = route[x][1]+1
-        l_word = sentence[x:y]
-        if re_eng.match(l_word) and len(l_word)==1:
-            buf += l_word
-            x =y
-        else:
-            if len(buf)>0:
-                yield buf
-                buf = u''
-            yield l_word        
-            x =y
-    if len(buf)>0:
-        yield buf
-        buf = u''
 
 def __cut_DAG(sentence):
     DAG = get_DAG(sentence)
@@ -219,7 +186,7 @@ def __cut_DAG(sentence):
                     yield buf
                     buf=u''
                 else:
-                    if (buf not in FREQ):
+                    if not (buf in FREQ):
                         regognized = finalseg.cut(buf)
                         for t in regognized:
                             yield t
@@ -234,7 +201,7 @@ def __cut_DAG(sentence):
         if len(buf)==1:
             yield buf
         else:
-            if (buf not in FREQ):
+            if not (buf in FREQ):
                 regognized = finalseg.cut(buf)
                 for t in regognized:
                     yield t
@@ -242,7 +209,7 @@ def __cut_DAG(sentence):
                 for elem in buf:
                     yield elem
 
-def cut(sentence,cut_all=False,HMM=True):
+def cut(sentence,cut_all=False):
     if not isinstance(sentence, unicode):
         try:
             sentence = sentence.decode('utf-8')
@@ -252,16 +219,12 @@ def cut(sentence,cut_all=False,HMM=True):
     if cut_all:
         re_han, re_skip = re.compile(ur"([\u4E00-\u9FA5]+)", re.U), re.compile(ur"[^a-zA-Z0-9+#\n]", re.U)
     blocks = re_han.split(sentence)
-    if HMM:
-        cut_block = __cut_DAG
-    else:
-        cut_block = __cut_DAG_NO_HMM
+    cut_block = __cut_DAG
     if cut_all:
         cut_block = __cut_all
     for blk in blocks:
-        if len(blk)==0:
-            continue
         if re_han.match(blk):
+            #pprint.pprint(__cut_DAG(blk))
             for word in cut_block(blk):
                 yield word
         else:
@@ -275,8 +238,8 @@ def cut(sentence,cut_all=False,HMM=True):
                 else:
                     yield x
 
-def cut_for_search(sentence,HMM=True):
-    words = cut(sentence,HMM=HMM)
+def cut_for_search(sentence):
+    words = cut(sentence)
     for w in words:
         if len(w)>2:
             for i in xrange(len(w)-1):
@@ -309,7 +272,6 @@ def load_userdict(f):
         else:
             add_word(word, freq)
 
-@require_initialized
 def add_word(word, freq, tag=None):
     global FREQ, trie, total, user_word_tag_tab
     freq = float(freq)
@@ -318,7 +280,7 @@ def add_word(word, freq, tag=None):
         user_word_tag_tab[word] = tag.strip()
     p = trie
     for c in word:
-        if c not in p:
+        if not c in p:
             p[c] = {}
         p = p[c]
     p[''] = ''                  # ending flag
@@ -328,8 +290,6 @@ __ref_cut_for_search = cut_for_search
 
 def __lcut(sentence):
     return list(__ref_cut(sentence,False))
-def __lcut_no_hmm(sentence):
-    return list(__ref_cut(sentence,False,False))
 def __lcut_all(sentence):
     return list(__ref_cut(sentence,True))
 def __lcut_for_search(sentence):
@@ -348,15 +308,12 @@ def enable_parallel(processnum=None):
         processnum = cpu_count()
     pool = Pool(processnum)
 
-    def pcut(sentence,cut_all=False,HMM=True):
+    def pcut(sentence,cut_all=False):
         parts = re.compile('([\r\n]+)').split(sentence)
         if cut_all:
             result = pool.map(__lcut_all,parts) 
         else:
-            if HMM:
-                result = pool.map(__lcut,parts)
-            else:
-                result = pool.map(__lcut_no_hmm,parts)
+            result = pool.map(__lcut,parts)
         for r in result:
             for w in r:
                 yield w
@@ -384,7 +341,7 @@ def set_dictionary(dictionary_path):
     with DICT_LOCK:
         abs_path = os.path.normpath( os.path.join( os.getcwd(), dictionary_path )  )
         if not os.path.exists(abs_path):
-            raise Exception("jieba: path does not exist:" + abs_path)
+            raise Exception("jieba: path does not exists:" + abs_path)
         DICTIONARY = abs_path
         initialized = False
 
@@ -393,18 +350,18 @@ def get_abs_path_dict():
     abs_path = os.path.join(_curpath,DICTIONARY)
     return abs_path
 
-def tokenize(unicode_sentence,mode="default",HMM=True):
+def tokenize(unicode_sentence,mode="default"):
     #mode ("default" or "search")
     if not isinstance(unicode_sentence, unicode):
         raise Exception("jieba: the input parameter should  unicode.")
     start = 0 
     if mode=='default':
-        for w in cut(unicode_sentence,HMM=HMM):
+        for w in cut(unicode_sentence):
             width = len(w)
             yield (w,start,start+width)
             start+=width
     else:
-        for w in cut(unicode_sentence,HMM=HMM):
+        for w in cut(unicode_sentence):
             width = len(w)
             if len(w)>2:
                 for i in xrange(len(w)-1):

@@ -31,15 +31,30 @@ class ArticleException(Exception):
     pass
 
 class Article(object):
+    """
+    """
+    def extend_config(self, config_items):
+        """
+        We are handling config value setting like this for a cleaner api.
+        Users just need to pass in a named param to this article and we
+        can dynamically set a config object for it.
+        """
+        for key, val in config_items.items():
+            if hasattr(self.config, key):
+                setattr(self.config, key, val)
 
-    def __init__(self, url, title=u'', source_url=None, config=None):
+    def __init__(self, url, title=u'', source_url=u'', config=None, **kwargs):
         """
+        The **kwargs arguement can be filled with config values which we then
+        push in.
         """
-        self.config = Configuration() if not config else config
+        self.config = config or Configuration()
+        self.extend_config(kwargs)
+
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)
 
-        if source_url is None:
+        if source_url == u'':
             source_url = get_scheme(url) + '://' + get_domain(url)
 
         if source_url is None or source_url == '':
@@ -53,19 +68,23 @@ class Article(object):
 
         self.title = encodeValue(title)
 
-        # the url of the "best image" to represent this article
+        # the url of the "best image" to represent this article, via reddit algorithm
         self.top_img = u''
 
         # all image urls
         self.imgs = []
 
+        # list of any movies found on the page like: youtube & vimeo
+        self.movies = []
+
         # pure text from the article
         self.text = u''
 
-        # keywords extracted from the cleaned text
+        # keywords extracted via nlp(), meta_keywords are via parse() from <meta> tags
         self.keywords = []
+        self.meta_keywords = []
 
-        # list of authors who have published the article
+        # list of authors who have published the article, via parse()
         self.authors = []
 
         self.published_date = u'' # TODO
@@ -89,9 +108,6 @@ class Article(object):
         # meta favicon field in HTML source
         self.meta_favicon = u""
 
-        # meta keywords field in the HTML source
-        self.meta_keywords = u""
-
         # The canonical link of this article if found in the meta data
         self.canonical_link = u""
 
@@ -102,9 +118,6 @@ class Article(object):
         # holds a set of tags that may have
         # been in the article, these are not meta keywords
         self.tags = set()
-
-        # list of any movies found on the page like: youtube & vimeo
-        self.movies = []
 
         # the lxml doc object
         self.doc = None
@@ -118,9 +131,9 @@ class Article(object):
 
     def build(self):
         """
-        build a lone article from a url independent of the
+        Build a lone article from a url independent of the
         source (newspaper). We won't normally call this method b/c
-        we want to multithread articles on a source (newspaper) level
+        we want to multithread articles on a source (newspaper) level.
         """
         self.download()
         self.parse()
@@ -128,17 +141,14 @@ class Article(object):
 
     def download(self):
         """
-        downloads the link's html content, don't use if we are async
-        downloading batch articles
+        Downloads the link's html content, don't use if we are async
+        downloading batch articles.
         """
         self.html = network.get_html(self.url, self.config)
         self.is_downloaded = True
 
     def parse(self):
         """
-        extracts the lxml root (doc), if it fails, we also extract the
-        BeautifulSoup root. We also parse images to keep cpu bound
-        tasks all in one place
         """
         if not self.is_downloaded:
             print 'You must download() an article before parsing it!'
@@ -151,30 +161,39 @@ class Article(object):
             print '[Article parse ERR] %s' % self.url
             return
 
-        # stores the final URL that we're going to try
-        # and fetch content against, this would be expanded if any
+        # TODO: Fix this, sync in our fix_url() method
         parse_candidate = self.get_parse_candidate()
         self.final_url = parse_candidate.url
-        # stores the MD5 hash of the url
-        # to use for various identification tasks
-        self.link_hash = parse_candidate.link_hash
+        self.link_hash = parse_candidate.link_hash # MD5
 
         document_cleaner = self.get_document_cleaner()
         output_formatter = self.get_output_formatter()
 
         title = self.extractor.get_title(self)
+        self.set_title(title)
+
         authors = self.extractor.get_authors(self)
+        self.set_authors(authors)
+
+        meta_lang = self.extractor.get_meta_lang(self)
+        self.set_meta_language(meta_lang)
+
+        meta_favicon = self.extractor.get_favicon(self)
+        self.set_meta_favicon(meta_favicon)
+
+        meta_description = self.extractor.get_meta_description(self)
+        self.set_meta_description(meta_description)
+
+        canonical_link = self.extractor.get_canonical_link(self)
+        self.set_canonical_link(canonical_link)
+
+        tags = self.extractor.extract_tags(self)
+        self.set_tags(tags)
+
+        meta_keywords = self.extractor.get_meta_keywords(self)
+        self.set_meta_keywords(meta_keywords)
 
         # TODO self.publish_date = self.config.publishDateExtractor.extract(self.doc)
-        # TODO self.additional_data = self.config.get_additionaldata_extractor.extract(self.doc)
-
-        self.meta_lang = self.extractor.get_meta_lang(self)
-        self.meta_favicon = self.extractor.get_favicon(self)
-        self.meta_description = self.extractor.get_meta_description(self)
-        self.canonical_link = self.extractor.get_canonical_link(self)
-        self.tags = self.extractor.extract_tags(self)
-        meta_keywords = self.extractor.get_meta_keywords(self)
-        self.meta_keywords = [k.strip() for k in meta_keywords.split(',')]
 
         # before we do any computations on the body itself, we must clean up the document
         self.doc = document_cleaner.clean(self)
@@ -187,11 +206,7 @@ class Article(object):
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
             text = output_formatter.get_formatted_text(self)
-
-        self.set_title(title)
-        self.set_authors(authors)
-        self.set_text(text)
-        self.set_keywords(self.meta_keywords)
+            self.set_text(text)
 
         if self.raw_doc is not None:
             img_url = self.extractor.get_top_img_url(self)
@@ -207,15 +222,15 @@ class Article(object):
 
     def is_valid_url(self):
         """
-        performs a check on the url of this link to
-        determine if a real news article or not
+        Performs a check on the url of this link to
+        determine if a real news article or not.
         """
         return valid_url(self.url)
 
     def is_valid_body(self):
         """
-        if the article's body text is long enough to meet
-        standard article requirements, we keep the article
+        If the article's body text is long enough to meet
+        standard article requirements, we keep the article.
         """
         if not self.is_parsed:
             raise ArticleException('must parse article before checking \
@@ -253,7 +268,7 @@ class Article(object):
 
     def is_media_news(self):
         """
-        if the article is a gallery, video, etc related
+        If the article is a gallery, video, etc related.
         """
         safe_urls = ['/video', '/slide', '/gallery', '/powerpoint',
                      '/fashion', '/glamour', '/cloth']
@@ -264,7 +279,7 @@ class Article(object):
 
     def nlp(self):
         """
-        keyword extraction wrapper
+        Keyword extraction wrapper.
         """
         if not self.is_downloaded or not self.is_parsed:
             print 'You must download and parse an article before parsing it!'
@@ -282,7 +297,7 @@ class Article(object):
     def get_parse_candidate(self):
         """
         A parse candidate is a wrapper object holding a link hash of this
-        article and a final_url
+        article and a final_url.
         """
         # TODO: Should we actually compute a hash using the html? It is more inconvenient if we do that
         if self.html:
@@ -303,7 +318,7 @@ class Article(object):
 
     def build_resource_path(self):
         """
-        must be called after we compute html/final url
+        Must be called after we compute html/final url.
         """
         res_path = self.get_resource_path()
         if not os.path.exists(res_path):
@@ -311,7 +326,7 @@ class Article(object):
 
     def get_resource_path(self):
         """
-        every article object has a special directory to store data in from
+        Every article object has a special directory to store data in from
         initialization to garbage collection.
         """
         res_dir_fn = 'article_resources'
@@ -335,8 +350,8 @@ class Article(object):
 
     def set_reddit_top_img(self):
         """
-        wrapper for setting images, queries known image attributes
-        first, uses Reddit's img algorithm as a fallback
+        Wrapper for setting images, queries known image attributes
+        first, uses Reddit's img algorithm as a fallback.
         """
         if self.top_img != u'': # if we already have a top img...
             return
@@ -348,7 +363,6 @@ class Article(object):
 
     def set_title(self, title):
         """
-        titles are length limited
         """
         title = title[:self.config.MAX_TITLE]
         title = encodeValue(title)
@@ -357,7 +371,6 @@ class Article(object):
 
     def set_text(self, text):
         """
-        text is length limited
         """
         text = text[:self.config.MAX_TEXT-5]
         text = encodeValue(text)
@@ -366,7 +379,7 @@ class Article(object):
 
     def set_keywords(self, keywords):
         """
-        keys are stored in list format
+        Keys are stored in list format.
         """
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
@@ -375,7 +388,7 @@ class Article(object):
 
     def set_authors(self, authors):
         """
-        authors are in ["firstName lastName", "firstName lastName"] format
+        Authors are in ["firstName lastName", "firstName lastName"] format.
         """
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
@@ -385,7 +398,40 @@ class Article(object):
 
     def set_summary(self, summary):
         """
-        summary is a paragraph of text from the title + body text
+        Summary is a paragraph of text from the title + body text.
         """
         summary = summary[:self.config.MAX_SUMMARY]
         self.summary = encodeValue(summary)
+
+    def set_meta_language(self, meta_lang):
+        """
+        We are saving langauges in 2 char form, english = 'en'.
+        """
+        if meta_lang and len(meta_lang) >= 2:
+            self.meta_lang = meta_lang[:2]
+
+    def set_meta_keywords(self, meta_keywords):
+        """
+        Store the keys in list form.
+        """
+        self.meta_keywords = [k.strip() for k in meta_keywords.split(',')]
+
+    def set_meta_favicon(self, meta_favicon):
+        """
+        """
+        self.meta_favicon = meta_favicon
+
+    def set_meta_description(self, meta_description):
+        """
+        """
+        self.meta_description = meta_description
+
+    def set_canonical_link(self, canonical_link):
+        """
+        """
+        self.canonical_link = canonical_link
+
+    def set_tags(self, tags):
+        """
+        """
+        self.tags = tags

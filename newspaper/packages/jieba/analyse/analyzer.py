@@ -1,7 +1,6 @@
 #encoding=utf-8
-from whoosh.analysis import RegexAnalyzer,LowercaseFilter,StopFilter,StemFilter
+from whoosh.analysis import RegexAnalyzer,LowercaseFilter,StopFilter
 from whoosh.analysis import Tokenizer,Token 
-from whoosh.lang.porter import stem
 
 import jieba
 import re
@@ -30,6 +29,5 @@ class ChineseTokenizer(Tokenizer):
             token.endchar = stop_pos
             yield token
 
-def ChineseAnalyzer(stoplist=STOP_WORDS,minsize=1,stemfn=stem,cachesize=50000):
-    return ChineseTokenizer() | LowercaseFilter() | StopFilter(stoplist=stoplist,minsize=minsize)\
-                                        |StemFilter(stemfn=stemfn, ignore=None,cachesize=cachesize)
+def ChineseAnalyzer(stoplist=STOP_WORDS,minsize=1):
+    return ChineseTokenizer() | LowercaseFilter() | StopFilter(stoplist=stoplist,minsize=minsize)

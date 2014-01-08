@@ -120,7 +120,7 @@ class TimeoutError(Exception):
 
 def timelimit(timeout):
     """
-    borrowed from web.py, rip Aaron Swartz
+    Borrowed from web.py, rip Aaron Swartz.
     """
     def _1(function):
         def _2(*args, **kw):
@@ -151,8 +151,8 @@ def timelimit(timeout):
 
 def domain_to_filename(domain):
     """
-    all '/' are turned into '-', no trailing. schema's
-    are gone, only the raw domain + ".txt" remains
+    All '/' are turned into '-', no trailing. schema's
+    are gone, only the raw domain + ".txt" remains.
     """
     filename =  domain.replace('/', '-')
     if filename[-1] == '-':
@@ -162,13 +162,13 @@ def domain_to_filename(domain):
 
 def filename_to_domain(filename):
     """
-    [:-4] for the .txt at end
+    [:-4] for the .txt at end.
     """
     return filename.replace('-', '/')[:-4]
 
 def is_ascii(word):
     """
-    true if a word is only ascii chars
+    True if a word is only ascii chars.
     """
     def onlyascii(char):
         if ord(char) > 127:
@@ -182,20 +182,20 @@ def is_ascii(word):
 
 def to_valid_filename(s):
     """
-    converts arbitrary string (for us domain name)
-    into a valid file name for caching
+    Converts arbitrary string (for us domain name)
+    into a valid file name for caching.
     """
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     return ''.join(c for c in s if c in valid_chars)
 
 def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
     """
-    caching extracting category locations & rss feeds for 5 days
+    Caching extracting category locations & rss feeds for 5 days.
     """
     def do_cache(function):
         def inner_function(*args, **kwargs):
             """
-            calculate a cache key based on the decorated method signature
+            Calculate a cache key based on the decorated method signature
             args[1] indicates the domain of the inputs, we hash on domain!
             """
             key = sha1(str(args[1]) + str(kwargs)).hexdigest()
@@ -219,7 +219,7 @@ def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
 
 def print_duration(method):
     """
-    prints out the runtime duration of a method in seconds
+    Prints out the runtime duration of a method in seconds.
     """
     def timed(*args, **kw):
         ts = time.time()
@@ -232,7 +232,7 @@ def print_duration(method):
 
 def chunks(l, n):
     """
-    Yield n successive chunks from l
+    Yield n successive chunks from l.
     """
     newn = int(len(l) / n)
     for i in xrange(0, n-1):
@@ -241,7 +241,7 @@ def chunks(l, n):
 
 def purge(fn, pattern):
     """
-    delete files in a dir matching pattern
+    Delete files in a dir matching pattern.
     """
     import os, re
     for f in os.listdir(fn):
@@ -250,7 +250,7 @@ def purge(fn, pattern):
 
 def clear_memo_cache(source):
     """
-    clears the memoization cache for this specific news domain
+    Clears the memoization cache for this specific news domain.
     """
     d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source.domain))
     if os.path.exists(d_pth):
@@ -326,12 +326,47 @@ def memoize_articles(source, articles):
 
 def get_useragent():
     """
-    uses generator to return next useragent in saved file
+    Uses generator to return next useragent in saved file.
     """
     with open(settings.USERAGENTS, 'r') as f:
         agents = f.readlines()
         selection = random.randint(0, len(agents)-1)
         agent = agents[selection]
         return agent.strip()
+
+def get_available_languages():
+    """
+    Returns a list of available languages and their 2 char input codes.
+    """
+    stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
+    two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
+    for d in two_dig_codes:
+        assert len(d) == 2
+    return two_dig_codes
+
+def print_available_languages():
+    """
+    Prints available languages with their full names
+    """
+    language_dict = {
+        'ar':   'Arabic',
+        'de':   'German',
+        'en':   'English',
+        'es':   'Spanish',
+        'fr':   'French',
+        'it':   'Italian',
+        'ko':   'Korean',
+        'no':   'Norwegian',
+        'pt':   'Portugease',
+        'sv':   'Swedish',
+        'zh':   'Chinese'
+    }
+
+    codes = get_available_languages()
+    print '\nYour available langauges are:'
+    print '\ninput code\t\tfull name'
+    for code in codes:
+        print '  %s\t\t\t  %s' % (code, language_dict[code])
+    print
 
 

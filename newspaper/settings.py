@@ -14,8 +14,11 @@ PARENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))
 
 POPULAR_URLS = os.path.join(PARENT_DIRECTORY, 'data/popular_sources.txt')
 USERAGENTS = os.path.join(PARENT_DIRECTORY, 'data/useragents.txt')
-STOPWORDS_EN = os.path.join(PARENT_DIRECTORY, 'data/stopwords_en.txt')
-STOPWORDS_EN_FN_2 = os.path.join(PARENT_DIRECTORY, 'data/stopwords_en2.txt')
+
+STOPWORDS_DIR = os.path.join(PARENT_DIRECTORY, 'resources/text')
+
+# NLP stopwords are != regular stopwords for now...
+NLP_STOPWORDS_EN = os.path.join(PARENT_DIRECTORY, 'data/stopwords_en2.txt')
 
 DATA_DIRECTORY = '.newspaper_scraper'
 

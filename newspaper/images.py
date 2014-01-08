@@ -33,7 +33,7 @@ def prepare_image(image):
 
 def image_entropy(img):
     """
-    calculate the entropy of an image
+    Calculate the entropy of an image.
     """
     hist = img.histogram()
     hist_size = sum(hist)
@@ -42,8 +42,8 @@ def image_entropy(img):
 
 def square_image(img):
     """
-    if the image is taller than it is wide, square it off. determine
-    which pieces to cut off based on the entropy pieces
+    If the image is taller than it is wide, square it off. determine
+    which pieces to cut off based on the entropy pieces.
     """
     x,y = img.size
     while y > x:
@@ -65,7 +65,7 @@ def square_image(img):
 
 def clean_url(url):
     """
-    url quotes unicode data out of urls
+    Url quotes unicode data out of urls.
     """
     url = url.encode('utf8')
     url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
@@ -198,8 +198,9 @@ class Scraper:
         return max_url
 
     def thumbnail(self):
-        """Identifies top image, trims out a thumbnail and also has a url"""
-
+        """
+        Identifies top image, trims out a thumbnail and also has a url.
+        """
         image_url = self.largest_image_url()
         if image_url:
             content_type, image_str = fetch_url(image_url, referer=self.url)

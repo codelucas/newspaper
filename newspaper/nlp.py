@@ -6,7 +6,7 @@ import math
 from collections import Counter, OrderedDict
 from . import settings
 
-with open(settings.STOPWORDS_EN_FN_2, 'r') as f:
+with open(settings.NLP_STOPWORDS_EN, 'r') as f:
     stopwords = [ w.strip() for w in f.readlines()]
 
 ideal = 20.0
@@ -37,7 +37,7 @@ def summarize(url='', title='', text=''):
 
 def score(sentences, titleWords, keywords):
     """
-    score sentences based on different features
+    Score sentences based on different features.
     """
     senSize = len(sentences)
     ranks = Counter()
@@ -93,7 +93,7 @@ def dbs(words, keywords):
 
 def split_words(text):
     """
-    split a string into array of words
+    Split a string into array of words.
     """
     try:
         text = re.sub(r'[^\w ]', '', text) #strip special chars
@@ -103,9 +103,9 @@ def split_words(text):
 
 def keywords(text):
     """
-    get the top 10 keywords and their frequency scores ignores blacklisted
+    Get the top 10 keywords and their frequency scores ignores blacklisted
     words in stopwords, counts the number of occurrences of each word, and
-    sorts them in reverse natural order (so descending) by number of occurrences
+    sorts them in reverse natural order (so descending) by number of occurrences.
     """
     import operator # sorting
     text = split_words(text)
@@ -130,7 +130,7 @@ def keywords(text):
 
 def split_sentences(text):
     """
-    split a large string into sentences
+    Split a large string into sentences.
     """
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
@@ -157,8 +157,8 @@ def title_score(title, sentence):
 
 def sentence_position(i, size):
     """
-    different sentence positions indicate different
-    probability of being an important sentence
+    Different sentence positions indicate different
+    probability of being an important sentence.
     """
     normalized =  i*1.0 / size
     if (normalized > 0 and normalized <= 0.1):

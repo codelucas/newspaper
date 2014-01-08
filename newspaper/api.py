@@ -13,14 +13,15 @@ from .settings import POPULAR_URLS, TRENDING_URL
 from .configuration import Configuration
 from .mthreading import NewsPool
 from .configuration import Configuration
+from .utils import print_available_languages
 
 def build(url=u'', config=None):
     """
-    returns a constructed source object without
-    downloading or parsing the articles
+    Returns a constructed source object without
+    downloading or parsing the articles.
     """
-    config = Configuration() if not config else config
-    url = url or '' # empty string precedence over None
+    config = config or Configuration() # Order matters
+    url = url or ''                    # Empty string precedence over None
     valid_href = ('://' in url) and (url[:4] == 'http')
 
     if not valid_href:
@@ -33,16 +34,22 @@ def build(url=u'', config=None):
 
 def build_article(url=u''):
     """
-    returns a constructed article object without
-    downloading or parsing
+    Returns a constructed article object without
+    downloading or parsing.
     """
     url = url or '' # empty string precedence over None
     a = Article(url)
     return a
 
+def languages():
+    """
+    Returns a list of the supported languages.
+    """
+    print_available_languages()
+
 def popular_urls():
     """
-    returns a list of pre-extracted popular source urls
+    Returns a list of pre-extracted popular source urls.
     """
     with open(POPULAR_URLS) as f:
         urls = ['http://' + u.strip() for u in f.readlines()]
@@ -50,7 +57,7 @@ def popular_urls():
 
 def hot():
     """
-    returns a list of hit terms via google trends
+    Returns a list of hit terms via google trends.
     """
     try:
         listing = feedparser.parse(TRENDING_URL)['entries']

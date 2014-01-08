@@ -16,15 +16,12 @@ class OutputFormatter(object):
 
     def get_language(self, article):
         """
-        Returns the language is by the article or
-        the configuration language
+        Returns the language is by the article or the configuration language.
         """
-        # we don't want to force the target laguage
-        # so we use the article.meta_lang
         if self.config.use_meta_language == True:
             if article.meta_lang:
                 return article.meta_lang[:2]
-        return self.config.target_language
+        return self.config.language
 
     def get_top_node(self):
         return self.top_node
@@ -54,16 +51,14 @@ class OutputFormatter(object):
 
     def links_to_text(self):
         """
-        cleans up and converts any nodes that
-        should be considered text into text
+        Cleans up and converts any nodes that should be considered text into text.
         """
         self.parser.stripTags(self.get_top_node(), 'a')
 
     def remove_negativescores_nodes(self):
         """
-        if there are elements inside our top node
-        that have a negative gravity score,
-        let's give em the boot
+        If there are elements inside our top node that have a negative gravity score,
+        let's give em the boot.
         """
         gravity_items = self.parser.css_select(self.top_node, "*[gravityScore]")
         for item in gravity_items:
@@ -74,18 +69,17 @@ class OutputFormatter(object):
 
     def replace_with_text(self):
         """
-        replace common tags with just
-        text so we don't have any crazy formatting issues
-        so replace <br>, <i>, <strong>, etc....
-        with whatever text is inside them
+        Replace common tags with just text so we don't have any crazy
+        formatting issues so replace <br>, <i>, <strong>, etc....
+        With whatever text is inside them.
         code : http://lxml.de/api/lxml.etree-module.html#strip_tags
         """
         self.parser.stripTags(self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
 
     def remove_fewwords_paragraphs(self, article):
         """
-        remove paragraphs that have less than x number of words,
-        would indicate that it's some sort of link
+        Remove paragraphs that have less than x number of words,
+        would indicate that it's some sort of link.
         """
         all_nodes = self.parser.getElementsByTags(self.get_top_node(), ['*'])
         all_nodes.reverse()

@@ -35,7 +35,7 @@ class Parser(object):
     @classmethod
     def root_to_urls(cls, doc, titles):
         """
-        Return a list of urls from an lxml root
+        Return a list of urls from an lxml root.
         """
         if doc is None:
             return []
@@ -50,8 +50,8 @@ class Parser(object):
     @classmethod
     def get_urls(cls, _input, titles=False, regex=False):
         """
-        inputs html page or doc and returns list of urls, the regex
-        flag indicates we don't parse via lxml and just search the html
+        Inputs html page or doc and returns list of urls, the regex
+        flag indicates we don't parse via lxml and just search the html.
         """
         if _input is None:
             log.critical('Must extract urls from either html, text or doc!')
@@ -75,8 +75,8 @@ class Parser(object):
     @classmethod
     def get_top_img_url(cls, doc):
         """
-        takes an lxml doc and returns the top img url
-        running as method == 'soup' assumes lxml's soupparser
+        Takes an lxml doc and returns the top img url
+        running as method == 'soup' assumes lxml's soupparser.
         """
         try:
             return doc.xpath('/html/head/meta[@property="og:image"][1]/@content')[0]
@@ -99,7 +99,7 @@ class Parser(object):
     @classmethod
     def get_img_urls(cls, doc):
         """
-        return all of the images on an html page, lxml root
+        Return all of the images on an html page, lxml root.
         """
         try:
             img_links = doc.xpath('//img/@src')
@@ -113,7 +113,7 @@ class Parser(object):
     @classmethod
     def get_feed_urls(cls, doc):
         """
-        returns list of feed urls on an lxml root
+        Returns list of feed urls on an lxml root.
         """
         try:
             return doc.xpath('//*[@type="application/rss+xml"]/@href')
@@ -125,7 +125,7 @@ class Parser(object):
     @classmethod
     def get_meta_type(cls, doc):
         """
-        returns the meta "type" of an article
+        Returns the meta "type" of an article.
         """
         try:
             return doc.xpath('/html/head/meta[@property="og:type"][1]/@content')[0]
@@ -136,7 +136,7 @@ class Parser(object):
     @classmethod
     def get_description(cls, doc):
         """
-        returns meta description
+        Returns meta description.
         """
         try:
             _list = doc.xpath('//meta[@name="description"]')

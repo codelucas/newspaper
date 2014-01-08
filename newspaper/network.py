@@ -10,12 +10,11 @@ from .mthreading import ThreadPool
 # from .packages import grequests
 
 log = logging.getLogger(__name__)
-default_config = Configuration()
 
 def get_request_kwargs(timeout, useragent):
     """
-    wrapper method because some values in this dictionary are methods
-    which need to be called every time we make a request
+    This Wrapper method exists b/c some values in req_kwargs dict
+    are methods which need to be called every time we make a request.
     """
     return {
         'headers' : {'User-Agent': useragent},
@@ -26,49 +25,49 @@ def get_request_kwargs(timeout, useragent):
 
 def get_html(url, config=None, response=None):
     """
-    retrieves the html for either a url or a response object
+    Retrieves the html for either a url or a response object. All html
+    extractions MUST come from this method due to some intricies in the
+    requests module. To get the encoding, requests only uses the HTTP header
+    encoding declaration requests.utils.get_encoding_from_headers() and reverts
+    to ISO-8859-1 if it doesn't find one. This results in incorrect character
+    encoding in a lot of cases.
     """
-    config = default_config if not config else config
+    FAIL_ENCODING = 'ISO-8859-1'
+    config =  config or Configuration()
     useragent = config.browser_user_agent
     timeout = config.request_timeout
 
     if response is not None:
-        return response.text
+        if response.encoding != FAIL_ENCODING:
+            return response.text
+        return response.content # not unicode, fix later
+
     try:
-        html = requests.get(url=url, **get_request_kwargs(timeout, useragent)).text
+        html = None
+        response = requests.get(url=url, **get_request_kwargs(timeout, useragent))
+        if response.encoding != FAIL_ENCODING:
+            html = response.text
+        else:
+            html = response.content # not unicode, fix later
         if html is None:
             html = u''
         return html
+
     except Exception, e:
         # print '[REQUEST FAILED]', str(e)
         log.debug('%s on %s' % (e, url))
         return u''
 
-def sync_request(urls_or_url, config=None):
-    """
-    wrapper for a regular request, no asyn nor multithread
-    """
-    config = default_config if not config else config
-    useragent = config.browser_user_agent
-    timeout = config.request_timeout
-    if isinstance(urls_or_url, list):
-        resps = [requests.get(url, **get_request_kwargs(timeout, useragent))
-                                                for url in urls_or_url]
-        return resps
-    else:
-        return requests.get(urls_or_url, **get_request_kwargs(timeout, useragent))
-
 class MRequest(object):
     """
-    Wrapper for request object for multithreading.
-    If the domain we are crawling is under heavy load,
-    the self.resp will be left as None. If this is the case,
-    we still want to report the url which has failed so (perhaps)
-    we can try again later.
+    Wrapper for request object for multithreading. If the domain we are
+    crawling is under heavy load, the self.resp will be left as None.
+    If this is the case, we still want to report the url which has failed
+    so (perhaps) we can try again later.
     """
     def __init__(self, url, config=None):
         self.url = url
-        config = default_config if not config else config
+        config = config or Configuration()
         self.useragent = config.browser_user_agent
         self.timeout = config.request_timeout
         self.resp = None
@@ -84,9 +83,11 @@ class MRequest(object):
             # print '[REQUEST FAILED]', str(e)
 
 def multithread_request(urls, config=None):
-    """request multiple urls via mthreading, order of urls & requests is stable
-    returns same requests but with response variables filled"""
-    config = default_config if not config else config
+    """
+    Request multiple urls via mthreading, order of urls & requests is stable
+    returns same requests but with response variables filled.
+    """
+    config = config or Configuration()
     num_threads = config.number_threads
 
     pool = ThreadPool(num_threads)
@@ -110,4 +111,19 @@ def multithread_request(urls, config=None):
 #    responses = grequests.map(rs, size=10)
 #
 #    return responses
+
+
+# def sync_request(urls_or_url, config=None):
+#    """
+#    Wrapper for a regular request, no asyn nor multithread.
+#    """
+#    # TODO config = default_config if not config else config
+#    useragent = config.browser_user_agent
+#    timeout = config.request_timeout
+#    if isinstance(urls_or_url, list):
+#        resps = [requests.get(url, **get_request_kwargs(timeout, useragent))
+#                                                for url in urls_or_url]
+#        return resps
+#    else:
+#        return requests.get(urls_or_url, **get_request_kwargs(timeout, useragent))
 

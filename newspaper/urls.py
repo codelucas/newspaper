@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-
 """
 Newspaper treats urls for news articles as critical components.
 Hence, we have an entire module dedicated to them.
 """
-
 import logging
 import re
 
@@ -14,6 +12,7 @@ from urlparse import (
 from .packages.tldextract import tldextract
 
 log = logging.getLogger(__name__)
+
 
 MAX_FILE_MEMO = 20000
 
@@ -29,7 +28,7 @@ BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
 
 def remove_args(url, keep_params=(), frags=False):
     """
-    remove all param arguments from a url
+    Remove all param arguments from a url.
     """
     parsed = urlsplit(url)
     filtered_query= '&'.join(
@@ -45,9 +44,9 @@ def remove_args(url, keep_params=(), frags=False):
 
 def redirect_back(url, source_domain):
     """
-    some sites like Pinterest have api's that cause news
+    Some sites like Pinterest have api's that cause news
     args to direct to their site with the real news url as a
-    GET param. This method catches that and returns our param
+    GET param. This method catches that and returns our param.
     """
     parse_data = urlparse(url)
     domain = parse_data.netloc
@@ -67,8 +66,8 @@ def redirect_back(url, source_domain):
 
 def prepare_url(url, source_url=None):
     """
-    operations that purify a url, removes arguments,
-    redirects, and merges relatives with absolutes
+    Operations that purify a url, removes arguments,
+    redirects, and merges relatives with absolutes.
     """
     try:
         if source_url is not None:
@@ -87,7 +86,7 @@ def prepare_url(url, source_url=None):
 
 def valid_url(url, verbose=False, test=False):
     """
-    Perform a regex check on an absolute url
+    Perform a regex check on an absolute url.
 
     First, perform a few basic checks like making sure the format of the url
     is right, (scheme, domain, tld).
@@ -115,7 +114,7 @@ def valid_url(url, verbose=False, test=False):
     be a company link, like 'cnn is hiring new interns'.
 
     We also filter out articles with a subdomain or first degree path
-    on a registered bad keyword
+    on a registered bad keyword.
     """
     DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
     ALLOWED_TYPES = ['html', 'htm', 'md', 'rst'] # TODO add more!

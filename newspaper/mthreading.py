@@ -10,7 +10,7 @@ from threading import Thread
 
 class Worker(Thread):
     """
-    Thread executing tasks from a given tasks queue
+    Thread executing tasks from a given tasks queue.
     """
     def __init__(self, tasks):
         Thread.__init__(self)
@@ -35,7 +35,7 @@ class Worker(Thread):
 
 class ThreadPool:
     """
-    Pool of threads consuming tasks from a queue
+    Pool of threads consuming tasks from a queue.
     """
     def __init__(self, num_threads):
         self.tasks = Queue.Queue(num_threads)
@@ -44,13 +44,13 @@ class ThreadPool:
 
     def add_task(self, func, *args, **kargs):
         """
-        Add a task to the queue
+        Add a task to the queue.
         """
         self.tasks.put((func, args, kargs))
 
     def wait_completion(self):
         """
-        Wait for completion of all the tasks in the queue
+        Wait for completion of all the tasks in the queue.
         """
         self.tasks.join()
 
@@ -82,7 +82,7 @@ class NewsPool(object):
         >>> news_pool.set(papers)
         >>> news_pool.join()
 
-        # all of your papers should have their articles html all populated now.
+        # All of your papers should have their articles html all populated now.
         >>> cnn_paper.articles[50].html
         u'<html>blahblah ... '
         """
@@ -91,8 +91,8 @@ class NewsPool(object):
 
     def join(self):
         """
-        runs the mtheading and returns when all threads have joined
-        resets the task
+        Runs the mtheading and returns when all threads have joined
+        resets the task.
         """
         if self.pool is None:
             print 'Please call set(..) with a list of source objects before .join(..)'
@@ -103,7 +103,7 @@ class NewsPool(object):
 
     def set(self, paper_list, threads_per_source=1):
         """
-        sets the job batch
+        Sets the job batch.
         """
         self.papers = paper_list
         num_threads = threads_per_source * len(self.papers)
@@ -111,7 +111,5 @@ class NewsPool(object):
 
         for paper in self.papers:
             self.pool.add_task(paper.download_articles)
-
-
 
 
