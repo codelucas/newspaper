@@ -196,11 +196,10 @@ class Article(object):
         if self.raw_doc is not None:
             if self.config.fetch_images:
                 img_url = self.extractor.get_top_img_url(self)
-                self.top_img = encodeValue(img_url)
+                self.set_top_img(img_url)
 
                 top_imgs = self.extractor.get_img_urls(self)
-                top_imgs = [ encodeValue(t) for t in top_imgs ]
-                self.imgs = top_imgs
+                self.set_imgs(top_imgs)
 
         if self.config.fetch_images:
             self.set_reddit_top_img()
@@ -345,7 +344,7 @@ class Article(object):
             return
         try:
             s = images.Scraper(self)
-            self.top_img = s.largest_image_url()
+            self.set_top_img(s.largest_image_url())
         except Exception, e:
             log.critical('jpeg error with PIL, %s' % e)
 
@@ -364,6 +363,24 @@ class Article(object):
         text = encodeValue(text)
         if text:
             self.text = text
+
+    def set_top_img(self, src_url):
+        """
+        We want to provide 2 api's for images. One at
+        "top_img", "imgs" and one at "top_image", "images".
+        """
+        src_url = encodeValue(src_url)
+        self.top_img = src_url
+        self.top_image = src_url
+
+    def set_imgs(self, imgs):
+        """
+        The motive for this method is the same as above, we want
+        to provide apis for both "imgs" and "images".
+        """
+        imgs = [encodeValue(i) for i in imgs]
+        self.images = imgs
+        self.imgs = imgs
 
     def set_keywords(self, keywords):
         """

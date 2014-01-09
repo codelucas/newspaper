@@ -1,17 +1,37 @@
-Newspaper: Article scraping & curation
-======================================
+Newspaper: Article scraping, & curation
+=======================================
 
 .. image:: https://badge.fury.io/py/newspaper.png
     :target: http://badge.fury.io/py/newspaper
         :alt: Latest version
 
-Inspired by `requests`_ for its **simplicity** and powered by `lxml`_ for its **speed**; *newspaper*
-is a Python 2 library for extracting & curating articles from the web.
+*newspaper* is a Python 2 library for extracting & curating articles from the web.
 
-Newspaper wants to change the way people handle article extraction with a new, more precise
-layer of abstraction. Newspaper caches whatever it can for speed. *Also, everything is in unicode*.
+Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed, Newspaper 
+wants to change the way people handle article extraction.
 
-Please refer to `The Documentation`_ for a quickstart tutorial!
+**We support 10+ languages and everything is in unicode!!!**
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> newspaper.languages()
+
+    Your available langauges are:
+    input code      full name
+
+      ar              Arabic
+      de              German
+      en              English
+      es              Spanish
+      fr              French
+      it              Italian
+      ko              Korean
+      no              Norwegian
+      pt              Portugease
+      sv              Swedish
+      zh              Chinese
+
 
 A Glance:
 ---------
@@ -57,6 +77,12 @@ A Glance:
     >>> article.text
     u'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
 
+    >>> article.top_image
+    u'http://someCDN.com/blah/blah/blah/file.png'
+
+    >>> article.movies
+    [u'http://youtube.com/path/to/link.com', ...]
+
 .. code-block:: pycon
 
     >>> article.nlp()
@@ -66,6 +92,21 @@ A Glance:
 
     >>> article.summary
     u'The study shows that 93% of people ...'
+
+
+Newspaper has *seamless* language and extraction configs.
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
+    >>> a = newspaper.build_article(url, language='zh') # Chinese language
+    
+    >>> a.download()
+    >>> a.parse()
+
+    >>> print a.text
+
 
 Documentation
 -------------

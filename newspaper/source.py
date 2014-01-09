@@ -28,7 +28,7 @@ log = logging.getLogger(__name__)
 class Category(object):
 
     def __init__(self, url):
-        self.url = url
+        self.url = encodeValue(url)
         self.html = None
         self.doc = None
 
@@ -36,7 +36,7 @@ class Category(object):
 class Feed(object):
 
     def __init__(self, url):
-        self.url = url
+        self.url = encodeValue(url)
         self.rss = None
         # TODO self.dom = None ;; speed up Feedparser
 

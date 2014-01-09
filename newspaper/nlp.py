@@ -121,7 +121,7 @@ def keywords(text):
     keywords = dict((x,y) for x, y in keywords) # recreate a dict
 
     for k in keywords:
-        articleScore = keywords[k]*1.0 / num_words
+        articleScore = keywords[k]*1.0 / max(num_words, 1)
         keywords[k] = articleScore * 1.5 + 1
 
     keywords = sorted(keywords.iteritems(), key=operator.itemgetter(1))
@@ -153,7 +153,7 @@ def title_score(title, sentence):
     for word in sentence:
         if (word not in stopwords and word in title):
             count+=1.0
-    return count/len(title)
+    return count / max(len(title), 1)
 
 def sentence_position(i, size):
     """
