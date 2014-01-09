@@ -13,32 +13,34 @@ from .settings import POPULAR_URLS, TRENDING_URL
 from .configuration import Configuration
 from .mthreading import NewsPool
 from .configuration import Configuration
-from .utils import print_available_languages
+from .utils import print_available_languages, extend_config
 
-def build(url=u'', config=None):
+def build(url=u'', dry=False, config=None, **kwargs):
     """
     Returns a constructed source object without
     downloading or parsing the articles.
     """
     config = config or Configuration() # Order matters
-    url = url or ''                    # Empty string precedence over None
-    valid_href = ('://' in url) and (url[:4] == 'http')
+    config = extend_config(config, kwargs)
 
-    if not valid_href:
-        print 'ERR: provide a valid url'
-        return None
+    url = url or ''
+    s = Source(url, config=config)
 
-    s = Source(url, config)
-    s.build()
+    # dry means we are just testing, don't actually build source
+    if not dry:
+        s.build()
     return s
 
-def build_article(url=u''):
+def build_article(url=u'', config=None, **kwargs):
     """
     Returns a constructed article object without
     downloading or parsing.
     """
-    url = url or '' # empty string precedence over None
-    a = Article(url)
+    config = config or Configuration() # Order matters
+    config = extend_config(config, kwargs)
+
+    url = url or ''
+    a = Article(url, config=config)
     return a
 
 def languages():

@@ -18,7 +18,7 @@ from . import network
 from . import settings
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .utils import URLHelper, encodeValue, RawHelper
+from .utils import URLHelper, encodeValue, RawHelper, extend_config
 from .cleaners import StandardDocumentCleaner
 from .outputformatters import StandardOutputFormatter
 from .videos.extractors import VideoExtractor
@@ -33,23 +33,13 @@ class ArticleException(Exception):
 class Article(object):
     """
     """
-    def extend_config(self, config_items):
-        """
-        We are handling config value setting like this for a cleaner api.
-        Users just need to pass in a named param to this article and we
-        can dynamically set a config object for it.
-        """
-        for key, val in config_items.items():
-            if hasattr(self.config, key):
-                setattr(self.config, key, val)
-
     def __init__(self, url, title=u'', source_url=u'', config=None, **kwargs):
         """
         The **kwargs arguement can be filled with config values which we then
         push in.
         """
         self.config = config or Configuration()
-        self.extend_config(kwargs)
+        self.config = extend_config(self.config, kwargs)
 
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)

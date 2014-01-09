@@ -232,7 +232,7 @@ class APITestCase(unittest.TestCase):
 
     @print_test
     def test_source_build(self):
-        huff_paper = newspaper.build('http://www.huffingtonpost.com/')
+        huff_paper = newspaper.build('http://www.huffingtonpost.com/', dry=True)
         assert isinstance(huff_paper, Source) == True
 
     @print_test
@@ -346,6 +346,18 @@ class ConfigBuildTestCase(unittest.TestCase):
         assert s.config.language == 'en'
         assert s.config.use_meta_language == False
 
+        s = newspaper.build('http://cnn.com', dry=True)
+        assert s.config.language == 'en'
+        assert s.config.MAX_FILE_MEMO == 20000
+        assert s.config.memoize_articles == True
+        assert s.config.use_meta_language == True
+
+        s = newspaper.build('http://cnn.com', dry=True, memoize_articles=False,
+                MAX_FILE_MEMO=10000, language='zh')
+        assert s.config.language == 'zh'
+        assert s.config.MAX_FILE_MEMO == 10000
+        assert s.config.memoize_articles == False
+        assert s.config.use_meta_language == False
 
 class MultiLanguageTestCase(unittest.TestCase):
     def runTest(self):

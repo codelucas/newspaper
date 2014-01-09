@@ -369,4 +369,15 @@ def print_available_languages():
         print '  %s\t\t\t  %s' % (code, language_dict[code])
     print
 
+def extend_config(config, config_items):
+    """
+    We are handling config value setting like this for a cleaner api.
+    Users just need to pass in a named param to this source and we can
+    dynamically generate a config object for it.
+    """
+    for key, val in config_items.items():
+        if hasattr(config, key):
+            setattr(config, key, val)
+
+    return config
 

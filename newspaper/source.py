@@ -20,7 +20,7 @@ from .extractors import StandardContentExtractor
 from .urls import (
     get_domain, get_scheme, prepare_url)
 from .utils import (
-    memoize_articles, cache_disk, clear_memo_cache, encodeValue)
+    memoize_articles, cache_disk, clear_memo_cache, encodeValue, extend_config)
 
 log = logging.getLogger(__name__)
 
@@ -52,16 +52,6 @@ class Source(object):
     articles   =  [<article obj>, <article obj>, ..]
     brand      =  'cnn'
     """
-    def extend_config(self, config_items):
-        """
-        We are handling config value setting like this for a cleaner api.
-        Users just need to pass in a named param to this source and we can
-        dynamically generate a config object for it.
-        """
-        for key, val in config_items.items():
-            if hasattr(self.config, key):
-                setattr(self.config, key, val)
-
     def __init__(self, url, config=None, **kwargs):
         """
         **The config object for this source will be passed into all of this
@@ -71,7 +61,7 @@ class Source(object):
             raise Exception('Input url is bad!')
 
         self.config = config or Configuration() # Order matters
-        self.extend_config(kwargs)
+        self.config = extend_config(self.config, kwargs)
 
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)
