@@ -5,16 +5,13 @@ Newspaper: Article scraping, & curation
     :target: http://badge.fury.io/py/newspaper
         :alt: Latest version
 
-*newspaper* is a Python 2 library for extracting & curating articles from the web.
+*Newspaper* is a Python 2 library for extracting & curating articles from the web. It is inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
 
-Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed, Newspaper 
-wants to change the way people handle article extraction.
-
-**We support 10+ languages and everything is in unicode!!!**
+**We support 10+ languages and everything is in unicode!**
 
 .. code-block:: pycon
 
-    >>> import newspaper
+    >>> import newspaper     
     >>> newspaper.languages()
 
     Your available langauges are:
@@ -99,10 +96,10 @@ If no language is specified, Newspaper will attempt to auto detect a language.
 
 .. code-block:: pycon
 
-    >>> import newspaper
+    >>> from newspaper import Article
     >>> url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
 
-    >>> a = newspaper.build_article(url, language='zh') # Chinese
+    >>> a = Article(url, language='zh') # Chinese
     
     >>> a.download()
     >>> a.parse()
@@ -115,9 +112,6 @@ If no language is specified, Newspaper will attempt to auto detect a language.
     >>> print a.title
     港特首梁振英就住宅违建事件道歉
 
-
-All parameters should be named except the url.
-However, please refer to the docs for specifics.
 
 Documentation
 -------------
