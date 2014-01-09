@@ -116,15 +116,20 @@ Here are some examples of how Config objects are passed.
 Here is a full list of the configuration options:
 
 ``MIN_WORD_COUNT``  default 300     "num of word tokens in article text"
+
 ``MIN_SENT_COUNT``  default 7       "num of sentence tokens"
+
 ``MAX_TITLE``       default 200     "num of chars in article title"
+
 ``MAX_TEXT``        default 100000  "num of chars in article text"
+
 ``MAX_KEYWORDS``    default 35      "num of keywords in article"
+
 ``MAX_AUTHORS``     default 10      "num of author names in article"
+
 ``MAX_SUMMARY``     default 5000    "num of chars of the summary"
 
-# max number of urls we cache for each news source
-``MAX_FILE_MEMO`` default 20000
+``MAX_FILE_MEMO`` default 20000 "python setup.py sdist bdist_wininst upload"
 
 ``parser_class`` default 'lxml' "lxml vs soup"
 
