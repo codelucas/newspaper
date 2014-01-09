@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-
-
 """
 Async IO vs multi-threading
 
 Multi-thread:           5.9 secs (10 threads) for 100 requests
 Async-IO with Gevent:   10.5 secs  for 100 requests
 Single thread:          86.0 secs for 100 requests
-
 """
-
 import sys
 import logging
 import Queue

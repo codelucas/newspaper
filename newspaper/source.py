@@ -71,6 +71,8 @@ class Source(object):
             raise Exception('Input url is bad!')
 
         self.config = config or Configuration() # Order matters
+        self.extend_config(kwargs)
+
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)
 

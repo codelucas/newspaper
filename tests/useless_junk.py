@@ -175,7 +175,49 @@ for feed in self.feeds:
 
 """
 
+"""
+class GrequestsTestCase(unittest.TestCase):
+    def runTest(self):
+        print 'testing grequests unit'
+        #self.test_ordering()
+        self.test_capacity()
 
+    @print_test
+    def test_ordering(self):
+        TEST_SIZE = 25
+        dd = {}
+        urls = read_urls(amount=TEST_SIZE)
+
+        # don't count feeds, they always redirect to some other url
+        urls = [u for u in urls if 'feeds' not in urlparse.urlparse(u).netloc.split('.')]
+
+        for index, url in enumerate(urls):
+            _ul = urlparse.urlparse(url)
+            normalized = _ul.netloc + _ul.path
+            dd[index] = normalized
+
+        responses = async_request(urls, timeout=3)
+        for index, resp in enumerate(responses):
+            _ul = urlparse.urlparse(resp.url)
+            normalized = _ul.netloc + _ul.path
+            # print dd[index], '==', normalized
+            assert dd[index] == normalized
+
+    @print_test
+    def test_capacity(self):
+        TEST_SIZE = 450
+        urls = read_urls(amount=TEST_SIZE)
+        responses = async_request(urls, timeout=3)
+        failed = 0
+        for index, r in enumerate(responses):
+            if r is not None:
+                pass
+            else:
+                #print '[FAIL]', urls[index]
+                failed += 1
+        print '\t\ttotal:', len(urls), 'failed', failed
+
+"""
 
 
 

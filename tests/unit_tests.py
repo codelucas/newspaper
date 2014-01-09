@@ -28,7 +28,6 @@ from newspaper.utils import encodeValue
 def print_test(method):
     """utility method for print verbalizing test suite, prints out
     time taken for test and functions name, and status"""
-
     def run(*args, **kw):
         ts = time.time()
         print '\ttesting function %r' % method.__name__
@@ -54,7 +53,6 @@ class ArticleTestCase(unittest.TestCase):
         self.test_parse_html()
         self.test_pre_parse_nlp()
         self.test_nlp_body()
-        self.test_resource_pathing()
 
     def setUp(self):
         """called before the first test case of this unit begins"""
@@ -127,19 +125,6 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
 
-    def test_resource_pathing(self):
-        """
-        ignore the time hash because time is changing always
-        """
-        pass
-        # TODO below test does not work, figure out how to unit test this.
-        # res_path = self.article.get_resource_path()
-        # RES_LINK_HASH = 'fca15800fe9782c1e6ba205f28c89174'
-        # print res_path
-        # print RES_LINK_HASH
-        # assert res_path.split('/')[-1].split('.')[0] == RES_LINK_HASH
-
-
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
         print 'testing source unit'
@@ -197,9 +182,7 @@ class SourceTestCase(unittest.TestCase):
 
         saved_urls = s.category_urls()
         s.categories = [] # reset and try again with caching
-
         s.set_categories()
-
         assert sorted(s.category_urls()) == sorted(saved_urls)
 
 class UrlTestCase(unittest.TestCase):
@@ -242,7 +225,7 @@ class UrlTestCase(unittest.TestCase):
 class APITestCase(unittest.TestCase):
     def runTest(self):
         print 'testing API unit'
-        self.test_source_build()
+        # self.test_source_build()
         self.test_article_build()
         self.test_hot_trending()
         self.test_popular_urls()
@@ -330,19 +313,82 @@ class MThreadingTestCase(unittest.TestCase):
         print 'Downloaded tc mthread len', len(tc_paper.articles[1].html)
 
 
+class ConfigBuildTestCase(unittest.TestCase):
+    def runTest(self):
+        self.test_config_build()
+
+    @print_test
+    def test_config_build(self):
+        """
+        Test if our **kwargs to config building setup actually works.
+        """
+        a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
+        assert a.config.language == 'en'
+        assert a.config.is_memoize_articles == True
+
+        a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html',
+                language='zh', is_memoize_articles=False)
+        assert a.config.language == 'zh'
+        assert a.config.is_memoize_articles == False
+
+        s = Source(url="http://cnn.com", is_memoize_articles=False,
+                max_file_memo=10000, language='en')
+        assert s.config.is_memoize_articles == False
+        assert s.config.max_file_memo == 10000
+        assert s.config.language == 'en'
+
+        s = Source(url='http://cnn.com')
+        assert s.config.language == 'en'
+        assert s.config.max_file_memo == 20000
+        assert s.config.is_memoize_articles == True
+
+
+class MultiLanguageTestCase(unittest.TestCase):
+    def runTest(self):
+        self.test_chinese_fulltext_extract()
+        self.test_arabic_fulltext_extract()
+        self.test_spanish_fulltext_extract()
+        self.test_print_languages()
+
+    @print_test
+    def test_chinese_fulltext_extract(self):
+        """
+        """
+        pass
+
+    @print_test
+    def test_arabic_fulltext_extract(self):
+        """
+        """
+        pass
+
+    @print_test
+    def test_spanish_fulltext_extract(self):
+        """
+        """
+        pass
+
+    @print_test
+    def test_print_languages(self):
+        """
+        """
+        pass
+
+
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
 
     suite = unittest.TestSuite()
 
+    suite.addTest(ConfigBuildTestCase())
     # suite.addTest(MThreadingTestCase())
+    # suite.addTest(MultiLanguageTestCase())
     suite.addTest(SourceTestCase())
     suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
     unittest.TextTestRunner().run(suite) # run custom subset
-
 
 
 """
