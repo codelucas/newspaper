@@ -121,5 +121,6 @@ class VideoExtractor(object):
                 if movie is not None and movie.provider is not None:
                     self.movies.append(movie)
 
+        return list(self.movies)
         # append movies list to article
-        self.article.movies = list(self.movies)
+        # self.article.movies = list(self.movies)

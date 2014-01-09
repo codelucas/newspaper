@@ -187,7 +187,7 @@ class Article(object):
         self.top_node = self.extractor.calculate_best_node(self)
         if self.top_node is not None:
             video_extractor = self.get_video_extractor(self)
-            video_extractor.get_videos()
+            self.set_movies(video_extractor.get_videos())
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
             text = output_formatter.get_formatted_text(self)
@@ -440,3 +440,10 @@ class Article(object):
         """
         """
         self.tags = tags
+
+    def set_movies(self, movie_objects):
+        """
+        Trim goose's movie objects into just urls for us.
+        """
+        movie_urls = [o.src for o in movie_objects if o and o.src]
+        self.movies = movie_urls
