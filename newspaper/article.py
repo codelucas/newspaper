@@ -209,14 +209,17 @@ class Article(object):
             self.set_text(text)
 
         if self.raw_doc is not None:
-            img_url = self.extractor.get_top_img_url(self)
-            self.top_img = encodeValue(img_url)
+            if self.config.fetch_images:
+                img_url = self.extractor.get_top_img_url(self)
+                self.top_img = encodeValue(img_url)
 
-            top_imgs = self.extractor.get_img_urls(self)
-            top_imgs = [ encodeValue(t) for t in top_imgs ]
-            self.imgs = top_imgs
+                top_imgs = self.extractor.get_img_urls(self)
+                top_imgs = [ encodeValue(t) for t in top_imgs ]
+                self.imgs = top_imgs
 
-        self.set_reddit_top_img()
+        if self.config.fetch_images:
+            self.set_reddit_top_img()
+
         self.is_parsed = True
         self.release_resources()
 

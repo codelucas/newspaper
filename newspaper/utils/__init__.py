@@ -312,7 +312,7 @@ def memoize_articles(source, articles):
 
     # new_length = len(cur_articles)
 
-    if len(memo) > config.max_file_memo:
+    if len(memo) > config.MAX_FILE_MEMO:
         # We still keep current batch of articles though!
         log.critical('memo overflow, dumping')
         memo_text = ''

@@ -31,32 +31,25 @@ class Configuration(object):
         self.MAX_AUTHORS     = 10       # num strings in list
         self.MAX_SUMMARY     = 5000     # num of chars
 
-        # maximum number of urls we memo per news domain
+        # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000
 
-        # minimum bytes for an image we'd accept, (filter out small imgs)
-        self.images_min_bytes = 5000
+        self.parser_class = 'lxml' # lxml vs soup
 
         # cache and save articles run after run
-        self.is_memoize_articles = True
+        self.memoize_articles = True
 
         # set this to false if you don't care about getting images
-        # TODO: Make this work
-        self.enable_image_fetching = True
+        self.fetch_images = True
 
-        # TODO: Make this work
-        # self.use_cached_categories = True
-
-        # set this var to False if you want to force
-        # the article language. Otherwise it will attempt to
-        # find meta language and use the correct stopwords dictionary
+        # don't toggle this variable
         self.use_meta_language = True
 
         # english is our fallback
-        self.language = 'en'
-        self.stopwords_class = StopWords
+        self._language = 'en'
 
-        self.max_file_memo = 20000
+        # unique stopword classes for oriental languages, don't toggle
+        self.stopwords_class = StopWords
 
         self.browser_user_agent = 'newspaper/%s' % __version__
         self.request_timeout = 7
@@ -64,12 +57,14 @@ class Configuration(object):
 
         self.verbose = False # turn this on when debugging
 
-        self.parser_class = 'lxml' # lxml vs soup
+        # set this to False if you want to recompute the categories *every* time
+        # self.use_cached_categories = True # TODO: Make this work
 
-    def get_parser(self):
-        """
-        """
-        return Parser if self.parser_class == 'lxml' else ParserSoup
+    def get_language(self):
+        return self._language
+
+    def del_language(self):
+        raise Exception('wtf are you doing?')
 
     def set_language(self, language):
         """
@@ -80,14 +75,21 @@ class Configuration(object):
             raise Exception("Your input language must be a 2 char langauge code, \
                 for example: english-->en \n and german-->de")
 
+        self.use_meta_language = False # if explicitly set langauge, don't use meta
+
         # Set oriental language stopword class.
-        self.language = language
+        self._language = language
         if language == 'ko':
             self.stopwords_class = StopWordsKorean
         elif language == 'zh':
             self.stopwords_class = StopWordsChinese
         elif language == 'ar':
             self.stopwords_class = StopWordsArabic
+
+    language = property(get_language, set_language, del_language, "langauge prop")
+
+    def get_parser(self):
+        return Parser if self.parser_class == 'lxml' else ParserSoup
 
     def get_publishdate_extractor(self):
         """

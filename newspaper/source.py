@@ -287,7 +287,7 @@ class Source(object):
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.config.is_memoize_articles:
+            if self.config.memoize_articles:
                 cur_articles = memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 
@@ -324,7 +324,7 @@ class Source(object):
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
-            if self.config.is_memoize_articles:
+            if self.config.memoize_articles:
                 cur_articles = memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 

@@ -295,7 +295,7 @@ class MThreadingTestCase(unittest.TestCase):
         """
         """
         config = Configuration()
-        config.is_memoize_articles = False
+        config.memoize_articles = False
         slate_paper = newspaper.build('http://slate.com', config)
         tc_paper = newspaper.build('http://techcrunch.com', config)
         espn_paper = newspaper.build('http://espn.com', config)
@@ -324,23 +324,27 @@ class ConfigBuildTestCase(unittest.TestCase):
         """
         a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
         assert a.config.language == 'en'
-        assert a.config.is_memoize_articles == True
+        assert a.config.memoize_articles == True
+        assert a.config.use_meta_language == True
 
         a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html',
-                language='zh', is_memoize_articles=False)
+                language='zh', memoize_articles=False)
         assert a.config.language == 'zh'
-        assert a.config.is_memoize_articles == False
-
-        s = Source(url="http://cnn.com", is_memoize_articles=False,
-                max_file_memo=10000, language='en')
-        assert s.config.is_memoize_articles == False
-        assert s.config.max_file_memo == 10000
-        assert s.config.language == 'en'
+        assert a.config.memoize_articles == False
+        assert a.config.use_meta_language == False
 
         s = Source(url='http://cnn.com')
         assert s.config.language == 'en'
-        assert s.config.max_file_memo == 20000
-        assert s.config.is_memoize_articles == True
+        assert s.config.MAX_FILE_MEMO == 20000
+        assert s.config.memoize_articles == True
+        assert s.config.use_meta_language == True
+
+        s = Source(url="http://cnn.com", memoize_articles=False,
+                MAX_FILE_MEMO=10000, language='en')
+        assert s.config.memoize_articles == False
+        assert s.config.MAX_FILE_MEMO == 10000
+        assert s.config.language == 'en'
+        assert s.config.use_meta_language == False
 
 
 class MultiLanguageTestCase(unittest.TestCase):
@@ -391,48 +395,4 @@ if __name__ == '__main__':
     unittest.TextTestRunner().run(suite) # run custom subset
 
 
-"""
-class GrequestsTestCase(unittest.TestCase):
-    def runTest(self):
-        print 'testing grequests unit'
-        #self.test_ordering()
-        self.test_capacity()
 
-    @print_test
-    def test_ordering(self):
-
-        TEST_SIZE = 25
-        dd = {}
-        urls = read_urls(amount=TEST_SIZE)
-
-        # don't count feeds, they always redirect to some other url
-        urls = [u for u in urls if 'feeds' not in urlparse.urlparse(u).netloc.split('.')]
-
-        for index, url in enumerate(urls):
-            _ul = urlparse.urlparse(url)
-            normalized = _ul.netloc + _ul.path
-            dd[index] = normalized
-
-        responses = async_request(urls, timeout=3)
-        for index, resp in enumerate(responses):
-            _ul = urlparse.urlparse(resp.url)
-            normalized = _ul.netloc + _ul.path
-            # print dd[index], '==', normalized
-            assert dd[index] == normalized
-
-    @print_test
-    def test_capacity(self):
-
-        TEST_SIZE = 450
-        urls = read_urls(amount=TEST_SIZE)
-        responses = async_request(urls, timeout=3)
-        failed = 0
-        for index, r in enumerate(responses):
-            if r is not None:
-                pass
-            else:
-                #print '[FAIL]', urls[index]
-                failed += 1
-        print '\t\ttotal:', len(urls), 'failed', failed
-
-"""
