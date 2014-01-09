@@ -1,6 +1,5 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
-
 """
 Downloads the necessary NLTK models and corpora required to support
 all of newspaper's features. Modify for your own needs.

@@ -129,7 +129,8 @@ class Article(object):
         Downloads the link's html content, don't use if we are async
         downloading batch articles.
         """
-        self.html = network.get_html(self.url, self.config)
+        html = network.get_html(self.url, self.config)
+        self.html = encodeValue(html)
         self.is_downloaded = True
 
     def parse(self):

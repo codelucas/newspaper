@@ -15,6 +15,8 @@ PARENT_DIR = os.path.join(TEST_DIR, '..')
 sys.path.insert(0, PARENT_DIR)
 
 URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
+TEXT_FN = os.path.join(TEST_DIR, 'data/body_text')
+HTML_FN = os.path.join(TEST_DIR, 'data/html')
 
 import newspaper
 from newspaper import Article, Source, ArticleException, news_pool
@@ -289,7 +291,6 @@ class MThreadingTestCase(unittest.TestCase):
     def runTest(self):
         self.test_download_works()
 
-
     @print_test
     def test_download_works(self):
         """
@@ -364,32 +365,42 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.test_chinese_fulltext_extract()
         self.test_arabic_fulltext_extract()
         self.test_spanish_fulltext_extract()
-        self.test_print_languages()
 
     @print_test
     def test_chinese_fulltext_extract(self):
-        """
-        """
-        pass
+        url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
+        article = Article(url=url, language='zh')
+        article.download()
+        article.parse()
+        with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
+            assert article.text == f.read()
+
+        # with codecs.open(os.path.join(HTML_FN, 'chinese_html_1.html'), 'w', 'utf8') as f:
+        #    f.write(article.html)
 
     @print_test
     def test_arabic_fulltext_extract(self):
-        """
-        """
-        pass
+        url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/index.html'
+        article = Article(url=url, language='ar')
+        article.download()
+        article.parse()
+        with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
+            assert article.text == f.read()
+
+        # with codecs.open(os.path.join(HTML_FN, 'arabic_html_1.html'), 'w', 'utf8') as f:
+        #    f.write(article.html)
 
     @print_test
     def test_spanish_fulltext_extract(self):
-        """
-        """
-        pass
+        url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscalia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
+        article = Article(url=url, language='es')
+        article.download()
+        article.parse()
+        with codecs.open(os.path.join(TEXT_FN, 'spanish_text_1.txt'), 'r', 'utf8') as f:
+            assert article.text == f.read()
 
-    @print_test
-    def test_print_languages(self):
-        """
-        """
-        pass
-
+        # with codecs.open(os.path.join(HTML_FN, 'spanish_html_1.html'), 'w', 'utf8') as f:
+        #    f.write(article.html)
 
 if __name__ == '__main__':
     # unittest.main() # run all units and their cases
@@ -398,7 +409,7 @@ if __name__ == '__main__':
 
     suite.addTest(ConfigBuildTestCase())
     # suite.addTest(MThreadingTestCase())
-    # suite.addTest(MultiLanguageTestCase())
+    suite.addTest(MultiLanguageTestCase())
     suite.addTest(SourceTestCase())
     suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
