@@ -61,18 +61,18 @@ class Article(object):
         # the url of the "best image" to represent this article, via reddit algorithm
         self.top_img = u''
 
-        # all image urls
-        self.imgs = []
-
-        # list of any movies found on the page like: youtube & vimeo
-        self.movies = []
+        self.imgs = [] # all image urls
+        self.movies = [] # youtube, vimeo, etc
 
         # pure text from the article
         self.text = u''
 
-        # keywords extracted via nlp(), meta_keywords are via parse() from <meta> tags
+        # keywords extracted via nlp() from the body text
+        # meta_keywords are via parse() from <meta> tags
+        # tags are related terms via parse() in the <meta> tags
         self.keywords = []
         self.meta_keywords = []
+        self.tags = set()
 
         # list of authors who have published the article, via parse()
         self.authors = []
@@ -101,13 +101,8 @@ class Article(object):
         # The canonical link of this article if found in the meta data
         self.canonical_link = u""
 
-        # holds the top Element we think
-        # is a candidate for the main body of the article
+        # Holds the top Element we think is a candidate for the main body
         self.top_node = None
-
-        # holds a set of tags that may have
-        # been in the article, these are not meta keywords
-        self.tags = set()
 
         # the lxml doc object
         self.doc = None
@@ -153,7 +148,6 @@ class Article(object):
 
         # TODO: Fix this, sync in our fix_url() method
         parse_candidate = self.get_parse_candidate()
-        self.final_url = parse_candidate.url
         self.link_hash = parse_candidate.link_hash # MD5
 
         document_cleaner = self.get_document_cleaner()

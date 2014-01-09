@@ -286,20 +286,19 @@ class ContentExtractor(object):
         """
         If the article has meta canonical link set in the url.
         """
-        if article.final_url:
-            kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'canonical'}
-            meta = self.parser.getElementsByTag(article.doc, **kwargs)
-            if meta is not None and len(meta) > 0:
-                href = self.parser.getAttribute(meta[0], 'href')
-                if href:
-                    href = href.strip()
-                    o = urlparse.urlparse(href)
-                    if not o.hostname:
-                        z = urlparse.urlparse(article.final_url)
-                        domain = '%s://%s' % (z.scheme, z.hostname)
-                        href = urlparse.urljoin(domain, href)
-                    return href
-        return article.final_url
+        kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'canonical'}
+        meta = self.parser.getElementsByTag(article.doc, **kwargs)
+        if meta is not None and len(meta) > 0:
+            href = self.parser.getAttribute(meta[0], 'href')
+            if href:
+                href = href.strip()
+                o = urlparse.urlparse(href)
+                if not o.hostname:
+                    z = urlparse.urlparse(article.url)
+                    domain = '%s://%s' % (z.scheme, z.hostname)
+                    href = urlparse.urljoin(domain, href)
+                return href
+        return u''
 
     def get_img_urls(self, article):
         """
