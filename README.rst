@@ -95,18 +95,29 @@ A Glance:
 
 
 Newspaper has *seamless* language and extraction configs.
+If no language is specified, Newspaper will attempt to auto detect a language.
 
 .. code-block:: pycon
 
     >>> import newspaper
     >>> url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
-    >>> a = newspaper.build_article(url, language='zh') # Chinese language
+
+    >>> a = newspaper.build_article(url, language='zh') # Chinese
     
     >>> a.download()
     >>> a.parse()
 
-    >>> print a.text
+    >>> print a.text[:150]
+    香港行政长官梁振英在各方压力下就其大宅的违章建筑（僭建）问题到立法会接受质询，并向香港民众道歉。
+    梁振英在星期二（12月10日）的答问大会开始之际在其演说中道歉，但强调他在违章建筑问题上没有隐瞒的意图和动机。
+    一些亲北京阵营议员欢迎梁振英道歉，且认为应能获得香港民众接受，但这些议员也质问梁振英有
+   
+    >>> print a.title
+    港特首梁振英就住宅违建事件道歉
 
+
+All parameters should be named except the url.
+However, please refer to the docs for specifics.
 
 Documentation
 -------------
