@@ -1,13 +1,12 @@
 #!/bin/python2.7
+# -*- coding: utf-8 -*-
 
 """
 Lucas Ou-Yang 2014 -- http://codelucas.com
 
 Setup guide: http://guide.python-distribute.org/creation.html
 python setup.py sdist bdist_wininst upload
-
 """
-
 try:
     from setuptools import setup
 except ImportError:
@@ -64,7 +63,7 @@ setup(
     name='newspaper',
     version='0.0.5',
     description='Simplified python article discovery & extraction.',
-    long_description=readme+'\r\n'+history,
+    # long_description=readme+'\r\n'+history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
     url='https://github.com/codelucas/newspaper/',
