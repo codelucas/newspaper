@@ -74,13 +74,27 @@ for absolute control over how your sources are constructed.
 And voila, we have mimic'd the ``build()`` method. In the above sequence,
 every method is dependant on the method above it. Stop whenever you wish.
 
-Config objects
---------------
+Parameters and Configurations
+-----------------------------
 
-You may configure your Source and Article objects however you want via
-the ``Config`` object. Config objects are passed into the constructors
-of ``Source()``, ``Article()``, and ``newspaper.build()`` initialization
-methods.
+Newspaper provides two api's for users to configure their ``Article`` and 
+``Source`` objects. One is via named parameter passing **recommended** and
+the other is via ``Config`` objects. 
+
+Here are some named parameter passing examples:
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> from newspaper import Article, Source
+
+    >>> cnn = newspaper.build('http://cnn.com', language='en', memoize_articles=False)
+
+    >>> article = Article(url='http://cnn.com/french/...', language='fr', fetch_images=False)
+    
+    >>> cnn = Source(url='http://latino.cnn.com/...', language='es', request_timeout=10, 
+                                                                number_threads=20)
+
 
 Here are some examples of how Config objects are passed.
 
@@ -90,6 +104,7 @@ Here are some examples of how Config objects are passed.
     >>> from newspaper import Config, Article, Source
 
     >>> config = Config()
+    >>> config.memoize_articles = False
 
     >>> cbs_paper = newspaper.build('http://cbs.com', config)
 
@@ -97,21 +112,36 @@ Here are some examples of how Config objects are passed.
 
     >>> cbs_paper = Source('http://cbs.com', config)
 
-Here are some examples of how to precisely modify a Config object.
 
-.. code-block:: pycon
+Here is a full list of the configuration options:
 
-    >>> config = Config()
-    >>> config.is_memoize_articles = False   # default True
-    >>> config.verbose = True                # default False
-    >>> config.request_timeout = 10          # default 7
-    >>> config.parser_class = 'soup'         # default 'lxml'
-    >>> config.target_language = 'es'        # default 'en'
+``MIN_WORD_COUNT``  default 300     "num of word tokens in article text"
+``MIN_SENT_COUNT``  default 7       "num of sentence tokens"
+``MAX_TITLE``       default 200     "num of chars in article title"
+``MAX_TEXT``        default 100000  "num of chars in article text"
+``MAX_KEYWORDS``    default 35      "num of keywords in article"
+``MAX_AUTHORS``     default 10      "num of author names in article"
+``MAX_SUMMARY``     default 5000    "num of chars of the summary"
 
-    >>> cbs_paper = newspaper.build('http://cbs.com', config)
+# max number of urls we cache for each news source
+``MAX_FILE_MEMO`` default 20000
 
-There are *many* more configuration options. You may view them in the
-``newspaper/configuration.py`` file.
+``parser_class`` default 'lxml' "lxml vs soup"
+
+``memoize_articles`` default True "cache and save articles run after run"
+
+``fetch_images`` default True "set this to false if you don't care about getting images"
+
+``language`` default 'en' "run ``newspaper.languages()`` to see available options."
+
+``browser_user_agent`` default 'newspaper/%s' % __version__
+``request_timeout`` default 7
+``number_threads`` default 10 "number of threads when mthreading"
+
+``verbose`` default False "turn this on when debugging"
+
+You may notice other config options in the ``newspaper/configuration.py`` file,
+however, they are private, **please do not toggle them**.
 
 Caching
 -------

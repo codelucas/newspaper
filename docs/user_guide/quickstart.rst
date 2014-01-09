@@ -15,12 +15,16 @@ You can initialize them in two *different* ways.
 
 Building a ``Source`` will extract its categories, feeds, articles, brand, and description for you.
 
+You may also provide configuration parameters like ``language``, ``browser_user_agent``, and etc seamlessly. Navigate to the :ref:`advanced <advanced>` section for details.
+
 .. code-block:: pycon
 
     >>> import newspaper
     >>> cnn_paper = newspaper.build('http://cnn.com')
 
-However, if needed, you may play with the lower level ``Source`` object as described
+    >>> sina_paper = newspaper.build('http://www.lemonde.fr/', language='fr')
+
+However, if needed, you may also play with the lower level ``Source`` object as described
 in the :ref:`advanced <advanced>` section.
 
 Extracting articles
@@ -67,24 +71,22 @@ articles which have already been crawled.
 
 This means **2** new articles have been published since our first extraction.
 
+You may opt out of this feature with the ``memoize_articles`` parameter.
 
-You may opt out of this feature by passing in a config object to the ``newspaper.build()`` method.
-More about ``Config`` objects will be covered in the :ref:`advanced <advanced>` section.
+You may also pass in the lower level``Config`` objects as covered in the :ref:`advanced <advanced>` section.
 
 .. code-block:: pycon
 
-    >>> from newspaper import Config
+    >>> import newspaper
 
-    >>> config = Config()
-    >>> config.is_memoize_articles = False
-
-    >>> cbs_paper = newspaper.build('http://cbs.com', config)
+    >>> cbs_paper = newspaper.build('http://cbs.com', memoize_articles=False)
     >>> cbs_paper.size()
     1030
 
-    >>> cbs_paper = newspaper.build('http://cbs.com', config)
+    >>> cbs_paper = newspaper.build('http://cbs.com', memoize_articles=False)
     >>> cbs_paper.size()
     1030
+
 
 Extracting Source categories
 ----------------------------
@@ -141,7 +143,10 @@ Initializing an ``Article`` by itself.
 .. code-block:: pycon
 
     >>> from newspaper import Article
-    >>> first_article = Article(url="http://cnn.com/2013/9/...")
+    >>> first_article = Article(url="http://www.lemonde.fr/...", language='fr')
+
+
+Note the similar ``language=`` named paramater above. All the config parameters as described for ``Source`` objects also apply for ``Article`` objects! **Source and Article objects have a very similar api**.
 
 There are endless possibilities on how we can manipulate and build articles.
 
@@ -177,7 +182,7 @@ You **must** have called ``download()`` on an article before calling ``parse()``
     >>> print first_article.text
     u'Three sisters who were imprisoned for possibly...'
 
-    >>> print first_article.top_img
+    >>> print first_article.top_image
     u'http://some.cdn.com/3424hfd4565sdfgdg436/
 
     >>> print first_article.authors
@@ -186,12 +191,21 @@ You **must** have called ``download()`` on an article before calling ``parse()``
     >>> print first_article.title
     u'Police: 3 sisters imprisoned in Tucson home'
 
+    >>> print first_article.images
+    ['url_to_img_1', 'url_to_img_2', 'url_to_img_3', ...]
+
+    >>> print first_article.movies
+    ['url_to_youtube_link_1', ...] # youtube, vimeo, etc
+
+
 Performing NLP on an Article
 ----------------------------
 
 Finally, you may extract out natural language properties from the text.
 You **must** have called both ``download()`` and ``parse()`` on the article
 before calling ``nlp()``.
+
+**As of the current build, nlp() features only work on western languages.**
 
 .. code-block:: pycon
 
@@ -206,6 +220,7 @@ before calling ``nlp()``.
     >>> print cnn_paper.articles[100].nlp() # fail, not been downloaded yet
     Traceback (...
     ArticleException: You must parse an article before you try to..
+
 
 ``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on
 all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.
@@ -226,3 +241,22 @@ of popular news source urls.. In case you need help choosing a news source!
 
     >>> newspaper.popular_urls()
     ['http://slate.com', 'http://cnn.com', 'http://huffingtonpost.com', ... ]
+
+    >>> newspaper.languages()
+
+    Your available langauges are:
+    input code      full name
+
+      ar              Arabic
+      de              German
+      en              English
+      es              Spanish
+      fr              French
+      it              Italian
+      ko              Korean
+      no              Norwegian
+      pt              Portugease
+      sv              Swedish
+      zh              Chinese
+
+      

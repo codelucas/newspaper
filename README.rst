@@ -1,4 +1,4 @@
-Newspaper: Article scraping, & curation
+Newspaper: Article scraping & curation
 =======================================
 
 .. image:: https://badge.fury.io/py/newspaper.png
@@ -135,6 +135,9 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集全家之力抱得爱车归”的全额购车模式已然过时，另一种轻松的新兴
     车模式――金融购车正逐步成为时下消费者购买爱车最为时尚的消费理念，他们认为，这种新颖的购车模式既能在短期内
     ...
+
+    >>> print article.title
+    两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽车网_新浪汽车_新浪网
 
 
 Documentation

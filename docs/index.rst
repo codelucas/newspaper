@@ -3,13 +3,30 @@ Newspaper: Article scraping & curation
 
 Release v0.0.4. :ref:`(Installation) <install>`.
 
-Inspired by `requests`_ for its **simplicity** and powered by `lxml`_ for its **speed**; *newspaper*
-is a Python 2 library for extracting & curating articles from the web.
+*Newspaper* is a Python 2 library for extracting & curating articles from the web. It is inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
 
-Newspaper wants to change the way people handle article extraction with a new, more precise
-layer of abstraction.
+**We support 10+ languages and everything is in unicode!**
 
-Newspaper caches whatever it can for speed. *Also, everything is in unicode*
+.. code-block:: pycon
+
+    >>> import newspaper     
+    >>> newspaper.languages()
+
+    Your available langauges are:
+    input code      full name
+
+      ar              Arabic
+      de              German
+      en              English
+      es              Spanish
+      fr              French
+      it              Italian
+      ko              Korean
+      no              Norwegian
+      pt              Portugease
+      sv              Swedish
+      zh              Chinese
+
 
 A Glance:
 ---------
@@ -55,6 +72,12 @@ A Glance:
     >>> article.text
     u'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
 
+    >>> article.top_image
+    u'http://someCDN.com/blah/blah/blah/file.png'
+
+    >>> article.movies
+    [u'http://youtube.com/path/to/link.com', ...]
+
 .. code-block:: pycon
 
     >>> article.nlp()
@@ -64,6 +87,71 @@ A Glance:
 
     >>> article.summary
     u'The study shows that 93% of people ...'
+
+
+Newspaper has *seamless* language extraction and detection.
+If no language is specified, Newspaper will attempt to auto detect a language.
+
+.. code-block:: pycon
+
+    >>> from newspaper import Article
+    >>> url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
+
+    >>> a = Article(url, language='zh') # Chinese
+    
+    >>> a.download()
+    >>> a.parse()
+
+    >>> print a.text[:150]
+    香港行政长官梁振英在各方压力下就其大宅的违章建筑（僭建）问题到立法会接受质询，并向香港民众道歉。
+    梁振英在星期二（12月10日）的答问大会开始之际在其演说中道歉，但强调他在违章建筑问题上没有隐瞒的意图和动机。
+    一些亲北京阵营议员欢迎梁振英道歉，且认为应能获得香港民众接受，但这些议员也质问梁振英有
+   
+    >>> print a.title
+    港特首梁振英就住宅违建事件道歉
+
+
+If you are certain that an *entire* news source is in one language, **go ahead and use the same api :)**
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', langauge='zh')
+
+    >>> for category in sina_paper.category_urls():
+    >>>     print category
+    u'http://health.sina.com.cn'
+    u'http://eladies.sina.com.cn'
+    u'http://english.sina.com'
+    ...
+
+    >>> article = sina_paper.articles[0]
+    >>> article.download()
+    >>> article.parse()
+
+    >>> print article.text
+    新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集全家之力抱得爱车归”的全额购车模式已然过时，另一种轻松的新兴
+    车模式――金融购车正逐步成为时下消费者购买爱车最为时尚的消费理念，他们认为，这种新颖的购车模式既能在短期内
+    ...
+
+    >>> print article.title
+    两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽车网_新浪汽车_新浪网
+
+
+Features
+--------
+
+- Works in 10+ languages (English, Chinese, German, Arabic, ...)
+- Multi-threaded article download framework
+- News url identification
+- Text extraction from html
+- Top image extraction from html
+- All image extraction from html
+- Keyword extraction from text
+- Summary extraction from text
+- Author extraction from text
+- Google trending terms extraction
+
 
 User Guide
 ----------
@@ -79,19 +167,6 @@ User Guide
    :maxdepth: 1
 
    user_guide/contributors
-
-Features
---------
-
-- News url identification
-- Quick article downloads via multi-threading
-- Text extraction from html
-- Keyword extraction from text
-- Summary extraction from text
-- Author extraction from text
-- Top Image extraction from html
-- All image extraction from html
-- Google trending terms extraction
 
 
 .. _`lxml`: http://lxml.de/
