@@ -91,7 +91,7 @@ A Glance:
     u'The study shows that 93% of people ...'
 
 
-Newspaper has *seamless* language and extraction configs.
+Newspaper has *seamless* language extraction and detection.
 If no language is specified, Newspaper will attempt to auto detect a language.
 
 .. code-block:: pycon
@@ -111,6 +111,30 @@ If no language is specified, Newspaper will attempt to auto detect a language.
    
     >>> print a.title
     港特首梁振英就住宅违建事件道歉
+
+
+If you are certain that an *entire* news source is in one language, **go ahead and use the same api :)**
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', langauge='zh')
+
+    >>> for category in sina_paper.category_urls():
+    >>>     print category
+    u'http://health.sina.com.cn'
+    u'http://eladies.sina.com.cn'
+    u'http://english.sina.com'
+    ...
+
+    >>> article = sina_paper.articles[0]
+    >>> article.download()
+    >>> article.parse()
+
+    >>> print article.text
+    新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集全家之力抱得爱车归”的全额购车模式已然过时，另一种轻松的新兴
+    车模式――金融购车正逐步成为时下消费者购买爱车最为时尚的消费理念，他们认为，这种新颖的购车模式既能在短期内
+    ...
 
 
 Documentation
