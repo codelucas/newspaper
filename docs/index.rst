@@ -1,7 +1,7 @@
 Newspaper: Article scraping & curation
 ======================================
 
-Release v0.0.4. :ref:`(Installation) <install>`.
+Release v0.0.5. :ref:`(Installation) <install>`.
 
 *Newspaper* is a Python 2 library for extracting & curating articles from the web. It is inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
 
@@ -103,9 +103,12 @@ If no language is specified, Newspaper will attempt to auto detect a language.
     >>> a.parse()
 
     >>> print a.text[:150]
-    香港行政长官梁振英在各方压力下就其大宅的违章建筑（僭建）问题到立法会接受质询，并向香港民众道歉。
-    梁振英在星期二（12月10日）的答问大会开始之际在其演说中道歉，但强调他在违章建筑问题上没有隐瞒的意图和动机。
-    一些亲北京阵营议员欢迎梁振英道歉，且认为应能获得香港民众接受，但这些议员也质问梁振英有
+    香港行政长官梁振英在各方压力下就其大宅的违章建
+    筑（僭建）问题到立法会接受质询，并向香港民众道歉。
+    梁振英在星期二（12月10日）的答问大会开始之际在其
+    演说中道歉，但强调他在违章建筑问题上没有隐瞒的意
+    图和动机。 一些亲北京阵营议员欢迎梁振英道歉，
+    且认为应能获得香港民众接受，但这些议员也质问梁振英有
    
     >>> print a.title
     港特首梁振英就住宅违建事件道歉
@@ -130,12 +133,16 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     >>> article.parse()
 
     >>> print article.text
-    新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集全家之力抱得爱车归”的全额购车模式已然过时，另一种轻松的新兴
-    车模式――金融购车正逐步成为时下消费者购买爱车最为时尚的消费理念，他们认为，这种新颖的购车模式既能在短期内
+    新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集
+    全家之力抱得爱车归”的全额购车模式已然过时，另一种轻
+    松的新兴 车模式――金融购车正逐步成为时下消费者购买
+    爱车最为时尚的消费理 念，他们认为，这种新颖的购车模
+    式既能在短期内
     ...
 
     >>> print article.title
-    两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽车网_新浪汽车_新浪网
+    两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉
+    汽车网_新浪汽车_新浪网
 
 
 Features

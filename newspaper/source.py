@@ -353,6 +353,7 @@ class Source(object):
         """
         Downloads all articles attached to self.
         """
+        # TODO fix how the article's is_downloaded is not set!
         urls = [a.url for a in self.articles]
         failed_articles = []
 

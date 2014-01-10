@@ -350,7 +350,13 @@ class Article(object):
 
     def set_title(self, title):
         """
+        The prechecked_title boolean is important for cases where our
+        educated guess of an article's title works and is actually
+        better than the actual title being extracted.
         """
+        prechecked_title = (self.title and not title)
+        if prechecked_title:
+            return
         title = title[:self.config.MAX_TITLE]
         title = encodeValue(title)
         if title:
