@@ -268,7 +268,7 @@ def encodeValue(value):
         value = smart_str(value)
     except:
         value = string_org
-    return value
+    return value.strip()
 
 def memoize_articles(source, articles):
     """
