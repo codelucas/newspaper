@@ -5,6 +5,17 @@
 from HTMLParser import HTMLParser
 from .text import innerTrim
 
+import lxml
+from lxml.html.clean import Cleaner
+
+
+cleaner = Cleaner()
+cleaner.javascript = True
+cleaner.style = True
+cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b', 'em']
+cleaner.remove_unknown_tags = False
+
+
 class OutputFormatter(object):
 
     def __init__(self, config):
@@ -26,14 +37,16 @@ class OutputFormatter(object):
     def get_top_node(self):
         return self.top_node
 
-    def get_formatted_text(self, article):
+    def get_formatted(self, article):
         self.top_node = article.top_node
         self.remove_negativescores_nodes()
+        html = self.convert_to_html()
         self.links_to_text()
         self.add_newline_to_br()
         self.replace_with_text()
         self.remove_fewwords_paragraphs(article)
-        return self.convert_to_text()
+        text = self.convert_to_text()
+        return (text, html)
 
     def convert_to_text(self):
         txts = []
@@ -44,6 +57,9 @@ class OutputFormatter(object):
                 txt_lis = innerTrim(txt).split(r'\n')
                 txts.extend(txt_lis)
         return '\n\n'.join(txts)
+
+    def convert_to_html(self):
+        return lxml.html.tostring(cleaner.clean_html(self.get_top_node()))
 
     def add_newline_to_br(self):
         for e in self.parser.getElementsByTag(self.top_node, tag='br'):

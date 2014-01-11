@@ -85,6 +85,9 @@ class Article(object):
         # the article's unchanged and raw html
         self.html = u''
 
+        # The html of the main article node
+        self.article_html = u''
+
         # flags warning users in-case they forget to download() or parse()
         self.is_parsed = False
         self.is_downloaded = False
@@ -190,7 +193,8 @@ class Article(object):
             self.set_movies(video_extractor.get_videos())
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
-            text = output_formatter.get_formatted_text(self)
+            text, article_html = output_formatter.get_formatted(self)
+            self.set_article_html(article_html)
             self.set_text(text)
 
         if self.raw_doc is not None:
@@ -369,6 +373,10 @@ class Article(object):
         text = encodeValue(text)
         if text:
             self.text = text
+
+    def set_article_html(self, article_html):
+        if article_html:
+            self.article_html = article_html
 
     def set_top_img(self, src_url):
         """
