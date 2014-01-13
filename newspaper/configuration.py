@@ -45,6 +45,9 @@ class Configuration(object):
         # don't toggle this variable
         self.use_meta_language = True
 
+        # you may keep the html of just the main article body
+        self.keep_article_html = False
+
         # english is our fallback
         self._language = 'en'
 

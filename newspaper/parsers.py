@@ -8,9 +8,10 @@ import logging
 
 import lxml.html
 from lxml.html import soupparser
+from lxml.html.clean import Cleaner
 from lxml import etree
-from copy import deepcopy
 
+from copy import deepcopy
 from .text import innerTrim
 from .utils import encodeValue
 
@@ -167,6 +168,19 @@ class Parser(object):
     # @classmethod
     # def set_doc(cls, html):
     #    cls.doc = cls.fromstring(html)
+
+    @classmethod
+    def node_to_string(cls, node):
+        return lxml.html.tostring(node)
+
+    @classmethod
+    def clean_article_html(cls, node):
+        article_cleaner = Cleaner()
+        article_cleaner.javascript = True
+        article_cleaner.style = True
+        article_cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b', 'em']
+        article_cleaner.remove_unknown_tags = False
+        return article_cleaner.clean_html(node)
 
     @classmethod
     def nodeToString(cls, node):

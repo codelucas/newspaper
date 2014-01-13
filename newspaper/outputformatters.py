@@ -6,15 +6,6 @@ from HTMLParser import HTMLParser
 from .text import innerTrim
 
 import lxml
-from lxml.html.clean import Cleaner
-
-
-cleaner = Cleaner()
-cleaner.javascript = True
-cleaner.style = True
-cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b', 'em']
-cleaner.remove_unknown_tags = False
-
 
 class OutputFormatter(object):
 
@@ -38,13 +29,23 @@ class OutputFormatter(object):
         return self.top_node
 
     def get_formatted(self, article):
+        """
+        Returns the body text of an article, and also the body article
+        html if specified. Returns in (text, html) form.
+        """
         self.top_node = article.top_node
+        html, text = u'', u''
+
         self.remove_negativescores_nodes()
-        html = self.convert_to_html()
+
+        if article.config.keep_article_html:
+            html = self.convert_to_html()
+
         self.links_to_text()
         self.add_newline_to_br()
         self.replace_with_text()
         self.remove_fewwords_paragraphs(article)
+
         text = self.convert_to_text()
         return (text, html)
 
@@ -59,7 +60,8 @@ class OutputFormatter(object):
         return '\n\n'.join(txts)
 
     def convert_to_html(self):
-        return lxml.html.tostring(cleaner.clean_html(self.get_top_node()))
+        cleaned_node = self.parser.clean_article_html(self.get_top_node())
+        return self.parser.node_to_string(cleaned_node)
 
     def add_newline_to_br(self):
         for e in self.parser.getElementsByTag(self.top_node, tag='br'):

@@ -375,8 +375,11 @@ class Article(object):
             self.text = text
 
     def set_article_html(self, article_html):
+        """
+        Sets the html of just our article body, the "top node".
+        """
         if article_html:
-            self.article_html = article_html
+            self.article_html = encodeValue(article_html)
 
     def set_top_img(self, src_url):
         """
