@@ -38,7 +38,7 @@ class Feed(object):
     def __init__(self, url):
         self.url = encodeValue(url)
         self.rss = None
-        # TODO self.dom = None ;; speed up Feedparser
+        # TODO self.dom = None, speed up Feedparser
 
 
 class Source(object):
@@ -107,35 +107,21 @@ class Source(object):
 
         self.generate_articles()
 
-    def purge_articles(self, reason, in_articles=None):
+    def purge_articles(self, reason, articles):
         """
         Delete rejected articles, if there is an articles param, we
         purge from there, otherwise purge from our source instance.
+
+        Reference this excellent StackOverflow post for some of the wonky
+        syntax below:
+        http://stackoverflow.com/questions/1207406/remove-items-from-a-
+        list-while-iterating-in-python
         """
-        # TODO Figure out why using the 'del' command on input list reference
-        # isn't actually filtering the list?!
-        # cur_articles = self.articles if in_articles is None else in_articles
-        new_articles = []
-
-        for index, article in enumerate(in_articles):
-            if reason == 'url' and not article.is_valid_url():
-                #print 'deleting article', cur_articles[index].url
-                #del cur_articles[index]
-                #del in_articles[index]
-                pass
-            elif reason == 'url':
-                new_articles.append(in_articles[index])
-
-            if reason == 'body' and not article.is_valid_body():
-                #del cur_articles[index]
-                pass
-            elif reason == 'body':
-                new_articles.append(in_articles[index])
-
-        if in_articles is not None: # if they give an input, output filtered
-            return new_articles
-        #else: # no input, we are playing with self.articles
-        #    self.articles = new_articles
+        if reason == 'url':
+            articles[:] = [a for a in articles if a.is_valid_url()]
+        elif reason == 'body':
+            articles[:] = [a for a in articles if a.is_valid_body()]
+        return articles
 
     @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
@@ -270,7 +256,7 @@ class Source(object):
                     url=url,
                     source_url=self.url,
                     config=self.config
-                    # title=?  # TODO: It **must** be fast
+                    # (pre) title=? # TODO: It **must** be fast
                  )
                 cur_articles.append(article)
 
@@ -343,10 +329,7 @@ class Source(object):
         """
         articles = self._generate_articles()
         self.articles = articles[:limit]
-
-        # for a in self.articles:
-        #   print 'test examine url:', a.url
-        # log.critical('total', len(articles), 'articles and cutoff was at', limit)
+        # log.debug('total', len(articles), 'articles and cutoff was at', limit)
 
     # @print_duration
     def download_articles(self, threads=1):
@@ -387,7 +370,7 @@ class Source(object):
 
     def parse_articles(self):
         """
-        Sync parse all articles, delete if too small.
+        Parse all articles, delete if too small.
         """
         for index, article in enumerate(self.articles):
             article.parse()
