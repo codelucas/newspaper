@@ -33,14 +33,13 @@ Praise:
 -------
 
     Newspaper is an amazing Python 2 library for extracting & curating articles from the web.
-    -- `tweeted by Kenneth Reitz`_, Author of `requests`_
+    -- `tweeted by Kenneth Reitz`_, Author of `python requests`_
 
-    Do article extraction like Instapaper and Pocket with Newspaper.
-    -- `tweeted by The Changelog`_, Open Source `newsletter`_
+    Do article extraction like Instapaper and Pocket with Newspaper. -- `The Changelog`_
 
 .. _`tweeted by Kenneth Reitz`: https://twitter.com/kennethreitz/status/419520678862548992
-.. _`tweeted by The Changelog`: https://twitter.com/TheChangelog/status/424198613846474752
-.. _`newsletter`: http://thechangelog.com/
+.. _`The Changelog`: http://thechangelog.com/
+.. _ `python requests`: https://github.com/kennethreitz/requests
 
 A Glance:
 ---------
