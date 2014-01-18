@@ -133,8 +133,7 @@ class Article(object):
         downloading batch articles.
         """
         html = network.get_html(self.url, self.config)
-        self.html = encodeValue(html)
-        self.is_downloaded = True
+        self.set_html(html)
 
     def parse(self):
         """
@@ -374,6 +373,15 @@ class Article(object):
         if text:
             self.text = text
 
+    def set_html(self, html):
+        """
+        This method is quite important because many other objects
+        besides this one will be modifying and setting the html.
+        """
+        self.is_downloaded = True
+        if html:
+           self.html = encodeValue(html)
+
     def set_article_html(self, article_html):
         """
         Sets the html of just our article body, the "top node".
@@ -464,3 +472,4 @@ class Article(object):
         """
         movie_urls = [o.src for o in movie_objects if o and o.src]
         self.movies = movie_urls
+

@@ -134,21 +134,6 @@ class Parser(object):
             print str(e)
             log.critical(e)
             return u''
-    @classmethod
-    def get_description(cls, doc):
-        """
-        Returns meta description.
-        """
-        try:
-            _list = doc.xpath('//meta[@name="description"]')
-            if len(_list) > 0:
-                content_list = _list[0].xpath('@content')
-                if len(content_list) > 0:
-                    return content_list[0]
-        except Exception, e:
-            print str(e)
-            log.critical(e)
-            return u''
 
     @classmethod
     def css_select(cls, node, selector):

@@ -152,7 +152,6 @@ class Source(object):
         query the desc html attribute.
         """
         desc = self.extractor.get_meta_description(self)
-        # desc = self.parser.get_description(self.doc)
         self.description = encodeValue(desc)
 
     def download(self):
@@ -161,7 +160,6 @@ class Source(object):
         """
         self.html = network.get_html(self.url, config=self.config)
 
-    # @print_duration
     def download_categories(self):
         """
         Download all category html, can use mthreading.
@@ -169,8 +167,6 @@ class Source(object):
         category_urls = [c.url for c in self.categories]
         requests = network.multithread_request(category_urls, self.config)
 
-        # the weird for loop is like this because the del keyword auto adjusts
-        # the list index after deletion only if the list being iterated contains elem deleted
         for index, _ in enumerate(self.categories):
             req = requests[index]
             if req.resp is not None:
@@ -178,9 +174,8 @@ class Source(object):
             else:
                 if self.config.verbose:
                     print 'deleting category', self.categories[index].url, 'due to download err'
-                del self.categories[index] # TODO
+        self.categories = [c for c in self.categories if c.html]
 
-    # @print_duration
     def download_feeds(self):
         """
         Download all feed html, can use mthreading.
@@ -188,8 +183,6 @@ class Source(object):
         feed_urls = [f.url for f in self.feeds]
         requests = network.multithread_request(feed_urls, self.config)
 
-        # the weird for loop is like this because the del keyword auto adjusts
-        # the list index after deletion only if the list being iterated contains elem deleted
         for index, _ in enumerate(self.feeds):
             req = requests[index]
             if req.resp is not None:
@@ -197,7 +190,7 @@ class Source(object):
             else:
                 if self.config.verbose:
                     print 'deleting feed', self.categories[index].url, 'due to download err'
-                del self.feeds[index] # TODO
+        self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
         """
@@ -224,9 +217,9 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
-    # TODO Use this method after we figure out how to make it fast
     def parse_feeds(self):
         """
+        **THIS METHOD IS CURRENTLY RETIRED**
         Due to the slow speed of feedparser, we won't be dom parsing
         our .rss feeds, but rather regex searching for urls in the .rss
         text and then relying on our article logic to detect false urls.
@@ -256,7 +249,7 @@ class Source(object):
                     url=url,
                     source_url=self.url,
                     config=self.config
-                    # (pre) title=? # TODO: It **must** be fast
+                    # (pre) title=? # TODO Fast title regexing?
                  )
                 cur_articles.append(article)
 
@@ -329,9 +322,8 @@ class Source(object):
         """
         articles = self._generate_articles()
         self.articles = articles[:limit]
-        # log.debug('total', len(articles), 'articles and cutoff was at', limit)
+        log.debug(len(articles), 'articles generated and cutoff at', limit)
 
-    # @print_duration
     def download_articles(self, threads=1):
         """
         Downloads all articles attached to self.
@@ -344,11 +336,10 @@ class Source(object):
             for index, article in enumerate(self.articles):
                 url = urls[index]
                 html = network.get_html(url, config=self.config)
-                if html:
-                    self.articles[index].html = html
-                else:
+                self.articles[index].set_html(html)
+                if not html:
                     failed_articles.append(self.articles[index])
-                    del self.articles[index] # TODO iffy using del here
+            self.articles = [a for a in self.articles if a.html]
         else:
             print ('Alert! We recommend you not multithread individual sources as '
                   'you will probably get rate limited. Instead, use newspapers custom '
@@ -356,11 +347,11 @@ class Source(object):
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
-                if req.resp is not None:
-                    self.articles[index].html = network.get_html(req.url, response=req.resp)
-                else:
+                html = network.get_html(req.url, response=req.resp)
+                self.articles[index].set_html(html)
+                if not req.resp:
                     failed_articles.append(self.articles[index])
-                    del self.articles[index] # TODO iffy using del here
+            self.articles = [a for a in self.articles if a.html]
 
         self.is_downloaded = True
         if len(failed_articles) > 0:
@@ -449,3 +440,4 @@ class Source(object):
         print 'feed_urls:', self.feed_urls()
         print '\r\n'
         print 'category_urls:', self.category_urls()
+
