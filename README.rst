@@ -33,11 +33,11 @@ Praise:
 -------
 
     Newspaper is an amazing python library for extracting & curating articles.
-    -- `Kenneth Reitz`_, Author of `requests`_
+    -- `tweeted by`_ Kenneth Reitz, Author of `requests`_
 
     Newspaper delivers Instapaper style article extraction. -- `The Changelog`_
 
-.. _`Kenneth Reitz`: https://twitter.com/kennethreitz/status/419520678862548992
+.. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/
 
 A Glance:

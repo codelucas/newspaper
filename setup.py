@@ -61,7 +61,7 @@ except:
 
 setup(
     name='newspaper',
-    version='0.0.5',
+    version='0.0.6',
     description='Simplified python article discovery & extraction.',
     # long_description=readme+'\r\n'+history,
     author='Lucas Ou-Yang',
