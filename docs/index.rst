@@ -27,6 +27,16 @@ Release v0.0.5. :ref:`(Installation) <install>`.
       sv              Swedish
       zh              Chinese
 
+Praise:
+-------
+
+    Newspaper is an amazing python library for extracting & curating articles.
+    -- `tweeted by`_ Kenneth Reitz, Author of `requests`_
+
+    Newspaper delivers Instapaper style article extraction. -- `The ChangeLog`_
+
+.. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
+.. _`The ChangeLog`: http://thechangelog.com/
 
 A Glance:
 ---------
@@ -178,7 +188,7 @@ User Guide
 
 .. _`lxml`: http://lxml.de/
 .. _`nltk`: http://nltk.org/
-.. _`requests`: http://docs.python-requests.org/en/latest/
+.. _`requests`: https://github.com/kennethreitz/requests
 .. _`goose`: https://github.com/grangier/python-goose
 
 

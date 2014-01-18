@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-
 """
 Wherever smart people work, doors are unlocked. -- Steve Wozniak
 """
-
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
