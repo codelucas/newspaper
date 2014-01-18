@@ -341,9 +341,8 @@ class Source(object):
                     failed_articles.append(self.articles[index])
             self.articles = [a for a in self.articles if a.html]
         else:
-            print ('Alert! We recommend you not multithread individual sources as '
-                  'you will probably get rate limited. Instead, use newspapers custom '
-                  'multithread framework')
+            if threads > 5:
+                print 'Using 5+ threads on a single source may get you rate limited!'
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
