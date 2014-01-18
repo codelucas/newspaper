@@ -29,6 +29,18 @@ Newspaper: Article scraping & curation
       sv              Swedish
       zh              Chinese
 
+Praise:
+-------
+
+    Newspaper is an amazing Python 2 library for extracting & curating articles from the web.
+    -- `tweeted by Kenneth Reitz`_, Author of `requests`_
+
+    Do article extraction like Instapaper and Pocket with Newspaper.
+    -- `tweeted by The Changelog`_, Open Source `newsletter`_
+
+.. _`tweeted by Kenneth Reitz`: https://twitter.com/kennethreitz/status/419520678862548992
+.. _`tweeted by The Changelog`: https://twitter.com/TheChangelog/status/424198613846474752
+.. _`newsletter`: http://thechangelog.com/
 
 A Glance:
 ---------
