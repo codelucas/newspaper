@@ -7,10 +7,10 @@ Newspaper: Article scraping & curation
 
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
-    Newspaper is an amazing python library for extracting & curating articles.
+    "Newspaper is an amazing python library for extracting & curating articles."
     -- `tweeted by`_ Kenneth Reitz, Author of `requests`_
 
-    Newspaper delivers Instapaper style article extraction. -- `The ChangeLog`_
+    "Newspaper delivers Instapaper style article extraction." -- `The ChangeLog`_
 
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The ChangeLog`: http://thechangelog.com/
