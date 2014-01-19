@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+Holds the code for cleaning out unwanted tags from the lxml
+dom xpath.
 """
 from .utils import ReplaceSequence
 

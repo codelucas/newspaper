@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 """
+Byte string <---> unicode conversions take place
+here, pretty much anything encoding related
 """
 import types
 import datetime

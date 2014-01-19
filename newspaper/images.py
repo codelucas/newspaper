@@ -1,4 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+The following image extraction implementation was taken from an old
+copy of Reddit's source code.
+"""
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 import urllib

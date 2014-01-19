@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 """
+All code involving requests and responses over the http network
+must be abstracted in this file.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import logging
 import requests
 
 from .settings import cj
 from .configuration import Configuration
 from .mthreading import ThreadPool
-# from .packages import grequests
 
 log = logging.getLogger(__name__)
 

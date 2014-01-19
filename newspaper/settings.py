@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 """
+Unlike configuration.py, this file is meant for static, entire project
+encompassing settings, like memoization and caching file directories.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import logging
 import os
 

@@ -1,6 +1,13 @@
 # -*- coding: utf-8 -*-
 """
+Holds misc. utility methods which prove to be
+useful throughout this library.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import time
 import hashlib
 import re

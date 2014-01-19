@@ -1,6 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Stopword extraction and stopword classes.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import os
 import re
 import string

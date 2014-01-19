@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 """
-Config settings for both Source and Article objects.
-Pass these in (optionally) via the constructors. Or
-else a default Configuration() object will be used.
+This class holds configuration objects, which can be thought of
+as settings.py but dynamic and changing for whatever parent object
+holds them. For example, pass in a config object to an Article
+object, Source object, or even network methods, and it just works.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 

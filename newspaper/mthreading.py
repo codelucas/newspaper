@@ -4,6 +4,11 @@ Anything that has to do with threading in this library
 must be abstracted in this file. If we decide to do gevent
 also, it will deserve its own gevent file.
 """
+__title__ = 'newspaper'
+__author__ = 'Lucas Ou-Yang'
+__license__ = 'MIT'
+__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+
 import Queue
 from threading import Thread
 
