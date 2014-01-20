@@ -128,7 +128,7 @@ If you are certain that an *entire* news source is in one language, **go ahead a
 .. code-block:: pycon
 
     >>> import newspaper
-    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', langauge='zh')
+    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', language='zh')
 
     >>> for category in sina_paper.category_urls():
     >>>     print category
