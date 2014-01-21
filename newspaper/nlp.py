@@ -51,7 +51,7 @@ def score(sentences, titleWords, keywords):
     for i, s in enumerate(sentences):
         sentence = split_words(s)
         titleFeature = title_score(titleWords, sentence)
-        sentenceLength = length_score(sentence)
+        sentenceLength = length_score(len(sentence))
         sentencePosition = sentence_position(i+1, senSize)
         sbsFeature = sbs(sentence, keywords)
         dbsFeature = dbs(sentence, keywords)
@@ -147,10 +147,10 @@ def split_sentences(text):
     sentences = [x.replace('\n','') for x in sentences if len(x)>10]
     return sentences
 
-def length_score(sentence):
+def length_score(sentence_len):
     """
     """
-    return 1- math.fabs(ideal - len(sentence)) / ideal
+    return 1- math.fabs(ideal - sentence_len) / ideal
 
 def title_score(title, sentence):
     """
