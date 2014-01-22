@@ -168,9 +168,9 @@ def sentence_position(i, size):
     probability of being an important sentence.
     """
     normalized =  i*1.0 / size
-    if (normalized > 1.0) #just in case
+    if (normalized > 1.0): #just in case
         return 0
-    else if (normalized > 0.9):
+    elif (normalized > 0.9):
         return 0.15
     elif (normalized > 0.8):
         return 0.04
