@@ -51,7 +51,7 @@ def score(sentences, titleWords, keywords):
     for i, s in enumerate(sentences):
         sentence = split_words(s)
         titleFeature = title_score(titleWords, sentence)
-        sentenceLength = length_score(sentence)
+        sentenceLength = length_score(len(sentence))
         sentencePosition = sentence_position(i+1, senSize)
         sbsFeature = sbs(sentence, keywords)
         dbsFeature = dbs(sentence, keywords)
@@ -147,10 +147,10 @@ def split_sentences(text):
     sentences = [x.replace('\n','') for x in sentences if len(x)>10]
     return sentences
 
-def length_score(sentence):
+def length_score(sentence_len):
     """
     """
-    return 1- math.fabs(ideal - len(sentence)) / ideal
+    return 1- math.fabs(ideal - sentence_len) / ideal
 
 def title_score(title, sentence):
     """
@@ -168,26 +168,28 @@ def sentence_position(i, size):
     probability of being an important sentence.
     """
     normalized =  i*1.0 / size
-    if (normalized > 0 and normalized <= 0.1):
-        return 0.17
-    elif normalized > 0.1 and normalized <= 0.2:
-        return 0.23
-    elif (normalized > 0.2 and normalized <= 0.3):
-        return 0.14
-    elif (normalized > 0.3 and normalized <= 0.4):
-        return 0.08
-    elif (normalized > 0.4 and normalized <= 0.5):
-        return 0.05
-    elif (normalized > 0.5 and normalized <= 0.6):
-        return 0.04
-    elif (normalized > 0.6 and normalized <= 0.7):
-        return 0.06
-    elif (normalized > 0.7 and normalized <= 0.8):
-        return 0.04
-    elif (normalized > 0.8 and normalized <= 0.9):
-        return 0.04
-    elif (normalized > 0.9 and normalized <= 1.0):
+    if (normalized > 1.0) #just in case
+        return 0
+    else if (normalized > 0.9):
         return 0.15
+    elif (normalized > 0.8):
+        return 0.04
+    elif (normalized > 0.7):
+        return 0.04
+    elif (normalized > 0.6):
+        return 0.06
+    elif (normalized > 0.5):
+        return 0.04
+    elif (normalized > 0.4):
+        return 0.05
+    elif (normalized > 0.3):
+        return 0.08
+    elif (normalized > 0.2):
+        return 0.14
+    elif (normalized > 0.1):
+        return 0.23
+    elif (normalized > 0):
+        return 0.17
     else:
         return 0
 
