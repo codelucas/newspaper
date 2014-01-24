@@ -163,7 +163,7 @@ class Parser(object):
         article_cleaner = Cleaner()
         article_cleaner.javascript = True
         article_cleaner.style = True
-        article_cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b', 'em']
+        article_cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b']
         article_cleaner.remove_unknown_tags = False
         return article_cleaner.clean_html(node)
 
