@@ -33,7 +33,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
       it              Italian
       ko              Korean
       no              Norwegian
-      pt              Portugease
+      pt              Portuguese
       sv              Swedish
       zh              Chinese
 

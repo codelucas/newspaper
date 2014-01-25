@@ -255,7 +255,7 @@ of popular news source urls.. In case you need help choosing a news source!
       it              Italian
       ko              Korean
       no              Norwegian
-      pt              Portugease
+      pt              Portuguese
       sv              Swedish
       zh              Chinese
 
