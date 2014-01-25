@@ -364,7 +364,7 @@ def print_available_languages():
         'it':   'Italian',
         'ko':   'Korean',
         'no':   'Norwegian',
-        'pt':   'Portugease',
+        'pt':   'Portuguese',
         'sv':   'Swedish',
         'zh':   'Chinese'
     }
