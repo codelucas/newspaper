@@ -212,7 +212,6 @@ class Article(object):
                     self.set_imgs(top_imgs)
 
         if self.config.fetch_images:
-            self.set_reddit_top_img(test_run=True)
             self.set_reddit_top_img()
 
         self.is_parsed = True
