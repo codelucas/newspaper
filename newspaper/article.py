@@ -207,10 +207,12 @@ class Article(object):
                 img_url = self.extractor.get_top_img_url(self)
                 self.set_top_img(img_url)
 
-                top_imgs = self.extractor.get_img_urls(self)
-                self.set_imgs(top_imgs)
+                if self.config.fetch_images:
+                    top_imgs = self.extractor.get_img_urls(self)
+                    self.set_imgs(top_imgs)
 
         if self.config.fetch_images:
+            self.set_reddit_top_img(test_run=True)
             self.set_reddit_top_img()
 
         self.is_parsed = True
@@ -344,11 +346,17 @@ class Article(object):
                 pass
         # os.remove(path)
 
-    def set_reddit_top_img(self):
+    def set_reddit_top_img(self, test_run=False):
         """
         Wrapper for setting images, queries known image attributes
         first, uses Reddit's img algorithm as a fallback.
         """
+
+        if test_run:
+            s = images.Scraper(self)
+            img = s.largest_image_url()
+            print 'it worked, the img is', img
+
         if self.top_img != u'': # if we already have a top img...
             return
         try:
