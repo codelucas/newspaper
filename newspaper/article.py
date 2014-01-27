@@ -101,6 +101,9 @@ class Article(object):
         # meta favicon field in HTML source
         self.meta_favicon = u""
 
+        # Meta tags contain a lot of structured data like OpenGraph
+        self.meta_data = {}
+
         # The canonical link of this article if found in the meta data
         self.canonical_link = u""
 
@@ -179,6 +182,9 @@ class Article(object):
 
         meta_keywords = self.extractor.get_meta_keywords(self)
         self.set_meta_keywords(meta_keywords)
+
+        meta_data = self.extractor.get_meta_data(self)
+        self.set_meta_data(meta_data)
 
         # TODO self.publish_date = self.config.publishDateExtractor.extract(self.doc)
 
@@ -455,6 +461,9 @@ class Article(object):
         """
         """
         self.meta_description = meta_description
+
+    def set_meta_data(self, meta_data):
+        self.meta_data = meta_data
 
     def set_canonical_link(self, canonical_link):
         """
