@@ -268,6 +268,8 @@ def clear_memo_cache(source):
 def encodeValue(value):
     """
     """
+    if value is None:
+        return u''
     string_org = value
     try:
         value = smart_unicode(value)
