@@ -124,6 +124,10 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                                 'installation this machine: %s' % str(e))
                         p = None
                         break
+                    except  ValueError, ve:
+                        log.debug('cant read image format: %s' % url)
+                        p = None
+                        break
                     new_data = open_req.read(chunk_size)
                     content += new_data
 
@@ -189,7 +193,7 @@ class Scraper:
                 continue
 
             # ignore excessively long/wide images
-            if max(size) / min(size) > 1.5:
+            if max(size) / min(size) > self.config.image_dimension_ration:
                 log.debug('ignore dims %s' % img_url)
                 continue
 
