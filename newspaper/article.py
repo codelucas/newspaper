@@ -110,6 +110,9 @@ class Article(object):
         # Holds the top Element we think is a candidate for the main body
         self.top_node = None
 
+        # Holds clean version of top Element
+        self.clean_top_node = None
+
         # the lxml doc object
         self.doc = None
 
@@ -198,24 +201,35 @@ class Article(object):
             self.set_movies(video_extractor.get_videos())
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
+            self.clean_top_node = copy.deepcopy(self.top_node)
+           
             text, article_html = output_formatter.get_formatted(self)
             self.set_article_html(article_html)
             self.set_text(text)
 
-        if self.raw_doc is not None:
-            if self.config.fetch_images:
-                img_url = self.extractor.get_top_img_url(self)
-                self.set_top_img(img_url)
-
-                if self.config.fetch_images:
-                    top_imgs = self.extractor.get_img_urls(self)
-                    self.set_imgs(top_imgs)
-
         if self.config.fetch_images:
-            self.set_reddit_top_img()
+            self.fetch_images()
 
         self.is_parsed = True
         self.release_resources()
+    
+    def fetch_images(self):
+        if self.raw_doc is not None:
+            img_url = self.extractor.get_top_img_url(self)
+            self.set_top_img(img_url)
+
+            top_imgs = self.extractor.get_img_urls(self)
+            self.set_imgs(top_imgs)
+        
+        if self.clean_top_node is not None and not self.has_top_image():
+            first_img = self.extractor.get_first_img_url(self.clean_top_node)
+            self.set_top_img(first_img)
+
+        if not self.has_top_image():
+            self.set_reddit_top_img()
+
+    def has_top_image(self):
+        return self.top_img is not None and self.top_img != u''
 
     def is_valid_url(self):
         """
@@ -350,14 +364,11 @@ class Article(object):
         Wrapper for setting images, queries known image attributes
         first, uses Reddit's img algorithm as a fallback.
         """
-
         if test_run:
             s = images.Scraper(self)
             img = s.largest_image_url()
             print 'it worked, the img is', img
 
-        if self.top_img != u'': # if we already have a top img...
-            return
         try:
             s = images.Scraper(self)
             self.set_top_img(s.largest_image_url())

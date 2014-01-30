@@ -359,6 +359,12 @@ class ContentExtractor(object):
         img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
         return img_links
 
+    def get_first_img_url(self, node):
+        node_images = self.parser.get_img_urls(node)
+        if node_images:
+            return node_images[0]
+        return u''
+
     def get_top_img_url(self, article):
         """
         """
