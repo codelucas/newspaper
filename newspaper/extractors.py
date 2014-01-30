@@ -351,8 +351,7 @@ class ContentExtractor(object):
         """
         doc = article.raw_doc
         urls = self.parser.get_img_urls(doc)
-        img_links = [ urlparse.urljoin(article.url, url) for url in urls ]
-
+        img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
         return img_links
 
     def get_top_img_url(self, article):
