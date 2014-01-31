@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 """
+Newspaper uses a lot of python-goose's extraction code. View their
+license here: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
+Keep all html page extraction code within this file. PLEASE abstract any
+lxml or soup parsing mechanisms in the parsers.py file!
 """
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'

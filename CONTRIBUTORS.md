@@ -4,9 +4,12 @@ Lucas Ou-Yang -- lucasyangpersonal@gmail.com
 
 Thanks to the following contributors:
 -------------------------------------
-- Michael Hood - https://github.com/michaelhood
-- Juliano Fischer - https://github.com/julianofischer
 - Alex Kessinger - https://github.com/voidfiles
+- Oleg Temnov - https://github.com/otemnov
+- Matthew Ward - https://github.com/WheresWardy
+- Juliano Fischer - https://github.com/julianofischer
+- Sandeep Singh - https://github.com/techaddict
+- Michael Hood - https://github.com/michaelhood
 
 Newspaper relied on some code of a few other open source projects:
 ------------------------------------------------------------------
