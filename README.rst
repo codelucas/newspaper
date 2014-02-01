@@ -216,7 +216,9 @@ If you are using ubuntu and are still running into gcc compile errors when insta
 Related Projects
 ----------------
 
-- [ruby-readability](https://github.com/cantino/ruby-readability) is a port of arc90's readability project to Ruby.
+- `ruby-readability`_ is a port of arc90's readability project to Ruby.
+
+.. _`ruby-readability`: https://github.com/cantino/ruby-readability 
 
 Todo List
 ---------
