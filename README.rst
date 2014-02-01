@@ -213,6 +213,11 @@ is not needed unless you need the natural language, ``nlp()``, features like key
 If you are using ubuntu and are still running into gcc compile errors when installing lxml, try installing
 ``libxslt1-dev`` instead of ``libxslt-dev``.
 
+Related Projects
+----------------
+
+- [ruby-readability](https://github.com/cantino/ruby-readability) is a port of arc90's readability project to Ruby.
+
 Todo List
 ---------
 
