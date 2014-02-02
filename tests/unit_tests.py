@@ -365,7 +365,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def runTest(self):
         self.test_chinese_fulltext_extract()
         self.test_arabic_fulltext_extract()
-        self.test_spanish_fulltext_extract()
+        #self.test_spanish_fulltext_extract()
 
     @print_test
     def test_chinese_fulltext_extract(self):

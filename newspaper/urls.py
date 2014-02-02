@@ -21,6 +21,11 @@ log = logging.getLogger(__name__)
 
 MAX_FILE_MEMO = 20000
 
+DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
+
+ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
+                'xhtml', 'jhtml', 'asp']
+
 GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
               'v', 'radio', 'press']
@@ -121,10 +126,7 @@ def valid_url(url, verbose=False, test=False):
     We also filter out articles with a subdomain or first degree path
     on a registered bad keyword.
     """
-    DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
-    ALLOWED_TYPES = ['html', 'htm', 'md', 'rst'] # TODO add more!
-
-    # if we are testing this method in the testing suite, we actually
+    # If we are testing this method in the testing suite, we actually
     # need to preprocess the url like we do in the article's constructor!
     if test:
         url = prepare_url(url)
@@ -221,6 +223,11 @@ def valid_url(url, verbose=False, test=False):
     if match_date is not None:
         if verbose: print '%s verified for date' % url
         return True
+
+    for GOOD in GOOD_PATHS:
+        if GOOD.lower() in [p.lower() for p in path_chunks]:
+            if verbose: print '%s verified for good path' % url
+            return True
 
     if verbose: print '%s caught for default false' % url
     return False
