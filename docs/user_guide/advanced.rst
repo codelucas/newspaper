@@ -35,6 +35,47 @@ speed up the download time while being respectful.
     >>> print slate_paper.articles[10].html
     u'<html> ...'
 
+Keeping Html of main body article
+---------------------------------
+
+Keeping the html of just an article's body text is helpbut because it allows you 
+to retain some of the semantic information in the html. Also it will help if you 
+end up displaying the extracted article somehow.
+
+Here is how to do so:
+
+.. code-block:: pycon
+
+    >>> from newspaper import Article
+
+    >>> a = Article('http://www.cnn.com/2014/01/12/world/asia/north-korea-charles-smith/index.html'
+        , keep_article_html=True)
+
+    >>> a.download()
+    >>> a.parse()
+
+    >>> a.article_html
+    u'<div> \n<p><strong>(CNN)</strong> -- Charles Smith insisted Sunda...'
+
+Adding new languages
+--------------------
+
+Newspaper is an ever-growing and adding support for new languages is quite easy, 
+especially if it is a Latin-based language.
+
+To add support for a latin language, first find a `stopwords`_ file for it. Place the
+file in `newspaper/resources/text/stopwords-<COUNTRY_CODE_GOES_HERE>`. Refer to 
+`this article`_ for a guide on country codes.
+
+Then, send a pull request and wait for the author to merge and add ur langauge 
+into the api.
+
+For non-latin languages, usually there are added complexities, so I will update
+this portion of the docs in the future.
+
+.. _`this article`: http://www.iso.org/iso/country_names_and_code_elements
+.. _`stopwords`: http://en.wikipedia.org/wiki/Stop_words
+
 Explicitly building a news source
 ---------------------------------
 
@@ -115,35 +156,41 @@ Here are some examples of how Config objects are passed.
 
 Here is a full list of the configuration options:
 
-``MIN_WORD_COUNT``  default 300     "num of word tokens in article text"
+``keep_article_html``, default False, "set to True if you want to preserve html of body text"
 
-``MIN_SENT_COUNT``  default 7       "num of sentence tokens"
+``MIN_WORD_COUNT``, default 300, "num of word tokens in article text"
 
-``MAX_TITLE``       default 200     "num of chars in article title"
+``MIN_SENT_COUNT``, default 7, "num of sentence tokens"
 
-``MAX_TEXT``        default 100000  "num of chars in article text"
+``MAX_TITLE``, default 200, "num of chars in article title"
 
-``MAX_KEYWORDS``    default 35      "num of keywords in article"
+``MAX_TEXT``, default 100000, "num of chars in article text"
 
-``MAX_AUTHORS``     default 10      "num of author names in article"
+``MAX_KEYWORDS``, default 35, "num of keywords in article"
 
-``MAX_SUMMARY``     default 5000    "num of chars of the summary"
+``MAX_AUTHORS``, default 10, "num of author names in article"
 
-``MAX_FILE_MEMO`` default 20000 "python setup.py sdist bdist_wininst upload"
+``MAX_SUMMARY``, default 5000, "num of chars of the summary"
 
-``parser_class`` default 'lxml' "lxml vs soup"
+``MAX_FILE_MEMO``, default 20000, "python setup.py sdist bdist_wininst upload"
 
-``memoize_articles`` default True "cache and save articles run after run"
+``parser_class``, default 'lxml', "lxml vs soup"
 
-``fetch_images`` default True "set this to false if you don't care about getting images"
+``memoize_articles``, default True, "cache and save articles run after run"
 
-``language`` default 'en' "run ``newspaper.languages()`` to see available options."
+``fetch_images``, default True, "set this to false if you don't care about getting images"
 
-``browser_user_agent`` default 'newspaper/%s' % __version__
-``request_timeout`` default 7
-``number_threads`` default 10 "number of threads when mthreading"
+``image_dimension_ration``, default 16/9.0, "max ratio for height/width, we ignore if greater"
 
-``verbose`` default False "turn this on when debugging"
+``language``, default 'en', "run ``newspaper.languages()`` to see available options."
+
+``browser_user_agent``, default 'newspaper/%s' % __version__
+
+``request_timeout``, default 7
+
+``number_threads``, default 10, "number of threads when mthreading"
+
+``verbose``, default False, "turn this on when debugging"
 
 You may notice other config options in the ``newspaper/configuration.py`` file,
 however, they are private, **please do not toggle them**.

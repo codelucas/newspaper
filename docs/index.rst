@@ -8,10 +8,10 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
     "Newspaper is an amazing python library for extracting & curating articles."
     -- `tweeted by`_ Kenneth Reitz, Author of `requests`_
 
-    "Newspaper delivers Instapaper style article extraction." -- `The ChangeLog`_
+    "Newspaper delivers Instapaper style article extraction." -- `The Changelog`_
 
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
-.. _`The ChangeLog`: http://thechangelog.com/
+.. _`The Changelog`: http://thechangelog.com/
 
 **We support 10+ languages and everything is in unicode!**
 
@@ -126,7 +126,7 @@ If you are certain that an *entire* news source is in one language, **go ahead a
 .. code-block:: pycon
 
     >>> import newspaper
-    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', langauge='zh')
+    >>> sina_paper = newspaper.build('http://www.sina.com.cn/', language='zh')
 
     >>> for category in sina_paper.category_urls():
     >>>     print category
