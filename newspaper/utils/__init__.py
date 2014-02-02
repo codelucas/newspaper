@@ -359,6 +359,8 @@ def print_available_languages():
     """
     language_dict = {
         'ar':   'Arabic',
+        'ru':   'Russian',
+        'nl':   'Dutch',
         'de':   'German',
         'en':   'English',
         'es':   'Spanish',
@@ -368,6 +370,9 @@ def print_available_languages():
         'no':   'Norwegian',
         'pt':   'Portuguese',
         'sv':   'Swedish',
+        'hu':   'Hungarian',
+        'fi':   'Finnish',
+        'da':   'Danish',
         'zh':   'Chinese'
     }
 
