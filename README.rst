@@ -218,7 +218,7 @@ Related Projects
 
 - `ruby-readability`_ is a port of arc90's readability project to Ruby.
 - `python-goose`_ is a port of Gravity's goose project to Python.
-- `java-boilerpipe` is an article extraction library in Java.
+- `java-boilerpipe`_ is an article extraction library in Java.
 
 .. _`python-goose`: https://github.com/grangier/python-goose
 .. _`ruby-readability`: https://github.com/cantino/ruby-readability 
