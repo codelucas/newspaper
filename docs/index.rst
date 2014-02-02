@@ -24,6 +24,8 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
     input code      full name
 
       ar              Arabic
+      ru              Russian
+      nl              Dutch
       de              German
       en              English
       es              Spanish
@@ -33,6 +35,9 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
       no              Norwegian
       pt              Portuguese
       sv              Swedish
+      hu              Hungarian
+      fi              Finnish
+      da              Danish
       zh              Chinese
 
 A Glance:
