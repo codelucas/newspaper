@@ -61,6 +61,9 @@ class Article(object):
         # the url of the "best image" to represent this article, via reddit algorithm
         self.top_img = self.top_image = u''
 
+        # stores image provided by metadata
+        self.meta_img = u''
+
         self.imgs = self.images = [] # all image urls
         self.movies = [] # youtube, vimeo, etc
 
@@ -215,11 +218,11 @@ class Article(object):
     
     def fetch_images(self):
         if self.raw_doc is not None:
-            img_url = self.extractor.get_top_img_url(self)
-            self.set_top_img(img_url)
+            meta_img_url = self.extractor.get_meta_img_url(self)
+            self.set_meta_img(meta_img_url)
 
-            top_imgs = self.extractor.get_img_urls(self)
-            self.set_imgs(top_imgs)
+            imgs = self.extractor.get_img_urls(self)
+            self.set_imgs(imgs)
         
         if self.clean_top_node is not None and not self.has_top_image():
             first_img = self.extractor.get_first_img_url(self.clean_top_node)
@@ -414,6 +417,10 @@ class Article(object):
         """
         if article_html:
             self.article_html = encodeValue(article_html)
+    
+    def set_meta_img(self, src_url):
+        self.meta_img = encodeValue(src_url)
+        self.set_top_img(src_url)
 
     def set_top_img(self, src_url):
         if src_url is not None:

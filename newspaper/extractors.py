@@ -357,6 +357,8 @@ class ContentExtractor(object):
         doc = article.raw_doc
         urls = self.parser.get_img_urls(doc)
         img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
+        if article.meta_img:
+            img_links.add(article.meta_img)
         return img_links
 
     def get_first_img_url(self, node):
@@ -365,12 +367,12 @@ class ContentExtractor(object):
             return node_images[0]
         return u''
 
-    def get_top_img_url(self, article):
+    def get_meta_img_url(self, article):
         """
         """
         # !important, we must use raw_doc because at this point doc has been cleaned
         doc = article.raw_doc
-        return self.parser.get_top_img_url(doc)
+        return self.parser.get_meta_img_url(doc)
 
     def get_category_urls(self, source, source_url=None, page_urls=None):
         """
