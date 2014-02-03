@@ -59,9 +59,9 @@ class Article(object):
         self.title = encodeValue(title)
 
         # the url of the "best image" to represent this article, via reddit algorithm
-        self.top_img = u''
+        self.top_img = self.top_image = u''
 
-        self.imgs = [] # all image urls
+        self.imgs = self.images = [] # all image urls
         self.movies = [] # youtube, vimeo, etc
 
         # pure text from the article
