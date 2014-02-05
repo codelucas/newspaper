@@ -71,9 +71,14 @@ class StopWords(object):
     def remove_punctuation(self, content):
         # code taken form
         # http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
-        if isinstance(content, unicode):
+        content_is_unicode = isinstance(content, unicode)
+        if content_is_unicode:
             content = content.encode('utf-8')
-        return content.translate(self.TRANS_TABLE, string.punctuation)
+        stripped_input = content.translate(self.TRANS_TABLE, string.punctuation)
+
+        if content_is_unicode:
+            return stripped_input.decode('utf-8')
+        return stripped_input
 
     def candidate_words(self, stripped_input):
         return stripped_input.split(' ')
