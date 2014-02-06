@@ -1,6 +1,6 @@
 lxml
 requests
-nltk
+-e git+git@github.com:nltk/nltk.git#egg=nltk-develop
 Pillow
 cssselect
-BeautifulSoup
+beautifulsoup4
