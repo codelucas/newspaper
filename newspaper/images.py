@@ -21,6 +21,7 @@ log = logging.getLogger(__name__)
 
 chunk_size = 1024
 thumbnail_size = 90, 90
+minimal_area = 5000
 
 def image_to_str(image):
     s = StringIO.StringIO()
@@ -153,7 +154,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
             if 'open_req' in locals():
                 open_req.close()
 
-def fetch_size(url, useragent, referer=None, retries=1):
+def fetch_image_dimension(url, useragent, referer=None, retries=1):
     return fetch_url(url, useragent, referer, retries, dimension=True)
 
 class Scraper:
@@ -166,9 +167,9 @@ class Scraper:
         self.useragent = self.config.browser_user_agent
 
     def largest_image_url(self):
+        #todo: remove. it is not responsibility of Scrapper
         if not self.imgs and not self.top_img:
             return None
-
         if self.top_img:
             return self.top_img
 
@@ -176,31 +177,8 @@ class Scraper:
         max_url = None
 
         for img_url in self.imgs:
-            size = fetch_size(img_url, self.useragent, referer=self.url)
-            if not size:
-                continue
-
-            area = size[0] * size[1]
-
-            # ignore little images
-            if area < 5000:
-                log.debug('ignore little %s' % img_url)
-                continue
-
-            # PIL won't scale up, so we set a min width and
-            # maintain the aspect ratio
-            if size[0] < thumbnail_size[0]:
-                continue
-
-            # ignore excessively long/wide images
-            if max(size) / min(size) > self.config.image_dimension_ration:
-                log.debug('ignore dims %s' % img_url)
-                continue
-
-            # penalize images with "sprite" in their name
-            if 'sprite' in img_url.lower():
-                log.debug('penalizing sprite %s' % img_url)
-                area /= 10
+            dimension = fetch_image_dimension(img_url, self.useragent, referer=self.url)
+            area = self.calculate_area(img_url, dimension)
 
             if area > max_area:
                 max_area = area
@@ -208,6 +186,41 @@ class Scraper:
 
         log.debug('using max img ' + max_url)
         return max_url
+    
+    def calculate_area(self, img_url, dimension):
+        if not dimension:
+            return 0
+
+        area = dimension[0] * dimension[1]
+
+        #todo: introduce filter classes for each case
+        # ignore little images
+        if area < minimal_area:
+            log.debug('ignore little %s' % img_url)
+            return 0
+
+        # PIL won't scale up, so we set a min width and
+        # maintain the aspect ratio
+        if dimension[0] < thumbnail_size[0]:
+            return 0
+
+        # ignore excessively long/wide images
+        if max(dimension) / min(dimension) > self.config.image_dimension_ration:
+            log.debug('ignore dims %s' % img_url)
+            return 0
+
+        # penalize images with "sprite" in their name
+        lower_case_url = img_url.lower()
+        if 'sprite' in lower_case_url or 'logo' in lower_case_url:
+            log.debug('penalizing sprite %s' % img_url)
+            area /= 10
+
+        return area
+
+    def satisfies_requirements(self, img_url):
+        dimension = fetch_image_dimension(img_url, self.useragent, referer=self.url)
+        area = self.calculate_area(img_url, dimension)
+        return area > minimal_area
 
     def thumbnail(self):
         """

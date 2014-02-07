@@ -74,7 +74,7 @@ class Parser(object):
         return cls.root_to_urls(doc, titles)
 
     @classmethod
-    def get_top_img_url(cls, doc):
+    def get_meta_img_url(cls, doc):
         """
         Takes an lxml doc and returns the top img url
         running as method == 'soup' assumes lxml's soupparser.
