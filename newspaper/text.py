@@ -57,7 +57,7 @@ class WordStats(object):
 class StopWords(object):
 
     PUNCTUATION = re.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
-    TRANS_TABLE = string.maketrans('', '')
+    TRANS_TABLE = str.maketrans('', '')
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
@@ -107,7 +107,7 @@ class StopWordsChinese(StopWords):
     def candidate_words(self, stripped_input):
         # jieba builds a tree that takes a while. avoid building
         # this tree if we don't use the chinese language
-        from .packages import jieba
+        import jieba
         return jieba.cut(stripped_input, cut_all=True)
 
 

@@ -7,7 +7,10 @@ import re
 import logging
 
 import lxml.html
-from lxml.html import soupparser
+try:
+    from lxml.html import soupparser
+except ImportError:
+    import bs4 as soupparser
 from lxml.html.clean import Cleaner
 from lxml import etree
 

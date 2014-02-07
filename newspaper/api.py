@@ -6,7 +6,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from .packages.feedparser import feedparser
+import feedparser
 from .source import Source
 from .article import Article
 from .settings import POPULAR_URLS, TRENDING_URL

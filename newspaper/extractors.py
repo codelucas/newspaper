@@ -16,7 +16,7 @@ import copy
 import urllib.parse
 from collections import defaultdict
 
-from .packages.tldextract import tldextract
+import tldextract
 from .utils import (
     StringSplitter, StringReplacement, ReplaceSequence)
 from .urls import (

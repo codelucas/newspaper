@@ -14,7 +14,7 @@ import re
 from urllib.parse import (
     urlparse, urljoin, urlsplit, urlunsplit, parse_qs)
 
-from .packages.tldextract import tldextract
+import tldextract
 
 log = logging.getLogger(__name__)
 

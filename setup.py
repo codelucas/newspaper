@@ -15,26 +15,7 @@ except ImportError:
 packages = [
     'newspaper',
     'newspaper.data',
-    'newspaper.packages',
-    'newspaper.packages.tldextract',
-    # 'newspaper.packages.tldextract.tests',
-    'newspaper.packages.feedparser',
-    # 'newspaper.packages.feedparser.tests'
-    #'newspaper.packages.goose',
-    #'newspaper.packages.goose.utils',
-    #'newspaper.packages.goose.videos',
-    #'newspaper.packages.goose.images',
-    'newspaper.packages.jieba',
-    'newspaper.packages.jieba.posseg',
-    'newspaper.packages.jieba.finalseg',
-    'newspaper.packages.jieba.analyse'
 ]
-
-# The following libs are bundled in
-# ---------------------------------
-# 'feedparser'
-# 'tldextract==1.2.2'
-# 'jieba'
 
 requires = [
     'lxml',         # 3.2.4 tested

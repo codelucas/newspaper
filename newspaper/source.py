@@ -13,8 +13,8 @@ import logging
 from . import network
 from .article import Article
 from .settings import ANCHOR_DIRECTORY
-from .packages.tldextract import tldextract
-from .packages.feedparser import feedparser
+import tldextract
+import feedparser
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
 from .urls import (
