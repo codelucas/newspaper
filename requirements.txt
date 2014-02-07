@@ -1,6 +1,10 @@
 lxml
 requests
--e git+git@github.com:nltk/nltk.git#egg=nltk-develop
 Pillow
 cssselect
 beautifulsoup4
+feedparser
+tldextract
+feedfinder2
+-e git+https://github.com/fxsjy/jieba.git@jieba3k#egg=jieba
+-e git+https://www.github.com/nltk/nltk@develop#egg=nltk

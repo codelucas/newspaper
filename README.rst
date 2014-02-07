@@ -218,6 +218,14 @@ is not needed unless you need the natural language, ``nlp()``, features like key
 If you are using ubuntu and are still running into gcc compile errors when installing lxml, try installing
 ``libxslt1-dev`` instead of ``libxslt-dev``.
 
+**Python 3**
+
+::
+
+    $ sudo apt-get install python3-dev
+    $ pip install newspaper
+    $ curl https://raw.github.com/kermit666/newspaper/py3k/download_corpora.py | python3
+
 Related Projects
 ----------------
 
