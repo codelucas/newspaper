@@ -10,6 +10,8 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import os
 import re
 import string
+import unicodedata
+import sys
 
 from .utils import FileHelper
 
@@ -56,8 +58,11 @@ class WordStats(object):
 
 class StopWords(object):
 
-    PUNCTUATION = re.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
-    TRANS_TABLE = str.maketrans('', '')
+    #PUNCTUATION = re.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
+    #TRANS_TABLE = str.maketrans('', '')
+    TRANS_TABLE = dict.fromkeys(i for i in range(sys.maxunicode)
+                        if unicodedata.category(chr(i)).startswith('P'))
+
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
@@ -71,9 +76,8 @@ class StopWords(object):
     def remove_punctuation(self, content):
         # code taken form
         # http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
-        if isinstance(content, str):
-            content = content.encode('utf-8')
-        return content.translate(self.TRANS_TABLE, string.punctuation)
+        # http://stackoverflow.com/questions/11066400/remove-punctation-from-unicode-formatted-strings/11066687#11066687
+        return content.translate(self.TRANS_TABLE)
 
     def candidate_words(self, stripped_input):
         return stripped_input.split(' ')

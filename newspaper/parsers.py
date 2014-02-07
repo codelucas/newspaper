@@ -62,6 +62,7 @@ class Parser(object):
             return []
 
         # If we are extracting from raw text
+        #TODO: _input.decode('<encoding>') - based on what's written in the xml
         if regex:
             _input = re.sub('<[^<]+?>', ' ', _input)
             _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
@@ -69,7 +70,7 @@ class Parser(object):
             return _input or []
 
         # If the input is html, parse it into a root
-        if isinstance(_input, str) or isinstance(_input, str):
+        if isinstance(_input, str) or isinstance(_input, bytes):
             doc = cls.fromstring(_input)
         else:
             doc = _input
@@ -350,7 +351,7 @@ class Parser(object):
         if e0.tail:
             e0 = deepcopy(e0)
             e0.tail = None
-        return cls.nodeToString(e0)
+        return cls.nodeToString(e0).decode()
 
 
 class ParserSoup(Parser):

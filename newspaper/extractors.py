@@ -710,7 +710,7 @@ class ContentExtractor(object):
         current_score = 0
         score_string = self.parser.getAttribute(node, 'gravityScore')
         if score_string:
-            current_score = int(score_string)
+            current_score = float(score_string)
 
         new_score = current_score + addToScore
         self.parser.setAttribute(node, "gravityScore", str(new_score))
@@ -765,7 +765,7 @@ class ContentExtractor(object):
         grvScoreString = self.parser.getAttribute(node, 'gravityScore')
         if not grvScoreString:
             return None
-        return int(grvScoreString)
+        return float(grvScoreString)
 
     def nodes_to_check(self, doc):
         """

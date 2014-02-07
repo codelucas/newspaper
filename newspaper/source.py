@@ -240,7 +240,8 @@ class Source(object):
         """
         articles = []
         for feed in self.feeds:
-            urls = self.parser.get_urls(feed.rss, regex=True)
+            # can't use regex until XML correctly decoded
+            urls = self.parser.get_urls(feed.rss)#, regex=True)
             cur_articles = []
             before_purge = len(urls)
 
@@ -322,7 +323,8 @@ class Source(object):
         """
         articles = self._generate_articles()
         self.articles = articles[:limit]
-        log.debug(len(articles), 'articles generated and cutoff at', limit)
+        log.debug('{} articles generated and cutoff at {}'
+                  .format(len(articles), limit))
 
     def download_articles(self, threads=1):
         """

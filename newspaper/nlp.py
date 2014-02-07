@@ -24,11 +24,11 @@ def summarize(url='', title='', text=''):
     if (text == '' or title == ''):
         return []
 
-    if isinstance(title, str):
-        title = title.encode('utf-8', 'ignore')
+    #if isinstance(title, str):
+    #    title = title.encode('utf-8', 'ignore')
 
-    if isinstance(text, str):
-        text = text.encode('utf-8', 'ignore')
+    #if isinstance(text, str):
+    #    text = text.encode('utf-8', 'ignore')
 
     summaries = []
     sentences = split_sentences(text)
