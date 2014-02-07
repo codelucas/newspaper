@@ -45,9 +45,9 @@ requires = [
     'BeautifulSoup'
 ]
 
-readme = u''
-history = u''
-_license = u''
+readme = ''
+history = ''
+_license = ''
 
 try:
     with open('README.rst') as f:
@@ -57,7 +57,7 @@ try:
     with open('HISTORY.md') as f:
         history = f.read()
 except:
-    print ''
+    print('')
 
 setup(
     name='newspaper',

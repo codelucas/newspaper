@@ -13,7 +13,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import re
 import copy
-import urlparse
+import urllib.parse
 from collections import defaultdict
 
 from .packages.tldextract import tldextract
@@ -24,8 +24,8 @@ from .urls import (
 
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
-ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(u"#!", u"?_escaped_fragment_=")
-TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
+ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement("#!", "?_escaped_fragment_=")
+TITLE_REPLACEMENTS = ReplaceSequence().create("&raquo;").append("»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
 ARROWS_SPLITTER = StringSplitter("»")
@@ -134,7 +134,7 @@ class ContentExtractor(object):
                 matches.extend(found)
 
         for match in matches:
-            content = u''
+            content = ''
 
             if match.tag == 'meta':
                 mm = match.xpath('@content')
@@ -142,7 +142,7 @@ class ContentExtractor(object):
                     content = mm[0]
 
             else: # match.tag == <any other tag>
-                content = match.text or u'' # text_content()
+                content = match.text or '' # text_content()
 
             if len(content) > 0:
                 _authors.extend(parse_byline(content))
@@ -195,7 +195,7 @@ class ContentExtractor(object):
             used_delimeter = True
 
         # split title with »
-        if not used_delimeter and u'»' in title_text:
+        if not used_delimeter and '»' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER)
             used_delimeter = True
 
@@ -326,7 +326,7 @@ class ContentExtractor(object):
                 if not ref.get(part):
                     ref[part] = dict()
                 else:
-                    if isinstance(ref.get(part), basestring):
+                    if isinstance(ref.get(part), str):
                         ref[part] = {'url': ref[part]}
                 ref = ref[part]
 
@@ -342,13 +342,13 @@ class ContentExtractor(object):
             href = self.parser.getAttribute(meta[0], 'href')
             if href:
                 href = href.strip()
-                o = urlparse.urlparse(href)
+                o = urllib.parse.urlparse(href)
                 if not o.hostname:
-                    z = urlparse.urlparse(article.url)
+                    z = urllib.parse.urlparse(article.url)
                     domain = '%s://%s' % (z.scheme, z.hostname)
-                    href = urlparse.urljoin(domain, href)
+                    href = urllib.parse.urljoin(domain, href)
                 return href
-        return u''
+        return ''
 
     def get_img_urls(self, article):
         """
@@ -356,7 +356,7 @@ class ContentExtractor(object):
         """
         doc = article.raw_doc
         urls = self.parser.get_img_urls(doc)
-        img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
+        img_links = set([ urllib.parse.urljoin(article.url, url) for url in urls ])
         return img_links
 
     def get_top_img_url(self, article):
@@ -384,15 +384,15 @@ class ContentExtractor(object):
 
             if not domain and not path:
                 if source.config.verbose:
-                    print 'elim category url %s for no domain and path' % p_url
+                    print('elim category url %s for no domain and path' % p_url)
                 continue
             if path and path.startswith('#'):
                 if source.config.verbose:
-                    print 'elim category url %s path starts with #' % p_url
+                    print('elim category url %s path starts with #' % p_url)
                 continue
             if scheme and (scheme!='http' and scheme!='https'):
                 if source.config.verbose:
-                    print 'elim category url %s for bad scheme, not http nor https' % p_url
+                    print('elim category url %s for bad scheme, not http nor https' % p_url)
                 continue
 
             if domain:
@@ -404,7 +404,7 @@ class ContentExtractor(object):
                 for part in child_subdomain_parts:
                     if part == domain_tld.domain:
                         if source.config.verbose:
-                            print 'subdomain contains at %s and %s' % (str(part), str(domain_tld.domain))
+                            print('subdomain contains at %s and %s' % (str(part), str(domain_tld.domain)))
                         subdomain_contains = True
                         break
 
@@ -412,11 +412,11 @@ class ContentExtractor(object):
                 # related to espn.com
                 if not subdomain_contains and (child_tld.domain != domain_tld.domain):
                     if source.config.verbose:
-                        print 'elim category url %s for domain mismatch' % p_url
+                        print('elim category url %s for domain mismatch' % p_url)
                         continue
                 elif child_tld.subdomain in ['m', 'i']:
                     if source.config.verbose:
-                        print 'elim category url %s for mobile subdomain' % p_url
+                        print('elim category url %s for mobile subdomain' % p_url)
                     continue
                 else:
                     valid_categories.append(scheme+'://'+domain)
@@ -433,7 +433,7 @@ class ContentExtractor(object):
                     valid_categories.append(domain+path)
                 else:
                     if source.config.verbose:
-                        print 'elim category url %s for >1 path chunks or size path chunks' % p_url
+                        print('elim category url %s for >1 path chunks or size path chunks' % p_url)
 
 
         stopwords = [
@@ -461,7 +461,7 @@ class ContentExtractor(object):
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
                     if source.config.verbose:
-                        print 'elim category url %s for subdomain contain stopword!' % p_url
+                        print('elim category url %s for subdomain contain stopword!' % p_url)
                     bad=True
                     break
             if not bad:

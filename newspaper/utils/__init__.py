@@ -58,7 +58,7 @@ class ParsingCandidate(object):
 class RawHelper(object):
     @classmethod
     def get_parsing_candidate(self, url, raw_html):
-        if isinstance(raw_html, unicode):
+        if isinstance(raw_html, str):
             raw_html = raw_html.encode('utf-8')
         link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
         return ParsingCandidate(url, link_hash)
@@ -93,7 +93,7 @@ class StringReplacement(object):
 
     def replaceAll(self, string):
         if not string:
-            return u''
+            return ''
         return string.replace(self.pattern, self.replaceWith)
 
 
@@ -103,7 +103,7 @@ class ReplaceSequence(object):
 
     #@classmethod
     def create(self, firstPattern, replaceWith=None):
-        result = StringReplacement(firstPattern, replaceWith or u'')
+        result = StringReplacement(firstPattern, replaceWith or '')
         self.replacements.append(result)
         return self
 
@@ -112,7 +112,7 @@ class ReplaceSequence(object):
 
     def replaceAll(self, string):
         if not string:
-            return u''
+            return ''
 
         mutatedString = string
 
@@ -151,7 +151,7 @@ def timelimit(timeout):
             if c.isAlive():
                 raise TimeoutError()
             if c.error:
-                raise c.error[0], c.error[1]
+                raise c.error[0](c.error[1])
             return c.result
         return _2
     return _1
@@ -232,7 +232,7 @@ def print_duration(method):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-        print '%r %2.2f sec' % (method.__name__, te-ts)
+        print('%r %2.2f sec' % (method.__name__, te-ts))
         return result
 
     return timed
@@ -242,7 +242,7 @@ def chunks(l, n):
     Yield n successive chunks from l.
     """
     newn = int(len(l) / n)
-    for i in xrange(0, n-1):
+    for i in range(0, n-1):
         yield l[i*newn:i*newn+newn]
     yield l[n*newn-newn:]
 
@@ -263,13 +263,13 @@ def clear_memo_cache(source):
     if os.path.exists(d_pth):
         os.remove(d_pth)
     else:
-        print 'memo file for', source.domain, 'has already been deleted!'
+        print('memo file for', source.domain, 'has already been deleted!')
 
 def encodeValue(value):
     """
     """
     if value is None:
-        return u''
+        return ''
     string_org = value
     try:
         value = smart_unicode(value)
@@ -306,18 +306,18 @@ def memoize_articles(source, articles):
 
         memo = { url:True for url in urls }
         # prev_length = len(memo)
-        for url, article in cur_articles.items():
+        for url, article in list(cur_articles.items()):
             if memo.get(url):
                 del cur_articles[url]
 
-        valid_urls = memo.keys() + cur_articles.keys()
+        valid_urls = list(memo.keys()) + list(cur_articles.keys())
 
-        memo_text = u'\r\n'.join(
+        memo_text = '\r\n'.join(
             [encodeValue(href.strip()) for href in (valid_urls)])
     # Our first run with memoization, save every url as valid
     else:
-        memo_text = u'\r\n'.join(
-            [encodeValue(href.strip()) for href in cur_articles.keys()])
+        memo_text = '\r\n'.join(
+            [encodeValue(href.strip()) for href in list(cur_articles.keys())])
 
     # new_length = len(cur_articles)
 
@@ -331,7 +331,7 @@ def memoize_articles(source, articles):
     ff.write(memo_text)
     ff.close()
     # print '***** final article urls', cur_articles.keys()[:10]
-    return cur_articles.values() # articles returned
+    return list(cur_articles.values()) # articles returned
 
 def get_useragent():
     """
@@ -377,11 +377,11 @@ def print_available_languages():
     }
 
     codes = get_available_languages()
-    print '\nYour available langauges are:'
-    print '\ninput code\t\tfull name'
+    print('\nYour available langauges are:')
+    print('\ninput code\t\tfull name')
     for code in codes:
-        print '  %s\t\t\t  %s' % (code, language_dict[code])
-    print
+        print('  %s\t\t\t  %s' % (code, language_dict[code]))
+    print()
 
 def extend_config(config, config_items):
     """
@@ -389,7 +389,7 @@ def extend_config(config, config_items):
     Users just need to pass in a named param to this source and we can
     dynamically generate a config object for it.
     """
-    for key, val in config_items.items():
+    for key, val in list(config_items.items()):
         if hasattr(config, key):
             setattr(config, key, val)
 

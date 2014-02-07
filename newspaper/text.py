@@ -16,7 +16,7 @@ from .utils import FileHelper
 TABSSPACE = re.compile(r'[\s\t]+')
 
 def innerTrim(value):
-    if isinstance(value, (unicode, str)):
+    if isinstance(value, str):
         # remove tab and white space
         value = re.sub(TABSSPACE, ' ', value)
         value = ''.join(value.splitlines())
@@ -71,7 +71,7 @@ class StopWords(object):
     def remove_punctuation(self, content):
         # code taken form
         # http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
-        if isinstance(content, unicode):
+        if isinstance(content, str):
             content = content.encode('utf-8')
         return content.translate(self.TRANS_TABLE, string.punctuation)
 

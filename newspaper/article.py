@@ -33,7 +33,7 @@ class ArticleException(Exception):
 class Article(object):
     """
     """
-    def __init__(self, url, title=u'', source_url=u'', config=None, **kwargs):
+    def __init__(self, url, title='', source_url='', config=None, **kwargs):
         """
         The **kwargs arguement can be filled with config values which we then
         push in.
@@ -44,7 +44,7 @@ class Article(object):
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)
 
-        if source_url == u'':
+        if source_url == '':
             source_url = get_scheme(url) + '://' + get_domain(url)
 
         if source_url is None or source_url == '':
@@ -59,13 +59,13 @@ class Article(object):
         self.title = encodeValue(title)
 
         # the url of the "best image" to represent this article, via reddit algorithm
-        self.top_img = u''
+        self.top_img = ''
 
         self.imgs = [] # all image urls
         self.movies = [] # youtube, vimeo, etc
 
         # pure text from the article
-        self.text = u''
+        self.text = ''
 
         # keywords extracted via nlp() from the body text
         # meta_keywords are via parse() from <meta> tags
@@ -77,35 +77,35 @@ class Article(object):
         # list of authors who have published the article, via parse()
         self.authors = []
 
-        self.published_date = u'' # TODO
+        self.published_date = '' # TODO
 
         # summary generated from the article's body txt
-        self.summary = u''
+        self.summary = ''
 
         # the article's unchanged and raw html
-        self.html = u''
+        self.html = ''
 
         # The html of the main article node
-        self.article_html = u''
+        self.article_html = ''
 
         # flags warning users in-case they forget to download() or parse()
         self.is_parsed = False
         self.is_downloaded = False
 
         # meta description field in HTML source
-        self.meta_description = u""
+        self.meta_description = ""
 
         # meta lang field in HTML source
-        self.meta_lang = u""
+        self.meta_lang = ""
 
         # meta favicon field in HTML source
-        self.meta_favicon = u""
+        self.meta_favicon = ""
 
         # Meta tags contain a lot of structured data like OpenGraph
         self.meta_data = {}
 
         # The canonical link of this article if found in the meta data
-        self.canonical_link = u""
+        self.canonical_link = ""
 
         # Holds the top Element we think is a candidate for the main body
         self.top_node = None
@@ -142,14 +142,14 @@ class Article(object):
         """
         """
         if not self.is_downloaded:
-            print 'You must download() an article before parsing it!'
+            print('You must download() an article before parsing it!')
             raise ArticleException()
 
         self.doc = self.parser.fromstring(self.html)
         self.raw_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
-            print '[Article parse ERR] %s' % self.url
+            print('[Article parse ERR] %s' % self.url)
             return
 
         # TODO: Fix this, sync in our fix_url() method
@@ -191,7 +191,7 @@ class Article(object):
         # before we do any computations on the body itself, we must clean up the document
         self.doc = document_cleaner.clean(self)
 
-        text = u''
+        text = ''
         self.top_node = self.extractor.calculate_best_node(self)
         if self.top_node is not None:
             video_extractor = self.get_video_extractor(self)
@@ -256,7 +256,7 @@ class Article(object):
             log.debug('%s caught for sent cnt' % self.url)
             return False
 
-        if self.html is None or self.html == u'':
+        if self.html is None or self.html == '':
             log.debug('%s caught for no html' % self.url)
             return False
 
@@ -279,11 +279,11 @@ class Article(object):
         Keyword extraction wrapper.
         """
         if not self.is_downloaded or not self.is_parsed:
-            print 'You must download and parse an article before parsing it!'
+            print('You must download and parse an article before parsing it!')
             raise ArticleException()
 
-        text_keyws = nlp.keywords(self.text).keys()
-        title_keyws = nlp.keywords(self.title).keys()
+        text_keyws = list(nlp.keywords(self.text).keys())
+        title_keyws = list(nlp.keywords(self.title).keys())
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
 
@@ -354,14 +354,14 @@ class Article(object):
         if test_run:
             s = images.Scraper(self)
             img = s.largest_image_url()
-            print 'it worked, the img is', img
+            print('it worked, the img is', img)
 
-        if self.top_img != u'': # if we already have a top img...
+        if self.top_img != '': # if we already have a top img...
             return
         try:
             s = images.Scraper(self)
             self.set_top_img(s.largest_image_url())
-        except Exception, e:
+        except Exception as e:
             log.critical('jpeg error with PIL, %s' % e)
 
     def set_title(self, title):

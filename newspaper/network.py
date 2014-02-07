@@ -56,13 +56,13 @@ def get_html(url, config=None, response=None):
         else:
             html = response.content # not unicode, fix later
         if html is None:
-            html = u''
+            html = ''
         return html
 
-    except Exception, e:
+    except Exception as e:
         # print '[REQUEST FAILED]', str(e)
         log.debug('%s on %s' % (e, url))
-        return u''
+        return ''
 
 class MRequest(object):
     """
@@ -82,7 +82,7 @@ class MRequest(object):
         try:
             self.resp = requests.get(self.url, **get_request_kwargs(
                                     self.timeout, self.useragent))
-        except Exception, e:
+        except Exception as e:
             pass
             log.critical('[REQUEST FAILED] ' + str(e))
             # TODO, do something with url when we fail!

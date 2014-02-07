@@ -9,13 +9,14 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-import urllib
-import StringIO
+import urllib.request, urllib.parse, urllib.error
+import io
 import math
 
 from PIL import Image, ImageFile
-from urllib2 import Request, HTTPError, URLError, build_opener
-from httplib import InvalidURL
+from urllib.request import Request, build_opener
+from urllib.error import HTTPError, URLError
+from http.client import InvalidURL
 
 log = logging.getLogger(__name__)
 
@@ -23,13 +24,13 @@ chunk_size = 1024
 thumbnail_size = 90, 90
 
 def image_to_str(image):
-    s = StringIO.StringIO()
+    s = io.StringIO()
     image.save(s, image.format)
     s.seek(0)
     return s.read()
 
 def str_to_image(s):
-    s = StringIO.StringIO(s)
+    s = io.StringIO(s)
     s.seek(0)
     image = Image.open(s)
     return image
@@ -76,7 +77,7 @@ def clean_url(url):
     Url quotes unicode data out of urls.
     """
     url = url.encode('utf8')
-    url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
+    url = ''.join([urllib.parse.quote(c) if ord(c) >= 127 else c for c in url])
     return url
 
 def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
@@ -117,14 +118,14 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                 while not p.image and new_data:
                     try:
                         p.feed(new_data)
-                    except IOError, e:
+                    except IOError as e:
                         # pil failed to install, jpeg codec broken
                         # **should work if you install via pillow
-                        print ('***jpeg misconfiguration! check pillow or pil'
-                                'installation this machine: %s' % str(e))
+                        print(('***jpeg misconfiguration! check pillow or pil'
+                                'installation this machine: %s' % str(e)))
                         p = None
                         break
-                    except  ValueError, ve:
+                    except  ValueError as ve:
                         log.debug('cant read image format: %s' % url)
                         p = None
                         break
@@ -144,7 +145,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
             return content_type, content
 
-        except (URLError, HTTPError, InvalidURL), e:
+        except (URLError, HTTPError, InvalidURL) as e:
             cur_try += 1
             if cur_try >= retries:
                 log.debug('error while fetching: %s refer: %s' % (url, referer))
@@ -220,7 +221,7 @@ class Scraper:
                 image = str_to_image(image_str)
                 try:
                     image = prepare_image(image)
-                except IOError, e:
+                except IOError as e:
                     if 'interlaced' in e.message:
                         return None
                     # raise

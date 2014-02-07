@@ -8,12 +8,12 @@ Single thread:          86.0 secs for 100 requests
 """
 import sys
 import logging
-import Queue
+import queue
 import os
 
 from threading import activeCount
 from threading import Thread
-from cookielib import CookieJar as cj
+from http.cookiejar import CookieJar as cj
 from unit_tests import read_urls
 
 try:  # Python 2.7+
@@ -39,7 +39,7 @@ def naive_run(urls):
     resps = []
     for url in urls:
         resps.append(sync_request(url))
-    print resps
+    print(resps)
 
 @print_duration
 def mthread_run(urls):

@@ -32,10 +32,10 @@ def print_test(method):
     time taken for test and functions name, and status"""
     def run(*args, **kw):
         ts = time.time()
-        print '\ttesting function %r' % method.__name__
+        print('\ttesting function %r' % method.__name__)
         method(*args, **kw)
         te = time.time()
-        print '\t[OK] in %r %2.2f sec' % (method.__name__, te-ts)
+        print('\t[OK] in %r %2.2f sec' % (method.__name__, te-ts))
     return run
 
 def read_urls(base_fn=URLS_FN, amount=100):
@@ -48,7 +48,7 @@ def read_urls(base_fn=URLS_FN, amount=100):
 
 class ArticleTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing article unit'
+        print('testing article unit')
         self.test_url()
         self.test_download_html()
         self.test_pre_download_parse()
@@ -68,7 +68,7 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_url(self):
-        assert self.article.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+        assert self.article.url == 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
 
     @print_test
     def test_download_html(self):
@@ -100,7 +100,7 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.top_img == TOP_IMG
         assert self.article.authors == AUTHORS
         assert self.article.title == TITLE
-        print 'we now have ', len(self.article.imgs), 'images'
+        print('we now have ', len(self.article.imgs), 'images')
         assert len(self.article.imgs) == LEN_IMGS
 
     @print_test
@@ -119,8 +119,8 @@ class ArticleTestCase(unittest.TestCase):
     def test_nlp_body(self):
         SUMMARY = """Wish the forecasters were wrong all the time :)"Though the worst of the storm has passed, winds could still pose a problem.\r\nForecasters see mostly smooth sailing into Thanksgiving.\r\nThe forecast has left up in the air the fate of the balloons in Macy's Thanksgiving Day Parade.\r\nThe storm caused some complications and inconveniences, but no major delays or breakdowns.\r\n"That's good news for people like Latasha Abney, who joined the more than 43 million Americans expected by AAA to travel over the Thanksgiving holiday weekend."""
 
-        KEYWORDS = [u'great', u'good', u'flight', u'sailing', u'delays', u'smooth', u'thanksgiving',
-                    u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
+        KEYWORDS = ['great', 'good', 'flight', 'sailing', 'delays', 'smooth', 'thanksgiving',
+                    'snow', 'weather', 'york', 'storm', 'winds', 'balloons', 'forecasters']
 
         self.article.nlp()
         # print self.article.summary
@@ -130,7 +130,7 @@ class ArticleTestCase(unittest.TestCase):
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing source unit'
+        print('testing source unit')
         self.source_url_input_none()
         self.test_cache_categories()
         self.test_source_build()
@@ -165,9 +165,9 @@ class SourceTestCase(unittest.TestCase):
         # Insead, i'm just going to print some stuff out so it is just as easy to take
         # a glance and see if it looks OK.
 
-        print '\t\tWe have %d articles currently!' % s.size()
-        print
-        print '\t\t%s categories are: %s' % (s.url, str(s.category_urls()))
+        print('\t\tWe have %d articles currently!' % s.size())
+        print()
+        print('\t\t%s categories are: %s' % (s.url, str(s.category_urls())))
 
         # We are printing the contents of a source instead of
         # assert checking because the results are always varying
@@ -190,7 +190,7 @@ class SourceTestCase(unittest.TestCase):
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing url unit'
+        print('testing url unit')
         self.test_valid_urls()
 
     @print_test
@@ -213,8 +213,8 @@ class UrlTestCase(unittest.TestCase):
             truth_val = True if lst == 1 else False
             try:
                 assert truth_val == valid_url(url, test=True)
-            except AssertionError, e:
-                print '\t\turl: %s is supposed to be %s' % (url, truth_val)
+            except AssertionError as e:
+                print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
     @print_test
@@ -227,7 +227,7 @@ class UrlTestCase(unittest.TestCase):
 
 class APITestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing API unit'
+        print('testing API unit')
         # self.test_source_build()
         self.test_article_build()
         self.test_hot_trending()
@@ -266,7 +266,7 @@ class APITestCase(unittest.TestCase):
 
 class EncodingTestCase(unittest.TestCase):
     def runTest(self):
-        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
+        self.uni_string = "∆ˆˆø∆ßåßlucas yang˜"
         self.normal_string = "∆ƒˆƒ´´lucas yang"
         self.test_encode_val()
         self.test_smart_unicode()
@@ -275,12 +275,12 @@ class EncodingTestCase(unittest.TestCase):
     @print_test
     def test_encode_val(self):
         assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        assert encodeValue(self.normal_string) == '∆ƒˆƒ´´lucas yang'
 
     @print_test
     def test_smart_unicode(self):
         assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        assert smart_unicode(self.normal_string) == '∆ƒˆƒ´´lucas yang'
 
     @print_test
     def test_smart_str(self):
@@ -302,17 +302,17 @@ class MThreadingTestCase(unittest.TestCase):
         tc_paper = newspaper.build('http://techcrunch.com', config)
         espn_paper = newspaper.build('http://espn.com', config)
 
-        print 'slate has %d articles tc has %d articles espn has %d articles' \
-                % (slate_paper.size(), tc_paper.size(), espn_paper.size())
+        print('slate has %d articles tc has %d articles espn has %d articles' \
+                % (slate_paper.size(), tc_paper.size(), espn_paper.size()))
 
         papers = [slate_paper, tc_paper, espn_paper]
         news_pool.set(papers, threads_per_source=2)
 
         news_pool.join()
 
-        print 'Downloaded slate mthread len', len(slate_paper.articles[0].html)
-        print 'Downloaded espn mthread len', len(espn_paper.articles[-1].html)
-        print 'Downloaded tc mthread len', len(tc_paper.articles[1].html)
+        print('Downloaded slate mthread len', len(slate_paper.articles[0].html))
+        print('Downloaded espn mthread len', len(espn_paper.articles[-1].html))
+        print('Downloaded tc mthread len', len(tc_paper.articles[1].html))
 
 
 class ConfigBuildTestCase(unittest.TestCase):

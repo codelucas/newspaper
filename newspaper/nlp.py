@@ -24,10 +24,10 @@ def summarize(url='', title='', text=''):
     if (text == '' or title == ''):
         return []
 
-    if isinstance(title, unicode):
+    if isinstance(title, str):
         title = title.encode('utf-8', 'ignore')
 
-    if isinstance(text, unicode):
+    if isinstance(text, str):
         text = text.encode('utf-8', 'ignore')
 
     summaries = []
@@ -131,7 +131,7 @@ def keywords(text):
         articleScore = keywords[k]*1.0 / max(num_words, 1)
         keywords[k] = articleScore * 1.5 + 1
 
-    keywords = sorted(keywords.iteritems(), key=operator.itemgetter(1))
+    keywords = sorted(iter(keywords.items()), key=operator.itemgetter(1))
     keywords.reverse()
     return dict(keywords)
 

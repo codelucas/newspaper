@@ -13,7 +13,7 @@ import os
 
 from .version import __version__
 
-from cookielib import CookieJar as cj
+from http.cookiejar import CookieJar as cj
 
 log = logging.getLogger(__name__)
 

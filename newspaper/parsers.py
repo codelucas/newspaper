@@ -66,7 +66,7 @@ class Parser(object):
             return _input or []
 
         # If the input is html, parse it into a root
-        if isinstance(_input, str) or isinstance(_input, unicode):
+        if isinstance(_input, str) or isinstance(_input, str):
             doc = cls.fromstring(_input)
         else:
             doc = _input
@@ -104,8 +104,8 @@ class Parser(object):
         """
         try:
             img_links = doc.xpath('//img/@src')
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print(str(e))
             log.critical(e)
             return []
 
@@ -118,8 +118,8 @@ class Parser(object):
         """
         try:
             return doc.xpath('//*[@type="application/rss+xml"]/@href')
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print(str(e))
             log.critical(e)
             return []
 
@@ -130,10 +130,10 @@ class Parser(object):
         """
         try:
             return doc.xpath('/html/head/meta[@property="og:type"][1]/@content')[0]
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print(str(e))
             log.critical(e)
-            return u''
+            return ''
 
     @classmethod
     def css_select(cls, node, selector):
@@ -144,8 +144,8 @@ class Parser(object):
         html = encodeValue(html)
         try:
             cls.doc = lxml.html.fromstring(html)
-        except Exception, e:
-            print '[Parse lxml ERR]', str(e)
+        except Exception as e:
+            print('[Parse lxml ERR]', str(e))
             return None
 
         return cls.doc
@@ -277,11 +277,11 @@ class Parser(object):
                 if prev is None:
                     if not parent.text:
                         parent.text = ''
-                    parent.text += u' ' + node.tail
+                    parent.text += ' ' + node.tail
                 else:
                     if not prev.tail:
                         prev.tail = ''
-                    prev.tail += u' ' + node.tail
+                    prev.tail += ' ' + node.tail
             node.clear()
             parent.remove(node)
 
@@ -292,7 +292,7 @@ class Parser(object):
     @classmethod
     def getText(cls, node):
         txts = [i for i in node.itertext()]
-        return innerTrim(u' '.join(txts).strip())
+        return innerTrim(' '.join(txts).strip())
 
     @classmethod
     def previousSiblings(cls, node):
