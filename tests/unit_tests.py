@@ -68,13 +68,13 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_url(self):
-        assert self.article.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+        self.assertEqual(self.article.url, u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
 
     @print_test
     def test_download_html(self):
         self.article.download()
         # can't compare html because it changes on every page as time goes on
-        assert len(self.article.html) > 5000
+        self.assertGreater(len(self.article.html), 5000)
 
     @print_test
     def test_pre_download_parse(self):
@@ -96,12 +96,12 @@ class ArticleTestCase(unittest.TestCase):
 
         self.article.parse()
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
-            assert self.article.text == f.read()
-        assert self.article.top_img == TOP_IMG
-        assert self.article.authors == AUTHORS
-        assert self.article.title == TITLE
+            self.assertEqual(self.article.text, f.read())
+        self.assertEqual(self.article.top_img, TOP_IMG)
+        self.assertEqual(self.article.authors, AUTHORS)
+        self.assertEqual(self.article.title, TITLE)
         print 'we now have ', len(self.article.imgs), 'images'
-        assert len(self.article.imgs) == LEN_IMGS
+        self.assertEqual(len(self.article.imgs), LEN_IMGS)
 
     @print_test
     def test_pre_parse_nlp(self):
@@ -125,8 +125,8 @@ class ArticleTestCase(unittest.TestCase):
         self.article.nlp()
         # print self.article.summary
         # print self.article.keywords
-        assert self.article.summary == SUMMARY
-        assert self.article.keywords == KEYWORDS
+        self.assertEqual(self.article.summary, SUMMARY)
+        self.assertEqual(self.article.keywords, KEYWORDS)
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
@@ -156,8 +156,8 @@ class SourceTestCase(unittest.TestCase):
         s.clean_memo_cache()
         s.build()
 
-        assert s.brand == BRAND
-        assert s.description == DESC
+        self.assertEqual(s.brand, BRAND)
+        self.assertEqual(s.description, DESC)
 
         # For this test case and a few more, I don't believe you can actually
         # assert two values to equal eachother because some values are ever changing.
@@ -186,7 +186,7 @@ class SourceTestCase(unittest.TestCase):
         saved_urls = s.category_urls()
         s.categories = [] # reset and try again with caching
         s.set_categories()
-        assert sorted(s.category_urls()) == sorted(saved_urls)
+        self.assertEqual(sorted(s.category_urls()), sorted(saved_urls))
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
@@ -209,10 +209,10 @@ class UrlTestCase(unittest.TestCase):
         for tup in test_tuples:
             lst = int(tup[0])
             url = tup[1]
-            assert len(tup) == 2
+            self.assertEqual(len(tup), 2)
             truth_val = True if lst == 1 else False
             try:
-                assert truth_val == valid_url(url, test=True)
+                self.assertEqual(truth_val, valid_url(url, test=True))
             except AssertionError, e:
                 print '\t\turl: %s is supposed to be %s' % (url, truth_val)
                 raise
@@ -236,13 +236,13 @@ class APITestCase(unittest.TestCase):
     @print_test
     def test_source_build(self):
         huff_paper = newspaper.build('http://www.huffingtonpost.com/', dry=True)
-        assert isinstance(huff_paper, Source) == True
+        self.assertIsInstance(huff_paper, Source)
 
     @print_test
     def test_article_build(self):
         url = 'http://abcnews.go.com/blogs/politics/2013/12/states-cite-surge-in-obamacare-sign-ups-ahead-of-first-deadline/'
         article = newspaper.build_article(url)
-        assert isinstance(article, Article) == True
+        self.assertIsInstance(article, Article)
         article.download()
         article.parse()
         article.nlp()
@@ -274,18 +274,18 @@ class EncodingTestCase(unittest.TestCase):
 
     @print_test
     def test_encode_val(self):
-        assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        self.assertEqual(encodeValue(self.uni_string), self.uni_string)
+        self.assertEqual(encodeValue(self.normal_string), u'∆ƒˆƒ´´lucas yang')
 
     @print_test
     def test_smart_unicode(self):
-        assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        self.assertEqual(smart_unicode(self.uni_string), self.uni_string)
+        self.assertEqual(smart_unicode(self.normal_string), u'∆ƒˆƒ´´lucas yang')
 
     @print_test
     def test_smart_str(self):
-        assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
-        assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
+        self.assertEqual(smart_str(self.uni_string), "∆ˆˆø∆ßåßlucas yang˜")
+        self.assertEqual(smart_str(self.normal_string), "∆ƒˆƒ´´lucas yang")
 
 
 class MThreadingTestCase(unittest.TestCase):
@@ -325,41 +325,41 @@ class ConfigBuildTestCase(unittest.TestCase):
         Test if our **kwargs to config building setup actually works.
         """
         a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
-        assert a.config.language == 'en'
-        assert a.config.memoize_articles == True
-        assert a.config.use_meta_language == True
+        self.assertEqual(a.config.language, 'en')
+        self.assertTrue(a.config.memoize_articles)
+        self.assertTrue(a.config.use_meta_language)
 
         a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html',
                 language='zh', memoize_articles=False)
-        assert a.config.language == 'zh'
-        assert a.config.memoize_articles == False
-        assert a.config.use_meta_language == False
+        self.assertEqual(a.config.language, 'zh')
+        self.assertFalse(a.config.memoize_articles)
+        self.assertFalse(a.config.use_meta_language)
 
         s = Source(url='http://cnn.com')
-        assert s.config.language == 'en'
-        assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles == True
-        assert s.config.use_meta_language == True
+        self.assertEqual(s.config.language, 'en')
+        self.assertEqual(s.config.MAX_FILE_MEMO, 20000)
+        self.assertTrue(s.config.memoize_articles)
+        self.assertTrue(s.config.use_meta_language)
 
         s = Source(url="http://cnn.com", memoize_articles=False,
                 MAX_FILE_MEMO=10000, language='en')
-        assert s.config.memoize_articles == False
-        assert s.config.MAX_FILE_MEMO == 10000
-        assert s.config.language == 'en'
-        assert s.config.use_meta_language == False
+        self.assertFalse(s.config.memoize_articles)
+        self.assertEqual(s.config.MAX_FILE_MEMO, 10000)
+        self.assertEqual(s.config.language, 'en')
+        self.assertFalse(s.config.use_meta_language)
 
         s = newspaper.build('http://cnn.com', dry=True)
-        assert s.config.language == 'en'
-        assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles == True
-        assert s.config.use_meta_language == True
+        self.assertEqual(s.config.language, 'en')
+        self.assertEqual(s.config.MAX_FILE_MEMO, 20000)
+        self.assertTrue(s.config.memoize_articles)
+        self.assertTrue(s.config.use_meta_language)
 
         s = newspaper.build('http://cnn.com', dry=True, memoize_articles=False,
                 MAX_FILE_MEMO=10000, language='zh')
-        assert s.config.language == 'zh'
-        assert s.config.MAX_FILE_MEMO == 10000
-        assert s.config.memoize_articles == False
-        assert s.config.use_meta_language == False
+        self.assertEqual(s.config.language, 'zh')
+        self.assertEqual(s.config.MAX_FILE_MEMO, 10000)
+        self.assertFalse(s.config.memoize_articles)
+        self.assertFalse(s.config.use_meta_language)
 
 class MultiLanguageTestCase(unittest.TestCase):
     def runTest(self):
@@ -374,7 +374,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.download()
         article.parse()
         with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
-            assert article.text == f.read()
+            self.assertEqual(article.text, f.read())
 
         # with codecs.open(os.path.join(HTML_FN, 'chinese_html_1.html'), 'w', 'utf8') as f:
         #    f.write(article.html)
@@ -386,7 +386,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.download()
         article.parse()
         with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
-            assert article.text == f.read()
+            self.assertEqual(article.text, f.read())
 
         # with codecs.open(os.path.join(HTML_FN, 'arabic_html_1.html'), 'w', 'utf8') as f:
         #    f.write(article.html)
@@ -398,7 +398,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.download()
         article.parse()
         with codecs.open(os.path.join(TEXT_FN, 'spanish_text_1.txt'), 'r', 'utf8') as f:
-            assert article.text == f.read()
+            self.assertEqual(article.text, f.read())
 
         # with codecs.open(os.path.join(HTML_FN, 'spanish_html_1.html'), 'w', 'utf8') as f:
         #    f.write(article.html)
