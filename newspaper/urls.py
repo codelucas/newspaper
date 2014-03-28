@@ -158,15 +158,14 @@ def valid_url(url, verbose=False, test=False):
 
     # siphon out the file type. eg: .html, .htm, .md
     if len(path_chunks) > 0:
-
-        last_chunk = path_chunks[-1].split('.') # last chunk == file usually
-        file_type = last_chunk[-1] if len(last_chunk) >= 2 else None
+        file_type = url_to_filetype(url)
 
         # if the file type is a media type, reject instantly
         if file_type and file_type not in ALLOWED_TYPES:
             if verbose: print '\t%s rejected due to bad filetype' % url
             return False
 
+        last_chunk = path_chunks[-1].split('.')
         # the file type is not of use to use anymore, remove from url
         if len(last_chunk) > 1:
             path_chunks[-1] = last_chunk[-2]
@@ -186,7 +185,7 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print '%s caught for a bad tld' % url
         return False
 
-    if  len(path_chunks) == 0:
+    if len(path_chunks) == 0:
         dash_count, underscore_count = 0, 0
     else:
         dash_count = url_slug.count('-')
@@ -231,6 +230,22 @@ def valid_url(url, verbose=False, test=False):
 
     if verbose: print '%s caught for default false' % url
     return False
+
+def url_to_filetype(abs_url):
+    """
+    Input a URL and output the filetype of the file
+    specified by the url. Returns None for no filetype.
+    'http://blahblah/images/car.jpg' -> 'jpg'
+    'http://yahoo.com'               -> None
+    """
+    path = urlparse(abs_url).path
+    # Eliminate the trailing '/', we are extracting the file
+    if path.endswith('/'):
+        path = path[:-1]
+    path_chunks = [x for x in path.split('/') if len(x) > 0]
+    last_chunk = path_chunks[-1].split('.')  # last chunk == file usually
+    file_type = last_chunk[-1] if len(last_chunk) >= 2 else None
+    return file_type or None
 
 def get_domain(abs_url, **kwargs):
     """

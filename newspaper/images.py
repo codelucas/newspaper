@@ -17,6 +17,8 @@ from PIL import Image, ImageFile
 from urllib2 import Request, HTTPError, URLError, build_opener
 from httplib import InvalidURL
 
+from . import urls
+
 log = logging.getLogger(__name__)
 
 chunk_size = 1024
@@ -122,11 +124,25 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                         # pil failed to install, jpeg codec broken
                         # **should work if you install via pillow
                         print ('***jpeg misconfiguration! check pillow or pil'
-                                'installation this machine: %s' % str(e))
+                               'installation this machine: %s' % str(e))
                         p = None
                         break
-                    except  ValueError, ve:
+                    except ValueError, ve:
                         log.debug('cant read image format: %s' % url)
+                        p = None
+                        break
+                    except Exception, e:
+                        # For some favicon.ico images, the image is so small
+                        # that our PIL feed() method fails a length test.
+                        # We add a check below for this.
+                        is_favicon = (urls.url_to_filetype(url) == 'ico')
+                        if is_favicon:
+                            print 'we caught a favicon!: %s' % url
+                        else:
+                            # import traceback
+                            # print traceback.format_exc()
+                            print 'PIL feed() failure for image:', url, str(e)
+                            raise e
                         p = None
                         break
                     new_data = open_req.read(chunk_size)
@@ -186,7 +202,7 @@ class Scraper:
 
         log.debug('using max img ' + max_url)
         return max_url
-    
+
     def calculate_area(self, img_url, dimension):
         if not dimension:
             return 0

@@ -197,7 +197,11 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 ::
 
-    $ apt-get install libxml2-dev libxslt-dev
+    # For lxml
+    $ sudo apt-get install libxml2-dev libxslt-dev  
+
+    # For PIL to recognize .jpg
+    $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev  
 
     $ easy_install lxml  # NOT PIP
     
@@ -215,8 +219,9 @@ It is also important to note that the line
 
 is not needed unless you need the natural language, ``nlp()``, features like keywords extraction and summarization.
 
-If you are using ubuntu and are still running into gcc compile errors when installing lxml, try installing
+If you are using **ubuntu** and are still running into gcc compile errors when installing lxml, try installing
 ``libxslt1-dev`` instead of ``libxslt-dev``.
+
 
 Related Projects
 ----------------

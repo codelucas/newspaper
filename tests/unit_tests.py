@@ -92,7 +92,7 @@ class ArticleTestCase(unittest.TestCase):
         SCHEME = 'http'
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 47 # list is too big, we just check size of images arr
+        LEN_IMGS = 48 # list is too big, we just check size of images arr
 
         self.article.parse()
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
