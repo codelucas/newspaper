@@ -568,7 +568,7 @@ class ContentExtractor(object):
                 if (nodes_number - i) <= bottom_negativescore_nodes:
                     booster = float(bottom_negativescore_nodes - (nodes_number - i))
                     boost_score = float(-pow(booster, float(2)))
-                    negscore = -abs(boost_score) + negative_scoring
+                    negscore = abs(boost_score) + negative_scoring
                     if negscore > 40:
                         boost_score = float(5)
 
