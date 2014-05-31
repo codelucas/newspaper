@@ -32,7 +32,7 @@ log.setLevel(logging.DEBUG)
 class FileHelper(object):
     @classmethod
     def loadResourceFile(self, filename):
-        if not os.path.isabs('filename'):
+        if not os.path.isabs(filename):
             # _PARENT_DIR = os.path.join(_TEST_DIR, '../..') # packages/goose
             # dirpath = os.path.dirname(goose.__file__)
             dirpath = os.path.abspath(os.path.dirname(__file__)) # goose/utils
