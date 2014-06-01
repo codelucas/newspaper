@@ -377,7 +377,7 @@ def print_available_languages():
     }
 
     codes = get_available_languages()
-    print '\nYour available langauges are:'
+    print '\nYour available languages are:'
     print '\ninput code\t\tfull name'
     for code in codes:
         print '  %s\t\t\t  %s' % (code, language_dict[code])
