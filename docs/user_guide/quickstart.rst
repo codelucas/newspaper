@@ -244,7 +244,7 @@ of popular news source urls.. In case you need help choosing a news source!
 
     >>> newspaper.languages()
 
-    Your available langauges are:
+    Your available languages are:
     input code      full name
 
       ar              Arabic
