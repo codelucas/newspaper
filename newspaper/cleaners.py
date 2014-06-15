@@ -138,7 +138,7 @@ class DocumentCleaner(object):
         return doc
 
     def clean_para_spans(self, doc):
-        spans = self.parser.css_select(doc, 'p > span')
+        spans = self.parser.css_select(doc, 'p span')
         for item in spans:
             self.parser.drop_tag(item)
         return doc
