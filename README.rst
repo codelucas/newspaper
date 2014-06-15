@@ -41,6 +41,8 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
       fi              Finnish
       da              Danish
       zh              Chinese
+      id              Indonesian
+      vi              Vietnamese
 
 A Glance:
 ---------

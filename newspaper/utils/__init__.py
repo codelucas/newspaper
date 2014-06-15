@@ -373,7 +373,9 @@ def print_available_languages():
         'hu':   'Hungarian',
         'fi':   'Finnish',
         'da':   'Danish',
-        'zh':   'Chinese'
+        'zh':   'Chinese',
+        'id':   'Indonesian',
+        'vi':   'Vietnamese'
     }
 
     codes = get_available_languages()
