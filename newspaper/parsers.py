@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+Newspaper uses a lot of python-goose's extraction code. View their
+license here: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
 Parser objects will only contain operations that manipulate
 or query an lxml or soup dom object generated from an article's html.
 """
@@ -32,57 +35,6 @@ class Parser(object):
                 node.drop_tag()
         else:
             nodes.drop_tag()
-
-    @classmethod
-    def root_to_urls(cls, doc, titles):
-        """
-        Return a list of urls from an lxml root.
-        """
-        if doc is None:
-            return []
-
-        a_tags = doc.xpath('//a')
-        # tries to find titles of link elements via tag text
-        if titles:
-            return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
-
-        return [ a.get('href') for a in a_tags if a.get('href') ]
-
-    @classmethod
-    def get_urls(cls, _input, titles=False, regex=False):
-        """
-        Inputs html page or doc and returns list of urls, the regex
-        flag indicates we don't parse via lxml and just search the html.
-        """
-        if _input is None:
-            log.critical('Must extract urls from either html, text or doc!')
-            return []
-
-        # If we are extracting from raw text
-        if regex:
-            _input = re.sub('<[^<]+?>', ' ', _input)
-            _input = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', _input)
-            _input = [i.strip() for i in _input]
-            return _input or []
-
-        # If the input is html, parse it into a root
-        if isinstance(_input, str) or isinstance(_input, unicode):
-            doc = cls.fromstring(_input)
-        else:
-            doc = _input
-
-        return cls.root_to_urls(doc, titles)
-
-    """
-    @classmethod
-    def get_feed_urls(cls, doc):
-        try:
-            return doc.xpath('//*[@type="application/rss+xml"]/@href')
-        except Exception, e:
-            print str(e)
-            log.critical(e)
-            return []
-    """
 
     @classmethod
     def css_select(cls, node, selector):

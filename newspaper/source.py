@@ -240,7 +240,7 @@ class Source(object):
         """
         articles = []
         for feed in self.feeds:
-            urls = self.parser.get_urls(feed.rss, regex=True)
+            urls = self.extractor.get_urls(feed.rss, regex=True)
             cur_articles = []
             before_purge = len(urls)
 
@@ -275,7 +275,7 @@ class Source(object):
         articles = []
         for category in self.categories:
             cur_articles = []
-            url_title_tups = self.parser.get_urls(category.doc, titles=True)
+            url_title_tups = self.extractor.get_urls(category.doc, titles=True)
             before_purge = len(url_title_tups)
 
             for tup in url_title_tups:

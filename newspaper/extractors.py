@@ -440,6 +440,47 @@ class ContentExtractor(object):
             return urlparse.urljoin(article.url, node_images[0])
         return u''
 
+    def _get_urls(self, doc, titles):
+        """
+        Return a list of urls or a list of (url, title_text) tuples if specified.
+        """
+        if doc is None:
+            return []
+
+        a_kwargs = {'tag': 'a'}
+        a_tags = self.parser.getElementsByTag(doc, **a_kwargs) # doc.xpath('//a')
+
+        # TODO this should be refactored! We should have a seperate method which
+        # siphones the titles our of a list of <a> tags.
+        if titles:
+            return [ (a.get('href'), a.text) for a in a_tags if a.get('href') ]
+
+        return [ a.get('href') for a in a_tags if a.get('href') ]
+
+    def get_urls(self, doc_or_html, titles=False, regex=False):
+        """
+        doc_or_htmls html page or doc and returns list of urls, the regex
+        flag indicates we don't parse via lxml and just search the html.
+        """
+        if doc_or_html is None:
+            log.critical('Must extract urls from either html, text or doc!')
+            return []
+
+        # If we are extracting from raw text
+        if regex:
+            doc_or_html = re.sub('<[^<]+?>', ' ', doc_or_html)
+            doc_or_html = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', doc_or_html)
+            doc_or_html = [i.strip() for i in doc_or_html]
+            return doc_or_html or []
+
+        # If the doc_or_html is html, parse it into a root
+        if isinstance(doc_or_html, str) or isinstance(doc_or_html, unicode):
+            doc = self.parser.fromstring(doc_or_html)
+        else:
+            doc = doc_or_html
+
+        return self._get_urls(doc, titles)
+
     def get_category_urls(self, source, source_url=None, page_urls=None):
         """
         Requires: source lxml root and source url takes a domain and finds all of the
@@ -449,7 +490,7 @@ class ContentExtractor(object):
         """
 
         source_url = source.url if not source_url else source_url
-        page_urls = self.parser.get_urls(source.doc) if not page_urls else page_urls
+        page_urls = self.get_urls(source.doc) if not page_urls else page_urls
         valid_categories = []
         for p_url in page_urls:
             scheme = get_scheme(p_url, allow_fragments=False)
