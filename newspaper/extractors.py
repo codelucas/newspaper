@@ -124,7 +124,7 @@ class ContentExtractor(object):
         VALS = ['author', 'byline']
         matches = []
         _authors, authors = [], []
-        doc = article.doc
+        doc = article.clean_doc
         html = article.html
 
         for attr in ATTRS:
@@ -173,7 +173,7 @@ class ContentExtractor(object):
         Fetch the article title and analyze it.
         """
         title = ''
-        doc = article.doc
+        doc = article.clean_doc
 
         title_element = self.parser.getElementsByTag(doc, tag='title')
         # no title found
@@ -234,7 +234,7 @@ class ContentExtractor(object):
         <link rel="icon" type="image/png" href="favicon.png" />
         """
         kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
-        meta = self.parser.getElementsByTag(article.doc, **kwargs)
+        meta = self.parser.getElementsByTag(article.clean_doc, **kwargs)
         if meta:
             favicon = self.parser.getAttribute(meta[0], 'href')
             return favicon
@@ -245,7 +245,7 @@ class ContentExtractor(object):
         Extract content language from meta.
         """
         # we have a lang attribute in html
-        attr = self.parser.getAttribute(article.doc, attr='lang')
+        attr = self.parser.getAttribute(article.clean_doc, attr='lang')
         if attr is None:
             # look up for a Content-Language in meta
             items = [
@@ -253,7 +253,7 @@ class ContentExtractor(object):
                 {'tag': 'meta', 'attr': 'name', 'value': 'lang'}
             ]
             for item in items:
-                meta = self.parser.getElementsByTag(article.doc, **item)
+                meta = self.parser.getElementsByTag(article.clean_doc, **item)
                 if meta:
                     attr = self.parser.getAttribute(meta[0], attr='content')
                     break
@@ -283,27 +283,56 @@ class ContentExtractor(object):
 
         return ''
 
+    def get_meta_img_url(self, article):
+        """
+        Returns the 'top img' as specified by the website.
+        """
+        top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
+        doc = article.clean_doc
+        try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
+
+        if try_one is None:
+            link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
+            try_two = self.parser.getElementsByTag(doc, **link_icon_kwargs)
+
+        if try_two is None:
+            link_img_src_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'img_src'}
+            try_three = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
+
+        if try_three is None:
+            try_four = self.get_meta_content(doc, 'meta[name="og:image"]')
+
+        top_meta_image = try_one or try_two or try_three or try_four # :)
+
+        return urlparse.urljoin(article.url, top_meta_image)
+
     def get_meta_type(self, article):
         """
         Returns meta type of article, open graph protocol.
         """
-        return self.get_meta_content(article.doc, 'meta[property="og:type"]')
+        return self.get_meta_content(article.clean_doc, 'meta[property="og:type"]')
 
-    def get_meta_description(self, article):
+    def get_meta_description(self, article_or_source):
         """
         If the article has meta description set in the source, use that.
         """
-        return self.get_meta_content(article.doc, "meta[name=description]")
+        # Since <source> objects use this particular method and sources don't
+        # have a 'clean_doc' we just use doc
+        try: # "easier to ask for forgiveness than permission"
+            doc = article_or_source.clean_doc
+        except:
+            doc = article_or_source.doc
+        return self.get_meta_content(doc, "meta[name=description]")
 
     def get_meta_keywords(self, article):
         """
         If the article has meta keywords set in the source, use that.
         """
-        return self.get_meta_content(article.doc, "meta[name=keywords]")
+        return self.get_meta_content(article.clean_doc, "meta[name=keywords]")
 
     def get_meta_data(self, article):
         data = defaultdict(dict)
-        props = self.parser.css_select(article.doc, 'meta')
+        props = self.parser.css_select(article.clean_doc, 'meta')
 
         for prop in props:
             key = prop.attrib.get('property')
@@ -347,7 +376,7 @@ class ContentExtractor(object):
         If the article has meta canonical link set in the url.
         """
         kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'canonical'}
-        meta = self.parser.getElementsByTag(article.doc, **kwargs)
+        meta = self.parser.getElementsByTag(article.clean_doc, **kwargs)
         if meta is not None and len(meta) > 0:
             href = self.parser.getAttribute(meta[0], 'href')
             if href:
@@ -376,14 +405,6 @@ class ContentExtractor(object):
         if node_images:
             return urlparse.urljoin(article.url, node_images[0])
         return u''
-
-    def get_meta_img_url(self, article):
-        """
-        """
-        # !important, we must use clean_doc because at this point doc has been cleaned
-        doc = article.clean_doc
-        meta_img_url = self.parser.get_meta_img_url(doc)
-        return urlparse.urljoin(article.url, meta_img_url)
 
     def get_category_urls(self, source, source_url=None, page_urls=None):
         """
@@ -524,7 +545,7 @@ class ContentExtractor(object):
         return feeds
 
     def extract_tags(self, article):
-        node = article.doc
+        node = article.clean_doc
 
         # node doesn't have chidren
         if len(list(node)) == 0:

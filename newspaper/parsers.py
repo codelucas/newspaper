@@ -73,12 +73,9 @@ class Parser(object):
 
         return cls.root_to_urls(doc, titles)
 
+    """
     @classmethod
     def get_meta_img_url(cls, doc):
-        """
-        Takes an lxml doc and returns the top img url
-        running as method == 'soup' assumes lxml's soupparser.
-        """
         try:
             return doc.xpath('/html/head/meta[@property="og:image"][1]/@content')[0]
         except:
@@ -96,6 +93,7 @@ class Parser(object):
         except:
             pass
         return None
+    """
 
     @classmethod
     def get_img_urls(cls, doc):

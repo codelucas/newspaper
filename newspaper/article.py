@@ -249,7 +249,7 @@ class Article(object):
         if not self.is_parsed:
             raise ArticleException('must parse article before checking \
                                     if it\'s body is valid!')
-        meta_type = self.extractor.get_meta_type(self.clean_doc)
+        meta_type = self.extractor.get_meta_type(self)
         wordcount = self.text.split(' ')
         sentcount = self.text.split('.')
 
