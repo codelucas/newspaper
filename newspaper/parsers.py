@@ -73,42 +73,6 @@ class Parser(object):
 
         return cls.root_to_urls(doc, titles)
 
-    """
-    @classmethod
-    def get_meta_img_url(cls, doc):
-        try:
-            return doc.xpath('/html/head/meta[@property="og:image"][1]/@content')[0]
-        except:
-            pass
-        try:
-            return doc.xpath('/html/head/link[@rel="icon"][1]/@href')[0]
-        except:
-            pass
-        try:
-            return doc.xpath('/html/head/link[@rel="img_src"][1]/@href')[0]
-        except:
-            pass
-        try:
-            return doc.xpath('/html/head/meta[@name="og:image"][1]/@content')[0]
-        except:
-            pass
-        return None
-    """
-
-    @classmethod
-    def get_img_urls(cls, doc):
-        """
-        Return all of the images on an html page, lxml root.
-        """
-        try:
-            img_links = doc.xpath('//img/@src')
-        except Exception, e:
-            print str(e)
-            log.critical(e)
-            return []
-
-        return img_links
-
     @classmethod
     def get_feed_urls(cls, doc):
         """

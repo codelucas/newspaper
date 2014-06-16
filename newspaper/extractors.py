@@ -389,19 +389,30 @@ class ContentExtractor(object):
                 return href
         return u''
 
-    def get_img_urls(self, article):
+    def get_img_urls(self, article, use_top_node=False):
         """
         Return all of the images on an html page, lxml root.
         """
-        doc = article.clean_doc
-        urls = self.parser.get_img_urls(doc)
+        doc = article.clean_top_node if use_top_node else article.clean_doc
+
+        img_kwargs = {'tag': 'img'}
+        img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
+        urls = [img_tag.get('src') for img_tag in img_tags if img_tag.get('src')]
         img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
+
         if article.meta_img:
             img_links.add(article.meta_img)
         return img_links
 
     def get_first_img_url(self, article):
-        node_images = self.parser.get_img_urls(article.clean_top_node)
+        """
+        Retrieves the first image in the 'top_node'
+        The top node is essentially the HTML
+        markdown where the main article lies and the first image
+        in that area is probably signifigcant.
+        """
+        node_images = self.get_img_urls(article, use_top_node=True)
+        node_images = list(node_images)
         if node_images:
             return urlparse.urljoin(article.url, node_images[0])
         return u''
