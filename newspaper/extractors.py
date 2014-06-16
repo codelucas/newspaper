@@ -226,6 +226,29 @@ class ContentExtractor(object):
         title = title_pieces[large_text_index]
         return TITLE_REPLACEMENTS.replaceAll(title).strip()
 
+    def get_feed_urls(self, source_or_category):
+        """
+        Returns list of feed urls on a source or category object.
+        """
+        # This feels really weird..., needs more refactoring
+        is_source = source_or_category.__class__.__name__ == 'Source'
+
+        if not is_source: # recursively call method with Source's categories
+            feed_urls = []
+            for category in source_or_category.categories:
+                feed_urls.extend(self.get_feed_urls(category))
+            feed_urls = feed_urls[:50]
+            feed_urls = [prepare_url(f, source.url) for f in feed_urls]
+
+            feed_urls = list(set(feed_urls))
+            return feed_urls
+
+        doc = source_or_category.doc # it's a Category
+        kwargs = {'attr': 'type', 'value': 'application/rss+xml'}
+        feed_elements = self.parser.getElementsByTag(doc, **kwargs)
+        feed_urls = [e.get('href') for e in feed_elements if e.get('href')]
+        return feed_urls
+
     def get_favicon(self, article):
         """
         Extract the favicon from a website
@@ -538,22 +561,6 @@ class ContentExtractor(object):
         category_urls = [prepare_url(p_url, source_url) for p_url in _valid_categories]
         category_urls = [c for c in category_urls if c is not None]
         return category_urls
-
-    def get_feed_urls(self, source):
-        """
-        Requires: List of category lxml roots, two types of anchors: categories
-        and feeds (rss). we extract category urls first and then feeds.
-        """
-        feed_urls = []
-        for category in source.categories:
-            root = category.doc
-            feed_urls.extend(self.parser.get_feed_urls(root))
-
-        feed_urls = feed_urls[:50]
-        feed_urls = [ prepare_url(f, source.url) for f in feed_urls ]
-
-        feeds = list(set(feed_urls))
-        return feeds
 
     def extract_tags(self, article):
         node = article.clean_doc

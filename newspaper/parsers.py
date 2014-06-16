@@ -73,17 +73,16 @@ class Parser(object):
 
         return cls.root_to_urls(doc, titles)
 
+    """
     @classmethod
     def get_feed_urls(cls, doc):
-        """
-        Returns list of feed urls on an lxml root.
-        """
         try:
             return doc.xpath('//*[@type="application/rss+xml"]/@href')
         except Exception, e:
             print str(e)
             log.critical(e)
             return []
+    """
 
     @classmethod
     def css_select(cls, node, selector):
