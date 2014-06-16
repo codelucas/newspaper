@@ -120,7 +120,7 @@ class Article(object):
         self.doc = None
 
         # a pure object from the orig html without any cleaning options done on it
-        self.raw_doc = None
+        self.clean_doc = None
 
         # A property bucket for consumers of goose to store custom data extractions.
         self.additional_data = {}
@@ -152,7 +152,7 @@ class Article(object):
             raise ArticleException()
 
         self.doc = self.parser.fromstring(self.html)
-        self.raw_doc = copy.deepcopy(self.doc)
+        self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
             print '[Article parse ERR] %s' % self.url
@@ -205,7 +205,7 @@ class Article(object):
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
-           
+
             text, article_html = output_formatter.get_formatted(self)
             self.set_article_html(article_html)
             self.set_text(text)
@@ -215,15 +215,15 @@ class Article(object):
 
         self.is_parsed = True
         self.release_resources()
-    
+
     def fetch_images(self):
-        if self.raw_doc is not None:
+        if self.clean_doc is not None:
             meta_img_url = self.extractor.get_meta_img_url(self)
             self.set_meta_img(meta_img_url)
 
             imgs = self.extractor.get_img_urls(self)
             self.set_imgs(imgs)
-        
+
         if self.clean_top_node is not None and not self.has_top_image():
             first_img = self.extractor.get_first_img_url(self)
             self.set_top_img(first_img)
@@ -249,7 +249,7 @@ class Article(object):
         if not self.is_parsed:
             raise ArticleException('must parse article before checking \
                                     if it\'s body is valid!')
-        meta_type = self.parser.get_meta_type(self.raw_doc)
+        meta_type = self.extractor.get_meta_type(self.clean_doc)
         wordcount = self.text.split(' ')
         sentcount = self.text.split('.')
 
@@ -417,7 +417,7 @@ class Article(object):
         """
         if article_html:
             self.article_html = encodeValue(article_html)
-    
+
     def set_meta_img(self, src_url):
         self.meta_img = encodeValue(src_url)
         self.set_top_img(src_url)
@@ -427,7 +427,7 @@ class Article(object):
             s = images.Scraper(self)
             if s.satisfies_requirements(src_url):
                 self.set_top_img_no_ckeck(src_url)
-        
+
     def set_top_img_no_ckeck(self, src_url):
         """
         We want to provide 2 api's for images. One at

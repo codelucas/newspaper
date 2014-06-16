@@ -53,6 +53,7 @@ class ArticleTestCase(unittest.TestCase):
         self.test_download_html()
         self.test_pre_download_parse()
         self.test_parse_html()
+        self.test_meta_tag_extraction()
         self.test_pre_parse_nlp()
         self.test_nlp_body()
 
@@ -92,7 +93,7 @@ class ArticleTestCase(unittest.TestCase):
         SCHEME = 'http'
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 48 # list is too big, we just check size of images arr
+        LEN_IMGS = 47 # list is too big, we just check size of images arr
 
         self.article.parse()
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
@@ -102,6 +103,12 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.title == TITLE
         print 'we now have ', len(self.article.imgs), 'images'
         assert len(self.article.imgs) == LEN_IMGS
+
+    @print_test
+    def test_meta_tag_extraction(self):
+        meta_type = self.article.extractor.get_meta_type(self.article)
+        # print 'meta type is---------', meta_type
+        assert 'article' == meta_type
 
     @print_test
     def test_pre_parse_nlp(self):

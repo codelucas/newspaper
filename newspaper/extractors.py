@@ -267,6 +267,10 @@ class ContentExtractor(object):
     def get_meta_content(self, doc, metaName):
         """
         Extract a given meta content form document.
+        Example metaNames:
+            "meta[name=description]"
+            "meta[name=keywords]"
+            "meta[property=og:type]"
         """
         meta = self.parser.css_select(doc, metaName)
         content = None
@@ -278,6 +282,12 @@ class ContentExtractor(object):
             return content.strip()
 
         return ''
+
+    def get_meta_type(self, article):
+        """
+        Returns meta type of article, open graph protocol.
+        """
+        return self.get_meta_content(article.doc, 'meta[property="og:type"]')
 
     def get_meta_description(self, article):
         """
@@ -354,7 +364,7 @@ class ContentExtractor(object):
         """
         Return all of the images on an html page, lxml root.
         """
-        doc = article.raw_doc
+        doc = article.clean_doc
         urls = self.parser.get_img_urls(doc)
         img_links = set([ urlparse.urljoin(article.url, url) for url in urls ])
         if article.meta_img:
@@ -370,8 +380,8 @@ class ContentExtractor(object):
     def get_meta_img_url(self, article):
         """
         """
-        # !important, we must use raw_doc because at this point doc has been cleaned
-        doc = article.raw_doc
+        # !important, we must use clean_doc because at this point doc has been cleaned
+        doc = article.clean_doc
         meta_img_url = self.parser.get_meta_img_url(doc)
         return urlparse.urljoin(article.url, meta_img_url)
 

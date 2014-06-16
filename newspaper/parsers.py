@@ -124,18 +124,6 @@ class Parser(object):
             return []
 
     @classmethod
-    def get_meta_type(cls, doc):
-        """
-        Returns the meta "type" of an article.
-        """
-        try:
-            return doc.xpath('/html/head/meta[@property="og:type"][1]/@content')[0]
-        except Exception, e:
-            print str(e)
-            log.critical(e)
-            return u''
-
-    @classmethod
     def css_select(cls, node, selector):
         return node.cssselect(selector)
 
