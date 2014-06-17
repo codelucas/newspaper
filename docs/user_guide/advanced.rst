@@ -100,12 +100,15 @@ open source library called *jieba* to split the text into words. For arabic we a
 using a special nltk tokenizer to do the same job.
 
 **So, to add full text extraction to a new (non-latin) language, we need:**
+
 1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
 in ``newspaper/resources/text/.``
+
 2. Provide a way of splitting/tokenizing text in that foreign language into words. 
 Here are some examples for Chinese, Arabic, English:
 
 **For latin languages:** 
+
 1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
 in ``newspaper/resources/text/.`` and we are done!
 
