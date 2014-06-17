@@ -86,7 +86,7 @@ One aspect of our text extraction algorithm revolves around counting the number 
 function words, such as the, is, at, which, and on* in a language.
 
 Reference this line to see it in action:
-`https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L669 <https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L669>`_
+`https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L668 <https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L668>`_
 
 **So for latin languages**, it is pretty basic. We first provide a list of 
 stopwords in ``stopwords-<language-code>.txt`` form. We then take some input text and 
@@ -100,13 +100,13 @@ open source library called *jieba* to split the text into words. For arabic we a
 using a special nltk tokenizer to do the same job.
 
 **So, to add full text extraction to a new (non-latin) language, we need:**
-#. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
 in ``newspaper/resources/text/.``
-#. Provide a way of splitting/tokenizing text in that foreign language into words. 
+2. Provide a way of splitting/tokenizing text in that foreign language into words. 
 Here are some examples for Chinese, Arabic, English:
 
 **For latin languages:** 
-#. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
 in ``newspaper/resources/text/.`` and we are done!
 
 
