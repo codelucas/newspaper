@@ -628,6 +628,11 @@ class ContentExtractor(object):
 
     def calculate_best_node(self, article):
         doc = article.doc
+
+        # if article.config.hints: TODO: Maybe a future release
+        #    rules_kw = article.config.hints.get(article.source_url)
+        #    doc = article.parser.getElementsByTag(doc, **rules_kw)[0]
+
         top_node = None
         nodes_to_check = self.nodes_to_check(doc)
 

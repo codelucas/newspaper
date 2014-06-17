@@ -96,6 +96,8 @@ def prepare_url(url, source_url=None):
 
 def valid_url(url, verbose=False, test=False):
     """
+    Is this URL a valid news-article url?
+
     Perform a regex check on an absolute url.
 
     First, perform a few basic checks like making sure the format of the url

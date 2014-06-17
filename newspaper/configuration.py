@@ -17,9 +17,50 @@ from .text import StopWordsChinese
 from .text import StopWordsArabic
 from .text import StopWordsKorean
 from .parsers import Parser, ParserSoup
+from .urls import is_abs_url, get_domain
 from .version import __version__
 
 log = logging.getLogger(__name__)
+
+
+"""
+class HintsDict(dict):
+    def __init__(self, *args):
+        '''
+        Works like a regular dict but the :meth:`get` method is different.
+
+        ~~Hints~~ new feature:
+        Example usage:
+        Suppose newspaper article extractor was having issues with extracting
+        text from 'Quartz' at qz.com. We can aid our extractor by providing simple
+        hints obtained by just glancing at the page, like tag names or attributes & values
+        of the tag containing our article.
+
+        After inspecting a random quartz article suppose the body text is clearly
+        in a <div> tag with a class labeled 'bodyArticle'.
+
+        {'www.qz.com': {'tag': 'div', 'attr': 'class', 'value': 'bodyArticle'}
+        ...}
+
+        '''
+        dict.__init__(self, args)
+
+    def set(self, key, val):
+        key = get_domain(key) if is_abs_url(key) else key
+        if isinstance(val, dict):
+            self[key] = val
+        else:
+            raise Exception("Not valid Hint value, must be in the form of \
+            {'www.news.domain': {'tag': 'div', 'attr': 'class', 'value': 'bodyArticle'}")
+
+    def get(self, key, default=None):
+        key = get_domain(key) if is_abs_url(key) else key
+        try:
+            val = self[key]
+        except (KeyError, ValueError):
+            val = default
+        return val
+"""
 
 class Configuration(object):
 
@@ -68,6 +109,9 @@ class Configuration(object):
 
         # set this to False if you want to recompute the categories *every* time
         # self.use_cached_categories = True # TODO: Make this work
+
+        # self.hints = None TODO: Maybe a future release?
+
 
     def get_language(self):
         return self._language
