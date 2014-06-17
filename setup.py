@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 """
-Lucas Ou-Yang 2014 -- http://codelucas.com
+Lucas Ou 2014 -- http://lucasou.com
 
 Setup guide: http://guide.python-distribute.org/creation.html
 python setup.py sdist bdist_wininst upload
@@ -20,10 +20,10 @@ packages = [
     # 'newspaper.packages.tldextract.tests',
     'newspaper.packages.feedparser',
     # 'newspaper.packages.feedparser.tests'
-    #'newspaper.packages.goose',
-    #'newspaper.packages.goose.utils',
-    #'newspaper.packages.goose.videos',
-    #'newspaper.packages.goose.images',
+    # 'newspaper.packages.goose',
+    # 'newspaper.packages.goose.utils',
+    # 'newspaper.packages.goose.videos',
+    # 'newspaper.packages.goose.images',
     'newspaper.packages.jieba',
     'newspaper.packages.jieba.posseg',
     'newspaper.packages.jieba.finalseg',
@@ -46,7 +46,6 @@ requires = [
 ]
 
 readme = u''
-history = u''
 _license = u''
 
 try:
@@ -54,8 +53,6 @@ try:
         readme = f.read()
     with open('LICENSE') as f:
         _license = f.read()
-    with open('HISTORY.md') as f:
-        history = f.read()
 except:
     print ''
 
@@ -78,4 +75,3 @@ setup(
     license=_license,
     zip_safe=False,
 )
-

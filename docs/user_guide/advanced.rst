@@ -57,24 +57,58 @@ Here is how to do so:
     >>> a.article_html
     u'<div> \n<p><strong>(CNN)</strong> -- Charles Smith insisted Sunda...'
 
+The lxml (dom object) and top_node (chunk of dom that contains our 'Article') are also
+cached incase users would like to use them.
+
+Access **after parsing()** with:
+
+.. code-block:: pycon
+
+    >>> a.download()
+    >>> a.parse()
+    >>> a.clean_dom
+    <lxml object ...  >
+    
+    >>> a.clean_top_node
+    <lxml object ...  >
+
+
 Adding new languages
 --------------------
 
-Newspaper is an ever-growing and adding support for new languages is quite easy, 
-especially if it is a Latin-based language.
+First, please reference this file and read from the highlighted line all the way 
+down to the end of the file.
 
-To add support for a latin language, first find a `stopwords`_ file for it. Place the
-file in `newspaper/resources/text/stopwords-<COUNTRY_CODE_GOES_HERE>`. Refer to 
-`this article`_ for a guide on country codes.
+`https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L57 <https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L57>`_
 
-Then, send a pull request and wait for the author to merge and add ur langauge 
-into the api.
+One aspect of our text extraction algorithm revolves around counting the number of 
+**stopwords** present in a text. Stopwords are: *some of the most common, short 
+function words, such as the, is, at, which, and on* in a language.
 
-For non-latin languages, usually there are added complexities, so I will update
-this portion of the docs in the future.
+Reference this line to see it in action:
+`https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L669 <https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L669>`_
 
-.. _`this article`: http://www.iso.org/iso/country_names_and_code_elements
-.. _`stopwords`: http://en.wikipedia.org/wiki/Stop_words
+**So for latin languages**, it is pretty basic. We first provide a list of 
+stopwords in ``stopwords-<language-code>.txt`` form. We then take some input text and 
+tokenize it into words by splitting the white space. After that we perform some 
+bookkeeping and then proceed to count the number of stopwords present.
+
+**For non-latin languages**, as you may have noticed in the code above, we need to 
+tokenize the words in a different way, *splitting by whitespace simply won't work for 
+languages like Chinese or Arabic*. For the Chinese language we are using a whole new 
+open source library called *jieba* to split the text into words. For arabic we are 
+using a special nltk tokenizer to do the same job.
+
+**So, to add full text extraction to a new (non-latin) language, we need:**
+#. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+in ``newspaper/resources/text/.``
+#. Provide a way of splitting/tokenizing text in that foreign language into words. 
+Here are some examples for Chinese, Arabic, English:
+
+**For latin languages:** 
+#. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+in ``newspaper/resources/text/.`` and we are done!
+
 
 Explicitly building a news source
 ---------------------------------
