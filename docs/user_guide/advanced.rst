@@ -105,7 +105,7 @@ using a special nltk tokenizer to do the same job.
 in ``newspaper/resources/text/.``
 
 2. Provide a way of splitting/tokenizing text in that foreign language into words. 
-Here are some examples for Chinese, Arabic, English:
+`Here are some examples for Chinese, Arabic, English<https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L105>`_
 
 **For latin languages:** 
 
