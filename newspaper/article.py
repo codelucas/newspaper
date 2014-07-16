@@ -11,6 +11,7 @@ import logging
 import copy
 import os
 import glob
+import datetime
 
 from . import nlp
 from . import images
@@ -167,6 +168,9 @@ class Article(object):
 
         title = self.extractor.get_title(self)
         self.set_title(title)
+
+        published_date = self.extractor.get_published_date(self)
+        self.set_published_date(published_date)
 
         authors = self.extractor.get_authors(self)
         self.set_authors(authors)
@@ -454,6 +458,15 @@ class Article(object):
             raise Exception("Keyword input must be list!")
         if keywords:
             self.keywords = [encodeValue(k) for k in keywords[:self.config.MAX_KEYWORDS]]
+
+    def set_published_date(self, date):
+      """
+      Datetime object of the timestamp on the article
+      """
+      if date and not isinstance(date, datetime.datetime):
+          raise Exception("published date must be a datetime object")
+      if date:
+          self.published_date = date
 
     def set_authors(self, authors):
         """
