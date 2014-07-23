@@ -252,8 +252,7 @@ class APITestCase(unittest.TestCase):
         url = 'http://abcnews.go.com/blogs/politics/2013/12/states-cite-surge-in-obamacare-sign-ups-ahead-of-first-deadline/'
         article = newspaper.build_article(url)
         assert isinstance(article, Article) == True
-        article.download()
-        article.parse()
+        article.build()
         article.nlp()
         # print article.title
         # print article.summary
@@ -382,8 +381,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_chinese_fulltext_extract(self):
         url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
         article = Article(url=url, language='zh')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -394,8 +392,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_arabic_fulltext_extract(self):
         url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/index.html'
         article = Article(url=url, language='ar')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -406,8 +403,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_spanish_fulltext_extract(self):
         url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscalia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
         article = Article(url=url, language='es')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'spanish_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
