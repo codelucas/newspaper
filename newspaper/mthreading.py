@@ -116,5 +116,3 @@ class NewsPool(object):
 
         for paper in self.papers:
             self.pool.add_task(paper.download_articles)
-
-

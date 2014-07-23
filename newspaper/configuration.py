@@ -181,4 +181,3 @@ class ArticleConfiguration(Configuration):
 
 class SourceConfiguration(Configuration):
     pass
-
