@@ -308,9 +308,9 @@ class MThreadingTestCase(unittest.TestCase):
         """
         config = Configuration()
         config.memoize_articles = False
-        slate_paper = newspaper.build('http://slate.com', config)
-        tc_paper = newspaper.build('http://techcrunch.com', config)
-        espn_paper = newspaper.build('http://espn.com', config)
+        slate_paper = newspaper.build('http://slate.com', config=config)
+        tc_paper = newspaper.build('http://techcrunch.com', config=config)
+        espn_paper = newspaper.build('http://espn.com', config=config)
 
         print 'slate has %d articles tc has %d articles espn has %d articles' \
                 % (slate_paper.size(), tc_paper.size(), espn_paper.size())
