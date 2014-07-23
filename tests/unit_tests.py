@@ -106,6 +106,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_meta_tag_extraction(self):
+        self.article.build()
+
         meta_type = self.article.extractor.get_meta_type(self.article)
         # print 'meta type is---------', meta_type
         assert 'article' == meta_type
