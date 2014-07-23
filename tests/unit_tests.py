@@ -157,7 +157,7 @@ class SourceTestCase(unittest.TestCase):
         builds a source object, validates it has no errors, prints out
         all valid categories and feed urls
         """
-        DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
+        DESC = """CNN.com International delivers breaking news from across the globe and information on the latest top stories, business, sports and entertainment headlines. Follow the news as it happens through: special reports, videos, audio, photo galleries plus interactive maps and timelines."""
         BRAND = 'cnn'
 
         config = Configuration()
