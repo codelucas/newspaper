@@ -93,9 +93,9 @@ class ArticleTestCase(unittest.TestCase):
         SCHEME = 'http'
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 47 # list is too big, we just check size of images arr
+        LEN_IMGS = 46 # list is too big, we just check size of images arr
 
-        self.article.parse()
+        self.article.build()
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
             assert self.article.text == f.read()
         assert self.article.top_img == TOP_IMG
