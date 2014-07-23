@@ -131,6 +131,7 @@ class ArticleTestCase(unittest.TestCase):
         KEYWORDS = [u'great', u'good', u'flight', u'sailing', u'delays', u'smooth', u'thanksgiving',
                     u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
 
+        self.article.build()
         self.article.nlp()
         # print self.article.summary
         # print self.article.keywords
