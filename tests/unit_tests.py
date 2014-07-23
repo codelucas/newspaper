@@ -275,11 +275,13 @@ class APITestCase(unittest.TestCase):
 
 class EncodingTestCase(unittest.TestCase):
     def runTest(self):
-        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
-        self.normal_string = "∆ƒˆƒ´´lucas yang"
         self.test_encode_val()
         self.test_smart_unicode()
         self.test_smart_str()
+
+    def setUp(self):
+        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
+        self.normal_string = "∆ƒˆƒ´´lucas yang"
 
     @print_test
     def test_encode_val(self):
