@@ -425,6 +425,3 @@ if __name__ == '__main__':
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
     unittest.TextTestRunner().run(suite) # run custom subset
-
-
-
