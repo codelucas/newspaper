@@ -14,6 +14,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import re
 import copy
 import urlparse
+import datetime
 from collections import defaultdict
 
 from .packages.tldextract import tldextract
@@ -206,6 +207,44 @@ class ContentExtractor(object):
 
         title = MOTLEY_REPLACEMENT.replaceAll(title_text)
         return title
+
+    def get_published_date(self, article):
+        """
+        Find the article published date form either in the page or the url
+        """
+        timestamps = article.doc.xpath(
+            ("//meta[@property='article:published_time']/@content|"
+            "//meta[@name='date']/@content|"
+            "//meta[@name='sailthru.date']/@content")
+        )
+        timestamp = None
+        if timestamps:
+            timestamp = timestamps.pop(0).replace(
+                "T", " ").split(" ").pop(0)
+            if len(timestamp) != 10:
+                timestamp = None
+        if not timestamp:
+            parts = urlparse.urlparse(article.url)
+            path_parts = parts.path.strip("/").split("/")
+            numbered_parts = [part for part in path_parts 
+                if part.isdigit() and len(part) < 5]
+            if len(numbered_parts) == 3:
+                timestamp = "-".join(numbered_parts) 
+
+        if not timestamp:
+            return None
+
+        formats = (
+            "%Y-%m-%d",  # ISO 
+            "%m-%d-%Y",  # US
+            "%d-%m-%Y"   # UK
+        )
+        for format in formats:
+            try:
+                return datetime.datetime.strptime(
+                    timestamp, format)
+            except ValueError:
+                pass
 
     def split_title(self, title, splitter):
         """
