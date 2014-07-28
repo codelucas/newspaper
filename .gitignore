@@ -4,10 +4,6 @@
 .idea
 .pypirc
 
-# VIM
-*.swp
-*.swo
-
 # C extensions
 *.so
 
