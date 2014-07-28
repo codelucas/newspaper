@@ -367,8 +367,6 @@ class ContentExtractor(object):
             if not key:
                 continue
 
-            key = key.split(':')
-
             value = prop.attrib.get('content')
             if not value:
                 value = prop.attrib.get('value')
@@ -381,6 +379,11 @@ class ContentExtractor(object):
             if value.isdigit():
                 value = int(value)
 
+            if ':' not in key:
+                data[key] = value
+                continue
+
+            key = key.split(':')
             ref = data[key.pop(0)]
 
             for idx, part in enumerate(key):
