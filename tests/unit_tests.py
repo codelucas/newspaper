@@ -8,6 +8,7 @@ import re
 import unittest
 import time
 import codecs
+import types
 import responses
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -63,7 +64,8 @@ class ArticleTestCase(unittest.TestCase):
         self.test_download_html()
         self.test_pre_download_parse()
         self.test_parse_html()
-        self.test_meta_tag_extraction()
+        self.test_meta_type_extraction()
+        self.test_meta_extraction()
         self.test_pre_parse_nlp()
         self.test_nlp_body()
 
@@ -119,13 +121,37 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     @responses.activate
-    def test_meta_tag_extraction(self):
+    def test_meta_type_extraction(self):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
 
         meta_type = self.article.extractor.get_meta_type(self.article)
         # print 'meta type is---------', meta_type
         assert 'article' == meta_type
+
+
+    @print_test
+    @responses.activate
+    def test_meta_extraction(self):
+        mock_response_with(self.article.url, 'cnn_article')
+        self.article.build()
+
+        meta = self.article.extractor.get_meta_data(self.article)
+
+        assert isinstance(meta, dict)
+
+        # if the value for a meta key is another dict, that dict ought to be
+        # filled with keys and values
+        dict_values = filter(lambda v: isinstance(v, dict), meta.values())
+        assert all(map(lambda d: len(d) > 0, dict_values))
+
+        # there are exactly 5 top-level "og:type" type keys
+        is_dict = lambda v: isinstance(v, dict)
+        assert len(filter(is_dict, meta.values())) == 5
+
+        # there are exactly 12 top-level "pubdate" type keys
+        is_string = lambda v: isinstance(v, types.StringTypes)
+        assert len(filter(is_string, meta.values())) == 12
 
     @print_test
     @responses.activate
