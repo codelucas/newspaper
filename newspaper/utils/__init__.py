@@ -368,6 +368,7 @@ def print_available_languages():
         'it':   'Italian',
         'ko':   'Korean',
         'no':   'Norwegian',
+        'nb':   'Norwegian (Bokmål)',
         'pt':   'Portuguese',
         'sv':   'Swedish',
         'hu':   'Hungarian',
@@ -375,7 +376,7 @@ def print_available_languages():
         'da':   'Danish',
         'zh':   'Chinese',
         'id':   'Indonesian',
-        'vi':   'Vietnamese'
+        'vi':   'Vietnamese',
     }
 
     codes = get_available_languages()
