@@ -93,9 +93,9 @@ class ArticleTestCase(unittest.TestCase):
         SCHEME = 'http'
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 47 # list is too big, we just check size of images arr
+        LEN_IMGS = 46 # list is too big, we just check size of images arr
 
-        self.article.parse()
+        self.article.build()
         with open(os.path.join(TEST_DIR, 'data/body_example.txt'), 'r') as f:
             assert self.article.text == f.read()
         assert self.article.top_img == TOP_IMG
@@ -106,6 +106,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_meta_tag_extraction(self):
+        self.article.build()
+
         meta_type = self.article.extractor.get_meta_type(self.article)
         # print 'meta type is---------', meta_type
         assert 'article' == meta_type
@@ -129,6 +131,7 @@ class ArticleTestCase(unittest.TestCase):
         KEYWORDS = [u'great', u'good', u'flight', u'sailing', u'delays', u'smooth', u'thanksgiving',
                     u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
 
+        self.article.build()
         self.article.nlp()
         # print self.article.summary
         # print self.article.keywords
@@ -154,7 +157,7 @@ class SourceTestCase(unittest.TestCase):
         builds a source object, validates it has no errors, prints out
         all valid categories and feed urls
         """
-        DESC = """CNN.com delivers the latest breaking news and information on the latest top stories, weather, business, entertainment, politics, and more. For in-depth coverage, CNN.com provides special reports, video, audio, photo galleries, and interactive guides."""
+        DESC = """CNN.com International delivers breaking news from across the globe and information on the latest top stories, business, sports and entertainment headlines. Follow the news as it happens through: special reports, videos, audio, photo galleries plus interactive maps and timelines."""
         BRAND = 'cnn'
 
         config = Configuration()
@@ -250,8 +253,7 @@ class APITestCase(unittest.TestCase):
         url = 'http://abcnews.go.com/blogs/politics/2013/12/states-cite-surge-in-obamacare-sign-ups-ahead-of-first-deadline/'
         article = newspaper.build_article(url)
         assert isinstance(article, Article) == True
-        article.download()
-        article.parse()
+        article.build()
         article.nlp()
         # print article.title
         # print article.summary
@@ -273,11 +275,13 @@ class APITestCase(unittest.TestCase):
 
 class EncodingTestCase(unittest.TestCase):
     def runTest(self):
-        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
-        self.normal_string = "∆ƒˆƒ´´lucas yang"
         self.test_encode_val()
         self.test_smart_unicode()
         self.test_smart_str()
+
+    def setUp(self):
+        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
+        self.normal_string = "∆ƒˆƒ´´lucas yang"
 
     @print_test
     def test_encode_val(self):
@@ -305,9 +309,9 @@ class MThreadingTestCase(unittest.TestCase):
         """
         config = Configuration()
         config.memoize_articles = False
-        slate_paper = newspaper.build('http://slate.com', config)
-        tc_paper = newspaper.build('http://techcrunch.com', config)
-        espn_paper = newspaper.build('http://espn.com', config)
+        slate_paper = newspaper.build('http://slate.com', config=config)
+        tc_paper = newspaper.build('http://techcrunch.com', config=config)
+        espn_paper = newspaper.build('http://espn.com', config=config)
 
         print 'slate has %d articles tc has %d articles espn has %d articles' \
                 % (slate_paper.size(), tc_paper.size(), espn_paper.size())
@@ -378,8 +382,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_chinese_fulltext_extract(self):
         url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
         article = Article(url=url, language='zh')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -390,8 +393,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_arabic_fulltext_extract(self):
         url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/index.html'
         article = Article(url=url, language='ar')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -402,8 +404,7 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_spanish_fulltext_extract(self):
         url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscalia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
         article = Article(url=url, language='es')
-        article.download()
-        article.parse()
+        article.build()
         with codecs.open(os.path.join(TEXT_FN, 'spanish_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -424,6 +425,3 @@ if __name__ == '__main__':
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
     unittest.TextTestRunner().run(suite) # run custom subset
-
-
-
