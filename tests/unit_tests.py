@@ -237,12 +237,12 @@ class SourceTestCase(unittest.TestCase):
         s = Source(url)
         s.download()
         s.parse()
-        # s.set_categories()
+        s.set_categories()
 
-        # saved_urls = s.category_urls()
-        # s.categories = [] # reset and try again with caching
-        # s.set_categories()
-        # assert sorted(s.category_urls()) == sorted(saved_urls)
+        saved_urls = s.category_urls()
+        s.categories = [] # reset and try again with caching
+        s.set_categories()
+        assert sorted(s.category_urls()) == sorted(saved_urls)
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
