@@ -13,8 +13,9 @@ import math
 from collections import Counter, OrderedDict
 from . import settings
 
+
 with open(settings.NLP_STOPWORDS_EN, 'r') as f:
-    stopwords = [ w.strip() for w in f.readlines()]
+    stopwords = set([w.strip() for w in f.readlines()])
 
 ideal = 20.0
 
