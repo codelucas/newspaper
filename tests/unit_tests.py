@@ -10,6 +10,7 @@ import time
 import codecs
 import types
 import responses
+from collections import defaultdict
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
@@ -126,7 +127,6 @@ class ArticleTestCase(unittest.TestCase):
         self.article.build()
 
         meta_type = self.article.extractor.get_meta_type(self.article)
-        # print 'meta type is---------', meta_type
         assert 'article' == meta_type
 
 
@@ -137,8 +137,28 @@ class ArticleTestCase(unittest.TestCase):
         self.article.build()
 
         meta = self.article.extractor.get_meta_data(self.article)
+        META_DATA = defaultdict(dict, {
+            'medium': 'news',
+            'googlebot': 'noarchive',
+            'pubdate': '2013-11-27T08:36:32Z',
+            'title': 'After storm, forecasters see smooth sailing for Thanksgiving - CNN.com',
+            'og': {'site_name': 'CNN','description': 'A strong storm struck much of the eastern United States on Wednesday, complicating holiday plans for many of the 43 million Americans expected to travel.', 'title': 'After storm, forecasters see smooth sailing for Thanksgiving', 'url': 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html', 'image': 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg', 'type': 'article'},
+            'section': 'travel',
+            'author': 'Dana Ford and Tom Watkins, CNN',
+            'robots': 'index,follow',
+            'vr': {'canonical': 'http://edition.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'},
+            'source': 'CNN',
+            'fb': {'page_id': 18793419640, 'app_id': 80401312489},
+            'keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm',
+            'article': {'publisher': 'https://www.facebook.com/cnninternational'},
+            'lastmod': '2013-11-28T02:03:23Z',
+            'twitter': {'site': {'identifier': '@CNNI', 'id': 2097571}, 'card': 'summary', 'creator': {'identifier': '@cnntravel', 'id': 174377718}},
+            'viewport':'width=1024',
+            'news_keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm'
+        })
 
-        assert isinstance(meta, dict)
+        print "META DATA", str(meta)
+        assert meta == META_DATA
 
         # if the value for a meta key is another dict, that dict ought to be
         # filled with keys and values

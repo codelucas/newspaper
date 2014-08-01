@@ -357,25 +357,15 @@ class ContentExtractor(object):
 
     def get_meta_data(self, article):
         data = defaultdict(dict)
-        props = self.parser.css_select(article.clean_doc, 'meta')
+        properties = self.parser.css_select(article.clean_doc, 'meta')
+        for prop in properties:
+            key = prop.attrib.get('property') or prop.attrib.get('name')
+            value = prop.attrib.get('content') or prop.attrib.get('value')
 
-        for prop in props:
-            key = prop.attrib.get('property')
-            if not key:
-                key = prop.attrib.get('name')
-
-            if not key:
+            if not key or not value:
                 continue
 
-            value = prop.attrib.get('content')
-            if not value:
-                value = prop.attrib.get('value')
-
-            if not value:
-                continue
-
-            value = value.strip()
-
+            key, value = key.strip(), value.strip()
             if value.isdigit():
                 value = int(value)
 
@@ -385,18 +375,17 @@ class ContentExtractor(object):
 
             key = key.split(':')
             ref = data[key.pop(0)]
-
             for idx, part in enumerate(key):
-                if not key[idx:-1]:  # no next values
+                if idx == len(key) - 1:
                     ref[part] = value
                     break
                 if not ref.get(part):
                     ref[part] = dict()
-                else:
-                    if isinstance(ref.get(part), basestring):
-                        ref[part] = {'url': ref[part]}
+                elif isinstance(ref.get(part), basestring):
+                    # Not clear what to do in this scenario,
+                    # it's not always a URL, but an ID of some sort
+                    ref[part] = {'identifier': ref[part]}
                 ref = ref[part]
-
         return data
 
     def get_canonical_link(self, article):
