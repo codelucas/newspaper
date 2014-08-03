@@ -22,6 +22,8 @@ from . import urls
 from .packages.tldextract import tldextract
 from .utils import ReplaceSequence, StringReplacement, StringSplitter
 
+log = logging.getLogger(__name__)
+
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
 ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(u"#!", u"?_escaped_fragment_=")
 TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
