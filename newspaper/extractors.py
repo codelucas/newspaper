@@ -59,7 +59,7 @@ class ContentExtractor(object):
         cases because the stopwords_class has to set incase the lang
         is not latin based.
         '''
-        if article.config.use_meta_language:
+        if article.config.use_meta_language and article.meta_lang:
             self.language = article.meta_lang
             self.stopwords_class = article.config.\
                 get_stopwords_class(article.meta_lang)

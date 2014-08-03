@@ -26,7 +26,7 @@ class OutputFormatter(object):
         Called before formatting the top node to ensure the stopwords_class
         has been updated incase a non-latin language code is extracted.
         """
-        if article.config.use_meta_language:
+        if article.config.use_meta_language and article.meta_lang:
             self.language = article.meta_lang
             self.stopwords_class = article.config.\
                 get_stopwords_class(article.meta_lang)
