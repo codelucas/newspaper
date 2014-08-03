@@ -61,8 +61,6 @@ class StopWords(object):
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
-        # TODO replace 'x' with class
-        # to generate dynamic path for file to load
         if not language in self._cached_stop_words:
             path = os.path.join('text', 'stopwords-%s.txt' % language)
             self._cached_stop_words[language] = set(FileHelper.loadResourceFile(path).splitlines())

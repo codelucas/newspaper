@@ -18,12 +18,18 @@ from . import network
 from . import settings
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .utils import URLHelper, encodeValue, RawHelper, extend_config
+from .utils import (URLHelper,
+                    encodeValue,
+                    RawHelper,
+                    extend_config,
+                    get_available_languages)
 from .cleaners import StandardDocumentCleaner
 from .outputformatters import StandardOutputFormatter
 from .videos.extractors import VideoExtractor
-from .urls import (
-    prepare_url, get_domain, get_scheme, valid_url)
+from .urls import (prepare_url,
+                   get_domain,
+                   get_scheme,
+                   valid_url)
 
 log = logging.getLogger(__name__)
 
@@ -42,7 +48,7 @@ class Article(object):
         self.config = extend_config(self.config, kwargs)
 
         self.parser = self.config.get_parser()
-        self.extractor = StandardContentExtractor(config=self.config)
+        self.extractor = self.get_extractor()
 
         if source_url == u'':
             source_url = get_scheme(url) + '://' + get_domain(url)
@@ -173,6 +179,9 @@ class Article(object):
 
         meta_lang = self.extractor.get_meta_lang(self)
         self.set_meta_language(meta_lang)
+
+        self.extractor.update_language(self)
+        output_formatter.update_language(self)
 
         meta_favicon = self.extractor.get_favicon(self)
         self.set_meta_favicon(meta_favicon)
@@ -474,9 +483,10 @@ class Article(object):
 
     def set_meta_language(self, meta_lang):
         """
-        We are saving langauges in 2 char form, english = 'en'.
+        Save langauges in their ISO 2 char form
         """
-        if meta_lang and len(meta_lang) >= 2:
+        if meta_lang and len(meta_lang) >= 2 and \
+           meta_lang in get_available_languages():
             self.meta_lang = meta_lang[:2]
 
     def set_meta_keywords(self, meta_keywords):

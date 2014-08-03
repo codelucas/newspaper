@@ -53,15 +53,16 @@ class ContentExtractor(object):
         self.language = config.language
         self.stopwords_class = config.stopwords_class
 
-    def get_language(self, article):
-        """
-        Returns the language is by the article or
-        the configuration language.
-        """
-        if self.config.use_meta_language == True:
-            if article.meta_lang:
-                return article.meta_lang
-        return self.config.language
+    def update_language(self, article):
+        '''
+        Required to be called before the extraction process in some
+        cases because the stopwords_class has to set incase the lang
+        is not latin based.
+        '''
+        if article.config.use_meta_language:
+            self.language = article.meta_lang
+            self.stopwords_class = article.config.\
+                get_stopwords_class(article.meta_lang)
 
     def get_authors(self, article):
         """
