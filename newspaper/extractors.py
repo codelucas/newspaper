@@ -230,24 +230,22 @@ class ContentExtractor(object):
         """
         Returns list of feed urls on a source or category object.
         """
-        # This feels really weird..., needs more refactoring
         is_source = source_or_category.__class__.__name__ == 'Source'
-
-        if not is_source: # recursively call method with Source's categories
+        if is_source:
+            source = source_or_category
             feed_urls = []
             for category in source_or_category.categories:
                 feed_urls.extend(self.get_feed_urls(category))
             feed_urls = feed_urls[:50]
             feed_urls = [urls.prepare_url(f, source.url) for f in feed_urls]
-
             feed_urls = list(set(feed_urls))
             return feed_urls
-
-        doc = source_or_category.doc # it's a Category
-        kwargs = {'attr': 'type', 'value': 'application/rss+xml'}
-        feed_elements = self.parser.getElementsByTag(doc, **kwargs)
-        feed_urls = [e.get('href') for e in feed_elements if e.get('href')]
-        return feed_urls
+        else:
+            category = source_or_category
+            kwargs = {'attr': 'type', 'value': 'application\/rss\+xml'}
+            feed_elements = self.parser.getElementsByTag(category.doc, **kwargs)
+            feed_urls = [e.get('href') for e in feed_elements if e.get('href')]
+            return feed_urls
 
     def get_favicon(self, article):
         """
