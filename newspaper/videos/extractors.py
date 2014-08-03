@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 """
-
 from .videos import Video
 
 VIDEOS_TAGS = ['iframe', 'embed', 'object', 'video']

@@ -6,14 +6,14 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from .packages.feedparser import feedparser
-from .source import Source
 from .article import Article
-from .settings import POPULAR_URLS, TRENDING_URL
 from .configuration import Configuration
 from .mthreading import NewsPool
-from .configuration import Configuration
-from .utils import print_available_languages, extend_config
+from .packages.feedparser import feedparser
+from .settings import POPULAR_URLS, TRENDING_URL
+from .source import Source
+from .utils import extend_config, print_available_languages
+
 
 def build(url=u'', dry=False, config=None, **kwargs):
     """

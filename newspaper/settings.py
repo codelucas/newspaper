@@ -11,9 +11,9 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 import os
 
-from .version import __version__
-
 from cookielib import CookieJar as cj
+
+from .version import __version__
 
 log = logging.getLogger(__name__)
 

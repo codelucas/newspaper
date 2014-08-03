@@ -9,13 +9,13 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-import urllib
-import StringIO
 import math
+import StringIO
+import urllib
+import urllib2
 
-from PIL import Image, ImageFile
-from urllib2 import Request, HTTPError, URLError, build_opener
 from httplib import InvalidURL
+from PIL import Image, ImageFile
 
 from . import urls
 
@@ -24,6 +24,7 @@ log = logging.getLogger(__name__)
 chunk_size = 1024
 thumbnail_size = 90, 90
 minimal_area = 5000
+
 
 def image_to_str(image):
     s = StringIO.StringIO()
@@ -94,12 +95,12 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
     while True:
         try:
-            req = Request(url)
+            req = urllib2.Request(url)
             req.add_header('User-Agent', useragent)
             if referer:
                 req.add_header('Referer', referer)
 
-            opener = build_opener()
+            opener = urllib2.build_opener()
             open_req = opener.open(req, timeout=5)
 
             # if we only need the dimension of the image, we may not
@@ -161,7 +162,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
             return content_type, content
 
-        except (URLError, HTTPError, InvalidURL), e:
+        except (urllib2.URLError, urllib2.HTTPError, InvalidURL), e:
             cur_try += 1
             if cur_try >= retries:
                 log.debug('error while fetching: %s refer: %s' % (url, referer))

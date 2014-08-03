@@ -3,9 +3,11 @@
 Byte string <---> unicode conversions take place
 here, pretty much anything encoding related
 """
-import types
 import datetime
+import types
+
 from decimal import Decimal
+
 
 class DjangoUnicodeDecodeError(UnicodeDecodeError):
     def __init__(self, obj, *args):

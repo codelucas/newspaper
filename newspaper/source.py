@@ -11,16 +11,15 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 
 from . import network
+from . import urls
+from . import utils
+
 from .article import Article
-from .settings import ANCHOR_DIRECTORY
-from .packages.tldextract import tldextract
-from .packages.feedparser import feedparser
-from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .urls import (
-    get_domain, get_scheme, prepare_url)
-from .utils import (
-    memoize_articles, cache_disk, clear_memo_cache, encodeValue, extend_config)
+from .configuration import Configuration
+from .packages.feedparser import feedparser
+from .packages.tldextract import tldextract
+from .settings import ANCHOR_DIRECTORY
 
 log = logging.getLogger(__name__)
 
@@ -28,7 +27,7 @@ log = logging.getLogger(__name__)
 class Category(object):
 
     def __init__(self, url):
-        self.url = encodeValue(url)
+        self.url = utils.encodeValue(url)
         self.html = None
         self.doc = None
 
@@ -36,7 +35,7 @@ class Category(object):
 class Feed(object):
 
     def __init__(self, url):
-        self.url = encodeValue(url)
+        self.url = utils.encodeValue(url)
         self.rss = None
         # TODO self.dom = None, speed up Feedparser
 
@@ -61,16 +60,16 @@ class Source(object):
             raise Exception('Input url is bad!')
 
         self.config = config or Configuration() # Order matters
-        self.config = extend_config(self.config, kwargs)
+        self.config = utils.extend_config(self.config, kwargs)
 
         self.parser = self.config.get_parser()
         self.extractor = StandardContentExtractor(config=self.config)
 
-        self.url = encodeValue(url)
-        self.url = prepare_url(url)
+        self.url = utils.encodeValue(url)
+        self.url = urls.prepare_url(url)
 
-        self.domain = get_domain(self.url)
-        self.scheme = get_scheme(self.url)
+        self.domain = urls.get_domain(self.url)
+        self.scheme = urls.get_scheme(self.url)
 
         self.categories = []
         self.feeds = []
@@ -123,7 +122,7 @@ class Source(object):
             articles[:] = [a for a in articles if a.is_valid_body()]
         return articles
 
-    @cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
+    @utils.cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
         """
         The domain param is **necessary**, see .utils.cache_disk for reasons.
@@ -152,7 +151,7 @@ class Source(object):
         query the desc html attribute.
         """
         desc = self.extractor.get_meta_description(self)
-        self.description = encodeValue(desc)
+        self.description = utils.encodeValue(desc)
 
     def download(self):
         """
@@ -257,7 +256,7 @@ class Source(object):
             after_purge = len(cur_articles)
 
             if self.config.memoize_articles:
-                cur_articles = memoize_articles(self, cur_articles)
+                cur_articles = utils.memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)
@@ -294,7 +293,7 @@ class Source(object):
             after_purge = len(cur_articles)
 
             if self.config.memoize_articles:
-                cur_articles = memoize_articles(self, cur_articles)
+                cur_articles = utils.memoize_articles(self, cur_articles)
             after_memo = len(cur_articles)
 
             articles.extend(cur_articles)
@@ -380,7 +379,7 @@ class Source(object):
         """
         Clears the memoization cache for this specific news domain.
         """
-        clear_memo_cache(self)
+        utils.clear_memo_cache(self)
 
     def feed_urls(self):
         """

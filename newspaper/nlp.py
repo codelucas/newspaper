@@ -10,14 +10,15 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import re
 import math
 
-from collections import Counter, OrderedDict
-from . import settings
+from collections import Counter
 
+from . import settings
 
 with open(settings.NLP_STOPWORDS_EN, 'r') as f:
     stopwords = set([w.strip() for w in f.readlines()])
 
 ideal = 20.0
+
 
 def summarize(url='', title='', text=''):
     """

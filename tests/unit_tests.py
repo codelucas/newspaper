@@ -230,13 +230,34 @@ class SourceTestCase(unittest.TestCase):
         builds a source object, validates it has no errors, prints out
         all valid categories and feed urls
         """
-        DESC = """CNN.com International delivers breaking news from across the globe and information on the latest top stories, business, sports and entertainment headlines. Follow the news as it happens through: special reports, videos, audio, photo galleries plus interactive maps and timelines."""
-        CATEGORY_URLS = [u'http://cnn.com/ASIA', u'http://connecttheworld.blogs.cnn.com', u'http://cnn.com/HLN', u'http://cnn.com/MIDDLEEAST', u'http://cnn.com', u'http://ireport.cnn.com', u'http://cnn.com/video', u'http://transcripts.cnn.com', u'http://cnn.com/espanol', u'http://partners.cnn.com', u'http://www.cnn.com', u'http://cnn.com/US', u'http://cnn.com/EUROPE', u'http://cnn.com/TRAVEL', u'http://cnn.com/cnni', u'http://cnn.com/SPORT', u'http://cnn.com/mostpopular', u'http://arabic.cnn.com', u'http://cnn.com/WORLD', u'http://cnn.com/LATINAMERICA', u'http://us.cnn.com', u'http://travel.cnn.com', u'http://mexico.cnn.com', u'http://cnn.com/SHOWBIZ', u'http://edition.cnn.com', u'http://amanpour.blogs.cnn.com', u'http://money.cnn.com', u'http://cnn.com/tools/index.html', u'http://cnnespanol.cnn.com', u'http://cnn.com/CNNI', u'http://business.blogs.cnn.com', u'http://cnn.com/AFRICA', u'http://cnn.com/TECH', u'http://cnn.com/BUSINESS']
+        DESC = ('CNN.com International delivers breaking news from across '
+                'the globe and information on the latest top stories, '
+                'business, sports and entertainment headlines. Follow the '
+                'news as it happens through: special reports, videos, '
+                'audio, photo galleries plus interactive maps and timelines.')
+        CATEGORY_URLS = [
+            u'http://cnn.com/ASIA', u'http://connecttheworld.blogs.cnn.com',
+            u'http://cnn.com/HLN', u'http://cnn.com/MIDDLEEAST',
+            u'http://cnn.com', u'http://ireport.cnn.com',
+            u'http://cnn.com/video', u'http://transcripts.cnn.com',
+            u'http://cnn.com/espanol',
+            u'http://partners.cnn.com', u'http://www.cnn.com',
+            u'http://cnn.com/US', u'http://cnn.com/EUROPE',
+            u'http://cnn.com/TRAVEL', u'http://cnn.com/cnni',
+            u'http://cnn.com/SPORT', u'http://cnn.com/mostpopular',
+            u'http://arabic.cnn.com', u'http://cnn.com/WORLD',
+            u'http://cnn.com/LATINAMERICA', u'http://us.cnn.com',
+            u'http://travel.cnn.com', u'http://mexico.cnn.com',
+            u'http://cnn.com/SHOWBIZ', u'http://edition.cnn.com',
+            u'http://amanpour.blogs.cnn.com', u'http://money.cnn.com',
+            u'http://cnn.com/tools/index.html', u'http://cnnespanol.cnn.com',
+            u'http://cnn.com/CNNI', u'http://business.blogs.cnn.com',
+            u'http://cnn.com/AFRICA', u'http://cnn.com/TECH',
+            u'http://cnn.com/BUSINESS']
+        FEEDS = [u'http://rss.cnn.com/rss/edition.rss']
         BRAND = 'cnn'
 
-        config = Configuration()
-        config.verbose = False
-        s = Source('http://cnn.com', config=config)
+        s = Source('http://cnn.com', verbose=False, memoize_articles=False)
         url_re = re.compile(".*cnn\.com")
         mock_response_with(url_re, 'cnn_main_site')
         s.clean_memo_cache()
@@ -246,6 +267,10 @@ class SourceTestCase(unittest.TestCase):
         assert s.description == DESC
         assert s.size() == 241
         assert s.category_urls() == CATEGORY_URLS
+        # TODO: A lot of the feed extraction is NOT being tested because feeds
+        # are primarly extracted from the HTML of category URLs. We lose this
+        # effect by just mocking CNN's main page HTML. Warning: tedious fix.
+        assert s.feed_urls() == FEEDS
 
     @print_test
     @responses.activate

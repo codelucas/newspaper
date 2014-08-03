@@ -8,21 +8,21 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import time
-import hashlib
-import re
-import os
-import random
 import codecs
-import threading
-import sys
-import pickle
+import hashlib
 import logging
+import os
+import pickle
+import random
+import re
 import string
+import sys
+import threading
+import time
 
 from hashlib import sha1
-from .encoding import (
-    smart_unicode, smart_str, DjangoUnicodeDecodeError)
+
+from . import encoding
 from .. import settings
 
 log = logging.getLogger(__name__)
@@ -272,9 +272,9 @@ def encodeValue(value):
         return u''
     string_org = value
     try:
-        value = smart_unicode(value)
-    except (UnicodeEncodeError, DjangoUnicodeDecodeError):
-        value = smart_str(value)
+        value = encoding.smart_unicode(value)
+    except (UnicodeEncodeError, encoding.DjangoUnicodeDecodeError):
+        value = encoding.smart_str(value)
     except:
         value = string_org
     return value.strip()

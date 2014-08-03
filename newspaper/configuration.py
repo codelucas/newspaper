@@ -12,12 +12,9 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
-from .text import StopWords
-from .text import StopWordsChinese
-from .text import StopWordsArabic
-from .text import StopWordsKorean
 from .parsers import Parser, ParserSoup
-from .urls import is_abs_url, get_domain
+from .text import (StopWords, StopWordsArabic, StopWordsChinese,
+                   StopWordsKorean)
 from .version import __version__
 
 log = logging.getLogger(__name__)

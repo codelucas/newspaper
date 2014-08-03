@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
 """
-Newspaper uses a lot of python-goose's extraction code. View their
-license here: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+Newspaper uses much of python-goose's extraction code. View their license:
+https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
 
-Keep all html page extraction code within this file. PLEASE abstract any
-lxml or soup parsing mechanisms in the parsers.py file!
+Keep all html page extraction code within this file. Abstract any
+lxml or soup parsing code in the parsers.py file!
 """
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import re
-import copy
-import urlparse
 from collections import defaultdict
+import copy
+import logging
+import re
+import urlparse
+
+from . import urls
 
 from .packages.tldextract import tldextract
-from .utils import (
-    StringSplitter, StringReplacement, ReplaceSequence)
-from .urls import (
-    get_path, get_domain, get_scheme, prepare_url)
-
+from .utils import ReplaceSequence, StringReplacement, StringSplitter
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
 ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(u"#!", u"?_escaped_fragment_=")
@@ -239,7 +238,7 @@ class ContentExtractor(object):
             for category in source_or_category.categories:
                 feed_urls.extend(self.get_feed_urls(category))
             feed_urls = feed_urls[:50]
-            feed_urls = [prepare_url(f, source.url) for f in feed_urls]
+            feed_urls = [urls.prepare_url(f, source.url) for f in feed_urls]
 
             feed_urls = list(set(feed_urls))
             return feed_urls
@@ -488,9 +487,9 @@ class ContentExtractor(object):
         page_urls = self.get_urls(source.doc) if not page_urls else page_urls
         valid_categories = []
         for p_url in page_urls:
-            scheme = get_scheme(p_url, allow_fragments=False)
-            domain = get_domain(p_url, allow_fragments=False)
-            path = get_path(p_url, allow_fragments=False)
+            scheme = urls.get_scheme(p_url, allow_fragments=False)
+            domain = urls.get_domain(p_url, allow_fragments=False)
+            path = urls.get_path(p_url, allow_fragments=False)
 
             if not domain and not path:
                 if source.config.verbose:
@@ -564,7 +563,7 @@ class ContentExtractor(object):
         # TODO Stop spamming urlparse and tldextract calls...
 
         for p_url in valid_categories:
-            path = get_path(p_url)
+            path = urls.get_path(p_url)
             subdomain = tldextract.extract(p_url).subdomain
             conjunction = path + ' ' + subdomain
             bad = False
@@ -594,7 +593,7 @@ class ContentExtractor(object):
 
         _valid_categories = list(set(_valid_categories))
 
-        category_urls = [prepare_url(p_url, source_url) for p_url in _valid_categories]
+        category_urls = [urls.prepare_url(p_url, source_url) for p_url in _valid_categories]
         category_urls = [c for c in category_urls if c is not None]
         return category_urls
 

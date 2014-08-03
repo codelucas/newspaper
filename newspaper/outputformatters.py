@@ -8,9 +8,9 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from HTMLParser import HTMLParser
+
 from .text import innerTrim
 
-import lxml
 
 class OutputFormatter(object):
 

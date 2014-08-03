@@ -12,29 +12,26 @@ import copy
 import os
 import glob
 
-from . import nlp
 from . import images
 from . import network
+from . import nlp
 from . import settings
+from . import urls
+
+from .cleaners import StandardDocumentCleaner
 from .configuration import Configuration
 from .extractors import StandardContentExtractor
-from .utils import (URLHelper,
-                    encodeValue,
-                    RawHelper,
-                    extend_config,
-                    get_available_languages)
-from .cleaners import StandardDocumentCleaner
 from .outputformatters import StandardOutputFormatter
+from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
+                    get_available_languages)
 from .videos.extractors import VideoExtractor
-from .urls import (prepare_url,
-                   get_domain,
-                   get_scheme,
-                   valid_url)
 
 log = logging.getLogger(__name__)
 
+
 class ArticleException(Exception):
     pass
+
 
 class Article(object):
     """
@@ -51,7 +48,7 @@ class Article(object):
         self.extractor = self.get_extractor()
 
         if source_url == u'':
-            source_url = get_scheme(url) + '://' + get_domain(url)
+            source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
 
         if source_url is None or source_url == '':
             raise ArticleException('input url bad format')
@@ -60,7 +57,7 @@ class Article(object):
         self.source_url = encodeValue(source_url)
 
         url = encodeValue(url)
-        self.url = prepare_url(url, self.source_url)
+        self.url = urls.prepare_url(url, self.source_url)
 
         self.title = encodeValue(title)
 
@@ -248,7 +245,7 @@ class Article(object):
         Performs a check on the url of this link to
         determine if a real news article or not.
         """
-        return valid_url(self.url)
+        return urls.valid_url(self.url)
 
     def is_valid_body(self):
         """
