@@ -23,45 +23,6 @@ from .version import __version__
 log = logging.getLogger(__name__)
 
 
-"""
-class HintsDict(dict):
-    def __init__(self, *args):
-        '''
-        Works like a regular dict but the :meth:`get` method is different.
-
-        ~~Hints~~ new feature:
-        Example usage:
-        Suppose newspaper article extractor was having issues with extracting
-        text from 'Quartz' at qz.com. We can aid our extractor by providing simple
-        hints obtained by just glancing at the page, like tag names or attributes & values
-        of the tag containing our article.
-
-        After inspecting a random quartz article suppose the body text is clearly
-        in a <div> tag with a class labeled 'bodyArticle'.
-
-        {'www.qz.com': {'tag': 'div', 'attr': 'class', 'value': 'bodyArticle'}
-        ...}
-
-        '''
-        dict.__init__(self, args)
-
-    def set(self, key, val):
-        key = get_domain(key) if is_abs_url(key) else key
-        if isinstance(val, dict):
-            self[key] = val
-        else:
-            raise Exception("Not valid Hint value, must be in the form of \
-            {'www.news.domain': {'tag': 'div', 'attr': 'class', 'value': 'bodyArticle'}")
-
-    def get(self, key, default=None):
-        key = get_domain(key) if is_abs_url(key) else key
-        try:
-            val = self[key]
-        except (KeyError, ValueError):
-            val = default
-        return val
-"""
-
 class Configuration(object):
 
     def __init__(self):
@@ -132,14 +93,18 @@ class Configuration(object):
 
         # Set oriental language stopword class.
         self._language = language
-        if language == 'ko':
-            self.stopwords_class = StopWordsKorean
-        elif language == 'zh':
-            self.stopwords_class = StopWordsChinese
-        elif language == 'ar':
-            self.stopwords_class = StopWordsArabic
+        self.stopwords_class = self.get_stopwords_class(language)
 
     language = property(get_language, set_language, del_language, "langauge prop")
+
+    def get_stopwords_class(self, language):
+        if language == 'ko':
+            return StopWordsKorean
+        elif language == 'zh':
+            return StopWordsChinese
+        elif language == 'ar':
+            return StopWordsArabic
+        return StopWords
 
     def get_parser(self):
         return Parser if self.parser_class == 'lxml' else ParserSoup

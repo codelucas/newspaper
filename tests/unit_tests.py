@@ -27,6 +27,7 @@ from newspaper import Article, Source, ArticleException, news_pool
 from newspaper import Config
 from newspaper.network import multithread_request
 from newspaper.configuration import Configuration
+from newspaper.text import StopWords, StopWordsArabic, StopWordsKorean, StopWordsChinese
 from newspaper.utils.encoding import smart_str, smart_unicode
 from newspaper.utils import encodeValue
 
@@ -109,6 +110,7 @@ class ArticleTestCase(unittest.TestCase):
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46 # list is too big, we just check size of images arr
+        META_LANG = 'en'
 
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
@@ -117,8 +119,8 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.top_img == TOP_IMG
         assert self.article.authors == AUTHORS
         assert self.article.title == TITLE
-        print 'we now have ', len(self.article.imgs), 'images'
         assert len(self.article.imgs) == LEN_IMGS
+        assert self.article.meta_lang == META_LANG
 
     @print_test
     @responses.activate
@@ -157,7 +159,6 @@ class ArticleTestCase(unittest.TestCase):
             'news_keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm'
         })
 
-        print "META DATA", str(meta)
         assert meta == META_DATA
 
         # if the value for a meta key is another dict, that dict ought to be
@@ -321,9 +322,6 @@ class APITestCase(unittest.TestCase):
         assert isinstance(article, Article) == True
         article.build()
         article.nlp()
-        # print article.title
-        # print article.summary
-        # print article.keywords
 
     @print_test
     def test_hot_trending(self):
@@ -449,6 +447,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
         article = Article(url=url, language='zh')
         article.build()
+        # assert isinstance(article.stopwords_class, StopWordsChinese)
         with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -458,8 +457,11 @@ class MultiLanguageTestCase(unittest.TestCase):
     @print_test
     def test_arabic_fulltext_extract(self):
         url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/index.html'
-        article = Article(url=url, language='ar')
+
+        article = Article(url=url)
         article.build()
+        assert article.meta_lang == 'ar'
+        # assert isinstance(article.stopwords_class, StopWordsArabic)
         with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
             assert article.text == f.read()
 
@@ -483,11 +485,11 @@ if __name__ == '__main__':
     suite = unittest.TestSuite()
 
     suite.addTest(ConfigBuildTestCase())
-    # suite.addTest(MThreadingTestCase())
     suite.addTest(MultiLanguageTestCase())
     suite.addTest(SourceTestCase())
     suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
-    unittest.TextTestRunner().run(suite) # run custom subset
+    unittest.TextTestRunner().run(suite)
+    # suite.addTest(MThreadingTestCase())

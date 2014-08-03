@@ -17,18 +17,19 @@ class OutputFormatter(object):
     def __init__(self, config):
         self.top_node = None
         self.config = config
-        # parser
         self.parser = self.config.get_parser()
+        self.language = config.language
         self.stopwords_class = config.stopwords_class
 
-    def get_language(self, article):
+    def update_language(self, article):
         """
-        Returns the language is by the article or the configuration language.
+        Called before formatting the top node to ensure the stopwords_class
+        has been updated incase a non-latin language code is extracted.
         """
-        if self.config.use_meta_language == True:
-            if article.meta_lang:
-                return article.meta_lang[:2]
-        return self.config.language
+        if article.config.use_meta_language:
+            self.language = article.meta_lang
+            self.stopwords_class = article.config.\
+                get_stopwords_class(article.meta_lang)
 
     def get_top_node(self):
         return self.top_node
@@ -109,7 +110,7 @@ class OutputFormatter(object):
         for el in all_nodes:
             tag = self.parser.getTag(el)
             text = self.parser.getText(el)
-            stop_words = self.stopwords_class(language=self.get_language(article)).get_stopword_count(text)
+            stop_words = self.stopwords_class(language=self.language).get_stopword_count(text)
             if (tag != 'br' or text != '\\r') and stop_words.get_stopword_count() < 3 \
                 and len(self.parser.getElementsByTag(el, tag='object')) == 0 \
                 and len(self.parser.getElementsByTag(el, tag='embed')) == 0:
