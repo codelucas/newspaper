@@ -27,14 +27,16 @@ from newspaper import Article, Source, ArticleException, news_pool
 from newspaper import Config
 from newspaper.network import multithread_request
 from newspaper.configuration import Configuration
-from newspaper.text import StopWords, StopWordsArabic, StopWordsKorean, StopWordsChinese
+from newspaper.text import (StopWords, StopWordsArabic,
+                            StopWordsKorean, StopWordsChinese)
 from newspaper.utils.encoding import smart_str, smart_unicode
 from newspaper.utils import encodeValue
 
 
 def print_test(method):
-    """utility method for print verbalizing test suite, prints out
-    time taken for test and functions name, and status"""
+    """Utility method for print verbalizing test suite, prints out
+    time taken for test and functions name, and status
+    """
     def run(*args, **kw):
         ts = time.time()
         print '\ttesting function %r' % method.__name__
@@ -43,13 +45,15 @@ def print_test(method):
         print '\t[OK] in %r %2.2f sec' % (method.__name__, te-ts)
     return run
 
-def read_urls(base_fn=URLS_FN, amount=100):
-    """utility funct which extracts out a listing of sample urls"""
 
+def read_urls(base_fn=URLS_FN, amount=100):
+    """Utility funct which extracts out a listing of sample urls
+    """
     f = codecs.open(base_fn, 'r', 'utf8')
     lines = f.readlines()
     lines = [l.strip() for l in lines]
     return lines[:amount]
+
 
 def mock_response_with(url, response_file):
     response_path = os.path.join(TEST_DIR, "data/html/%s.html" % response_file)
@@ -58,6 +62,7 @@ def mock_response_with(url, response_file):
 
     responses.add(responses.GET, url, body=body, status=200,
                   content_type='text/html')
+
 
 class ArticleTestCase(unittest.TestCase):
     def runTest(self):
@@ -75,15 +80,19 @@ class ArticleTestCase(unittest.TestCase):
         """called before the first test case of this unit begins"""
 
         self.article = Article(
-            url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html?iref=allsearch')
+            url='http://www.cnn.com/2013/11/27/travel/weather-'
+                'thanksgiving/index.html?iref=allsearch')
 
     def tearDown(self):
-        """called after all test cases finish of this unit"""
+        """Called after all test cases finish of this unit
+        """
         pass
 
     @print_test
     def test_url(self):
-        assert self.article.url == u'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+        assert self.article.url == (
+            u'http://www.cnn.com/2013/11/27/travel/weather-'
+            'thanksgiving/index.html')
 
     @print_test
     @responses.activate
@@ -94,9 +103,10 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_pre_download_parse(self):
-        """before we download an article you should not be parsing!"""
-
+        """Before we download an article you should not be parsing!
+        """
         article = Article(self.article.url)
+
         def failfunc():
             article.parse()
         self.assertRaises(ArticleException, failfunc)
@@ -104,12 +114,13 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     @responses.activate
     def test_parse_html(self):
-        TOP_IMG = 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg'
+        TOP_IMG = ('http://i2.cdn.turner.com/cnn/dam/assets/131129200805-'
+                   '01-weather-1128-story-top.jpg')
         DOMAIN = 'www.cnn.com'
         SCHEME = 'http'
         AUTHORS = ['Dana Ford', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 46 # list is too big, we just check size of images arr
+        LEN_IMGS = 46
         META_LANG = 'en'
 
         mock_response_with(self.article.url, 'cnn_article')
@@ -128,9 +139,9 @@ class ArticleTestCase(unittest.TestCase):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
 
-        meta_type = self.article.extractor.get_meta_type(self.article)
+        meta_type = self.article.extractor.get_meta_type(
+            self.article.clean_doc)
         assert 'article' == meta_type
-
 
     @print_test
     @responses.activate
@@ -138,7 +149,7 @@ class ArticleTestCase(unittest.TestCase):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
 
-        meta = self.article.extractor.get_meta_data(self.article)
+        meta = self.article.extractor.get_meta_data(self.article.clean_doc)
         META_DATA = defaultdict(dict, {
             'medium': 'news',
             'googlebot': 'noarchive',
@@ -180,6 +191,7 @@ class ArticleTestCase(unittest.TestCase):
         """Test running NLP algos before even downloading the article"""
 
         mock_response_with(self.article.url, 'cnn_article')
+
         def failfunc():
             self.article.nlp()
         self.assertRaises(ArticleException, failfunc)
@@ -190,6 +202,7 @@ class ArticleTestCase(unittest.TestCase):
 
         article = Article(self.article.url)
         article.download()
+
         def failfunc():
             article.nlp()
         self.assertRaises(ArticleException, failfunc)
@@ -199,8 +212,10 @@ class ArticleTestCase(unittest.TestCase):
     def test_nlp_body(self):
         SUMMARY = """Wish the forecasters were wrong all the time :)"Though the worst of the storm has passed, winds could still pose a problem.\r\nForecasters see mostly smooth sailing into Thanksgiving.\r\nThe forecast has left up in the air the fate of the balloons in Macy's Thanksgiving Day Parade.\r\nThe storm caused some complications and inconveniences, but no major delays or breakdowns.\r\n"That's good news for people like Latasha Abney, who joined the more than 43 million Americans expected by AAA to travel over the Thanksgiving holiday weekend."""
 
-        KEYWORDS = [u'great', u'good', u'flight', u'sailing', u'delays', u'smooth', u'thanksgiving',
-                    u'snow', u'weather', u'york', u'storm', u'winds', u'balloons', u'forecasters']
+        KEYWORDS = [
+            u'great', u'good', u'flight', u'sailing', u'delays',
+            u'smooth', u'thanksgiving', u'snow', u'weather', u'york',
+            u'storm', u'winds', u'balloons', u'forecasters']
 
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
@@ -209,6 +224,7 @@ class ArticleTestCase(unittest.TestCase):
         # print self.article.keywords
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
+
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
@@ -286,9 +302,10 @@ class SourceTestCase(unittest.TestCase):
         s.set_categories()
 
         saved_urls = s.category_urls()
-        s.categories = [] # reset and try again with caching
+        s.categories = []
         s.set_categories()
         assert sorted(s.category_urls()) == sorted(saved_urls)
+
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
@@ -321,11 +338,11 @@ class UrlTestCase(unittest.TestCase):
 
     @print_test
     def test_prepare_url(self):
-        """
-        normalizes a url, removes arguments, hashtags. If a relative url, it
+        """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
         pass
+
 
 class APITestCase(unittest.TestCase):
     def runTest(self):
@@ -337,14 +354,17 @@ class APITestCase(unittest.TestCase):
 
     @print_test
     def test_source_build(self):
-        huff_paper = newspaper.build('http://www.huffingtonpost.com/', dry=True)
-        assert isinstance(huff_paper, Source) == True
+        huff_paper = newspaper.build(
+            'http://www.huffingtonpost.com/', dry=True)
+        assert isinstance(huff_paper, Source) is True
 
     @print_test
     def test_article_build(self):
-        url = 'http://abcnews.go.com/blogs/politics/2013/12/states-cite-surge-in-obamacare-sign-ups-ahead-of-first-deadline/'
+        url = ('http://abcnews.go.com/blogs/politics/2013/12/'
+               'states-cite-surge-in-obamacare-sign-ups-ahead'
+               '-of-first-deadline/')
         article = newspaper.build_article(url)
-        assert isinstance(article, Article) == True
+        assert isinstance(article, Article) is True
         article.build()
         article.nlp()
 
@@ -361,6 +381,7 @@ class APITestCase(unittest.TestCase):
         just make sure this runs
         """
         newspaper.popular_urls()
+
 
 class EncodingTestCase(unittest.TestCase):
     def runTest(self):
@@ -394,16 +415,14 @@ class MThreadingTestCase(unittest.TestCase):
 
     @print_test
     def test_download_works(self):
-        """
-        """
         config = Configuration()
         config.memoize_articles = False
         slate_paper = newspaper.build('http://slate.com', config=config)
         tc_paper = newspaper.build('http://techcrunch.com', config=config)
         espn_paper = newspaper.build('http://espn.com', config=config)
 
-        print 'slate has %d articles tc has %d articles espn has %d articles' \
-                % (slate_paper.size(), tc_paper.size(), espn_paper.size())
+        print ('slate has %d articles tc has %d articles espn has %d articles'
+               % (slate_paper.size(), tc_paper.size(), espn_paper.size()))
 
         papers = [slate_paper, tc_paper, espn_paper]
         news_pool.set(papers, threads_per_source=2)
@@ -421,51 +440,53 @@ class ConfigBuildTestCase(unittest.TestCase):
 
     @print_test
     def test_config_build(self):
+        """Test if our **kwargs to config building setup actually works.
         """
-        Test if our **kwargs to config building setup actually works.
-        """
-        a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html')
+        a = Article(url='http://www.cnn.com/2013/11/27/'
+                    'travel/weather-thanksgiving/index.html')
         assert a.config.language == 'en'
-        assert a.config.memoize_articles == True
-        assert a.config.use_meta_language == True
+        assert a.config.memoize_articles is True
+        assert a.config.use_meta_language is True
 
-        a = Article(url='http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html',
-                language='zh', memoize_articles=False)
+        a = Article(url='http://www.cnn.com/2013/11/27/travel/'
+                    'weather-thanksgiving/index.html',
+                    language='zh', memoize_articles=False)
         assert a.config.language == 'zh'
-        assert a.config.memoize_articles == False
-        assert a.config.use_meta_language == False
+        assert a.config.memoize_articles is False
+        assert a.config.use_meta_language is False
 
         s = Source(url='http://cnn.com')
         assert s.config.language == 'en'
         assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles == True
-        assert s.config.use_meta_language == True
+        assert s.config.memoize_articles is True
+        assert s.config.use_meta_language is True
 
         s = Source(url="http://cnn.com", memoize_articles=False,
-                MAX_FILE_MEMO=10000, language='en')
-        assert s.config.memoize_articles == False
+                   MAX_FILE_MEMO=10000, language='en')
+        assert s.config.memoize_articles is False
         assert s.config.MAX_FILE_MEMO == 10000
         assert s.config.language == 'en'
-        assert s.config.use_meta_language == False
+        assert s.config.use_meta_language is False
 
         s = newspaper.build('http://cnn.com', dry=True)
         assert s.config.language == 'en'
         assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles == True
-        assert s.config.use_meta_language == True
+        assert s.config.memoize_articles is True
+        assert s.config.use_meta_language is True
 
         s = newspaper.build('http://cnn.com', dry=True, memoize_articles=False,
-                MAX_FILE_MEMO=10000, language='zh')
+                            MAX_FILE_MEMO=10000, language='zh')
         assert s.config.language == 'zh'
         assert s.config.MAX_FILE_MEMO == 10000
-        assert s.config.memoize_articles == False
-        assert s.config.use_meta_language == False
+        assert s.config.memoize_articles is False
+        assert s.config.use_meta_language is False
+
 
 class MultiLanguageTestCase(unittest.TestCase):
     def runTest(self):
         self.test_chinese_fulltext_extract()
         self.test_arabic_fulltext_extract()
-        #self.test_spanish_fulltext_extract()
+        # self.test_spanish_fulltext_extract()
 
     @print_test
     def test_chinese_fulltext_extract(self):

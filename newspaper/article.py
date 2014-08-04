@@ -15,10 +15,10 @@ from . import nlp
 from . import settings
 from . import urls
 
-from .cleaners import StandardDocumentCleaner
+from .cleaners import DocumentCleaner
 from .configuration import Configuration
-from .extractors import StandardContentExtractor
-from .outputformatters import StandardOutputFormatter
+from .extractors import ContentExtractor
+from .outputformatters import OutputFormatter
 from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
                     get_available_languages)
 from .videos.extractors import VideoExtractor
@@ -40,8 +40,7 @@ class Article(object):
         self.config = config or Configuration()
         self.config = extend_config(self.config, kwargs)
 
-        self.parser = self.config.get_parser()
-        self.extractor = self.get_extractor()
+        self.extractor = ContentExtractor(self.config)
 
         if source_url == u'':
             source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
@@ -156,7 +155,7 @@ class Article(object):
             print 'You must download() an article before parsing it!'
             raise ArticleException()
 
-        self.doc = self.parser.fromstring(self.html)
+        self.doc = self.config.get_parser().fromstring(self.html)
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
@@ -167,54 +166,59 @@ class Article(object):
         parse_candidate = self.get_parse_candidate()
         self.link_hash = parse_candidate.link_hash  # MD5
 
-        document_cleaner = self.get_document_cleaner()
-        output_formatter = self.get_output_formatter()
+        document_cleaner = DocumentCleaner(self.config)
+        output_formatter = OutputFormatter(self.config)
 
-        title = self.extractor.get_title(self)
+        title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
 
-        authors = self.extractor.get_authors(self)
+        authors = self.extractor.get_authors(self.clean_doc)
         self.set_authors(authors)
 
-        meta_lang = self.extractor.get_meta_lang(self)
+        meta_lang = self.extractor.get_meta_lang(self.clean_doc)
         self.set_meta_language(meta_lang)
 
-        self.extractor.update_language(self)
-        output_formatter.update_language(self)
+        if self.config.use_meta_language:
+            self.extractor.update_language(self.meta_lang)
+            output_formatter.update_language(self.meta_lang)
 
-        meta_favicon = self.extractor.get_favicon(self)
+        meta_favicon = self.extractor.get_favicon(self.clean_doc)
         self.set_meta_favicon(meta_favicon)
 
-        meta_description = self.extractor.get_meta_description(self)
+        meta_description = \
+            self.extractor.get_meta_description(self.clean_doc)
         self.set_meta_description(meta_description)
 
-        canonical_link = self.extractor.get_canonical_link(self)
+        canonical_link = self.extractor.get_canonical_link(
+            self.url, self.clean_doc)
         self.set_canonical_link(canonical_link)
 
-        tags = self.extractor.extract_tags(self)
+        tags = self.extractor.extract_tags(self.clean_doc)
         self.set_tags(tags)
 
-        meta_keywords = self.extractor.get_meta_keywords(self)
+        meta_keywords = self.extractor.get_meta_keywords(
+            self.clean_doc)
         self.set_meta_keywords(meta_keywords)
 
-        meta_data = self.extractor.get_meta_data(self)
+        meta_data = self.extractor.get_meta_data(self.clean_doc)
         self.set_meta_data(meta_data)
 
         # TODO self.publish_date = ...
 
         # Before any computations on the body, clean DOM object
-        self.doc = document_cleaner.clean(self)
+        self.doc = document_cleaner.clean(self.doc)
 
         text = u''
-        self.top_node = self.extractor.calculate_best_node(self)
+        self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
-            video_extractor = self.get_video_extractor(self)
+            video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
 
-            text, article_html = output_formatter.get_formatted(self)
+            text, article_html = output_formatter.get_formatted(
+                self.top_node)
             self.set_article_html(article_html)
             self.set_text(text)
 
@@ -226,14 +230,18 @@ class Article(object):
 
     def fetch_images(self):
         if self.clean_doc is not None:
-            meta_img_url = self.extractor.get_meta_img_url(self)
+            meta_img_url = self.extractor.get_meta_img_url(
+                self.url, self.clean_doc)
             self.set_meta_img(meta_img_url)
 
-            imgs = self.extractor.get_img_urls(self)
+            imgs = self.extractor.get_img_urls(self.url, self.clean_doc)
+            if self.meta_img:
+                imgs.add(self.meta_img)
             self.set_imgs(imgs)
 
         if self.clean_top_node is not None and not self.has_top_image():
-            first_img = self.extractor.get_first_img_url(self)
+            first_img = self.extractor.get_first_img_url(
+                self.url, self.clean_top_node)
             self.set_top_img(first_img)
 
         if not self.has_top_image():
@@ -255,7 +263,7 @@ class Article(object):
         if not self.is_parsed:
             raise ArticleException('must parse article before checking \
                                     if it\'s body is valid!')
-        meta_type = self.extractor.get_meta_type(self)
+        meta_type = self.extractor.get_meta_type(self.clean_doc)
         wordcount = self.text.split(' ')
         sentcount = self.text.split('.')
 
@@ -321,18 +329,6 @@ class Article(object):
             return RawHelper.get_parsing_candidate(self.url, self.html)
         return URLHelper.get_parsing_candidate(self.url)
 
-    def get_video_extractor(self, article):
-        return VideoExtractor(article, self.config)
-
-    def get_output_formatter(self):
-        return StandardOutputFormatter(self.config)
-
-    def get_document_cleaner(self):
-        return StandardDocumentCleaner(self.config)
-
-    def get_extractor(self):
-        return StandardContentExtractor(self.config)
-
     def build_resource_path(self):
         """Must be called after computing HTML/final URL
         """
@@ -361,15 +357,10 @@ class Article(object):
                 pass
         # os.remove(path)
 
-    def set_reddit_top_img(self, test_run=False):
+    def set_reddit_top_img(self):
         """Wrapper for setting images. Queries known image attributes
         first, then uses Reddit's imgage algorithm as a fallback.
         """
-        # TODO: move tests from here
-        if test_run:
-            s = images.Scraper(self)
-            img = s.largest_image_url()
-            print 'it worked, the img is', img
         try:
             s = images.Scraper(self)
             self.set_top_img_no_ckeck(s.largest_image_url())
