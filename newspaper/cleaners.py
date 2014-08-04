@@ -47,10 +47,9 @@ class DocumentCleaner(object):
             .append("\t")\
             .append("^\\s+$")
 
-    def clean(self, article):
+    def clean(self, doc_to_clean):
         """Remove chunks of the DOM as specified
         """
-        doc_to_clean = article.doc
         doc_to_clean = self.clean_body_classes(doc_to_clean)
         doc_to_clean = self.clean_article_tags(doc_to_clean)
         doc_to_clean = self.clean_em_tags(doc_to_clean)
@@ -193,7 +192,6 @@ class DocumentCleaner(object):
                 nodes_to_return.append(kid)
             # The node is a text node
             elif self.parser.isTextNode(kid):
-                kid_text_node = kid
                 kid_text = self.parser.getText(kid)
                 self.replace_walk_left_right(kid, kid_text, replacement_text,
                                              nodes_to_remove)
@@ -232,7 +230,3 @@ class DocumentCleaner(object):
                     div.insert(c, n)
                 else_divs += 1
         return doc
-
-
-class StandardDocumentCleaner(DocumentCleaner):
-    pass

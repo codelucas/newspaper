@@ -56,17 +56,17 @@ class ContentExtractor(object):
         self.language = config.language
         self.stopwords_class = config.stopwords_class
 
-    def update_language(self, article):
+    def update_language(self, meta_lang):
         '''Required to be called before the extraction process in some
         cases because the stopwords_class has to set incase the lang
         is not latin based
         '''
-        if article.config.use_meta_language and article.meta_lang:
-            self.language = article.meta_lang
-            self.stopwords_class = article.config.\
-                get_stopwords_class(article.meta_lang)
+        if meta_lang:
+            self.language = meta_lang
+            self.stopwords_class = \
+                self.config.get_stopwords_class(meta_lang)
 
-    def get_authors(self, article):
+    def get_authors(self, doc):
         """Fetch the authors of the article, return as a list
         Only works for english articles
         """
@@ -125,8 +125,6 @@ class ContentExtractor(object):
         VALS = ['author', 'byline']
         matches = []
         _authors, authors = [], []
-        doc = article.clean_doc
-        html = article.html
 
         for attr in ATTRS:
             for val in VALS:
@@ -136,24 +134,19 @@ class ContentExtractor(object):
 
         for match in matches:
             content = u''
-
             if match.tag == 'meta':
                 mm = match.xpath('@content')
                 if len(mm) > 0:
                     content = mm[0]
-
             else:
                 content = match.text or u''
-
             if len(content) > 0:
                 _authors.extend(parse_byline(content))
 
         uniq = list(set([s.lower() for s in _authors]))
-
         for name in uniq:
             names = [w.capitalize() for w in name.split(' ')]
             authors.append(' '.join(names))
-
         return authors or []
 
         # TODO Method 2: Search raw html for a by-line
@@ -166,12 +159,10 @@ class ContentExtractor(object):
         #    return [] # Failed to find anything
         # return authors
 
-    def get_title(self, article):
+    def get_title(self, doc):
         """Fetch the article title and analyze it
         """
         title = ''
-        doc = article.clean_doc
-
         title_element = self.parser.getElementsByTag(doc, tag='title')
         # no title found
         if title_element is None or len(title_element) == 0:
@@ -222,44 +213,41 @@ class ContentExtractor(object):
         title = title_pieces[large_text_index]
         return TITLE_REPLACEMENTS.replaceAll(title).strip()
 
-    def get_feed_urls(self, source_or_category):
-        """Returns list of feed urls on a source or category object
+    def get_feed_urls(self, source_url, categories):
+        """Takes a source url and a list of category objects and returns
+        a list of feed urls
         """
-        is_source = source_or_category.__class__.__name__ == 'Source'
-        if is_source:
-            source = source_or_category
-            feed_urls = []
-            for category in source_or_category.categories:
-                feed_urls.extend(self.get_feed_urls(category))
-            feed_urls = feed_urls[:50]
-            feed_urls = [urls.prepare_url(f, source.url) for f in feed_urls]
-            feed_urls = list(set(feed_urls))
-            return feed_urls
-        else:
-            category = source_or_category
+        total_feed_urls = []
+        for category in categories:
             kwargs = {'attr': 'type', 'value': 'application\/rss\+xml'}
             feed_elements = self.parser.getElementsByTag(
                 category.doc, **kwargs)
             feed_urls = [e.get('href') for e in feed_elements if e.get('href')]
-            return feed_urls
+            total_feed_urls.extend(feed_urls)
 
-    def get_favicon(self, article):
+        total_feed_urls = total_feed_urls[:50]
+        total_feed_urls = [urls.prepare_url(f, source_url)
+                           for f in total_feed_urls]
+        total_feed_urls = list(set(total_feed_urls))
+        return total_feed_urls
+
+    def get_favicon(self, doc):
         """Extract the favicon from a website http://en.wikipedia.org/wiki/Favicon
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
         <link rel="icon" type="image/png" href="favicon.png" />
         """
         kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
-        meta = self.parser.getElementsByTag(article.clean_doc, **kwargs)
+        meta = self.parser.getElementsByTag(doc, **kwargs)
         if meta:
             favicon = self.parser.getAttribute(meta[0], 'href')
             return favicon
         return ''
 
-    def get_meta_lang(self, article):
+    def get_meta_lang(self, doc):
         """Extract content language from meta
         """
         # we have a lang attribute in html
-        attr = self.parser.getAttribute(article.clean_doc, attr='lang')
+        attr = self.parser.getAttribute(doc, attr='lang')
         if attr is None:
             # look up for a Content-Language in meta
             items = [
@@ -268,8 +256,7 @@ class ContentExtractor(object):
                 {'tag': 'meta', 'attr': 'name', 'value': 'lang'}
             ]
             for item in items:
-                meta = self.parser.getElementsByTag(
-                    article.clean_doc, **item)
+                meta = self.parser.getElementsByTag(doc, **item)
                 if meta:
                     attr = self.parser.getAttribute(
                         meta[0], attr='content')
@@ -296,11 +283,10 @@ class ContentExtractor(object):
             return content.strip()
         return ''
 
-    def get_meta_img_url(self, article):
+    def get_meta_img_url(self, article_url, doc):
         """Returns the 'top img' as specified by the website
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
-        doc = article.clean_doc
 
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
         if try_one is None:
@@ -319,34 +305,26 @@ class ContentExtractor(object):
 
         top_meta_image = try_one or try_two or try_three or try_four
 
-        return urlparse.urljoin(article.url, top_meta_image)
+        return urlparse.urljoin(article_url, top_meta_image)
 
-    def get_meta_type(self, article):
+    def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
         """
-        return self.get_meta_content(
-            article.clean_doc, 'meta[property="og:type"]')
+        return self.get_meta_content(doc, 'meta[property="og:type"]')
 
-    def get_meta_description(self, article_or_source):
+    def get_meta_description(self, doc):
         """If the article has meta description set in the source, use that
         """
-        # Since <source> objects use this particular method and sources don't
-        # have a 'clean_doc' we just use doc
-        # "easier to ask for forgiveness than permission"
-        try:
-            doc = article_or_source.clean_doc
-        except:
-            doc = article_or_source.doc
         return self.get_meta_content(doc, "meta[name=description]")
 
-    def get_meta_keywords(self, article):
+    def get_meta_keywords(self, doc):
         """If the article has meta keywords set in the source, use that
         """
-        return self.get_meta_content(article.clean_doc, "meta[name=keywords]")
+        return self.get_meta_content(doc, "meta[name=keywords]")
 
-    def get_meta_data(self, article):
+    def get_meta_data(self, doc):
         data = defaultdict(dict)
-        properties = self.parser.css_select(article.clean_doc, 'meta')
+        properties = self.parser.css_select(doc, 'meta')
         for prop in properties:
             key = prop.attrib.get('property') or prop.attrib.get('name')
             value = prop.attrib.get('content') or prop.attrib.get('value')
@@ -377,47 +355,42 @@ class ContentExtractor(object):
                 ref = ref[part]
         return data
 
-    def get_canonical_link(self, article):
+    def get_canonical_link(self, article_url, doc):
         """If the article has meta canonical link set in the url
         """
         kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'canonical'}
-        meta = self.parser.getElementsByTag(article.clean_doc, **kwargs)
+        meta = self.parser.getElementsByTag(doc, **kwargs)
         if meta is not None and len(meta) > 0:
             href = self.parser.getAttribute(meta[0], 'href')
             if href:
                 href = href.strip()
                 o = urlparse.urlparse(href)
                 if not o.hostname:
-                    z = urlparse.urlparse(article.url)
+                    z = urlparse.urlparse(article_url)
                     domain = '%s://%s' % (z.scheme, z.hostname)
                     href = urlparse.urljoin(domain, href)
                 return href
         return u''
 
-    def get_img_urls(self, article, use_top_node=False):
+    def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root
         """
-        doc = article.clean_top_node if use_top_node else article.clean_doc
-
         img_kwargs = {'tag': 'img'}
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urlparse.urljoin(article.url, url) for url in urls])
-
-        if article.meta_img:
-            img_links.add(article.meta_img)
+        img_links = set([urlparse.urljoin(article_url, url) for url in urls])
         return img_links
 
-    def get_first_img_url(self, article):
+    def get_first_img_url(self, article_url, top_node):
         """Retrieves the first image in the 'top_node'
         The top node is essentially the HTML markdown where the main
         article lies and the first image in that area is probably signifigcant.
         """
-        node_images = self.get_img_urls(article, use_top_node=True)
+        node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
         if node_images:
-            return urlparse.urljoin(article.url, node_images[0])
+            return urlparse.urljoin(article_url, node_images[0])
         return u''
 
     def _get_urls(self, doc, titles):
@@ -458,14 +431,13 @@ class ContentExtractor(object):
             doc = doc_or_html
         return self._get_urls(doc, titles)
 
-    def get_category_urls(self, source, source_url=None, page_urls=None):
-        """Requires: source lxml root and source url takes a domain and
+    def get_category_urls(self, source_url, doc):
+        """Inputs source lxml root and source url, extracts domain and
         finds all of the top level urls, we are assuming that these are
         the category urls.
         cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
         """
-        source_url = source.url if not source_url else source_url
-        page_urls = self.get_urls(source.doc) if not page_urls else page_urls
+        page_urls = self.get_urls(doc)
         valid_categories = []
         for p_url in page_urls:
             scheme = urls.get_scheme(p_url, allow_fragments=False)
@@ -473,15 +445,15 @@ class ContentExtractor(object):
             path = urls.get_path(p_url, allow_fragments=False)
 
             if not domain and not path:
-                if source.config.verbose:
+                if self.config.verbose:
                     print 'elim category url %s for no domain and path' % p_url
                 continue
             if path and path.startswith('#'):
-                if source.config.verbose:
+                if self.config.verbose:
                     print 'elim category url %s path starts with #' % p_url
                 continue
             if scheme and (scheme != 'http' and scheme != 'https'):
-                if source.config.verbose:
+                if self.config.verbose:
                     print ('elim category url %s for bad scheme, '
                            'not http nor https' % p_url)
                 continue
@@ -493,7 +465,7 @@ class ContentExtractor(object):
                 subdomain_contains = False
                 for part in child_subdomain_parts:
                     if part == domain_tld.domain:
-                        if source.config.verbose:
+                        if self.config.verbose:
                             print ('subdomain contains at %s and %s' %
                                    (str(part), str(domain_tld.domain)))
                         subdomain_contains = True
@@ -503,12 +475,12 @@ class ContentExtractor(object):
                 # espn.com, but espn.go.com is probably related to espn.com
                 if not subdomain_contains and \
                         (child_tld.domain != domain_tld.domain):
-                    if source.config.verbose:
+                    if self.config.verbose:
                         print ('elim category url %s for domain '
                                'mismatch' % p_url)
                         continue
                 elif child_tld.subdomain in ['m', 'i']:
-                    if source.config.verbose:
+                    if self.config.verbose:
                         print ('elim category url %s for mobile '
                                'subdomain' % p_url)
                     continue
@@ -526,7 +498,7 @@ class ContentExtractor(object):
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
                     valid_categories.append(domain+path)
                 else:
-                    if source.config.verbose:
+                    if self.config.verbose:
                         print ('elim category url %s for >1 path chunks '
                                'or size path chunks' % p_url)
         stopwords = [
@@ -554,7 +526,7 @@ class ContentExtractor(object):
             bad = False
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
-                    if source.config.verbose:
+                    if self.config.verbose:
                         print ('elim category url %s for subdomain '
                                'contain stopword!' % p_url)
                     bad = True
@@ -584,14 +556,14 @@ class ContentExtractor(object):
         category_urls = [c for c in category_urls if c is not None]
         return category_urls
 
-    def extract_tags(self, article):
-        node = article.clean_doc
-        if len(list(node)) == 0:
+    def extract_tags(self, doc):
+        if len(list(doc)) == 0:
             return NO_STRINGS
-
-        elements = self.parser.css_select(node, A_REL_TAG_SELECTOR)
+        elements = self.parser.css_select(
+            doc, A_REL_TAG_SELECTOR)
         if not elements:
-            elements = self.parser.css_select(node, A_HREF_TAG_SELECTOR)
+            elements = self.parser.css_select(
+                doc, A_HREF_TAG_SELECTOR)
             if not elements:
                 return NO_STRINGS
 
@@ -602,8 +574,7 @@ class ContentExtractor(object):
                 tags.append(tag)
         return set(tags)
 
-    def calculate_best_node(self, article):
-        doc = article.doc
+    def calculate_best_node(self, doc):
         top_node = None
         nodes_to_check = self.nodes_to_check(doc)
         starting_boost = float(1.0)
@@ -875,11 +846,11 @@ class ContentExtractor(object):
             return False
         return True
 
-    def post_cleanup(self, targetNode):
+    def post_cleanup(self, top_node):
         """Remove any divs that looks like non-content,
         clusters of links, or paras with no gusto
         """
-        node = self.add_siblings(targetNode)
+        node = self.add_siblings(top_node)
         for e in self.parser.getChildren(node):
             e_tag = self.parser.getTag(e)
             if e_tag != 'p':
@@ -888,7 +859,3 @@ class ContentExtractor(object):
                         or not self.is_nodescore_threshold_met(node, e):
                     self.parser.remove(e)
         return node
-
-
-class StandardContentExtractor(ContentExtractor):
-    pass

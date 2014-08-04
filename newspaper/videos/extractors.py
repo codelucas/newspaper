@@ -8,16 +8,11 @@ VIDEO_PROVIDERS = ['youtube', 'vimeo', 'dailymotion', 'kewego']
 class VideoExtractor(object):
     """Extracts a list of video from Article top node
     """
-    def __init__(self, article, config):
-        # article
-        self.article = article
-        # config
+    def __init__(self, config, top_node):
         self.config = config
-        # parser
         self.parser = self.config.get_parser()
-        # candidates
+        self.top_node = top_node
         self.candidates = []
-        # movies
         self.movies = []
 
     def get_embed_code(self, node):
@@ -104,7 +99,7 @@ class VideoExtractor(object):
 
     def get_videos(self):
         self.candidates = self.parser.getElementsByTags(
-            self.article.top_node, VIDEOS_TAGS)
+            self.top_node, VIDEOS_TAGS)
         # loop all candidates
         # and check if src attribute belongs to a video provider
         for candidate in self.candidates:

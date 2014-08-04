@@ -15,7 +15,7 @@ from . import urls
 from . import utils
 
 from .article import Article
-from .extractors import StandardContentExtractor
+from .extractors import ContentExtractor
 from .configuration import Configuration
 from .packages.feedparser import feedparser
 from .packages.tldextract import tldextract
@@ -59,8 +59,7 @@ class Source(object):
         self.config = config or Configuration()
         self.config = utils.extend_config(self.config, kwargs)
 
-        self.parser = self.config.get_parser()
-        self.extractor = StandardContentExtractor(config=self.config)
+        self.extractor = ContentExtractor(self.config)
 
         self.url = utils.encodeValue(url)
         self.url = urls.prepare_url(url)
@@ -121,7 +120,7 @@ class Source(object):
         the boilerplate method is so we can use this decorator right.
         We are caching categories for 1 day.
         """
-        return self.extractor.get_category_urls(self)
+        return self.extractor.get_category_urls(self.url, self.doc)
 
     def set_categories(self):
         urls = self._get_category_urls(self.domain)
@@ -131,14 +130,14 @@ class Source(object):
         """Don't need to cache getting feed urls, it's almost
         instant with xpath
         """
-        urls = self.extractor.get_feed_urls(self)
+        urls = self.extractor.get_feed_urls(self.url, self.categories)
         self.feeds = [Feed(url=url) for url in urls]
 
     def set_description(self):
         """Sets a blurb for this source, for now we just query the
         desc html attribute
         """
-        desc = self.extractor.get_meta_description(self)
+        desc = self.extractor.get_meta_description(self.doc)
         self.description = utils.encodeValue(desc)
 
     def download(self):
@@ -185,7 +184,7 @@ class Source(object):
         children links, also sets description
         """
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
-        self.doc = self.parser.fromstring(self.html)
+        self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
             print '[Source parse ERR]', self.url
             return
@@ -197,7 +196,7 @@ class Source(object):
         log.debug('We are extracting from %d categories' %
                   len(self.categories))
         for category in self.categories:
-            doc = self.parser.fromstring(category.html)
+            doc = self.config.get_parser().fromstring(category.html)
             category.doc = doc
             if category.doc is None:
                 print '[Category parse ERR]', category.url
