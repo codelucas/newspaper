@@ -287,7 +287,6 @@ class ContentExtractor(object):
         """Returns the 'top img' as specified by the website
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
-
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
         if try_one is None:
             link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
