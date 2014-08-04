@@ -19,20 +19,19 @@ log = logging.getLogger(__name__)
 
 
 def get_request_kwargs(timeout, useragent):
-    """
-    This Wrapper method exists b/c some values in req_kwargs dict
-    are methods which need to be called every time we make a request.
+    """This Wrapper method exists b/c some values in req_kwargs dict
+    are methods which need to be called every time we make a request
     """
     return {
-        'headers' : {'User-Agent': useragent},
-        'cookies' : cj(),
-        'timeout' : timeout,
-        'allow_redirects' : True
+        'headers': {'User-Agent': useragent},
+        'cookies': cj(),
+        'timeout': timeout,
+        'allow_redirects': True
     }
 
+
 def get_html(url, config=None, response=None):
-    """
-    Retrieves the html for either a url or a response object. All html
+    """Retrieves the html for either a url or a response object. All html
     extractions MUST come from this method due to some intricies in the
     requests module. To get the encoding, requests only uses the HTTP header
     encoding declaration requests.utils.get_encoding_from_headers() and reverts
@@ -40,34 +39,34 @@ def get_html(url, config=None, response=None):
     encoding in a lot of cases.
     """
     FAIL_ENCODING = 'ISO-8859-1'
-    config =  config or Configuration()
+    config = config or Configuration()
     useragent = config.browser_user_agent
     timeout = config.request_timeout
 
     if response is not None:
         if response.encoding != FAIL_ENCODING:
             return response.text
-        return response.content # not unicode, fix later
+        return response.content
 
     try:
         html = None
-        response = requests.get(url=url, **get_request_kwargs(timeout, useragent))
+        response = requests.get(url=url,
+                                **get_request_kwargs(timeout, useragent))
         if response.encoding != FAIL_ENCODING:
             html = response.text
         else:
-            html = response.content # not unicode, fix later
+            html = response.content
         if html is None:
             html = u''
         return html
 
     except Exception, e:
-        # print '[REQUEST FAILED]', str(e)
         log.debug('%s on %s' % (e, url))
         return u''
 
+
 class MRequest(object):
-    """
-    Wrapper for request object for multithreading. If the domain we are
+    """Wrapper for request object for multithreading. If the domain we are
     crawling is under heavy load, the self.resp will be left as None.
     If this is the case, we still want to report the url which has failed
     so (perhaps) we can try again later.
@@ -82,23 +81,20 @@ class MRequest(object):
     def send(self):
         try:
             self.resp = requests.get(self.url, **get_request_kwargs(
-                                    self.timeout, self.useragent))
+                                     self.timeout, self.useragent))
         except Exception, e:
             pass
             log.critical('[REQUEST FAILED] ' + str(e))
-            # TODO, do something with url when we fail!
-            # print '[REQUEST FAILED]', str(e)
+
 
 def multithread_request(urls, config=None):
-    """
-    Request multiple urls via mthreading, order of urls & requests is stable
+    """Request multiple urls via mthreading, order of urls & requests is stable
     returns same requests but with response variables filled.
     """
     config = config or Configuration()
     num_threads = config.number_threads
 
     pool = ThreadPool(num_threads)
-    # print 'beginning of mthreading, %s threads running' % activeCount()
 
     m_requests = []
     for url in urls:
@@ -114,7 +110,8 @@ def multithread_request(urls, config=None):
 #    """receives a list of requests and sends them all
 #    asynchronously at once"""
 #
-#    rs = (grequests.request('GET', url, **get_request_kwargs(timeout)) for url in urls)
+#    rs = (grequests.request('GET', url,
+#          **get_request_kwargs(timeout)) for url in urls)
 #    responses = grequests.map(rs, size=10)
 #
 #    return responses
@@ -132,5 +129,5 @@ def multithread_request(urls, config=None):
 #                                                for url in urls_or_url]
 #        return resps
 #    else:
-#        return requests.get(urls_or_url, **get_request_kwargs(timeout, useragent))
-
+#        return requests.get(urls_or_url,
+#                            **get_request_kwargs(timeout, useragent))

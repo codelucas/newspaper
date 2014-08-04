@@ -41,9 +41,7 @@ class Feed(object):
 
 
 class Source(object):
-    """
-    Sources are abstractions of online news vendors like huffpost or cnn.
-
+    """Sources are abstractions of online news vendors like huffpost or cnn.
     domain     =  'www.cnn.com'
     scheme     =  'http'
     categories =  ['http://cnn.com/world', 'http://money.cnn.com']
@@ -52,14 +50,13 @@ class Source(object):
     brand      =  'cnn'
     """
     def __init__(self, url, config=None, **kwargs):
-        """
-        **The config object for this source will be passed into all of this
-        source's children articles unless specified otherwise or re-set.**
+        """The config object for this source will be passed into all of this
+        source's children articles unless specified otherwise or re-set.
         """
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
 
-        self.config = config or Configuration() # Order matters
+        self.config = config or Configuration()
         self.config = utils.extend_config(self.config, kwargs)
 
         self.parser = self.config.get_parser()
@@ -83,35 +80,31 @@ class Source(object):
         self.brand = tldextract.extract(self.url).domain
         self.description = u''
 
-        self.is_parsed = False     # flags to warn users if they forgot to
-        self.is_downloaded = False # download() or parse()
+        self.is_parsed = False
+        self.is_downloaded = False
 
     def build(self):
-        """
-        Encapsulates download and basic parsing with lxml. May be a
+        """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
         self.download()
         self.parse()
 
-        # Can not merge category and feed tasks together because
-        # computing feed urls relies on the category urls!
         self.set_categories()
-        self.download_categories() # mthread
+        self.download_categories()  # mthread
         self.parse_categories()
 
         self.set_feeds()
-        self.download_feeds()      # mthread
-        # self.parse_feeds()       # TODO regexing out feeds until we fix feedparser!
+        self.download_feeds()       # mthread
+        # TODO: self.parse_feeds()  # regex for now
 
         self.generate_articles()
 
     def purge_articles(self, reason, articles):
-        """
-        Delete rejected articles, if there is an articles param, we
-        purge from there, otherwise purge from our source instance.
+        """Delete rejected articles, if there is an articles param,
+        purge from there, otherwise purge from source instance.
 
-        Reference this excellent StackOverflow post for some of the wonky
+        Reference this StackOverflow post for some of the wonky
         syntax below:
         http://stackoverflow.com/questions/1207406/remove-items-from-a-
         list-while-iterating-in-python
@@ -124,44 +117,37 @@ class Source(object):
 
     @utils.cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
-        """
-        The domain param is **necessary**, see .utils.cache_disk for reasons.
-        the boilerplate method is so we can use this decorator right. We are caching
-        categories for 1 day.
+        """The domain param is **necessary**, see .utils.cache_disk for reasons.
+        the boilerplate method is so we can use this decorator right.
+        We are caching categories for 1 day.
         """
         return self.extractor.get_category_urls(self)
 
     def set_categories(self):
-        """
-        """
         urls = self._get_category_urls(self.domain)
         self.categories = [Category(url=url) for url in urls]
 
     def set_feeds(self):
-        """
-        Don't need to cache getting feed urls, it's almost
-        instant with xpath.
+        """Don't need to cache getting feed urls, it's almost
+        instant with xpath
         """
         urls = self.extractor.get_feed_urls(self)
         self.feeds = [Feed(url=url) for url in urls]
 
     def set_description(self):
-        """
-        Sets a blurb for this source, for now we just
-        query the desc html attribute.
+        """Sets a blurb for this source, for now we just query the
+        desc html attribute
         """
         desc = self.extractor.get_meta_description(self)
         self.description = utils.encodeValue(desc)
 
     def download(self):
-        """
-        Downloads html of source.
+        """Downloads html of source
         """
         self.html = network.get_html(self.url, config=self.config)
 
     def download_categories(self):
-        """
-        Download all category html, can use mthreading.
+        """Download all category html, can use mthreading
         """
         category_urls = [c.url for c in self.categories]
         requests = network.multithread_request(category_urls, self.config)
@@ -169,15 +155,16 @@ class Source(object):
         for index, _ in enumerate(self.categories):
             req = requests[index]
             if req.resp is not None:
-                self.categories[index].html = network.get_html(req.url, response=req.resp)
+                self.categories[index].html = network.get_html(
+                    req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print 'deleting category', self.categories[index].url, 'due to download err'
+                    print ('deleting category',
+                           self.categories[index].url, 'due to download err')
         self.categories = [c for c in self.categories if c.html]
 
     def download_feeds(self):
-        """
-        Download all feed html, can use mthreading.
+        """Download all feed html, can use mthreading
         """
         feed_urls = [f.url for f in self.feeds]
         requests = network.multithread_request(feed_urls, self.config)
@@ -185,16 +172,17 @@ class Source(object):
         for index, _ in enumerate(self.feeds):
             req = requests[index]
             if req.resp is not None:
-                self.feeds[index].rss = network.get_html(req.url, response=req.resp)
+                self.feeds[index].rss = network.get_html(
+                    req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print 'deleting feed', self.categories[index].url, 'due to download err'
+                    print ('deleting feed',
+                           self.categories[index].url, 'due to download err')
         self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
-        """
-        Sets the lxml root, also sets lxml roots of all
-        children links, also sets description.
+        """Sets the lxml root, also sets lxml roots of all
+        children links, also sets description
         """
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.parser.fromstring(self.html)
@@ -204,10 +192,10 @@ class Source(object):
         self.set_description()
 
     def parse_categories(self):
+        """Parse out the lxml root in each category
         """
-        Parse out the lxml root in each category.
-        """
-        log.debug('We are extracting from %d categories' % len(self.categories))
+        log.debug('We are extracting from %d categories' %
+                  len(self.categories))
         for category in self.categories:
             doc = self.parser.fromstring(category.html)
             category.doc = doc
@@ -217,8 +205,7 @@ class Source(object):
         self.categories = [c for c in self.categories if c.doc is not None]
 
     def parse_feeds(self):
-        """
-        **THIS METHOD IS CURRENTLY RETIRED**
+        """DEPRECATED
         Due to the slow speed of feedparser, we won't be dom parsing
         our .rss feeds, but rather regex searching for urls in the .rss
         text and then relying on our article logic to detect false urls.
@@ -234,8 +221,7 @@ class Source(object):
         self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 
     def feeds_to_articles(self):
-        """
-        Returns articles given the url of a feed.
+        """Returns articles given the url of a feed
         """
         articles = []
         for feed in self.feeds:
@@ -247,9 +233,7 @@ class Source(object):
                 article = Article(
                     url=url,
                     source_url=self.url,
-                    config=self.config
-                    # (pre) title=? # TODO Fast title regexing?
-                 )
+                    config=self.config)
                 cur_articles.append(article)
 
             cur_articles = self.purge_articles('url', cur_articles)
@@ -262,14 +246,15 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url)
-            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url))
+                print('%d->%d->%d for %s' %
+                      (before_purge, after_purge, after_memo, feed.url))
+            log.debug('%d->%d->%d for %s' %
+                      (before_purge, after_purge, after_memo, feed.url))
         return articles
 
     def categories_to_articles(self):
-        """
-        Takes the categories, splays them into a big list of urls and churns
-        the articles out of each url with the url_to_article method.
+        """Takes the categories, splays them into a big list of urls and churns
+        the articles out of each url with the url_to_article method
         """
         articles = []
         for category in self.categories:
@@ -299,33 +284,31 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print '%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)
-            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
-
+                print ('%d->%d->%d for %s' %
+                       (before_purge, after_purge, after_memo, category.url))
+            log.debug('%d->%d->%d for %s' %
+                      (before_purge, after_purge, after_memo, category.url))
         return articles
 
     def _generate_articles(self):
-        """
-        Returns a list of all articles, from both categories and feeds.
+        """Returns a list of all articles, from both categories and feeds
         """
         category_articles = self.categories_to_articles()
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
-        uniq = { article.url:article for article in articles }
+        uniq = {article.url: article for article in articles}
         return uniq.values()
 
     def generate_articles(self, limit=5000):
-        """
-        Saves all current articles of news source, filter out bad urls.
+        """Saves all current articles of news source, filter out bad urls
         """
         articles = self._generate_articles()
         self.articles = articles[:limit]
         log.debug(len(articles), 'articles generated and cutoff at', limit)
 
     def download_articles(self, threads=1):
-        """
-        Downloads all articles attached to self.
+        """Downloads all articles attached to self
         """
         # TODO fix how the article's is_downloaded is not set!
         urls = [a.url for a in self.articles]
@@ -341,7 +324,8 @@ class Source(object):
             self.articles = [a for a in self.articles if a.html]
         else:
             if threads > 5:
-                print 'Using 5+ threads on a single source may get you rate limited!'
+                print ('Using 5+ threads on a single source '
+                       'may get you rate limited!')
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
@@ -358,8 +342,7 @@ class Source(object):
                     [a.url for a in failed_articles]
 
     def parse_articles(self):
-        """
-        Parse all articles, delete if too small.
+        """Parse all articles, delete if too small
         """
         for index, article in enumerate(self.articles):
             article.parse()
@@ -368,56 +351,48 @@ class Source(object):
         self.is_parsed = True
 
     def size(self):
-        """
-        Number of articles linked to this news source.
+        """Number of articles linked to this news source
         """
         if self.articles is None:
             return 0
         return len(self.articles)
 
     def clean_memo_cache(self):
-        """
-        Clears the memoization cache for this specific news domain.
+        """Clears the memoization cache for this specific news domain
         """
         utils.clear_memo_cache(self)
 
     def feed_urls(self):
-        """
-        Returns a list of feed urls.
+        """Returns a list of feed urls
         """
         return [feed.url for feed in self.feeds]
 
     def category_urls(self):
-        """
-        Returns a list of category urls.
+        """Returns a list of category urls
         """
         return [category.url for category in self.categories]
 
     def article_urls(self):
-        """
-        Returns a list of article urls.
+        """Returns a list of article urls
         """
         return [article.url for article in self.articles]
 
     def get_key(self):
-        """
-        """
         # TODO
         pass
 
     def clear_anchor_directory(self):
+        """Clears out all files in our directory where we cache anchors
+        the key is sha1(self.domain).hexdigest() fn is ANCHOR_DIR/key.
         """
-        Clears out all files in our directory where we cache anchors
-        the key is sha1(self.domain).hexdigest()
-        fn is ANCHOR_DIR/key.
-        """
-        # TODO tomorow
-        #d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source_domain))
-        #os.path.remove(ANCHOR_DIRECTORY)
+        pass
+        # TODO:
+        # d_pth = os.path.join(
+        #   settings.MEMO_DIR, domain_to_filename(source_domain))
+        # os.path.remove(ANCHOR_DIRECTORY)
 
     def print_summary(self):
-        """
-        Prints out a summary of the data in our source instance.
+        """Prints out a summary of the data in our source instance
         """
         print '[source url]:',              self.url
         print '[source brand]:',            self.brand
@@ -438,4 +413,3 @@ class Source(object):
         print 'feed_urls:', self.feed_urls()
         print '\r\n'
         print 'category_urls:', self.category_urls()
-

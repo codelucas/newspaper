@@ -62,9 +62,10 @@ class Parser(object):
         article_cleaner = lxml.html.clean.Cleaner()
         article_cleaner.javascript = True
         article_cleaner.style = True
-        article_cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b',
-                'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img', 'h1',
-                'h2', 'h3', 'h4', 'h5', 'h6']
+        article_cleaner.allow_tags = [
+            'a', 'span', 'p', 'br', 'strong', 'b',
+            'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img', 'h1',
+            'h2', 'h3', 'h4', 'h5', 'h6']
         article_cleaner.remove_unknown_tags = False
         return article_cleaner.clean_html(node)
 
@@ -89,7 +90,8 @@ class Parser(object):
         return None
 
     @classmethod
-    def getElementsByTag(cls, node, tag=None, attr=None, value=None, childs=False):
+    def getElementsByTag(
+            cls, node, tag=None, attr=None, value=None, childs=False):
         NS = "http://exslt.org/regular-expressions"
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
@@ -255,4 +257,3 @@ class ParserSoup(Parser):
         html = utils.encodeValue(html)
         cls.doc = lxml.html.soupparser.fromstring(html)
         return cls.doc
-

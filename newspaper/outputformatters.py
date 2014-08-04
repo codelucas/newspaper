@@ -22,9 +22,8 @@ class OutputFormatter(object):
         self.stopwords_class = config.stopwords_class
 
     def update_language(self, article):
-        """
-        Called before formatting the top node to ensure the stopwords_class
-        has been updated incase a non-latin language code is extracted.
+        """Called before formatting the top node to ensure the stopwords_class
+        has been updated incase a non-latin language code is extracted
         """
         if article.config.use_meta_language and article.meta_lang:
             self.language = article.meta_lang
@@ -35,9 +34,8 @@ class OutputFormatter(object):
         return self.top_node
 
     def get_formatted(self, article):
-        """
-        Returns the body text of an article, and also the body article
-        html if specified. Returns in (text, html) form.
+        """Returns the body text of an article, and also the body article
+        html if specified. Returns in (text, html) form
         """
         self.top_node = article.top_node
         html, text = u'', u''
@@ -74,17 +72,17 @@ class OutputFormatter(object):
             e.text = r'\n'
 
     def links_to_text(self):
-        """
-        Cleans up and converts any nodes that should be considered text into text.
+        """Cleans up and converts any nodes that should be considered
+        text into text.
         """
         self.parser.stripTags(self.get_top_node(), 'a')
 
     def remove_negativescores_nodes(self):
+        """If there are elements inside our top node that have a
+        negative gravity score, let's give em the boot.
         """
-        If there are elements inside our top node that have a negative gravity score,
-        let's give em the boot.
-        """
-        gravity_items = self.parser.css_select(self.top_node, "*[gravityScore]")
+        gravity_items = self.parser.css_select(
+            self.top_node, "*[gravityScore]")
         for item in gravity_items:
             score = self.parser.getAttribute(item, 'gravityScore')
             score = int(score, 0)
@@ -98,7 +96,8 @@ class OutputFormatter(object):
         With whatever text is inside them.
         code : http://lxml.de/api/lxml.etree-module.html#strip_tags
         """
-        self.parser.stripTags(self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
+        self.parser.stripTags(
+            self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
 
     def remove_fewwords_paragraphs(self, article):
         """
@@ -110,10 +109,14 @@ class OutputFormatter(object):
         for el in all_nodes:
             tag = self.parser.getTag(el)
             text = self.parser.getText(el)
-            stop_words = self.stopwords_class(language=self.language).get_stopword_count(text)
-            if (tag != 'br' or text != '\\r') and stop_words.get_stopword_count() < 3 \
-                and len(self.parser.getElementsByTag(el, tag='object')) == 0 \
-                and len(self.parser.getElementsByTag(el, tag='embed')) == 0:
+            stop_words = self.stopwords_class(language=self.language).\
+                get_stopword_count(text)
+            if (tag != 'br' or text != '\\r') \
+                    and stop_words.get_stopword_count() < 3 \
+                    and len(self.parser.getElementsByTag(
+                        el, tag='object')) == 0 \
+                    and len(self.parser.getElementsByTag(
+                        el, tag='embed')) == 0:
                 self.parser.remove(el)
             # TODO
             # check if it is in the right place

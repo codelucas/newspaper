@@ -35,7 +35,7 @@ class FileHelper(object):
         if not os.path.isabs(filename):
             # _PARENT_DIR = os.path.join(_TEST_DIR, '../..') # packages/goose
             # dirpath = os.path.dirname(goose.__file__)
-            dirpath = os.path.abspath(os.path.dirname(__file__)) # goose/utils
+            dirpath = os.path.abspath(os.path.dirname(__file__))
             path = os.path.join(dirpath, '../resources', filename)
         else:
             path = filename
@@ -67,16 +67,14 @@ class RawHelper(object):
 class URLHelper(object):
     @classmethod
     def get_parsing_candidate(self, url_to_crawl):
-        # replace shebang in urls
+        # Replace shebang in urls
         final_url = url_to_crawl.replace('#!', '?_escaped_fragment_=') \
-                    if '#!' in url_to_crawl else url_to_crawl
+            if '#!' in url_to_crawl else url_to_crawl
         link_hash = '%s.%s' % (hashlib.md5(final_url).hexdigest(), time.time())
         return ParsingCandidate(final_url, link_hash)
 
 
 class StringSplitter(object):
-    """
-    """
     def __init__(self, pattern):
         self.pattern = re.compile(pattern)
 
@@ -101,7 +99,6 @@ class ReplaceSequence(object):
     def __init__(self):
         self.replacements = []
 
-    #@classmethod
     def create(self, firstPattern, replaceWith=None):
         result = StringReplacement(firstPattern, replaceWith or u'')
         self.replacements.append(result)
@@ -115,7 +112,6 @@ class ReplaceSequence(object):
             return u''
 
         mutatedString = string
-
         for rp in self.replacements:
             mutatedString = rp.replaceAll(mutatedString)
         return mutatedString
@@ -126,8 +122,7 @@ class TimeoutError(Exception):
 
 
 def timelimit(timeout):
-    """
-    Borrowed from web.py, rip Aaron Swartz.
+    """Borrowed from web.py, rip Aaron Swartz
     """
     def _1(function):
         def _2(*args, **kw):
@@ -145,7 +140,6 @@ def timelimit(timeout):
                         self.result = function(*args, **kw)
                     except:
                         self.error = sys.exc_info()
-
             c = Dispatch()
             c.join(timeout)
             if c.isAlive():
@@ -156,26 +150,26 @@ def timelimit(timeout):
         return _2
     return _1
 
+
 def domain_to_filename(domain):
+    """All '/' are turned into '-', no trailing. schema's
+    are gone, only the raw domain + ".txt" remains
     """
-    All '/' are turned into '-', no trailing. schema's
-    are gone, only the raw domain + ".txt" remains.
-    """
-    filename =  domain.replace('/', '-')
+    filename = domain.replace('/', '-')
     if filename[-1] == '-':
         filename = filename[:-1]
     filename += ".txt"
     return filename
 
+
 def filename_to_domain(filename):
-    """
-    [:-4] for the .txt at end.
+    """[:-4] for the .txt at end
     """
     return filename.replace('-', '/')[:-4]
 
+
 def is_ascii(word):
-    """
-    True if a word is only ascii chars.
+    """True if a word is only ascii chars
     """
     def onlyascii(char):
         if ord(char) > 127:
@@ -187,28 +181,28 @@ def is_ascii(word):
             return False
     return True
 
+
 def to_valid_filename(s):
-    """
-    Converts arbitrary string (for us domain name)
-    into a valid file name for caching.
+    """Converts arbitrary string (for us domain name)
+    into a valid file name for caching
     """
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     return ''.join(c for c in s if c in valid_chars)
 
+
 def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
-    """
-    Caching extracting category locations & rss feeds for 5 days.
+    """Caching extracting category locations & rss feeds for 5 days
     """
     def do_cache(function):
         def inner_function(*args, **kwargs):
-            """
-            Calculate a cache key based on the decorated method signature
+            """Calculate a cache key based on the decorated method signature
             args[1] indicates the domain of the inputs, we hash on domain!
             """
             key = sha1(str(args[1]) + str(kwargs)).hexdigest()
             filepath = os.path.join(cache_folder, key)
 
-            # verify that the cached object exists and is less than X seconds old
+            # verify that the cached object exists and is less than
+            # X seconds old
             if os.path.exists(filepath):
                 modified = os.path.getmtime(filepath)
                 age_seconds = time.time() - modified
@@ -220,13 +214,12 @@ def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
             # ... and save the cached object for next time
             pickle.dump(result, open(filepath, "wb"))
             return result
-
         return inner_function
     return do_cache
 
+
 def print_duration(method):
-    """
-    Prints out the runtime duration of a method in seconds.
+    """Prints out the runtime duration of a method in seconds
     """
     def timed(*args, **kw):
         ts = time.time()
@@ -234,30 +227,28 @@ def print_duration(method):
         te = time.time()
         print '%r %2.2f sec' % (method.__name__, te-ts)
         return result
-
     return timed
 
+
 def chunks(l, n):
-    """
-    Yield n successive chunks from l.
+    """Yield n successive chunks from l
     """
     newn = int(len(l) / n)
     for i in xrange(0, n-1):
         yield l[i*newn:i*newn+newn]
     yield l[n*newn-newn:]
 
+
 def purge(fn, pattern):
+    """Delete files in a dir matching pattern
     """
-    Delete files in a dir matching pattern.
-    """
-    import os, re
     for f in os.listdir(fn):
         if re.search(pattern, f):
             os.remove(os.path.join(fn, f))
 
+
 def clear_memo_cache(source):
-    """
-    Clears the memoization cache for this specific news domain.
+    """Clears the memoization cache for this specific news domain
     """
     d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source.domain))
     if os.path.exists(d_pth):
@@ -265,9 +256,8 @@ def clear_memo_cache(source):
     else:
         print 'memo file for', source.domain, 'has already been deleted!'
 
+
 def encodeValue(value):
-    """
-    """
     if value is None:
         return u''
     string_org = value
@@ -279,9 +269,9 @@ def encodeValue(value):
         value = string_org
     return value.strip()
 
+
 def memoize_articles(source, articles):
-    """
-    When we parse the <a> links in an <html> page, on the 2nd run
+    """When we parse the <a> links in an <html> page, on the 2nd run
     and later, check the <a> links of previous runs. If they match,
     it means the link must not be an article, because article urls
     change as time passes. This method also uniquifies articles.
@@ -292,19 +282,17 @@ def memoize_articles(source, articles):
     if len(articles) == 0:
         return []
 
-    cur_articles = { article.url:article for article in articles }
     memo = {}
-    # print '******current article urls!', cur_articles.keys()[:10]
-
+    cur_articles = {article.url: article for article in articles}
     d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source_domain))
 
     if os.path.exists(d_pth):
         f = codecs.open(d_pth, 'r', 'utf8')
-        urls = f.readlines() # list of urls, unicode
+        urls = f.readlines()
         f.close()
         urls = [u.strip() for u in urls]
 
-        memo = { url:True for url in urls }
+        memo = {url: True for url in urls}
         # prev_length = len(memo)
         for url, article in cur_articles.items():
             if memo.get(url):
@@ -320,7 +308,6 @@ def memoize_articles(source, articles):
             [encodeValue(href.strip()) for href in cur_articles.keys()])
 
     # new_length = len(cur_articles)
-
     if len(memo) > config.MAX_FILE_MEMO:
         # We still keep current batch of articles though!
         log.critical('memo overflow, dumping')
@@ -330,12 +317,11 @@ def memoize_articles(source, articles):
     ff = codecs.open(d_pth, 'w', 'utf-8')
     ff.write(memo_text)
     ff.close()
-    # print '***** final article urls', cur_articles.keys()[:10]
-    return cur_articles.values() # articles returned
+    return cur_articles.values()
+
 
 def get_useragent():
-    """
-    Uses generator to return next useragent in saved file.
+    """Uses generator to return next useragent in saved file
     """
     with open(settings.USERAGENTS, 'r') as f:
         agents = f.readlines()
@@ -343,9 +329,9 @@ def get_useragent():
         agent = agents[selection]
         return agent.strip()
 
+
 def get_available_languages():
-    """
-    Returns a list of available languages and their 2 char input codes.
+    """Returns a list of available languages and their 2 char input codes
     """
     stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
     two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
@@ -353,9 +339,9 @@ def get_available_languages():
         assert len(d) == 2
     return two_dig_codes
 
+
 def print_available_languages():
-    """
-    Prints available languages with their full names
+    """Prints available languages with their full names
     """
     language_dict = {
         'ar':   'Arabic',
@@ -386,6 +372,7 @@ def print_available_languages():
         print '  %s\t\t\t  %s' % (code, language_dict[code])
     print
 
+
 def extend_config(config, config_items):
     """
     We are handling config value setting like this for a cleaner api.
@@ -397,4 +384,3 @@ def extend_config(config, config_items):
             setattr(config, key, val)
 
     return config
-
