@@ -1,24 +1,22 @@
 # -*- coding: utf-8 -*-
 """
-Newspaper uses a lot of python-goose's extraction code. View their
-license here: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+Newspaper uses a lot of python-goose's parsing code. View theirlicense:
+https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
 
 Parser objects will only contain operations that manipulate
 or query an lxml or soup dom object generated from an article's html.
 """
-import re
 import logging
-
+import lxml.etree
 import lxml.html
-from lxml.html import soupparser
-from lxml.html.clean import Cleaner
-from lxml import etree
 
 from copy import deepcopy
-from .text import innerTrim
-from .utils import encodeValue
+
+from . import text
+from . import utils
 
 log = logging.getLogger(__name__)
+
 
 class Parser(object):
 
@@ -42,7 +40,7 @@ class Parser(object):
 
     @classmethod
     def fromstring(cls, html):
-        html = encodeValue(html)
+        html = utils.encodeValue(html)
         try:
             cls.doc = lxml.html.fromstring(html)
         except Exception, e:
@@ -61,18 +59,19 @@ class Parser(object):
 
     @classmethod
     def clean_article_html(cls, node):
-        article_cleaner = Cleaner()
+        article_cleaner = lxml.html.clean.Cleaner()
         article_cleaner.javascript = True
         article_cleaner.style = True
-        article_cleaner.allow_tags = ['a', 'span', 'p', 'br', 'strong', 'b',
-                'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img', 'h1',
-                'h2', 'h3', 'h4', 'h5', 'h6']
+        article_cleaner.allow_tags = [
+            'a', 'span', 'p', 'br', 'strong', 'b',
+            'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img', 'h1',
+            'h2', 'h3', 'h4', 'h5', 'h6']
         article_cleaner.remove_unknown_tags = False
         return article_cleaner.clean_html(node)
 
     @classmethod
     def nodeToString(cls, node):
-        return etree.tostring(node)
+        return lxml.etree.tostring(node)
 
     @classmethod
     def replaceTag(cls, node, tag):
@@ -80,7 +79,7 @@ class Parser(object):
 
     @classmethod
     def stripTags(cls, node, *tags):
-        etree.strip_tags(node, *tags)
+        lxml.etree.strip_tags(node, *tags)
 
     @classmethod
     def getElementById(cls, node, idd):
@@ -91,7 +90,8 @@ class Parser(object):
         return None
 
     @classmethod
-    def getElementsByTag(cls, node, tag=None, attr=None, value=None, childs=False):
+    def getElementsByTag(
+            cls, node, tag=None, attr=None, value=None, childs=False):
         NS = "http://exslt.org/regular-expressions"
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
@@ -193,7 +193,7 @@ class Parser(object):
     @classmethod
     def getText(cls, node):
         txts = [i for i in node.itertext()]
-        return innerTrim(u' '.join(txts).strip())
+        return text.innerTrim(u' '.join(txts).strip())
 
     @classmethod
     def previousSiblings(cls, node):
@@ -254,7 +254,6 @@ class Parser(object):
 class ParserSoup(Parser):
     @classmethod
     def fromstring(cls, html):
-        html = encodeValue(html)
-        cls.doc = soupparser.fromstring(html)
+        html = utils.encodeValue(html)
+        cls.doc = lxml.html.soupparser.fromstring(html)
         return cls.doc
-

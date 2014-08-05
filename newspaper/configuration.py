@@ -12,12 +12,9 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
-from .text import StopWords
-from .text import StopWordsChinese
-from .text import StopWordsArabic
-from .text import StopWordsKorean
 from .parsers import Parser, ParserSoup
-from .urls import is_abs_url, get_domain
+from .text import (StopWords, StopWordsArabic, StopWordsChinese,
+                   StopWordsKorean)
 from .version import __version__
 
 log = logging.getLogger(__name__)
@@ -30,49 +27,48 @@ class Configuration(object):
         Modify any of these Article / Source properties
         TODO: Have a seperate ArticleConfig and SourceConfig extend this!
         """
-        self.MIN_WORD_COUNT  = 300      # num of word tokens in text
-        self.MIN_SENT_COUNT  = 7        # num of sentence tokens
-        self.MAX_TITLE       = 200      # num of chars
-        self.MAX_TEXT        = 100000   # num of chars
-        self.MAX_KEYWORDS    = 35       # num of strings in list
-        self.MAX_AUTHORS     = 10       # num strings in list
-        self.MAX_SUMMARY     = 5000     # num of chars
+        self.MIN_WORD_COUNT = 300  # num of word tokens in text
+        self.MIN_SENT_COUNT = 7    # num of sentence tokens
+        self.MAX_TITLE = 200       # num of chars
+        self.MAX_TEXT = 100000     # num of chars
+        self.MAX_KEYWORDS = 35     # num of strings in list
+        self.MAX_AUTHORS = 10      # num strings in list
+        self.MAX_SUMMARY = 5000    # num of chars
 
         # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000
 
-        self.parser_class = 'lxml' # lxml vs soup
+        self.parser_class = 'lxml'  # 'lxml' or 'soup'
 
-        # cache and save articles run after run
+        # Cache and save articles run after run
         self.memoize_articles = True
 
-        # set this to false if you don't care about getting images
+        # Set this to false if you don't care about getting images
         self.fetch_images = True
         self.image_dimension_ration = 16/9.0
 
-        # don't toggle this variable
+        # Don't toggle this variable, done internally
         self.use_meta_language = True
 
-        # you may keep the html of just the main article body
+        # You may keep the html of just the main article body
         self.keep_article_html = False
 
-        # english is our fallback
+        # English is the fallback
         self._language = 'en'
 
-        # unique stopword classes for oriental languages, don't toggle
+        # Unique stopword classes for oriental languages, don't toggle
         self.stopwords_class = StopWords
 
         self.browser_user_agent = 'newspaper/%s' % __version__
         self.request_timeout = 7
-        self.number_threads = 10 # number of threads when mthreading
+        self.number_threads = 10
 
-        self.verbose = False # turn this on when debugging
+        self.verbose = False  # for debugging
 
-        # set this to False if you want to recompute the categories *every* time
-        # self.use_cached_categories = True # TODO: Make this work
-
-        # self.hints = None TODO: Maybe a future release?
-
+        # Set this to False if you want to recompute the categories
+        # *every* time you build a `Source` object
+        # TODO: Actually make this work
+        # self.use_cached_categories = True
 
     def get_language(self):
         return self._language
@@ -81,21 +77,22 @@ class Configuration(object):
         raise Exception('wtf are you doing?')
 
     def set_language(self, language):
-        """
-        Language setting must be done in this method because non-occidental
+        """Language setting must be set in this method b/c non-occidental
         (western) langauges require a seperate stopwords class.
         """
         if not language or len(language) != 2:
             raise Exception("Your input language must be a 2 char langauge code, \
                 for example: english-->en \n and german-->de")
 
-        self.use_meta_language = False # if explicitly set langauge, don't use meta
+        # If explicitly set langauge, don't use meta
+        self.use_meta_language = False
 
-        # Set oriental language stopword class.
+        # Set oriental language stopword class
         self._language = language
         self.stopwords_class = self.get_stopwords_class(language)
 
-    language = property(get_language, set_language, del_language, "langauge prop")
+    language = property(get_language, set_language,
+                        del_language, "langauge prop")
 
     def get_stopwords_class(self, language):
         if language == 'ko':
@@ -109,40 +106,10 @@ class Configuration(object):
     def get_parser(self):
         return Parser if self.parser_class == 'lxml' else ParserSoup
 
-    def get_publishdate_extractor(self):
-        """
-        """
-        return self.extract_publishdate
-
-    def set_publishdate_extractor(self, extractor):
-        """
-        Pass in to extract article publish dates.
-        @param extractor a concrete instance of PublishDateExtractor
-        """
-        if not extractor:
-            raise ValueError("extractor must not be null!")
-        self.extract_publishdate = extractor
-
-    def get_additionaldata_extractor(self):
-        """
-        """
-        return self.additional_data_extractor
-
-    def set_additionaldata_extractor(self, extractor):
-        """
-        Pass in to extract any additional data not defined within
-        @param extractor a concrete instance of AdditionalDataExtractor
-        """
-        if not extractor:
-            raise ValueError("extractor must not be null!")
-        self.additional_data_extractor = extractor
-
-
-# TODO: Since we have Source() and Article() objects, we should split up
-# TODO: the config options for both
 
 class ArticleConfiguration(Configuration):
     pass
+
 
 class SourceConfiguration(Configuration):
     pass

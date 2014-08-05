@@ -5,30 +5,36 @@ dom xpath.
 """
 from .utils import ReplaceSequence
 
+
 class DocumentCleaner(object):
 
     def __init__(self, config):
+        """Set appropriate tag names and regexes of tags to remove
+        from the HTML
+        """
         self.config = config
         self.parser = self.config.get_parser()
-
         self.remove_nodes_re = (
-        "^side$|combx|retweet|mediaarticlerelated|menucontainer|"
-        "navbar|storytopbar-bucket|utility-bar|inline-share-tools"
-        "|comment|PopularQuestions|contact|foot|footer|Footer|footnote"
-        "|cnn_strycaptiontxt|cnn_html_slideshow|cnn_strylftcntnt"
-        "|links|meta$|shoutbox|sponsor"
-        "|tags|socialnetworking|socialNetworking|cnnStryHghLght"
-        "|cnn_stryspcvbx|^inset$|pagetools|post-attributes"
-        "|welcome_form|contentTools2|the_answers"
-        "|communitypromo|runaroundLeft|subscribe|vcard|articleheadings"
-        "|date|^print$|popup|author-dropdown|tools|socialtools|byline"
-        "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
-        "|legende|ajoutVideo|timestamp|js_replies"
+            "^side$|combx|retweet|mediaarticlerelated|menucontainer|"
+            "navbar|storytopbar-bucket|utility-bar|inline-share-tools"
+            "|comment|PopularQuestions|contact|foot|footer|Footer|footnote"
+            "|cnn_strycaptiontxt|cnn_html_slideshow|cnn_strylftcntnt"
+            "|links|meta$|shoutbox|sponsor"
+            "|tags|socialnetworking|socialNetworking|cnnStryHghLght"
+            "|cnn_stryspcvbx|^inset$|pagetools|post-attributes"
+            "|welcome_form|contentTools2|the_answers"
+            "|communitypromo|runaroundLeft|subscribe|vcard|articleheadings"
+            "|date|^print$|popup|author-dropdown|tools|socialtools|byline"
+            "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
+            "|legende|ajoutVideo|timestamp|js_replies"
         )
         self.regexp_namespace = "http://exslt.org/regular-expressions"
-        self.nauthy_ids_re = "//*[re:test(@id, '%s', 'i')]" % self.remove_nodes_re
-        self.nauthy_classes_re = "//*[re:test(@class, '%s', 'i')]" % self.remove_nodes_re
-        self.nauthy_names_re = "//*[re:test(@name, '%s', 'i')]" % self.remove_nodes_re
+        self.nauthy_ids_re = ("//*[re:test(@id, '%s', 'i')]" %
+                              self.remove_nodes_re)
+        self.nauthy_classes_re = ("//*[re:test(@class, '%s', 'i')]" %
+                                  self.remove_nodes_re)
+        self.nauthy_names_re = ("//*[re:test(@name, '%s', 'i')]" %
+                                self.remove_nodes_re)
         self.div_to_p_re = r"<(a|blockquote|dl|div|img|ol|p|pre|table|ul)"
         self.caption_re = "^caption$"
         self.google_re = " google "
@@ -37,14 +43,13 @@ class DocumentCleaner(object):
         self.facebook_braodcasting_re = "facebook-broadcasting"
         self.twitter_re = "[^-]twitter"
         self.tablines_replacements = ReplaceSequence()\
-                                            .create("\n", "\n\n")\
-                                            .append("\t")\
-                                            .append("^\\s+$")
+            .create("\n", "\n\n")\
+            .append("\t")\
+            .append("^\\s+$")
 
-    def clean(self, article):
+    def clean(self, doc_to_clean):
+        """Remove chunks of the DOM as specified
         """
-        """
-        doc_to_clean = article.doc
         doc_to_clean = self.clean_body_classes(doc_to_clean)
         doc_to_clean = self.clean_article_tags(doc_to_clean)
         doc_to_clean = self.clean_em_tags(doc_to_clean)
@@ -55,7 +60,8 @@ class DocumentCleaner(object):
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.google_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.entries_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.facebook_re)
-        doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.facebook_braodcasting_re)
+        doc_to_clean = self.remove_nodes_regex(doc_to_clean,
+                                               self.facebook_braodcasting_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.twitter_re)
         doc_to_clean = self.clean_para_spans(doc_to_clean)
         doc_to_clean = self.div_to_para(doc_to_clean, 'div')
@@ -63,9 +69,9 @@ class DocumentCleaner(object):
         return doc_to_clean
 
     def clean_body_classes(self, doc):
-        # we don't need body classes
-        # in case it matches an unwanted class all the document
-        # will be empty
+        """Removes the `class` attribute from the <body> tag because
+        if there is a bad match, the entire DOM will be empty!
+        """
         elements = self.parser.getElementsByTag(doc, tag="body")
         if elements:
             self.parser.delAttribute(elements[0], attr="class")
@@ -87,10 +93,10 @@ class DocumentCleaner(object):
         return doc
 
     def remove_drop_caps(self, doc):
-        items = self.parser.css_select(doc, "span[class~=dropcap], span[class~=drop_cap]")
+        items = self.parser.css_select(doc, 'span[class~=dropcap], '
+                                       'span[class~=drop_cap]')
         for item in items:
             self.parser.drop_tag(item)
-
         return doc
 
     def remove_scripts_styles(self, doc):
@@ -98,12 +104,10 @@ class DocumentCleaner(object):
         scripts = self.parser.getElementsByTag(doc, tag='script')
         for item in scripts:
             self.parser.remove(item)
-
         # remove styles
         styles = self.parser.getElementsByTag(doc, tag='style')
         for item in styles:
             self.parser.remove(item)
-
         # remove comments
         comments = self.parser.getComments(doc)
         for item in comments:
@@ -116,17 +120,14 @@ class DocumentCleaner(object):
         naughty_list = self.parser.xpath_re(doc, self.nauthy_ids_re)
         for node in naughty_list:
             self.parser.remove(node)
-
         # class
         naughty_classes = self.parser.xpath_re(doc, self.nauthy_classes_re)
         for node in naughty_classes:
             self.parser.remove(node)
-
         # name
         naughty_names = self.parser.xpath_re(doc, self.nauthy_names_re)
         for node in naughty_names:
             self.parser.remove(node)
-
         return doc
 
     def remove_nodes_regex(self, doc, pattern):
@@ -146,53 +147,54 @@ class DocumentCleaner(object):
     def get_flushed_buffer(self, replacement_text, doc):
         return self.parser.textToPara(replacement_text)
 
+    def replace_walk_left_right(self, kid, kid_text,
+                                replacement_text, nodes_to_remove):
+        kid_text_node = kid
+        replace_text = self.tablines_replacements.replaceAll(kid_text)
+        if len(replace_text) > 1:
+            prev_node = self.parser.previousSibling(kid_text_node)
+            while prev_node is not None \
+                    and self.parser.getTag(prev_node) == "a" \
+                    and self.parser.getAttribute(
+                        prev_node, 'grv-usedalready') != 'yes':
+                outer = " " + self.parser.outerHtml(prev_node) + " "
+                replacement_text.append(outer)
+                nodes_to_remove.append(prev_node)
+                self.parser.setAttribute(prev_node, attr='grv-usedalready',
+                                         value='yes')
+                prev_node = self.parser.previousSibling(prev_node)
+
+            replacement_text.append(replace_text)
+            next_node = self.parser.nextSibling(kid_text_node)
+            while next_node is not None \
+                    and self.parser.getTag(next_node) == "a" \
+                    and self.parser.getAttribute(
+                        next_node, 'grv-usedalready') != 'yes':
+                outer = " " + self.parser.outerHtml(next_node) + " "
+                replacement_text.append(outer)
+                nodes_to_remove.append(next_node)
+                self.parser.setAttribute(next_node, attr='grv-usedalready',
+                                         value='yes')
+                next_node = self.parser.nextSibling(next_node)
+
     def get_replacement_nodes(self, doc, div):
         replacement_text = []
         nodes_to_return = []
         nodes_to_remove = []
-        childs = self.parser.childNodesWithText(div)
-
-        for kid in childs:
-            # node is a p
-            # and already have some replacement text
+        kids = self.parser.childNodesWithText(div)
+        for kid in kids:
+            # The node is a <p> and already has some replacement text
             if self.parser.getTag(kid) == 'p' and len(replacement_text) > 0:
-                newNode = self.get_flushed_buffer(''.join(replacement_text), doc)
-                nodes_to_return.append(newNode)
+                new_node = self.get_flushed_buffer(
+                    ''.join(replacement_text), doc)
+                nodes_to_return.append(new_node)
                 replacement_text = []
                 nodes_to_return.append(kid)
-            # node is a text node
+            # The node is a text node
             elif self.parser.isTextNode(kid):
-                kid_text_node = kid
                 kid_text = self.parser.getText(kid)
-                replace_text = self.tablines_replacements.replaceAll(kid_text)
-                if(len(replace_text)) > 1:
-                    previous_sibling_node = self.parser.previousSibling(kid_text_node)
-                    while previous_sibling_node is not None \
-                        and self.parser.getTag(previous_sibling_node) == "a" \
-                        and self.parser.getAttribute(previous_sibling_node, 'grv-usedalready') != 'yes':
-                        outer = " " + self.parser.outerHtml(previous_sibling_node) + " "
-                        replacement_text.append(outer)
-                        nodes_to_remove.append(previous_sibling_node)
-                        self.parser.setAttribute(previous_sibling_node,
-                                    attr='grv-usedalready', value='yes')
-                        prev = self.parser.previousSibling(previous_sibling_node)
-                        previous_sibling_node = prev if prev is not None else None
-                    # append replace_text
-                    replacement_text.append(replace_text)
-                    #
-                    next_sibling_node = self.parser.nextSibling(kid_text_node)
-                    while next_sibling_node is not None \
-                        and self.parser.getTag(next_sibling_node) == "a" \
-                        and self.parser.getAttribute(next_sibling_node, 'grv-usedalready') != 'yes':
-                        outer = " " + self.parser.outerHtml(next_sibling_node) + " "
-                        replacement_text.append(outer)
-                        nodes_to_remove.append(next_sibling_node)
-                        self.parser.setAttribute(next_sibling_node,
-                                    attr='grv-usedalready', value='yes')
-                        next = self.parser.nextSibling(next_sibling_node)
-                        previous_sibling_node = next if next is not None else None
-
-            # otherwise
+                self.replace_walk_left_right(kid, kid_text, replacement_text,
+                                             nodes_to_remove)
             else:
                 nodes_to_return.append(kid)
 
@@ -214,8 +216,8 @@ class DocumentCleaner(object):
         bad_divs = 0
         else_divs = 0
         divs = self.parser.getElementsByTag(doc, tag=dom_type)
-        tags = ['a', 'blockquote', 'dl', 'div', 'img', 'ol', 'p', 'pre', 'table', 'ul']
-
+        tags = ['a', 'blockquote', 'dl', 'div', 'img', 'ol', 'p',
+                'pre', 'table', 'ul']
         for div in divs:
             items = self.parser.getElementsByTags(div, tags)
             if div is not None and len(items) == 0:
@@ -224,14 +226,7 @@ class DocumentCleaner(object):
             elif div is not None:
                 replaceNodes = self.get_replacement_nodes(doc, div)
                 div.clear()
-
                 for c, n in enumerate(replaceNodes):
                     div.insert(c, n)
-
                 else_divs += 1
-
         return doc
-
-
-class StandardDocumentCleaner(DocumentCleaner):
-    pass

@@ -11,8 +11,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 import re
 
-from urlparse import (
-    urlparse, urljoin, urlsplit, urlunsplit, parse_qs)
+from urlparse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
 
 from .packages.tldextract import tldextract
 

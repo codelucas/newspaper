@@ -8,9 +8,9 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from HTMLParser import HTMLParser
+
 from .text import innerTrim
 
-import lxml
 
 class OutputFormatter(object):
 
@@ -21,36 +21,35 @@ class OutputFormatter(object):
         self.language = config.language
         self.stopwords_class = config.stopwords_class
 
-    def update_language(self, article):
-        """
-        Called before formatting the top node to ensure the stopwords_class
-        has been updated incase a non-latin language code is extracted.
-        """
-        if article.config.use_meta_language and article.meta_lang:
-            self.language = article.meta_lang
-            self.stopwords_class = article.config.\
-                get_stopwords_class(article.meta_lang)
+    def update_language(self, meta_lang):
+        '''Required to be called before the extraction process in some
+        cases because the stopwords_class has to set incase the lang
+        is not latin based
+        '''
+        if meta_lang:
+            self.language = meta_lang
+            self.stopwords_class = \
+                self.config.get_stopwords_class(meta_lang)
 
     def get_top_node(self):
         return self.top_node
 
-    def get_formatted(self, article):
+    def get_formatted(self, top_node):
+        """Returns the body text of an article, and also the body article
+        html if specified. Returns in (text, html) form
         """
-        Returns the body text of an article, and also the body article
-        html if specified. Returns in (text, html) form.
-        """
-        self.top_node = article.top_node
+        self.top_node = top_node
         html, text = u'', u''
 
         self.remove_negativescores_nodes()
 
-        if article.config.keep_article_html:
+        if self.config.keep_article_html:
             html = self.convert_to_html()
 
         self.links_to_text()
         self.add_newline_to_br()
         self.replace_with_text()
-        self.remove_fewwords_paragraphs(article)
+        self.remove_fewwords_paragraphs()
 
         text = self.convert_to_text()
         return (text, html)
@@ -74,17 +73,17 @@ class OutputFormatter(object):
             e.text = r'\n'
 
     def links_to_text(self):
-        """
-        Cleans up and converts any nodes that should be considered text into text.
+        """Cleans up and converts any nodes that should be considered
+        text into text.
         """
         self.parser.stripTags(self.get_top_node(), 'a')
 
     def remove_negativescores_nodes(self):
+        """If there are elements inside our top node that have a
+        negative gravity score, let's give em the boot.
         """
-        If there are elements inside our top node that have a negative gravity score,
-        let's give em the boot.
-        """
-        gravity_items = self.parser.css_select(self.top_node, "*[gravityScore]")
+        gravity_items = self.parser.css_select(
+            self.top_node, "*[gravityScore]")
         for item in gravity_items:
             score = self.parser.getAttribute(item, 'gravityScore')
             score = int(score, 0)
@@ -98,9 +97,10 @@ class OutputFormatter(object):
         With whatever text is inside them.
         code : http://lxml.de/api/lxml.etree-module.html#strip_tags
         """
-        self.parser.stripTags(self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
+        self.parser.stripTags(
+            self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
 
-    def remove_fewwords_paragraphs(self, article):
+    def remove_fewwords_paragraphs(self):
         """
         Remove paragraphs that have less than x number of words,
         would indicate that it's some sort of link.
@@ -110,10 +110,14 @@ class OutputFormatter(object):
         for el in all_nodes:
             tag = self.parser.getTag(el)
             text = self.parser.getText(el)
-            stop_words = self.stopwords_class(language=self.language).get_stopword_count(text)
-            if (tag != 'br' or text != '\\r') and stop_words.get_stopword_count() < 3 \
-                and len(self.parser.getElementsByTag(el, tag='object')) == 0 \
-                and len(self.parser.getElementsByTag(el, tag='embed')) == 0:
+            stop_words = self.stopwords_class(language=self.language).\
+                get_stopword_count(text)
+            if (tag != 'br' or text != '\\r') \
+                    and stop_words.get_stopword_count() < 3 \
+                    and len(self.parser.getElementsByTag(
+                        el, tag='object')) == 0 \
+                    and len(self.parser.getElementsByTag(
+                        el, tag='embed')) == 0:
                 self.parser.remove(el)
             # TODO
             # check if it is in the right place
@@ -121,7 +125,3 @@ class OutputFormatter(object):
                 trimmed = self.parser.getText(el)
                 if trimmed.startswith("(") and trimmed.endswith(")"):
                     self.parser.remove(el)
-
-
-class StandardOutputFormatter(OutputFormatter):
-    pass

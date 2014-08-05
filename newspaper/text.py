@@ -15,6 +15,7 @@ from .utils import FileHelper
 
 TABSSPACE = re.compile(r'[\s\t]+')
 
+
 def innerTrim(value):
     if isinstance(value, (unicode, str)):
         # remove tab and white space
@@ -22,6 +23,7 @@ def innerTrim(value):
         value = ''.join(value.splitlines())
         return value.strip()
     return ''
+
 
 class WordStats(object):
 
@@ -56,14 +58,16 @@ class WordStats(object):
 
 class StopWords(object):
 
-    PUNCTUATION = re.compile("[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
+    PUNCTUATION = re.compile(
+        "[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
     TRANS_TABLE = string.maketrans('', '')
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
-        if not language in self._cached_stop_words:
+        if language not in self._cached_stop_words:
             path = os.path.join('text', 'stopwords-%s.txt' % language)
-            self._cached_stop_words[language] = set(FileHelper.loadResourceFile(path).splitlines())
+            self._cached_stop_words[language] = \
+                set(FileHelper.loadResourceFile(path).splitlines())
         self.STOP_WORDS = self._cached_stop_words[language]
 
     def remove_punctuation(self, content):
@@ -72,7 +76,8 @@ class StopWords(object):
         content_is_unicode = isinstance(content, unicode)
         if content_is_unicode:
             content = content.encode('utf-8')
-        stripped_input = content.translate(self.TRANS_TABLE, string.punctuation)
+        stripped_input = content.translate(
+            self.TRANS_TABLE, string.punctuation)
 
         if content_is_unicode:
             return stripped_input.decode('utf-8')
@@ -101,8 +106,7 @@ class StopWords(object):
 
 
 class StopWordsChinese(StopWords):
-    """
-    Chinese segmentation.
+    """Chinese segmentation
     """
     def __init__(self, language='zh'):
         super(StopWordsChinese, self).__init__(language='zh')
@@ -115,8 +119,7 @@ class StopWordsChinese(StopWords):
 
 
 class StopWordsArabic(StopWords):
-    """
-    Arabic segmentation.
+    """Arabic segmentation
     """
     def __init__(self, language='ar'):
         # force ar languahe code
@@ -135,8 +138,7 @@ class StopWordsArabic(StopWords):
 
 
 class StopWordsKorean(StopWords):
-    """
-    Korean segmentation.
+    """Korean segmentation
     """
     def __init__(self, language='ko'):
         super(StopWordsKorean, self).__init__(language='ko')
@@ -158,4 +160,3 @@ class StopWordsKorean(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
-

@@ -8,14 +8,12 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from .article import Article, ArticleException
+from .api import (build, build_article, hot, languages, popular_urls,
+                  NewsPool, Configuration as Config)
 from .source import Source
-
-from .api import build, build_article, popular_urls, hot, languages
-from .api import NewsPool, Configuration as Config
+from .version import __version__
 
 news_pool = NewsPool()
-
-from .version import __version__
 
 # Set default logging handler to avoid "No handler found" warnings.
 import logging

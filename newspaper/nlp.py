@@ -9,25 +9,24 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import re
 import math
+import operator
 
-from collections import Counter, OrderedDict
+from collections import Counter
+
 from . import settings
-
 
 with open(settings.NLP_STOPWORDS_EN, 'r') as f:
     stopwords = set([w.strip() for w in f.readlines()])
 
 ideal = 20.0
 
+
 def summarize(url='', title='', text=''):
-    """
-    """
     if (text == '' or title == ''):
         return []
 
     if isinstance(title, unicode):
         title = title.encode('utf-8', 'ignore')
-
     if isinstance(text, unicode):
         text = text.encode('utf-8', 'ignore')
 
@@ -36,16 +35,15 @@ def summarize(url='', title='', text=''):
     keys = keywords(text)
     titleWords = split_words(title)
 
-    # score setences, and use the top 5 sentences
+    # Score setences, and use the top 5 sentences
     ranks = score(sentences, titleWords, keys).most_common(5)
     for rank in ranks:
         summaries.append(rank[0])
-
     return summaries
 
+
 def score(sentences, titleWords, keywords):
-    """
-    Score sentences based on different features.
+    """Score sentences based on different features
     """
     senSize = len(sentences)
     ranks = Counter()
@@ -57,16 +55,14 @@ def score(sentences, titleWords, keywords):
         sbsFeature = sbs(sentence, keywords)
         dbsFeature = dbs(sentence, keywords)
         frequency = (sbsFeature + dbsFeature) / 2.0 * 10.0
-
-        # weighted average of scores from four categories
+        # Weighted average of scores from four categories
         totalScore = (titleFeature*1.5 + frequency*2.0 +
                       sentenceLength*1.0 + sentencePosition*1.0)/4.0
         ranks[s] = totalScore
     return ranks
 
+
 def sbs(words, keywords):
-    """
-    """
     score = 0.0
     if (len(words) == 0):
         return 0
@@ -75,10 +71,9 @@ def sbs(words, keywords):
             score += keywords[word]
     return (1.0 / math.fabs(len(words)) * score)/10.0
 
+
 def dbs(words, keywords):
-    """
-    """
-    if (len(words)==0):
+    if (len(words) == 0):
         return 0
     summ = 0
     first = []
@@ -87,46 +82,45 @@ def dbs(words, keywords):
     for i, word in enumerate(words):
         if word in keywords:
             score = keywords[word]
-            if first==[]:
+            if first == []:
                 first = [i, score]
             else:
                 second = first
                 first = [i, score]
                 dif = first[0] - second[0]
-                summ+=(first[1]*second[1]) / (dif ** 2)
-
-    # number of intersections
+                summ += (first[1]*second[1]) / (dif ** 2)
+    # Number of intersections
     k = len(set(keywords.keys()).intersection(set(words)))+1
     return (1/(k*(k+1.0))*summ)
 
+
 def split_words(text):
-    """
-    Split a string into array of words.
+    """Split a string into array of words
     """
     try:
-        text = re.sub(r'[^\w ]', '', text) #strip special chars
+        text = re.sub(r'[^\w ]', '', text)  # strip special chars
         return [x.strip('.').lower() for x in text.split()]
     except TypeError:
         return None
 
+
 def keywords(text):
-    """
-    Get the top 10 keywords and their frequency scores ignores blacklisted
+    """Get the top 10 keywords and their frequency scores ignores blacklisted
     words in stopwords, counts the number of occurrences of each word, and
-    sorts them in reverse natural order (so descending) by number of occurrences.
+    sorts them in reverse natural order (so descending) by number of
+    occurrences.
     """
-    import operator # sorting
     text = split_words(text)
     # of words before removing blacklist words
     num_words = len(text)
     text = [x for x in text if x not in stopwords]
     freq = Counter()
     for word in text:
-        freq[word]+=1
+        freq[word] += 1
 
-    minSize = min(10, len(freq))
-    keywords = tuple(freq.most_common(minSize)) # get first 10
-    keywords = dict((x,y) for x, y in keywords) # recreate a dict
+    min_size = min(10, len(freq))
+    keywords = tuple(freq.most_common(min_size))
+    keywords = dict((x, y) for x, y in keywords)
 
     for k in keywords:
         articleScore = keywords[k]*1.0 / max(num_words, 1)
@@ -136,40 +130,37 @@ def keywords(text):
     keywords.reverse()
     return dict(keywords)
 
+
 def split_sentences(text):
-    """
-    Split a large string into sentences.
+    """Split a large string into sentences
     """
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-    # text = re.sub(r'[^\w .]', '', text)
     sentences = tokenizer.tokenize(text)
-    sentences = [x.replace('\n','') for x in sentences if len(x)>10]
+    sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
     return sentences
 
+
 def length_score(sentence_len):
-    """
-    """
-    return 1- math.fabs(ideal - sentence_len) / ideal
+    return 1 - math.fabs(ideal - sentence_len) / ideal
+
 
 def title_score(title, sentence):
-    """
-    """
     title = [x for x in title if x not in stopwords]
     count = 0.0
     for word in sentence:
         if (word not in stopwords and word in title):
-            count+=1.0
+            count += 1.0
     return count / max(len(title), 1)
 
+
 def sentence_position(i, size):
-    """
-    Different sentence positions indicate different
+    """Different sentence positions indicate different
     probability of being an important sentence.
     """
-    normalized =  i*1.0 / size
-    if (normalized > 1.0): #just in case
+    normalized = i * 1.0 / size
+    if (normalized > 1.0):
         return 0
     elif (normalized > 0.9):
         return 0.15
@@ -193,4 +184,3 @@ def sentence_position(i, size):
         return 0.17
     else:
         return 0
-
