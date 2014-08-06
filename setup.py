@@ -1,6 +1,5 @@
 #!/bin/python2.7
 # -*- coding: utf-8 -*-
-
 """
 Lucas Ou 2014 -- http://lucasou.com
 
@@ -14,16 +13,9 @@ except ImportError:
 
 packages = [
     'newspaper',
-    'newspaper.data',
     'newspaper.packages',
     'newspaper.packages.tldextract',
-    # 'newspaper.packages.tldextract.tests',
     'newspaper.packages.feedparser',
-    # 'newspaper.packages.feedparser.tests'
-    # 'newspaper.packages.goose',
-    # 'newspaper.packages.goose.utils',
-    # 'newspaper.packages.goose.videos',
-    # 'newspaper.packages.goose.images',
     'newspaper.packages.jieba',
     'newspaper.packages.jieba.posseg',
     'newspaper.packages.jieba.finalseg',
@@ -37,10 +29,10 @@ packages = [
 # 'jieba'
 
 requires = [
-    'lxml',         # 3.2.4 tested
+    'lxml',
     'requests',
     'nltk',
-    'Pillow',       # <- PIL
+    'Pillow',
     'cssselect',
     'BeautifulSoup'
 ]
