@@ -832,7 +832,7 @@ class ContentExtractor(object):
                 self.parser.remove(p)
 
         subParagraphs2 = self.parser.getElementsByTag(e, tag='p')
-        if len(subParagraphs2) == 0 and e.tag is not "td":
+        if len(subParagraphs2) == 0 and e.tag != "td":
             return True
         return False
 
