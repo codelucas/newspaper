@@ -31,7 +31,11 @@ NLP_STOPWORDS_EN = os.path.join(
 
 DATA_DIRECTORY = '.newspaper_scraper'
 
-TOP_DIRECTORY = os.path.join(os.path.expanduser("~"), DATA_DIRECTORY)
+try:
+    TOP_DIRECTORY = os.path.join(os.environ['NEWSPAPER_HOME'], DATA_DIRECTORY)
+except KeyError:
+    TOP_DIRECTORY = os.path.join(os.path.expanduser("~"), DATA_DIRECTORY)
+
 if not os.path.exists(TOP_DIRECTORY):
     os.mkdir(TOP_DIRECTORY)
 
