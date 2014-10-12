@@ -160,7 +160,6 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽
     车网_新浪汽车_新浪网
 
-
 Documentation
 -------------
 
@@ -247,6 +246,23 @@ It is also important to note that the line
 is not needed unless you need the natural language, ``nlp()``, features like keywords 
 extraction and summarization.
 
+Development
+-----------
+
+If you'd like to contribute and hack on the newspaper project, feel free to clone
+a development version of this repository locally::
+
+    git clone git://github.com/codelucas/newspaper.git
+
+Once you have a copy of the source, you can embed it in your Python package,
+or install it into your site-packages easily::
+
+    $ pip install -r requirements.txt
+    $ python setup.py install
+
+Feel free to give our testing suite a shot::
+
+    $ python tests/unit_tests.py
 
 Related Projects
 ----------------
@@ -258,12 +274,6 @@ Related Projects
 .. _`python-goose`: https://github.com/grangier/python-goose
 .. _`ruby-readability`: https://github.com/cantino/ruby-readability 
 .. _`java-boilerpipe`: http://boilerpipe-web.appspot.com/
-
-Todo List
----------
-
-- Add a "follow_robots.txt" option in the config object.
-- Bake in the CSSSelect and BeautifulSoup dependencies
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
 .. _`The Documentation`: http://newspaper.readthedocs.org
