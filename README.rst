@@ -189,18 +189,24 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 **If you are on Debian / Ubuntu**, install using the following:
 
-::
+Python development version, needed for Python.h::
 
-    # Python development version, needed for Python.h
     $ apt-get install python-dev
 
-    # lxml requirements
+lxml requirements::
+
     $ apt-get install libxml2-dev libxslt-dev
 
-    # For PIL to recognize .jpg images
+For PIL to recognize .jpg images::
+
     $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev  
 
+
+Install the distribution via pip::
+
     $ pip install newspaper 
+
+Download NLP related corpora::
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
@@ -209,10 +215,8 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 ::
 
-    # lxml requirements
     $ brew install libxml2 libxslt
 
-    # For PIL to recognize .jpg images
     $ brew install libtiff libjpeg webp little-cms2
 
     $ pip install newspaper 
@@ -222,29 +226,17 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 **Otherwise**, install with the following:
 
-::
+NOTE: You will most likely need to install the following libraries via your package manager
 
-    # You will most likely need to install the following libraries via your
-    # package manager
-    #
-    # PIL: libjpeg-dev zlib1g-dev libpng12-dev  
-    # lxml: libxml2-dev libxslt-dev
-    # Python Development version: python-dev
+- PIL: ``libjpeg-dev`` ``zlib1g-dev`` ``libpng12-dev``
+- lxml: ``libxml2-dev`` ``libxslt-dev``
+- Python Development version: ``python-dev``
+
+::
 
     $ pip install newspaper
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
-
-
-It is also important to note that the line 
-
-::
-
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
-
-
-is not needed unless you need the natural language, ``nlp()``, features like keywords 
-extraction and summarization.
 
 Development
 -----------
