@@ -37,31 +37,14 @@ requires = [
     'BeautifulSoup'
 ]
 
-readme = u''
-_license = u''
-
-try:
-    with open('README.rst') as f:
-        readme = f.read()
-    with open('LICENSE') as f:
-        _license = f.read()
-except:
-    print ''
-
 setup(
     name='newspaper',
     version='0.0.8',
     description='Simplified python article discovery & extraction.',
-    # long_description=readme+'\r\n'+history,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
     url='https://github.com/codelucas/newspaper/',
     packages=packages,
-
-    # TODO: Uhh, what do the following two lines mean?
-    # package_data={'': ['LICENSE'], 'newspaper': []},
-    # package_dir={'newspaper': 'newspaper'},
-
     include_package_data=True,
     install_requires=requires,
     license=_license,
