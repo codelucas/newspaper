@@ -47,6 +47,6 @@ setup(
     packages=packages,
     include_package_data=True,
     install_requires=requires,
-    license=_license,
+    license='',
     zip_safe=False,
 )
