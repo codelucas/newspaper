@@ -189,24 +189,23 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 **If you are on Debian / Ubuntu**, install using the following:
 
-Python development version, needed for Python.h::
+- Python development version, needed for Python.h::
 
-    $ apt-get install python-dev
+    $ sudo apt-get install python-dev
 
-lxml requirements::
+- lxml requirements::
 
-    $ apt-get install libxml2-dev libxslt-dev
+    $ sudo apt-get install libxml2-dev libxslt-dev
 
-For PIL to recognize .jpg images::
+- For PIL to recognize .jpg images::
 
     $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev  
 
-
-Install the distribution via pip::
+- Install the distribution via pip::
 
     $ pip install newspaper 
 
-Download NLP related corpora::
+- Download NLP related corpora::
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
@@ -226,7 +225,7 @@ Download NLP related corpora::
 
 **Otherwise**, install with the following:
 
-NOTE: You will most likely need to install the following libraries via your package manager
+NOTE: You will still most likely need to install the following libraries via your package manager
 
 - PIL: ``libjpeg-dev`` ``zlib1g-dev`` ``libpng12-dev``
 - lxml: ``libxml2-dev`` ``libxslt-dev``
