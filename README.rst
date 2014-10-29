@@ -15,6 +15,8 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
+Basic Demo: http://newspaper-demo.herokuapp.com
+
 **We support 10+ languages and everything is in unicode!**
 
 .. code-block:: pycon
