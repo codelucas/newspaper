@@ -13,13 +13,6 @@ except ImportError:
 
 packages = [
     'newspaper',
-    'newspaper.packages',
-    'newspaper.packages.tldextract',
-    'newspaper.packages.feedparser',
-    'newspaper.packages.jieba',
-    'newspaper.packages.jieba.posseg',
-    'newspaper.packages.jieba.finalseg',
-    'newspaper.packages.jieba.analyse'
 ]
 
 # The following libs are bundled in

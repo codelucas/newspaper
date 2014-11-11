@@ -9,10 +9,11 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import feedparser
+
 from .article import Article
 from .configuration import Configuration
 from .mthreading import NewsPool
-from .packages.feedparser import feedparser
 from .settings import POPULAR_URLS, TRENDING_URL
 from .source import Source
 from .utils import extend_config, print_available_languages

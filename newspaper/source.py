@@ -10,6 +10,10 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
+import feedparser
+
+from tldextract import tldextract
+
 from . import network
 from . import urls
 from . import utils
@@ -17,9 +21,8 @@ from . import utils
 from .article import Article
 from .extractors import ContentExtractor
 from .configuration import Configuration
-from .packages.feedparser import feedparser
-from .packages.tldextract import tldextract
 from .settings import ANCHOR_DIRECTORY
+
 
 log = logging.getLogger(__name__)
 

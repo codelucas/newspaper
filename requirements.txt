@@ -7,3 +7,7 @@ nltk==3.0.0
 requests==2.3.0
 six==1.7.3
 -e git+https://github.com/karls/responses@regex-url-matching#egg=responses
+feedparser==5.1.3
+tldextract==1.5.1
+feedfinder2==0.0.1
+jieba==0.34
