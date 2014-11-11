@@ -1,9 +1,9 @@
-BeautifulSoup==3.2.1
+beautifulsoup4==4.3.2
 Pillow==2.5.1
 PyYAML==3.11
 cssselect==0.9.1
 lxml==3.3.5
-nltk==2.0.4
+nltk==3.0.0
 requests==2.3.0
 six==1.7.3
 -e git+https://github.com/karls/responses@regex-url-matching#egg=responses
