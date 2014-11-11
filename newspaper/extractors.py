@@ -15,7 +15,7 @@ from collections import defaultdict
 import copy
 import logging
 import re
-import urlparse
+import urllib.parse
 
 from tldextract import tldextract
 
@@ -27,8 +27,8 @@ log = logging.getLogger(__name__)
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
 ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(
-    u"#!", u"?_escaped_fragment_=")
-TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
+    "#!", "?_escaped_fragment_=")
+TITLE_REPLACEMENTS = ReplaceSequence().create("&raquo;").append("»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
 ARROWS_SPLITTER = StringSplitter("»")
@@ -134,13 +134,13 @@ class ContentExtractor(object):
                 matches.extend(found)
 
         for match in matches:
-            content = u''
+            content = ''
             if match.tag == 'meta':
                 mm = match.xpath('@content')
                 if len(mm) > 0:
                     content = mm[0]
             else:
-                content = match.text or u''
+                content = match.text or ''
             if len(content) > 0:
                 _authors.extend(parse_byline(content))
 
@@ -184,7 +184,7 @@ class ContentExtractor(object):
             used_delimeter = True
 
         # split title with »
-        if not used_delimeter and u'»' in title_text:
+        if not used_delimeter and '»' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER)
             used_delimeter = True
 
@@ -305,7 +305,7 @@ class ContentExtractor(object):
 
         top_meta_image = try_one or try_two or try_three or try_four
 
-        return urlparse.urljoin(article_url, top_meta_image)
+        return urllib.parse.urljoin(article_url, top_meta_image)
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
@@ -348,7 +348,7 @@ class ContentExtractor(object):
                     break
                 if not ref.get(part):
                     ref[part] = dict()
-                elif isinstance(ref.get(part), basestring):
+                elif isinstance(ref.get(part), str):
                     # Not clear what to do in this scenario,
                     # it's not always a URL, but an ID of some sort
                     ref[part] = {'identifier': ref[part]}
@@ -364,13 +364,13 @@ class ContentExtractor(object):
             href = self.parser.getAttribute(meta[0], 'href')
             if href:
                 href = href.strip()
-                o = urlparse.urlparse(href)
+                o = urllib.parse.urlparse(href)
                 if not o.hostname:
-                    z = urlparse.urlparse(article_url)
+                    z = urllib.parse.urlparse(article_url)
                     domain = '%s://%s' % (z.scheme, z.hostname)
-                    href = urlparse.urljoin(domain, href)
+                    href = urllib.parse.urljoin(domain, href)
                 return href
-        return u''
+        return ''
 
     def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root
@@ -379,7 +379,7 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urlparse.urljoin(article_url, url) for url in urls])
+        img_links = set([urllib.parse.urljoin(article_url, url) for url in urls])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -390,8 +390,8 @@ class ContentExtractor(object):
         node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
         if node_images:
-            return urlparse.urljoin(article_url, node_images[0])
-        return u''
+            return urllib.parse.urljoin(article_url, node_images[0])
+        return ''
 
     def _get_urls(self, doc, titles):
         """Return a list of urls or a list of (url, title_text) tuples
@@ -425,7 +425,7 @@ class ContentExtractor(object):
             doc_or_html = [i.strip() for i in doc_or_html]
             return doc_or_html or []
         # If the doc_or_html is html, parse it into a root
-        if isinstance(doc_or_html, str) or isinstance(doc_or_html, unicode):
+        if isinstance(doc_or_html, str) or isinstance(doc_or_html, str):
             doc = self.parser.fromstring(doc_or_html)
         else:
             doc = doc_or_html
@@ -446,16 +446,16 @@ class ContentExtractor(object):
 
             if not domain and not path:
                 if self.config.verbose:
-                    print 'elim category url %s for no domain and path' % p_url
+                    print('elim category url %s for no domain and path' % p_url)
                 continue
             if path and path.startswith('#'):
                 if self.config.verbose:
-                    print 'elim category url %s path starts with #' % p_url
+                    print('elim category url %s path starts with #' % p_url)
                 continue
             if scheme and (scheme != 'http' and scheme != 'https'):
                 if self.config.verbose:
-                    print ('elim category url %s for bad scheme, '
-                           'not http nor https' % p_url)
+                    print(('elim category url %s for bad scheme, '
+                           'not http nor https' % p_url))
                 continue
 
             if domain:
@@ -466,8 +466,8 @@ class ContentExtractor(object):
                 for part in child_subdomain_parts:
                     if part == domain_tld.domain:
                         if self.config.verbose:
-                            print ('subdomain contains at %s and %s' %
-                                   (str(part), str(domain_tld.domain)))
+                            print(('subdomain contains at %s and %s' %
+                                   (str(part), str(domain_tld.domain))))
                         subdomain_contains = True
                         break
 
@@ -476,13 +476,13 @@ class ContentExtractor(object):
                 if not subdomain_contains and \
                         (child_tld.domain != domain_tld.domain):
                     if self.config.verbose:
-                        print ('elim category url %s for domain '
-                               'mismatch' % p_url)
+                        print(('elim category url %s for domain '
+                               'mismatch' % p_url))
                         continue
                 elif child_tld.subdomain in ['m', 'i']:
                     if self.config.verbose:
-                        print ('elim category url %s for mobile '
-                               'subdomain' % p_url)
+                        print(('elim category url %s for mobile '
+                               'subdomain' % p_url))
                     continue
                 else:
                     valid_categories.append(scheme+'://'+domain)
@@ -499,8 +499,8 @@ class ContentExtractor(object):
                     valid_categories.append(domain+path)
                 else:
                     if self.config.verbose:
-                        print ('elim category url %s for >1 path chunks '
-                               'or size path chunks' % p_url)
+                        print(('elim category url %s for >1 path chunks '
+                               'or size path chunks' % p_url))
         stopwords = [
             'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
             'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
@@ -527,8 +527,8 @@ class ContentExtractor(object):
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
                     if self.config.verbose:
-                        print ('elim category url %s for subdomain '
-                               'contain stopword!' % p_url)
+                        print(('elim category url %s for subdomain '
+                               'contain stopword!' % p_url))
                     bad = True
                     break
             if not bad:

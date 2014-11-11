@@ -43,8 +43,8 @@ class Parser(object):
         html = utils.encodeValue(html)
         try:
             cls.doc = lxml.html.fromstring(html)
-        except Exception, e:
-            print '[Parse lxml ERR]', str(e)
+        except Exception as e:
+            print('[Parse lxml ERR]', str(e))
             return None
 
         return cls.doc
@@ -178,11 +178,11 @@ class Parser(object):
                 if prev is None:
                     if not parent.text:
                         parent.text = ''
-                    parent.text += u' ' + node.tail
+                    parent.text += ' ' + node.tail
                 else:
                     if not prev.tail:
                         prev.tail = ''
-                    prev.tail += u' ' + node.tail
+                    prev.tail += ' ' + node.tail
             node.clear()
             parent.remove(node)
 
@@ -193,7 +193,7 @@ class Parser(object):
     @classmethod
     def getText(cls, node):
         txts = [i for i in node.itertext()]
-        return text.innerTrim(u' '.join(txts).strip())
+        return text.innerTrim(' '.join(txts).strip())
 
     @classmethod
     def previousSiblings(cls, node):

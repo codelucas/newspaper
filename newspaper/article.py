@@ -33,7 +33,7 @@ class ArticleException(Exception):
 class Article(object):
     """Article objects abstract an online news article page
     """
-    def __init__(self, url, title=u'', source_url=u'', config=None, **kwargs):
+    def __init__(self, url, title='', source_url='', config=None, **kwargs):
         """The **kwargs argument may be filled with config values, which
         is added into the config object
         """
@@ -42,7 +42,7 @@ class Article(object):
 
         self.extractor = ContentExtractor(self.config)
 
-        if source_url == u'':
+        if source_url == '':
             source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
 
         if source_url is None or source_url == '':
@@ -57,10 +57,10 @@ class Article(object):
         self.title = encodeValue(title)
 
         # URL of the "best image" to represent this article
-        self.top_img = self.top_image = u''
+        self.top_img = self.top_image = ''
 
         # stores image provided by metadata
-        self.meta_img = u''
+        self.meta_img = ''
 
         # All image urls in this article
         self.imgs = self.images = []
@@ -69,7 +69,7 @@ class Article(object):
         self.movies = []
 
         # Body text from this article
-        self.text = u''
+        self.text = ''
 
         # `keywords` are extracted via nlp() from the body text
         self.keywords = []
@@ -84,16 +84,16 @@ class Article(object):
         self.authors = []
 
         # TODO: Date of when this article was published
-        self.published_date = u''
+        self.published_date = ''
 
         # Summary generated from the article's body txt
-        self.summary = u''
+        self.summary = ''
 
         # This article's unchanged and raw HTML
-        self.html = u''
+        self.html = ''
 
         # The HTML of this article's main node (most important part)
-        self.article_html = u''
+        self.article_html = ''
 
         # Flags warning users in-case they forget to download() or parse()
         # or if they call methods out of order
@@ -101,19 +101,19 @@ class Article(object):
         self.is_downloaded = False
 
         # Meta description field in the HTML source
-        self.meta_description = u""
+        self.meta_description = ""
 
         # Meta language field in HTML source
-        self.meta_lang = u""
+        self.meta_lang = ""
 
         # Meta favicon field in HTML source
-        self.meta_favicon = u""
+        self.meta_favicon = ""
 
         # Meta tags contain a lot of structured data, e.g. OpenGraph
         self.meta_data = {}
 
         # The canonical link of this article if found in the meta data
-        self.canonical_link = u""
+        self.canonical_link = ""
 
         # Holds the top element of the DOM that we determine is a candidate
         # for the main body of the article
@@ -152,14 +152,14 @@ class Article(object):
 
     def parse(self):
         if not self.is_downloaded:
-            print 'You must download() an article before parsing it!'
+            print('You must download() an article before parsing it!')
             raise ArticleException()
 
         self.doc = self.config.get_parser().fromstring(self.html)
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
-            print '[Article parse ERR] %s' % self.url
+            print('[Article parse ERR] %s' % self.url)
             return
 
         # TODO: Fix this, sync in our fix_url() method
@@ -208,7 +208,7 @@ class Article(object):
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
 
-        text = u''
+        text = ''
         self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
@@ -248,7 +248,7 @@ class Article(object):
             self.set_reddit_top_img()
 
     def has_top_image(self):
-        return self.top_img is not None and self.top_img != u''
+        return self.top_img is not None and self.top_img != ''
 
     def is_valid_url(self):
         """Performs a check on the url of this link to determine if article
@@ -287,7 +287,7 @@ class Article(object):
             log.debug('%s caught for sent cnt' % self.url)
             return False
 
-        if self.html is None or self.html == u'':
+        if self.html is None or self.html == '':
             log.debug('%s caught for no html' % self.url)
             return False
 
@@ -309,11 +309,11 @@ class Article(object):
         """Keyword extraction wrapper
         """
         if not self.is_downloaded or not self.is_parsed:
-            print 'You must download and parse an article before parsing it!'
+            print('You must download and parse an article before parsing it!')
             raise ArticleException()
 
-        text_keyws = nlp.keywords(self.text).keys()
-        title_keyws = nlp.keywords(self.title).keys()
+        text_keyws = list(nlp.keywords(self.text).keys())
+        title_keyws = list(nlp.keywords(self.title).keys())
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
 
@@ -364,7 +364,7 @@ class Article(object):
         try:
             s = images.Scraper(self)
             self.set_top_img_no_ckeck(s.largest_image_url())
-        except Exception, e:
+        except Exception as e:
             log.critical('jpeg error with PIL, %s' % e)
 
     def set_title(self, title):
