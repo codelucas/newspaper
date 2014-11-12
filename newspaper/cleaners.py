@@ -170,7 +170,7 @@ class DocumentCleaner(object):
                     and self.parser.getTag(next_node) == "a" \
                     and self.parser.getAttribute(
                         next_node, 'grv-usedalready') != 'yes':
-                outer = " " + self.parser.outerHtml(next_node) + " "
+                outer = " " + self.parser.outerHtml(next_node).decode('utf-8') + " "
                 replacement_text.append(outer)
                 nodes_to_remove.append(next_node)
                 self.parser.setAttribute(next_node, attr='grv-usedalready',

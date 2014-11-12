@@ -58,7 +58,7 @@ def asyncio_run(urls):
     pass
     # rs = (grequests.request('GET', u, **req_kwargs) for u in urls)
     # responses = async_request(urls)
-    # print responses
+    # print(responses)
 
 
 def benchmark():

@@ -76,11 +76,9 @@ class StopWords(object):
         content_is_unicode = isinstance(content, str)
         if content_is_unicode:
             content = content.encode('utf-8')
-        stripped_input = content.translate(
-            self.TRANS_TABLE, string.punctuation)
+        trans_table = {ord(c): None for c in string.punctuation}
+        stripped_input = content.decode('utf-8').translate(trans_table)
 
-        if content_is_unicode:
-            return stripped_input.decode('utf-8')
         return stripped_input
 
     def candidate_words(self, stripped_input):

@@ -326,8 +326,8 @@ class Source(object):
             self.articles = [a for a in self.articles if a.html]
         else:
             if threads > 5:
-                print ('Using 5+ threads on a single source '
-                       'may get you rate limited!')
+                print(('Using 5+ threads on a single source '
+                       'may get you rate limited!'))
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):

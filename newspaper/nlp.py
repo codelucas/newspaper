@@ -112,23 +112,26 @@ def keywords(text):
     """
     text = split_words(text)
     # of words before removing blacklist words
-    num_words = len(text)
-    text = [x for x in text if x not in stopwords]
-    freq = Counter()
-    for word in text:
-        freq[word] += 1
+    if text:
+        num_words = len(text)
+        text = [x for x in text if x not in stopwords]
+        freq = Counter()
+        for word in text:
+            freq[word] += 1
 
-    min_size = min(10, len(freq))
-    keywords = tuple(freq.most_common(min_size))
-    keywords = dict((x, y) for x, y in keywords)
+        min_size = min(10, len(freq))
+        keywords = tuple(freq.most_common(min_size))
+        keywords = dict((x, y) for x, y in keywords)
 
-    for k in keywords:
-        articleScore = keywords[k]*1.0 / max(num_words, 1)
-        keywords[k] = articleScore * 1.5 + 1
+        for k in keywords:
+            articleScore = keywords[k]*1.0 / max(num_words, 1)
+            keywords[k] = articleScore * 1.5 + 1
 
-    keywords = sorted(iter(keywords.items()), key=operator.itemgetter(1))
-    keywords.reverse()
-    return dict(keywords)
+        keywords = sorted(iter(keywords.items()), key=operator.itemgetter(1))
+        keywords.reverse()
+        return dict(keywords)
+    else:
+        return dict()
 
 
 def split_sentences(text):
@@ -137,7 +140,7 @@ def split_sentences(text):
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-    sentences = tokenizer.tokenize(text)
+    sentences = tokenizer.tokenize(text.decode('utf-8'))
     sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
     return sentences
 
@@ -147,12 +150,15 @@ def length_score(sentence_len):
 
 
 def title_score(title, sentence):
-    title = [x for x in title if x not in stopwords]
-    count = 0.0
-    for word in sentence:
-        if (word not in stopwords and word in title):
-            count += 1.0
-    return count / max(len(title), 1)
+    if title:
+        title = [x for x in title if x not in stopwords]
+        count = 0.0
+        for word in sentence:
+            if (word not in stopwords and word in title):
+                count += 1.0
+        return count / max(len(title), 1)
+    else:
+        return 0
 
 
 def sentence_position(i, size):

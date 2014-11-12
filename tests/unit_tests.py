@@ -88,7 +88,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_download_html(self):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.download()
-        assert len(self.article.html) == 75244
+        assert len(self.article.html) == 75176
 
     @print_test
     def test_pre_download_parse(self):
@@ -209,8 +209,8 @@ class ArticleTestCase(unittest.TestCase):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
         self.article.nlp()
-        # print self.article.summary
-        # print self.article.keywords
+        # print(self.article.summary)
+        # print(self.article.keywords)
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
 
@@ -388,8 +388,8 @@ class EncodingTestCase(unittest.TestCase):
 
     @print_test
     def test_smart_str(self):
-        assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
-        assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
+        assert smart_str(self.uni_string) == b'\xe2\x88\x86\xcb\x86\xcb\x86\xc3\xb8\xe2\x88\x86\xc3\x9f\xc3\xa5\xc3\x9flucas yang\xcb\x9c'
+        assert smart_str(self.normal_string) == b'\xe2\x88\x86\xc6\x92\xcb\x86\xc6\x92\xc2\xb4\xc2\xb4lucas yang'
 
 
 class MThreadingTestCase(unittest.TestCase):

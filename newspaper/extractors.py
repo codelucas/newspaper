@@ -418,7 +418,7 @@ class ContentExtractor(object):
             return []
         # If we are extracting from raw text
         if regex:
-            doc_or_html = re.sub('<[^<]+?>', ' ', doc_or_html)
+            doc_or_html = re.sub('<[^<]+?>', ' ', doc_or_html.decode('utf-8'))
             doc_or_html = re.findall(
                 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|'
                 '(?:%[0-9a-fA-F][0-9a-fA-F]))+', doc_or_html)
@@ -762,7 +762,7 @@ class ContentExtractor(object):
         current_score = 0
         score_string = self.parser.getAttribute(node, 'gravityScore')
         if score_string:
-            current_score = int(score_string)
+            current_score = float(score_string)
 
         new_score = current_score + addToScore
         self.parser.setAttribute(node, "gravityScore", str(new_score))
@@ -813,7 +813,7 @@ class ContentExtractor(object):
         grvScoreString = self.parser.getAttribute(node, 'gravityScore')
         if not grvScoreString:
             return None
-        return int(grvScoreString)
+        return float(grvScoreString)
 
     def nodes_to_check(self, doc):
         """Returns a list of nodes we want to search

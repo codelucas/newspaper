@@ -78,7 +78,7 @@ def clean_url(url):
     """Url quotes unicode data out of urls
     """
     url = url.encode('utf8')
-    url = ''.join([urllib.parse.quote(c) if ord(c) >= 127 else c for c in url])
+    url = ''.join([urllib.parse.quote(c) if ord(c) >= 127 else c for c in url.decode('utf-8')])
     return url
 
 
@@ -136,7 +136,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                             print('we caught a favicon!: %s' % url)
                         else:
                             # import traceback
-                            # print traceback.format_exc()
+                            # print(traceback.format_exc())
                             print('PIL feed() failure for image:', url, str(e))
                             raise e
                         p = None

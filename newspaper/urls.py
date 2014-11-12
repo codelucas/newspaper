@@ -88,7 +88,7 @@ def prepare_url(url, source_url=None):
             proper_url = remove_args(url)
     except ValueError as e:
         log.critical('url %s failed on err %s' % (url, str(e)))
-        # print 'url %s failed on err %s' % (url, str(e))
+        # print('url %s failed on err %s' % (url, str(e)))
         proper_url = ''
 
     return proper_url
