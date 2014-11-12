@@ -17,7 +17,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
 
 .. code-block:: pycon
 
-    >>> import newspaper     
+    >>> import newspaper
     >>> newspaper.languages()
 
     Your available langauges are:
@@ -52,13 +52,13 @@ A Glance:
     >>> cnn_paper = newspaper.build('http://cnn.com')
 
     >>> for article in cnn_paper.articles:
-    >>>     print article.url
+    >>>     print(article.url)
     u'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
     u'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
     ...
 
     >>> for category in cnn_paper.category_urls():
-    >>>     print category
+    >>>     print(category)
 
     u'http://lifestyle.cnn.com'
     u'http://cnn.com/world'
@@ -112,19 +112,19 @@ If no language is specified, Newspaper will attempt to auto detect a language.
     >>> url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
 
     >>> a = Article(url, language='zh') # Chinese
-    
+
     >>> a.download()
     >>> a.parse()
 
-    >>> print a.text[:150]
+    >>> print(a.text[:150])
     香港行政长官梁振英在各方压力下就其大宅的违章建
     筑（僭建）问题到立法会接受质询，并向香港民众道歉。
     梁振英在星期二（12月10日）的答问大会开始之际在其
     演说中道歉，但强调他在违章建筑问题上没有隐瞒的意
     图和动机。 一些亲北京阵营议员欢迎梁振英道歉，
     且认为应能获得香港民众接受，但这些议员也质问梁振英有
-   
-    >>> print a.title
+
+    >>> print(a.title)
     港特首梁振英就住宅违建事件道歉
 
 
@@ -136,7 +136,7 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     >>> sina_paper = newspaper.build('http://www.sina.com.cn/', language='zh')
 
     >>> for category in sina_paper.category_urls():
-    >>>     print category
+    >>>     print(category)
     u'http://health.sina.com.cn'
     u'http://eladies.sina.com.cn'
     u'http://english.sina.com'
@@ -146,7 +146,7 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     >>> article.download()
     >>> article.parse()
 
-    >>> print article.text
+    >>> print(article.text)
     新浪武汉汽车综合 随着汽车市场的日趋成熟，传统的“集
     全家之力抱得爱车归”的全额购车模式已然过时，另一种轻
     松的新兴 车模式――金融购车正逐步成为时下消费者购买
@@ -154,7 +154,7 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     式既能在短期内
     ...
 
-    >>> print article.title
+    >>> print(article.title)
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉
     汽车网_新浪汽车_新浪网
 
@@ -209,4 +209,4 @@ to talk about the future of this library and news extraction in general!
 .. _`Lucas Ou-Yang`: http://lucasou.com
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
-.. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt 
+.. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
