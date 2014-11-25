@@ -30,7 +30,7 @@ ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(
 TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
-SLASH_SPLITTER = StringSplitter(" / ")
+SLASH_SPLITTER = StringSplitter("/")
 ARROWS_SPLITTER = StringSplitter("»")
 COLON_SPLITTER = StringSplitter(":")
 SPACE_SPLITTER = StringSplitter(' ')
@@ -184,7 +184,7 @@ class ContentExtractor(object):
             used_delimeter = True
 
         # split title with /
-        if not used_delimeter and ' / ' in title_text:
+        if not used_delimeter and '/' in title_text:
             title_text = self.split_title(title_text, SLASH_SPLITTER)
             used_delimeter = True
 
