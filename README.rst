@@ -15,6 +15,8 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
+Basic Demo: http://newspaper-demo.herokuapp.com
+
 **We support 10+ languages and everything is in unicode!**
 
 .. code-block:: pycon
@@ -160,7 +162,6 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽
     车网_新浪汽车_新浪网
 
-
 Documentation
 -------------
 
@@ -188,67 +189,73 @@ Get it now
 Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
 However, you will run into fixable issues if you are trying to install on ubuntu.
 
-**If you are on ubuntu**, install using the following:
+**If you are on Debian / Ubuntu**, install using the following:
 
-::
+- Python development version, needed for Python.h::
 
-    # Pre-req's for lxml
-    $ apt-get install libxml2-dev libxslt-dev
+    $ sudo apt-get install python-dev
 
-    # For PIL to recognize .jpg
+- lxml requirements::
+
+    $ sudo apt-get install libxml2-dev libxslt-dev
+
+- For PIL to recognize .jpg images::
+
     $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev  
 
-    $ easy_install lxml # NOT PIP
+- Install the distribution via pip::
 
     $ pip install newspaper 
 
-    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+- Download NLP related corpora::
+
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
 
-**If you are on OSX**, install using the following:
+**If you are on OSX**, install using the following, you may use both homebrew or macports:
 
 ::
 
-    # Pre-req's for lxml
-    $ brew install libxml2 libxslt # or the equiv command in macports
+    $ brew install libxml2 libxslt
 
-    $ pip install lxml
-
-    # For PIL to recognize .jpg
-    $ brew install libtiff libjpeg webp little-cms2 # or the equiv with macports
+    $ brew install libtiff libjpeg webp little-cms2
 
     $ pip install newspaper 
 
-    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
 
-**If you are neither using ubuntu nor mac**, install with the following:
+**Otherwise**, install with the following:
+
+NOTE: You will still most likely need to install the following libraries via your package manager
+
+- PIL: ``libjpeg-dev`` ``zlib1g-dev`` ``libpng12-dev``
+- lxml: ``libxml2-dev`` ``libxslt-dev``
+- Python Development version: ``python-dev``
 
 ::
-
-    # You will most likely need to install the following libraries via your
-    # package manager
-    # for lxml: libxml2-dev libxslt-dev
-    # for PIL: libjpeg-dev zlib1g-dev libpng12-dev  
 
     $ pip install newspaper
 
-    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
+Development
+-----------
 
-It is also important to note that the line 
+If you'd like to contribute and hack on the newspaper project, feel free to clone
+a development version of this repository locally::
 
-::
+    git clone git://github.com/codelucas/newspaper.git
 
-    $ curl https://raw.github.com/codelucas/newspaper/master/download_corpora.py | python2.7
+Once you have a copy of the source, you can embed it in your Python package,
+or install it into your site-packages easily::
 
+    $ pip install -r requirements.txt
+    $ python setup.py install
 
-is not needed unless you need the natural language, ``nlp()``, features like keywords 
-extraction and summarization.
+Feel free to give our testing suite a shot::
 
-If you are using **ubuntu** and are still running into gcc compile errors when installing lxml, try installing
-``libxslt1-dev`` instead of ``libxslt-dev``.
-
+    $ python tests/unit_tests.py
 
 Related Projects
 ----------------
@@ -260,12 +267,6 @@ Related Projects
 .. _`python-goose`: https://github.com/grangier/python-goose
 .. _`ruby-readability`: https://github.com/cantino/ruby-readability 
 .. _`java-boilerpipe`: http://boilerpipe-web.appspot.com/
-
-Todo List
----------
-
-- Add a "follow_robots.txt" option in the config object.
-- Bake in the CSSSelect and BeautifulSoup dependencies
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
 .. _`The Documentation`: http://newspaper.readthedocs.org

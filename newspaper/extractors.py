@@ -30,6 +30,8 @@ ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(
 TITLE_REPLACEMENTS = ReplaceSequence().create(u"&raquo;").append(u"»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
+UNDERSCORE_SPLITTER = StringSplitter("_")
+SLASH_SPLITTER = StringSplitter("/")
 ARROWS_SPLITTER = StringSplitter("»")
 COLON_SPLITTER = StringSplitter(":")
 SPACE_SPLITTER = StringSplitter(' ')
@@ -180,6 +182,15 @@ class ContentExtractor(object):
         # split title with -
         if not used_delimeter and '-' in title_text:
             title_text = self.split_title(title_text, DASH_SPLITTER)
+            used_delimeter = True
+
+        # split title with _
+        if not used_delimeter and '_' in title_text:
+            title_text = self.split_title(title_text, UNDERSCORE_SPLITTER)
+
+        # split title with /
+        if not used_delimeter and '/' in title_text:
+            title_text = self.split_title(title_text, SLASH_SPLITTER)
             used_delimeter = True
 
         # split title with »
@@ -832,7 +843,7 @@ class ContentExtractor(object):
                 self.parser.remove(p)
 
         subParagraphs2 = self.parser.getElementsByTag(e, tag='p')
-        if len(subParagraphs2) == 0 and e.tag is not "td":
+        if len(subParagraphs2) == 0 and e.tag != "td":
             return True
         return False
 

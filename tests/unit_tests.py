@@ -18,8 +18,7 @@ PARENT_DIR = os.path.join(TEST_DIR, '..')
 # tests is a separate module, insert parent dir manually
 sys.path.insert(0, PARENT_DIR)
 
-URLS_FN = os.path.join(TEST_DIR, 'data/100K_urls.txt')
-TEXT_FN = os.path.join(TEST_DIR, 'data/body_text')
+TEXT_FN = os.path.join(TEST_DIR, 'data/text')
 HTML_FN = os.path.join(TEST_DIR, 'data/html')
 
 import newspaper
@@ -46,15 +45,6 @@ def print_test(method):
     return run
 
 
-def read_urls(base_fn=URLS_FN, amount=100):
-    """Utility funct which extracts out a listing of sample urls
-    """
-    f = codecs.open(base_fn, 'r', 'utf8')
-    lines = f.readlines()
-    lines = [l.strip() for l in lines]
-    return lines[:amount]
-
-
 def mock_response_with(url, response_file):
     response_path = os.path.join(TEST_DIR, "data/html/%s.html" % response_file)
     with open(response_path, 'r') as f:
@@ -66,7 +56,6 @@ def mock_response_with(url, response_file):
 
 class ArticleTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing article unit'
         self.test_url()
         self.test_download_html()
         self.test_pre_download_parse()
@@ -77,8 +66,8 @@ class ArticleTestCase(unittest.TestCase):
         self.test_nlp_body()
 
     def setUp(self):
-        """called before the first test case of this unit begins"""
-
+        """called before the first test case of this unit begins
+        """
         self.article = Article(
             url='http://www.cnn.com/2013/11/27/travel/weather-'
                 'thanksgiving/index.html?iref=allsearch')
@@ -125,7 +114,7 @@ class ArticleTestCase(unittest.TestCase):
 
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
-        with open(os.path.join(TEST_DIR, 'data/cnn.txt'), 'r') as f:
+        with open(os.path.join(TEXT_FN, 'cnn.txt'), 'r') as f:
             assert self.article.text == f.read()
         assert self.article.top_img == TOP_IMG
         assert self.article.authors == AUTHORS
@@ -188,8 +177,8 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     @responses.activate
     def test_pre_download_nlp(self):
-        """Test running NLP algos before even downloading the article"""
-
+        """Test running NLP algos before even downloading the article
+        """
         mock_response_with(self.article.url, 'cnn_article')
 
         def failfunc():
@@ -198,8 +187,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_pre_parse_nlp(self):
-        """Test running NLP algos before parsing the article"""
-
+        """Test running NLP algos before parsing the article
+        """
         article = Article(self.article.url)
         article.download()
 
@@ -228,7 +217,6 @@ class ArticleTestCase(unittest.TestCase):
 
 class SourceTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing source unit'
         self.source_url_input_none()
         self.test_cache_categories()
         self.test_source_build()
@@ -291,8 +279,7 @@ class SourceTestCase(unittest.TestCase):
     @print_test
     @responses.activate
     def test_cache_categories(self):
-        """
-        builds two same source objects in a row examines speeds of both
+        """Builds two same source objects in a row examines speeds of both
         """
         url = 'http://uk.yahoo.com'
         mock_response_with(url, 'yahoo_main_site')
@@ -309,13 +296,11 @@ class SourceTestCase(unittest.TestCase):
 
 class UrlTestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing url unit'
         self.test_valid_urls()
 
     @print_test
     def test_valid_urls(self):
-        """
-        prints out a list of urls with our heuristic guess if it is a
+        """Prints out a list of urls with our heuristic guess if it is a
         valid news url purely based on the url
         """
         from newspaper.urls import valid_url
@@ -323,7 +308,8 @@ class UrlTestCase(unittest.TestCase):
         with open(os.path.join(TEST_DIR, 'data/test_urls.txt'), 'r') as f:
             lines = f.readlines()
             test_tuples = [tuple(l.strip().split(' ')) for l in lines]
-            # tuples are ('1', 'url_goes_here') form, '1' means valid, '0' otherwise
+            # tuples are ('1', 'url_goes_here') form, '1' means valid,
+            # '0' otherwise
 
         for tup in test_tuples:
             lst = int(tup[0])
@@ -346,7 +332,6 @@ class UrlTestCase(unittest.TestCase):
 
 class APITestCase(unittest.TestCase):
     def runTest(self):
-        print 'testing API unit'
         # self.test_source_build()
         self.test_article_build()
         self.test_hot_trending()
@@ -370,15 +355,13 @@ class APITestCase(unittest.TestCase):
 
     @print_test
     def test_hot_trending(self):
-        """
-        grab google trending, just make sure this runs
+        """Grab google trending, just make sure this runs
         """
         newspaper.hot()
 
     @print_test
     def test_popular_urls(self):
-        """
-        just make sure this runs
+        """Just make sure this method runs
         """
         newspaper.popular_urls()
 
@@ -421,7 +404,7 @@ class MThreadingTestCase(unittest.TestCase):
         tc_paper = newspaper.build('http://techcrunch.com', config=config)
         espn_paper = newspaper.build('http://espn.com', config=config)
 
-        print ('slate has %d articles tc has %d articles espn has %d articles'
+        print ('Slate has %d articles TC has %d articles ESPN has %d articles'
                % (slate_paper.size(), tc_paper.size(), espn_paper.size()))
 
         papers = [slate_paper, tc_paper, espn_paper]
@@ -429,9 +412,9 @@ class MThreadingTestCase(unittest.TestCase):
 
         news_pool.join()
 
-        print 'Downloaded slate mthread len', len(slate_paper.articles[0].html)
-        print 'Downloaded espn mthread len', len(espn_paper.articles[-1].html)
-        print 'Downloaded tc mthread len', len(tc_paper.articles[1].html)
+        print 'Downloaded Slate mthread len', len(slate_paper.articles[0].html)
+        print 'Downloaded ESPN mthread len', len(espn_paper.articles[-1].html)
+        print 'Downloaded TC mthread len', len(tc_paper.articles[1].html)
 
 
 class ConfigBuildTestCase(unittest.TestCase):
@@ -441,6 +424,8 @@ class ConfigBuildTestCase(unittest.TestCase):
     @print_test
     def test_config_build(self):
         """Test if our **kwargs to config building setup actually works.
+        NOTE: No need to mock responses as we are just initializing the
+        objects, not actually calling download(..)
         """
         a = Article(url='http://www.cnn.com/2013/11/27/'
                     'travel/weather-thanksgiving/index.html')
@@ -468,65 +453,49 @@ class ConfigBuildTestCase(unittest.TestCase):
         assert s.config.language == 'en'
         assert s.config.use_meta_language is False
 
-        s = newspaper.build('http://cnn.com', dry=True)
-        assert s.config.language == 'en'
-        assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles is True
-        assert s.config.use_meta_language is True
-
-        s = newspaper.build('http://cnn.com', dry=True, memoize_articles=False,
-                            MAX_FILE_MEMO=10000, language='zh')
-        assert s.config.language == 'zh'
-        assert s.config.MAX_FILE_MEMO == 10000
-        assert s.config.memoize_articles is False
-        assert s.config.use_meta_language is False
-
 
 class MultiLanguageTestCase(unittest.TestCase):
     def runTest(self):
         self.test_chinese_fulltext_extract()
         self.test_arabic_fulltext_extract()
-        # self.test_spanish_fulltext_extract()
+        self.test_spanish_fulltext_extract()
 
     @print_test
     def test_chinese_fulltext_extract(self):
-        url = 'http://www.bbc.co.uk/zhongwen/simp/chinese_news/2012/12/121210_hongkong_politics.shtml'
+        url = 'http://news.sohu.com/20050601/n225789219.shtml'
+        mock_response_with(url, 'chinese_article')
         article = Article(url=url, language='zh')
         article.build()
-        # assert isinstance(article.stopwords_class, StopWordsChinese)
-        with codecs.open(os.path.join(TEXT_FN, 'chinese_text_1.txt'), 'r', 'utf8') as f:
+        with codecs.open(os.path.join(TEXT_FN, 'chinese.txt'),
+                         'r', 'utf8') as f:
             assert article.text == f.read()
-
-        # with codecs.open(os.path.join(HTML_FN, 'chinese_html_1.html'), 'w', 'utf8') as f:
-        #    f.write(article.html)
 
     @print_test
     def test_arabic_fulltext_extract(self):
-        url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/index.html'
-
+        url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/'\
+              'index.html'
+        mock_response_with(url, 'arabic_article')
         article = Article(url=url)
         article.build()
         assert article.meta_lang == 'ar'
-        # assert isinstance(article.stopwords_class, StopWordsArabic)
-        with codecs.open(os.path.join(TEXT_FN, 'arabic_text_1.txt'), 'r', 'utf8') as f:
+        with codecs.open(os.path.join(TEXT_FN, 'arabic.txt'),
+                         'r', 'utf8') as f:
             assert article.text == f.read()
-
-        # with codecs.open(os.path.join(HTML_FN, 'arabic_html_1.html'), 'w', 'utf8') as f:
-        #    f.write(article.html)
 
     @print_test
     def test_spanish_fulltext_extract(self):
-        url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscalia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
+        url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscal'\
+              'ia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
+        mock_response_with(url, 'spanish_article')
         article = Article(url=url, language='es')
         article.build()
-        with codecs.open(os.path.join(TEXT_FN, 'spanish_text_1.txt'), 'r', 'utf8') as f:
+        with codecs.open(os.path.join(TEXT_FN, 'spanish.txt'),
+                         'r', 'utf8') as f:
             assert article.text == f.read()
 
-        # with codecs.open(os.path.join(HTML_FN, 'spanish_html_1.html'), 'w', 'utf8') as f:
-        #    f.write(article.html)
 
 if __name__ == '__main__':
-    # unittest.main() # run all units and their cases
+    # unittest.main()  # run all units and their cases
 
     suite = unittest.TestSuite()
 
@@ -538,4 +507,5 @@ if __name__ == '__main__':
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
     unittest.TextTestRunner().run(suite)
+
     # suite.addTest(MThreadingTestCase())

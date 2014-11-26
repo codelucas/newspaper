@@ -9,12 +9,7 @@ Lucas Ou-Yang -- http://codelucas.com, lucasyangpersonal@gmail.com
 
 Thanks to the following contributors:
 -------------------------------------
-- Alex Kessinger - https://github.com/voidfiles
-- Oleg Temnov - https://github.com/otemnov
-- Matthew Ward - https://github.com/WheresWardy  
-- Sandeep Singh - https://github.com/techaddict
-- Michael Hood - https://github.com/michaelhood
-- Juliano Fischer - https://github.com/julianofischer
+https://github.com/codelucas/newspaper/graphs/contributors
 
 Newspaper relied on some code of a few other open source projects:
 ------------------------------------------------------------------

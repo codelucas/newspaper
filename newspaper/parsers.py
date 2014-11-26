@@ -9,6 +9,7 @@ or query an lxml or soup dom object generated from an article's html.
 import logging
 import lxml.etree
 import lxml.html
+import lxml.html.clean
 
 from copy import deepcopy
 
