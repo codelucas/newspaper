@@ -27,7 +27,7 @@ requires = [
     'nltk',
     'Pillow',
     'cssselect',
-    'BeautifulSoup'
+    'BeautifulSoup4'
 ]
 
 setup(
