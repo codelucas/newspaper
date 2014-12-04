@@ -25,11 +25,6 @@ def summarize(url='', title='', text=''):
     if (text == '' or title == ''):
         return []
 
-    if isinstance(title, unicode):
-        title = title.encode('utf-8', 'ignore')
-    if isinstance(text, unicode):
-        text = text.encode('utf-8', 'ignore')
-
     summaries = []
     sentences = split_sentences(text)
     keys = keywords(text)
