@@ -38,10 +38,10 @@ def print_test(method):
     """
     def run(*args, **kw):
         ts = time.time()
-        print '\ttesting function %r' % method.__name__
+        print('\ttesting function %r' % method.__name__)
         method(*args, **kw)
         te = time.time()
-        print '\t[OK] in %r %2.2f sec' % (method.__name__, te-ts)
+        print('\t[OK] in %r %2.2f sec' % (method.__name__, te-ts))
     return run
 
 
@@ -80,7 +80,7 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     def test_url(self):
         assert self.article.url == (
-            u'http://www.cnn.com/2013/11/27/travel/weather-'
+            'http://www.cnn.com/2013/11/27/travel/weather-'
             'thanksgiving/index.html')
 
     @print_test
@@ -88,7 +88,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_download_html(self):
         mock_response_with(self.article.url, 'cnn_article')
         self.article.download()
-        assert len(self.article.html) == 75244
+        assert len(self.article.html) == 75176
 
     @print_test
     def test_pre_download_parse(self):
@@ -163,16 +163,16 @@ class ArticleTestCase(unittest.TestCase):
 
         # if the value for a meta key is another dict, that dict ought to be
         # filled with keys and values
-        dict_values = filter(lambda v: isinstance(v, dict), meta.values())
-        assert all(map(lambda d: len(d) > 0, dict_values))
+        dict_values = [v for v in list(meta.values()) if isinstance(v, dict)]
+        assert all([len(d) > 0 for d in dict_values])
 
         # there are exactly 5 top-level "og:type" type keys
         is_dict = lambda v: isinstance(v, dict)
-        assert len(filter(is_dict, meta.values())) == 5
+        assert len(list(filter(is_dict, list(meta.values())))) == 5
 
         # there are exactly 12 top-level "pubdate" type keys
-        is_string = lambda v: isinstance(v, types.StringTypes)
-        assert len(filter(is_string, meta.values())) == 12
+        is_string = lambda v: isinstance(v, str)
+        assert len(list(filter(is_string, list(meta.values())))) == 12
 
     @print_test
     @responses.activate
@@ -202,15 +202,15 @@ class ArticleTestCase(unittest.TestCase):
         SUMMARY = """Wish the forecasters were wrong all the time :)"Though the worst of the storm has passed, winds could still pose a problem.\r\nForecasters see mostly smooth sailing into Thanksgiving.\r\nThe forecast has left up in the air the fate of the balloons in Macy's Thanksgiving Day Parade.\r\nThe storm caused some complications and inconveniences, but no major delays or breakdowns.\r\n"That's good news for people like Latasha Abney, who joined the more than 43 million Americans expected by AAA to travel over the Thanksgiving holiday weekend."""
 
         KEYWORDS = [
-            u'great', u'good', u'flight', u'sailing', u'delays',
-            u'smooth', u'thanksgiving', u'snow', u'weather', u'york',
-            u'storm', u'winds', u'balloons', u'forecasters']
+            'great', 'good', 'flight', 'sailing', 'delays',
+            'smooth', 'thanksgiving', 'snow', 'weather', 'york',
+            'storm', 'winds', 'balloons', 'forecasters']
 
         mock_response_with(self.article.url, 'cnn_article')
         self.article.build()
         self.article.nlp()
-        # print self.article.summary
-        # print self.article.keywords
+        # print(self.article.summary)
+        # print(self.article.keywords)
         assert self.article.summary == SUMMARY
         assert self.article.keywords == KEYWORDS
 
@@ -240,25 +240,25 @@ class SourceTestCase(unittest.TestCase):
                 'news as it happens through: special reports, videos, '
                 'audio, photo galleries plus interactive maps and timelines.')
         CATEGORY_URLS = [
-            u'http://cnn.com/ASIA', u'http://connecttheworld.blogs.cnn.com',
-            u'http://cnn.com/HLN', u'http://cnn.com/MIDDLEEAST',
-            u'http://cnn.com', u'http://ireport.cnn.com',
-            u'http://cnn.com/video', u'http://transcripts.cnn.com',
-            u'http://cnn.com/espanol',
-            u'http://partners.cnn.com', u'http://www.cnn.com',
-            u'http://cnn.com/US', u'http://cnn.com/EUROPE',
-            u'http://cnn.com/TRAVEL', u'http://cnn.com/cnni',
-            u'http://cnn.com/SPORT', u'http://cnn.com/mostpopular',
-            u'http://arabic.cnn.com', u'http://cnn.com/WORLD',
-            u'http://cnn.com/LATINAMERICA', u'http://us.cnn.com',
-            u'http://travel.cnn.com', u'http://mexico.cnn.com',
-            u'http://cnn.com/SHOWBIZ', u'http://edition.cnn.com',
-            u'http://amanpour.blogs.cnn.com', u'http://money.cnn.com',
-            u'http://cnn.com/tools/index.html', u'http://cnnespanol.cnn.com',
-            u'http://cnn.com/CNNI', u'http://business.blogs.cnn.com',
-            u'http://cnn.com/AFRICA', u'http://cnn.com/TECH',
-            u'http://cnn.com/BUSINESS']
-        FEEDS = [u'http://rss.cnn.com/rss/edition.rss']
+            'http://cnn.com/ASIA', 'http://connecttheworld.blogs.cnn.com',
+            'http://cnn.com/HLN', 'http://cnn.com/MIDDLEEAST',
+            'http://cnn.com', 'http://ireport.cnn.com',
+            'http://cnn.com/video', 'http://transcripts.cnn.com',
+            'http://cnn.com/espanol',
+            'http://partners.cnn.com', 'http://www.cnn.com',
+            'http://cnn.com/US', 'http://cnn.com/EUROPE',
+            'http://cnn.com/TRAVEL', 'http://cnn.com/cnni',
+            'http://cnn.com/SPORT', 'http://cnn.com/mostpopular',
+            'http://arabic.cnn.com', 'http://cnn.com/WORLD',
+            'http://cnn.com/LATINAMERICA', 'http://us.cnn.com',
+            'http://travel.cnn.com', 'http://mexico.cnn.com',
+            'http://cnn.com/SHOWBIZ', 'http://edition.cnn.com',
+            'http://amanpour.blogs.cnn.com', 'http://money.cnn.com',
+            'http://cnn.com/tools/index.html', 'http://cnnespanol.cnn.com',
+            'http://cnn.com/CNNI', 'http://business.blogs.cnn.com',
+            'http://cnn.com/AFRICA', 'http://cnn.com/TECH',
+            'http://cnn.com/BUSINESS']
+        FEEDS = ['http://rss.cnn.com/rss/edition.rss']
         BRAND = 'cnn'
 
         s = Source('http://cnn.com', verbose=False, memoize_articles=False)
@@ -318,8 +318,8 @@ class UrlTestCase(unittest.TestCase):
             truth_val = True if lst == 1 else False
             try:
                 assert truth_val == valid_url(url, test=True)
-            except AssertionError, e:
-                print '\t\turl: %s is supposed to be %s' % (url, truth_val)
+            except AssertionError as e:
+                print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
     @print_test
@@ -373,23 +373,23 @@ class EncodingTestCase(unittest.TestCase):
         self.test_smart_str()
 
     def setUp(self):
-        self.uni_string = u"∆ˆˆø∆ßåßlucas yang˜"
+        self.uni_string = "∆ˆˆø∆ßåßlucas yang˜"
         self.normal_string = "∆ƒˆƒ´´lucas yang"
 
     @print_test
     def test_encode_val(self):
         assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        assert encodeValue(self.normal_string) == '∆ƒˆƒ´´lucas yang'
 
     @print_test
     def test_smart_unicode(self):
         assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == u'∆ƒˆƒ´´lucas yang'
+        assert smart_unicode(self.normal_string) == '∆ƒˆƒ´´lucas yang'
 
     @print_test
     def test_smart_str(self):
-        assert smart_str(self.uni_string) == "∆ˆˆø∆ßåßlucas yang˜"
-        assert smart_str(self.normal_string) == "∆ƒˆƒ´´lucas yang"
+        assert smart_str(self.uni_string) == b'\xe2\x88\x86\xcb\x86\xcb\x86\xc3\xb8\xe2\x88\x86\xc3\x9f\xc3\xa5\xc3\x9flucas yang\xcb\x9c'
+        assert smart_str(self.normal_string) == b'\xe2\x88\x86\xc6\x92\xcb\x86\xc6\x92\xc2\xb4\xc2\xb4lucas yang'
 
 
 class MThreadingTestCase(unittest.TestCase):
@@ -404,17 +404,17 @@ class MThreadingTestCase(unittest.TestCase):
         tc_paper = newspaper.build('http://techcrunch.com', config=config)
         espn_paper = newspaper.build('http://espn.com', config=config)
 
-        print ('Slate has %d articles TC has %d articles ESPN has %d articles'
-               % (slate_paper.size(), tc_paper.size(), espn_paper.size()))
+        print(('Slate has %d articles TC has %d articles ESPN has %d articles'
+               % (slate_paper.size(), tc_paper.size(), espn_paper.size())))
 
         papers = [slate_paper, tc_paper, espn_paper]
         news_pool.set(papers, threads_per_source=2)
 
         news_pool.join()
 
-        print 'Downloaded Slate mthread len', len(slate_paper.articles[0].html)
-        print 'Downloaded ESPN mthread len', len(espn_paper.articles[-1].html)
-        print 'Downloaded TC mthread len', len(tc_paper.articles[1].html)
+        print('Downloaded Slate mthread len', len(slate_paper.articles[0].html))
+        print('Downloaded ESPN mthread len', len(espn_paper.articles[-1].html))
+        print('Downloaded TC mthread len', len(tc_paper.articles[1].html))
 
 
 class ConfigBuildTestCase(unittest.TestCase):

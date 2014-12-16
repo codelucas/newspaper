@@ -9,7 +9,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import Queue
+import queue
 from threading import Thread
 
 
@@ -27,13 +27,13 @@ class Worker(Thread):
         while True:
             try:
                 func, args, kargs = self.tasks.get()
-            except Queue.Empty:
-                print 'thread breaking b/c queue is empty'
+            except queue.Empty:
+                print('thread breaking b/c queue is empty')
                 break
             try:
                 func(*args, **kargs)
-            except Exception, e:
-                print 'critical multi-thread err %s' % e
+            except Exception as e:
+                print('critical multi-thread err %s' % e)
 
             self.tasks.task_done()
 
@@ -43,7 +43,7 @@ class ThreadPool:
     Pool of threads consuming tasks from a queue.
     """
     def __init__(self, num_threads):
-        self.tasks = Queue.Queue(num_threads)
+        self.tasks = queue.Queue(num_threads)
         for _ in range(num_threads):
             Worker(self.tasks)
 
@@ -100,7 +100,7 @@ class NewsPool(object):
         resets the task.
         """
         if self.pool is None:
-            print 'Call set(..) with a list of source objects before .join(..)'
+            print('Call set(..) with a list of source objects before .join(..)')
             raise
         self.pool.wait_completion()
         self.papers = []

@@ -9,16 +9,17 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import feedparser
+
 from .article import Article
 from .configuration import Configuration
 from .mthreading import NewsPool
-from .packages.feedparser import feedparser
 from .settings import POPULAR_URLS, TRENDING_URL
 from .source import Source
 from .utils import extend_config, print_available_languages
 
 
-def build(url=u'', dry=False, config=None, **kwargs):
+def build(url='', dry=False, config=None, **kwargs):
     """Returns a constructed source object without
     downloading or parsing the articles
     """
@@ -31,7 +32,7 @@ def build(url=u'', dry=False, config=None, **kwargs):
     return s
 
 
-def build_article(url=u'', config=None, **kwargs):
+def build_article(url='', config=None, **kwargs):
     """Returns a constructed article object without downloading
     or parsing
     """
@@ -63,6 +64,6 @@ def hot():
         listing = feedparser.parse(TRENDING_URL)['entries']
         trends = [item['title'] for item in listing]
         return trends
-    except Exception, e:
-        print 'ERR hot terms failed!', str(e)
+    except Exception as e:
+        print('ERR hot terms failed!', str(e))
         return None

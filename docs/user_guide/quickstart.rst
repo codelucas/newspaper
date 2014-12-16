@@ -38,13 +38,13 @@ initialized and built.
 .. code-block:: pycon
 
     >>> for article in cnn_paper.articles:
-    >>>     print article.url
+    >>>     print(article.url)
 
     u'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
     u'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
     ...
 
-    >>> print cnn_paper.size() # cnn has 3100 articles
+    >>> print(cnn_paper.size()) # cnn has 3100 articles
     3100
 
 Article caching
@@ -94,7 +94,7 @@ Extracting Source categories
 .. code-block:: pycon
 
     >>> for category in cnn_paper.category_urls():
-    >>>     print category
+    >>>     print(category)
 
     u'http://lifestyle.cnn.com'
     u'http://cnn.com/world'
@@ -107,7 +107,7 @@ Extracting Source feeds
 .. code-block:: pycon
 
     >>> for feed_url in cnn_paper.feed_urls():
-    >>>     print feed_url
+    >>>     print(feed_url)
 
     u'http://rss.cnn.com/rss/cnn_crime.rss'
     u'http://rss.cnn.com/rss/cnn_tech.rss'
@@ -118,10 +118,10 @@ Extracting Source brand & description
 
 .. code-block:: pycon
 
-    >>> print cnn_paper.brand
+    >>> print(cnn_paper.brand)
     u'cnn'
 
-    >>> print cnn_paper.description
+    >>> print(cnn_paper.description)
     u'CNN.com delivers the latest breaking news and information on the latest...'
 
 News Articles
@@ -163,10 +163,10 @@ quickly download articles concurrently with multi-threading check out the
 
     >>> first_article.download()
 
-    >>> print first_article.html
+    >>> print(first_article.html)
     u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
-    >>> print cnn_paper.articles[7].html
+    >>> print(cnn_paper.articles[7].html)
     u'' fail, not downloaded yet
 
 Parsing an Article
@@ -179,22 +179,22 @@ You **must** have called ``download()`` on an article before calling ``parse()``
 
     >>> first_article.parse()
 
-    >>> print first_article.text
+    >>> print(first_article.text)
     u'Three sisters who were imprisoned for possibly...'
 
-    >>> print first_article.top_image
+    >>> print(first_article.top_image)
     u'http://some.cdn.com/3424hfd4565sdfgdg436/
 
-    >>> print first_article.authors
+    >>> print(first_article.authors)
     [u'Eliott C. McLaughlin', u'Some CoAuthor']
 
-    >>> print first_article.title
+    >>> print(first_article.title)
     u'Police: 3 sisters imprisoned in Tucson home'
 
-    >>> print first_article.images
+    >>> print(first_article.images)
     ['url_to_img_1', 'url_to_img_2', 'url_to_img_3', ...]
 
-    >>> print first_article.movies
+    >>> print(first_article.movies)
     ['url_to_youtube_link_1', ...] # youtube, vimeo, etc
 
 
@@ -211,13 +211,13 @@ before calling ``nlp()``.
 
     >>> first_article.nlp()
 
-    >>> print first_article.summary
+    >>> print(first_article.summary)
     u'...imprisoned for possibly a constant barrage...'
 
-    >>> print first_article.keywords
+    >>> print(first_article.keywords)
     [u'music', u'Tucson', ... ]
 
-    >>> print cnn_paper.articles[100].nlp() # fail, not been downloaded yet
+    >>> print(cnn_paper.articles[100].nlp()) # fail, not been downloaded yet
     Traceback (...
     ArticleException: You must parse an article before you try to..
 
@@ -258,5 +258,3 @@ of popular news source urls.. In case you need help choosing a news source!
       pt              Portuguese
       sv              Swedish
       zh              Chinese
-
-      

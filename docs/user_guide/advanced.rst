@@ -32,14 +32,14 @@ speed up the download time while being respectful.
     At this point, you can safely assume that download() has been
     called on every single article for all 3 sources.
 
-    >>> print slate_paper.articles[10].html
+    >>> print(slate_paper.articles[10].html)
     u'<html> ...'
 
 Keeping Html of main body article
 ---------------------------------
 
-Keeping the html of just an article's body text is helpbut because it allows you 
-to retain some of the semantic information in the html. Also it will help if you 
+Keeping the html of just an article's body text is helpbut because it allows you
+to retain some of the semantic information in the html. Also it will help if you
 end up displaying the extracted article somehow.
 
 Here is how to do so:
@@ -68,7 +68,7 @@ Access **after parsing()** with:
     >>> a.parse()
     >>> a.clean_dom
     <lxml object ...  >
-    
+
     >>> a.clean_top_node
     <lxml object ...  >
 
@@ -76,40 +76,40 @@ Access **after parsing()** with:
 Adding new languages
 --------------------
 
-First, please reference this file and read from the highlighted line all the way 
+First, please reference this file and read from the highlighted line all the way
 down to the end of the file.
 
 `https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L57 <https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L57>`_
 
-One aspect of our text extraction algorithm revolves around counting the number of 
-**stopwords** present in a text. Stopwords are: *some of the most common, short 
+One aspect of our text extraction algorithm revolves around counting the number of
+**stopwords** present in a text. Stopwords are: *some of the most common, short
 function words, such as the, is, at, which, and on* in a language.
 
 Reference this line to see it in action:
 `https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L668 <https://github.com/codelucas/newspaper/blob/master/newspaper/extractors.py#L668>`_
 
-**So for latin languages**, it is pretty basic. We first provide a list of 
-stopwords in ``stopwords-<language-code>.txt`` form. We then take some input text and 
-tokenize it into words by splitting the white space. After that we perform some 
+**So for latin languages**, it is pretty basic. We first provide a list of
+stopwords in ``stopwords-<language-code>.txt`` form. We then take some input text and
+tokenize it into words by splitting the white space. After that we perform some
 bookkeeping and then proceed to count the number of stopwords present.
 
-**For non-latin languages**, as you may have noticed in the code above, we need to 
-tokenize the words in a different way, *splitting by whitespace simply won't work for 
-languages like Chinese or Arabic*. For the Chinese language we are using a whole new 
-open source library called *jieba* to split the text into words. For arabic we are 
+**For non-latin languages**, as you may have noticed in the code above, we need to
+tokenize the words in a different way, *splitting by whitespace simply won't work for
+languages like Chinese or Arabic*. For the Chinese language we are using a whole new
+open source library called *jieba* to split the text into words. For arabic we are
 using a special nltk tokenizer to do the same job.
 
 **So, to add full text extraction to a new (non-latin) language, we need:**
 
-1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt``
 in ``newspaper/resources/text/.``
 
-2. Provide a way of splitting/tokenizing text in that foreign language into words. 
+2. Provide a way of splitting/tokenizing text in that foreign language into words.
 `Here are some examples for Chinese, Arabic, English <https://github.com/codelucas/newspaper/blob/master/newspaper/text.py#L105>`_
 
-**For latin languages:** 
+**For latin languages:**
 
-1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt`` 
+1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt``
 in ``newspaper/resources/text/.`` and we are done!
 
 
@@ -124,11 +124,11 @@ into newspaper's ``Source`` api.
     >>> from newspaper import Source
     >>> cnn_paper = Source('http://cnn.com')
 
-    >>> print cnn_paper.size() # no articles, we have not built the source
+    >>> print(cnn_paper.size()) # no articles, we have not built the source
     0
 
     >>> cnn_paper.build()
-    >>> print cnn_paper.size()
+    >>> print(cnn_paper.size())
     3100
 
 Note the ``build()`` method above. You may go lower level and de-abstract it
@@ -146,7 +146,7 @@ for absolute control over how your sources are constructed.
     >>> cnn_paper.download_feeds()
     >>> cnn_paper.generate_articles()
 
-    >>> print cnn_paper.size()
+    >>> print(cnn_paper.size())
     3100
 
 And voila, we have mimic'd the ``build()`` method. In the above sequence,
@@ -155,9 +155,9 @@ every method is dependant on the method above it. Stop whenever you wish.
 Parameters and Configurations
 -----------------------------
 
-Newspaper provides two api's for users to configure their ``Article`` and 
+Newspaper provides two api's for users to configure their ``Article`` and
 ``Source`` objects. One is via named parameter passing **recommended** and
-the other is via ``Config`` objects. 
+the other is via ``Config`` objects.
 
 Here are some named parameter passing examples:
 
@@ -169,8 +169,8 @@ Here are some named parameter passing examples:
     >>> cnn = newspaper.build('http://cnn.com', language='en', memoize_articles=False)
 
     >>> article = Article(url='http://cnn.com/french/...', language='fr', fetch_images=False)
-    
-    >>> cnn = Source(url='http://latino.cnn.com/...', language='es', request_timeout=10, 
+
+    >>> cnn = Source(url='http://latino.cnn.com/...', language='es', request_timeout=10,
                                                                 number_threads=20)
 
 

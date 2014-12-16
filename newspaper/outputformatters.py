@@ -7,7 +7,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from HTMLParser import HTMLParser
+from html.parser import HTMLParser
 
 from .text import innerTrim
 
@@ -39,7 +39,7 @@ class OutputFormatter(object):
         html if specified. Returns in (text, html) form
         """
         self.top_node = top_node
-        html, text = u'', u''
+        html, text = '', ''
 
         self.remove_negativescores_nodes()
 

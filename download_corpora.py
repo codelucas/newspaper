@@ -17,7 +17,7 @@ REQUIRED_CORPORA = [
 
 def main():
     for each in REQUIRED_CORPORA:
-        print('Downloading "{0}"'.format(each))
+        print(('Downloading "{0}"'.format(each)))
         nltk.download(each)
     print("Finished.")
 

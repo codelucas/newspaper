@@ -10,6 +10,10 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
+import feedparser
+
+from tldextract import tldextract
+
 from . import network
 from . import urls
 from . import utils
@@ -17,9 +21,8 @@ from . import utils
 from .article import Article
 from .extractors import ContentExtractor
 from .configuration import Configuration
-from .packages.feedparser import feedparser
-from .packages.tldextract import tldextract
 from .settings import ANCHOR_DIRECTORY
+
 
 log = logging.getLogger(__name__)
 
@@ -71,13 +74,13 @@ class Source(object):
         self.feeds = []
         self.articles = []
 
-        self.html = u''
+        self.html = ''
         self.doc = None
 
-        self.logo_url = u''
-        self.favicon = u''
+        self.logo_url = ''
+        self.favicon = ''
         self.brand = tldextract.extract(self.url).domain
-        self.description = u''
+        self.description = ''
 
         self.is_parsed = False
         self.is_downloaded = False
@@ -158,8 +161,8 @@ class Source(object):
                     req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print ('deleting category',
-                           self.categories[index].url, 'due to download err')
+                    print(('deleting category',
+                           self.categories[index].url, 'due to download err'))
         self.categories = [c for c in self.categories if c.html]
 
     def download_feeds(self):
@@ -175,8 +178,8 @@ class Source(object):
                     req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print ('deleting feed',
-                           self.categories[index].url, 'due to download err')
+                    print(('deleting feed',
+                           self.categories[index].url, 'due to download err'))
         self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
@@ -186,7 +189,7 @@ class Source(object):
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
-            print '[Source parse ERR]', self.url
+            print('[Source parse ERR]', self.url)
             return
         self.set_description()
 
@@ -199,7 +202,7 @@ class Source(object):
             doc = self.config.get_parser().fromstring(category.html)
             category.doc = doc
             if category.doc is None:
-                print '[Category parse ERR]', category.url
+                print('[Category parse ERR]', category.url)
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
@@ -212,10 +215,10 @@ class Source(object):
         for feed in self.feeds:
             try:
                 feed.dom = feedparser.parse(feed.html)
-            except Exception, e:
+            except Exception as e:
                 log.critical('feedparser failed %s' % e)
                 if self.config.verbose:
-                    print 'feed %s has failed parsing' % feed.url
+                    print('feed %s has failed parsing' % feed.url)
 
         self.feeds = [feed for feed in self.feeds if feed.dom is not None]
 
@@ -245,8 +248,8 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, feed.url))
+                print(('%d->%d->%d for %s' %
+                      (before_purge, after_purge, after_memo, feed.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, feed.url))
         return articles
@@ -283,8 +286,8 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print ('%d->%d->%d for %s' %
-                       (before_purge, after_purge, after_memo, category.url))
+                print(('%d->%d->%d for %s' %
+                       (before_purge, after_purge, after_memo, category.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, category.url))
         return articles
@@ -297,7 +300,7 @@ class Source(object):
 
         articles = feed_articles + category_articles
         uniq = {article.url: article for article in articles}
-        return uniq.values()
+        return list(uniq.values())
 
     def generate_articles(self, limit=5000):
         """Saves all current articles of news source, filter out bad urls
@@ -323,8 +326,8 @@ class Source(object):
             self.articles = [a for a in self.articles if a.html]
         else:
             if threads > 5:
-                print ('Using 5+ threads on a single source '
-                       'may get you rate limited!')
+                print(('Using 5+ threads on a single source '
+                       'may get you rate limited!'))
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
@@ -337,8 +340,8 @@ class Source(object):
         self.is_downloaded = True
         if len(failed_articles) > 0:
             if self.config.verbose:
-                print '[ERROR], these article urls failed the download:', \
-                    [a.url for a in failed_articles]
+                print('[ERROR], these article urls failed the download:', \
+                    [a.url for a in failed_articles])
 
     def parse_articles(self):
         """Parse all articles, delete if too small
@@ -393,22 +396,22 @@ class Source(object):
     def print_summary(self):
         """Prints out a summary of the data in our source instance
         """
-        print '[source url]:',              self.url
-        print '[source brand]:',            self.brand
-        print '[source domain]:',           self.domain
-        print '[source len(articles)]:',    len(self.articles)
-        print '[source description[:50]]:', self.description[:50]
+        print('[source url]:',              self.url)
+        print('[source brand]:',            self.brand)
+        print('[source domain]:',           self.domain)
+        print('[source len(articles)]:',    len(self.articles))
+        print('[source description[:50]]:', self.description[:50])
 
-        print 'printing out 10 sample articles...'
+        print('printing out 10 sample articles...')
 
         for a in self.articles[:10]:
-            print '\t', '[url]:', a.url
-            print '\t[title]:', a.title
-            print '\t[len of text]:', len(a.text)
-            print '\t[keywords]:', a.keywords
-            print '\t[len of html]:', len(a.html)
-            print '\t=============='
+            print('\t', '[url]:', a.url)
+            print('\t[title]:', a.title)
+            print('\t[len of text]:', len(a.text))
+            print('\t[keywords]:', a.keywords)
+            print('\t[len of html]:', len(a.html))
+            print('\t==============')
 
-        print 'feed_urls:', self.feed_urls()
-        print '\r\n'
-        print 'category_urls:', self.category_urls()
+        print('feed_urls:', self.feed_urls())
+        print('\r\n')
+        print('category_urls:', self.category_urls())
