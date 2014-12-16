@@ -6,4 +6,5 @@ lxml==3.3.5
 nltk==2.0.4
 requests==2.3.0
 six==1.7.3
+jieba==0.35
 -e git+https://github.com/karls/responses@regex-url-matching#egg=responses
