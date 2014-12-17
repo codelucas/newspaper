@@ -1,1 +1,1 @@
-recursive-include newspaper *
+recursive-include newspaper *include requirements.txt

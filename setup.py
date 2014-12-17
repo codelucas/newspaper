@@ -16,37 +16,34 @@ packages = [
     'newspaper.packages',
     'newspaper.packages.tldextract',
     'newspaper.packages.feedparser',
-    'newspaper.packages.jieba',
-    'newspaper.packages.jieba.posseg',
-    'newspaper.packages.jieba.finalseg',
-    'newspaper.packages.jieba.analyse'
 ]
 
-# The following libs are bundled in
-# ---------------------------------
-# 'feedparser'
-# 'tldextract==1.2.2'
-# 'jieba'
+required = []
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
+"""
 requires = [
-    'lxml',
-    'requests',
-    'nltk',
-    'Pillow',
-    'cssselect',
-    'BeautifulSoup'
+    'lxml==3.3.5',
+    'jieba==0.35',
+    'requests==2.3.0',
+    'nltk==2.0.4',
+    'Pillow==2.5.1',
+    'cssselect==0.9.1',
+    'BeautifulSoup==3.2.1'
 ]
+"""
 
 setup(
     name='newspaper',
-    version='0.0.8',
+    version='0.0.9',
     description='Simplified python article discovery & extraction.',
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
     url='https://github.com/codelucas/newspaper/',
     packages=packages,
     include_package_data=True,
-    install_requires=requires,
+    install_requires=required,
     license='',
     zip_safe=False,
 )
