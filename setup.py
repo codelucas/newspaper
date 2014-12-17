@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 """
 Lucas Ou 2014 -- http://lucasou.com
-
-Setup guide: http://guide.python-distribute.org/creation.html
-python setup.py sdist bdist_wininst upload
 """
 
 import sys
@@ -23,7 +20,7 @@ packages = [
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wininst upload')
+    os.system('python3 setup.py sdist upload')  # bdist_wininst
     sys.exit()
 
 
@@ -48,4 +45,9 @@ setup(
     install_requires=required,
     license='MIT',
     zip_safe=False,
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'Natural Language :: English',
+        'Intended Audience :: Developers',
+    ],
 )

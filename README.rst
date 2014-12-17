@@ -18,6 +18,8 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
 **Newspaper is a Python3 library**! Or, view the `Python2 branch`_
 
+.. _`Python2 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
+
 **We support 10+ languages and everything is in unicode!**
 
 .. code-block:: pycon
@@ -192,7 +194,7 @@ Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
 However, you will run into fixable issues if you are trying to install on ubuntu.
 
 Note that our Python3 package name is ``newspaper3k`` while our Python2
-package name is ``newspaper``
+package name is ``newspaper``.
 
 **If you are on Debian / Ubuntu**, install using the following:
 
@@ -286,4 +288,7 @@ to talk about the future of this library and news extraction in general!
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
 
-.. _`Python2 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
+.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
+.. _`The Documentation`: http://newspaper.readthedocs.org
+.. _`lxml`: http://lxml.de/
+.. _`requests`: https://github.com/kennethreitz/requests
