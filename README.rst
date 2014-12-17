@@ -16,7 +16,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
 
-Newspaper is a **Python3** library! Alternatively, view the `Python2 branch`_
+**Newspaper is a Python3 library**! Or, view the `Python2 branch`_
 
 **We support 10+ languages and everything is in unicode!**
 
