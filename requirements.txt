@@ -10,4 +10,4 @@ responses==0.3.0
 feedparser==5.1.3
 tldextract==1.5.1
 feedfinder2==0.0.1
-jieba3k
+jieba3k==0.35.1
