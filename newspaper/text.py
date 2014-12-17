@@ -17,7 +17,7 @@ TABSSPACE = re.compile(r'[\s\t]+')
 
 
 def innerTrim(value):
-    if isinstance(value, (unicode, str)):
+    if isinstance(value, str):
         # remove tab and white space
         value = re.sub(TABSSPACE, ' ', value)
         value = ''.join(value.splitlines())
@@ -60,7 +60,7 @@ class StopWords(object):
 
     PUNCTUATION = re.compile(
         "[^\\p{Ll}\\p{Lu}\\p{Lt}\\p{Lo}\\p{Nd}\\p{Pc}\\s]")
-    TRANS_TABLE = string.maketrans('', '')
+    TRANS_TABLE = str.maketrans('', '')
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
@@ -73,14 +73,12 @@ class StopWords(object):
     def remove_punctuation(self, content):
         # code taken form
         # http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
-        content_is_unicode = isinstance(content, unicode)
+        content_is_unicode = isinstance(content, str)
         if content_is_unicode:
             content = content.encode('utf-8')
-        stripped_input = content.translate(
-            self.TRANS_TABLE, string.punctuation)
+        trans_table = {ord(c): None for c in string.punctuation}
+        stripped_input = content.decode('utf-8').translate(trans_table)
 
-        if content_is_unicode:
-            return stripped_input.decode('utf-8')
         return stripped_input
 
     def candidate_words(self, stripped_input):

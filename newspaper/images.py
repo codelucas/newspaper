@@ -10,11 +10,11 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 import math
-import StringIO
-import urllib
-import urllib2
+import io
+import urllib.request, urllib.parse, urllib.error
+import urllib.request, urllib.error, urllib.parse
 
-from httplib import InvalidURL
+from http.client import InvalidURL
 from PIL import Image, ImageFile
 
 from . import urls
@@ -27,14 +27,14 @@ minimal_area = 5000
 
 
 def image_to_str(image):
-    s = StringIO.StringIO()
+    s = io.StringIO()
     image.save(s, image.format)
     s.seek(0)
     return s.read()
 
 
 def str_to_image(s):
-    s = StringIO.StringIO(s)
+    s = io.StringIO(s)
     s.seek(0)
     image = Image.open(s)
     return image
@@ -78,7 +78,7 @@ def clean_url(url):
     """Url quotes unicode data out of urls
     """
     url = url.encode('utf8')
-    url = ''.join([urllib.quote(c) if ord(c) >= 127 else c for c in url])
+    url = ''.join([urllib.parse.quote(c) if ord(c) >= 127 else c for c in url.decode('utf-8')])
     return url
 
 
@@ -90,12 +90,12 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
         return nothing
     while True:
         try:
-            req = urllib2.Request(url)
+            req = urllib.request.Request(url)
             req.add_header('User-Agent', useragent)
             if referer:
                 req.add_header('Referer', referer)
 
-            opener = urllib2.build_opener()
+            opener = urllib.request.build_opener()
             open_req = opener.open(req, timeout=5)
 
             # if we only need the dimension of the image, we may not
@@ -116,28 +116,28 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                 while not p.image and new_data:
                     try:
                         p.feed(new_data)
-                    except IOError, e:
+                    except IOError as e:
                         # pil failed to install, jpeg codec broken
                         # **should work if you install via pillow
-                        print ('***jpeg misconfiguration! check pillow or pil'
-                               'installation this machine: %s' % str(e))
+                        print(('***jpeg misconfiguration! check pillow or pil'
+                               'installation this machine: %s' % str(e)))
                         p = None
                         break
-                    except ValueError, ve:
+                    except ValueError as ve:
                         log.debug('cant read image format: %s' % url)
                         p = None
                         break
-                    except Exception, e:
+                    except Exception as e:
                         # For some favicon.ico images, the image is so small
                         # that our PIL feed() method fails a length test.
                         # We add a check below for this.
                         is_favicon = (urls.url_to_filetype(url) == 'ico')
                         if is_favicon:
-                            print 'we caught a favicon!: %s' % url
+                            print('we caught a favicon!: %s' % url)
                         else:
                             # import traceback
-                            # print traceback.format_exc()
-                            print 'PIL feed() failure for image:', url, str(e)
+                            # print(traceback.format_exc())
+                            print('PIL feed() failure for image:', url, str(e))
                             raise e
                         p = None
                         break
@@ -157,7 +157,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
             return content_type, content
 
-        except (urllib2.URLError, urllib2.HTTPError, InvalidURL), e:
+        except (urllib.error.URLError, urllib.error.HTTPError, InvalidURL) as e:
             cur_try += 1
             if cur_try >= retries:
                 log.debug('error while fetching: %s refer: %s' %
@@ -240,7 +240,7 @@ class Scraper:
                 image = str_to_image(image_str)
                 try:
                     image = prepare_image(image)
-                except IOError, e:
+                except IOError as e:
                     if 'interlaced' in e.message:
                         return None
                 return image, image_url

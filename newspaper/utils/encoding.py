@@ -46,8 +46,8 @@ def is_protected_type(obj):
     force_unicode(strings_only=True).
     """
     return isinstance(obj, (
-        types.NoneType,
-        int, long,
+        type(None),
+        int,
         datetime.datetime, datetime.date, datetime.time,
         float, Decimal)
     )
@@ -61,17 +61,17 @@ def force_unicode(s, encoding='utf-8', strings_only=False, errors='strict'):
     # Handle the common case first, saves 30-40% in performance when s
     # is an instance of unicode. This function gets called often in that
     # setting.
-    if isinstance(s, unicode):
+    if isinstance(s, str):
         return s
     if strings_only and is_protected_type(s):
         return s
     try:
-        if not isinstance(s, basestring,):
+        if not isinstance(s, str,):
             if hasattr(s, '__unicode__'):
-                s = unicode(s)
+                s = str(s)
             else:
                 try:
-                    s = unicode(str(s), encoding, errors)
+                    s = str(str(s), encoding, errors)
                 except UnicodeEncodeError:
                     if not isinstance(s, Exception):
                         raise
@@ -81,14 +81,14 @@ def force_unicode(s, encoding='utf-8', strings_only=False, errors='strict'):
                     # without raising a further exception. We do an
                     # approximation to what the Exception's standard str()
                     # output should be.
-                    s = u' '.join([force_unicode(arg, encoding, strings_only,
+                    s = ' '.join([force_unicode(arg, encoding, strings_only,
                                    errors) for arg in s])
-        elif not isinstance(s, unicode):
+        elif not isinstance(s, str):
             # Note: We use .decode() here, instead of unicode(s, encoding,
             # errors), so that if s is a SafeString, it ends up being a
             # SafeUnicode at the end.
             s = s.decode(encoding, errors)
-    except UnicodeDecodeError, e:
+    except UnicodeDecodeError as e:
         if not isinstance(s, Exception):
             raise DjangoUnicodeDecodeError(s, *e.args)
         else:
@@ -97,7 +97,7 @@ def force_unicode(s, encoding='utf-8', strings_only=False, errors='strict'):
             # working unicode method. Try to handle this without raising a
             # further exception by individually forcing the exception args
             # to unicode.
-            s = u' '.join([force_unicode(arg, encoding, strings_only,
+            s = ' '.join([force_unicode(arg, encoding, strings_only,
                            errors) for arg in s])
     return s
 
@@ -106,11 +106,11 @@ def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):
     """Returns a bytestring version of 's', encoded as specified in 'encoding'.
     If strings_only is True, don't convert (some) non-string-like objects.
     """
-    if strings_only and isinstance(s, (types.NoneType, int)):
+    if strings_only and isinstance(s, (type(None), int)):
         return s
     # if isinstance(s, Promise):
     #     return unicode(s).encode(encoding, errors)
-    if not isinstance(s, basestring):
+    if not isinstance(s, str):
         try:
             return str(s)
         except UnicodeEncodeError:
@@ -120,8 +120,8 @@ def smart_str(s, encoding='utf-8', strings_only=False, errors='strict'):
                 # further exception.
                 return ' '.join([smart_str(arg, encoding, strings_only,
                                  errors) for arg in s])
-            return unicode(s).encode(encoding, errors)
-    elif isinstance(s, unicode):
+            return str(s).encode(encoding, errors)
+    elif isinstance(s, str):
         return s.encode(encoding, errors)
     elif s and encoding != 'utf-8':
         return s.decode('utf-8', errors).encode(encoding, errors)

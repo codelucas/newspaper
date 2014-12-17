@@ -11,9 +11,9 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 import re
 
-from urlparse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
+from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
 
-from .packages.tldextract import tldextract
+from tldextract import tldextract
 
 log = logging.getLogger(__name__)
 
@@ -86,10 +86,10 @@ def prepare_url(url, source_url=None):
             proper_url = remove_args(proper_url)
         else:
             proper_url = remove_args(url)
-    except ValueError, e:
+    except ValueError as e:
         log.critical('url %s failed on err %s' % (url, str(e)))
-        # print 'url %s failed on err %s' % (url, str(e))
-        proper_url = u''
+        # print('url %s failed on err %s' % (url, str(e)))
+        proper_url = ''
 
     return proper_url
 
@@ -134,14 +134,14 @@ def valid_url(url, verbose=False, test=False):
 
     # 11 chars is shortest valid url length, eg: http://x.co
     if url is None or len(url) < 11:
-        if verbose: print '\t%s rejected because len of url is less than 11' % url
+        if verbose: print('\t%s rejected because len of url is less than 11' % url)
         return False
 
     r1 = ('mailto:' in url) # TODO not sure if these rules are redundant
     r2 = ('http://' not in url) and ('https://' not in url)
 
     if r1 or r2:
-        if verbose: print '\t%s rejected because len of url structure' % url
+        if verbose: print('\t%s rejected because len of url structure' % url)
         return False
 
     path = urlparse(url).path
@@ -163,7 +163,7 @@ def valid_url(url, verbose=False, test=False):
 
         # if the file type is a media type, reject instantly
         if file_type and file_type not in ALLOWED_TYPES:
-            if verbose: print '\t%s rejected due to bad filetype' % url
+            if verbose: print('\t%s rejected due to bad filetype' % url)
             return False
 
         last_chunk = path_chunks[-1].split('.')
@@ -180,10 +180,10 @@ def valid_url(url, verbose=False, test=False):
     subd = tld_dat.subdomain
     tld = tld_dat.domain.lower()
 
-    url_slug = path_chunks[-1] if path_chunks else u''
+    url_slug = path_chunks[-1] if path_chunks else ''
 
     if tld in BAD_DOMAINS:
-        if verbose: print '%s caught for a bad tld' % url
+        if verbose: print('%s caught for a bad tld' % url)
         return False
 
     if len(path_chunks) == 0:
@@ -197,39 +197,39 @@ def valid_url(url, verbose=False, test=False):
 
         if dash_count >= underscore_count:
             if tld not in [ x.lower() for x in url_slug.split('-') ]:
-                if verbose: print '%s verified for being a slug' % url
+                if verbose: print('%s verified for being a slug' % url)
                 return True
 
         if underscore_count > dash_count:
             if tld not in [ x.lower() for x in url_slug.split('_') ]:
-                if verbose: print '%s verified for being a slug' % url
+                if verbose: print('%s verified for being a slug' % url)
                 return True
 
     # There must be at least 2 subpaths
     if len(path_chunks) <= 1:
-        if verbose: print '%s caught for path chunks too small' % url
+        if verbose: print('%s caught for path chunks too small' % url)
         return False
 
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
     for b in BAD_CHUNKS:
         if b in path_chunks or b == subd:
-            if verbose: print '%s caught for bad chunks' % url
+            if verbose: print('%s caught for bad chunks' % url)
             return False
 
     match_date = re.search(DATE_REGEX, url)
 
     # if we caught the verified date above, it's an article
     if match_date is not None:
-        if verbose: print '%s verified for date' % url
+        if verbose: print('%s verified for date' % url)
         return True
 
     for GOOD in GOOD_PATHS:
         if GOOD.lower() in [p.lower() for p in path_chunks]:
-            if verbose: print '%s verified for good path' % url
+            if verbose: print('%s verified for good path' % url)
             return True
 
-    if verbose: print '%s caught for default false' % url
+    if verbose: print('%s caught for default false' % url)
     return False
 
 def url_to_filetype(abs_url):
@@ -286,4 +286,3 @@ def is_abs_url(url):
 
     c_regex = re.compile(regex)
     return (c_regex.search(url) != None)
-
