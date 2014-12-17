@@ -1,4 +1,3 @@
-#!/bin/python2.7
 # -*- coding: utf-8 -*-
 """
 Lucas Ou 2014 -- http://lucasou.com
@@ -6,10 +5,19 @@ Lucas Ou 2014 -- http://lucasou.com
 Setup guide: http://guide.python-distribute.org/creation.html
 python setup.py sdist bdist_wininst upload
 """
+import sys
+import os
+
 try:
     from setuptools import setup
 except ImportError:
     from distutils.core import setup
+
+
+if sys.argv[-1] == 'publish':
+    os.system('python setup.py sdist bdist_wininst upload')
+    sys.exit()
+
 
 packages = [
     'newspaper',
@@ -18,21 +26,10 @@ packages = [
     'newspaper.packages.feedparser',
 ]
 
-required = []
+
 with open('requirements.txt') as f:
     required = f.read().splitlines()
 
-"""
-requires = [
-    'lxml==3.3.5',
-    'jieba==0.35',
-    'requests==2.3.0',
-    'nltk==2.0.4',
-    'Pillow==2.5.1',
-    'cssselect==0.9.1',
-    'BeautifulSoup==3.2.1'
-]
-"""
 
 setup(
     name='newspaper',
@@ -44,6 +41,6 @@ setup(
     packages=packages,
     include_package_data=True,
     install_requires=required,
-    license='',
+    license='MIT',
     zip_safe=False,
 )
