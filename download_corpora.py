@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 """
 Downloads the necessary NLTK models and corpora required to support
@@ -11,7 +10,7 @@ REQUIRED_CORPORA = [
     'punkt',  # Required for WordTokenizer
     'maxent_treebank_pos_tagger',  # Required for NLTKTagger
     'movie_reviews',  # Required for NaiveBayesAnalyzer
-    'wordnet', # Required for lemmatization and Wordnet
+    'wordnet',  # Required for lemmatization and Wordnet
     'stopwords'
 ]
 
