@@ -85,11 +85,11 @@ class Source(object):
         self.is_parsed = False
         self.is_downloaded = False
 
-    def build(self):
+    def build(self, response=None):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
-        self.download()
+        self.download(response)
         self.parse()
 
         self.set_categories()
@@ -143,10 +143,10 @@ class Source(object):
         desc = self.extractor.get_meta_description(self.doc)
         self.description = utils.encodeValue(desc)
 
-    def download(self):
+    def download(self, response=None):
         """Downloads html of source
         """
-        self.html = network.get_html(self.url, config=self.config)
+        self.html = network.get_html(self.url, self.config, response)
 
     def download_categories(self):
         """Download all category html, can use mthreading

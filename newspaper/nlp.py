@@ -9,7 +9,6 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import re
 import math
-import operator
 
 from collections import Counter
 
@@ -24,11 +23,6 @@ ideal = 20.0
 def summarize(url='', title='', text=''):
     if (text == '' or title == ''):
         return []
-
-    if isinstance(title, str):
-        title = title.encode('utf-8', 'ignore')
-    if isinstance(text, str):
-        text = text.encode('utf-8', 'ignore')
 
     summaries = []
     sentences = split_sentences(text)
@@ -110,25 +104,29 @@ def keywords(text):
     sorts them in reverse natural order (so descending) by number of
     occurrences.
     """
+    NUM_KEYWORDS = 10
     text = split_words(text)
     # of words before removing blacklist words
     if text:
         num_words = len(text)
         text = [x for x in text if x not in stopwords]
-        freq = Counter()
+        freq = {}
         for word in text:
-            freq[word] += 1
+            if word in freq:
+                freq[word] += 1
+            else:
+                freq[word] = 1
 
-        min_size = min(10, len(freq))
-        keywords = tuple(freq.most_common(min_size))
+        min_size = min(NUM_KEYWORDS, len(freq))
+        keywords = sorted(freq.items(),
+                          key=lambda x: (x[1], x[0]),
+                          reverse=True)
+        keywords = keywords[:min_size]
         keywords = dict((x, y) for x, y in keywords)
 
         for k in keywords:
             articleScore = keywords[k]*1.0 / max(num_words, 1)
             keywords[k] = articleScore * 1.5 + 1
-
-        keywords = sorted(iter(keywords.items()), key=operator.itemgetter(1))
-        keywords.reverse()
         return dict(keywords)
     else:
         return dict()
@@ -140,7 +138,7 @@ def split_sentences(text):
     import nltk.data
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
-    sentences = tokenizer.tokenize(text.decode('utf-8'))
+    sentences = tokenizer.tokenize(text)
     sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
     return sentences
 

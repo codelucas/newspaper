@@ -143,16 +143,17 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self):
+    def download(self, response=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
         """
-        html = network.get_html(self.url, self.config)
+        html = network.get_html(self.url, self.config, response)
         self.set_html(html)
 
     def parse(self):
         if not self.is_downloaded:
-            print('You must download() an article before parsing it!')
+            print('You must `download()` an article before '
+                  'calling `parse()` on it!')
             raise ArticleException()
 
         self.doc = self.config.get_parser().fromstring(self.html)
@@ -309,7 +310,8 @@ class Article(object):
         """Keyword extraction wrapper
         """
         if not self.is_downloaded or not self.is_parsed:
-            print('You must download and parse an article before parsing it!')
+            print('You must `download()` and `parse()` an article '
+                  'before calling `nlp()` on it!')
             raise ArticleException()
 
         text_keyws = list(nlp.keywords(self.text).keys())
@@ -318,7 +320,7 @@ class Article(object):
         self.set_keywords(keyws)
 
         summary_sents = nlp.summarize(title=self.title, text=self.text)
-        summary = '\r\n'.join(summary_sents)
+        summary = '\n'.join(summary_sents)
         self.set_summary(summary)
 
     def get_parse_candidate(self):
