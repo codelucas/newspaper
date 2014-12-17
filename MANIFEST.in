@@ -1,1 +1,1 @@
-recursive-include newspaper *
+requirements.txt README.rst LICENSE
