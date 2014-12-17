@@ -15,6 +15,9 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
+
+Newspaper is a Python3 library! Alternatively, view the `Python2 branch`_
+
 Basic Demo: http://newspaper-demo.herokuapp.com
 
 **We support 10+ languages and everything is in unicode!**
@@ -57,16 +60,16 @@ A Glance:
 
     >>> for article in cnn_paper.articles:
     >>>     print(article.url)
-    u'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
-    u'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
+    'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
+    'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
     ...
 
     >>> for category in cnn_paper.category_urls():
     >>>     print(category)
 
-    u'http://lifestyle.cnn.com'
-    u'http://cnn.com/world'
-    u'http://tech.cnn.com'
+    'http://lifestyle.cnn.com'
+    'http://cnn.com/world'
+    'http://tech.cnn.com'
     ...
 
 .. code-block:: pycon
@@ -78,23 +81,23 @@ A Glance:
     >>> article.download()
 
     >>> article.html
-    u'<!DOCTYPE HTML><html itemscope itemtype="http://...'
+    '<!DOCTYPE HTML><html itemscope itemtype="http://...'
 
 .. code-block:: pycon
 
     >>> article.parse()
 
     >>> article.authors
-    [u'Leigh Ann Caldwell', 'John Honway']
+    ['Leigh Ann Caldwell', 'John Honway']
 
     >>> article.text
-    u'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
+    'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
 
     >>> article.top_image
-    u'http://someCDN.com/blah/blah/blah/file.png'
+    'http://someCDN.com/blah/blah/blah/file.png'
 
     >>> article.movies
-    [u'http://youtube.com/path/to/link.com', ...]
+    ['http://youtube.com/path/to/link.com', ...]
 
 .. code-block:: pycon
 
@@ -104,7 +107,7 @@ A Glance:
     ['New Years', 'resolution', ...]
 
     >>> article.summary
-    u'The study shows that 93% of people ...'
+    'The study shows that 93% of people ...'
 
 
 Newspaper has *seamless* language extraction and detection.
@@ -141,9 +144,9 @@ If you are certain that an *entire* news source is in one language, **go ahead a
 
     >>> for category in sina_paper.category_urls():
     >>>     print(category)
-    u'http://health.sina.com.cn'
-    u'http://eladies.sina.com.cn'
-    u'http://english.sina.com'
+    'http://health.sina.com.cn'
+    'http://eladies.sina.com.cn'
+    'http://english.sina.com'
     ...
 
     >>> article = sina_paper.articles[0]
@@ -172,6 +175,7 @@ Interested in adding a new language for us? Refer to: `Docs - Adding new languag
 Features
 --------
 
+- Full Python3 and Python2 support
 - Works in 10+ languages (English, Chinese, German, Arabic, ...)
 - Multi-threaded article download framework
 - News url identification
@@ -189,6 +193,9 @@ Get it now
 Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
 However, you will run into fixable issues if you are trying to install on ubuntu.
 
+Note that our Python3 package name is ``newspaper3k`` while our Python2
+package name is ``newspaper``
+
 **If you are on Debian / Ubuntu**, install using the following:
 
 - Python development version, needed for Python.h::
@@ -205,11 +212,11 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 - Install the distribution via pip::
 
-    $ pip install newspaper
+    $ pip3 install newspaper3k
 
 - Download NLP related corpora::
 
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
@@ -220,9 +227,9 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
     $ brew install libtiff libjpeg webp little-cms2
 
-    $ pip install newspaper
+    $ pip3 install newspaper3k
 
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
 
 **Otherwise**, install with the following:
@@ -235,12 +242,15 @@ NOTE: You will still most likely need to install the following libraries via you
 
 ::
 
-    $ pip install newspaper
+    $ pip3 install newspaper3k
 
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
 Development
 -----------
+
+Newspaper has two branches up for development. *This* branch, the master, is our Python3
+codebase while our Python2 branch is located on *python-2-head*.
 
 If you'd like to contribute and hack on the newspaper project, feel free to clone
 a development version of this repository locally::
@@ -250,12 +260,12 @@ a development version of this repository locally::
 Once you have a copy of the source, you can embed it in your Python package,
 or install it into your site-packages easily::
 
-    $ pip install -r requirements.txt
-    $ python setup.py install
+    $ pip3 install -r requirements.txt
+    $ python3 setup.py install
 
-Feel free to give our testing suite a shot::
+Feel free to give our testing suite a shot, everything is mocked!::
 
-    $ python tests/unit_tests.py
+    $ python3 tests/unit_tests.py
 
 LICENSE
 -------
@@ -271,3 +281,5 @@ to talk about the future of this library and news extraction in general!
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
+.. _`Python2 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
