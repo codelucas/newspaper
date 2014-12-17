@@ -429,7 +429,7 @@ class ContentExtractor(object):
             return []
         # If we are extracting from raw text
         if regex:
-            doc_or_html = re.sub('<[^<]+?>', ' ', doc_or_html)
+            doc_or_html = re.sub('<[^<]+?>', ' ', str(doc_or_html))
             doc_or_html = re.findall(
                 'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|'
                 '(?:%[0-9a-fA-F][0-9a-fA-F]))+', doc_or_html)
