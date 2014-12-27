@@ -10,6 +10,7 @@ import logging
 import lxml.etree
 import lxml.html
 import lxml.html.clean
+import re
 import traceback
 
 from copy import deepcopy
@@ -46,6 +47,14 @@ class Parser(object):
         # don't bring the entire library down because one article
         # or article failed to parse
         try:
+            # remove encoding tag because lxml won't accept it for
+            # unicode objects (Issue #78)
+            if isinstance(html, bytes):
+                if html.startswith(b'<?'):
+                    html = re.sub(b'^\<\?.*?\?\>', b'', html, flags=re.DOTALL)
+            else:
+                if html.startswith('<?'):
+                    html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
             cls.doc = lxml.html.fromstring(html)
             return cls.doc
         except Exception:
