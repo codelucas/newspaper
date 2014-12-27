@@ -11,6 +11,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 import math
 import io
+import traceback
 import urllib.request, urllib.parse, urllib.error
 import urllib.request, urllib.error, urllib.parse
 
@@ -116,28 +117,21 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                 while not p.image and new_data:
                     try:
                         p.feed(new_data)
-                    except IOError as e:
-                        # pil failed to install, jpeg codec broken
-                        # **should work if you install via pillow
-                        print(('***jpeg misconfiguration! check pillow or pil'
-                               'installation this machine: %s' % str(e)))
+                    except IOError:
+                        traceback.print_exc()
                         p = None
                         break
-                    except ValueError as ve:
-                        log.debug('cant read image format: %s' % url)
+                    except ValueError:
+                        traceback.print_exc()
                         p = None
                         break
                     except Exception as e:
                         # For some favicon.ico images, the image is so small
                         # that our PIL feed() method fails a length test.
-                        # We add a check below for this.
                         is_favicon = (urls.url_to_filetype(url) == 'ico')
                         if is_favicon:
-                            print('we caught a favicon!: %s' % url)
+                            pass
                         else:
-                            # import traceback
-                            # print(traceback.format_exc())
-                            print('PIL feed() failure for image:', url, str(e))
                             raise e
                         p = None
                         break
