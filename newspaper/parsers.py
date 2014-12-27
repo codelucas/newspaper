@@ -10,6 +10,7 @@ import logging
 import lxml.etree
 import lxml.html
 import lxml.html.clean
+import traceback
 
 from copy import deepcopy
 
@@ -42,13 +43,14 @@ class Parser(object):
     @classmethod
     def fromstring(cls, html):
         html = utils.encodeValue(html)
+        # don't bring the entire library down because one article
+        # or article failed to parse
         try:
             cls.doc = lxml.html.fromstring(html)
-        except Exception as e:
-            print('[Parse lxml ERR]', str(e))
+            return cls.doc
+        except Exception:
+            traceback.print_exc()
             return None
-
-        return cls.doc
 
     # @classmethod
     # def set_doc(cls, html):
