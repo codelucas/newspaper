@@ -72,7 +72,7 @@ class Parser(object):
 
     @classmethod
     def nodeToString(cls, node):
-        return lxml.etree.tostring(node)
+        return lxml.etree.tostring(node).decode()
 
     @classmethod
     def replaceTag(cls, node, tag):
