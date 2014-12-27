@@ -119,11 +119,11 @@ class ArticleTestCase(unittest.TestCase):
         with open(os.path.join(TEXT_FN, 'cnn.txt'), 'r') as f:
             assert self.article.text == f.read()
 
-        # TOP_IMG = ('http://i2.cdn.turner.com/cnn/dam/assets/131129200805-'
-        #            '01-weather-1128-story-top.jpg')
-        # `top_img` isn't tested because it is extracted for this particular
-        # article with the "reddit method", it requires internet connection
-        # TODO: assert self.article.top_img == TOP_IMG
+        # NOTE: top_img extraction requires an internet connection
+        # unlike the rest of this test file
+        TOP_IMG = ('http://i2.cdn.turner.com/cnn/dam/assets/131129200805-'
+                   '01-weather-1128-story-top.jpg')
+        assert self.article.top_img == TOP_IMG
 
         assert sorted(self.article.authors) == AUTHORS
         assert self.article.title == TITLE
