@@ -10,6 +10,7 @@ import logging
 import lxml.etree
 import lxml.html
 import lxml.html.clean
+import re
 
 from copy import deepcopy
 
@@ -43,6 +44,10 @@ class Parser(object):
     def fromstring(cls, html):
         html = utils.encodeValue(html)
         try:
+            # Remove encoding tag because lxml won't accept it for unicode objects (Issue #78)
+            if html.startswith('<?'):
+                html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
+
             cls.doc = lxml.html.fromstring(html)
         except Exception, e:
             print '[Parse lxml ERR]', str(e)
