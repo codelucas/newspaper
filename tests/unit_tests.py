@@ -81,12 +81,13 @@ class ArticleTestCase(unittest.TestCase):
     def test_url(self):
         assert self.article.url == (
             u'http://www.cnn.com/2013/11/27/travel/weather-'
-            'thanksgiving/index.html')
+            'thanksgiving/index.html?iref=allsearch')
 
     @print_test
     @responses.activate
     def test_download_html(self):
-        mock_response_with(self.article.url, 'cnn_article')
+        canon_url = 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'
+        mock_response_with(canon_url, 'cnn_article')
         self.article.download()
         assert len(self.article.html) == 75244
 
@@ -269,7 +270,7 @@ class SourceTestCase(unittest.TestCase):
 
         assert s.brand == BRAND
         assert s.description == DESC
-        assert s.size() == 241
+        assert s.size() == 266
         assert s.category_urls() == CATEGORY_URLS
         # TODO: A lot of the feed extraction is NOT being tested because feeds
         # are primarly extracted from the HTML of category URLs. We lose this
