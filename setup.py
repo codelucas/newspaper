@@ -15,7 +15,7 @@ except ImportError:
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wininst upload')
+    os.system('python setup.py sdist upload') # bdist_wininst
     sys.exit()
 
 
