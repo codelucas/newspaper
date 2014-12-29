@@ -363,7 +363,7 @@ class Article(object):
         """
         try:
             s = images.Scraper(self)
-            self.set_top_img_no_check(s.largest_image_url())
+            self.set_top_img(s.largest_image_url())
         except Exception, e:
             log.critical('jpeg error with PIL, %s' % e)
 
@@ -398,7 +398,7 @@ class Article(object):
 
     def set_meta_img(self, src_url):
         self.meta_img = encodeValue(src_url)
-        self.set_top_img(src_url)
+        self.set_top_img_no_check(src_url)
 
     def set_top_img(self, src_url):
         if src_url is not None:
