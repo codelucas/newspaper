@@ -91,11 +91,13 @@ class ArticleTestCase(unittest.TestCase):
     def test_url(self):
         assert self.article.url == (
             'http://www.cnn.com/2013/11/27/travel/weather-'
-            'thanksgiving/index.html')
+            'thanksgiving/index.html?iref=allsearch')
 
     @print_test
     def test_download_html(self):
-        resp = mock_response_with(self.article.url, 'cnn_article')
+        self.canon_url = ('http://www.cnn.com/2013/11/27/travel/'
+                     'weather-thanksgiving/index.html')
+        resp = mock_response_with(self.canon_url, 'cnn_article')
         self.article.download(resp)
         assert len(self.article.html) == 75176
 
@@ -186,7 +188,7 @@ class ArticleTestCase(unittest.TestCase):
         """Test running NLP algos before parsing the article
         """
         new_article = Article(self.article.url)
-        resp = mock_response_with(new_article.url, 'cnn_article')
+        resp = mock_response_with(self.canon_url, 'cnn_article')
         new_article.download(resp)
         self.assertRaises(ArticleException, new_article.nlp)
 
@@ -259,8 +261,9 @@ class SourceTestCase(unittest.TestCase):
 
         # assert s.brand == BRAND
         # assert s.description == DESC
-        # assert s.size() == 241
+        # assert s.size() == 266
         # assert s.category_urls() == CATEGORY_URLS
+
         # TODO: A lot of the feed extraction is NOT being tested because feeds
         # are primarly extracted from the HTML of category URLs. We lose this
         # effect by just mocking CNN's main page HTML. Warning: tedious fix.
