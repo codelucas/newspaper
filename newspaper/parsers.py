@@ -11,6 +11,7 @@ import lxml.etree
 import lxml.html
 import lxml.html.clean
 import re
+import traceback
 
 from copy import deepcopy
 
@@ -43,17 +44,17 @@ class Parser(object):
     @classmethod
     def fromstring(cls, html):
         html = utils.encodeValue(html)
+        # don't bring the entire library down because one article
+        # or article failed to parse
         try:
             # Remove encoding tag because lxml won't accept it for unicode objects (Issue #78)
             if html.startswith('<?'):
                 html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
-
             cls.doc = lxml.html.fromstring(html)
-        except Exception, e:
-            print '[Parse lxml ERR]', str(e)
+            return cls.doc
+        except Exception:
+            traceback.print_exc()
             return None
-
-        return cls.doc
 
     # @classmethod
     # def set_doc(cls, html):

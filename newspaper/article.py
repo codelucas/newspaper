@@ -159,7 +159,7 @@ class Article(object):
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
-            print '[Article parse ERR] %s' % self.url
+            # `parse` call failed, return nothing
             return
 
         # TODO: Fix this, sync in our fix_url() method

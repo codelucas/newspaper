@@ -198,8 +198,6 @@ class Source(object):
         for category in self.categories:
             doc = self.config.get_parser().fromstring(category.html)
             category.doc = doc
-            if category.doc is None:
-                print '[Category parse ERR]', category.url
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
