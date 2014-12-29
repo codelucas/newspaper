@@ -365,7 +365,7 @@ class Article(object):
         """
         try:
             s = images.Scraper(self)
-            self.set_top_img_no_ckeck(s.largest_image_url())
+            self.set_top_img_no_check(s.largest_image_url())
         except Exception as e:
             log.critical('jpeg error with PIL, %s' % e)
 
@@ -406,9 +406,9 @@ class Article(object):
         if src_url is not None:
             s = images.Scraper(self)
             if s.satisfies_requirements(src_url):
-                self.set_top_img_no_ckeck(src_url)
+                self.set_top_img_no_check(src_url)
 
-    def set_top_img_no_ckeck(self, src_url):
+    def set_top_img_no_check(self, src_url):
         """Provide 2 APIs for images. One at "top_img", "imgs"
         and one at "top_image", "images"
         """
