@@ -1,0 +1,17 @@
+When warp-speed Santa drones are shooting Christmas presents down the air holes of our Disastro-Bunkers in 2089, will there be snow on the ground?
+
+That's a ridiculous question to ask—and now it's been answered by David Taylor, a 44-year-old data scientist and writer in Montreal, who's made an animation of predicted white Christmases for each remaining year of the century.
+
+Taylor is aware that, by its nature, this simulation includes many wild misses. Today, a snowstorm's exact movements are difficult to nail down three days in advance; guessing whether there will be powder in six decades on December 25 is harder than keeping Jim Cantore silent during thundersnow. The humor of this impossible task was part of what made Taylor want to attempt it.
+
+"Basically, I was cruising around the Statistics Canada website looking for interesting data that hadn't already been mined out, and I came across this huge collection of climate models going to the year 2100, containing day-by-day predictions of atmospheric conditions including temperature and precipitation," he emails. "I found that amusing because even the seven-day weather forecasts are so often way off. But of course the accuracy of day-by-day predictions aren't the point of the model, they're just the product of the model."
+
+The model Taylor relied on, the CanRCM4, generated a few interesting trends over the century. The effects of climate change are obvious, with the snowpack receding evermore north like the white hairline of a balding Kris Kringle. Within this general pattern, though, are what Taylor calls "mini-cycles of a few years of cooling, then a few years of warming." There are also a couple of mystery zones, where snow or barrenness stubbornly reign.
+
+"There are... these persistent spots in and around Utah that are always snow-covered no matter what's going on in the rest of the continent, and there's this spot between Walla Walla and Spokane, Washington, that's always snow-free even though it's surrounded by snow," he says. "I'm just a data analyst and programmer, not a climatologist, but my first guess is that the Rocky Mountains have something to do with the fact that snow cover seems less variable in the West than the East." (It might also relate to how climate change is building a hot/cold divide between America's coasts.)
+
+So why did Taylor pick this treasured event for scrutiny? Is his first holiday memory waking up to ivory drifts pressing against the window, signaling school cancellations stretching as far as the mind's eye could see?
+
+Not really. "Well, the data is arranged day by day, so Christmas seemed the natural choice," he says. As for his own weather experiences, he's only seen one white Christmas in his life, way back in 1997.
+
+"It's ironic because most of the rest of Canada had snow on the ground, but Edmonton, which is the large city the furthest north, was experiencing a Chinook (warm air from the Rockies) and didn't," he says. "In Edmonton, there's usually snow on the ground to stay by Halloween."

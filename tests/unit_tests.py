@@ -22,11 +22,13 @@ sys.path.insert(0, PARENT_DIR)
 
 TEXT_FN = os.path.join(TEST_DIR, 'data/text')
 HTML_FN = os.path.join(TEST_DIR, 'data/html')
+URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
 
 import newspaper
 from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
+from newspaper.urls import get_domain
 from newspaper.utils.encoding import smart_str, smart_unicode
 from newspaper.utils import encodeValue
 # from newspaper import Config
@@ -60,6 +62,56 @@ def mock_response_with(url, response_file):
     responses.add(responses.GET, url, body=body, status=200,
                   content_type='text/html')
     return requests.get(url)
+
+
+def get_base_domain(url):
+    """For example, the base url of uk.reuters.com => reuters.com
+    """
+    domain = get_domain(url)
+    tld = '.'.join(domain.split('.')[-2:])
+    if tld in ['co.uk', 'com.au', 'au.com']:  # edge cases
+        end_chunks = domain.split('.')[-3:]
+    else:
+        end_chunks = domain.split('.')[-2:]
+    base_domain = '.'.join(end_chunks)
+    return base_domain
+
+
+class ExhaustiveFullTextCase(unittest.TestCase):
+
+    def runTest(self):
+        # The "correct" fulltext needs to be manually checked
+        # we have 50 so far
+        FULLTEXT_PREPARED = 50
+        domain_counters = {}
+
+        with open(URLS_FILE, 'r') as f:
+            urls = [d.strip() for d in f.readlines() if d.strip()]
+
+        for url in urls[:FULLTEXT_PREPARED]:
+            domain = get_base_domain(url)
+            if domain in domain_counters:
+                domain_counters[domain] += 1
+            else:
+                domain_counters[domain] = 1
+
+            try:
+                a = Article(url)
+                a.download()
+                a.parse()
+            except Exception:
+                print('<< URL: %s parse ERROR >>' % url)
+                continue
+
+            out_fn = domain + str(domain_counters[domain]) + '.txt'
+            out_fn = os.path.join(TEXT_FN, out_fn)
+            with open(out_fn, 'r') as f:
+                correct_text = f.read()
+
+            condensed_url = url[:30] + ' ...'
+            print('%s -- fulltext status: %s' %
+                  (condensed_url, a.text == correct_text))
+            # assert a.text == correct_text
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -479,13 +531,15 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    suite.addTest(ConfigBuildTestCase())
-    suite.addTest(MultiLanguageTestCase())
+    # suite.addTest(ConfigBuildTestCase())
+    # suite.addTest(MultiLanguageTestCase())
 
-    suite.addTest(EncodingTestCase())
-    suite.addTest(UrlTestCase())
-    suite.addTest(ArticleTestCase())
-    suite.addTest(APITestCase())
+    suite.addTest(ExhaustiveFullTextCase())
+    # suite.addTest(EncodingTestCase())
+    # suite.addTest(UrlTestCase())
+    # suite.addTest(ArticleTestCase())
+    # suite.addTest(APITestCase())
+
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())
