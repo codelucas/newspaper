@@ -351,7 +351,13 @@ class ContentExtractor(object):
                 continue
 
             key = key.split(':')
-            ref = data[key.pop(0)]
+            key_head = key.pop(0)
+            ref = data[key_head]
+
+            if isinstance(ref, basestring):
+                data[key_head] = {key_head: ref}
+                ref = data[key_head]
+
             for idx, part in enumerate(key):
                 if idx == len(key) - 1:
                     ref[part] = value
