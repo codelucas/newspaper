@@ -51,7 +51,6 @@ class Article(object):
         # URL to the main page of the news source which owns this article
         self.source_url = source_url
 
-        url = url
         self.url = urls.prepare_url(url, self.source_url)
 
         self.title = title
@@ -375,7 +374,6 @@ class Article(object):
             # <title> extraction failed
             return
         title = title[:self.config.MAX_TITLE]
-        title = title
         if title:
             self.title = title
 
