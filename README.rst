@@ -1,9 +1,7 @@
 Newspaper3k: Article scraping & curation
 ========================================
 
-.. image:: https://badge.fury.io/py/newspaper.png
-    :target: http://badge.fury.io/py/newspaper
-        :alt: Latest version
+[![PyPI version](https://badge.fury.io/py/newspaper3k.svg)](http://badge.fury.io/py/newspaper3k)
 
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 

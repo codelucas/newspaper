@@ -1,7 +1,7 @@
 Newspaper: Article scraping & curation
 ======================================
 
-Release v0.0.7. :ref:`(Installation) <install>`.
+Release v0.1.2. :ref:`(Installation) <install>`.
 
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
 
