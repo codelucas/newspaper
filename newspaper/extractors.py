@@ -396,7 +396,8 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urllib.parse.urljoin(article_url, url) for url in urls])
+        img_links = set([urllib.parse.urljoin(article_url, url)
+                        for url in urls])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -442,7 +443,7 @@ class ContentExtractor(object):
             doc_or_html = [i.strip() for i in doc_or_html]
             return doc_or_html or []
         # If the doc_or_html is html, parse it into a root
-        if isinstance(doc_or_html, str) or isinstance(doc_or_html, str):
+        if isinstance(doc_or_html, str):
             doc = self.parser.fromstring(doc_or_html)
         else:
             doc = doc_or_html
@@ -463,7 +464,8 @@ class ContentExtractor(object):
 
             if not domain and not path:
                 if self.config.verbose:
-                    print('elim category url %s for no domain and path' % p_url)
+                    print('elim category url %s for no domain and path'
+                          % p_url)
                 continue
             if path and path.startswith('#'):
                 if self.config.verbose:

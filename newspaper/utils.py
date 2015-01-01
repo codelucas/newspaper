@@ -195,7 +195,8 @@ def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
             """Calculate a cache key based on the decorated method signature
             args[1] indicates the domain of the inputs, we hash on domain!
             """
-            key = sha1((str(args[1]) + str(kwargs)).encode('utf-8')).hexdigest()
+            key = sha1((str(args[1]) +
+                        str(kwargs)).encode('utf-8')).hexdigest()
             filepath = os.path.join(cache_folder, key)
 
             # verify that the cached object exists and is less than

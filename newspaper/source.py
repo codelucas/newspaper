@@ -338,8 +338,8 @@ class Source(object):
         self.is_downloaded = True
         if len(failed_articles) > 0:
             if self.config.verbose:
-                print('[ERROR], these article urls failed the download:', \
-                    [a.url for a in failed_articles])
+                print('[ERROR], these article urls failed the download:',
+                      [a.url for a in failed_articles])
 
     def parse_articles(self):
         """Parse all articles, delete if too small
