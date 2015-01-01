@@ -531,14 +531,13 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    # suite.addTest(ConfigBuildTestCase())
-    # suite.addTest(MultiLanguageTestCase())
-
-    suite.addTest(ExhaustiveFullTextCase())
-    # suite.addTest(EncodingTestCase())
-    # suite.addTest(UrlTestCase())
-    # suite.addTest(ArticleTestCase())
-    # suite.addTest(APITestCase())
+    # suite.addTest(ExhaustiveFullTextCase())
+    suite.addTest(ConfigBuildTestCase())
+    suite.addTest(MultiLanguageTestCase())
+    suite.addTest(EncodingTestCase())
+    suite.addTest(UrlTestCase())
+    suite.addTest(ArticleTestCase())
+    suite.addTest(APITestCase())
 
     unittest.TextTestRunner().run(suite)
 
