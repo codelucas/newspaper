@@ -29,8 +29,6 @@ from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
-from newspaper.utils.encoding import smart_str, smart_unicode
-from newspaper.utils import encodeValue
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -148,7 +146,7 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     def test_download_html(self):
         self.canon_url = ('http://www.cnn.com/2013/11/27/travel/'
-                     'weather-thanksgiving/index.html')
+                          'weather-thanksgiving/index.html')
         resp = mock_response_with(self.canon_url, 'cnn_article')
         self.article.download(resp)
         assert len(self.article.html) == 75176
@@ -392,32 +390,6 @@ class APITestCase(unittest.TestCase):
         newspaper.popular_urls()
 
 
-class EncodingTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_encode_val()
-        self.test_smart_unicode()
-        self.test_smart_str()
-
-    def setUp(self):
-        self.uni_string = "∆ˆˆø∆ßåßlucas yang˜"
-        self.normal_string = "∆ƒˆƒ´´lucas yang"
-
-    @print_test
-    def test_encode_val(self):
-        assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_unicode(self):
-        assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_str(self):
-        assert smart_str(self.uni_string) == b'\xe2\x88\x86\xcb\x86\xcb\x86\xc3\xb8\xe2\x88\x86\xc3\x9f\xc3\xa5\xc3\x9flucas yang\xcb\x9c'
-        assert smart_str(self.normal_string) == b'\xe2\x88\x86\xc6\x92\xcb\x86\xc6\x92\xc2\xb4\xc2\xb4lucas yang'
-
-
 class MThreadingTestCase(unittest.TestCase):
     def runTest(self):
         self.test_download_works()
@@ -534,7 +506,6 @@ if __name__ == '__main__':
     # suite.addTest(ExhaustiveFullTextCase())
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
-    suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())

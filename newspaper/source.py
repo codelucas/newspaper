@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 class Category(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.html = None
         self.doc = None
 
@@ -38,7 +38,7 @@ class Category(object):
 class Feed(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.rss = None
         # TODO self.dom = None, speed up Feedparser
 
@@ -64,7 +64,7 @@ class Source(object):
 
         self.extractor = ContentExtractor(self.config)
 
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.url = urls.prepare_url(url)
 
         self.domain = urls.get_domain(self.url)
@@ -141,7 +141,7 @@ class Source(object):
         desc html attribute
         """
         desc = self.extractor.get_meta_description(self.doc)
-        self.description = utils.encodeValue(desc)
+        self.description = desc
 
     def download(self, response=None):
         """Downloads html of source

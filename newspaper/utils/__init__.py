@@ -22,7 +22,6 @@ import time
 
 from hashlib import sha1
 
-from . import encoding
 from .. import settings
 
 log = logging.getLogger(__name__)
@@ -255,19 +254,6 @@ def clear_memo_cache(source):
         print('memo file for', source.domain, 'has already been deleted!')
 
 
-def encodeValue(value):
-    if value is None:
-        return ''
-    string_org = value
-    try:
-        value = encoding.smart_unicode(value)
-    except (UnicodeEncodeError, encoding.DjangoUnicodeDecodeError):
-        value = encoding.smart_str(value)
-    except:
-        value = string_org
-    return value.strip()
-
-
 def memoize_articles(source, articles):
     """When we parse the <a> links in an <html> page, on the 2nd run
     and later, check the <a> links of previous runs. If they match,
@@ -299,11 +285,11 @@ def memoize_articles(source, articles):
         valid_urls = list(memo.keys()) + list(cur_articles.keys())
 
         memo_text = '\r\n'.join(
-            [encodeValue(href.strip()) for href in (valid_urls)])
+            [href.strip() for href in (valid_urls)])
     # Our first run with memoization, save every url as valid
     else:
         memo_text = '\r\n'.join(
-            [encodeValue(href.strip()) for href in list(cur_articles.keys())])
+            [href.strip() for href in list(cur_articles.keys())])
 
     # new_length = len(cur_articles)
     if len(memo) > config.MAX_FILE_MEMO:
