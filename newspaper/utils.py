@@ -22,7 +22,7 @@ import time
 
 from hashlib import sha1
 
-from .. import settings
+from . import settings
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -33,7 +33,7 @@ class FileHelper(object):
     def loadResourceFile(self, filename):
         if not os.path.isabs(filename):
             dirpath = os.path.abspath(os.path.dirname(__file__))
-            path = os.path.join(dirpath, '../resources', filename)
+            path = os.path.join(dirpath, 'resources', filename)
         else:
             path = filename
         try:
