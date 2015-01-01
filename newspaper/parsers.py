@@ -13,10 +13,10 @@ import lxml.html.clean
 import re
 import traceback
 
+from bs4 import UnicodeDammit
 from copy import deepcopy
 
 from . import text
-from . import utils
 
 log = logging.getLogger(__name__)
 
@@ -42,28 +42,29 @@ class Parser(object):
         return node.cssselect(selector)
 
     @classmethod
+    def get_unicode_html(cls, html):
+        converted = UnicodeDammit(html, is_html=True)
+        if not converted.unicode_markup:
+            raise Exception(
+                'Failed to detect encoding of article HTML, tried: %s' %
+                ', '.join(converted.tried_encodings))
+        html = converted.unicode_markup
+        return html
+
+    @classmethod
     def fromstring(cls, html):
-        html = utils.encodeValue(html)
-        # don't bring the entire library down because one article
-        # or article failed to parse
+        html = cls.get_unicode_html(html)
+        # Enclosed in a `try` to prevent bringing the entire library
+        # down due to one article (out of potentially many in a `Source`)
         try:
-            # remove encoding tag because lxml won't accept it for
-            # unicode objects (Issue #78)
-            if isinstance(html, bytes):
-                if html.startswith(b'<?'):
-                    html = re.sub(b'^\<\?.*?\?\>', b'', html, flags=re.DOTALL)
-            else:
-                if html.startswith('<?'):
-                    html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
+            # lxml does not play well with <? ?> encoding tags
+            if html.startswith('<?'):
+                html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
             cls.doc = lxml.html.fromstring(html)
             return cls.doc
         except Exception:
             traceback.print_exc()
-            return None
-
-    # @classmethod
-    # def set_doc(cls, html):
-    #    cls.doc = cls.fromstring(html)
+            return
 
     @classmethod
     def node_to_string(cls, node):
@@ -83,6 +84,9 @@ class Parser(object):
 
     @classmethod
     def nodeToString(cls, node):
+        """`decode` is needed at the end because `etree.tostring`
+        returns a python bytestring
+        """
         return lxml.etree.tostring(node).decode()
 
     @classmethod
@@ -261,11 +265,3 @@ class Parser(object):
             e0 = deepcopy(e0)
             e0.tail = None
         return cls.nodeToString(e0)
-
-
-class ParserSoup(Parser):
-    @classmethod
-    def fromstring(cls, html):
-        html = utils.encodeValue(html)
-        cls.doc = lxml.html.soupparser.fromstring(html)
-        return cls.doc

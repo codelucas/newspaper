@@ -22,13 +22,13 @@ sys.path.insert(0, PARENT_DIR)
 
 TEXT_FN = os.path.join(TEST_DIR, 'data/text')
 HTML_FN = os.path.join(TEST_DIR, 'data/html')
+URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
 
 import newspaper
 from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
-from newspaper.utils.encoding import smart_str, smart_unicode
-from newspaper.utils import encodeValue
+from newspaper.urls import get_domain
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -60,6 +60,56 @@ def mock_response_with(url, response_file):
     responses.add(responses.GET, url, body=body, status=200,
                   content_type='text/html')
     return requests.get(url)
+
+
+def get_base_domain(url):
+    """For example, the base url of uk.reuters.com => reuters.com
+    """
+    domain = get_domain(url)
+    tld = '.'.join(domain.split('.')[-2:])
+    if tld in ['co.uk', 'com.au', 'au.com']:  # edge cases
+        end_chunks = domain.split('.')[-3:]
+    else:
+        end_chunks = domain.split('.')[-2:]
+    base_domain = '.'.join(end_chunks)
+    return base_domain
+
+
+class ExhaustiveFullTextCase(unittest.TestCase):
+
+    def runTest(self):
+        # The "correct" fulltext needs to be manually checked
+        # we have 50 so far
+        FULLTEXT_PREPARED = 50
+        domain_counters = {}
+
+        with open(URLS_FILE, 'r') as f:
+            urls = [d.strip() for d in f.readlines() if d.strip()]
+
+        for url in urls[:FULLTEXT_PREPARED]:
+            domain = get_base_domain(url)
+            if domain in domain_counters:
+                domain_counters[domain] += 1
+            else:
+                domain_counters[domain] = 1
+
+            try:
+                a = Article(url)
+                a.download()
+                a.parse()
+            except Exception:
+                print('<< URL: %s parse ERROR >>' % url)
+                continue
+
+            out_fn = domain + str(domain_counters[domain]) + '.txt'
+            out_fn = os.path.join(TEXT_FN, out_fn)
+            with open(out_fn, 'r') as f:
+                correct_text = f.read()
+
+            condensed_url = url[:30] + ' ...'
+            print('%s -- fulltext status: %s' %
+                  (condensed_url, a.text == correct_text))
+            # assert a.text == correct_text
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -96,7 +146,7 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     def test_download_html(self):
         self.canon_url = ('http://www.cnn.com/2013/11/27/travel/'
-                     'weather-thanksgiving/index.html')
+                          'weather-thanksgiving/index.html')
         resp = mock_response_with(self.canon_url, 'cnn_article')
         self.article.download(resp)
         assert len(self.article.html) == 75176
@@ -340,32 +390,6 @@ class APITestCase(unittest.TestCase):
         newspaper.popular_urls()
 
 
-class EncodingTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_encode_val()
-        self.test_smart_unicode()
-        self.test_smart_str()
-
-    def setUp(self):
-        self.uni_string = "∆ˆˆø∆ßåßlucas yang˜"
-        self.normal_string = "∆ƒˆƒ´´lucas yang"
-
-    @print_test
-    def test_encode_val(self):
-        assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_unicode(self):
-        assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_str(self):
-        assert smart_str(self.uni_string) == b'\xe2\x88\x86\xcb\x86\xcb\x86\xc3\xb8\xe2\x88\x86\xc3\x9f\xc3\xa5\xc3\x9flucas yang\xcb\x9c'
-        assert smart_str(self.normal_string) == b'\xe2\x88\x86\xc6\x92\xcb\x86\xc6\x92\xc2\xb4\xc2\xb4lucas yang'
-
-
 class MThreadingTestCase(unittest.TestCase):
     def runTest(self):
         self.test_download_works()
@@ -479,13 +503,13 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
+    # suite.addTest(ExhaustiveFullTextCase())
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
-
-    suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
+
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())

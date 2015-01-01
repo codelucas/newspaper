@@ -1,0 +1,1 @@
+// results fragments requested via ajax should be an empty response if ($_GET['ajax'] != 'true'): ? = __("no entries found")?> endif; ?

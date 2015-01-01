@@ -1,0 +1,81 @@
+One great way of organically promoting your application is to provide “badges”; snippets of content that people can embed on their own websites.
+
+This can contain up-to-the-minute information from your application about a user, piece of content or another object, dynamically generated and inserted into other websites. This is probably best illustrated with some examples:
+
+In this article I’m going to take a look at some of the ways you can implement this.
+
+All the code from this tutorial is available on Github. There’s also an online demo.
+
+First, we’ll define our application’s dependencies using Composer:
+
+Now, in , let’s pull in the Composer-generated autoloader, add our statement, initialize our Silex application and setup Twig templating:
+
+Let’s create a data-store of users, with some information about them which will form the basis of our example “badges”. For simplicity, we’ll use a static array; in practice you’d use a database, but it ought to be pretty simple to swap this out for something more dynamic. We’ll inject it into the application container like so:
+
+Now that we’ve got a basic application set up along with some data, let’s go through three approaches to how you can provide an embeddable “badge” which displays this data for a given user.
+
+IFrames are arguably a dirty word in web circles, perhaps deservedly so. But they are a common and practical approach to embedding content from one site into another.
+
+Let’s start with this approach; later we can reuse some of the code when we try out the JavaScript method.
+
+Start with a simple Twig template, which creates some HTML – with inlined styles, to minimize HTTP requests – which contains our “badge” as a :
+
+This is all pretty straightforward. Notice how we’re incorporating a variable named which we’ll set server-side, which is going to take care of one very important aspect – any images we incorporate must be referenced using absolute URLs.
+
+Now the corresponding route:
+
+All pretty straightforward. The bit which populates is a bit quick-and-dirty, but it’ll do the job for now.
+
+Embedding this into a third-party site is really simple:
+
+Later we’ll look at some of the things you need to think about with the iframe approach; for now, let’s move onto method number two.
+
+One of the simplest ways to implement this is to provide a URL to an image, which gets created server-side.
+
+Here’s a screenshot of the sort of image we’re going to create:
+
+Okay, it won’t win any awards for design, but you can use the same approach to create much more visually appealing images than this.
+
+You’ll find the necessary resources – the background and trophy images, avatars and fonts – in the example application’s repository.
+
+Here’s some example code to dynamically generate an embeddable image:
+
+It’s pretty much self-documented, and should be pretty simple to adapt to your needs or with better images. Note that we’re taking the background image from a non-web accessible directory ( ), but the avatars and trophy icon are in the directory.
+
+Embedding this into a third-party website couldn’t be simpler:
+
+There are a couple of improvements we could make. For one thing, we’re generating a new image on each request. However you can use WideImage’s method to cache the results, like so:
+
+It might also be better to provide a default image when the requested user cannot be found, rather than issuing a 404 error.
+
+Now onto the third and final approach.
+
+Using JavaScript to dynamically create embedded content is amongst the most common, and perhaps the most flexible approach.
+
+Again we’re going to generate some HTML, but this time we’ll return a simple snippet of JavaScript that will write it to the host page. All that requires is that the host website insert a simple tag where they want our content to appear.
+
+We’ll re-use the Twig template from earlier, but this time the route looks slightly different:
+
+The first part is identical to the iframe approach. This time, though, we’re generating a simple . Before we can do that, we use a little magic to minify the resulting HTML – which also ensures it will all be on one line – then insert it into some very simple dynamically created JavaScript.
+
+Embedding this into a page is just as simple:
+
+Strictly speaking, we don’t even need that container DIV, but it can be used to apply styling on the host site.
+
+Now that we’ve examined three approaches, let’s look at some of the things you need to think about when deciding which of these approaches to take.
+
+When choosing an approach to this problem, there are a few things you need to weigh up.
+
+If you’re intending people to be able to embed content into the body of CMS-driven content or within blog posts, it’s worth bearing in mind that any CMS or blog software worth its salt will block certain types of content. Inline scripts are almost certainly out. IFrames are probably going to be stripped out. That probably just leaves image tags.
+
+There are a few ways to approach styling; perhaps you want to control everything, keeping your badges consistent across sites. Alternatively, you could provide default styles but allow site owners the flexibility to override them to better fit the design of their site.
+
+Obviously images cannot be customized; aside, perhaps, their sizing. If you use iframes, it’s worth noting that any styling applied to the parent page will not be inherited by your content. On the other hand if you use the JavaScript approach, it may well be possible to override the styling, depending on specificity and how you incorporate your styles. The demo page that comes with the example application shows this in action.
+
+Perhaps, like Stackoverflow and their “User Flair” badges, you want to provide a number of alternative styles – light and dark, for example. This is entirely possible with any of the approaches I’ve outlined, though it’s arguably slightly more difficult with the image tag approach.
+
+So far our embeddable content has been dynamically generated, but in no way interactive. A Facebook “like” button, for example, doesn’t just provide a count – it also allows people to perform the “like” action from within the page. That sort of interactivity will be covered in a later article.
+
+Embeddable content is great way to promote your site. It can be used not only to link back to your site but to provide “live” content, right there on a third-party “host” website.
+
+We’ve looked at three common approaches to this – images, iframes and JavaScript. We’ve looked at some of the things you need to think about when deciding which one to use, along with some pitfalls to be wary of.
