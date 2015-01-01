@@ -265,11 +265,3 @@ class Parser(object):
             e0 = deepcopy(e0)
             e0.tail = None
         return cls.nodeToString(e0)
-
-
-class ParserSoup(Parser):
-    @classmethod
-    def fromstring(cls, html):
-        html = cls.get_unicode_html(html)
-        cls.doc = lxml.html.soupparser.fromstring(html)
-        return cls.doc

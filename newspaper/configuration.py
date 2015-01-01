@@ -12,7 +12,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
-from .parsers import Parser, ParserSoup
+from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
                    StopWordsKorean)
 from .version import __version__
@@ -37,8 +37,6 @@ class Configuration(object):
 
         # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000
-
-        self.parser_class = 'lxml'  # 'lxml' or 'soup'
 
         # Cache and save articles run after run
         self.memoize_articles = True
@@ -104,7 +102,7 @@ class Configuration(object):
         return StopWords
 
     def get_parser(self):
-        return Parser if self.parser_class == 'lxml' else ParserSoup
+        return Parser
 
 
 class ArticleConfiguration(Configuration):
