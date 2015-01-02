@@ -6,6 +6,7 @@ import sys
 import os
 import unittest
 import time
+import traceback
 from collections import defaultdict
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -89,19 +90,18 @@ class ExhaustiveFullTextCase(unittest.TestCase):
             else:
                 domain_counters[domain] = 1
 
+            res_filename = domain + str(domain_counters[domain])
+            html = mock_resource_with(res_filename, 'html')
             try:
                 a = Article(url)
-                a.download()
+                a.download(html)
                 a.parse()
             except Exception:
                 print('<< URL: %s parse ERROR >>' % url)
+                traceback.print_exc()
                 continue
 
-            out_fn = domain + str(domain_counters[domain]) + '.txt'
-            out_fn = os.path.join(TEXT_FN, out_fn)
-            with open(out_fn, 'r') as f:
-                correct_text = f.read()
-
+            correct_text = mock_resource_with(res_filename, 'txt')
             condensed_url = url[:30] + ' ...'
             print('%s -- fulltext status: %s' %
                   (condensed_url, a.text == correct_text))
@@ -497,7 +497,6 @@ if __name__ == '__main__':
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
-
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())
