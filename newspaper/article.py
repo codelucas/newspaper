@@ -142,11 +142,12 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, response=None):
+    def download(self, html=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
         """
-        html = network.get_html(self.url, self.config, response)
+        if html is None:
+            html = network.get_html(self.url, self.config)
         self.set_html(html)
 
     def parse(self):

@@ -143,10 +143,10 @@ class Source(object):
         desc = self.extractor.get_meta_description(self.doc)
         self.description = desc
 
-    def download(self, response=None):
+    def download(self):
         """Downloads html of source
         """
-        self.html = network.get_html(self.url, self.config, response)
+        self.html = network.get_html(self.url, self.config)
 
     def download_categories(self):
         """Download all category html, can use mthreading
