@@ -385,9 +385,11 @@ class Article(object):
     def set_html(self, html):
         """Encode HTML before setting it
         """
-        self.is_downloaded = True
         if html:
+            if isinstance(html, bytes):
+                html = self.config.get_parser().get_unicode_html(html)
             self.html = html
+            self.is_downloaded = True
 
     def set_article_html(self, article_html):
         """Sets the HTML of just the article's `top_node`
