@@ -51,7 +51,7 @@ http://cntraveler.com/galleries/2014-12-24/what-the-airlines-did-well-in-2014-am
 http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast
 http://coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast
 http://letterstotheeditorblog.dallasnews.com/2014/12/kindhearted-police-with-holiday-spirit.html/'
-http://dallasmorningviewsblog.dallasnews.com/2014/12/footballs-growing-caste-system-as-more-parents-say-no.html/feed/
+http://dallasmorningviewsblog.dallasnews.com/2014/12/footballs-growing-caste-system-as-more-parents-say-no.html
 http://details.com/watch/black-on-black-watches-for-men
 http://details.com/fashion-style/perfect-wardrobe/201408/gray-shirts-sweaters-pants-suits-coats-for-fall
 http://elle.com/runway/ready-to-wear/spring-2015-rtw/nicole-miller/collection/
@@ -60,12 +60,8 @@ http://fool.com/investing/general/2014/12/22/7-top-stocks-to-buy-for-2015.aspx#1
 http://fool.com/../../personal-finance/2010/07/30/5-fixes-for-female-money-problems.aspx
 http://smallbusiness.foxbusiness.com/marketing-sales/2014/12/16/7-powerful-ways-to-convert-neutral-traffic-into-paying-customers/
 http://smallbusiness.foxbusiness.com/marketing-sales/2014/12/23/how-to-deal-with-scrooge-client/
-http://foxnews.com/2014/12/23/he-cannot-run-city-new-york-oreilly-rips-incompetent-mayor-de-blasio
-http://radio.foxnews.com/2014/12/25/afmw-michael-w-smith-michael-w-smith-friends-the-spirit-of-christmas-video/
 http://huffingtonpost.de/news/missing-airasia-plane/
 http://huffingtonpost.de/news/inspiration
-http://reuters.com/article/2014/12/29/uk-google-china-idUKKBN0K70BJ20141229
-http://reuters.com/article/businessNews/idFRKBN0K70N920141229
 http://mashable.com/2010/01/01/im-feeling-lucky-google-new-year/
 http://mashable.com/2014/12/22/stansted-power-outage/
 http://www.oregonlive.com/business/index.ssf/2014/12/alzheimers_foundation_comcast.html
@@ -83,7 +79,7 @@ http://readwrite.com/2014/12/29/pinterest-opens-up-promoted-pins
 http://www.slate.com/articles/technology/the_back_end/2014/10/the_new_seven_wonders_defining_the_top_technological_marvels_of_the_contemporary.html
 http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html
 https://deals.thenextweb.com/sales/free-anime-for-30-days-from-crunchyroll?utm_campaign=feed&amp;utm_medium=RSS&amp;utm_source=thenextweb
-http://thenextweb.com/apps/2014/12/12/google-maps-finally-adds-lane-guidance-confused-european-drivers/feed/
+http://thenextweb.com/apps/2014/12/12/google-maps-finally-adds-lane-guidance-confused-european-drivers
 http://www.thekitchn.com/before-after-the-details-make-a-difference-reader-kitchen-remodel-214061#comments
 http://www.thekitchn.com/drink-up-15-good-ideas-for-beer-and-wine-the-kitchns-best-of-2014-214146#comments
 http://www.thedailybeast.com/articles/2014/12/16/the-vatican-s-rare-nod-to-american-nuns.html
@@ -115,7 +111,7 @@ http://www.syracuse.com/living/index.ssf/2014/12/echos_of_the_past_the_hotel_syr
 http://globalnews.ca/video/1747657/video-of-the-gardners-hours-before-birth-of-quadruplets
 http://globalnews.ca/video/1747659/quad-squad-born-in-utah/
 http://uproxx.com/webculture/2014/12/a-reddit-post-about-a-fake-ebola-like-illness-sparked-a-panic-in-and-around-an-arizona-town/
-http://uproxx.com/filmdrunk/2014/12/simon-pegg-gave-his-blessing-for-a-touring-shaun-of-the-dead-stage-show/feed/
+http://uproxx.com/filmdrunk/2014/12/simon-pegg-gave-his-blessing-for-a-touring-shaun-of-the-dead-stage-show
 http://dailycaller.com/2014/12/25/happy-kwanzaa-the-holiday-brought-to-you-by-the-fbi/
 http://dailycaller.com/2014/12/27/jennifer-lawrence-made-an-appearance-at-the-louisville-kentucky-flop-fest-video/
 http://pe.com/los-angeles-CA/legal/legal-services/The-Law-Offices-of-Jacob-Emrani-951-268-7555
@@ -130,8 +126,8 @@ http://glamour.com/fashion/blogs/dressed/2014/09/rihanna-leaves-pants-at-home-f
 http://glamour.com/weddings/blogs/save-the-date/2014/12/simple-wedding-dresses
 http://blog.gulflive.com/mississippi-press-living/2014/12/sampling_history_new_year_offe.html
 http://videos.gulflive.com/2013/10/crown_equity_holdings_could_be.html
-http://247wallst.com/investing/2014/12/29/the-4-stocks-that-slimmed-the-djia-monday-slide/feed/
-http://247wallst.com/investing/2014/12/29/the-52-week-low-club-for-monday-19/feed/
+http://247wallst.com/investing/2014/12/29/the-4-stocks-that-slimmed-the-djia-monday-slide
+http://247wallst.com/investing/2014/12/29/the-52-week-low-club-for-monday-19
 http://flavorwire.com/495982/13-media-moments-from-2014-we-could-have-lived-without#comments
 http://flavorwire.com/495418/2014-the-year-the-outrage-machine-started-eating-the-real-world
 http://www.businessweek.com/articles/2014-12-18/afghanistans-new-rich-navigate-u-dot-s-dot-pullout#r=nav-fst
@@ -139,7 +135,6 @@ http://www.businessweek.com/articles/2014-12-22/cuomos-cap-on-hedge-funds-in-pen
 http://www.bloomberg.com/news/2014-09-30/job-woes-linger-in-29-states-as-u-s-recovers-unevenly.html
 http://bloomberg.com/infographics/2014-08-22/ukraine-russia-map.html
 http://www.theroot.com/articles/culture/2014/12/rev_sharpton_responds_to_his_critics.html
-http://theroot.com/list/The-Root-100/video/The-Root-100-Panel-Discussion-2
 http://livescience.com/48502-magic-mushrooms-change-brain-networks.html
 http://livescience.com/48543-how-zombies-evolved-in-pop-culture.html
 http://lifebuzz.com/colbie-caillat-got-tired-of-being-photoshopped-so-heres-what-she-did-about-it/
@@ -156,7 +151,7 @@ http://adoption.com/what-not-to-say-to-a-birth-mom-or-adoptee/
 http://forums.adoption.com/search-birthfamily-adoptee/222937-if-you-looking-siblings-please-post-here.html
 http://youbeauty.com/skin/our-favorite-pop-culture-nail-art
 http://youbeauty.com/face/we-tried-it-clinique-acne-solutions-powder-makeup-in-golden
-http://www.sitepoint.com/average-page-weight-increases-15-2014/feed/
+http://www.sitepoint.com/average-page-weight-increases-15-2014
 http://www.sitepoint.com/3-ways-implement-embeddable-custom-badges/
 http://www.technologyreview.com/featuredstory/532796/who-owns-the-biggest-biotech-discovery-of-the-century/
 http://www.technologyreview.com/news/532896/discarded-laptop-batteries-keep-the-lights-on/

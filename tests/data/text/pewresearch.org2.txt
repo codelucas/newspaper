@@ -11,3 +11,5 @@ A 2009 paper in the Journal of Monetary Economics, which also found a cause-and-
 Those attitudinal changes have real-world consequences, though not large ones. The authors of the JME paper, Paul Edelstein and Lutz Kilian, concentrated mainly on unexpected increases, rather than drops, in energy prices; they estimated that a one-time, 1% increase in energy prices was associated with a 0.08% fall in total real consumption a year later, based on 1988-2006 data. But that was considerably less than the 0.30% decline seen in the 1970-1987 data; energy price shocks, they concluded, have less effect on the overall economy than they used to.
 
 Edelstein and Kilian also estimated that one year after an unexpected, permanent increase of 25 cents a gallon in the price of gas, a typical household would have reduced its expenditures by $17 a month, with most of the adjustment coming in the first six months after the price increase. Concluded the researchers: “It takes repeated surprise increases in gasoline prices to generate large effects on household consumption, but over time the effects will add up.”
+
+Topics: National Economy

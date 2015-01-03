@@ -26,6 +26,7 @@ from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
+
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -77,13 +78,12 @@ class ExhaustiveFullTextCase(unittest.TestCase):
     def runTest(self):
         # The "correct" fulltext needs to be manually checked
         # we have 50 so far
-        FULLTEXT_PREPARED = 50
         domain_counters = {}
 
         with open(URLS_FILE, 'r') as f:
             urls = [d.strip() for d in f.readlines() if d.strip()]
 
-        for url in urls[:FULLTEXT_PREPARED]:
+        for url in urls:
             domain = get_base_domain(url)
             if domain in domain_counters:
                 domain_counters[domain] += 1
@@ -102,10 +102,8 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 continue
 
             correct_text = mock_resource_with(res_filename, 'txt')
-            condensed_url = url[:30] + ' ...'
-            print('%s -- fulltext status: %s' %
-                  (condensed_url, a.text == correct_text))
-            # assert a.text == correct_text
+            # print('%s -- status: %s' % (url, a.text == correct_text))
+            assert a.text == correct_text
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -491,12 +489,14 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    # suite.addTest(ExhaustiveFullTextCase())
+    suite.addTest(ExhaustiveFullTextCase())
+    """
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
+    """
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())

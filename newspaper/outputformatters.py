@@ -50,7 +50,6 @@ class OutputFormatter(object):
         self.add_newline_to_br()
         self.replace_with_text()
         self.remove_fewwords_paragraphs()
-
         text = self.convert_to_text()
         return (text, html)
 
@@ -111,7 +110,7 @@ class OutputFormatter(object):
             tag = self.parser.getTag(el)
             text = self.parser.getText(el)
             stop_words = self.stopwords_class(language=self.language).\
-                get_stopword_count(text)
+                    get_stopword_count(text)
             if (tag != 'br' or text != '\\r') \
                     and stop_words.get_stopword_count() < 3 \
                     and len(self.parser.getElementsByTag(
@@ -121,7 +120,7 @@ class OutputFormatter(object):
                 self.parser.remove(el)
             # TODO
             # check if it is in the right place
-            else:
-                trimmed = self.parser.getText(el)
-                if trimmed.startswith("(") and trimmed.endswith(")"):
-                    self.parser.remove(el)
+        else:
+            trimmed = self.parser.getText(el)
+            if trimmed.startswith("(") and trimmed.endswith(")"):
+                self.parser.remove(el)

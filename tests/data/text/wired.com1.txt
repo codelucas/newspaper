@@ -2,6 +2,8 @@ A shiny Morpho butterfly is a master of nanoscale light bending. That blue isn�
 
 If it’s all made of the same stuff, why are some parts so shiny, and other parts not? This video by KQED explains:
 
+How to Build A Butterfly Wing
+
 The shine of butterflies (and beetles) is created by incredibly detailed nanostructures of longitudinal ridges and crossribs. They reflect specific wavelengths of light, creating the insect’s sparkle. The photo at right shows some detail; the white scale bar is is 65 µm long, or 0.0650 mm.
 
 Butterflies extrude their scales during metamorphosis from cells on their epidermis, just like we do with hair. And, just like our hair, the final version of a butterfly’s scales are not living cells.
