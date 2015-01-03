@@ -1,5 +1,3 @@
-With summer finally upon us, it's hard not look wistfully from the inside of a car and long for the wind on your face—barreling down country roads, freed from the tethers of smartphones and chatty passengers. For a lot of folks, this time of year is when they finally take the plunge, shirk that four-wheeled cage, and buy a motorcycle. Bikes are simple: two wheels, a motor, and miles and miles of outlaw-style freedom. But, as with everything in life, that simplicity comes with a price. So, if heading off into the sunset like Brando in The Wild One is your new life's goal, then here's everything you need to know about it before you do:
-
 The Real Cost of Ownership
 
  It's not a surprise that when gas prices spike during the warmer months, so do motorcycle sales. And while it's true that some motorcycles do get better gas mileage than cars, and that they're often cheaper to buy, the fact is that the cost of bike ownership goes way beyond the MSRP and price at the pump:
@@ -41,3 +39,5 @@ Fatalities by engine size:
  500 to 1000cc: 40%
 
  1001 to 1500cc: 30%
+
+Got it? Good.

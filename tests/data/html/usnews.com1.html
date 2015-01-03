@@ -41,7 +41,7 @@
 
         
         
-            <meta name="usn-stitial-fact" content="{&#034;slug&#034;:&#034;140326.most.presidents.fact&#034;,&#034;text&#034;:&#034;Ohio and Virginia both claim to have produced the most presidents, with eight each.&#034;}" />
+            <meta name="usn-stitial-fact" content="{&#034;slug&#034;:&#034;140326.low.earning.governor.fact&#034;,&#034;text&#034;:&#034;Maine has the lowest paid governor in the country, earning $70,000 annually.&#034;}" />
         
 
         
@@ -212,7 +212,8 @@
             
         
 
-        <link rel="shortcut icon" href="http://www.usnews.com/usnews/favicon.ico"/>
+        
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UgEGUlJVGwcAXVVRDwE="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script><link rel="shortcut icon" href="http://www.usnews.com/usnews/favicon.ico"/>
 
         
         <script src="/static/scripts/jquery/base.js" type="text/javascript"></script>
@@ -1177,6 +1178,387 @@ color: #666;}</style><p>Long before the 2014 midterm elections, the next potenti
 
 <div class="sep media">
     
+            <a href="//www.usnews.com/news/articles/2015/01/02/obama-increases-sanctions-against-north-korea-after-sony-hack" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/0279f06/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fb1%2Fe4%2Fd9938b07454b834bb191bc525634%2Fresizes%2F500%2F150102-theinterview-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/obama-increases-sanctions-against-north-korea-after-sony-hack" target="_top">
+                Obama Increases Sanctions Against North Korea After Sony Hack
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+                By
+                
+                    <a href="/topics/author/tom-risen" class="link-dark" target="_top">
+                        Tom Risen
+                    </a>
+                    |
+                
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 16:35:00 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/price-is-right-contestants-think-iphones-cost-7-000" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/c35e2cd/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fec%2F3b%2F348b4f6a4454ac859e845962ac87%2Fresizes%2F500%2F150102-iphone-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/price-is-right-contestants-think-iphones-cost-7-000" target="_top">
+                &#039;Price Is Right&#039; Contestants Thinks A New iPhone Costs $7,500
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+                By
+                
+                    <a href="/topics/author/lauren-boyer" class="link-dark" target="_top">
+                        Lauren Boyer
+                    </a>
+                    |
+                
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 15:58:07 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/mario-cuomo-a-rare-voice-against-the-death-penalty-in-tough-on-crime-era" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/f5fae6a/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F08%2F36%2Ff6cbb7644cddb33d5d67a394416e%2Fresizes%2F500%2F150102-mariocuomo-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/mario-cuomo-a-rare-voice-against-the-death-penalty-in-tough-on-crime-era" target="_top">
+                Mario Cuomo a Rare Voice Against the Death Penalty in Tough on Crime Era
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+                By
+                
+                    <a href="/topics/author/tierney-sneed" class="link-dark" target="_top">
+                        Tierney Sneed
+                    </a>
+                    |
+                
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 15:25:00 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+                            
+                                
+                                
+                                    
+                                
+                                
+
+
+
+
+
+
+
+
+<div id="rectangle_1" class="ad ad-rectangle ad-rectangle-a ad-labeled sep">
+    
+        
+        
+          <script type="text/javascript"> dblclick('rectangle_1'); </script>
+        
+    
+</div>
+
+                            
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/us-sanctions-north-korea-over-sony-cyberattack" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/eb53ba1/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fa3%2Fc8%2F7b2f5991443790b5cdfd291859de%2Fresizes%2F500%2F150102-kim-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/us-sanctions-north-korea-over-sony-cyberattack" target="_top">
+                U.S. Sanctions North Korea Over Sony Cyberattack
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 14:26:01 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/south-sudan-plans-2015-elections-despite-continued-violence" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/e49e458/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fd0%2F99%2Fb92604244225be006fd1b10077dd%2Fresizes%2F500%2F150102-kiir-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/south-sudan-plans-2015-elections-despite-continued-violence" target="_top">
+                South Sudan Plans 2015 Elections Despite Continued Violence
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+                By
+                
+                    <a href="/topics/author/teresa-welsh" class="link-dark" target="_top">
+                        Teresa Welsh
+                    </a>
+                    |
+                
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 13:58:00 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/newlywed-man-95-dies-after-wife-is-taken-away" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/60ea84b/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Ff6%2F59%2F42f4a66a4431b12d861c7a1df6ea%2Fresizes%2F500%2F150102-couple-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/newlywed-man-95-dies-after-wife-is-taken-away" target="_top">
+                Newlywed Man, 95, Dies After Wife Is Taken Away
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 12:41:35 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/harry-reid-suffers-broken-ribs-bones-in-accident" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/5fd9749/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F86%2Fec79075b51901c2bc9a4239a1f66ea%2Fresizes%2F500%2Fmedia%3A31a290870c5140ae9ab1b449afec97ddCongress.JPEG" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/harry-reid-suffers-broken-ribs-bones-in-accident" target="_top">
+                Harry Reid Suffers Broken Ribs, Bones in Accident
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 10:49:22 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/georgia-police-chief-shoots-his-wife-early-new-years-day" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/6d5bafd/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F12%2Fc6%2F285a2edb44b38baa5902d554225d%2Fresizes%2F500%2F150102-policechief-editorial.png" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/georgia-police-chief-shoots-his-wife-early-new-years-day" target="_top">
+                Georgia Police Chief Shoots His Wife Early New Year&#039;s Day
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 10:44:56 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
+            <a href="//www.usnews.com/news/articles/2015/01/02/florida-man-decapitates-his-mother-on-new-years-eve" class="img block" target="_top">
+                <img src="http://www.usnews.com/dims4/USNEWS/348a720/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F4f%2Fc2%2F4ad2eb4e46ecbd71a178f1866ec4%2Fresizes%2F500%2F150102-gomez-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
+            </a>
+    
+    <div class="content">
+        <h4>
+            <a href="//www.usnews.com/news/articles/2015/01/02/florida-man-decapitates-his-mother-on-new-years-eve" target="_top">
+                Florida Man Decapitates His Mother on New Year&#039;s Eve
+            </a>
+        </h4>
+        <p class="t-block t-subdued">
+            
+            
+            <time itemprop="datePublished" datetime="Fri Jan 02 10:28:20 EST 2015" class="t item">
+                Jan. 2, 2015
+            </time>
+        </p>
+    </div>
+</div>
+
+                        
+                    
+                        
+                        
+
+                        
+                            
+                            
+
+
+
+
+
+
+<div class="sep media">
+    
             <a href="//www.usnews.com/news/articles/2015/01/02/workers-weakened-bargaining-power-fuels-income-inequality" class="img block" target="_top">
                 <img src="http://www.usnews.com/dims4/USNEWS/5db30ae/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F0b%2Ffa%2Ffdb82aab41cfb1fe02703681176d%2Fresizes%2F500%2F141230-unions-minwage-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
             </a>
@@ -1288,31 +1670,6 @@ color: #666;}</style><p>Long before the 2014 midterm elections, the next potenti
                         
                     
                         
-                        
-                            
-                                
-                                
-                                    
-                                
-                                
-
-
-
-
-
-
-
-
-<div id="rectangle_1" class="ad ad-rectangle ad-rectangle-a ad-labeled sep">
-    
-        
-        
-          <script type="text/javascript"> dblclick('rectangle_1'); </script>
-        
-    
-</div>
-
-                            
                         
 
                         
@@ -1645,386 +2002,6 @@ color: #666;}</style><p>Long before the 2014 midterm elections, the next potenti
             
             <time itemprop="datePublished" datetime="Wed Dec 31 11:07:30 EST 2014" class="t item">
                 Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/31/senate-committee-sets-hearing-date-for-keystone-xl" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/2cda301/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F32%2Fa8%2F641d15b24e4c86e3ddad1008da39%2Fresizes%2F500%2F141226-keystone-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/31/senate-committee-sets-hearing-date-for-keystone-xl" target="_top">
-                Senate Committee Sets Hearing Date for Keystone XL
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/alan-neuhauser" class="link-dark" target="_top">
-                        Alan Neuhauser
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Wed Dec 31 11:00:00 EST 2014" class="t item">
-                Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/photos/2014/12/31/photos-new-years-around-the-world" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/81239b6/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fc7%2Ff2%2Fe190ebee489a8882588db7fc6679%2Fresizes%2F500%2Fap719697228800-1.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/photos/2014/12/31/photos-new-years-around-the-world" target="_top">
-                Photos: New Year&#039;s Around the World
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/diana_soliwon" class="link-dark" target="_top">
-                        Diana Soliwon
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Wed Dec 31 10:05:21 EST 2014" class="t item">
-                Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/31/thieves-steal-300k-worth-of-wine-from-french-laundry-restaurant" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/4c4f58e/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2F30%2F04%2Ff0de808e4065884a3179213c4be9%2Fresizes%2F500%2F141231-frenchlaundry-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/31/thieves-steal-300k-worth-of-wine-from-french-laundry-restaurant" target="_top">
-                Thieves Steal $300K Worth of Wine From French Laundry Restaurant
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-            
-            <time itemprop="datePublished" datetime="Wed Dec 31 10:02:19 EST 2014" class="t item">
-                Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/photos/2014/12/31/photos-the-year-in-extreme-weather" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/64d075f/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Ff7%2F68%2F3eac6cd441f8a26a04e8f2b4c5c3%2Fresizes%2F500%2F453834034.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/photos/2014/12/31/photos-the-year-in-extreme-weather" target="_top">
-                Photos: The Year in Extreme Weather
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/diana_soliwon" class="link-dark" target="_top">
-                        Diana Soliwon
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Wed Dec 31 09:16:15 EST 2014" class="t item">
-                Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/31/the-best-and-worst-of-the-year-in-politics" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/4cf9f0d/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fb4%2Fc9%2Fffe26ddf46bea8676d430f49360b%2Fresizes%2F500%2F141230-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/31/the-best-and-worst-of-the-year-in-politics" target="_top">
-                The Best and Worst of the Year in Politics
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/david-catanese" class="link-dark" target="_top">
-                        David Catanese
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Wed Dec 31 00:01:00 EST 2014" class="t item">
-                Dec. 31, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/30/2014-the-us-economys-breakout-year" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/681b849/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fe9%2F08%2Fa4c64d63425ebc497d5ca62f0e21%2Fresizes%2F500%2F141230-unemployment-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/30/2014-the-us-economys-breakout-year" target="_top">
-                2014: The U.S. Economy&#039;s Breakout Year
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/katherine-peralta" class="link-dark" target="_top">
-                        Katherine Peralta
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Tue Dec 30 17:33:43 EST 2014" class="t item">
-                Dec. 30, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/30/un-security-council-to-vote-on-palestinian-resolution" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/1b16223/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fb4%2F90%2F078525174dc9bd210629b9c1042c%2Fresizes%2F500%2F141230-palestine-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/30/un-security-council-to-vote-on-palestinian-resolution" target="_top">
-                U.N. Security Council to Vote on Palestinian Resolution
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/teresa-welsh" class="link-dark" target="_top">
-                        Teresa Welsh
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Tue Dec 30 16:20:00 EST 2014" class="t item">
-                Dec. 30, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/30/russian-university-announces-noahs-ark-dna-storage-project" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/8d7798b/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Fe7%2Fbf%2Feb1efe7d4263887d04880203b97c%2Fresizes%2F500%2F141230-genetics-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/30/russian-university-announces-noahs-ark-dna-storage-project" target="_top">
-                Russian University Announces &#039;Noah&#039;s Ark&#039; DNA Storage Project
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-                By
-                
-                    <a href="/topics/author/andrew-soergel" class="link-dark" target="_top">
-                        Andrew Soergel
-                    </a>
-                    |
-                
-            
-            
-            <time itemprop="datePublished" datetime="Tue Dec 30 16:08:00 EST 2014" class="t item">
-                Dec. 30, 2014
-            </time>
-        </p>
-    </div>
-</div>
-
-                        
-                    
-                        
-                        
-
-                        
-                            
-                            
-
-
-
-
-
-
-<div class="sep media">
-    
-            <a href="//www.usnews.com/news/articles/2014/12/30/north-carolina-town-wont-drop-live-opossum-on-new-years-eve" class="img block" target="_top">
-                <img src="http://www.usnews.com/dims4/USNEWS/517bfab/2147483647/thumbnail/80x80%3E/quality/85/?url=%2Fcmsmedia%2Ff6%2Fe4%2F815e54f04e0caff61d3a03ad4485%2Fresizes%2F500%2F141230-possom-editorial.jpg" width="80" height="80" data-size="articleThumb"/>
-            </a>
-    
-    <div class="content">
-        <h4>
-            <a href="//www.usnews.com/news/articles/2014/12/30/north-carolina-town-wont-drop-live-opossum-on-new-years-eve" target="_top">
-                North Carolina Town Won&#039;t Drop Live Opossum on New Year&#039;s Eve
-            </a>
-        </h4>
-        <p class="t-block t-subdued">
-            
-            
-            <time itemprop="datePublished" datetime="Tue Dec 30 14:56:12 EST 2014" class="t item">
-                Dec. 30, 2014
             </time>
         </p>
     </div>
@@ -9245,5 +9222,6 @@ padding-bottom: 5px;
         <script type="text/javascript" src="http://content.dl-rms.com/rms/mother/8981/nodetag.js"></script>
         <script type="text/javascript" src="http://tags.crwdcntrl.net/c/5305/cc.js?ns=_cc5305" id="LOTCC_5305"></script>
         <script type="text/javascript">_cc5305.bcp();</script>
-    </body>
+    
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationID":"4094380","applicationTime":885,"beacon":"beacon-6.newrelic.com","queueTime":0,"licenseKey":"07f9f00f2b","transactionName":"ZlQBZBYDWkMEVkZRCV8eKWM0TWN1Jxh7diAeUgxdCQ1aHxVUVV05AQFRVAcNWkQEXFxdFB9bEEA=","agent":"js-agent.newrelic.com\/nr-476.min.js","errorBeacon":"bam.nr-data.net"}</script></body>
 </html>

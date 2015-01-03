@@ -45,3 +45,4 @@ venv
 generate_fulltext.py
 generate_html.py
 generate_urls.py
+debug-test.py

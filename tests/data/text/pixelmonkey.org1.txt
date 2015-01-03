@@ -6,9 +6,13 @@ The Palm V was an amazing device. In lieu of the plastic of the Palm III, it had
 
 I came across a time capsule of my Palm V usage. Since I was a web designer at this time, but since it was a “pre-web” era, I often put together little static HTML websites to demonstrate features and ideas to my friends. I did one of these for my Palm V.
 
+A Mobile Device of Pure Utility
+
 In a world without cell data plans, wifi networks, & laptop computers, my Palm V provided much of the same utility that is now spread across these various pieces of everyday technology infrastructure, but in a single device. I kept a unified to do list of my life, and a specialized task manager specifically for coursework and classes. In it, I tracked not just homework assignments and due dates grouped by class, but also my grades — so that I could prioritize work to optimize my grades.
 
 I think I only got my first cell phone a couple of years later — and they were nowhere near ubiquitous yet, so my contact manager was actually being used to store landline phone numbers and addresses of my friends — and likely, of local take-out / delivery restaurants.
+
+What was AvantGo?
 
 I sometimes tell my friends that despite the lack of infrastructure in school for it, I was indeed a “child of the Internet”. This was mostly thanks to AvantGo.
 
@@ -20,9 +24,17 @@ So, yes — when I was bored in Spanish or Math class, I’d pull up a political
 
 What makes AvantGo so interesting, upon reflection, is that despite everything against it — under-powered mobile devices, no ubiquitous wireless Internet access, and a less standardized world-wide-web, it still satisfied a use case that has yet to be satisfied today. Namely, it provided a way for me to curate the “best sources of content” I found on the web, and sync and download all their content to provide a personalized, offline library of content. Instead, we have nothing but fragmentation today — individual native apps for each news publisher, RSS readers like Newsblur providing a way to get the latest updates from a group of them, and mobile web browsers for everything else.
 
+Many in the industry see AvantGo as the first to attempt [a shift to mobile]. AvantGo’s software pulls content from a user-defined list of sites and loads the content into the PalmPilot’s synchronization queue on a desktop computer. When the PalmPilot is synchronized with the desktop machine using 3Com’s own synchronization software, the desired content is also uploaded to the Pilot — giving users a fresh stash of data to dig through offline.
+
+ - from “The Next Browser War?”, Wired, 1999
+
+Smartphones
+
 Obviously, devices running iOS and Android are finally starting to make ubiquitous computing a reality, and are providing less clunky ways to access web content.
 
 But I think it’s worth reflecting on what my Palm V had going for it nearly a decade ago that has yet to arrive in this new era.
+
+Vindigo: When I was a student at NYU, I had instant access to all the restaurants in New York, complete with editorial reviews, walking directions, and sometimes, menu previews. I also had a list of restaurants I had visited with notes about dishes I had ordered. This, despite my Palm V having no data connectivity, no built-in GPS, and extremely limited storage capacity. Yes, today we have tools like Yelp and Urbanspoon, but these tools are actually comparably slow and impersonal. I think there is an opportunity to win this market with speed — create an offline-synced, indexed, full restaurant database stored on the user’s phone, along with a personalized cache of restaurants that user has visited. 4.0 Student: There is certainly no shortage of todo list applications out there, but I have been surprised to not see a rewrite of 4.0 Student for iOS and Android. The specific functions that a task manager needs to be optimized for students: grouping of tasks by course, quick entry of due dates, ability to enter in grades for tests and assignments, and ability to estimate a current GPA in the class. This allows a student to smartly prioritize his or her coursework by those classes that most need attention. A well-designed app probably has little need for web syncing, since it could be operated entirely from the mobile device. AvantGo: I do think RSS/Atom and the modern news readers are an important innovation for online content. But some content doesn’t fit into the RSS/Atom spec — think Wikipedia, HTML e-books, etc. Mobile devices have plenty of space for this, and these days, they even have the compute power to do the crawling / caching themselves (without the need for a sync via desktop). There are probably a ton of interesting use cases here — think about doctors/nurses who might want an offline cache of all of Wikipedia’s medical topics; a conference attendee who might want an offline sync of the conference agenda / schedule; or a military soldier who might want to sync the Army Field Manual.
 
 A great example of online/offline mastery that I witnessed in a mobile application is Spotify’s support for bringing an entire music playlist offline. Offers the best of both worlds.
 
@@ -31,5 +43,3 @@ We’re certainly living in an age of ubiquitous, wireless Internet access, whet
 Due to our obsession with connectivity, I think many developers are forgetting about use cases where the mobile device is meant to be a smart accessory to our lives, rather than a portal to the web. These are no longer “thin clients” — instead, we should think of them as powerful handheld computers. Recent iPhone and Android devices feature dual-core processors at speed above 1Ghz and 1GB of RAM. In 1998, typical desktop computers were slower than this (e.g. a single-core P3 600 Mhz w/ 128MB of RAM and 10GB of disk storage).
 
 Yes, we’ve put the power of a desktop computer into the palm of a user’s hand. But, are we really tapping this opportunity?
-
-Andrew Montalenti (aka pixelmonkey, amontalenti) is the co-founder and CTO of Parse.ly, which provides data insights to the web's best publishers. You can follow him on Twitter or LinkedIn. If you liked this post, you should subscribe to his free e-mail newsletter, Fire and Motion, which discusses technology startups and business from the trenches. This entry was posted on Sunday, December 30th, 2012 at 3:00 pm and is filed under Personal, Technology. You can follow any responses to this entry through the RSS 2.0 feed. You can leave a response, or trackback from your own site.

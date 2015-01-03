@@ -49,9 +49,10 @@ class OutputFormatter(object):
         self.links_to_text()
         self.add_newline_to_br()
         self.replace_with_text()
-        self.remove_fewwords_paragraphs()
-
+        self.remove_empty_tags()
+        self.remove_trailing_media_div()
         text = self.convert_to_text()
+        # print(self.parser.nodeToString(self.get_top_node()))
         return (text, html)
 
     def convert_to_text(self):
@@ -100,28 +101,48 @@ class OutputFormatter(object):
         self.parser.stripTags(
             self.get_top_node(), 'b', 'strong', 'i', 'br', 'sup')
 
-    def remove_fewwords_paragraphs(self):
+    def remove_empty_tags(self):
+        """It's common in top_node to exit tags that are filled with data
+        within properties but not within the tags themselves, delete them
         """
-        Remove paragraphs that have less than x number of words,
-        would indicate that it's some sort of link.
-        """
-        all_nodes = self.parser.getElementsByTags(self.get_top_node(), ['*'])
+        all_nodes = self.parser.getElementsByTags(
+            self.get_top_node(), ['*'])
         all_nodes.reverse()
         for el in all_nodes:
             tag = self.parser.getTag(el)
             text = self.parser.getText(el)
-            stop_words = self.stopwords_class(language=self.language).\
-                get_stopword_count(text)
             if (tag != 'br' or text != '\\r') \
-                    and stop_words.get_stopword_count() < 3 \
+                    and not text \
                     and len(self.parser.getElementsByTag(
                         el, tag='object')) == 0 \
                     and len(self.parser.getElementsByTag(
                         el, tag='embed')) == 0:
                 self.parser.remove(el)
-            # TODO
-            # check if it is in the right place
-            else:
-                trimmed = self.parser.getText(el)
-                if trimmed.startswith("(") and trimmed.endswith(")"):
-                    self.parser.remove(el)
+
+    def remove_trailing_media_div(self):
+        """Punish the *last top level* node in the top_node if it's
+        DOM depth is too deep. Many media non-content links are
+        eliminated: "related", "loading gallery", etc
+        """
+
+        def get_depth(node, depth=1):
+            """Computes depth of an lxml element via BFS, this would be
+            in parser if it were used anywhere else besides this method
+            """
+            children = self.parser.getChildren(node)
+            if not children:
+                return depth
+            max_depth = 0
+            for c in children:
+                e_depth = get_depth(c, depth + 1)
+                if e_depth > max_depth:
+                    max_depth = e_depth
+            return max_depth
+
+        top_level_nodes = self.parser.getChildren(self.get_top_node())
+        if len(top_level_nodes) < 3:
+            return
+
+        last_node = top_level_nodes[-1]
+        if get_depth(last_node) >= 2:
+            self.parser.remove(last_node)
