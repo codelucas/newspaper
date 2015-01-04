@@ -75,6 +75,7 @@ def get_base_domain(url):
 
 class ExhaustiveFullTextCase(unittest.TestCase):
 
+    @print_test
     def runTest(self):
         # The "correct" fulltext needs to be manually checked
         # we have 50 so far
@@ -101,12 +102,9 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 traceback.print_exc()
                 continue
 
-            with open(os.path.join(TEXT_FN, res_filename + '.txt'), 'w') as f:
-                f.write(a.text)
-
-            # correct_text = mock_resource_with(res_filename, 'txt')
+            correct_text = mock_resource_with(res_filename, 'txt')
             # print('%s -- status: %s' % (url, a.text == correct_text))
-            # assert a.text == correct_text
+            assert a.text == correct_text
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -239,9 +237,9 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_nlp_body(self):
-        KEYWORDS = ['forecasters', 'storm', 'winds', 'sailing',
-                    'great', 'weather', 'balloons', 'snow', 'good',
-                    'flight', 'york', 'roads', 'smooth', 'thanksgiving']
+        KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
+                    'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
+                    'travel', 'weather', 'winds', 'york']
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
         assert self.article.summary == SUMMARY
         assert sorted(self.article.keywords) == sorted(KEYWORDS)
@@ -493,13 +491,11 @@ if __name__ == '__main__':
     suite = unittest.TestSuite()
 
     suite.addTest(ExhaustiveFullTextCase())
-    """
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
-    """
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())
