@@ -12,7 +12,27 @@ Fanplayr analyzes traffic you drive so you can target different offers to segmen
 
 
 
-user type visit count past purchases time on site page views cart size device type browser source search term location
+user type
+
+visit count
+
+past purchases
+
+time on site
+
+page views
+
+cart size
+
+device type
+
+browser
+
+source
+
+search term
+
+location
 
 New visitors who place items with high profit margins in their carts can be offered a higher dollar discount. Reward the loyalty of your repeat buyers with percent off their current purchase. Be sure to let them know they received the discount because they have purchased from you before.
 
@@ -30,9 +50,9 @@ Traffic from AdWords can be offered multiple types of incentives which can be me
 
 Free shipping if they spend $50 or more
 
- 10% off sales of $100 or more
+10% off sales of $100 or more
 
- $20 off a $200 purchase
+$20 off a $200 purchase
 
 Fanplayr not only analyzes, segments, and allows you to add incentives and offers; it integrates A/B testing into ecommerce software. Changes can be made to text campaigns on the fly.
 
@@ -42,7 +62,9 @@ Conversion testing can increase conversion rates up to 25% ~ Up to 50% higher av
 
 Solutions providers can use analysis and segmenting to decrease the time it takes to progress through their sales funnels. For example, Neil Patel at QuickSprout suggested in 7 Simple A/B Tests to Increase Conversions 10% or More to test:
 
-Buy now vs free trial Credit card vs no credit card
+Buy now vs free trial
+
+Credit card vs no credit card
 
 Improve your sales funnel by comparing the actions of visitors who have converted with those who haven’t. Check page views to determine whether visiting particular pages increases conversions. If it does, change site navigation to add that page to the sales funnel.
 
@@ -75,5 +97,3 @@ This is especially true if you are a very small brand. People want to know there
 Gail Gardner is the Small Business Marketing Strategist who founded and provides consulting at GrowMap.com. She also answers questions in live chat as Community Manager at SocialImplications.com.
 
 More from AllBusiness.com:
-
-The Gift of a Bright Business Idea Be Prepared for a Roller Coaster Ride: 5 Key Business Predictions for 2015 Growth: One Thing Your Startup Must Do to Avoid Crashing and Burning

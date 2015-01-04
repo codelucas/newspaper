@@ -14,7 +14,13 @@ Traditionally, publishers assumed direct traffic was people bookmarking their ho
 
 Sources for this traffic include:
 
-Email/IMs Copying and pasting a link Switching from a https:// site to an http:// site Chat apps (Whats App, etc.)
+Email/IMs
+
+Copying and pasting a link
+
+Switching from a https:// site to an http:// site
+
+Chat apps (Whats App, etc.)
 
 In 2012, Alexis Madrigal wrote a story about these sources, terming them “dark social”. (This post is worth re-reading for some fun facts like “Only about four percent of total traffic is on mobile at all.”) In summary, he supposed that since these were links that were being shared from person-to-person, this kind of traffic should still be thought of as social sharing.
 

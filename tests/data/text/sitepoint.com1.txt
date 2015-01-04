@@ -18,13 +18,39 @@ There’s been a 9% increase for “other” files. That figure doubled in 2013 
 
 Finally, images are responsible for 85% of the weight gain. Using high-resolution (Retina) images could account for some of this hike, except:
 
-Pages contain more than fifty images, which seems excessive. Retina accounts for a relatively small proportion of devices. SVG, icon fonts, and CSS3 effects can replace many images. There are numerous tools to help reduce file sizes.
+Pages contain more than fifty images, which seems excessive.
+
+Retina accounts for a relatively small proportion of devices.
+
+SVG, icon fonts, and CSS3 effects can replace many images.
+
+There are numerous tools to help reduce file sizes.
 
 Additional Factors
 
 The survey also reveals:
 
-95 HTTP requests are made per page — a drop of a single request from last year. Pages contain 862 DOM elements. Resources are loaded from sixteen domains with a maximum of 52 requests per domain. The average PageSpeed score is 78 out of 100 — which is surprisingly good, given the bloat. 46% of pages use Google libraries. 47% of pages use custom fonts. 79% of responses are compressed (gzip’d). 14% of pages are loaded over HTTPS. 20% of pages use localStorage. 65% of pages use iframes (mostly videos and advertising). 74% of pages use at least one redirect — which seems high.
+95 HTTP requests are made per page — a drop of a single request from last year.
+
+Pages contain 862 DOM elements.
+
+Resources are loaded from sixteen domains with a maximum of 52 requests per domain.
+
+The average PageSpeed score is 78 out of 100 — which is surprisingly good, given the bloat.
+
+46% of pages use Google libraries.
+
+47% of pages use custom fonts.
+
+79% of responses are compressed (gzip’d).
+
+14% of pages are loaded over HTTPS.
+
+20% of pages use localStorage.
+
+65% of pages use iframes (mostly videos and advertising).
+
+74% of pages use at least one redirect — which seems high.
 
 The Primary Suspects
 
@@ -40,7 +66,15 @@ Overweight pages are unnecessary. My primary suspects remain bloated CMS templat
 
 We can summarize the problem in one simple word: laziness. Developers are at fault — that’s you and me. We have plenty of excuses:
 
-there’s never enough time the client insisted it should be done this way the budget/schedule is too tight I inherited a shoddy system I don’t have the tools
+there’s never enough time
+
+the client insisted it should be done this way
+
+the budget/schedule is too tight
+
+I inherited a shoddy system
+
+I don’t have the tools
 
 Whether it’s technical boundaries or a failure to explain issues, it’s still laziness. We work at the coal face; the final decisions are ours alone. Why create a badly-optimized site when many bloat-blasting solutions are simple and take minutes to implement?
 

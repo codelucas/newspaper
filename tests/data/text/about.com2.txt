@@ -1,4 +1,4 @@
-Updated August 02, 2014. 
+Updated August 02, 2014.
 
 
 
@@ -20,13 +20,9 @@ One type of mutations are hereditary mutations (also called germline mutations,)
 
 The type of mutations that scientists look for in people with lung cancer are instead called acquired mutations (also called somatic mutations.) These mutations are not present at birth (they do not run in families) but rather develop in the process of cells becoming cancerous.
 
-What are Cancer Cells? Cancer Cells vs Normal Cells
-
 What Exactly are Gene Mutations?
 
 Gene mutations are changes to a particular gene in a chromosome. All genes are made up of variable sequences of 4 amino acids (called bases); adenine, tyrosine, cytosine, and guanine. When a gene is exposed to toxins in the environment, or when an accident occurs in cell division, a mutation (change) may occur. In some cases it may mean that one base is substituted for another, say adenine instead of guanine. In other cases bases may be inserted, or deleted, or genes may be rearranged in some way.
-
-The Genetic Code
 
 Significance of Gene Mutations
 
@@ -40,7 +36,13 @@ There are many mutations that are being studied by scientists looking at lung tu
 
 Common driver mutations in lung cancer include (for starters):
 
-EGFR mutations KRAS mutations EML4-ALK Rearrangements MET mutation
+EGFR mutations
+
+KRAS mutations
+
+EML4-ALK Rearrangements
+
+MET mutation
 
 These 4 mutations are in general mutually exclusive and are only rarely seen in the same tumor.
 
@@ -48,11 +50,11 @@ Personalized Treatments Available Based on Genetic Testing
 
 The use of "targeted therapies" - that is medications that target particular genetic abnormalities in a tumor -- has been coined personalized medicine. What this means is that rather than a conventional chemotherapy drug that attacks all rapidly dividing cells, a targeted drug instead attacks a particular abnormality present only in your cancer cells. In general targeted treatments have fewer side effects than traditional chemotherapy. To date, targeted therapies that have been approved for people with lung cancer include:
 
-Tarceva (erlotonib) has been approved for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva) Xalkori (crizotonib) was approved by the FDA in 2011 for people whose tumor has an ALK4-EML gene rearrangement
+Tarceva (erlotonib) has been approved for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva)
+
+Tarceva (erlotonib) for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva) Xalkori (crizotonib) was approved by the FDA in 2011 for people whose tumor has an ALK4-EML gene rearrangement
 
 Other medications are being studied in clinical trials, including targeted therapies for those whose tumor becomes resistant to Tarceva or Xalkori..
-
-More About ALK Positive Lung Cancer
 
 Resistance to Treatment
 
@@ -65,8 +67,6 @@ The ability to understand the molecular profile of lung tumors is an extremely e
 Next Step
 
 If you have been diagnosed with non-small cell lung cancer, especially lung adenocarcinoma or squamous cell lung cancer, talk to your doctor about genetic testing. Although testing is now recommended for everyone with advanced non-small cell lung cancer, a recent study reported that only 60% of oncologists are currently ordering testing. You may also wish to talk to your doctor about clinical trials that may be an option for you. If you are interested in looking into trials evaluating these treatments worldwide, check out the article below on how to find clinical trials. It can be confusing as you check out these databases, but help is near. Recently a lung cancer clinical trial matching service backed by several lung cancer organizations has become available. With this free service a trained nurse navigator can help you locate any clinical trials that may be an option for you.
-
-Finding Clinical Trials for Lung Cancer Treatment
 
 Sources:
 

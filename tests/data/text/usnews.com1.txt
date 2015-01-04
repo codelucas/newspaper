@@ -12,13 +12,9 @@ The first chart demonstrates total trips by presidential candidates to the first
 
 The second chart shows trips to the first-in-the-nation caucus state of Iowa, where Republican Gov. Rick Perry has completed the most visits of any aspirant. On the Democratic side, it's Maryland Gov. Martin O'Malley.
 
-/a>
-
 On to New Hampshire, where it's neighboring Vermont Sen. Bernie Sanders who has logged the most visits, according to our totals.
 
 Finally, in South Carolina, it's GOP Sen. Rand Paul, R-Ky., who has dropped in most frequently to the Palmetto State.
-
-/a>
 
 There are more charts and maps on Github. All charts include embed codes so that anyone can easily use our charts on their own websites. Data for these charts are current through Monday, Nov. 3.
 
