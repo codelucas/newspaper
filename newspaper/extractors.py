@@ -866,15 +866,13 @@ class ContentExtractor(object):
         return True
 
     def post_cleanup(self, top_node):
-        """Remove any divs that looks like non-content,
-        clusters of links, or paras with no gusto
+        """Remove any divs that looks like non-content, clusters of links,
+        or paras with no gusto; add adjacent nodes which look contenty
         """
         node = self.add_siblings(top_node)
         for e in self.parser.getChildren(node):
             e_tag = self.parser.getTag(e)
             if e_tag != 'p':
-                if self.is_highlink_density(e) \
-                        or self.is_table_and_no_para_exist(e) \
-                        or not self.is_nodescore_threshold_met(node, e):
+                if self.is_highlink_density(e):
                     self.parser.remove(e)
         return node

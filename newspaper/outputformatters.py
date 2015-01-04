@@ -48,6 +48,7 @@ class OutputFormatter(object):
 
         self.links_to_text()
         self.add_newline_to_br()
+        self.add_newline_to_li()
         self.replace_with_text()
         self.remove_fewwords_paragraphs()
         text = self.convert_to_text()
@@ -60,6 +61,7 @@ class OutputFormatter(object):
             if txt:
                 txt = HTMLParser().unescape(txt)
                 txt_lis = innerTrim(txt).split(r'\n')
+                txt_lis = [n.strip(' ') for n in txt_lis]
                 txts.extend(txt_lis)
         return '\n\n'.join(txts)
 
@@ -70,6 +72,14 @@ class OutputFormatter(object):
     def add_newline_to_br(self):
         for e in self.parser.getElementsByTag(self.top_node, tag='br'):
             e.text = r'\n'
+
+    def add_newline_to_li(self):
+        for e in self.parser.getElementsByTag(self.top_node, tag='ul'):
+            li_list = self.parser.getElementsByTag(e, tag='li')
+            for li in li_list[:-1]:
+                li.text = self.parser.getText(li) + r'\n'
+                for c in self.parser.getChildren(li):
+                    self.parser.remove(c)
 
     def links_to_text(self):
         """Cleans up and converts any nodes that should be considered
