@@ -26,6 +26,7 @@ from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
+
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -74,16 +75,15 @@ def get_base_domain(url):
 
 class ExhaustiveFullTextCase(unittest.TestCase):
 
+    @print_test
     def runTest(self):
-        # The "correct" fulltext needs to be manually checked
-        # we have 50 so far
-        FULLTEXT_PREPARED = 50
         domain_counters = {}
 
         with open(URLS_FILE, 'r') as f:
             urls = [d.strip() for d in f.readlines() if d.strip()]
 
-        for url in urls[:FULLTEXT_PREPARED]:
+        failed = 0
+        for url in urls:
             domain = get_base_domain(url)
             if domain in domain_counters:
                 domain_counters[domain] += 1
@@ -102,10 +102,18 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 continue
 
             correct_text = mock_resource_with(res_filename, 'txt')
-            condensed_url = url[:30] + ' ...'
-            print('%s -- fulltext status: %s' %
-                  (condensed_url, a.text == correct_text))
+            if not (a.text == correct_text):
+                # print('Diff: ', simplediff.diff(correct_text, a.text))
+                # `correct_text` holds the reason of failure if failure
+                print('%s -- %s -- %s' %
+                      ('Fulltext failed', res_filename, correct_text.strip()))
+                failed += 1
+            # TODO: assert statements are commented out for full-text
+            # extraction tests because we are constantly tweaking the
+            # algorithm and improving
             # assert a.text == correct_text
+        print('%s fulltext extractions failed out of %s' %
+              (failed, len(urls)))
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -238,9 +246,9 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_nlp_body(self):
-        KEYWORDS = ['forecasters', 'storm', 'winds', 'sailing',
-                    'great', 'weather', 'balloons', 'snow', 'good',
-                    'flight', 'york', 'roads', 'smooth', 'thanksgiving']
+        KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
+                    'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
+                    'travel', 'weather', 'winds', 'york']
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
         assert self.article.summary == SUMMARY
         assert sorted(self.article.keywords) == sorted(KEYWORDS)
@@ -491,7 +499,9 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    # suite.addTest(ExhaustiveFullTextCase())
+    if len(sys.argv) > 1 and sys.argv[1] == 'fulltext':
+        suite.addTest(ExhaustiveFullTextCase())
+
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
     suite.addTest(UrlTestCase())

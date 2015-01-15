@@ -15,66 +15,19 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
-
 **Newspaper is a Python3 library**! Or, view the `Python2 branch`_
 
 .. _`Python2 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
-
-**We support 10+ languages and everything is in unicode!**
-
-.. code-block:: pycon
-
-    >>> import newspaper
-    >>> newspaper.languages()
-
-    Your available languages are:
-    input code      full name
-
-      ar              Arabic
-      ru              Russian
-      nl              Dutch
-      de              German
-      en              English
-      es              Spanish
-      fr              French
-      it              Italian
-      ko              Korean
-      no              Norwegian
-      pt              Portuguese
-      sv              Swedish
-      hu              Hungarian
-      fi              Finnish
-      da              Danish
-      zh              Chinese
-      id              Indonesian
-      vi              Vietnamese
 
 A Glance:
 ---------
 
 .. code-block:: pycon
 
-    >>> import newspaper
+    >>> from newspaper import Article
 
-    >>> cnn_paper = newspaper.build('http://cnn.com')
-
-    >>> for article in cnn_paper.articles:
-    >>>     print(article.url)
-    'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
-    'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
-    ...
-
-    >>> for category in cnn_paper.category_urls():
-    >>>     print(category)
-
-    'http://lifestyle.cnn.com'
-    'http://cnn.com/world'
-    'http://tech.cnn.com'
-    ...
-
-.. code-block:: pycon
-
-    >>> article = cnn_paper.articles[0]
+    >>> url = 'http://fox13now.com/2013/12/30/new-year-new-laws-obamacare-pot-guns-and-drones/'
+    >>> article = Article(url)
 
 .. code-block:: pycon
 
@@ -108,6 +61,34 @@ A Glance:
 
     >>> article.summary
     'The study shows that 93% of people ...'
+
+.. code-block:: pycon
+
+    >>> import newspaper
+
+    >>> cnn_paper = newspaper.build('http://cnn.com')
+
+    >>> for article in cnn_paper.articles:
+    >>>     print(article.url)
+    'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
+    'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
+    ...
+
+    >>> for category in cnn_paper.category_urls():
+    >>>     print(category)
+
+    'http://lifestyle.cnn.com'
+    'http://cnn.com/world'
+    'http://tech.cnn.com'
+    ...
+
+.. code-block:: pycon
+
+    >>> cnn_article = cnn_paper.articles[0]
+    >>> cnn_article.download()
+    >>> cnn_article.parse()
+    >>> cnn_article.nlp()
+    ...
 
 
 Newspaper has *seamless* language extraction and detection.
@@ -176,7 +157,6 @@ Features
 --------
 
 - Full Python3 and Python2 support
-- Works in 10+ languages (English, Chinese, German, Arabic, ...)
 - Multi-threaded article download framework
 - News url identification
 - Text extraction from html
@@ -186,6 +166,35 @@ Features
 - Summary extraction from text
 - Author extraction from text
 - Google trending terms extraction
+- Works in 10+ languages (English, Chinese, German, Arabic, ...)
+
+.. code-block:: pycon
+
+    >>> import newspaper
+    >>> newspaper.languages()
+
+    Your available languages are:
+    input code      full name
+
+      ar              Arabic
+      ru              Russian
+      nl              Dutch
+      de              German
+      en              English
+      es              Spanish
+      fr              French
+      it              Italian
+      ko              Korean
+      no              Norwegian
+      pt              Portuguese
+      sv              Swedish
+      hu              Hungarian
+      fi              Finnish
+      da              Danish
+      zh              Chinese
+      id              Indonesian
+      vi              Vietnamese
+
 
 Get it now
 ----------
@@ -266,6 +275,10 @@ or install it into your site-packages easily::
 Feel free to give our testing suite a shot, everything is mocked!::
 
     $ python3 tests/unit_tests.py
+
+Planning on tweaking our full-text algorithm? Add the ``fulltext`` parameter::
+
+    $ python3 tests/unit_tests.py fulltext
 
 
 Demo

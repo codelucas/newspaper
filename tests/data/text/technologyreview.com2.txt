@@ -1,3 +1,5 @@
+A street vendor in India uses a light powered by refurbished battery cells.
+
 Many of the estimated 50 million lithium-ion laptop batteries discarded every year could provide electricity storage sufficient to light homes in poor countries, researchers at IBM say.
 
 In work being aired this week at a conference in San Jose, researchers at IBM Research India in Bangalore found that at least 70 percent of all discarded batteries have enough life left to power an LED light at least four hours a day for a year.
