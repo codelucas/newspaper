@@ -1,1134 +1,914 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-2.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"4a7ea7f0ae","applicationID":"2572105","transactionName":"cQxZR0VYX15QF0lGAF4GRBxEX1xF","queueTime":5,"applicationTime":125,"agentToken":null,"agent":"js-agent.newrelic.com/nr-476.min.js"}</script>
-<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"Vw4EUVJQGwEFU1NTBwQ="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+<!--
 
-<title>
-  Free Crunchyroll Anime: 30-Day Subscription | TNW Deals
-</title>
-<link href="https://deals.thenextweb.com/feed.rss" rel="alternate" title="RSS" type="application/rss+xml" />
-<meta name = "description" content = "Free Anime For 30 Days From Crunchyroll - Get A Free Month Of Access To Crunchyroll&#39;s Library Of Over 20,000 Japanese Anime + Asian Media Videos" >
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link href="https://image-assets.stackcommerce.com/publishers/52/logo_16x16.png" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-<link rel="apple-touch-icon" href="https://stores-assets.stackcommerce.com/assets/favicon-63ea551811c16623fc554a00764283cd.ico" />
-<link rel="apple-touch-icon-precomposed" href="https://stores-assets.stackcommerce.com/assets/favicon-63ea551811c16623fc554a00764283cd.ico" />
-<link href="https://stores-assets.stackcommerce.com/assets/application-b6307e125bf814b3be1dca9974c6f07a.css" media="all" rel="stylesheet" />
-<link href="https://stores-assets.stackcommerce.com/publishers/stylesheet/thenextweb-20150102234934.css" media="all" rel="stylesheet" />
+	 _______  ___      __
+	/_  __/ |/ / | /| / /
+	 / / /    /| |/ |/ / 
+	/_/ /_/|_/ |__/|__/  
+	
+-->
+<html lang="en-US" prefix="og: http://ogp.me/ns#" xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml" itemscope itemtype='http://schema.org/NewsArticle'>
+<head>
+	<meta charset="UTF-8">
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//s3.buysellads.com">
+	<link rel="dns-prefetch" href="//ping.chartbeat.net">
+	<link rel="dns-prefetch" href="//platform.twitter.com">
+	
+	<title>BlackBerry denies Samsung buyout rumors</title>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-title" content="The Next Web">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<meta name="readability-verification" content="gg98CaM5YewFSAnFdCqrXVhu7AvvbXqSaC8QJtt90">
+	<meta property="twitter:account_id" content="10876852" />
+	<meta property="fb:app_id" content="378011798897423" />
+	<link rel="alternate" type="application/rss+xml" title="TNW Network All Stories RSS Feed" href="http://feeds2.feedburner.com/thenextweb" />
+	<link rel="alternate" type="application/rss+xml" title="TNW Network Top Stories RSS Feed" href="http://feeds2.feedburner.com/thenextwebtopstories" />
+	<link rel="alternate" type="application/rss+xml" title="TNW Insider RSS Feed" href="http://feeds.feedburner.com/tnwindustry" />
+	<link href="/opensearch.xml" rel="search" title="The Next Web" type="application/opensearchdescription+xml">
+	<link rel="shortcut icon" href="http://thenextweb.com/favicon.ico" type="image/x-icon" />
+	<link rel="apple-touch-icon" href="http://cdn1.tnwcdn.com/wp-content/themes/icetea/assets/icons/touch-icon-iphone-precomposed.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="http://cdn1.tnwcdn.com/wp-content/themes/icetea/assets/icons/touch-icon-ipad-precomposed.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="http://cdn1.tnwcdn.com/wp-content/themes/icetea/assets/icons/touch-icon-iphone-retina-precomposed.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="http://cdn1.tnwcdn.com/wp-content/themes/icetea/assets/icons/touch-icon-ipad-retina-precomposed.png">
+	<link rel="apple-touch-startup-image" href="http://cdn1.tnwcdn.com/wp-content/themes/icetea/static/images/apple-startup-screen.png">
+	<link rel="pingback" href="http://thenextweb.com/xmlrpc.php">
+	<link href="https://plus.google.com/115081025762845243709/" rel="publisher">
+	<link href="http://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet" type="text/css">
+	<meta itemprop="interactionCount" content="UserComments:0">
+	<meta itemprop="interactionCount" content="UserLikes:41">
+	<meta itemprop="interactionCount" content="UserTweets:208">
+	<meta itemprop="interactionCount" content="UserPlusOnes:13">
+	<meta itemprop="name" content="BlackBerry denies Samsung buyout rumors">
+	<meta itemprop="description" content="After rumors started spreading earlier today that Blackberry was in the midst of talks to be acquired by Samsung - causing its stocks to rise suddenly by 29 percent - the company ...">
+	<meta itemprop="image" content="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo-520x245.jpg">
+	<meta name="author" content="Napier Lopez">
+	<meta itemprop="dateCreated" content="2015-01-14">
+	<meta property="article:modified" itemprop="dateModified" content="2015-01-14">
+	<meta property="article:published" itemprop="datePublished" content="2015-01-14">
+	<meta itemprop="wordCount" content="266">
+	<meta itemprop="alternativeHeadline" content="BlackBerry denies Samsung buyout rumors">
+	<meta itemprop="thumbnailUrl" content="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo.jpg">
+
+	<script type="text/javascript">
+		var SITE_URL = 'http://thenextweb.com/';
+		var SITE_SECURE_URL = 'https://thenextweb.com/';
+		var THEME_URL = 'http://thenextweb.com/wp-content/themes/icetea/';
+		var THEME_CDN_URL = 'http://cdn0.tnwcdn.com/wp-content/themes/icetea/';
+		var adBlocker = true;
+		var POST_ID = '828211';
+		var CURRENT_POST = {"post_id":828211,"thumbnail":"<img src=\"http:\/\/cdn1.tnwcdn.com\/assets\/images\/transparent.png\" data-src=\"http:\/\/cdn1.tnwcdn.com\/wp-content\/blogs.dir\/1\/files\/2014\/09\/Blackberry-Logo-60x50.jpg\" width=\"60\" height=\"50\" title=\"BlackBerry denies Samsung buyout rumors\" alt=\"Blackberry-Logo\" class=\"lazy\" \/>\n\t\t\t<noscript><img src=\"http:\/\/cdn1.tnwcdn.com\/wp-content\/blogs.dir\/1\/files\/2014\/09\/Blackberry-Logo-60x50.jpg\" width=\"60\" height=\"50\" title=\"BlackBerry denies Samsung buyout rumors\" alt=\"Blackberry-Logo\" class=\"lazy\" \/><\/noscript>","permalink":"http:\/\/thenextweb.com\/insider\/2015\/01\/14\/blackberry-denies-samsung-buyout-rumors\/","title":"BlackBerry denies Samsung buyout rumors","short_title":"BlackBerry denies Samsung buyout rumors","social_title":"BlackBerry denies Samsung buyout rumors","date":"January 14, 2015","timestamp":1421276249,"author":"Napier Lopez","category":"Insider","sponsored":false,"sponsor_name":"","sensitive":false,"ads_disabled":false,"isColumn":false,"isFYI":false,"pinned":false,"pinned_text":false};
+		var ROADBLOCKED_ADS = {"top_lb":"","med_rt":"","mob_top":"","mob_med_rt":"","mob_bot":"","mob_sec":"","bot_lb":"","bot_com_lb":"","onexone":""};
+		var PAGE = {"category":"insider","template":"article","banners":true,"conference_related":false,"deals_releated":false};
+	</script>
+				
 <script>
-  window['optimizely'] = window['optimizely'] || [];
-  window['optimizely'].push(["customTag", "LoggedIn", false]);
+	COUNTRY_CODE = "US";
 </script>
-<script src="//cdn.optimizely.com/js/74647825.js"></script>
+				<!-- Parse.ly -->
+	<script type="application/ld+json">
+{"@context":"http:\/\/schema.org","@type":"NewsArticle","headline":"BlackBerry denies Samsung buyout rumors","url":"http:\/\/thenextweb.com\/insider\/2015\/01\/14\/blackberry-denies-samsung-buyout-rumors\/","thumbnailUrl":"http:\/\/cdn1.tnwcdn.com\/wp-content\/blogs.dir\/1\/files\/2014\/09\/Blackberry-Logo-520x245.jpg","dateCreated":"2015-01-14T23:57:29+0100","articleSection":"Insider","creator":"Napier Lopez","keywords":[]}	  </script>
+	
+				<link rel="stylesheet" href="http://cdn1.tnwcdn.com/plus/css/ss-pika.css" type="text/css" /><link rel="stylesheet" href="http://cdn2.tnwcdn.com/plus/css/tnw-icons.css" type="text/css" /><link rel="stylesheet" href="http://cdn0.tnwcdn.com/wp-content/themes/icetea/assets/stylesheets/base.min.css?v=1421246152" type="text/css" /><!--[if lt IE 9]>
+<link rel="stylesheet" href="http://thenextweb.com/wp-content/themes/icetea/assets/stylesheets/ie.css?1403194640" type="text/css" />
+<![endif]-->
 <!--[if lte IE 9]>
-  <script src="https://stores-assets.stackcommerce.com/assets/jquery.html5-placeholder-shim-75064d169f4acbff07ae8e361d3c5bcb.js"></script>
-  <script>
-    $.placeholder.shim();
-  </script>
+<style>.loop-post { width: 47%; float: left; margin-right: 3%; }</style>
 <![endif]-->
 
-  <meta content="product" name="twitter:card"></meta>
-<meta content="A Free Month of Access to Over 20,000 Japanese Anime &amp; Asian Media Videos" name="twitter:title"></meta>
-<meta content="Free Anime For 30 Days From Crunchyroll - Get A Free Month Of Access To Crunchyroll&#39;s Library Of Over 20,000 Japanese Anime + Asian Media Videos" name="twitter:description"></meta>
-<meta content="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6647/redesign_22744189597537.jO0sfbQz6rkrIUqfVvZZ_height640.png" name="twitter:image:src"></meta>
-<meta content="FREE" name="twitter:data1"></meta>
-<meta content="PRICE" name="twitter:label1"></meta>
-<meta content="100%" name="twitter:data2"></meta>
-<meta content="OFF" name="twitter:label2"></meta>
-<meta content="deals.thenextweb.com" name="twitter:domain"></meta>
-<meta content="@thenextweb" name="twitter:site"></meta>
-<meta content="@thenextweb" name="twitter:creator"></meta>
+				
 
-<meta content="518504714962278" property="fb:app_id"></meta>
-<meta content="website" property="og:type"></meta>
-<meta content="Free Anime For 30 Days From Crunchyroll - Get A Free Month Of Access To Crunchyroll&#39;s Library Of Over 20,000 Japanese Anime + Asian Media Videos" property="og:description"></meta>
-<meta content="A Free Month of Access to Over 20,000 Japanese Anime &amp; Asian Media Videos" property="og:title"></meta>
-<meta content="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6647/redesign_22744189597537.jO0sfbQz6rkrIUqfVvZZ_height640.png" property="og:image"></meta>
-<meta content="TNW Deals" property="og:site_name"></meta>
-<meta content="https://deals.thenextweb.com/sales/free-anime-for-30-days-from-crunchyroll?utm_campaign=feed&amp;amp;utm_medium=RSS&amp;amp;utm_source=thenextweb" property="og:url"></meta>
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.7.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<link rel="original-source" href="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" />
+<link rel="canonical" href="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" />
+<meta property="article:section" content="Insider" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="BlackBerry denies Samsung buyout rumors" />
+<meta property="og:description" content="After rumors started spreading earlier today that Blackberry was in the midst of talks to be acquired by Samsung – causing its stocks to rise suddenly by 29 percent – the company&hellip;" />
+<meta property="og:url" content="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" />
+<meta property="og:site_name" content="The Next Web" />
+<meta property="article:publisher" content="https://www.facebook.com/thenextweb" />
+<meta property="article:published_time" content="2015-01-14T23:57:29+01:00" />
+<meta property="article:modified_time" content="2015-01-15T00:06:48+01:00" />
+<meta property="og:updated_time" content="2015-01-15T00:06:48+01:00" />
+<meta property="og:image" content="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo.jpg" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:description" content="After rumors started spreading earlier today that Blackberry was in the midst of talks to be acquired by Samsung – causing its stocks to rise suddenly by 29 percent – the company&hellip;"/>
+<meta name="twitter:title" content="BlackBerry denies Samsung buyout rumors"/>
+<meta name="twitter:site" content="@thenextweb"/>
+<meta name="twitter:domain" content="The Next Web"/>
+<meta name="twitter:creator" content="@napilopez"/>
+<meta name="twitter:image:src" content="http://thenextweb.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo.jpg"/>
+<!-- / Yoast WordPress SEO plugin. -->
 
-
-<meta content="authenticity_token" name="csrf-param" />
-<meta content="ixkOFrcy+0rmpaG4ihfExa3y2RNeKqNqXxtXgkgcdgY=" name="csrf-token" />
-
-
-<!-- For iPad with high-resolution Retina display running iOS ≥ 7: -->
-<link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://stores-assets.stackcommerce.com/assets/apple-touch-icon-152x152-precomposed-37546b705a41a1ecaf7546e483a2d3c9.png">
-<!-- For iPhone with high-resolution Retina display running iOS ≥ 7: -->
-<link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://stores-assets.stackcommerce.com/assets/apple-touch-icon-120x120-precomposed-244567eef6bcc60e8d5da8f863eb7947.png">
-<!-- For the iPad mini and the first- and second-generation iPad on iOS ≥ 7: -->
-<link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://stores-assets.stackcommerce.com/assets/apple-touch-icon-76x76-precomposed-67504aa5664ffca7d53f78cfa6cca841.png">
-
-  <!-- Quantcast Tag, part 1 -->
-  <script type="text/javascript">
-    var _qevents = _qevents || [];
-    (function() {
-     var elem = document.createElement('script');
-     elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
-     elem.async = true;
-     elem.type = "text/javascript";
-     var scpt = document.getElementsByTagName('script')[0];
-     scpt.parentNode.insertBefore(elem, scpt);
-    })();
-  </script>
-
-  <script>
-    (function() {
-      var _fbq = window._fbq || (window._fbq = []);
-      if (!_fbq.loaded) {
-        var fbds = document.createElement('script');
-        fbds.async = true;
-        fbds.src = '//connect.facebook.net/en_US/fbds.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(fbds, s);
-        _fbq.loaded = true;
-      }
-      _fbq.push(['addPixelId', '1426112910984284']);
-    })();
-    window._fbq = window._fbq || [];
-    window._fbq.push(['track', 'PixelInitialized', {}]);
-  </script>
-  <noscript>
-    <img height="1" width="1" border="0" alt="" style="display:none" src="https://www.facebook.com/tr?id=1426112910984284&amp;ev=NoScript" />
-  </noscript>
-
-
-  <link rel="canonical" href="https://stacksocial.com/sales/free-anime-for-30-days-from-crunchyroll" />
-
-
-<script type="text/javascript">
-var Analytical = {
-  track: function(page) {
-
-  },
-  event: function(name, data) {
-    if (typeof data === 'undefined') { data = {}; }
-
-  }
-};
-</script>
-
-  </head>
-  <body id="stacksocial-wrapper" class="publisher-thenextweb" data-publisher-tags="[{&quot;name&quot;:&quot;Entrepreneur&quot;,&quot;slug&quot;:&quot;entrepreneur&quot;},{&quot;name&quot;:&quot;Apple / Mac&quot;,&quot;slug&quot;:&quot;apple-mac&quot;},{&quot;name&quot;:&quot;Android&quot;,&quot;slug&quot;:&quot;android&quot;},{&quot;name&quot;:&quot;Developer&quot;,&quot;slug&quot;:&quot;developer&quot;},{&quot;name&quot;:&quot;Designer&quot;,&quot;slug&quot;:&quot;designer&quot;},{&quot;name&quot;:&quot;Gadgets / Gear&quot;,&quot;slug&quot;:&quot;gadgets-gear&quot;},{&quot;name&quot;:&quot;Gamer&quot;,&quot;slug&quot;:&quot;gamer&quot;},{&quot;name&quot;:&quot;Productivity&quot;,&quot;slug&quot;:&quot;productivity&quot;}]">
-    
-    <div class="site-wrapper relative c-6 bg-14 fsxs pbxxl">
-      <script>
-  window.current_publisher_code = "thenextweb";
-</script>
-<div class="relative zm">
-  <div class="relative fsxxs c-16 c-alternate bg-blue bg-alternate pvxxxxs text-center ">
-  <div class="dvxs pvxxxxs">
-    <a class="absolute left" href="http://thenextweb.com/"><i class='icon-arrow-left'></i> back to thenextweb.com</a>&nbsp;
-    <a class="hidden-xs hidden-sm js-hello-bar" data-sale-slug="vpn-unlimited-premium-plan-3-years-of-hacker-protection-more" href="/sales/the-name-your-own-price-ios-designer-bundle">
-      NEW BUNDLE ALERT! Name Your Own Price On The iOS Designer Bundle! 
-      <i class="icon-arrow-right"></i>
-</a>  </div>
-</div>
-    <script>
-    if (!window.email_capture) {
-      window.email_capture = {};
-    }
-    window.email_capture["modal_url"] = "https://deals.thenextweb.com/modal_email_capture";
-  </script>
-  <div class="modal fixed fill zxl bg-1 no-select soft-hide fade-m z-modal">
-  </div>
-  <div class="email-capture-modal js-email-capture-modal bg-16">
-    <div class="bg-2 c-11 fsxxxs fws lss pvxxs text-center relative">
-      Sign Up for Hand-Selected Deals Backed by Our Guarantee
-      <div class="absolute top right mtxxxs">
-        <a class="close-modal" href="#">
-          <i class="icon-cross paxxxs fsl c-6 c-7-hover"></i>
-</a>      </div>
-    </div>
-    <div class="bg-16 paxxxs text-center"><img alt="Square logo 75x75" src="https://image-assets.stackcommerce.com/publishers/52/square_logo_75x75.png" /></div>
-    <div class="capture nmtxs pbl phxl text-center">
-      <table class="full-width">
-        <tr>
-          <td class="col-xs-6 pan">
-            <hr class="bg-6"/>
-          </td>
-          <td class="phs c-6 fwxl fsxxs nowrap">
-            Get the best deals on things you love.
-          </td>
-          <td class="col-xs-6 pan">
-            <hr class="bg-6"/>
-          </td>
-        </tr>
-      </table>
-      <div class="ptm phl">
-        <div class="errors paxxxs bg-error c-16 soft-hide fsxs fws text-center mbxs"></div>
-        <form accept-charset="UTF-8" action="/subscribe.json" class="js-newsletter-subscription" data-remote="true" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-          <input id="source" name="source" type="hidden" value="EmailCaptureModal" />
-          <div class="row nmhxxxxs mbs">
-            <div class="col-xs-8 phxxxxs">
-              <input class="email" id="email" name="email" placeholder="Email Address" type="email" />
-            </div>
-            <div class="col-xs-4 phxxxxs">
-              <input class="btn btn-primary full-width" name="commit" type="submit" value="Do It" />
-            </div>
-          </div>
-</form>        <div class="c-10 fsxxxxs text-center">
-          By clicking the "Do It" button, you agree to our <u><a href="/terms">Terms of Use</a></u> and <u><a href="/privacy">Privacy Policy</a></u>.
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="fixed top left right zxl navbarjs-fixed" role="navigation"></div>
-  <nav id="navbar-header" class="navbar bg-main navbarjs-nav relative zxl">
-    <div class="navbar-header">
-      <div class="navbar-toggle man pan pbxs plxs bss bwan bwls bc-4">
-        <button type="button" class="navbar-toggle c-main c-main-hover mtxs bg-main fsxl mbn paxxxs relative" style="padding-bottom: 2px;" data-toggle="collapse" data-target="#navbar-content">
-          <i class="icon-reorder"></i>
-          <span class="sr-only">Toggle navigation</span>
-        </button>
-      </div>
-      <div class="navbar-toggle man pan pbxs plxs">
-        <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/cart">
-          <table class="full">
-            <tr>
-              <td class="prs">
-                <div class="mtxs mbn paxxxs relative">
-                  <i class="icon-cart fsl"></i>
-                  
-                </div>
-              </td>
-            </tr>
-          </table>
-</a>      </div>
-      <div class="navbar-toggle man pan pbxs plxs js-mobile-search-toggle">
-        <a href="#" class="c-main c-main-hover bg-main bg-main-hover fws">
-          <table class="full">
-            <tr>
-              <td class="prs">
-                <div class="mtxs mbn paxxxs relative">
-                  <i class="search-field-icon icon-search fsl"></i>
-                </div>
-              </td>
-            </tr>
-          </table>
-        </a>
-      </div>
-      <a class="navbar-brand full-height" href="/">
-        <table class="full-height"><tr><td><img class="dvl-max" style="max-width: 220px" src=https://image-assets.stackcommerce.com/publishers/52/bd5b440d65123796a798ce9743086e20-logo-store.png?1406816750/></td></tr></table>
-</a>    </div>
-    <div class="collapse navbar-collapse full-width" id="navbar-content">
-      <ul class="nav navbar-nav">
-        <li class="dropdown bg-main c-main bg-main-hover c-main-hover">
-          <a class="dropdown-toggle relative c-main c-main-hover bg-main bg-main-hover fws pvm prl" data-toggle="dropdown" href="#">
-            Categories
-            <div class="icon-arrow-down-2 absolute top right fss mrxs mtm ptxxxxs"></div>
-</a>          <ul class="dropdown-menu">
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/entrepreneur">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-suitcase icon-fix fsm mrxs"></i><span class="fsxxs">Entrepreneur</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/apple-mac">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-apple icon-fix fsm mrxs"></i><span class="fsxxs">Apple / Mac</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/android">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-android icon-fix fsm mrxs"></i><span class="fsxxs">Android</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/developer">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-tools icon-fix fsm mrxs"></i><span class="fsxxs">Developer</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/designer">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-designer icon-fix fsm mrxs"></i><span class="fsxxs">Designer</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/gadgets-gear">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-camera icon-fix fsm mrxs"></i><span class="fsxxs">Gadgets / Gear</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/gamer">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-gamer icon-fix fsm mrxs"></i><span class="fsxxs">Gamer</span>
-                  </div>
-</a>              </li>
-              <li class="bg-main">
-                <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/tags/productivity">
-                  <div class="pbxxs ptxxxs relative zs">
-                    <i class="icon-list icon-fix fsm mrxs"></i><span class="fsxxs">Productivity</span>
-                  </div>
-</a>              </li>
-            <li class="bg-main">
-              <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/free">
-                <div class="pbxxs ptxxxs relative zs">
-                  <i class="icon-star icon-fix fsm mrxs"></i><span class="fsxxs">Freebies</span>
-                </div>
-</a>            </li>
-            <li class="bg-main">
-              <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/giveaways">
-                <div class="pbxxs ptxxxs relative zs">
-                  <i class="icon-gift icon-fix fsm mrxs"></i><span class="fsxxs">Giveaways</span>
-                </div>
-</a>            </li>
-          </ul>
-        </li>
-        <li>
-          <a class="c-main c-main-hover bg-main bg-main-hover fws pvm" href="/tags/holiday-specials">
-            Holiday Specials
-</a>        </li>
-      </ul>
-      <ul class="nav navbar-nav hidden-xs hidden-sm visible-md visible-lg">
-        <li class="ptxxs plxs pbxxs center-block">
-          <form accept-charset="UTF-8" action="/search" class="form-inline bg-main-search" method="get"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-            <div class="form-group">
-              <i class="search-field-icon icon-search fsxxs"></i>
-              <input class="form-control bg-main-search-query mtxxxs mbxxxs pll bwan" id="ss-top-search" name="query" placeholder="Search" type="text" />
-            </div>
-</form>        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="hidden-xs visible-sm hidden-md hidden-lg">
-  <a class="c-main c-main-hover c- bg-main bg-main-hover fws js-mobile-search-toggle" href="#">
-    <table class="full">
-      <tr>
-        <td>
-          <i class="search-field-icon icon-search fsm lhs"></i>
-        </td>
-      </tr>
-    </table>
-</a></li>
-<li class="hidden-xs">
-  <a class="c-main c-main-hover bg-main bg-main-hover fws" href="/cart">
-    <table class="full mtxxxxs">
-      <tr>
-        <td class="prxxxs">
-          <div class="relative">
-            <i class="icon-cart fsm lhs"></i>
-            
-          </div>
-        </td>
-      </tr>
-    </table>
-</a></li>
-  <li class="text-center">
-    <a class="pull-left c-main c-main-hover bg-main bg-main-hover pvm fws mrxxxs" href="/sign_in">Login</a>
-    <a class="js-join-now hidden-sm hidden-md pull-left bss bwam c-button c-button-hover bg-button bg-button-hover paxxs mtxs mrxs fws braxs" href="/sign_up">Join Now</a>
-  </li>
-
-      </ul>
-    </div>
-    <div class="col-lg-12 ptxxs plxs pbxxs collapse hidden-md hidden-lg" id="search-dropdown-bar">
-      <form accept-charset="UTF-8" action="/search" class="form-inline bg-main-search" method="get"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /></div>
-        <div>
-          <input class="bg-main-search-query mtxxxs mbxxxs bwan braxs full-width show" id="mobile-search-box" name="query" placeholder="Search" type="text" />
-        </div>
-</form>    </div>
-  </nav>
-</div>
-
-
-      
-      
-      
-<div class="bg-14">
-    <div class="phxs text-center mtl">
-      <h1 class="fsxxxxl fwl c-5">
-        Free Crunchyroll Anime: 30-Day Subscription
-      </h1>
-      <h2 class="fsl fws c-8">
-        A Free Month of Access to Over 20,000 Japanese Anime &amp; Asian Media Videos
-      </h2>
-    </div>
-
-  <div class="container phxs mtl">
-    <div class="row nmhxs">
-      <div class="col-md-8 phxs">
-          <div class="pas mbm bg-16">
-            <div class="js-slideshow">
-  <div class="bg-n">
-    <img class="img-responsive js-slideshow-display" src="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6647/redesign_22744189597537.jO0sfbQz6rkrIUqfVvZZ_height640.png">
-  </div>
-  <div class="row nmhxxs">
-        <div class="col-xs-2 phxxs mts">
-          <div class="bg-1 js-slideshow-slide active">
-            <img alt="Redesign 22744189597537.jo0sfbqz6rkriuqfvvzz height640" class="img-responsive fade-m fade-n-active" src="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6647/redesign_22744189597537.jO0sfbQz6rkrIUqfVvZZ_height640.png" />
-          </div>
-        </div>
-        <div class="col-xs-2 phxxs mts">
-          <div class="bg-1 js-slideshow-slide">
-            <img alt="Redesign 22744189597551.aaqvu7wgwwuzzjkx0f5m height640" class="img-responsive fade-m fade-n-active" src="https://image-assets.stackcommerce.com/uploaded_screenshot_2s/6647/redesign_22744189597551.aAqvu7WGWwuzzjkx0f5m_height640.png" />
-          </div>
-        </div>
-  </div>
-</div>
-          </div>
-          <div id="navbar-sub" class="fsxs fws c-6 bg-16 clearfix navbarjs-nav">
-    <a class="anchor-link navbarjs-pill" href="#overview">
-      <div class="c-blue-active bg-15-hover pvs phxs upcase pull-left">
-        overview
-      </div>
-</a>    <a class="anchor-link navbarjs-pill" href="#terms">
-      <div class="c-blue-active bg-15-hover pvs phxs upcase pull-left">
-        terms
-      </div>
-</a>    <a class="anchor-link navbarjs-pill" href="#comments">
-      <div class="c-blue-active bg-15-hover pvs phxs upcase pull-left">
-        comments
-      </div>
-</a>  <div class="pull-left hide navbarjs-hidden">
-    <a name="top" href="#stacksocial-wrapper" class="fsxxs bg-14-hover pvs phm anchor-link visible-lg visible-md">
-      <i class="icon-arrow-up"></i>
-    </a>
-  </div>
-</div>
-             <div class="c-6 bg-16 phs">
-  <div id="overview">
-      
-    <a name="6647_desc"></a>
-    <div id="6647" class="product-info-sect">
-      <article class="product-description">
-        <h3>10,000+ <span class="caps">HOURS</span> OF <span class="caps">CONTENT</span> AT <span class="caps">YOUR</span> <span class="caps">FINGERTIPS</span></h3>
-<p>Crunchyroll is a leading destination and platform for Japanese anime, Korean drama, live-action titles, and tons of other Asian media.</p>
-<p>All videos are professionally translated into multiple languages, and are available for viewing within minutes of their original TV broadcasts through tons of different applications.</p>
-<h3><span class="caps">TOP</span> <span class="caps">FEATURES</span></h3>
-<ul><li>20,000+ videos<br />
-<li>10,000+ hours of content<br />
-<li>Professionally translated in multiple languages<br />
-<li>Viewable on iPhone, iPad, Android, PlayStation, Xbox, AppleTV, Roku, Chromecast, Internet-enabled TVs, set-top boxes, and Crunchyroll.com</ul>
-<h3><span class="caps">WHAT</span> YOU&#8217;LL <span class="caps">NEED</span></h3>
-<ul><li>A browser/internet connection<br />
-<li>A compatible viewing device including:<br />
-<ul><li>Apple iOS<br />
-<li>Android phone/tablet<br />
-<li>Windows Phone<br />
-<li>PlayStation3/4 &amp; Xbox 360/One<br />
-<li>AppleTV/Roku/Chromecast<br />
-<li>An Internet-enabled Smart TV/set-top box</ul></ul>      </article>
-    </div>
-
-    <hr class="mvm"/>
-  </div>
-  <div id="terms" class="mvm">
-    <div class="c-blue fsm fwxl mbm">TERMS & CONDITIONS</div>
-    <ul><li>Instant digital redemption</ul>
-  </div>
-  <hr/>
-  <table class="mtm">
-  <tr>
-    <td class="prxxxs">
-      Share this:
-    </td>
-    <td class="prxxxs">
-      <input type="text" class="mbn c-blue" value="https://deals.thenextweb.com/sales/free-anime-for-30-days-from-crunchyroll" onClick="this.select()" />
-    </td>
-    <td class="prxxxs">
-      <a class="paxs c-8 bg-14 bg-13-hover" href="https://www.facebook.com/dialog/feed?app_id=518504714962278&amp;link=https://deals.thenextweb.com/sales/free-anime-for-30-days-from-crunchyroll&amp;picture=https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6647/redesign_22744189597537.jO0sfbQz6rkrIUqfVvZZ_height640.png&amp;name=Free+Crunchyroll+Anime%3A+30-Day+Subscription&amp;caption=by+Crunchyroll&amp;description=A+Free+Month+of+Access+to+Over+20%2C000+Japanese+Anime+%26+Asian+Media+Videos&amp;redirect_uri=https://deals.thenextweb.com/" onclick="javascript:window.open(this.href,
-      &#39;&#39;, &#39;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=436,width=626&#39;);return false;">
-        <i class="icon-facebook"></i>
-</a>    </td>
-    <td class="prxxxs">
-      <a class="paxs c-8 bg-14 bg-13-hover" href="http://twitter.com/share?text=Get+Free+Crunchyroll+Anime%3A+30-Day+Subscription+-+A+Free+Month+of+Access+to+Over+20%2C000+Japanese+Anime+%26+As...&amp;url=https%3A%2F%2Fdeals.thenextweb.com%2Fsales%2Ffree-anime-for-30-days-from-crunchyroll&amp;counturl=https%3A%2F%2Fdeals.thenextweb.com%2F" onclick="javascript:window.open(this.href,
-      &#39;&#39;, &#39;menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=260,width=600&#39;);return false;">
-        <i class="icon-twitter"></i>
-</a>    </td>
-  </tr>
-</table>
-</div>
-
-   <div class="bg-16 pas mtm-plus">
-  <div id="comments">
-    <div id="disqus_thread"></div>
-    <script type="text/javascript">
-  var disqus_shortname = "stacksocialdisqus"
-    , disqus_identifier = "free-anime-for-30-days-from-crunchyroll"
-    , disqus_title = "A Free Month of Access to Over 20,000 Japanese Anime & Asian Media Videos"
-    , disqus_url = "http://stacksocial.com/sales/free-anime-for-30-days-from-crunchyroll"
-    , disqus_category_id = "2453899";
-
-  /* * * DON'T EDIT BELOW THIS LINE * * */
-  (function() {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-  })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-
-  </div>
-</div>
-
-          <div class="mtm-plus nmbm visible-lg visible-md">
-  <div class="phs bg-16">
-    <div class="c-6 fss fwl pvm text-center">CUSTOMERS ALSO BOUGHT</div>
-    <hr/>
-  </div>
-    <div class="tri-unit relative">
-  <div class="absolute fill visible-lg visible-md">
-    <div class="full bg-16"></div>
-  </div>
-  <div class="row mhn">
-      <div class="col-md-4 phn tri-unit-item">
-          <div class="pbs mtm bg-16 main-unit">
-    <a href="/sales/a-lifetime-of-investing-and-financial-training-from-wall-street-survivor" id="sale-1647">
-      <div class="relative phs pts main-unit-padding clearfix">
-        <div class="relative main-unit-image">
-          <div class="absolute fill zs main-unit-image-cover"></div>
-          <div class="relative bg-1 zxs js-deal-ends">
-            <img alt="Wall Street Survivor Training: Lifetime Subscription" class="img-responsive js-deal-ends-image js-unveil" data-src="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6661/redesign_22957197927575.wXDZbndkDjnyzUt3MAcO_height640.png" src="https://stores-assets.stackcommerce.com/assets/unveil-82b8bde1fa3afa997f1b29c1c2842459.gif" />
-            <div class="absolute fill hide js-deal-ends-hover">
-              <table class="full c-16 fsxl">
-                <tr>
-                  <td>
-                    <div class="text-center">
-                      <i class="icon-clock"></i>
-                      <div class="mts">
-                        Sale ends in <span class='c-blue'><abbr class="js-interval" data-ends-at="2015-02-03T07:59:00Z" data-starts-at="2015-01-03T05:00:00Z"></abbr></span>
-                      </div>
-                      <div class="main-unit-description">
-                        <div class="row mtm">
-                          <div class="col-xs-2 col-xs-offset-5">
-                            <hr class="bg-8"/>
-                          </div>
-                        </div>
-                        <div class="row mtm">
-                          <div class="col-xs-8 col-xs-offset-2">
-                            <div class="fsm c-13 italic">
-                              18 Courses (and ALL Future Courses) to Teach You Everything You Need to Know about Finance &amp; Investing
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="main-unit-details row mts">
-          <div class="main-unit-name c-6 fwl fsxl col-sm-10 col-xs-9">
-            Wall Street Survivor Training: Lifetime Subscription
-            <span class="main-unit-promotion outline circle blue thick fsxxs italicize">
-              90%&nbsp;off
-            </span>
-          </div>
-          <div class="main-unit-price col-sm-2 col-xs-3 text-right">
-            <div class="main-unit-price-display c-orange fws fsxxxl drtl">
-              $99
-            </div>
-            <div class="fsm fws c-10 drtl nowrap main-unit-price-cost">
-              <i class="icon-tag fsxs"></i> <strike>$999</strike>
-            </div>
-          </div>
-        </div>
-      </div>
-</a>    <div class="main-unit-time mtxs mhs c-9 fsxxxs fws">
-      <i class='icon-clock hide'></i>
-      <abbr class="js-interval" data-ends-at="2015-02-03T07:59:00Z" data-starts-at="2015-01-03T05:00:00Z"></abbr>
-      <u class='js-tags' data-tags='[{&quot;name&quot;:&quot;Entrepreneur&quot;,&quot;slug&quot;:&quot;entrepreneur&quot;},{&quot;name&quot;:&quot;Productivity&quot;,&quot;slug&quot;:&quot;productivity&quot;}]'></u>
-    </div>
-  </div>
-
-      </div>
-      <div class="col-md-4 phn tri-unit-item">
-          <div class="pbs mtm bg-16 main-unit">
-    <a href="/sales/panorama-bluetooth-speaker-us" id="sale-1650">
-      <div class="relative phs pts main-unit-padding clearfix">
-        <div class="relative main-unit-image">
-          <div class="absolute fill zs main-unit-image-cover"></div>
-          <div class="relative bg-1 zxs js-deal-ends">
-            <img alt="Panorama Bluetooth Speaker" class="img-responsive js-deal-ends-image js-unveil" data-src="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6658/redesign_PanoramaSpeaker_MF1_1214.jpg" src="https://stores-assets.stackcommerce.com/assets/unveil-82b8bde1fa3afa997f1b29c1c2842459.gif" />
-            <div class="absolute fill hide js-deal-ends-hover">
-              <table class="full c-16 fsxl">
-                <tr>
-                  <td>
-                    <div class="text-center">
-                      <i class="icon-clock"></i>
-                      <div class="mts">
-                        Sale ends in <span class='c-blue'><abbr class="js-interval" data-ends-at="2015-07-02T06:59:00Z" data-starts-at="2015-01-02T05:00:00Z"></abbr></span>
-                      </div>
-                      <div class="main-unit-description">
-                        <div class="row mtm">
-                          <div class="col-xs-2 col-xs-offset-5">
-                            <hr class="bg-8"/>
-                          </div>
-                        </div>
-                        <div class="row mtm">
-                          <div class="col-xs-8 col-xs-offset-2">
-                            <div class="fsm c-13 italic">
-                              The Crisp &amp; Clear Way to Wirelessly Stream Calls &amp; Music 
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="main-unit-details row mts">
-          <div class="main-unit-name c-6 fwl fsxl col-sm-10 col-xs-9">
-            Panorama Bluetooth Speaker
-            <span class="main-unit-promotion outline circle blue thick fsxxs italicize">
-              77%&nbsp;off
-            </span>
-          </div>
-          <div class="main-unit-price col-sm-2 col-xs-3 text-right">
-            <div class="main-unit-price-display c-orange fws fsxxxl drtl">
-              $24.99
-            </div>
-            <div class="fsm fws c-10 drtl nowrap main-unit-price-cost">
-              <i class="icon-tag fsxs"></i> <strike>$109</strike>
-            </div>
-          </div>
-        </div>
-      </div>
-</a>    <div class="main-unit-time mtxs mhs c-9 fsxxxs fws">
-      <i class='icon-clock hide'></i>
-      <abbr class="js-interval" data-ends-at="2015-07-02T06:59:00Z" data-starts-at="2015-01-02T05:00:00Z"></abbr>
-      <u class='js-tags' data-tags='[{&quot;name&quot;:&quot;Gadgets / Gear&quot;,&quot;slug&quot;:&quot;gadgets-gear&quot;},{&quot;name&quot;:&quot;Lifestyle&quot;,&quot;slug&quot;:&quot;lifestyle&quot;}]'></u>
-    </div>
-  </div>
-
-      </div>
-      <div class="col-md-4 phn tri-unit-item">
-          <div class="pbs mtm bg-16 main-unit">
-    <a href="/sales/free-beginner-wordpress-online-tutorial" id="sale-1638">
-      <div class="relative phs pts main-unit-padding clearfix">
-        <div class="relative main-unit-image">
-          <div class="absolute fill zs main-unit-image-cover"></div>
-          <div class="relative bg-1 zxs js-deal-ends">
-            <img alt="Free Beginner WordPress Online Tutorial" class="img-responsive js-deal-ends-image js-unveil" data-src="https://image-assets.stackcommerce.com/uploaded_screenshot_1s/6648/redesign_WPtutorial_MF_1214.jpg" src="https://stores-assets.stackcommerce.com/assets/unveil-82b8bde1fa3afa997f1b29c1c2842459.gif" />
-            <div class="absolute fill hide js-deal-ends-hover">
-              <table class="full c-16 fsxl">
-                <tr>
-                  <td>
-                    <div class="text-center">
-                      <i class="icon-clock"></i>
-                      <div class="mts">
-                        Sale ends in <span class='c-blue'><abbr class="js-interval" data-ends-at="2015-07-01T06:59:00Z" data-starts-at="2015-01-01T05:00:00Z"></abbr></span>
-                      </div>
-                      <div class="main-unit-description">
-                        <div class="row mtm">
-                          <div class="col-xs-2 col-xs-offset-5">
-                            <hr class="bg-8"/>
-                          </div>
-                        </div>
-                        <div class="row mtm">
-                          <div class="col-xs-8 col-xs-offset-2">
-                            <div class="fsm c-13 italic">
-                              Create Your Own Blog or Website w/ 90 Min of Instruction
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div class="main-unit-details row mts">
-          <div class="main-unit-name c-6 fwl fsxl col-sm-10 col-xs-9">
-            Free Beginner WordPress Online Tutorial
-            <span class="main-unit-promotion outline circle blue thick fsxxs italicize">
-              100%&nbsp;off
-            </span>
-          </div>
-          <div class="main-unit-price col-sm-2 col-xs-3 text-right">
-            <div class="main-unit-price-display c-orange fws fsxxxl drtl">
-              FREE
-            </div>
-            <div class="fsm fws c-10 drtl nowrap main-unit-price-cost">
-              <i class="icon-tag fsxs"></i> <strike>$49</strike>
-            </div>
-          </div>
-        </div>
-      </div>
-</a>    <div class="main-unit-time mtxs mhs c-9 fsxxxs fws">
-      <i class='icon-clock hide'></i>
-      <abbr class="js-interval" data-ends-at="2015-07-01T06:59:00Z" data-starts-at="2015-01-01T05:00:00Z"></abbr>
-      <u class='js-tags' data-tags='[{&quot;name&quot;:&quot;Productivity&quot;,&quot;slug&quot;:&quot;productivity&quot;},{&quot;name&quot;:&quot;Entrepreneur&quot;,&quot;slug&quot;:&quot;entrepreneur&quot;}]'></u>
-    </div>
-  </div>
-
-      </div>
-  </div>
-</div>
-</div>
-
-      </div>
-
-      <div class="col-md-4 phxs">
-        <div id="purchase-form">
-          <div class="bg-15 phs pvxxs visible-lg visible-md">
-            <table class="full">
-              <tr>
-                <td class="pan c-orange fwm fsxxxxxxl">
-                  FREE
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="bg-16 pas buy-now-form">
-            <div class="c-7 fsxxs mbm visible-lg visible-md">
-              <table>
-                <tr>
-                  <td class="prxxs">
-                    <i class="icon-tag"></i>
-                  </td>
-                  <td>
-                    <strike>$7.00</strike>&nbsp;<span class="c-blueFaded">100% off</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="ptxs"></div>
-                  </td>
-                  <td>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="prxxs">
-                    <i class="icon-clock"></i>
-                  </td>
-                  <td>
-                    Freebie ends in
-                    <span class="c-orange">
-                      <abbr class="js-interval" data-ends-at="2015-01-23T07:59:00Z" data-starts-at="2014-12-23T05:00:00Z"></abbr>
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="ptxs"></div>
-                  </td>
-                  <td>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="prxxs">
-                    <i class="icon-stack"></i>
-                  </td>
-                  <td>
-                    By <a href="http://www.crunchyroll.com/" target="_blank">Crunchyroll</a>
-                  </td>
-                </tr>
-              </table>
-            </div>
-                <hr class="visible-lg visible-md mbm"/>
-                <a class="btn btn-primary full-width buy-now-button" href="/sign_in">Login To Get It</a>
-          </div>
-        </div>
-        <div class="c-6 fwm fsxxs mvm pas bss bwas bc-12">
-  <div class="max relative">
-    <i class="icon-headphones fsl absolute right top"></i>
-    <div>
-      <strong>Questions?</strong>&nbsp;
-      We'd love to help!
-    </div>
-    <div>
-      Email or chat M-F, 9am-5pm PST:
-    </div>
-    <div class="mtxxxs">
-      <a class="c-blue c-6-hover" href="https://stacksocial.zendesk.com/hc/en-us/requests/new" target="_blank">Contact Customer Support</a>
-    </div>
-  </div>
-</div>
-
-<div id="recent-sales-sidebar" class="soft-hide hidden-xs">
-  <div class="phs bg-16">
-    <div class="c-6 fss fwl pvm text-center">RECENT SALES</div>
-    <hr/>
-  </div>
-  <div class="js-async-sales-sidebar" data-url="/sales/sidebar?sale_id=1637"></div>
-</div>
-<div class="pas bg-16 mtm">
-  <div class="c-6 fss fwl ptxs pbm text-center">CONNECT WITH US</div>
-  <hr/>
-  <table class="full-width t-fixed mtm text-center">
-    <tr>
-        <td>
-          <a href="http://facebook.com/thenextweb">
-            <div class="fsxl c-facebook"><i class="icon-facebook"></i></div>
-</a>        </td>
-        <td>
-          <a href="https://twitter.com/thenextweb">
-            <div class="fsxl c-twitter"><i class="icon-twitter"></i></div>
-</a>        </td>
-        <td>
-          <a href="http://pinterest.com/thenextweb">
-            <div class="fsxl c-pinterest"><i class="icon-pinterest"></i></div>
-</a>        </td>
-        <td>
-          <a href="https://youtube.com/thenextweb">
-            <div class="fsxl c-5"><i class="icon-youtube"></i></div>
-</a>        </td>
-        <td>
-          <a class="c-blue c-6-hover" href="https://stacksocial.zendesk.com/hc/en-us/requests/new" target="_blank">
-            <div class="fsxl c-7"><i class="icon-envelope"></i></div>
-          </a>
-        </td>
-    </tr>
-  </table>
-  <div class="text-center fsxs fws c-8 mtl mbxs">Sign up for our newsletter!</div>
-  <form accept-charset="UTF-8" action="/subscribe" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="ixkOFrcy+0rmpaG4ihfExa3y2RNeKqNqXxtXgkgcdgY=" /></div>
-    <div class="relative">
-      <div class="absolute left bottom top mbxs mlxs">
-        <table class="full-height">
-          <tr>
-            <td>
-              <i class="icon-envelope c-11 fss"></i>
-            </td>
-          </tr>
-        </table>
-      </div>
-      <input class="plxl mbs js-email-field" id="email" name="email" placeholder="Email Address" type="email" />
-    </div>
-    <input class="btn btn-primary full-width" type="submit" value="subscribe" />
-</form></div>
-
-
-<div class="bg-16 pas mts">
-  <div class="c-6 fss fwl ptxs pbm text-center upcase">
-    OUR PROMISE
-  </div>
-  <hr/>
-  <div class="row nmhxxs mtm">
-    <div class="col-xs-1 phxs">
-      <i class="icon-checkmark fsxs c-green"></i>
-    </div>
-    <div class="col-xs-11 phxxs fsxs c-6 fwxl upcase">
-      Trusted Source
-    </div>
-  </div>
-  <div class="row nmhxs mtxs">
-    <div class="col-xs-11 col-xs-offset-1 phxs fsxxs fws c-6">
-      We take pride in curating the latest and greatest creative technology products around the globe. We personally research and hand-pick each product to ensure it meets our standards.
-    </div>
-  </div>
-  <div class="row nmhxxs mtm">
-    <div class="col-xs-1 phxs">
-      <i class="icon-checkmark fsxs c-green"></i>
-    </div>
-    <div class="col-xs-11 phxxs fsxs c-6 fwxl upcase">
-      The Next Web&nbsp;Promise
-    </div>
-  </div>
-  <div class="row nmhxs mtxs">
-    <div class="col-xs-11 col-xs-offset-1 phxs fsxxs fws c-6">
-      If you’re not happy for any reason, contact us and we’ll do our very best to make the situation right. We understand that we’re nothing without you, so we’re always looking to go the extra mile!
-    </div>
-  </div>
-</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-      <div class="push"></div>
-    </div>
-      <div class="footer relative zs">
-  <div class="pbxxl bg-14">
-    <div class="container phxs">
-      <table class="full-width">
-        <tr>
-          <td class="col-xs-6 pan">
-            <hr class="hidden-sm hidden-xs"/>
-          </td>
-          <td>
-            <table class="full-width">
-              <tr class="visible-xs" style="text-align: center;">
-                <td colspan="3" class="pbs">
-                  <img alt="Bd5b440d65123796a798ce9743086e20 logo store" class="dhxxxxxl-max" src="https://image-assets.stackcommerce.com/publishers/52/bd5b440d65123796a798ce9743086e20-logo-store.png?1406816750" />
-                </td>
-              </tr>
-              <tr>
-                <td class="hidden-xs">
-                  <div class="pls">
-                    <img alt="Bd5b440d65123796a798ce9743086e20 logo store" src="https://image-assets.stackcommerce.com/publishers/52/bd5b440d65123796a798ce9743086e20-logo-store.png?1406816750" />
-                  </div>
-                </td>
-                <td>
-                  <div class="phs c-9 fsxxs lsl fwl nowrap">POWERED BY</div>
-                </td>
-                <td class="prxxxs c-12 fwxl fss">
-                  <a href="http://stackcommerce.com"><img alt="stack commerce logo" src="https://stores-assets.stackcommerce.com/assets/logo-8b2ac0b904d6b45deebaa40a0bab7378.svg" style="width: 200px" target="_blank" /></a>
-                </td>
-              </tr>
-            </table>
-          </td>
-          <td class="col-xs-6 pan">
-            <hr class="hidden-sm hidden-xs"/>
-          </td>
-        </tr>
-      </table>
-      <div class="mbl mtm c-blue text-center">
-        <div class="visible-md visible-lg">
-          <table class="full-width">
-            <tr>
-              <td>
-                <a href="https://stackcommerce.com/about">What Is StackCommerce?</a>
-              </td>
-              <td>
-                <a href="https://stackcommerce.com/publishers">Want Your Own Store?</a>
-              </td>
-              <td>
-                <a href="https://stackcommerce.com/vendors">Have A Product To Sell?</a>
-              </td>
-              <td>
-                <a href="https://stackcommerce.com/publishers#stack-anywhere">Want To Be An Affiliate?</a>
-              </td>
-              <td>
-                <a href="https://stacksocial.zendesk.com/hc/en-us/requests/new" target="_blank">Need Customer Support?</a>
-              </td>
-            </tr>
-          </table>
-        </div>
-        <div class="hidden-md hidden-lg">
-          <div>
-            <a href="https://stackcommerce.com/about">What Is StackCommerce?</a>
-          </div>
-          <div class="mts">
-            <a href="https://stackcommerce.com/publishers">Want Your Own Store?</a>
-          </div>
-          <div class="mts">
-            <a href="https://stackcommerce.com/vendors">Have A Product To Sell?</a>
-          </div>
-          <div class="mts">
-           <a href="https://stackcommerce.com/publishers#stack-anywhere">Want To Be An Affiliate?</a>
-         </div>
-         <div class="mts">
-           <a href="https://stacksocial.zendesk.com/hc/en-us/requests/new" target="_blank">Need Customer Support?</a>
-         </div>
-        </div>
-      </div>
-      <hr/>
-    </div>
-  </div>
-  <div class="relative bg-4 ptl pbl zs">
-    <div class="container phxs">
-      <div class="row nmhxxs">
-        <div class="col-sm-5 phxxs mtm">
-          <img alt="Square logo 75x75" src="https://image-assets.stackcommerce.com/publishers/52/square_logo_75x75.png" />
-          <div class="c-7 mtxl fsxxs">
-            <div>
-              Copyright &copy; 2014 The Next Web and StackCommerce.
-            </div>
-            <div>
-              All rights reserved. Hand made in Los Angeles.
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-1 visible-md visible-lg nmhxxs"></div>
-        <div class="col-sm-1 visible-xs visible-sm"></div>
-        <div class="col-sm-6 phxxs mtm fss fws">
-          <div class="row nmhxxs">
-            <div class="col-xs-4 col-md-4 phxxs c-11">
-              <div>
-                <a class="c-16-hover" href="http://thenextweb.com/about/">About</a>
-              </div>
-              <div class="mts">
-                <a class="c-16-hover" href="/sign_in">Profile</a>
-              </div>
-              <div class="mts">
-                <a class="c-16-hover" href="/sign_in">Account</a>
-              </div>
-              <div class="mts">
-                <a class="c-16-hover" href="/sign_in">Purchases</a>
-              </div>
-            </div>
-            <div class="col-xs-4 col-md-4 phxxs c-11">
-              <div>
-                <a class="c-16-hover" href="/terms">Terms</a>
-              </div>
-              <div class="mts">
-                <a class="c-16-hover" href="/privacy">Privacy</a>
-              </div>
-              <div class="mts">
-                <a class="c-16-hover" href=" https://stacksocial.zendesk.com/hc/en-us/requests/new" target="_blank">Customer Support</a>
-              </div>
-            </div>
-            <div class="col-xs-4 col-md-4 phxxs">
-                <div class="c-11 mbs">
-                  <a class="c-16-hover" href="http://facebook.com/thenextweb">
-                    <i class="icon-facebook c-7 fss prm relative" style="top: 2px;"></i>Facebook
-</a>                </div>
-                <div class="c-11 mbs">
-                  <a class="c-16-hover" href="https://twitter.com/thenextweb">
-                    <i class="icon-twitter c-7 fss prm relative" style="top: 2px;"></i>Twitter
-</a>                </div>
-                <div class="c-11 mbs">
-                  <a class="c-16-hover" href="http://plus.google.com/+TheNextWeb">
-                    <i class="icon-google-plus c-7 fss prm relative" style="top: 2px;"></i>Google
-</a>                </div>
-                <div class="c-11 mbs">
-                  <a class="c-16-hover" href="http://pinterest.com/thenextweb">
-                    <i class="icon-pinterest c-7 fss prm relative" style="top: 2px;"></i>Pinterest
-</a>                </div>
-                <div class="c-11 mbs">
-                  <a class="c-16-hover" href="https://youtube.com/thenextweb">
-                    <i class="icon-youtube c-7 fss prm relative" style="top: 2px;"></i>YouTube
-</a>                </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <script src="https://stores-assets.stackcommerce.com/assets/application-65f093d9ecfb615dd2cc49a775ab0712.js"></script>
-    <script>
-  window.twttr = (function (d, s, id) {
-    var t, js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return; js = d.createElement(s); js.id = id;
-    js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
-    return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
-  }(document, "script", "twitter-wjs"));
-</script>
+<link rel="alternate" type="application/rss+xml" title="The Next Web &raquo; BlackBerry denies Samsung buyout rumors Comments Feed" href="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/feed/" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://thenextweb.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://thenextweb.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='shortlink' href='http://thenextweb.com/?p=828211' />
+        <script>var _roost = _roost || [];_roost.push(['appkey','af8c631d64e248a6bb35e08555cd04a4']);</script><noscript><a href="https://goroost.com/site-contact?noscript&appkey=af8c631d64e248a6bb35e08555cd04a4" title="Contact Us" target="_blank">Questions or feedback? Need help?</a> powered by <a href="https://goroost.com" title="Roost Web Push">Roost - Push notifications for websites</a></noscript><script src="//cdn.goroost.com/js/roost.js" async></script>
+                <script>
+                _roost.push( [ 'autoprompt', false ] );
+                                    _roost.push( [ 'minvisits', 2 ] );
+                            </script>
+    	<meta name="twitter:image:src" content="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo.jpg">
 
 <script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-729494-4', 'thenextweb.com', {'siteSpeedSampleRate': 100, 'allowLinker': true});
+	ga('require', 'displayfeatures');
+	ga('require', 'linker');
+	ga('require', 'linkid', 'linkid.js');
+
+	ga('set', 'dimension1', (new Date().getHours()));
+	ga('set', 'dimension3', 'Article'); 
+	ga('set', 'dimension4', 'Napier Lopez');
+	ga('set', 'dimension5', '2015-01-14');
+	ga('set', 'dimension11', 'No');
+	ga('set', 'dimension12', 'No');
+	ga('set', 'dimension14', '0');
+		ga('send', 'pageview');
 </script>
 
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-  {"parsetags": "explicit"}
-</script>
+	<script type="text/javascript">
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId: '378011798897423', status: false, cookie: false, oauth: false, xfbml: true,
+				channelUrl: 'http://thenextweb.com/wp-content/themes/icetea/includes/fb-channel-url.php'
+			});
+		};
+	</script>
+	<script>
+		(function() {
+			var _fbq = window._fbq || (window._fbq = []);
+			if (!_fbq.loaded) {
+				var fbds = document.createElement('script');
+				fbds.async = true;
+				fbds.src = '//connect.facebook.net/en_US/fbds.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(fbds, s);
+				_fbq.loaded = true;
+			}
+			_fbq.push(['addPixelId', '710910915665976']);
+		})();
+		window._fbq = window._fbq || [];
+		window._fbq.push(['track', 'PixelInitialized', {}]);
+	</script>
+	<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=710910915665976&amp;ev=PixelInitialized" /></noscript>
 
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-21555618-1']);
+	<script type='text/javascript'>
+		var googletag = googletag || {};
+		googletag.cmd = googletag.cmd || [];
+		(function() {
+			var gads = document.createElement('script');
+			gads.async = true;
+			gads.type = 'text/javascript';
+			var useSSL = 'https:' == document.location.protocol;
+			gads.src = (useSSL ? 'https:' : 'http:') +
+			'//www.googletagservices.com/tag/js/gpt.js';
+			var node = document.getElementsByTagName('script')[0];
+			node.parentNode.insertBefore(gads, node);
+		})();
+	</script>
+	<script src="http://cdn0.tnwcdn.com/assets/js/advertising.js"></script>
+	<!-- Chartbeat -->
+	<script type='text/javascript'>var _sf_startpt=(new Date()).getTime()</script>
+	
+	<script type="text/javascript" src="//native.sharethrough.com/assets/tag.js" async></script>
+	<!-- comScore -->
+	<script>
+	  var _comscore = _comscore || [];
+	  _comscore.push({ c1: "2", c2: "19019920" });
+	  (function() {
+	    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+	    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+	    el.parentNode.insertBefore(s, el);
+	  })();
+	</script>
+	<noscript>
+	  <img src="http://b.scorecardresearch.com/p?c1=2&c2=19019920&cv=2.0&cj=1" />
+	</noscript>
+</head>
 
-    var topDomain = window.location.hostname.match(/[^\.]*\.[^.]*$/)[0];
-    _gaq.push(['_setDomainName', '.' + topDomain]);
+<body class="single single-post postid-828211 single-format-standard category-insider" data-for="blog">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MHDDSC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MHDDSC');</script>
+<!-- End Google Tag Manager -->
 
-  _gaq.push(['_trackPageview']);
+	<header class="TNW_global_header" id="top">
+	<div class="wrapper clearfix">
+		<ul class="clearfix platform">
+									<li class="follow c-TNWgh-headerButton is-lineless b-TNWgh-toggler c-TNWgh-followMenuWrap">
+				<div class="c-TNWgh-followBar">
+					<div class="desktop">
+						<ul class="clearfix">
+							<li class="facebook" data-hoverload="true" data-for="facebook"><a class="stub" href="http://facebook.com/thenextweb"></a></li>
+							<li class="twitter" data-hoverload="true" data-for="twitter"><a class="stub" href="https://twitter.com/thenextweb"></a></li>
+							<li class="rss"><a href="http://thenextweb.com/feed?token=116910" id="rss" class="ss-pika ss-rss rss-feed"></a></li>
+						</ul>
+					</div>
+				</div>
+				<a>
+					<span class="mobile">
+						Follow
+					</span>
+					<i class="ss-pika ss-dropdown"></i>
+				</a>
+				<div class="b-TNWgh-menu-surface c-TNWgh-menu-surface c-TNWgh-followMenu" id="follow-menu">
+					<ul class="clearfix">
+					
+						<li><a href="https://www.facebook.com/thenextweb" onclick="ga('send', 'event', 'General', 'Social', 'Facebook', {'nonInteraction': 1});"><i class="ss-social ss-facebook"></i> Facebook</a></li>
+						<li><a href="https://www.twitter.com/thenextweb" onclick="ga('send', 'event', 'General', 'Social', 'Twitter', {'nonInteraction': 1});"><i class="ss-social ss-twitter"></i> Twitter</a></li>
+						<li><a href="https://plus.google.com/+TheNextWeb" onclick="ga('send', 'event', 'General', 'Social', 'Google+', {'nonInteraction': 1});"><i class="ss-social ss-googleplus"></i> Google+</a></li>
+						<li><a href="https://www.youtube.com/user/thenextweb" onclick="ga('send', 'event', 'General', 'Social', 'Youtube', {'nonInteraction': 1});"><i class="ss-social ss-youtube"></i> YouTube</a></li>
+						<li><a href="https://www.linkedin.com/company/the-next-web" onclick="ga('send', 'event', 'General', 'Social', 'LinkedIn', {'nonInteraction': 1});"><i class="ss-social ss-linkedin"></i> LinkedIn</a></li>
+						<li><a href="http://pinterest.com/thenextweb/" onclick="ga('send', 'event', 'General', 'Social', 'Pinterest', {'nonInteraction': 1});"><i class="ss-social ss-pinterest"></i> Pinterest</a></li>
+						<li><a href="http://feeds2.feedburner.com/thenextweb" onclick="ga('send', 'event', 'General', 'Social', 'RSS', {'nonInteraction': 1});"><i class="ss-social ss-rss"></i> RSS feed</a></li>
+						<li><a class="rss-feed" href="http://thenextweb.com/feed?token=116910" onclick="ga('send', 'event', 'General', 'Social', 'Pro-RSS', {'nonInteraction': 1});"><i class="ss-social ss-rss"></i> Pro RSS feed</a></li>
+						<li><a href="/notifications" onclick="ga('send', 'event', 'General', 'Social', 'Push alert', {'nonInteraction': 1});"><i class="ss-pika ss-notifications"></i> Push alerts</a></li>
+					</ul>
+					<form action="http://thenextweb.us1.list-manage1.com/subscribe/post?u=22ec88eb9b9d8bc3bcf660787&amp;id=32f70ba9aa" method="post" target="_blank" novalidate="">
+						<h3>The latest news in your inbox</h3>
+						<div class="clearfix">
+							<input class="left" id="nm" name="EMAIL" placeholder="Your email address" type="text">
+							<input class="right" name="subscribe" type="submit" value="OK" onclick="ga('send', 'pageview', '/newsletter/subscribe/');">
+							<input type="hidden" value="TheNextWeb" name="uri">
+							<input type="hidden" name="loc" value="en_US">
+						</div>
+							<div class="subs_options">
+							<div style="display: none;">
+								<input type="checkbox" value="1" name="group[6][1]" checked="" id="newsl_breaking_news">
+								<label for="newsl_breaking_news">
+									<strong>Breaking News</strong>
+									<span>Instant alerts for the biggest news</span>
+									
+								</label>
+							</div>
+							<div>
+								<input type="checkbox" value="4" name="group[6][4]" checked="" id="newsl_weeklytop">
+								<label for="newsl_weeklytop">
+									<strong>TNW Weekly</strong>
+									<span>The best of the week, handpicked every Friday</span>
+								</label>
+							</div>
+							<div>
+								<input type="checkbox" value="2" name="group[6][2]" id="newsl_topstories">
+								<label for="newsl_topstories">
+									<strong>Daily Top stories</strong>
+									<span>The most shared stories of the day</span>
+								</label>
+							</div>
+							<div>
+								<input type="checkbox" id="newsl_tnwnews" name="group[69][32]" value="1" checked="checked">
+								<label for="newsl_tnwnews">
+									<strong>Info about future TNW products</strong>
+								</label>
+							</div>
+						</div>
+					</form>
+				</div>
+			</li>
+						<li class="account c-TNWgh-headerButton b-TNWgh-toggler" data-submenu-target="account">
+				<a id="user-account" class="toggle-account user-account" onclick="ga('send', 'event', 'General', 'Navigation', 'User', {'nonInteraction': 1});"><i class="ss-pika ss-user"></i></a>
+				<div class="b-TNWgh-menu-surface c-TNWgh-menu-surface" id="auth-popup"></div>
+			</li>
+						<li class="more c-TNWgh-headerButton">
+				<a class="toggle toggle-info" onclick="ga('send', 'event', 'General', 'Navigation', 'Info', {'nonInteraction': 1});"><i class="ss-pika ss-info"></i></a>
+				<ul>
+					<li><a href="http://thenextweb.com/about" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - About', {'nonInteraction': 1});">About</a></li>
+					<li><a href="http://thenextweb.com/about/contact" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - Contact', {'nonInteraction': 1});">Contact</a></li>
+					<li><a href="http://goodies.thenextweb.com/" target="_blank" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - Goodies', {'nonInteraction': 1});">Goodies</a></li>
+					<li><a href="http://thenextweb.com/about/team" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - Team', {'nonInteraction': 1});">Team</a></li>
+					<li><a href="http://thenextweb.com/jobs" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - Jobs', {'nonInteraction': 1});">Jobs</a></li>
+					<li><a href="http://thenextweb.com/advertise" onclick="ga('send', 'event', 'General', 'Navigation', 'Info - Advertise', {'nonInteraction': 1});">Advertise</a></li>
+				</ul>
+			</li>			
+					
+			<li class="clearfix c-TNWgh-headerButton search preactive">
+				<a class="toggle toggle-search" onclick="ga('send', 'event', 'General', 'Navigation', 'Search', {'nonInteraction': 1});"><i class="ss-pika ss-search"></i></a>
+				<form action="/" method="get" class="c-TNWgh-search">
+					<input id="s" name="s" placeholder="Search…" type="text">
+					<input type="submit">
+				</form>
+			</li>
+					</ul>
+		
+		<div class="platforms">
+						<li class="c-TNWgh-headerButton c-TNWgh-menuIcon js-TNWgh-sidebarClose is-hamburger">
+				<div>
+					<div></div><div></div><div></div>
+				</div>
+			</li>
+						<a class="logo c-TNWgh-logo" href="http://thenextweb.com" title="The Next Web" onclick="ga('send', 'event', 'General', 'Navigation', 'Logo', {'nonInteraction': 1});">The Next Web</a>
+						<ul>
+				<li data-for="blog"><a class="active"  href="http://thenextweb.com/" onclick="ga('send', 'event', 'General', 'Navigation', 'News', {'nonInteraction': 1});">Blog</a></li>
+				<li data-for="conference"><a href="http://thenextweb.com/conference/" onclick="ga('send', 'event', 'General', 'Navigation', 'Conference', {'nonInteraction': 1});">Conference</a></li>
+				<li data-for="deals"><a href="https://deals.thenextweb.com/" onclick="ga('send', 'event', 'General', 'Navigation', 'Deals', {'nonInteraction': 1});">Deals</a></li>
+				<li data-for="pro"><a href="http://thenextweb.com/pro?code=freetrial" onclick="ga('send', 'event', 'General', 'Navigation', 'Pro', {'nonInteraction': 1});">Pro</a></li>
+			</ul>
+								</div>
+		
+	</div>
+</header>
 
-    _gaq.push(['_setCustomVar', 2, 'status', 'logged_out', 2]);
 
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
+	
+		<div id="stream">
+			
+			<div id="stream-switcher" class="clearfix">
 
-  <!-- Quantcast Tag, part 2 -->
-  <script type="text/javascript">
-    _qevents.push( { qacct:"p-443uI8zl5eTMM" } );
-  </script>
-  <noscript>
-    <div style="display:none;">
-      <img src="//pixel.quantserve.com/pixel/p-443uI8zl5eTMM.gif" border="0" height="1" width="1" alt="Quantcast"/>
+				<div class="cat-select-ghost tnwselect"><span>&nbsp;</span></div>
+					
+					<select id="channel-select" name="channel" onclick="ga('send', 'event', 'General', 'Sidebar', 'Channel Select', {'nonInteraction': 1});">
+		
+		<option value="all">All channels</option>
+          
+				<optgroup label="Channels">
+				 <option value="apps">Apps</option>
+				 <option value="creativity">Creativity</option>
+				 <option value="dd">Design &amp; Dev</option>
+				 <option value="entrepreneur">Entrepreneur</option>
+				 <option value="gadgets">Gadgets</option>
+				 <option value="insider">Insider</option>
+				 <option value="lifehacks">LifeHacks</option>
+				 <option value="media">Media</option>
+				 <option value="offers">Offers</option>
+				 <option value="shareables">Shareables</option>
+				 <option value="socialmedia">Social Media</option>
+      
+	        </optgroup>
+          
+				<optgroup label="Editions">
+				 <option value="africa">Africa</option>
+				 <option value="asia">Asia</option>
+				 <option value="au">Australia</option>
+				 <option value="ca">Canada</option>
+				 <option value="eu">Europe</option>
+				 <option value="in">India</option>
+				 <option value="la">Latin America</option>
+				 <option value="me">Middle East</option>
+				 <option value="uk">UK</option>
+      
+	        </optgroup>
+          
+				<optgroup label="Companies">
+				 <option value="apple">Apple</option>
+				 <option value="facebook">Facebook</option>
+				 <option value="google">Google</option>
+				 <option value="microsoft">Microsoft</option>
+				 <option value="twitter">Twitter</option>
+      
+	        </optgroup>
+	</select>
+					
+				<ul id="filter-toggle-buttons">
+					<li class="active filter-button"><a href="/" id="latest-stream" title="Latest" onclick="ga('send', 'event', 'Sidebar', 'Latest', {'nonInteraction': 1});"><i class="ss-pika ss-clock"></i>&nbsp;Latest</a></li>
+					<li class="filter-button"><a href="/popular" id="popular-stream" title="Popular" onclick="ga('send', 'event', 'Sidebar', 'Popular', {'nonInteraction': 1});"><i class="ss-pika ss-flame"></i>&nbsp;Popular</a></li>
+				</ul>
+			</div>
+			
+			<div id="stream-list"></div>
+			
+			<div class="stream-footer">
+				<ul>
+					<li><a href="/about/" title="About" onclick="ga('send', 'event', 'General', 'Footer Sidebar Navigation', 'About', {'nonInteraction': 1});">About</a></li>
+					<li><a href="http://goodies.thenextweb.com" title="Goodies" onclick="ga('send', 'event', 'General', 'Footer Sidebar Navigation', 'Goodies', {'nonInteraction': 1});">Goodies</a></li>
+					<li><a href="/advertise/" title="Advertise" onclick="ga('send', 'event', 'General', 'Footer Sidebar Navigation', 'Advertise', {'nonInteraction': 1});">Advertise</a></li>
+					<li><a href="/privacy-policy/" title="Privacy Policy" onclick="ga('send', 'event', 'General', 'Footer Sidebar Navigation', 'Privacy', {'nonInteraction': 1});">Privacy</a></li>
+					<li><a href="/tos/" title="Terms of Service" onclick="ga('send', 'event', 'General', 'Footer Sidebar Navigation', 'Terms of Service', {'nonInteraction': 1});">ToS</a></li>
+				</ul>
+			</div>
+		</div>
+	<div id="mobile-leaderboard" class="sticky"></div>
+	<div id="siteskin-1x1"></div>
+	<div id="content" class="wrapper clearfix">
+		<div id="main" class="post-828211 post type-post status-publish format-standard has-post-thumbnail hentry category-insider insider">
+			<div class="content-head">
+												<div id='announcement'>
+					<div id='div-gpt-ad-1390829216427-0' style='margin:auto; display:none;'></div>
+				</div>
+
+									<div id="top-leaderboard">
+						<!-- TNW_topleaderboard_728x90 -->
+						<div id='div-gpt-ad-1368717423425-2' style='display:none;'></div>
+					</div>
+							</div>
+
+
+	<div id="article-wrapper">
+			
+		<div class="article">			
+		<div class="article-adjacent-navigation clearfix">
+			<a  class="prev-article inactive">
+							</a>
+			<a href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" class="next-article " onclick="ga('send', 'event', 'Article', 'Next', {'nonInteraction': 1});" title="Facebook&#8217;s third Q&amp;A: Zuckerberg thinks existing wearables are goofy, talks future of Web">
+				<div class="cta">Facebook’s third Q&A: Zuckerberg thinks existing wearables are goofy, talks future of Web</div>
+				<i class="icon-arrow-right"></i>
+			</a>
+		</div>
+				
+			<div class="article-head clearfix">
+<div class="breadcrumbs"><a class="category" rel="tag" onclick="ga('send', 'event', 'Article', 'Category', 'Insider');" title="Insider" href="http://thenextweb.com/insider/">Insider</a></div>
+<h1 class="article-title entry-title" itemprop='headline'>
+	BlackBerry denies Samsung buyout rumors</h1>				<div class="article-featured-image">
+				<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo-798x310.jpg" width="798" height="310" title="BlackBerry denies Samsung buyout rumors" alt="Blackberry-Logo" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/09/Blackberry-Logo-798x310.jpg" width="798" height="310" title="BlackBerry denies Samsung buyout rumors" alt="Blackberry-Logo" class="lazy" /></noscript>				</div>
+							<div class="article-meta-wrapper">
+		<div class="article-meta clearfix">
+			<div class="article-social">
+			
+	
+		<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="Facebook" onclick="ga('send', 'event', 'Article', 'Share', 'Facebook');" data-url="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http%3A%2F%2Ftnw.to%2Fg4t7N&p[title]=BlackBerry+denies+Samsung+buyout+rumors&p[images][0]=http%3A%2F%2Fcdn1.tnwcdn.com%2Fwp-content%2Fblogs.dir%2F1%2Ffiles%2F2014%2F09%2FBlackberry-Logo.jpg&p[summary]=After+rumors+started+spreading+earlier+today+that+Blackberry+was+in+the+midst+of+talks+to+be+acquired+by+Samsung%C2%A0-+causing+its+stocks+to+rise+suddenly+by+29+percent+-%C2%A0the+company+...&u=http%3A%2F%2Ftnw.to%2Fg4t7N&t=BlackBerry+denies+Samsung+buyout+rumors" data-width="850" data-height="500" class="button social-share social-facebook"  title="Share on Facebook">
+			<i class="ss-social ss-facebook"></i><span class="mobile-cta">Share</span>
+		</a>
+		<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="Twitter" onclick="ga('send', 'event', 'Article', 'Share', 'Twitter');" data-url="https://twitter.com/intent/tweet?url=http%3A%2F%2Ftnw.to%2Ff4tI0&via=thenextweb&related=thenextweb&text=BlackBerry+denies+Samsung+buyout+rumors" data-width="685" data-height="500" class="button social-share social-twitter" title="Share on Twitter">
+			<i class="ss-social ss-twitter"></i><span class="mobile-cta">Tweet</span>
+		</a>
+		<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="Google+" onclick="ga('send', 'event', 'Article', 'Share', 'Google+');" data-url="https://plus.google.com/share?url=http%3A%2F%2Ftnw.to%2Fa4hPS" data-width="600" data-height="600" class="button social-share social-google" title="Share on Google+">
+			<i class="ss-social ss-googleplus"></i>
+		</a>
+		<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="Reddit" onclick="ga('send', 'event', 'Article', 'Share', 'Reddit');" data-url="http://www.reddit.com/submit?url=http%3A%2F%2Fthenextweb.com%2Finsider%2F2015%2F01%2F14%2Fblackberry-denies-samsung-buyout-rumors%2F" data-width="505" data-height="500" class="button social-share social-reddit" title="Share on Reddit">
+			<i class="ss-social ss-reddit"></i>
+		</a>
+				<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="Hacker News" onclick="ga('send', 'event', 'Article', 'Share', 'Hacker News');" data-url="http://news.ycombinator.com/submitlink?u=http%3A%2F%2Fthenextweb.com%2Finsider%2F2015%2F01%2F14%2Fblackberry-denies-samsung-buyout-rumors%2F&t=BlackBerry denies Samsung buyout rumors" data-width="505" data-height="500" class="button social-share social-hackernews" title="Share on Hacker News">
+			HN
+		</a>
+		<a data-permalink="http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/" data-title="BlackBerry denies Samsung buyout rumors" data-network="LinkedIn" onclick="ga('send', 'event', 'Article', 'Share', 'LinkedIn');" data-url="http://www.linkedin.com/shareArticle?mini=true&url=http%3A%2F%2Ftnw.to%2Fd4hWn" data-width="600" data-height="600" class="button social-share social-linkedin" title="Share on LinkedIn">
+			<i class="ss-social ss-linkedin"></i>
+		</a>
+				
+				<div class="share-count">
+					<div class="count-number">269</div>
+					<div class="count-label">Shares</div>
+				</div>
+				<div class="comment-count social-comments" onclick="ga('send', 'event', 'Article', 'Comment Button', 'Top', {'nonInteraction': 1});">
+					<div class="count-number"><a href="#disqus_thread">0</a></div>	
+					<div class="count-label">Comments</div>
+				</div>
+
+				<div class="nav-buttons-wrapper top mobile">
+							<div class="article-adjacent-navigation clearfix">
+			<a  class="prev-article inactive">
+							</a>
+			<a href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" class="next-article " onclick="ga('send', 'event', 'Article', 'Next', {'nonInteraction': 1});" title="Facebook&#8217;s third Q&amp;A: Zuckerberg thinks existing wearables are goofy, talks future of Web">
+				<div class="cta">Facebook’s third Q&A: Zuckerberg thinks existing wearables are goofy, talks future of Web</div>
+				<i class="icon-arrow-right"></i>
+			</a>
+		</div>
+						</div>
+						
+			</div>
+			
+
+			
+			<div class="article-options">
+				<div class="article-copypaste-wrapper"><input type="text" class="article-copypaste" value="http://tnw.to/b4gsK"></div>
+				
+				<div class="article-dropdown-wrapper">
+					<a class="article-dropdown-button" onclick="ga('send', 'event', 'Article', 'Save to', 'Open', {'nonInteraction': 1});"><i class="ss-pika ss-redirect"></i>&nbsp;Save to <span class="arrowdown">▾</span></a>
+					<div class="article-dropdown">
+						<ul>
+							<li><a href="javascript:void(0)" class="social-share" data-network="Buffer" data-url="http://bufferapp.com/add?url=http%3A%2F%2Fthenextweb.com%2Finsider%2F2015%2F01%2F14%2Fblackberry-denies-samsung-buyout-rumors%2F&text=BlackBerry denies Samsung buyout rumors" data-width="960" data-height="600" onclick="ga('send', 'event', 'Article', 'Save to', 'Buffer', {'nonInteraction': 1});"><i class="icon-buffer"></i>&nbsp;Buffer</a></li>
+							<li><a href="javascript:void(0)" class="social-share" data-network="Pocket" data-url="https://getpocket.com/save?url=http%3A%2F%2Fthenextweb.com%2Finsider%2F2015%2F01%2F14%2Fblackberry-denies-samsung-buyout-rumors%2F&title=BlackBerry denies Samsung buyout rumors" data-width="600" data-height="600" onclick="ga('send', 'event', 'Article', 'Save to', 'Pocket', {'nonInteraction': 1});"><i class="icon-pocket"></i>&nbsp;Pocket&nbsp;<div class="pro-feature">Pro</div></a></li>
+							<li><a id="share-evernote" href="javascript:void(0)" class="social-share" data-network="Evernote" data-url="http://www.evernote.com/clip.action?url=http%3A%2F%2Fthenextweb.com%2Finsider%2F2015%2F01%2F14%2Fblackberry-denies-samsung-buyout-rumors%2F%3Fprint&title=BlackBerry denies Samsung buyout rumors" data-width="960" data-height="500" onclick="ga('send', 'event', 'Article', 'Save to', 'Evernote', {'nonInteraction': 1});"><i class="icon-evernote"></i>&nbsp;Evernote&nbsp;<div class="pro-feature">Pro</div></a></li>
+							<li><a id="share-pdf" target="_blank" href="/pro/pdf" onclick="ga('send', 'event', 'Article', 'Save to', 'PDF', {'nonInteraction': 1});"><i class="icon-print ss-pika ss-print"></i>&nbsp;PDF&nbsp;<div class="pro-feature">Pro</div></a></li>						
+						</ul>
+					</div>
+				</div>
+			</div>
+							
+		</div>
+	</div><!-- Article Meta Wrapper -->
+			</div><!-- article-head -->
+
+		<div data-tab="article" class="article-tab">
+				<div class="article-body-wrapper">
+										<div class="article-body clearfix">
+												
+						<div class="article-author media">
+	<div class="media-image">
+		<img alt='Napier Lopez' src='http://1.gravatar.com/avatar/91e095325202753e1c62164de0c2cbda?s=60&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D60&amp;r=G' class='avatar avatar-60 photo' height='60' width='60' />	</div>
+	<div class="media-body">
+		<div class="article-author-name" itemprop="author creator editor" itemscope itemtype="http://schema.org/Person">
+		<a href="http://thenextweb.com/author/napierlopez/" title="Posts by Napier Lopez" rel="author" onclick="ga('send', 'event', 'Homepage', 'Article', 'Author', {'nonInteraction': 1});"><span class="vcard author"><span class="fn" itemprop="name">Napier Lopez</span></span></a>		</div>
+		<div class="article-date date updated" title="2015-01-14" data-timestamp="1421276249">14 January '15, 11:57pm</span></div>
+				<a href="https://twitter.com/napilopez" class="author-follow-button" target="_blank"><i class="ss-social ss-twitter"></i>&nbsp;Follow</a>
+				<div id="post-edit"></div>
+	</div>
+</div>						<div itemprop='articleBody' class="entry-content">
+							
+							<div id="tiEmbedPlayer" data-type="micro"></div>
+							<p>After rumors started spreading earlier today that Blackberry was in the midst of talks to be <a href="http://thenextweb.com/insider/2015/01/14/samsung-reportedly-approached-blackberry-takeover-bid/">acquired by Samsung</a> – causing its stocks to rise suddenly by 29 percent – the company has offered an official comment: it “has not engaged with Samsung with respect to any possible offer to purchase BlackBerry.”</p>
+<p>Blackberry then goes on to say its policy is not to comment on rumors – how nice of them to make an exception – and will talk no further about the matter.</p>
+<p>Here’s the full statement:</p>
+<form id="aspnetForm" action="/press-release/blackberry-responds-to-media-report-nasdaq-bbry-1983083.aspx?hootPostID=51e4918cbbf7a0700c00cec669b04b7d" method="post">
+<div id="main_content" class="main">
+<div class="ContentPadding">
+<div id="ctl00_p_wpcpageplaceholder_re1_newsroomSrv">
+<div id="newsroom" class="newsroom-onecolumn">
+<div class="newsroom-middle">
+<div class="newsroom-left">
+<div id="newsroom-copy">
+<div class="mw_release">
+<blockquote><p>BlackBerry Limited (NASDAQ:BBRY)(TSX:BB) (“BlackBerry”) is aware of certain press reports published today with respect to a possible offer by Samsung to purchase BlackBerry. BlackBerry has not engaged in discussions with Samsung with respect to any possible offer to purchase BlackBerry. BlackBerry’s policy is not to comment on rumors or speculation, and accordingly it does not intend to comment further.</p></blockquote>
+<p>In all, it looks like the rumors amounted to no more than speculation; we’ll update if we hear more.</p>
+<p>➤ <a href="http://press.blackberry.com/press/2015/blackberry-responds-to-media-report.html">BlackBerry responds to media report</a> [BlackBerry]</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+							
+							<br>
+
+														<div class="button social-comments load-article-comments" onclick="ga('send', 'event', 'Article', 'Comment Button', 'Bottom', {'nonInteraction': 1});">
+								<i class="ss-pika ss-chat"></i><span class="comments-cta"><a href="#comments">Show comments</a></span>
+							</div>
+						</div>
+					</div><!-- Article Body -->
+					<div id="second-leaderboard"></div>
+											<div class="nav-buttons-wrapper top mobile">
+									<div class="article-adjacent-navigation clearfix">
+			<a  class="prev-article inactive">
+							</a>
+			<a href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" class="next-article " onclick="ga('send', 'event', 'Article', 'Next', {'nonInteraction': 1});" title="Facebook&#8217;s third Q&amp;A: Zuckerberg thinks existing wearables are goofy, talks future of Web">
+				<div class="cta">Facebook’s third Q&A: Zuckerberg thinks existing wearables are goofy, talks future of Web</div>
+				<i class="icon-arrow-right"></i>
+			</a>
+		</div>
+								</div>
+					
+
+
+				</div><!-- Article Body Wrapper -->
+
+			</div>
+
+			<div class="comments-wrapper" id="comments">
+				<div data-tab="comments" id="comments-828211" class="comments article-comments article-more">
+					<!-- Comments section -->
+					<h4>Discussion</h4>
+					
+<div id="disqus_thread">
     </div>
-  </noscript>
-<!-- End Quantcast tag -->
 
 <script type="text/javascript">
-  adroll_adv_id = "SRXPRQELBJDXBNMJXRWFXM";
-  adroll_pix_id = "FYFXEYJTCZCRZOX7J2EXDZ";
+/* <![CDATA[ */
+    var disqus_url = 'http://thenextweb.com/insider/2015/01/14/blackberry-denies-samsung-buyout-rumors/';
+    var disqus_identifier = '828211 http://thenextweb.com/?p=828211';
+    var disqus_container_id = 'disqus_thread';
+    var disqus_domain = 'disqus.com';
+    var disqus_version = '2.77';
+    var disqus_shortname = 'thenextweb';
+    var disqus_title = "BlackBerry denies Samsung buyout rumors";
+    var disqus_config = function () {
+        var config = this; // Access to the config object
+        config.language = '';
 
-  (function () {
-    var oldonload = window.onload;
+        /* Add the ability to add javascript callbacks */
+        
+        /*
+           All currently supported events:
+            * preData — fires just before we request for initial data
+            * preInit - fires after we get initial data but before we load any dependencies
+            * onInit  - fires when all dependencies are resolved but before dtpl template is rendered
+            * afterRender - fires when template is rendered but before we show it
+            * onReady - everything is done
+         */
 
-    window.onload = function(){
-      __adroll_loaded=true;
-      var scr = document.createElement("script");
-      var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
-      scr.setAttribute('async', 'true');
-      scr.type = "text/javascript";
-      scr.src = host + "/j/roundtrip.js";
-      ((document.getElementsByTagName('head') || [null])[0] || document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
-      if(oldonload){oldonload()}
-    };
-  }());
-</script>
-<script type="text/javascript">
-  setTimeout(function(){var a=document.createElement("script");
-  var b=document.getElementsByTagName("script")[0];
-  a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0021/8576.js?"+Math.floor(new Date().getTime()/3600000);
-  a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
-</script>
-    
-      <!-- Facebook Conversion Code for Newsletter Subscription -->
-  <script>
-    (function() {
-      var _fbq = window._fbq || (window._fbq = []);
-      if (!_fbq.loaded) {
-        var fbds = document.createElement('script');
-        fbds.async = true;
-        fbds.src = '//connect.facebook.net/en_US/fbds.js';
-        var s = document.getElementsByTagName('script')[0];
-        s.parentNode.insertBefore(fbds, s);
-        _fbq.loaded = true;
-      }
-    })();
-    window._fbq = window._fbq || [];
+        config.callbacks.preData.push(function() {
+            // clear out the container (its filled for SEO/legacy purposes)
+            document.getElementById(disqus_container_id).innerHTML = '';
+        });
+                config.callbacks.onReady.push(function() {
+            // sync comments in the background so we don't block the page
+            var script = document.createElement('script');
+            script.async = true;
+            script.src = '?cf_action=sync_comments&post_id=828211';
 
-    $('.js-newsletter-subscription').on("subscribe:success", function(){
-      window._fbq.push(['track', '6018607654097', {'value':'0.00','currency':'USD'}]);
-    })
-  </script>
-
-<script>
-  $('.bg-main-search-query').livequery(function(){
-    $this = $(this)
-
-    $this
-      .on('focus', function() { $('.icon-search').addClass('active') })
-      .on('blur', function() {
-        if ($this.val() === "") {
-          $('.icon-search').removeClass('active')
-        }
-      });
-
-    if ($this.val() != "") {
-      $this.trigger('focus')
-    };
-  });
-  $(".js-mobile-search-toggle").click(function(e){
-    e.preventDefault();
-    $(".js-mobile-search-toggle").toggleClass("active");
-    $("#search-dropdown-bar").slideToggle('fast', function(){
-      $("#mobile-search-box").focus();
-    })
-  });
-
-  if ($("#ss-top-search").val() != "") {
-    $(".js-mobile-search-toggle:first").click();
-  }
-  </script>
-
-    
-    
-  </body>
-  <script type="text/javascript">
-  var _kiq = _kiq || [];
-  (function(){
-    setTimeout(function(){
-    var d = document, f = d.getElementsByTagName('script')[0], s = d.createElement('script'); s.type = 'text/javascript';
-    s.async = true; s.src = '//s3.amazonaws.com/ki.js/38276/7nG.js'; f.parentNode.insertBefore(s, f);
-    }, 1);
-  })();
+            var firstScript = document.getElementsByTagName( "script" )[0];
+            firstScript.parentNode.insertBefore(script, firstScript);
+        });
+                this.page.remote_auth_s3 = 'W10= 527932daa898aad01cb9051ac45af8c7a010909b 1421284406';
+this.page.api_key = 'SXISHARNQTST5OOVPDBS2XJiLapdZTt4gZzH0Lr1H3L8qh6ZBAl3qAigmqSg7w4W';
+this.sso = {
+          name: "The Next Web",
+          button: "http://cdn3.tnwcdn.com/plus/img/tnw-sso-login-button.png",
+          icon: "http://cdn0.tnwcdn.com/plus/img/favicon.ico",
+          url: "http://thenextweb.com/auth/login?next=refresh_parent",
+          logout: "http://thenextweb.com/auth/logout",
+          width: "400",
+          height: "600"
+    }    };
+/* ]]> */
 </script>
 
+
+				</div>
+			</div>
+			
+				
+			</div><!-- article tab -->
+						<div class="article-more clearfix">
+				<div id="comments-leaderboard">
+					<div id='div-gpt-ad-1399993607171-0' style='width:728px; height:90px; margin:auto; display:none;'></div>
+				</div>
+			</div>
+						<div class="article-more clearfix">
+				<h3>Related stories</h3>
+				<div class="article-more-posts">
+					<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="828209" href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" title="Zuckerberg Thinks Current Wearables Are "Goofy" and More" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/12/facebook_culture_06-320x140.jpg" width="320" height="140" title="Facebook's third Q&A: Mark Zuckerberg thinks existing wearables are goofy and more" alt="facebook_culture_06" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/12/facebook_culture_06-320x140.jpg" width="320" height="140" title="Facebook's third Q&A: Mark Zuckerberg thinks existing wearables are goofy and more" alt="facebook_culture_06" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="828209" href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" title="Zuckerberg Thinks Current Wearables Are "Goofy" and More" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});">
+					Facebook&#8217;s third Q&#038;A: Mark Zuckerberg thinks existing wearables are goofy and more				</a>
+			</h2>
+		</div>
+	</div>	
+		<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="828084" href="http://thenextweb.com/insider/2015/01/14/facebook-at-work-released/" title="Facebook launches Facebook At Work... but you probably won't be able to try it yet" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/fbwork_press_newsfeed-320x140.png" width="320" height="140" title="Facebook launches Facebook At Work... but you probably won't be able to try it yet" alt="fbwork_press_newsfeed" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/fbwork_press_newsfeed-320x140.png" width="320" height="140" title="Facebook launches Facebook At Work... but you probably won't be able to try it yet" alt="fbwork_press_newsfeed" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="828084" href="http://thenextweb.com/insider/2015/01/14/facebook-at-work-released/" title="Facebook launches Facebook At Work... but you probably won't be able to try it yet" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});">
+					Facebook launches Facebook At Work&#8230; but you probably won&#8217;t be able to try it yet				</a>
+			</h2>
+		</div>
+	</div>	
+		<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="828023" href="http://thenextweb.com/google/2015/01/14/google-translate-gets-real-time-voice-sign-translations-ios-android/" title="Google Translate Gets Real-Time Voice And Sign Translations" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 2', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/02/googletranslate_android_3-322x140.jpg" width="320" height="139" title="Google Translate gets real-time voice and sign translations on iOS and Android" alt="googletranslate_android_3" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/02/googletranslate_android_3-322x140.jpg" width="320" height="139" title="Google Translate gets real-time voice and sign translations on iOS and Android" alt="googletranslate_android_3" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="828023" href="http://thenextweb.com/google/2015/01/14/google-translate-gets-real-time-voice-sign-translations-ios-android/" title="Google Translate Gets Real-Time Voice And Sign Translations" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 2', {'nonInteraction': 1});">
+					Google Translate gets real-time voice and sign translations on iOS and Android				</a>
+			</h2>
+		</div>
+	</div>	
+		<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="827990" href="http://thenextweb.com/insider/2015/01/14/obama-wants-speed-us-broadband/" title="Obama Plans Executive Action to Speed Up US Broadband" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 1', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Obama-320x140.jpg" width="320" height="140" title="Obama plans executive action to speed up US broadband" alt="Obama" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Obama-320x140.jpg" width="320" height="140" title="Obama plans executive action to speed up US broadband" alt="Obama" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="827990" href="http://thenextweb.com/insider/2015/01/14/obama-wants-speed-us-broadband/" title="Obama Plans Executive Action to Speed Up US Broadband" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 1', {'nonInteraction': 1});">
+					Obama plans executive action to speed up US broadband				</a>
+			</h2>
+		</div>
+	</div>	
+		<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="828129" href="http://thenextweb.com/google/2015/01/14/googles-new-classroom-app-opens-doors-android-ios/" title="Google's Classroom App Opens Its Doors On Android and iOS" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Google-Classroom-320x140.png" width="320" height="140" title="Google's new Classroom app opens its doors on Android and iOS" alt="Google Classroom" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Google-Classroom-320x140.png" width="320" height="140" title="Google's new Classroom app opens its doors on Android and iOS" alt="Google Classroom" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="828129" href="http://thenextweb.com/google/2015/01/14/googles-new-classroom-app-opens-doors-android-ios/" title="Google's Classroom App Opens Its Doors On Android and iOS" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});">
+					Google&#8217;s new Classroom app opens its doors on Android and iOS				</a>
+			</h2>
+		</div>
+	</div>	
+		<div class="loop-post">
+		<div class="loop-post-content clearfix">
+			<div class="loop-post-image">
+				<a class="post-link" data-postid="828004" href="http://thenextweb.com/apps/2015/01/14/firefox-35-brings-improved-cross-browser-video-chat-better-performance/" title="Firefox 35 Brings Improved Cross-browser Video Chat" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Image', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 1', {'nonInteraction': 1});">
+					<img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Firefox-Hello-320x140.jpg" width="320" height="140" title="Firefox 35 brings improved cross-browser video chat and better performance" alt="Firefox Hello" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2015/01/Firefox-Hello-320x140.jpg" width="320" height="140" title="Firefox 35 brings improved cross-browser video chat and better performance" alt="Firefox Hello" class="lazy" /></noscript>				</a>
+			</div>
+			<h2>
+				<a class="post-link" data-postid="828004" href="http://thenextweb.com/apps/2015/01/14/firefox-35-brings-improved-cross-browser-video-chat-better-performance/" title="Firefox 35 Brings Improved Cross-browser Video Chat" onclick="ga('send', 'event', 'Article', 'Related Posts', 'Headline', {'nonInteraction': 1});ga('send', 'event', 'Article', 'Related Posts', 'Placing - 1', {'nonInteraction': 1});">
+					Firefox 35 brings improved cross-browser video chat and better performance				</a>
+			</h2>
+		</div>
+	</div>	
+					</div>
+			</div>
+
+							<div class="article-ad">
+					<div id="bottom-leaderboard">
+						<div id='div-gpt-ad-1368717423425-0' style='width:728px; height:90px; margin:auto; display:none;'></div>
+						<div id='div-gpt-ad-1370955865098-0' style='width:300px; height:250px; margin:auto; display:none;'></div>
+					</div>
+				</div>
+			
+		</div><!-- article -->
+		
+			<div id="pop-up">
+		<a href="#" class="close" onclick="ga('send', 'event', 'Article', 'Pop-up', 'Close');">×</a>
+		<div class="pop-up-headline">Don't miss this:</div>
+		<div class="pop-up-article">
+		<a class="image" href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" onclick="ga('send', 'event', 'Article', 'Pop-up', 'Image', {'nonInteraction': 1});" title="Facebook&#8217;s third Q&amp;A: Zuckerberg thinks existing wearables are goofy, talks future of Web"><img src="http://cdn1.tnwcdn.com/assets/images/transparent.png" data-src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/12/facebook_culture_06-60x50.jpg" width="60" height="50" title="BlackBerry denies Samsung buyout rumors" alt="facebook_culture_06" class="lazy" />
+			<noscript><img src="http://cdn1.tnwcdn.com/wp-content/blogs.dir/1/files/2014/12/facebook_culture_06-60x50.jpg" width="60" height="50" title="BlackBerry denies Samsung buyout rumors" alt="facebook_culture_06" class="lazy" /></noscript></a>
+		<a class="post-link" href="http://thenextweb.com/facebook/2015/01/14/facebooks-third-qa-mark-zuckerberg-thinks-existing-wearables-goofy/" onclick="ga('send', 'event', 'Article', 'Pop-up', 'Title', {'nonInteraction': 1});" title="Facebook&#8217;s third Q&amp;A: Zuckerberg thinks existing wearables are goofy, talks future of Web">Facebook’s third Q&A: Zuckerberg thinks existing wearables are goofy, talks future of Web</a>
+		</div>
+	</div>
+			
+	</div><!-- /article-wrapper -->
+
+	<div id="article-loading"></div>
+	
+			<div id="footer">
+				<div class="footer-menu clearfix">
+					<p>
+						<a href="/about/" title="About" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'About', {'nonInteraction': 1});">About</a>
+						<a href="/about/team/" title="Team" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Team', {'nonInteraction': 1});">Team</a>
+						<a href="/about/contact/" title="Contact" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Contact', {'nonInteraction': 1});">Contact</a>
+						<a href="/advertise/" title="Advertise" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Advertise', {'nonInteraction': 1});">Advertise</a>
+						<a href="/tos/" title="Terms of Service" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Terms of Service', {'nonInteraction': 1});">Terms of Service</a>
+						<a href="/privacy-policy/" title="Privacy Policy" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Privacy Policy', {'nonInteraction': 1});">Privacy Policy</a>
+						<a href="/jobs/" title="Jobs" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Jobs', {'nonInteraction': 1});">Jobs</a>
+						<a href="/jobs/intern-at-tnw/" title="Internshps" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Internships', {'nonInteraction': 1});">Internships</a>
+						<a href="http://goodies.thenextweb.com" title="Goodies" onclick="ga('send', 'event', 'General', 'Footer Navigation', 'Goodies', {'nonInteraction': 1});">Goodies</a>
+					</p>
+				</div>
+				<div id="footer-partners">
+					<div class="clearfix" id="partners">
+						<div>
+							<a id="partner-maxcdn" href="http://www.maxcdn.com/" target="_blank" rel="nofollow" title="MaxCDN" onclick="ga('send', 'event', 'General', 'Sponsor', 'MaxCDN', {'nonInteraction': 1});">MaxCDN</a>
+						</div>
+						<div>
+							<span id="div-gpt-ad-1383298902094-0"></span>
+						</div>
+					</div>
+				</div>
+
+				<div class="footer-colophon">
+					<p>Copyright 2001 - <span itemprop="copyrightYear">2015</span> <span itemprop="copyrightHolder provider sourceOrganization" itemscope itemtype="http://schema.org/Organization"><span itemprop="name">The Next Web</span></span>, Inc. All Rights Reserved.</p>
+				</div>
+			</div>
+		</div><!-- main -->
+		<div id="img-preload" style="display: none;"></div>
+	</div><!-- #content -->
+
+	<div class="stream-ghost"></div>
+	<div id="roadblock-1x1"></div>
+
+	
+	<div id="fb-root"></div>
+	
+	<!-- Parse.ly Include: Standard -->
+	<div id="parsely-root" style="display: none">
+		<a id="parsely-cfg" data-parsely-site="thenextweb.com" href="http://parsely.com" rel="nofollow">.</a>
+	</div>
+	
+	<script>
+		// Force G+ language
+		window.___gcfg = {lang: 'en-US'};
+		(function(w, d, s) {
+			function go(){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				var load = function(url, id) {
+					if (d.getElementById(id)) {return;}
+					js = d.createElement(s); js.src = url; js.id = id;
+					fjs.parentNode.insertBefore(js, fjs);
+				};
+				load('http://static.parsely.com/p.js', 'js-parsely');
+			}
+			if (w.addEventListener) { w.addEventListener("load", go, false); }
+			else if (w.attachEvent) { w.attachEvent("onload",go); }
+		}(window, document, 'script'));
+	</script>
+
+	<!-- Chartbeat -->
+	<script type='text/javascript'>
+		var _sf_async_config={};
+		_sf_async_config.uid = 54698;
+		_sf_async_config.domain = 'thenextweb.com';
+		_sf_async_config.useCanonical = true;
+		_sf_async_config.sections = "Insider";
+		_sf_async_config.authors = "Napier Lopez";
+		(function(){
+			function loadChartbeat() {
+				window._sf_endpt=(new Date()).getTime();
+				var e = document.createElement('script');
+				e.setAttribute('language', 'javascript');
+				e.setAttribute('type', 'text/javascript');
+				e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+				document.body.appendChild(e);
+			}
+			var oldonload = window.onload;
+			window.onload = (typeof window.onload != 'function') ?
+			loadChartbeat : function() { oldonload(); loadChartbeat(); };
+		})();
+	</script>
+
+	<!-- TuneIn -->
+	<script type='text/javascript'>
+	  (function () {
+	    var tiwp = document.createElement('script');
+	    tiwp.async = true;
+	    tiwp.type = 'text/javascript';
+	    tiwp.src = '//lib.tunein.com/embed/player.js';
+	    var node = document.getElementsByTagName('script')[0];
+	    node.parentNode.insertBefore(tiwp, node);
+	  })();
+	</script>
+
+				<script src="http://cdn0.tnwcdn.com/wp-content/themes/icetea/assets/js/scripts.min.js?v=1421246154" type="text/javascript"></script>
+					
+	    <script type="text/javascript">
+    // <![CDATA[
+        var disqus_shortname = 'thenextweb';
+        (function () {
+            var nodes = document.getElementsByTagName('span');
+            for (var i = 0, url; i < nodes.length; i++) {
+                if (nodes[i].className.indexOf('dsq-postid') != -1) {
+                    nodes[i].parentNode.setAttribute('data-disqus-identifier', nodes[i].getAttribute('rel'));
+                    url = nodes[i].parentNode.href.split('#', 1);
+                    if (url.length == 1) url = url[0];
+                    else url = url[1]
+                    nodes[i].parentNode.href = url + '#disqus_thread';
+                }
+            }
+            var s = document.createElement('script'); s.async = true;
+            s.type = 'text/javascript';
+            s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+            (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+        }());
+    //]]>
+    </script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201503'></script>
+
+			<script>
+				var _roost = _roost || [];
+				$(function() {
+					var alias = typeof TNWPlus !== 'undefined' ? TNWPlus.settings.user.id : 0;
+					_roost.push(['alias', alias]);
+					_roost.push(['onresult', function (data) {
+						if (data.firstTime == true && data.registered == true) {
+							return location.href = '/notifications';
+						}
+					}]);
+				});
+			</script>
+				
+	<!-- TNW+ -->
+	<script type="text/javascript" src="http://cdn0.tnwcdn.com/assets/shared/js/plus.js"></script>
+
+
+	<!-- Stream item template -->
+	<script type="text/template" id="stream-item-template">
+		<div class="thumb"><a data-post-id="<%= post.post_id %>" href="<%= post.permalink %>" title="<%= post.title%>" onclick="ga('send', 'event', 'Stream', 'Click', 'Image', {'nonInteraction': 1});"><%= post.thumbnail %></a></div>
+		<div class="body">
+			<a class="title" href="<%= post.permalink %>" title="<%= post.title%>" onclick="ga('send', 'event', 'Stream', 'Click', 'Title', {'nonInteraction': 1});"><%= post.short_title %></a>
+			<div class="date" data-timestamp="<%= post.timestamp %>"><%= post.date %></div>
+		</div>
+	</script>
+	</script>
+	<noscript>
+	<div style="display:inline;">
+	<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/1055417172/?value=0&amp;guid=ON&amp;script=0"/>
+	</div>
+	</noscript>
+	<!-- Quantcast Tag -->
+	<script type="text/javascript">
+		var _qevents = _qevents || [];
+		(function() {
+		var elem = document.createElement('script');
+		elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+		elem.async = true;
+		elem.type = "text/javascript";
+		var scpt = document.getElementsByTagName('script')[0];
+		scpt.parentNode.insertBefore(elem, scpt);
+		})();
+
+		_qevents.push({qacct:"p-uj7YQZPFcqCJV"});
+	</script>
+	<noscript>
+	<div style="display:none;">
+		<img src="//pixel.quantserve.com/pixel/p-uj7YQZPFcqCJV.gif" border="0" height="1" width="1" alt="Quantcast"/>
+	</div>
+	</noscript>
+	<!-- End Quantcast tag -->
+	</body>
 </html>

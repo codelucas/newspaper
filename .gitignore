@@ -40,9 +40,3 @@ nosetests.xml
 .project
 .pydevproject
 venv
-
-# Utility files for generating resources for unit testing
-generate_fulltext.py
-generate_html.py
-generate_urls.py
-debug-test.py
