@@ -211,8 +211,6 @@ Here is a full list of the configuration options:
 
 ``MAX_FILE_MEMO``, default 20000, "python setup.py sdist bdist_wininst upload"
 
-``parser_class``, default 'lxml', "lxml vs soup"
-
 ``memoize_articles``, default True, "cache and save articles run after run"
 
 ``fetch_images``, default True, "set this to false if you don't care about getting images"
