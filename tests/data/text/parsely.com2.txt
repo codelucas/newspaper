@@ -1,0 +1,65 @@
+Though we hear about pageviews going up at many of the large online publishers, digital media companies still struggle to see a correlating increase in revenue. What’s the disconnect? Methods to increase almost any metric, including pageviews and visitors, don’t always focus on long-term benefits to the people that matter most when it comes to generating revenue: the audience.
+
+Think of metrics like the Force. Sure, they have a dark-side: user-unfriendly slideshows to increase clicks, or enlarged images for more scrolling and time engaged.
+
+But you can use the “Force” of metrics for good: to understand your audience and create better experiences for them. Metrics can arm anyone in digital media, from editors to business executives with with vital information about their readers’ preferences and behaviors. When it comes to audience insights, aim to be Luke Skywalker, not Darth Vader.
+
+Why Referrals Matter
+
+Data allows publishers today to see where readers come from and how they found an article or story. This tells you how readers already spend their time, what they care about, and can give you a good idea of who they might be based on some basic demographics about the referral networks.
+
+Analytics that tell you where your traffic comes from on a story by story or author by author basis will give you the clearest picture of your audience. For example, here’s the referral sources for articles written by our CTO on the Parse.ly blog next to the referral sources for articles written by our Director of Marketing:
+
+Looking at this, we know that readers coming to our blog for articles about technology (Apache Storm overviews, information on our open-source technology streamparse) tend to search for these technologies, or come from technology-based aggregation sites like Hacker News, Lobsters and tend to congregate on Twitter.
+
+Readers coming to articles written by our Director of Marketing tend to use more social networks, like LinkedIn and Facebook as well as Twitter, and are active in the content and journalism communities, as indicated by Contently and Poynter.org’s presence.
+
+We consider what people on these sites and networks want to learn or read about when we write new blog posts or create whitepapers and ebooks. We think about what kind of information we have that might be useful and interesting to someone that also reads about content marketing or regularly participates in tech conversations. It’s also a great gut-check to see if the audience we intended to reach is actually seeing our stories.
+
+Referral Trends and Benchmarking Against Your Peers
+
+Access to internal data allows you to focus on your own readers, but what about understanding your broader competitive set? Where are their readers coming from?
+
+Parse.ly publishes a quarterly Authority Report that includes a summary of refferal traffic based on billions of pageviews on our network of digital publishing sites. In the most recent edition, we compared referral traffic on a year-over-year basis (Aug. 2013-Aug. 2014).
+
+Overall, the data told the story of the rise of social and the constricting of all other categories. Since search was the largest, it had the most landshare to lose, but in general, social’s rise was at the expense of all other categories.
+
+See the full breakdown of top twenty five referrals and how they changed when you subscribe to the report.
+
+Social: Facebook the disruptor
+
+Most of social’s gains came directly from the increase in Facebook traffic to sites.
+
+Facebook made a huge jump, going from 12% of overall traffic referrals to over 20% (22.7% to be precise). This is similar to findings of other vendors and has recently spurred a torrent of concern over how much influence the social giant has over readers.
+
+For instance, Shareaholic found almost exactly the same percentage increase for Facebook referrals over a similar time (they tracked Sept 2013 through Sept 2014).
+
+However, our network saw Twitter and Stumbleupon as the two highest referrers after Facebook. Pinterest didn’t make a mark until four, though we did see the directional changes in growth match for all three networks.
+
+Even at this scale of billions of referrers, the types of audiences that the Parse.ly network sees versus the Shareaholic network likely accounts for these differences.
+
+Search: The dominator
+
+Say what you will about the rise of social, search still eeks out more overall web visits. Though we did see the two come toe-to-toe back in January, search has climbed back up into the dominate position.
+
+Google didn’t even lose any ground to the Facebook growth – it gained almost two percentage points as a referral source to news sites.
+
+One thing to note in our data: the search traffic shown controls for the “brand search” effect. Brand search is typing a brand name i.e. “Business Insider” into Google Chrome’s browser bar or in a search field instead of typing the domain directly or clicking on a bookmark. In those cases, though the referrer tracks as “search,” but it doesn’t accurately describe the intention of the searcher; they already knew where they wanted to go.
+
+The data in the Authority Report only considers post URLs, not landing pages or homepages. This means that every view we account for came directly to an article, video or story.
+
+Aggregators and RSS: The displaced
+
+Our data saw almost all aggregators sites account for less of the overall referral pie for traffic. One theory why? Over the past year, digital news outlets have started to embrace more aggregation on their own sites. Huffington Post and Gawker have a strong reputation for aggregating other outlets stories; the New York Times now links out to others’ top stories on their homepages and in their apps.
+
+RSS readers may have also suffered from social’s gains. Feedly, which was poised to take over the RSS game after Google Reader was shuttered dipped in the past year. Mobile apps and social media feeds provide similar functionality combined with better social/mobile elements.
+
+The Last Word: “OTHER”
+
+Overall, this sample of sites saw a 30% increase of total external traffic, bolstered by strong social and search networks, but also ultimately aided by an increasingly larger set of long-tail sites. Does the large increase in this group point to more reliance on paid traffic distribution through networks like Outbrain, Taboola and their ilk?
+
+It certainly points to the fact that digital publishers have to be more vigilant than ever about where their audiences live online, how they’re finding the content they read and how the publishers can craft cohesive strategies across their entire organization that use data on those activities to their advantage.
+
+Related
+
+Parse.ly, November 17, 2014

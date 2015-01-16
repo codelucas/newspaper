@@ -1,0 +1,1999 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" >
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UQ8EUVRACgUEUlVRBg=="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+    <title>FINANCIAL ADVISOR INSIGHTS: December 29 - Business Insider</title>
+    <meta name="date" content="2014-12-29" />
+<meta name="sailthru.date" content="2014-12-29" />
+<meta name="news_keywords" content="Financial Advisor Insights, Elena Holodny, " />
+<meta name="sailthru.tags" content="Financial Advisor Insights, Elena Holodny, " />
+<meta name="description" content="&quot;Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows.&quot;" />
+<meta name="sailthru.description" content="&quot;Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows.&quot;" />
+<meta name="title" content="What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" />
+<meta name="sailthru.verticals" content="wealthadvisor,yourmoney,clusterstock,moneygame" />
+<meta name="sailthru.title" content="What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" />
+<meta name="tbi-image" content="http://static2.businessinsider.com/image/54a1d7ee6da8115b5a51cb6b/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg" />
+<meta name="sailthru.image.full" content="http://static2.businessinsider.com/image/54a1d7ee6da8115b5a51cb6b/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg" />
+<meta name="sailthru.image.thumb" content="http://static2.businessinsider.com/image/54a1d7ee6da8115b5a51cb6b-50-50/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg" />
+<meta name="sailthru.author" content="Elena Holodny" />
+<meta property="og:title" content="What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" />
+<meta property="og:description" content="&quot;Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows.&quot;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" />
+<meta property="og:site_name" content="Business Insider" />
+<meta property="fb:app_id" content="155043519637" />
+<meta property="article:publisher" content="businessinsider" />
+<meta property="author" content="Elena Holodny" />
+<meta property="twitter:card" content="summary" />
+<meta property="twitter:url" content="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" />
+<meta property="twitter:title" content="What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" />
+<meta property="twitter:description" content="&quot;Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows.&quot;" />
+<meta property="twitter:image" content="http://static2.businessinsider.com/image/54a1d7ee6da8115b5a51cb6b/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg" />
+<meta property="twitter:creator" content="elenaholodny" />
+<meta property="twitter:site" content="businessinsider" />
+<meta property="article:author" content="http://www.businessinsider.com/author/elena-holodny" />
+<meta property="og:image" content="http://static2.businessinsider.com/image/54a1d7f66da811cc6051cb6b/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg" />    
+<link rel="alternate" href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" hreflang="x-default">
+<link rel="alternate" href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" hreflang="en-US">
+<link rel="alternate" href="http://uk.businessinsider.com/financial-advisor-insights-december-29-2014-12" hreflang="en-GB">
+    <link href="http://static3.businessinsider.com/assets/css/min-base-us.css?1419282513" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://static6.businessinsider.com/assets/css/min-post-us.css?1419282513" media="screen" rel="stylesheet" type="text/css" />
+<link href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" rel="canonical" />    <link type="text/css" rel="stylesheet" media="print" href="http://static1.businessinsider.com/assets/css/print.css?1419282513" />   
+    <script type="text/javascript" src="http://static1.businessinsider.com/assets/js/min2.js?1419282513"></script>
+<script type="application/ld+json">
+    //<![CDATA[
+    {"@context":"http:\/\/schema.org","@type":"NewsArticle","headline":"What\u0027s Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors","url":"http:\/\/www.businessinsider.com\/financial-advisor-insights-december-29-2014-12","thumbnailUrl":"http:\/\/static2.businessinsider.com\/image\/54a1d7ee6da8115b5a51cb6b\/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg","dateCreated":"2014-12-29T22:39:00Z","articleSection":"wealthadvisor","creator":"Elena Holodny","keywords":["Financial Advisor Insights"]}    //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    BI.post.isSlideshow=false;    //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    post = {"id":"54a1affa69bedddc082ead43","uri":"http:\/\/www.businessinsider.com\/financial-advisor-insights-december-29-2014-12","thumb":"http:\/\/static2.businessinsider.com\/image\/54a1d7ee6da8115b5a51cb6b-90-90\/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg","author":"Elena Holodny","author_ids":"Elena Holodny:46","post_type":"post"};    //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    
+        Author = "Elena Holodny";
+        Category = "Financial Advisor Insights";
+        AuthorType = "Staff";
+        Editor = "Elena Holodny";
+        BIISub = "none"
+            //]]>
+</script>
+<script type="text/javascript">
+    //<![CDATA[
+    
+        BI.nav_select = "Finance";
+        BI.highTrafficMode = 0;
+        BI.post.isDraft = 0;
+        BI.post.url = "http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12";
+        BI.post.name = "financial-advisor-insights-december-29-2014-12";
+        BI.comments.currentPage = 0;
+        BI.comments.filterPundits = 1;
+        BI.comments.getAllComments = 1;
+            //]]>
+</script>    <!-- optimizely desktop -->
+        <!-- End optimizely desktop -->
+
+        <meta name="tbi-vertical" content="wealthadvisor" />
+    <meta name="viewport" content="width=1024" />
+
+    <!--[if gte IE 9]>
+    <style type="text/css">
+        .gradient {
+            filter: none;
+        }
+    </style>
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        <link type="text/css" rel="stylesheet" media="all" href="http://static3.businessinsider.com/assets/css/ie7_or_lower.css" />
+        <link type="text/css" rel="stylesheet" media="all" href="http://static2.businessinsider.com/assets/css_vendor/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+        <link type="text/css" rel="stylesheet" media="all" href="http://static5.businessinsider.com/assets/css/ie8.css" />
+    <![endif]-->
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script type="text/javascript" src="http://static3.businessinsider.com/assets/js/vendor/ie8/placeholders.min.js"></script>
+    <![endif]-->
+
+    <!--[if IE 9]>
+        <link type="text/css" rel="stylesheet" media="all" href="http://static4.businessinsider.com/assets/css/ie9.css" />
+        <script type="text/javascript" src="http://static5.businessinsider.com/assets/js/shims/Element.classList.js"></script>
+    <![endif]-->
+
+    <script type="text/javascript">
+        var vertical = 'wealthadvisor';
+        var PageType = 'post';
+        var post_id = '';
+        var _sf_startpt=(new Date()).getTime();
+    </script>
+
+    <!-- Kissmetrics -->
+    <script type="text/javascript">
+        var _kmq = _kmq || [];
+        var _kmk = _kmk || '999f578acebfab6dd29b540ab4ebbcbaafafa774';
+
+        function _kms(u){
+            setTimeout(function(){
+                var s = document.createElement('script');
+                var f = document.getElementsByTagName('script')[0];
+                s.type = 'text/javascript';
+                s.async = true;
+                s.src = u;
+                f.parentNode.insertBefore(s, f);
+            }, 1);
+        }
+            </script>
+    <!-- Kissmetrics -->
+
+    <link rel="alternate" type="application/rss+xml" title="RSS" href="/wealthadvisor.rss" />
+    <link rel="shortcut icon" href="http://static5.businessinsider.com/assets/images/faviconBI.ico" />
+    <link rel="icon" type="image/ico" href="http://static5.businessinsider.com/assets/images/faviconBI.ico" />
+    <link rel="apple-touch-icon" href="http://static4.businessinsider.com/assets/images/apple-touch-icon.png" />
+    <meta name="linkedin:owner" content="mid:218712">
+
+    <!--[if gte IE 9]>
+        <meta name="application-name" content="Business Insider - wealthadvisor"/>
+        <meta name="msapplication-tooltip" content="Start the page in Site Mode"/>
+        <meta name="msapplication-starturl" content="http://www.businessinsider.com/wealthadvisor"/>
+        <meta name="msapplication-window" content="width=800;height=600"/>
+        <meta name="msapplication-navbutton-color" content="#4C7C8D"/>
+
+        <meta name="msapplication-task" content="name=Tech;action-uri=http://www.businessinsider.com/sai;icon-uri=http://www.businessinsider.com/favicon.ico"/>
+        <meta name="msapplication-task" content="name=Media;action-uri=http://www.businessinsider.com/thewire;icon-uri=http://www.businessinsider.com/favicon.ico"/>
+        <meta name="msapplication-task" content="name=Wall Street;action-uri=http://www.businessinsider.com/clusterstock;icon-uri=http://www.businessinsider.com/favicon.ico"/>
+        <meta name="msapplication-task" content="name=Markets;action-uri=http://www.businessinsider.com/moneygame;icon-uri=http://www.businessinsider.com/favicon.ico"/>
+        <meta name="msapplication-task" content="name=Strategy;action-uri=http://www.businessinsider.com/warroom;icon-uri=http://www.businessinsider.com/favicon.ico"/>
+    <![endif]-->
+
+    <script type="text/javascript">BI.siteURI = 'http://www.businessinsider.com';</script>
+    <script type="text/javascript">BI.secureURI = 'https://www.businessinsider.com';</script>
+    <script type="text/javascript">BI.staticURI = 'http://static1.businessinsider.com';</script>
+    <script type="text/javascript">BI.env.setDomain('http://www.businessinsider.com');</script>
+    <script type="text/javascript">BI.sailthruHorizonURI = 'horizon.businessinsider.com'</script>
+
+    
+    <script type="text/javascript" src="//platform.linkedin.com/in.js">
+       api_key: x4dbohswv62d
+       authorize: true
+       scope: r_basicprofile r_emailaddress r_network rw_nus
+    </script>
+
+    
+</head>
+
+
+<body class="responsive ">
+<div data-cookie-notice-container></div>
+<!-- print only -->
+<img class="print" src="http://static1.businessinsider.com/assets/images/us/logos/logo-bi-print.png" width="150" />
+
+<!-- FB Connect -->
+<div id="fb-root" data-bi-facebook-root="155043519637"></div>
+<!-- / FB Connect -->
+
+<!--[if lt IE 8]>
+    <div class="container>
+        <div class="row">
+            <div class="alert alert-error alert-block">
+                <h4>Warning!</h4>
+                You are using an outdated version of Internet Explorer.  For security reasons you should <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="_blank" title="Upgrade IE">upgrade your browser</a>. Please go to Windows Updates and install the latest version.
+            </div>
+        </div>
+    </div>
+<![endif]-->
+
+    <div id="tray">
+        <div class="list-pipes filters container">
+            <ul class="container page">
+                <li><a href="#" class="active" data-view="featured">Featured</a></li>
+                <li><a href="#" data-view="trending">Trending</a></li>
+                <li><a href="#" data-view="latest">Recent</a></li>
+            </ul>
+        </div>
+        <div class="container page">
+            <div class="tray-control right">
+                <i class="fa fa-angle-right"></i>
+            </div>
+            <div class="tray-control left disabled">
+                <i class="fa fa-angle-left"></i>
+            </div>
+            <div class="container" style="overflow: hidden">
+                <div class="carousel-items row">
+                    <div class="item-container">
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- new masthead -->
+<div class="masthead">
+    <div class="masthead-bottom-gradient"></div>
+    <div class="container">
+        <div class="row">
+
+            <!-- BI Logo -->
+            <div class="span2 logo">
+                <div class="sprites logo-background"></div>
+                <div class="sprites logo-background-oneline"></div>
+                <a class="logo-link" href="/" title="Business Insider"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="Business Insider"></a>
+            </div>
+
+            <div class="span10 navigation">
+                <div class="row">
+
+                    <!-- user_menubar -->
+                    <div data-bi-ajax-route="/esi/user_menubar?0=json%3A%5B%5D"></div>
+                    <!-- Non-verticals -->
+                    <div class="non-verticals">
+                        <ul class="sprites">
+                            <li class="sprites hide-uk"><a href="/events">Events</a></li>
+                            <li class="sprites"><a href="http://intelligence.businessinsider.com">BI Intelligence</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                                <div class="tray-btn">
+                    <span class="open-label"><i class="fa fa-caret-down"></i></span>
+                    <span class="close-label"><i class="fa fa-caret-up"></i></span>
+                </div>
+                
+                <div class="row">
+                    <!-- Search -->
+                    <div class="span4 nav-search">
+                        <form method="get" action="/s" class="search-field">
+                            <input class="sprites" name="q" type="text" placeholder="Search">
+                            <button type="submit" title="Search"></button>
+                        </form>
+                    </div>
+
+                    <!-- Main Nav -->
+                    <div class="main-nav">
+                        <ul>
+                                                                                    <li class="Tech">
+                                <a class="item" data-dropdown-id="dropdown-Tech" href="/sai">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Tech                                </a>
+                            </li>
+                                                                                    <li class="Finance active">
+                                <a class="item" data-dropdown-id="dropdown-Finance" href="/clusterstock">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Finance                                </a>
+                            </li>
+                                                                                    <li class="Politics">
+                                <a class="item" data-dropdown-id="dropdown-Politics" href="/politics">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Politics                                </a>
+                            </li>
+                                                                                    <li class="Strategy">
+                                <a class="item" data-dropdown-id="dropdown-Strategy" href="/warroom">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Strategy                                </a>
+                            </li>
+                                                                                    <li class="Life">
+                                <a class="item" data-dropdown-id="dropdown-Life" href="/thelife">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Life                                </a>
+                            </li>
+                                                                                    <li class="Sports">
+                                <a class="item" data-dropdown-id="dropdown-Sports" href="/sportspage">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Sports                                </a>
+                            </li>
+                                                                                    <li class="Video">
+                                <a class="item" data-dropdown-id="dropdown-Video" href="/video">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    Video                                </a>
+                            </li>
+                                                                                    <li class="All">
+                                <a class="item" data-dropdown-id="dropdown-All" href="/">
+                                    <div class="triangle triangle-left"></div>
+                                    <div class="triangle triangle-right"></div>
+                                    All                                </a>
+                            </li>
+                                                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Nav Dropdowns -->
+    <div class="main-nav-dropdown ks-nav-dropdown" style="border-color: #185f7c">
+    </div>
+</div>
+<!-- / new masthead -->
+
+
+
+<div id="main-content" class="container">
+    <!-- flash messages -->
+    
+        <div class="subnav-container">
+        <div class="subnav-content">
+            
+
+<div data-bi-ad class="ad dfp" data-adunit="desktop/finance/wealthadvisor/post" data-authors="elena-holodny" data-pagetype="post" data-pos="atf" data-region="Subnav" data-sizes="728x90,970x250,970x90" data-tag="financial-advisor-insights" data-url="/financial-advisor-insights-december-29-2014-12" data-views="0-5000"></div>
+<script type="text/javascript">
+	(function() {
+		'use strict';
+
+		// Notify the DFP code that a new ad has just been rendered
+		amplify.publish('adRender');
+	}());
+</script>
+        </div>
+    </div>
+    
+    
+    <div class="siteskin-dropshadow">
+        <div class="row primary-row">
+                            <div class="breaking-module-rendered" id="breaking-module-rendered">
+                    <div data-bi-ajax-route="/esi/breaking_module?0=json%3A%5B%22Object%22%2C%22Post%22%2C%2254a1affa69bedddc082ead43%22%5D"></div>                </div>
+                        <div class="span8">
+                <div class="breaking-module-siteskin" id="breaking-module-siteskin"></div>
+    
+<a name="post-top"></a>
+
+
+<div id="share-email-tmpl">
+    <div id="shareEmailModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="shareEmailModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="shareEmailModalLabel"></h3>
+      </div>
+      <div class="modal-body">
+        <div class="share-email-error alert alert-error display-none"></div>
+
+        <div class="share-email-body">
+            <div class="register">
+                <form id="form_form" class="form-horizontal" action="#" method="post">
+                    <div class="control-group">
+                        <label for="mail_from" class="control-label">From</label>
+                        <div class="controls">
+                            <input type="text" name="mail_from" class="mail-from" placeholder="Your Email Address" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label for="mail_to" class="control-label">To</label>
+                        <div class="controls">
+                            <input type="text" name="mail_to" class="mail-to" placeholder="Friend's Email Address" />
+                        </div>
+                    </div>
+                    <input type="hidden" name="action" value="email" />
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="submit" class="btn submit email-post" value="Send" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="share-email-success" style="display:none">
+            <div class="alert alert-success">
+                You have successfully emailed the post.
+            </div>
+        </div>
+
+      </div>
+    </div>
+</div>
+
+
+
+<div  class="content post">
+    <div class="sl-layout-post">
+        
+<!-- Top category tags -->
+    <div class="category-wrapper" data-category-wrapper>
+
+            
+                            <span class="category-link" style="border-color: #cf4e00;">
+                    <a style="color: #cf4e00" href="http://www.businessinsider.com/wealthadvisor">Wealth Advisor</a>                </span>
+            
+        <span class="tags-top pull-right">
+            More:
+
+                                                        <a href="/category/financial-advisor-insights">Financial Advisor Insights</a>
+            
+                    </span>
+    </div>
+
+
+<h1>What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors</h1>
+
+<div id="content" class="content">
+    <div class="post-top">
+        <!-- Byline -->
+        
+<div class="flex byline">
+			<div class="flex-auto byline-icon">
+							<a class="author-photo author-photo-square" href="http://www.businessinsider.com/author/elena-holodny"><img class="author" src="http://static5.businessinsider.com/image/539f2b7becad048d24726bff-50-50/elena-holodny.jpg"></a>
+					</div>
+	
+	
+	<div class="flex-item">
+		<div class="list-pipes">
+			<ul>
+																		<li class="single-author"><a href="http://www.businessinsider.com/author/elena-holodny" rel="author">Elena Holodny</a></li>
+		                <li>
+    <div class="contact">
+        
+                    <a href="mailto:eholodny@businessinsider.com" data-toggle="tooltip" data-placement="top" title="" data-original-title="eholodny@businessinsider.com"><i class="fa fa-envelope-o"></i></a>
+        
+        
+        
+        
+                    <a href="http://twitter.com/elenaholodny" data-toggle="tooltip" data-placement="top" title="" data-original-title="Twitter feed"><i class="fa fa-twitter"></i></a>
+        
+        
+    </div>
+
+    </li>
+													                    </ul>
+                </div>
+                <div class="list-pipes">
+                    <ul>
+                		        			        <li class="date" data-bi-format="date" rel="1419892740">Dec. 29, 2014,  5:39 PM</li>		        			
+		    		        <li class="pageviews"><span class="sprites red views" title="views">2,127</span></li>
+		    
+		    		        			        <li title="Read comments" class="comments ks-read-comments-top">
+				        <a href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12#comments" class="views sprites comments-icon"></a>
+						<a class="comment_count" href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12#comments">1</a>			        </li>
+		        		    
+			</ul>
+
+		</div>
+	</div>
+</div>
+
+        <!-- Sharing -->
+        <div class="share">
+			
+<!-- RRSSB start -->
+<div class="rrssb-baseline share-container ks-share-top clearfix" style="display:block;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-top clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">facebook</span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">linkedin</span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">twitter</span>
+            </a>
+        </li>
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">google+</span>
+            </a>
+        </li>
+                <li class="printbtn ks-byline-print">
+            <a href="javascript:window.print()" title="print">
+                <i class="fa fa-print"></i>
+                <span class="text">print</span>
+            </a>
+        </li>
+                <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB end -->
+
+<!-- RRSSB TEST 1 start -->
+<div class="rrssb-test-1 share-container ks-share-top clearfix" style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-top clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="facebook-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="linkedin-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="twitter-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="googleplus-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="printbtn ks-byline-print">
+            <a href="javascript:window.print()" title="print">
+                <i class="fa fa-print"></i>
+                <span class="text">print</span>
+            </a>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 1 end -->
+
+<!-- RRSSB TEST 2 start -->
+<div class="rrssb-test-2 share-container ks-share-top clearfix" style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-top clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">share <span class="facebook-count"></span></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">share <span class="linkedin-count"></span></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">tweet <span class="twitter-count"></span></span>
+            </a>
+        </li>
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">share <span class="googleplus-count"></span></span>
+            </a>
+        </li>
+        <li class="printbtn ks-byline-print">
+            <a href="javascript:window.print()" title="print">
+                <i class="fa fa-print"></i>
+                <span class="text">print</span>
+            </a>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 2 end -->
+
+<!-- RRSSB TEST 3 start -->
+<div class="rrssb-test-3 share-container ks-share-top clearfix" style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-top clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">Share on Facebook <span class="facebook-count"></span></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">Share on Twitter <span class="twitter-count"></span></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">Share on Linkedin <span class="linkedin-count"></span></span>
+            </a>
+        </li>
+
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">share <span class="googleplus-count"></span></span>
+            </a>
+        </li>
+        <li class="printbtn ks-byline-print">
+            <a href="javascript:window.print()" title="print">
+                <i class="fa fa-print"></i>
+                <span class="text">print</span>
+            </a>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 3 end -->
+        </div>
+    </div>
+
+    <!-- Perfect Market content ad-->
+    
+		 <!-- END Perfect Market content ad-->
+
+    <div class="clear-both">
+		<div class="KonaBody post-content">
+			
+            
+<p><span class="KonaFilter image-container display-table float_right"><span><span data-post-image class="image on-image"><img src="http://static6.businessinsider.com/image/54a2f5506bb3f7f23df64607-1132-849/matryoshka-russia-2.jpg" border="0" alt="Matryoshka Russia"><span class="source"><span><a href="http://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Matryoshka_dolls_in_Budapest.jpg/1280px-Matryoshka_dolls_in_Budapest.jpg">Wikimedia Commons</a></span></span></span><p></span></span><em><strong>FA Insights is a daily newsletter from Business Insider that delivers the top news and commentary forfinancial advisors.</strong></em></p>
+<p><strong><a href="http://e.businessinsider.com/539f5e1cfd376d3e6900001d24hih.468/VKHYu0mONWzTmuv9A498e" target="_blank">Russia's Problems Are A Huge Warning Sign About Emerging Markets</a> (Morningstar) </strong></p>
+<p>Russia's seen a volatile December: hiked interest rates, increased inflation, and a plunging ruble. Morningstar's Karin Anderson suggests that Russia's problems reflect the larger risks associated with emerging markets.</p>
+<p>"Emerging markets' fundamentals can change fairly quickly with changes in political regimes, commodities pricing, or geopolitical risk. Second, currency fluctuations can have a quick and pronounced impact on investors' assessment of the risks and valuations of emerging-markets bonds," writes Anderson.</p>
+<p>"Because of those risks, Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows," Anderson adds.</p>
+<p><strong><a href="http://e.businessinsider.com/539f5e1cfd376d3e6900001d24hih.468/VKHYu0mONWzTmuwAA0234" target="_blank">F-Squared Paid $35 Million In A Settlement</a> (The Wall Street Journal) </strong></p>
+<p>"F-Squared Investments Inc., which builds investment portfolios out of exchange-traded funds, admitted it misled clients about its track record and agreed to pay $35 million in a settlement with regulators," reports Corrie Driebusch.</p>
+<p>The SEC filed separate civil charges against the former CEO. He stepped down from his position last month, but his lawyers maintain that the SEC's allegations "are misdirected and meritless."</p>
+<p><strong><a href="http://e.businessinsider.com/539f5e1cfd376d3e6900001d24hih.468/VKHYu0mONWzTmuwDA4fb9" target="_blank">Analysts Aren't Feeling Great About Commodities In 2015 </a>(Think Advisor)</strong></p>
+<p>Thanks in part to the strong US dollar, commodities have seen a tough year. And analysts don't think that things will get any better in the next one.</p>
+<p>A recent Bloomberg survey sees Brent sliding to $50 a barrel, and Goldman Sachs analysts "see further declines in prices for oil and for other commodities with anticipated strengthening of the US dollar in 2015 and weaker demand for commodities in China," reports Janet Levaux.</p>
+<p>Additionally, analysts have mixed feelings about agri-commodities in the next year.</p>
+<p><strong><a href="http://e.businessinsider.com/539f5e1cfd376d3e6900001d24hih.468/VKHYu0mOKCi9vzg8A13aa" target="_blank">An SEC Investor Advocate Will Push For Spending More On RIA Exams</a> (Financial Advisor Magazine) </strong></p>
+<p>"Securities and Exchange Commission Investor Advocate Rick Fleming said <span data-term="goog_981393261">Tuesday</span> he will push SEC chairman Mary Jo White to use a 'significant' portion of its extra $150 million for 2015 to go to increase financial advisoroversight," reports Ted Knutson.</p>
+<p>"Fraudulent or abusive practices by an investment advisor," said Fleming, "can be very difficult for an individual investor to detect, particularly if the advisor goes so far as to falsify account statements or other records."</p>
+<p>Fleming reportedly has limited clout within the agency.</p>
+<p><strong><a href="http://e.businessinsider.com/539f5e1cfd376d3e6900001d24hih.468/VKFfcMPocp9-qfYGA58ab" target="_blank">There Are 4 Things Advisors Need To Know To Avoid Getting Fired</a> (Financial Planning) </strong></p>
+<p>Veteran Wall Streeter Charlotte Beyer has four tips for how to keep wealthy investors as clients.</p>
+<p>The first two are related: advisors should probe and get feedback, and they should overcommunicate. The biggest reason advisors get fired, writes Beyer, is "it's always about communication — usually a lack of — every time."</p>
+<p>Additionally, advisors should be diplomatic about demands by anticipating a client's needs. And finally, advisors should be consistent by emphasizing the long-term approach.</p>
+
+            
+					</div>
+
+        
+<div class="cotd">
+
+    <h3>Follow Financial Advisor Insights and never miss an update!</h3>
+
+    <form id="form_form" class="form-default" action="/newsletter" method="get">
+        <fieldset>
+			<div class="fb_like">
+
+				<label>Get updates in your Facebook	news feed.</label>
+
+				<div class="fb-like" data-href="http://www.businessinsider.com/category/financial-advisor-insights" data-send="false" data-layout="standard" data-width="295" data-show-faces="true"></div>
+			</div>
+            <div class="fields-newsletter">
+
+				<p>Get updates in your inbox.</p>
+									<a name="fa_email"></a>
+					<div class="f_email text required">
+						<input required placeholder="Email Address" id="f_email" name="email" type="text" />
+						<span class="msg"><span></span></span>
+						</div>
+                    <input class="btn submit" type="submit" value="Sign-Up" />
+	            
+
+				<div style="clear: both;"></div>
+
+				<a class="privacy" href="/privacy-policy" target="_blank">Privacy Policy</a>
+
+            </div>
+        </fieldset>
+        <input type="hidden" name="newsletters[]" value="Financial Advisor Insights" />
+
+            <input type="hidden" name="source" value="financial_advisor_insights" />
+
+    </form>
+
+</div>
+
+<div class="cotd-b margin-bottom">
+    <h3>Get updates in your inbox</h3>
+    <p><i class="smaller">Subscribe to Financial Advisor Insights and never miss an update!</i></p>
+    <form id="form_formb" class="form-default" action="/newsletter" method="get">
+        <fieldset>
+                            <div class="input-append">
+                    <input required placeholder="Email Address" id="f_email" name="email" type="text" />
+                    <input class="btn submit" type="submit" value="Sign-Up" />
+                </div>
+                <div class="learn-more">
+                    <a href="/privacy-policy" target="_blank">Privacy Policy</a>
+                </div>
+                    </fieldset>
+        <input type="hidden" name="newsletters[]" value="Financial Advisor Insights" />
+
+            <input type="hidden" name="source" value="financial_advisor_insights" />
+  
+    </form>
+</div>
+    </div>
+</div>
+
+        <div id="social-reader-notification" class="alert clear-both" style="display:none;"></div>
+
+        <div id="facebook-notification" class="alert" style="display:none;"></div>
+
+            </div>
+
+        
+        <div class="bottom-share-module clearfix clear-both">
+            <!-- RRSSB BOTTOM POST CALL -->
+            
+<!-- RRSSB start -->
+<div class="rrssb-baseline share-container ks-share-bottom clearfix " style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-bottom clearfix">
+        <li class="facebook ks-sharemodule-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">facebook</span>
+            </a>
+        </li>
+        <li class="linkedin ks-sharemodule-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">linkedin</span>
+            </a>
+        </li>
+        <li class="twitter ks-sharemodule-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">twitter</span>
+            </a>
+        </li>
+        <li class="googleplus ks-sharemodule-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">google+</span>
+            </a>
+        </li>
+        <li class="email button-email ks-sharemodule-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB end -->
+
+<!-- RRSSB TEST 1 start -->
+<div class="rrssb-test-1 share-container ks-share-bottom clearfix " style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-bottom clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="facebook-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="linkedin-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="twitter-count-1 social-count-center"></span>
+            </a>
+        </li>
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="googleplus-count-1 social-count-center"></span>
+            </a>
+        </li>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 1 end -->
+
+<!-- RRSSB TEST 2 start -->
+<div class="rrssb-test-2 share-container ks-share-bottom clearfix " style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-bottom clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">share <span class="facebook-count"></span></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">share <span class="linkedin-count"></span></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">tweet <span class="twitter-count"></span></span>
+            </a>
+        </li>
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">share <span class="googleplus-count"></span></span>
+            </a>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 2 end -->
+
+<!-- RRSSB TEST 3 start -->
+<div class="rrssb-test-3 share-container ks-share-bottom clearfix " style="display:none;">
+    <!-- buttons start here -->
+    <ul class="rrssb-buttons rrssb-bottom clearfix">
+        <li class="facebook ks-byline-fb">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="facebook" class="popup">
+                <i class="fa fa-facebook-square"></i>
+                <span class="text">Share on Facebook <span class="facebook-count"></span></span>
+            </a>
+        </li>
+        <li class="twitter ks-byline-tweet">
+            <a href="http://twitter.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;via=businessinsider&amp;text=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors" title="twitter" class="popup">
+                <i class="fa fa-twitter"></i>
+                <span class="text">Share on Twitter <span class="twitter-count"></span></span>
+            </a>
+        </li>
+        <li class="linkedin ks-byline-linkedin">
+            <a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12&amp;title=What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors&amp;summary="Russia is a reminder that emerging markets remain subject to swift and meaningful changes in capital flows."" title="linkedin" class="popup">
+                <i class="fa fa-linkedin"></i>
+                <span class="text">Share on Linkedin <span class="linkedin-count"></span></span>
+            </a>
+        </li>
+
+        <li class="googleplus ks-byline-gplusone">
+            <a href="https://plus.google.com/share?url=http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" title="google+" class="popup">
+                <i class="fa fa-google-plus"></i>
+                <span class="text">Share on Google Plus <span class="googleplus-count"></span></span>
+            </a>
+        </li>
+        <li class="email button-email ks-byline-email" data-href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12">
+            <a href="#" title="email">
+                <i class="fa fa-envelope-o"></i>
+                <span class="text">email</span>
+            </a>
+        </li>
+    </ul>
+    <!-- buttons end here -->
+</div>
+<!-- RRSSB TEST 3 end -->
+
+<!-- THis Empty div tells sailthru where to fly out the concierge promo. -->
+<div id="bottom-share-links"></div>
+        </div>
+
+                    
+<div class="bottom-recommended clear-fix pull-left ks-recommended">
+    <h3 class="underlined thin">Recommended For You</h3>
+    <!-- Concierge posts -->
+    <ul class="media-list pull-left ">
+        <li class="media concierge-post">
+            <a href=""><div class="seealso-image"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="" /></div></a>
+            <h4 class="related"><a href=""></a></h4>
+        </li>
+        <li class="media concierge-post">
+            <a href=""><div class="seealso-image"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="" /></div></a>
+            <h4 class="related"><a href=""></a></h4>
+        </li>
+        <li class="media concierge-post">
+            <a href=""><div class="seealso-image"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="" /></div></a>
+            <h4 class="related"><a href=""></a></h4>
+        </li>
+        <li class="media concierge-post">
+            <a href=""><div class="seealso-image"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="" /></div></a>
+            <h4 class="related"><a href=""></a></h4>
+        </li>
+                <li class="media concierge-post last-story">
+            <a href=""><div class="seealso-image"><img src="http://static4.businessinsider.com/assets/images/transparent.gif" alt="" /></div></a>
+            <h4 class="related"><a href=""></a></h4>
+        </li>
+    </ul>
+</div>
+            <div class="clearfix"></div>
+        
+                                    <div id='taboola-below-main-column' class='ks-taboola'></div>
+                <script type="text/javascript">                 
+                window._taboola = window._taboola || [];
+                                    _taboola.push({mode:'thumbs-1r', container:'taboola-below-main-column', placement:'below-main-column'});
+                                </script>
+                        <div class="clearfix"></div>
+        
+                <div class="clearfix"></div>
+
+        
+                
+        
+        
+        	<!-- Comments Form -->
+	<a name="comment-form"></a>
+	<div data-bi-ajax-route="/esi/user_commentbox?0=&1=NULL&2=financial-advisor-insights-december-29-2014-12"></div>	<!-- / Comments Form -->
+
+<!-- Comments -->
+<div id="comments" class="">
+    
+<a name="comments"></a>
+<div class="comments">
+
+    <h3>Comments <a href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12/comments.rss" class="" title="RSS"><i class="fa fa-rss"></i></a></h3>
+
+    
+    <div class="tabs">
+
+	    <div id="pundit-request-success-message"></div>
+
+		<div class="comments-tabs">
+
+			<ul class="comments-tabs nav nav-tabs gradient">
+
+				<li id="comments-1" class="pundit-comments-content-message tab">
+					<a href="#pundits" data-toggle="tab">
+						Insiders
+						<span class="badge badge-info">0</span>
+					</a>
+				</li>
+				<li id="comments-2" class="comments-content-message tab active">
+					<a href="#non-pundits" data-toggle="tab">
+						All Comments
+						<span class="badge badge-info">1</span>
+					</a>
+				</li>
+                <div id="pundit-request-container" class="pundit-request-container pull-right gradient">
+                    <div class="pundit-request" rel="pundit-request-success-message">
+                        <a href="/register?first=index&pundit_request=1">Apply To Be An "Insider" &#187;</a>
+                    </div>
+                </div>
+			</ul>
+
+		</div>
+
+	</div>
+
+    <div id="comments-container">
+        <div id="comments-loading-image">
+            <img src="http://static3.businessinsider.com/assets/images/icons/icon_loading.gif" alt="Loading" /> <span style="color:#dd4725">Loading</span>
+        </div>
+        <div class="comments-content tab-content"></div>
+        <div id="pundit-request-success-message-bottom" class="margin-top"></div>
+
+        <!-- Receive New Comments Alert -->
+        
+    </div>
+</div>
+
+<!-- Bleachers -->
+
+</div>
+<!-- / Comments -->
+
+        <!-- Schema.org/Article metadata -->
+<div style="display:none;" itemscope itemtype="http://schema.org/Article">
+    <h1 itemprop="name">What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors</h1>
+    <a href="http://www.businessinsider.com/financial-advisor-insights-december-29-2014-12" itemprop="url">What's Happening In Russia Is A Big Wake-Up Call For Emerging Market Investors</a>
+    <img src="http://static3.businessinsider.com/image/54a1d7ee6da8115b5a51cb6b-100-100/whats-happening-in-russia-is-a-big-wake-up-call-for-emerging-market-investors.jpg"  itemprop="image" />
+    <div itemprop="description"><p>FA&nbsp;Insights&nbsp;is a daily newsletter...</p></div>
+</div>
+<!-- / Schema.org/Article metadata -->
+        
+    
+</div>
+
+                        </div>
+                                                    <div class="span4">
+                                <div class="main-rail">
+                                    
+<div id="right-rail" class="right-rail">
+	<div class="sl-layout-post">
+		<!-- PERFECT MARKET RR -->
+					<!-- Only show at uppermost top if skin is active -->
+			
+			<!-- Vertical Host -->
+													<!-- / Vertical Host -->
+
+			<!-- Countdown Clock  -->
+						<!-- / Countdown Clock  -->
+
+			
+			<!-- BI Live Widget (Above Fold Placement) -->
+										
+			<!-- Newsletters -->
+			
+<div class="right-subscribe">
+	<div class="right-news">
+		<h3>Get <span class="news-vert">Wealth Advisor</span> Emails &amp; Alerts</h3>
+		<div class="alert" id="news-alert"></div>
+		<form class="form" action="/newsletter?source=sidebar" method="post">
+			<div class="input-append">
+				<input id="news-email" name="email" type="text" placeholder="Email Address" data-email="">
+				<button class="btn submit" id="news-signup" type="submit">Sign-Up</button>
+			</div>
+			<a class="pull-right smallest" href="/newsletter">Learn More &#187;</a>
+
+			<div id="newsletter-expand" class="newsletter-preview-links" style="display:none">
+				<ul>
+											<li>
+							<label class="checkbox">
+								<input type="checkbox" name="newsletters[]" value="Wealth Advisor Select" checked="checked">
+									Wealth Advisor Select							</label>
+						</li>
+									</ul>
+				<div class="divider">More</div>
+				<div class="accordion" id="news-categories">
+																											<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id1">
+									<i class="fa fa-caret-right"></i><span>Featured</span>
+								</a>
+							</div>
+							<div id="news-category-id1" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Business Insider Select"
+																											/>
+													Business Insider Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Tech Select"
+																											/>
+													Tech Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Tech Chart Of The Day"
+																											/>
+													Tech Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Markets Chart Of The Day"
+																											/>
+													Markets Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="10 Things Before the Opening Bell"
+																											/>
+													10 Things Before the Opening Bell												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Instant MBA"
+																											/>
+													Instant MBA												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Breaking News"
+																											/>
+													Breaking News												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Master Events List"
+																											/>
+													Business Insider Events												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id2">
+									<i class="fa fa-caret-right"></i><span>Entertainment</span>
+								</a>
+							</div>
+							<div id="news-category-id2" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Entertainment Select"
+																											/>
+													Entertainment Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Sports Select"
+																											/>
+													Sports Select												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id3">
+									<i class="fa fa-caret-right"></i><span>Finance</span>
+								</a>
+							</div>
+							<div id="news-category-id3" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Finance Select"
+																											/>
+													Finance Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Markets Select"
+																											/>
+													Markets Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Monday Scouting Report"
+																											/>
+													Monday Scouting Report												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Your Money Select"
+																											/>
+													Your Money Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Financial Advisor Insights"
+																											/>
+													Financial Advisor Insights												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Smart Investor"
+																											/>
+													Smart Investor												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id4">
+									<i class="fa fa-caret-right"></i><span>Strategy</span>
+								</a>
+							</div>
+							<div id="news-category-id4" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Strategy Select"
+																											/>
+													Strategy Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Advertising Select"
+																											/>
+													Advertising Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Retail Select"
+																											/>
+													Retail Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Careers Select"
+																											/>
+													Careers Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Advertising: The Brief"
+																											/>
+													Advertising: The Brief												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id5">
+									<i class="fa fa-caret-right"></i><span>Politics</span>
+								</a>
+							</div>
+							<div id="news-category-id5" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Politics Select"
+																											/>
+													Politics Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Military Select"
+																											/>
+													Military Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Law & Order Select"
+																											/>
+													Law & Order Select												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id6">
+									<i class="fa fa-caret-right"></i><span>Life</span>
+								</a>
+							</div>
+							<div id="news-category-id6" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Life Select"
+																											/>
+													Life Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Transportation Select"
+																											/>
+													Transportation Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Education Select"
+																											/>
+													Education Select												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id7">
+									<i class="fa fa-caret-right"></i><span>Tech</span>
+								</a>
+							</div>
+							<div id="news-category-id7" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Enterprise Select"
+																											/>
+													Enterprise Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Science Select"
+																											/>
+													Science Select												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Mobile Chart Of The Day"
+																											/>
+													Mobile Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="E-Commerce Chart Of The Day"
+																											/>
+													E-Commerce Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Payments Chart Of The Day"
+																											/>
+													Payments Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Digital Media Chart Of The Day"
+																											/>
+													Digital Media Chart Of The Day												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="IoT Chart of the Day"
+																											/>
+													IoT Chart of the Day												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id8">
+									<i class="fa fa-caret-right"></i><span>Charts of the Day</span>
+								</a>
+							</div>
+							<div id="news-category-id8" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Sports Chart Of The Day"
+																											/>
+													Sports Chart Of The Day												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+																	<div class="accordion-group">
+							<div class="accordion-heading">
+								<a class="accordion-toggle collapsed" data-toggle="collapse" href="#news-category-id9">
+									<i class="fa fa-caret-right"></i><span>Top 10 Things</span>
+								</a>
+							</div>
+							<div id="news-category-id9" class="accordion-body collapse">
+								<div class="accordion-inner">
+									<ul>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="10 Things In Tech You Need To Know"
+																											/>
+													10 Things In Tech You Need To Know												</label>
+											</li>
+																																																						<li>
+												<label class="checkbox">
+													<input type="checkbox" name="newsletters[]" value="Closing Bell"
+																											/>
+													Closing Bell												</label>
+											</li>
+																			</ul>
+								</div>
+							</div>
+						</div>
+									</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+			<!-- Show here if skin is not active -->
+												<div class="right-ad">
+						<div class="ad-height-250">
+							<h5 class="text-ad">Advertisement</h5>
+							
+
+<div data-bi-ad class="ad dfp" data-adunit="desktop/finance/wealthadvisor/post" data-authors="elena-holodny" data-pagetype="post" data-region="Upper 300" data-sizes="300x250,300x600,300x400,300x1050" data-tag="financial-advisor-insights" data-url="/financial-advisor-insights-december-29-2014-12" data-views="0-5000"></div>
+<script type="text/javascript">
+	(function() {
+		'use strict';
+
+		// Notify the DFP code that a new ad has just been rendered
+		amplify.publish('adRender');
+	}());
+</script>
+						</div>
+					</div>
+		        		    
+			<!-- Your Money -->
+							<div class="stock-ticker ks-rr-your-money">
+	<h3 class="underlined">Your Money</h3>
+    <table class="xignite-indices">
+	                <tr>
+                <td>
+                    NASDAQ Composite                </td>
+                <td class="price">4,727</td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            -9.24                        </span>
+                                    </td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            (-0.195%)
+                        </span>
+                                    </td>
+            </tr>
+                    <tr>
+                <td>
+                    S&P 500                </td>
+                <td class="price">2,058</td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            -0.7                        </span>
+                                    </td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            (-0.034%)
+                        </span>
+                                    </td>
+            </tr>
+                    <tr>
+                <td>
+                    NYSE Composite                </td>
+                <td class="price">10,831</td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            -8.32                        </span>
+                                    </td>
+                <td>
+                                            <span class="xignite-indices-red">
+                            (-0.077%)
+                        </span>
+                                    </td>
+            </tr>
+            </table>
+
+            <div class="ad-marketswidget margin-top">
+            <h5 class="text-ad">Sponsored By</h5>
+
+                            <div class="marketswidget-unit">
+                    
+
+<div data-bi-ad class="ad dfp" data-adunit="desktop/finance/wealthadvisor/post" data-authors="elena-holodny" data-pagetype="post" data-region="Stock Widget 1" data-sizes="88x31" data-tag="financial-advisor-insights" data-url="/financial-advisor-insights-december-29-2014-12" data-views="0-5000"></div>
+<script type="text/javascript">
+	(function() {
+		'use strict';
+
+		// Notify the DFP code that a new ad has just been rendered
+		amplify.publish('adRender');
+	}());
+</script>
+                </div>
+            
+                    </div>
+    </div>			
+			<div id="taboola-right-rail-thumbnails"></div>
+<script type="text/javascript">
+	window._taboola = window._taboola || [];
+	_taboola.push({
+		mode: 'organic-thumbnails-a',
+		container: 'taboola-right-rail-thumbnails',
+		placement: 'Right Rail Thumbnails',
+		target_type: 'video'
+	});
+</script>
+							<!-- Linkedin App -->
+							
+		 	                <div class="right-ad">
+                    <div>
+                        <div class="sponsored-content-widget ks-rr-sponsored-content-widget">
+    <h3 class="underlined">Featured</h3>
+    <ul class="media-list">
+                <li id="id-54a3039b6da811105b8b4568" class="media">
+                        <a class="pull-left" href="http://www.businessinsider.com/spanx-ceo-sara-blakely-aha-moment-2014-12">
+                                    <img src="http://static3.businessinsider.com/image/54a302fbecad04ea79ce4466-60/heres-the-surprising-story-behind-spanx-ceo-sara-blakelys-aha-moment.jpg" alt="Here's The Surprising Story Behind Spanx CEO Sara Blakely's 'Aha Moment'" />
+                            </a>
+            <div class="media-body">
+                <p><a class="title" href="http://www.businessinsider.com/spanx-ceo-sara-blakely-aha-moment-2014-12">Here's The Surprising Story Behind Spanx CEO Sara Blakely's 'Aha Moment'</a></p>
+            </div>
+            <p class="align-right">
+                <a href="http://www.businessinsider.com/idea-factory">More &quot;Idea Factory&quot; »</a>            </p>
+        </li>
+                <li id="id-5498770eeab8eace28371e76" class="media">
+                        <a class="pull-left" href="http://www.businessinsider.com/nba-power-rankings-christmas-2014-12">
+                                    <img src="http://static4.businessinsider.com/image/549893b86bb3f7b23d525c39-60/nba-power-rankings-where-every-team-stands-going-into-2015.jpg" alt="NBA POWER RANKINGS: Where Every Team Stands Going Into 2015" />
+                            </a>
+            <div class="media-body">
+                <p><a class="title" href="http://www.businessinsider.com/nba-power-rankings-christmas-2014-12">NBA POWER RANKINGS: Where Every Team Stands Going Into 2015</a></p>
+            </div>
+            <p class="align-right">
+                <a href="http://www.businessinsider.com/category/2015-watch-list">More &quot;2015 Watch List&quot; »</a>            </p>
+        </li>
+                <li id="id-5489b1946bb3f745296de643" class="media">
+                        <a class="pull-left" href="http://www.businessinsider.com/us-energy-production-boom-charts-2014-12">
+                                    <img src="http://static2.businessinsider.com/image/5489bcc46bb3f7de5d6de629-60/these-6-charts-show-how-us-energy-boomed-and-disrupted-the-global-energy-game.jpg" alt="These 6 Charts Show How US Energy Boomed And Disrupted The Global Energy Game" />
+                            </a>
+            <div class="media-body">
+                <p><a class="title" href="http://www.businessinsider.com/us-energy-production-boom-charts-2014-12">These 6 Charts Show How US Energy Boomed And Disrupted The Global Energy Game</a></p>
+            </div>
+            <p class="align-right">
+                <a href="http://www.businessinsider.com/think-global">More &quot;Think Global&quot; »</a>            </p>
+        </li>
+                <li id="id-54949daaeab8ea44412cdb75" class="media">
+                        <a class="pull-left" href="http://www.businessinsider.com/peter-thiel-mentorship-2014-12">
+                                    <img src="http://static4.businessinsider.com/image/5494a5d1eab8eaec59198dd2-60/peter-thiel-explains-why-mentorship-is-tricky-for-tech-companies.jpg" alt="Peter Thiel Explains Why Mentorship Is Tricky For Tech Companies" />
+                            </a>
+            <div class="media-body">
+                <p><a class="title" href="http://www.businessinsider.com/peter-thiel-mentorship-2014-12">Peter Thiel Explains Why Mentorship Is Tricky For Tech Companies</a></p>
+            </div>
+            <p class="align-right">
+                <a href="http://www.businessinsider.com/idea-factory">More &quot;Idea Factory&quot; »</a>            </p>
+        </li>
+            </ul>
+</div>                    </div>
+                </div>
+            
+			<!-- Facebook Promo -->
+			
+			<!-- Facebook App -->
+			<div class="facebook-app-container" style="display:none;">
+	<h3 class="underlined">Welcome, <span id="fb-username"></span>!</h3>
+	<div class="facebook-app media">
+
+		<div class="fb-profile-pic pull-left"></div>
+
+		<div class="media-body">
+
+			<h5>You are logged into Facebook</h5>
+
+			<h5>Social: <a class="switch-off" href=""></a></h5>
+
+			<ul class="clearfix">
+				<li class="bi-popover activity"><a href="">Your Activity</a><span>|</span>
+					<div class="popover bottom">
+						<div class="arrow"></div>
+						<h3 class="popover-title">These articles have been shared on your timeline. You can remove them here:</h3>
+						<div class="popover-content">
+							<div class="fb-remove-articles"></div>
+						</div>
+					</div>
+				</li>
+				<li class="bi-popover options"><a href="">Options</a>
+					<div class="popover bottom">
+						<div class="arrow"></div>
+						<h3 class="popover-title">Notify me when a story is shared.</h3>
+						<div class="popover-content">
+							<div>						
+								<form id="fb-app-form">
+									<label class="radio inline">
+										<input type="radio" name="shared" value="true" id="notify_yes">Yes</label>
+									<label class="radio inline">
+										<input type="radio" name="shared" value="false" id="notify_no">No</label>
+								</form>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ul>
+
+		</div>	
+
+	</div>
+</div>
+
+	        <!-- Google App -->
+	        <div class="google-app-container" style="display:none;">
+    <h3 class="underlined">Welcome, <span id="gp-username"></span>!</h3>
+    <div class="google-app media">
+
+        <div class="gp-profile-pic pull-left"></div>
+
+        <div class="media-body">
+
+            <h5>You are logged in with Google</h5>
+
+            <h5>Social: <a class="switch-off" href=""></a></h5>
+
+            <ul class="clearfix">
+                <li class="bi-popover activity"><a href="">Your Activity</a><span>|</span>
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <h3 class="popover-title">These articles have been added to your Google activity log. You can remove them here:</h3>
+                        <div class="popover-content">
+                            <div class="gp-remove-articles"></div>
+                        </div>
+                    </div>
+                </li>
+                <li class="bi-popover options"><a href="">Options</a>
+                    <div class="popover bottom">
+                        <div class="arrow"></div>
+                        <h3 class="popover-title">Notify me when a story is shared.</h3>
+                        <div class="popover-content">
+                            <div>                       
+                                <form id="gp-app-form">
+                                    <label class="radio inline">
+                                        <input type="radio" name="shared" value="true" id="notify_yes">Yes</label>
+                                    <label class="radio inline">
+                                        <input type="radio" name="shared" value="false" id="notify_no">No</label>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>  
+
+    </div>
+</div>
+
+			<!-- Editorial Sidebar -->
+							<div data-bi-ajax-route="/esi/ed_sidebar"></div>			
+			<!-- Trending -->
+			<div class="trending ks-trending-recirculation">
+				<h3 class="underlined">Trending</h3>
+			</div>
+
+			<!-- Read Me -->
+			<div data-bi-ajax-route="/esi/readme_module?0=300&1=wealthadvisor"></div>
+							<!-- The Hive -->
+							
+			<!-- Editorial Sidebar 2 -->
+							<!-- editorial sidebar 2 -->
+<div id="editorial2" class="ks-rr-editorial-2" data-bi-heatmap="editorial2">
+	<h3 class="underlined">BI Intelligence</h3>
+	<div>
+		<div style="width: 47.995%; display: block; position: relative; float: left; margin: 0 0 2% 2%;"><a href="https://intelligence.businessinsider.com/the-internet-of-things-is-rising-examining-the-internet-of-things-2014-9?utm_source=House&amp;utm_term=RR-IoT&amp;utm_campaign=RR"><img src="https://static-ssl.businessinsider.com/image/51092209ecad046342000012/nest.png " border="0" style="width: 100%; margin-bottom: 5px;" /></a>
+<div style="height: 120px !important;"><a href="https://intelligence.businessinsider.com/the-internet-of-things-is-rising-examining-the-internet-of-things-2014-9?utm_source=House&amp;utm_term=RR-IoT&amp;utm_campaign=RR"><span style="color: #000000;">Here's How The Internet Of Things Will Grow Across Home, Enterprise, And Government </span></a></div>
+</div>
+<div style="width: 47.995%; display: block; position: relative; float: left; margin: 0 0 2% 2%;"><a href="https://intelligence.businessinsider.com/same-day-delivery-is-gaining-traction-and-will-cause-in-store-sales-in-big-cities-to-decline-2014-9?utm_source=House&amp;utm_term=RR-Samedaydelivery&amp;utm_campaign=RR"><img src="https://static-ssl.businessinsider.com/image/53fe4b49eab8ea81387cb1f9/bii-sameday-scenarios.png" border="0" style="width: 100%; margin-bottom: 5px;" /></a>
+<div style="height: 120px !important;"><a href="https://intelligence.businessinsider.com/same-day-delivery-is-gaining-traction-and-will-cause-in-store-sales-in-big-cities-to-decline-2014-9?utm_source=House&amp;utm_term=RR-Samedaydelivery&amp;utm_campaign=RR"><span style="color: #000000;">Same-Day Delivery Services Are Going After Brick-And-Mortar Retailers&rsquo; Last Big Advantage</span></a></div>
+</div>
+<div style="width: 47.995%; display: block; position: relative; float: left; margin: 0 0 20px 2%;"><a href="https://intelligence.businessinsider.com/the-beacons-explainer-everything-you-need-to-know-about-beacons-and-apples-ibeacon-system-2014-7?utm_source=House&amp;utm_term=RR-BEACN&amp;utm_campaign=RR"><img src="http://static3.businessinsider.com/image/53ceb45e69bedd9c6e0e23e5/bii-beacons-installed-base-estimate-1.png" border="0" style="width: 100%; margin-bottom: 5px;" /></a>
+<div style="height: 120px !important;"><a href="https://intelligence.businessinsider.com/the-beacons-explainer-everything-you-need-to-know-about-beacons-and-apples-ibeacon-system-2014-7?utm_source=House&amp;utm_term=RR-BEACN&amp;utm_campaign=RR"><span style="color: #000000;">THE BEACONS FAQ: It's Time To Set The Story Straight</span></a></div>
+</div>
+<div style="width: 47.995%; display: block; position: relative; float: left; margin: 0 0 20px 2%;"><a href="https://intelligence.businessinsider.com/the-social-commerce-report-how-social-networks-are-driving-immediate-sales-and-influencing-purchases-down-the-line-2014-9?utm_source=House&amp;utm_term=RR-SOCCOMM&amp;utm_campaign=RR"><img src="http://static1.businessinsider.com/image/51d71e9e6bb3f7cf10000008/nordstrom-pinterest.jpg" border="0" style="width: 100%; margin-bottom: 5px;" /></a>
+<div style="height: 120px !important;"><a href="https://intelligence.businessinsider.com/the-social-commerce-report-how-social-networks-are-driving-immediate-sales-and-influencing-purchases-down-the-line-2014-9?utm_source=House&amp;utm_term=RR-SOCCOMM&amp;utm_campaign=RR"><span style="color: #000000;">How Social Networks Are Driving More Sales And Influencing Online And Offline Purchases</span></a></div>
+</div>
+<div style="border-top: 1px solid #ddd; margin-top: 20px; margin-left: -20px; width: 340px; clear: both;">
+<div style="margin: 30px 20px 0px 20px;">
+<h3 class="underlined">Read Business Insider On The Go</h3>
+<div class="content" style="height: 190px; text-align: center !important; background-image: url('http://static2.businessinsider.com/image/520a3568ecad04d97a000017/greybackground.png'); background-repeat: no-repeat; background-position: bottom center; overflow: hidden;">
+<div style="float: left; margin-top: 21px; display: block; z-index: 1; width: 300px; border-bottom: 1px solid #9d9d9d;"><a href="/about/mobile"><img src="http://static2.businessinsider.com//image/544a63ddecad04d00aa997b7-260/biapp-oct14-v2.png" border="0" /></a></div>
+<div style="z-index: 100; margin: 0px 15px 86px 200px; position: absolute; height: 90px; width: 90px; -moz-border-radius: 45px; border-radius: 45px; background-color: #2e79a6; -moz-box-shadow: 3px 3px 4px rgba(0,0,0,0.6); -webkit-box-shadow: 3px 3px 4px rgba(0,0,0,0.6); box-shadow: -3px 3px 4px rgba(0,0,0,0.6); text-align: center; vertical-align: middle !important;">
+<p style="font-family: Helvetica Neue, Arial, sans-serif; color: white; font-size: 18px; font-weight: 100; line-height: 20px; margin-top: 23px;">FREE App<br />Download</p>
+</div>
+</div>
+<div style="text-align: center; margin: 10px auto; width: 260px; display: block;"><img src="http://static2.businessinsider.com//image/544aa0d0ecad044925a997a5/bi_app_gif.gif" border="0" /></div>
+<div style="text-align: center !important; width: 100%; display: block;"><a href="https://itunes.apple.com/us/app/business-insider/id554260576?mt=8"><img src="http://static2.businessinsider.com/image/51e9584f69beddbb1d000003-208/appstorebadgeen.png" border="0" style="margin: 0px 0px 10px 0px;" /></a> <br /><a href="http://www.businessinsider.com/about/mobile">Available for iPhone, iPad, Android, BlackBerry and Windows</a> <br /> <a href="http://www.businessinsider.com/about/mobile"><img src="http://static1.businessinsider.com/image/51e95c6aeab8ea3845000009/appleicon.png" border="0" style="margin: 10px 5px;" /></a> <a href="http://www.businessinsider.com/about/mobile"><img src="http://static4.businessinsider.com/image/51e95c6aeab8eab74700000b/androidicon.png" border="0" style="margin: 10px 5px;" /></a><a href="http://www.businessinsider.com/about/mobile"><img src="http://static1.businessinsider.com/image/51e95c6aecad04b45d000002/.png" border="0" style="margin: 10px 5px;" /></a><a href="http://www.businessinsider.com/about/mobile"><img src="http://static5.businessinsider.com/image/5271611eeab8ea5e3bfb295b/windowsicon.png" border="0" style="margin: 10px 5px;" /></a></div>
+</div>
+</div>	</div>
+</div>
+<!-- / editorial sidebar 2 -->
+			
+			<!-- BI Live Widget (Below Fold Placement) -->
+							<div data-bi-ajax-route="/esi/live_feed_module?0=300&1=wealthadvisor&2=below_fold"></div>			
+			<!-- Author Sold -->
+			
+			<!-- Jobs Widget -->
+			
+<!-- Jobs Module -->
+<div class="jobs ks-rr-jobs hide-uk">
+	<h5 class="text-ad pull-right"><a href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin026&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-all-jobs-applys" title="Visit Career Builder"><img src="http://static3.businessinsider.com/assets/images/careerbuilder.png" alt="Career Builder"></a></h5>
+	<h3 class="underlined">Find A Job</h3>
+
+	<div class="row-fluid">
+		<div class="span6">
+			<ul>
+				<li>
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=technology&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin020&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-tech-applys">Tech Jobs</a>
+				</li>
+				<li class="">
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=media&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin021&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-media-applys">Media Jobs</a>
+				</li>
+				<li class="">
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=finance&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin022&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-finance-applys">Finance Jobs</a>
+				</li>
+			</ul>
+		</div>
+		<div class="span6">
+			<ul>
+				<li>
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=c-level&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin023&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-c-level-applys">C-Level Jobs</a>
+				</li>
+				<li>
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=design&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin024&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-design-applys">Design Jobs</a>
+				</li>
+				<li>
+					<a rel="nofollow" href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=sales&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin025&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-sales-applys">Sales Jobs</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer border-top-dotted clearfix">
+		<div class="pull-right">
+			<a href="http://www.careerbuilder.com/Jobseeker/Jobs/JobResults.aspx?IPath=QH&qb=1&s_rawwords=&s_freeloc=&s_jobtypes=ALL&lr=cbpar_busiin&siteid=cbpar_busiin026&utm_source=businessinsider&utm_medium=partner&utm_campaign=businessinsider-all-jobs-applys">See All Jobs</a>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+			<!-- Partners -->
+			<div class="right-ad">
+				<div class="partner-thanks clearfix">
+				<h3 class="underlined">Thanks to our partners</h3>
+					<a href="http://hub.am/16BKYF8" title="Visit Datapipe" target="_blank"><img class="pull-left" src="http://static4.businessinsider.com/assets/images/partners/datapipe-9.png" alt="Datapipe" /></a>
+					<a href="http://www.catchpoint.com/" title="Visit Catchpoint" target="_blank"><img class="pull-left" src="http://static3.businessinsider.com/assets/images/partners/catchpoint-9.png" alt="Catchpoint - Web Performance Monitoring" /></a>
+					<a href="http://www.ooyala.com/?utm_source=BusinessInsider&utm_medium=Sponsor&utm_campaign=Rebranding" title="Visit Ooyala" target="_blank"><img class="pull-left" src="http://static3.businessinsider.com/assets/images/partners/ooyala-9.png" alt="Ooyala" /></a>
+					<a href="http://www.sailthru.com" title="Visit Sailthru" target="_blank"><img class="pull-left" src="http://static2.businessinsider.com/assets/images/partners/sailthru-9.png" alt="Sailthru" /></a>
+				</div>
+			</div>
+
+			<!-- Google Adsense -->
+			            <!-- / Google Adsense -->
+
+			</div>
+</div>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="footer" data-bi-footer>
+
+            <div class="container border-top">
+                <div class="list-pipes">
+                    <ul>
+                    <li>* Copyright &copy; 2015 Business Insider Inc. All rights reserved. <span class="nowrap">Registration on or use of this site constitutes acceptance of our
+                                                        <a href="/terms">Terms of Service</a>                            and
+                                                                                    <a href="/privacy-policy">Privacy Policy</a>.</span>
+                        </li>
+                        <li><a href="/disclaimer">Disclaimer</a></li>
+                                                    <li><a href="/commerce-on-business-insider">Commerce Policy</a></li>
+                                            </ul>
+                </div>
+                <div class="list-pipes">
+                    <ul>
+                        <li>Powered by <a href="http://www.mongodb.org">MongoDB</a></li>
+                        <li>Hosted by <a href="http://hub.am/16BKYF8">Datapipe</a></li>
+                        <li>Stock quotes by <a href="http://ycharts.com">YCharts</a></li>
+                                                    <li><a href="http://nytm.org/made">Made in NYC</a></li>
+                                            </ul>
+                </div>
+                <div class="international-links border-top list-pipes">
+                    <ul><li>International Editions:</li>
+                        <li><a href="http://www.businessinsider.com.au/">AUS</a></li><li><a href="http://www.businessinsider.co.id/">ID</a></li><li><a href="http://www.businessinsider.in/">IN</a></li><li><a href="http://www.businessinsider.my/">MY</a></li><li><a href="http://www.businessinsider.sg/">SG</a></li><li><a href="http://uk.businessinsider.com?IR=C">UK</a></li>                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="http://static3.businessinsider.com/assets/js/min-foot.js?1419282513"></script>
+<!--[if gte IE 9]>
+<script type="text/javascript">amplify.publish("ie9-pinned-site", {"hid":null,"vertical":"wealthadvisor"});</script><![endif]-->
+
+<!-- Google Tag Manager -->
+<noscript><iframe src=""//www.googletagmanager.com/ns.html?id=GTM-NS64GV""
+height=""0"" width=""0"" style=""display:none;visibility:hidden""></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NS64GV');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Twitter widget.js -->
+<script type="text/javascript">
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="https://platform.twitter.com/widgets.js";
+        js.async=true;
+        fjs.parentNode.insertBefore(js,fjs);
+    }}(document,"script","twitter-wjs");
+</script>
+<!-- /Twitter widget.js -->
+
+            <!-- BEGIN Tynt Script -->
+        <script type="text/javascript">
+            if(document.location.protocol=='http:'){
+                var Tynt=Tynt||[];Tynt.push('a-j2SKmdSr37y5adbiUzgI');
+                (function(){var s=document.createElement('script');s.async="async";s.type="text/javascript";s.src='http://tcr.tynt.com/ti.js';var h=document.getElementsByTagName('script')[0];h.parentNode.insertBefore(s,h);})();
+            }
+        </script>
+        <!-- END Tynt Script -->
+    
+    <!-- START Nielsen Online SiteCensus V6.0 -->
+    <!-- COPYRIGHT 2010 Nielsen Online -->
+    <script type="text/javascript">
+    (function () {
+        var d = new Image(1, 1);
+        d.onerror = d.onload = function () { d.onerror = d.onload = null; };
+        d.src = ["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-103525h&cg=0&cc=1&si=", escape(window.location.href), "&rp=", escape(document.referrer), "&ts=compact&rnd=", (new Date()).getTime()].join('');
+    })();
+    </script>
+    <noscript>
+        <div><img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-103525h&amp;cg=0&amp;cc=1&amp;ts=noscript" width="1" height="1" alt="" /></div>
+    </noscript>
+    <!-- END Nielsen Online SiteCensus V6.0 -->
+
+    <!-- Begin comScore Tag -->
+    <script type="text/javascript">
+        var _comscore = _comscore || [];
+        _comscore.push({ c1: "2", c2: "9900186" });
+        (function() {
+            var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+            s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+            el.parentNode.insertBefore(s, el);
+        })();
+    </script>
+    <noscript>
+        <img src="http://b.scorecardresearch.com/p?c1=2&c2=9900186&cv=2.0&cj=1" />
+    </noscript>
+    <!-- End comScore Tag -->
+
+        <!-- Chartbeat -->
+    <script type="text/javascript">
+        // chartbeat wants the vars in global
+        window._sf_async_config={uid:14447,domain:"businessinsider.com"};
+        window._sf_async_config.useCanonical = true;
+
+        //only set the following if on a sponsored post
+        
+        (function(){
+          function loadChartbeat() {
+            window._sf_endpt=(new Date()).getTime();
+            var e = document.createElement('script');
+            e.setAttribute('language', 'javascript');
+            e.setAttribute('type', 'text/javascript');
+            e.setAttribute('src',
+               (("https:" == document.location.protocol) ? "https://s3.amazonaws.com/" : "http://") +
+               "static.chartbeat.com/js/chartbeat_pub.js");
+            document.body.appendChild(e);
+          }
+          var oldonload = window.onload;
+          window.onload = (typeof window.onload != 'function') ?
+             loadChartbeat : function() { oldonload(); loadChartbeat(); };
+        })();
+    </script>
+    <!-- / Chartbeat -->
+    
+    <!-- BEGIN Krux Control Tag for "businessinsider.com" -->
+<!-- Source: /snippet/controltag?confid=I2I9M2yx&site=businessinsider.com&edit=1 -->
+<script class="kxct" data-id="I2I9M2yx" data-timing="async" data-version="1.9" type="text/javascript">
+  window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+  (function(){
+    var k=document.createElement('script');k.type='text/javascript';k.async=true;
+    var m,src=(m=location.href.match(/\bkxsrc=([^&]+)/))&&decodeURIComponent(m[1]);
+    k.src = /^https?:\/\/([^\/]+\.)?krxd\.net(:\d{1,5})?\//i.test(src) ? src : src === "disable" ? "" :
+      (location.protocol==="https:"?"https:":"http:")+"//cdn.krxd.net/controltag?confid=I2I9M2yx"
+  ;
+    var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+  }());
+</script>
+<!-- END Krux Controltag -->
+            <!-- Sailthru Concierge -->
+        <script type="text/javascript" src="http://ak.sail-horizon.com/horizon/v1.js"></script>
+        <script type="text/javascript" src="http://ak.sail-horizon.com/scout/v1.js"></script>
+        <script type="text/javascript">
+        $(function() {
+            // Sailthru Concierge
+            if (window.Sailthru) {
+                var sailthruOpts = {
+                    domain: 'horizon.businessinsider.com'
+                                            , concierge: { from: 'top', threshold: $('#bottom-share-links') }
+                                    };
+                if (window.outerWidth < 800) { //on small screens we dont want the flyout to appear
+                    delete sailthruOpts.concierge;
+                }
+                Sailthru.setup(sailthruOpts);
+            }
+        });
+        </script>
+        <!-- / Sailthru Concierge -->
+                <!-- Skimlinks -->
+        <script class="post-loaded" type="text/javascript" data-src="http://s.skimresources.com/js/35871X943606.skimlinks.js"></script>
+        <!-- /Skimlinks -->
+
+    
+<!-- Perfect market JS -->
+    <!-- End Perfect market JS-->
+
+<!-- kontera contextual ads -->
+
+<!-- taboola -->
+        <script type="text/javascript">
+        window._taboola = window._taboola || [];
+        _taboola.push({article:'auto'});
+        !function (e, f, u) {
+            e.async = 1;
+            e.src = u;
+            f.parentNode.insertBefore(e, f);
+        }(
+            document.createElement('script'),
+            document.getElementsByTagName('script')[0],
+            'http://cdn.taboola.com/libtrc/businessinsider/loader.js'
+        );
+    </script>
+<script type="text/javascript">
+    window._taboola = window._taboola || [];
+    _taboola.push({flush: true});
+</script>
+<!-- End taboola -->
+
+<!--bizio-->
+<script type="text/javascript">
+  _bizo_data_partner_id = "1301";
+</script>
+<script type="text/javascript">
+(function() {
+  var s = document.getElementsByTagName("script")[0];
+  var b = document.createElement("script");
+  b.type = "text/javascript";
+  b.async = true;
+  b.src = (window.location.protocol === "https:" ? "https://sjs" : "http://js") + ".bizographics.com/insight.min.js";
+  s.parentNode.insertBefore(b, s);
+})();
+</script>
+<noscript>
+  <img height="1" width="1" alt="" style="display:none;" src="//www.bizographics.com/collect/?pid=1301&fmt=gif" />
+</noscript>
+<!--end-->
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="businessinsider.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-1.newrelic.com","licenseKey":"4b4136998e","applicationID":"2646431,2646478,2664978","transactionName":"ZVZVZRBVXEJVVkJRDVwcdEQRQF1cG0VZSxY=","queueTime":0,"applicationTime":245,"ttGuid":"","agentToken":"","atts":"SRFWE1hPT0w=","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-476.min.js"}</script></body>
+</html>

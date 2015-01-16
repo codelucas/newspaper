@@ -1,0 +1,85 @@
+The HTTP Archive Report collates information from almost half a million of the web’s most popular websites. The latest figures indicate that average page weight has increased by 15% in one year to reach 1,953Kb — a little under 2Mb — and comprises 95 individual HTTP requests. While this is smaller than the 32% increase in 2013, it remains cause for concern.
+
+The report analyzes publicly-accessible content and shopping web sites rather than complex web applications and provides a breakdown of the technologies used:
+
+technology end 2013 end 2014 increase HTML 57Kb 59Kb +4% CSS 46Kb 57Kb +24% JavaScript 276Kb 295Kb +7% Images 1,030Kb 1,243Kb +21% Flash 87Kb 76Kb -13% Other 205Kb 223Kb +9% Total 1,701Kb 1,953Kb +15%
+
+These are average figures; a large proportion of pages will have greater file sizes.
+
+A 2Kb rise for HTML seems reasonable although it’s a significant quantity of content given the trend for simpler, more concise text.
+
+What surprises me most is CSS’s 11Kb rise. Responsive Web Design and CSS3 animations could account for some of this increase but there’s not been a drop in JavaScript. Despite the availability of CSS management and minification tools, the average site also makes six requests for CSS files.
+
+JavaScript has risen by 19Kb. This is confusing; the need for shims is reducing, effects can be handed to CSS3 and monolithic libraries have fallen from favor. Sites make an average of 18 JavaScript file requests, which is unchanged from last year — although a quarter of sites make more than 30 requests. Perhaps some of the gain can be explained by increasingly sophisticated/bloated social networking scripts?
+
+27% of sites continue to use Flash — a fall of 5% over the year. The majority is used for advertising, video, and games. Flash hasn’t dropped as fast as expected but its future is clear.
+
+There’s been a 9% increase for “other” files. That figure doubled in 2013 but, back then, custom fonts and icon fonts were relatively new.
+
+Finally, images are responsible for 85% of the weight gain. Using high-resolution (Retina) images could account for some of this hike, except:
+
+Pages contain more than fifty images, which seems excessive.
+
+Retina accounts for a relatively small proportion of devices.
+
+SVG, icon fonts, and CSS3 effects can replace many images.
+
+There are numerous tools to help reduce file sizes.
+
+Additional Factors
+
+The survey also reveals:
+
+95 HTTP requests are made per page — a drop of a single request from last year.
+
+Pages contain 862 DOM elements.
+
+Resources are loaded from sixteen domains with a maximum of 52 requests per domain.
+
+The average PageSpeed score is 78 out of 100 — which is surprisingly good, given the bloat.
+
+46% of pages use Google libraries.
+
+47% of pages use custom fonts.
+
+79% of responses are compressed (gzip’d).
+
+14% of pages are loaded over HTTPS.
+
+20% of pages use localStorage.
+
+65% of pages use iframes (mostly videos and advertising).
+
+74% of pages use at least one redirect — which seems high.
+
+The Primary Suspects
+
+A 15% increase is less extravagant than the 32% rise in 2013 and the 30% rise in 2012, but it’s still too much. Has your bandwidth increased more than 15% in the past twelve months? A third of web users now use mobile devices — will they appreciate the additional weight?
+
+Let’s put this into context for website owners. Bloated pages adversely affect your profitability:
+
+Users have a slower experience. It doesn’t matter how great your site looks — people will not wait. There’s little point creating a site that works on mobile devices when your pages are 2Mb. Responsive Web Design != a responsive website. Are you losing up to a third of potential customers? Google will downgrade your site and harm your search engine optimization efforts (though we’re never sure exactly how much this matters to Google’s algorithm). Your hosting costs will increase. The more code you use, the more likely it will break. Updates and maintenance are more difficult, take longer and cost more.
+
+It’s ironic that web developers praise the benefits of cross-device HTML5 apps when a single page is often larger to download and slower than an equivalent native app.
+
+Overweight pages are unnecessary. My primary suspects remain bloated CMS templates and frameworks. They offer a cheaper and quicker development route at the expense of quality, efficiency and performance. Many are packed with features you’ll never use, but removing them can be laborious, tedious, and time-consuming.
+
+We can summarize the problem in one simple word: laziness. Developers are at fault — that’s you and me. We have plenty of excuses:
+
+there’s never enough time
+
+the client insisted it should be done this way
+
+the budget/schedule is too tight
+
+I inherited a shoddy system
+
+I don’t have the tools
+
+Whether it’s technical boundaries or a failure to explain issues, it’s still laziness. We work at the coal face; the final decisions are ours alone. Why create a badly-optimized site when many bloat-blasting solutions are simple and take minutes to implement?
+
+Clients rarely appreciate the efficiency gains we make but they don’t understand anything we do. We are the experts, and minimizing page weight is an essential part of the job. Do it. It’s easier to beg for forgiveness than to ask for permission.
+
+</rant></soapbox>
+
+Are you concerned by the web obesity problem? Are you pleased the scale of increases has dropped? Do you or fellow developers struggle to implement optimization techniques or to explain them to clients? Do you think there are other causes? Is Craig being too simplistic and shouty?!

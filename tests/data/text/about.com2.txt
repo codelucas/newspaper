@@ -1,0 +1,79 @@
+Updated August 02, 2014.
+
+
+
+Written or reviewed by a board-certified physician. See About.com's Medical Review Board.
+
+One of the most exciting advances in the treatment of lung cancer has come from an understanding of genetic changes in lung cancer cells. Whereas in the past we broke lung cancers down into perhaps 5 types, we now know that no two lung cancers are the same. If there were 30 people in a room with lung cancer, they would have 30 different and unique types of lung cancer.
+
+If you’ve been recently diagnosed with lung cancer, especially lung adenocarcinoma, your oncologist may have talked to you about genetic testing (otherwise known as molecular profiling or biomarker testing) of your tumor. It's now recommended that all lung cancer patients with advanced or metastatic lung adenocarcinoma (a type of non-small cell lung cancer) have biomarker testing to look for EGFR mutations and ALK rearrangements. In addition, patients with other forms of non-small cell lung cancer (for example, adenosquamous carcinoma in non-smokers) should also be considered for testing. What does this mean?
+
+What is Genetic Testing (Molecular Profiling) of a Lung Cancer Tumor?
+
+Genetic testing involves tests that a pathologist performs in the lab using a sample of your cancer tissue - tests that look at the cancer from a molecular level. This tissue may come from a biopsy of your tumor, or from tissue removed during surgery for lung cancer. The reason behind this is that cancers have gene mutations that "drive" or control the growth of the cancer. Simplistically, if these mutations can be identified, then treatments can be used which "target" these mutations, hence stopping the growth of the cancer. It is these mutations that lead to the development of a cancer in the first place.
+
+Before going further it's helpful to address something that is confusing for many people. There are two primary types of gene mutations.
+
+Hereditary Mutations vs Aquired Mutations in Cancer
+
+One type of mutations are hereditary mutations (also called germline mutations,) meaning you inherit genes with mutations from one or more parents. Common examples of these mutations include hemophilia associated as well as mutations that may predispose someone to developing breast cancer (BRCA1 and BRCA2 mutations.)
+
+The type of mutations that scientists look for in people with lung cancer are instead called acquired mutations (also called somatic mutations.) These mutations are not present at birth (they do not run in families) but rather develop in the process of cells becoming cancerous.
+
+What Exactly are Gene Mutations?
+
+Gene mutations are changes to a particular gene in a chromosome. All genes are made up of variable sequences of 4 amino acids (called bases); adenine, tyrosine, cytosine, and guanine. When a gene is exposed to toxins in the environment, or when an accident occurs in cell division, a mutation (change) may occur. In some cases it may mean that one base is substituted for another, say adenine instead of guanine. In other cases bases may be inserted, or deleted, or genes may be rearranged in some way.
+
+Significance of Gene Mutations
+
+Why are oncologists interested in acquired gene mutations in a tumor? First, we should talk about the two types of acquired mutations found in lung cancers. One type of mutation is termed a driver mutation. These mutations, via several mechanisms, “drive” the growth of a tumor. In lung cancer the number of driver mutations is variable. In one study, an average of 11 driver mutations per cancer were found. Another type of mutation is termed a passenger mutation. Just as someone may be a passenger in a car, these genes do not drive the cancer and are basically along for the ride. Again we don’t know exactly how many passenger mutations are present in a tumor (and the number varies from tumor to tumor) but some tumors may have more than 1,000 of these mutations.
+
+Driver mutations not only initiate the development of a cancer, but work to maintain the growth of a cancer as well.
+
+Common Driver Mutations Found in Lung Cancer Tumors
+
+There are many mutations that are being studied by scientists looking at lung tumors. So far driver mutations have been identified in approximately 60% of lung adenocarcinomas. Researchers are now finding driver mutations in squamous cell lung cancer as well.
+
+Common driver mutations in lung cancer include (for starters):
+
+EGFR mutations
+
+KRAS mutations
+
+EML4-ALK Rearrangements
+
+MET mutation
+
+These 4 mutations are in general mutually exclusive and are only rarely seen in the same tumor.
+
+Personalized Treatments Available Based on Genetic Testing
+
+The use of "targeted therapies" - that is medications that target particular genetic abnormalities in a tumor -- has been coined personalized medicine. What this means is that rather than a conventional chemotherapy drug that attacks all rapidly dividing cells, a targeted drug instead attacks a particular abnormality present only in your cancer cells. In general targeted treatments have fewer side effects than traditional chemotherapy. To date, targeted therapies that have been approved for people with lung cancer include:
+
+Tarceva (erlotonib) has been approved for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva)
+
+Tarceva (erlotonib) for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva) Xalkori (crizotonib) was approved by the FDA in 2011 for people whose tumor has an ALK4-EML gene rearrangement
+
+Other medications are being studied in clinical trials, including targeted therapies for those whose tumor becomes resistant to Tarceva or Xalkori..
+
+Resistance to Treatment
+
+A challenging problem with current targeted treatments is that nearly everyone inevitably becomes resistant to treatments we have. There are many mechanisms by which this occurs making it difficult to find one solution. Research is ongoing in clinical trials; evaluating both the use of substituting a second drug to target the mutations, and drugs that use different targets or mechanisms to attack the cancer cell.
+
+The Future
+
+The ability to understand the molecular profile of lung tumors is an extremely exciting area of research, and it’s likely that new treatments for other mutations will soon be available. An example of how rapidly this area of medicine is advancing is the ALK4-EML gene rearrangment. This gene "mutation" (actually a rearranglement) was discovered as recently as 2007. Through a rapid process, the medication Xalkori (crizotinib) was approved in 2011 for general use by the FDA for those patients whose tumors have this rearrangment. There are clinical trials currently in progress evaluating the use of second generation drugs for those who have become resistant to Xalkori.
+
+Next Step
+
+If you have been diagnosed with non-small cell lung cancer, especially lung adenocarcinoma or squamous cell lung cancer, talk to your doctor about genetic testing. Although testing is now recommended for everyone with advanced non-small cell lung cancer, a recent study reported that only 60% of oncologists are currently ordering testing. You may also wish to talk to your doctor about clinical trials that may be an option for you. If you are interested in looking into trials evaluating these treatments worldwide, check out the article below on how to find clinical trials. It can be confusing as you check out these databases, but help is near. Recently a lung cancer clinical trial matching service backed by several lung cancer organizations has become available. With this free service a trained nurse navigator can help you locate any clinical trials that may be an option for you.
+
+Sources:
+
+Hensing, T., Chawla, A., Batra, R., and R. Salgia. A personalized treatment for lung cancer: molecular pathways, targeted therapies, and genomic characterization. Advances in Experimental Medicine and Biology. 2014. 799:85-117.
+
+Kim, H., Mitsudomi, T., Soo, R., and B. Cho. Personalized therapy on the horizon for squamous cell carcinoma of the lung. Lung Cancer. 2013. 80(3):249-55.
+
+Li, T., Kung, H., Mack, P., and D. Gandara. Genotyping and genomic profiling of non-small-cell lung cancer: implications for current and future therapies. Journal of Clinical Oncology. 2013. 31(8):1039-49.
+
+Luo, S., and D. Lam. Oncogenic driver mutations in lung cancer. Translational Respiratory Medicine. 2013. 1:6.

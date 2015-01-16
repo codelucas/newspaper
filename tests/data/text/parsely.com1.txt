@@ -1,0 +1,45 @@
+Yesterday, Facebook announced a number of new tools for publishers, as part of their on-going relationship to encourage a high volume of quality content that will keep us scrolling through our newsfeeds.
+
+At the bottom was a short mention:
+
+We also recently fixed a bug that caused many third-party analytics tools to undercount the percentage of their organic traffic from Facebook. In the past, referrer data was missing from some of our outbound mobile clicks. This issue has been resolved for iOS, with a fix for Android coming soon. Publishers may see an increase in iOS mobile traffic from Facebook and a decrease in undefined sources or direct traffic.
+
+ICYMI – this is a fix for direct traffic (sometimes called “dark social”) for traffic coming through the mobile app that sometimes dropped the referral information.
+
+Here’s a little background:
+
+Anyone who has looked at analytics, has seen “direct” as a traffic source. There tends to be a fair amount of confusion around this section, as it encompasses anything that analytics can’t track.
+
+Traditionally, publishers assumed direct traffic was people bookmarking their home page or typing in the address directly in the search bar. However, since Parse.ly looks at analytics by a post-by-post basis, we can’t make that assumption, as most people are not typing in new article post URLs “directly” into their browser.
+
+Sources for this traffic include:
+
+Email/IMs
+
+Copying and pasting a link
+
+Switching from a https:// site to an http:// site
+
+Chat apps (Whats App, etc.)
+
+In 2012, Alexis Madrigal wrote a story about these sources, terming them “dark social”. (This post is worth re-reading for some fun facts like “Only about four percent of total traffic is on mobile at all.”) In summary, he supposed that since these were links that were being shared from person-to-person, this kind of traffic should still be thought of as social sharing.
+
+Parse.ly’s CTO, Andrew Montalenti, explained some other areas that “dark” traffic can come from – he points out that it’s not all social; some traffic might also be explained by search and sites that block their referral information from being passed through or programs used by people protecting their browsing (especially in the wake of Snowden/NSA revelations).
+
+Though many of those sources will probably continue to be “dark”, a lot of us in the analytics community realized a while ago that Facebook was sending some of this direct traffic. The Guardian’s Ophan architect, Graham Tackley, showed off charts at ONA this year on how The Guardian saw its direct traffic spike in association with Facebook spikes.
+
+We saw a similar pattern, and called up Facebook a few months ago. As the massive social network makes a concerted effort to work with publishers, they were concerned at the differences we saw compared to their own data, and we shared some of our aggregate data with them as they worked to fix the referral issue.
+
+What to expect from the fix:
+
+The announcement above acknowledged the first fix, and we’ll continue to monitor the impact that this is making in our system.
+
+What does this mean for your traffic? We checked the amount of traffic that currently comes into posts as direct (aka “dark social”) but is actually Facebook by looking at the user agents and found in one sample that 11% of total traffic coming was from Facebook. (And yes – that means that almost 50% of all external traffic referrers in this sample came from Facebook, wow.)
+
+Our analysis also checked out how much of that dark traffic came in from Android vs. iOS. We’ll be keeping track of this for the next few weeks, and we expect to see those numbers go down as the app fixes roll out and people update their apps.
+
+We know that people have a lot of questions about this, and we’re happy to provide additional information or answer questions about it – let us know in a comment, or shoot us a note.
+
+Related
+
+Parse.ly, December 11, 2014

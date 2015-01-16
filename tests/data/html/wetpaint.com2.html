@@ -1,0 +1,916 @@
+  <!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/NewsArticle" xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://ogp.me/ns/fb#">
+<head  prefix="og: http://ogp.me/ns# wetpaintwww: http://ogp.me/ns/apps/wetpaintwww#">
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-1.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"c27708c69d","applicationID":"126641","transactionName":"cgkNTUZZDw5dQxwAREUPAFVRGRAKV0Y=","queueTime":0,"applicationTime":1037,"ttGuid":"","agentToken":null,"agent":"js-agent.newrelic.com/nr-476.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VwEPVFVACQEGUlVT"};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script>
+  <link href="http://static2.wetpaint.me/assets/application/base-eb148408547ff656bc63d7a72fe67d42.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="http://static2.wetpaint.me/assets/layouts/publishable_article-05837f4b39843160fc9f0ac4b40e8542.css" media="screen" rel="stylesheet" type="text/css" />
+  <link href="http://static2.wetpaint.me/assets/favicon-cb3ce93042bb9b04aa2fbdbbd297b6ce.ico" rel="shortcut icon" />
+<link href="http://static2.wetpaint.me/apple-touch-icon.png?e6140b1" rel="apple-touch-icon" />
+<link rel="apple-touch-icon" href="http://static2.wetpaint.me/assets/apple-touch-icon-3f9df3dbb4f65d0428d716dbb40b1730.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://static2.wetpaint.me/assets/apple-touch-icon-ipad-cacab38624c891683d713a00b65411b8.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://static2.wetpaint.me/assets/apple-touch-icon-iphone-retina-bfe5221a722b0454cf95ed994f1b4e07.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://static2.wetpaint.me/assets/apple-touch-icon-ipad-retina-edaaec5bb561a284f6b4fc10331bc300.png">
+  <title>Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant? | The Bachelor | Wetpaint</title>
+
+  <link rel="canonical" href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" itemprop="url">
+  <meta name="description" content="  Chris Soules has quite the lady trough to drink from on this Bachelor Season 19 excursion, kicking off on January 5. And one of the foxiest drops in his bu..." itemprop="about">
+  <meta name="robots" content="noodp, noydir">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script type="text/javascript" async>
+var COMSCORE={};if(typeof _comscore!="object"){var _comscore=[]}COMSCORE.beacon=function(k){try{if(!k){return}var i=1.8,l=k.options||{},j=l.doc||document,b=l.nav||navigator,g=j.location,f=512,d=function(e,m){if(e==null){return""}e=(encodeURIComponent||escape)(e);if(m){e=e.substr(0,m)}return e},a=[(g.protocol=="https:"?"https://sb":"http://b"),".scorecardresearch.com/b?","c1=",d(k.c1),"&c2=",d(k.c2),"&rn=",Math.random(),"&c7=",d(g.href,f),"&c3=",d(k.c3),"&c4=",d(k.c4,f),"&c5=",d(k.c5),"&c6=",d(k.c6),"&c10=",d(k.c10),"&c15=",d(k.c15),"&c16=",d(k.c16),"&c8=",d(j.title),"&c9=",d(j.referrer,f),"&cv=",i,k.r?"&r="+d(k.r,f):""].join("");a=a.length>2080?a.substr(0,2075)+"&ct=1":a;if(!/BlackBerry.*?\/([1-3]\.|4\.[0-5])/.test(b.userAgent)){var c=new Image();c.onload=function(){};c.src=a}else{a=a.replace(/\/b\?/,"/p?");j.write("<img src='"+a+"' />")}return a}catch(h){}};COMSCORE.purge=function(a){try{var c=[],f,b;a=a||_comscore;for(b=a.length-1;b>=0;b--){f=COMSCORE.beacon(a[b]);a.splice(b,1);if(f){c.push(f)}}return c}catch(d){}};COMSCORE.purge();
+COMSCORE.beacon({c1:2,c2:"5916149",c3:"",c4:"",c5:"",c6:"",c7:escape(document.location.href),c8:escape(document.title),c9:escape(document.referrer),c10:escape(screen.width+'x'+screen.height)});
+</script>
+
+  <link rel="alternate" type="application/rss+xml" title="Wetpaint Entertainment The Bachelor RSS" href="http://feeds.wetpaint.com/thebachelorshow/latest/excerpt">
+  
+
+  <meta property="fb:admins" content="628638109,100000821098041">
+<meta property="og:site_name" content="Wetpaint">
+<meta property="og:url" content="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19"/>
+	<meta property="og:image" content="http://static.wetpaint.me/bachelor/ROOT/photos/122214alissagiambrone-1419880475.jpg">
+	<meta property="fb:app_id" content="73759578322">
+	<meta property="og:title" content="Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?">
+	<meta property="og:type" content="article">
+	<meta property="article:publisher" content="https://www.facebook.com/TheBachelorFansite">
+	<meta property="og:description" content="  Chris Soules has quite the lady trough to drink from on this Bachelor Season 19 excursion, kicking off on January 5. And one of the foxiest drops in his bucket of babes is Alissa Giambrone!  ">
+	<meta property="wetpaintwww:published_time" content="2014-12-29 19:13:00 UTC">
+	<meta property="article:published_time" content="2014-12-29 19:13:00 UTC">
+
+  <meta name="twitter:card" content="photo">
+<meta name="twitter:url" content="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19">
+	<meta property="twitter:title" content="Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?">
+	<meta property="twitter:description" content="  Chris Soules has quite the lady trough to drink from on this Bachelor Season 19 excursion, kicking off on January 5. And one of the foxiest drops in his bucket of babes is Alissa Giambrone!  ">
+	<meta property="twitter:image" content="http://static.wetpaint.me/bachelor/ROOT/photos/305_320/122214alissagiambrone-1419880475.jpg">
+	<meta property="twitter:site" content="@BachelrWetpaint">
+	<meta property="twitter:creator" content="@BachelrWetpaint">
+
+
+  <meta name="google-site-verification" content="hi57CmwMgdgLeJaUBrJIh0Nz2yPR3tX2r7r__SMzExw" />
+  <meta name="y_key" content="2fda708437f0d260" />
+  <meta name="msvalidate.01" content="A9E92B3F9B63DDD7EF44EE984A7A4DD9" />
+  <link rel="publisher" href="https://plus.google.com/114745337135279313902">
+  <link rel="author" href="https://plus.google.com/102196971100179933019" />
+
+
+  <meta name="keywords" content="The Bachelor,TV,News,Bachelor in Paradise,Features,Spoilers,TV Stars,The Bachelorette,The Bachelor,Chris Soules,Season 19,Bachelor 2015,Season 19 Contestants,Alissa Giambrone"><meta name="news_keywords" content="The Bachelor,TV,News,Bachelor in Paradise,Features,Spoilers,TV Stars,The Bachelorette,The Bachelor,Chris Soules">
+  
+
+  
+<script type="text/javascript">
+  var _sf_startpt = (new Date()).getTime();
+  // safari private browsing check 
+  window.isLocalStorageNameSupported = function() {
+    var testKey = 'test', storage = window.sessionStorage;
+    try {
+      storage.setItem(testKey, '1');
+      storage.removeItem(testKey);
+      return true;
+    } catch (error) {
+      localStorage.setItem = function(){};
+      sessionStorage.setItem = function(){};
+      return false;
+    }
+  };
+
+  var wp = {
+    pubdate: "2014-12-29 19:13",
+    page_type: "article",
+    classification: "features",
+    publish_author: "Julia Wayne",
+    page: {
+      fanpage: eval([{"fbid":"240938883493","title":"The Bachelor","url":"https://www.facebook.com/TheBachelorFansite"}][Math.floor(Math.random()*1)]),
+      openGraphType: "article",
+      reaction_poll_id: 108349,
+      is_draft: false
+    },
+    site_name: "the-bachelor",
+    secondary_topic: "",
+    author_slug: "",
+    current_tag: "",
+    category: "tv",
+    entertainment: true,
+    hasHero: false,
+    store_name: "bachelor",
+    isExclusive: false,
+    isPremiumContent: false,
+    isOwnedAndOperatedVideo: false,
+    twitter_id: "BachelrWetpaint",
+
+    controller: "article",
+    action: "show",
+
+    hasFlash: (function () {
+      return JSON.parse(sessionStorage.getItem('hasFlash')) || (function () {
+        var hasFlash = false;
+        try {
+          var fo = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+          if (fo) {
+            hasFlash = true;
+          }
+        } catch (e) {
+          if (navigator.mimeTypes ["application/x-shockwave-flash"] !== undefined) {
+            hasFlash = true;
+          }
+        }
+        if (window.isLocalStorageNameSupported()) {
+          sessionStorage.setItem('hasFlash', JSON.stringify(hasFlash));
+        }
+        return hasFlash;
+      }());
+    }()),
+
+
+    sessionStartTime: (function () {
+      return parseInt(JSON.parse(sessionStorage.getItem('timeOnSite'))) || (function () {
+        var timeOnSite = new Date().getTime();
+        if (window.isLocalStorageNameSupported()) {
+          sessionStorage.setItem('timeOnSite', JSON.stringify(timeOnSite));
+        }
+        return timeOnSite;
+      }());
+    }()),
+
+    fanConverterRandomizedPageViews: (function () {
+      return JSON.parse(sessionStorage.getItem('fanConverterRandomizedPageViews')) || (function () {
+        var randomPageViews = Math.floor((Math.random()*8)+1);
+        if (window.isLocalStorageNameSupported()) {
+          sessionStorage.setItem('fanConverterRandomizedPageViews', JSON.stringify(randomPageViews));
+        }
+        return randomPageViews;
+      }());
+    }()),
+
+    timeOnSite: function () {
+        return parseInt((new Date().getTime() - this.sessionStartTime) / 1000);
+    },
+
+    // set up feature flags
+    flags: {
+      fanconverter_disabled: false,
+      learnings_enabled: true,
+      sharethrough_enabled: false,
+      luminate_enabled: false,
+      nrelate_enabled: false,
+      ggnoads_enabled: true,
+      homing_missile_threshold_percentage: 2.5,
+      homing_missile_training_percentage: 90,
+      homing_missile_js_url: 'false',
+      homing_missile_access_token: 'false',
+      fanconverter_js_path: 'http://fanconverter.wetpaint.me/3.0.2/application-fanconverter.js',
+      play_thru_enabled: false,
+      play_thru_photo_count: 3,
+      mobile_ads_disabled: false,
+      desktop_ads_disabled: false,
+      test_ads_enabled: false,
+      adtech_mobile_1x1_enabled: false,
+      adtech_desktop_1x1_enabled: true,
+      synchronous_mobile_ads_enabled: false,
+      viggle_video_points: 50,
+      viggle_video_points_point_cap: 10000,
+      viggle_store_url: 'https://www.vigglestore.com/auth/login/wetpaint',
+      viggle_points_endpoint: 'http://wp-user.viggle.com',
+      viggle_show_sweepstakes: false,
+      viggle_sweepstakes_show_popup: false,
+      viggle_sweepstakes_local_storage_name: 'july21_sweeps_2b',
+      viggle_premium_content_popup: 'true',
+      viggle_premium_content_popup_probability_a: '0.0',
+      everything_is_awesome_everything_is_premium: true,
+      premium_views_for_search_and_direct: 2,
+      vip_limited_access: true,
+      vip_limited_access_content_limit: 5
+    },
+
+    meta_keywords: ["TV", "News", "Bachelor in Paradise", "Features", "Spoilers", "TV Stars", "The Bachelorette", "The Bachelor", "Chris Soules", "Season 19", "Bachelor 2015", "Season 19 Contestants", "Alissa Giambrone"],
+    adtech_hidden_flag_string: "",
+
+    content_image_url: "http://static.wetpaint.me/bachelor/ROOT/photos/122214alissagiambrone-1419880475.jpg",
+    content_description: "  Chris Soules has quite the lady trough to drink from on this Bachelor Season 19 excursion, kicking off on January 5. And one of the foxiest drops in his bucket of babes is Alissa Giambrone!  ",
+
+    demo_env: false,
+    _domain: location.hostname.replace(/^.*?([a-z]+\.[a-z]+)$/, '$1'),
+    FBAPPID: '73759578322',
+    FBNS: 'wetpaintwww',
+    istest: /selenium/.test(navigator.userAgent),
+    ga_site: "UA-10597003-2",
+    ga_global: 'UA-10597003-4',
+    ga_paid: 'UA-10597003-49',
+    eg: 'http://172.16.2.160:3000',
+    www_host: 'http://www.wetpaint.com',
+    rails_env: 'production',
+    dogfood: false,
+
+    client_ip: '127.0.0.1',
+    server_time_stamp: 1420263182471,
+    server_name: 'c5',
+
+    ads: {
+      placement: 'article',
+      test: false,
+      showId: 'the-bachelor',
+      brandSafe: true      
+    },
+    gallery: undefined,
+
+    currentContext: (function () {
+      var contexts = {
+        phone: [0, 459],
+        tablet: [460, 739],
+        tabletWide: [740, 979],
+        desktop: [980, 1299],
+        desktopWide: [1300, 9999]
+      };
+      var screenWidth = document.documentElement.clientWidth;
+      var currentContext = 'phone';
+      for (context in contexts) {
+        if (contexts.hasOwnProperty(context)) {
+          var breakpoints = contexts[context];
+          minWidth = breakpoints[0];
+          maxWidth = breakpoints[1];
+          if (screenWidth >= minWidth && screenWidth <= maxWidth) {
+            currentContext = context;
+          }
+        }
+      }
+      return currentContext;
+    }()),
+    canonicalUrl: 'http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19',
+    // for frontend mvc
+    Models: {},
+    Views: {}
+  };
+
+  wp.ads.serveAsync = (function () {
+    var asyncFlag = true;
+    if (wp.currentContext == 'phone' || wp.currentContext == 'tablet') {
+      // The size of the top ad varies, so we must be synchronous in order to size the container correctly
+      // Galleries can be asynchronous because the targeting parameter only provides them with 320x50 ads
+      return asyncFlag && wp.page_type == 'gallery';
+    } else {
+      return asyncFlag;
+    }
+  })();
+</script>
+
+
+  <script src="http://static2.wetpaint.me/assets/header_javascripts-2007bc42847b82aec2746d1b44251e23.js" type="text/javascript"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/jquery-1.9.1.min.js">\x3C/script>')</script>
+    <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "NewsArticle",
+  "headline": "Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?",
+  "url": "http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19",
+  "thumbnailUrl": "http://static.wetpaint.me/bachelor/ROOT/photos/122214alissagiambrone-1419880475.jpg",
+  "dateCreated": "2014-12-29T19:13:00Z",
+  "articleSection": "The Bachelor",
+  "creator": "Julia Wayne",
+  "keywords": ["TV", "News", "Bachelor in Paradise", "Features", "Spoilers", "TV Stars", "The Bachelorette", "The Bachelor", "Chris Soules", "Season 19", "Bachelor 2015", "Season 19 Contestants", "Alissa Giambrone"]
+}
+</script>
+
+   <script type='text/javascript'>
+    var crtg_nid="2400";
+    var crtg_cookiename="cto_wet";
+    var crtg_varname="crtg_content";
+    function crtg_getCookie(c_name){ var i,x,y,ARRCookies=document.cookie.split(";");for(i=0;i<ARRCookies.length;i++){x=ARRCookies[i].substr(0,ARRCookies[i].indexOf("="));y=ARRCookies[i].substr(ARRCookies[i].indexOf("=")+1);x=x.replace(/^\s+|\s+$/g,"");if(x==c_name){return unescape(y);}}return'';}
+    var crtg_content = crtg_getCookie(crtg_cookiename);var crtg_rnd=Math.floor(Math.random()*99999999999);
+    var crtg_url=location.protocol+'//rtax.criteo.com/delivery/rta/rta.js?netId='+escape(crtg_nid);crtg_url+='&cookieName='+escape(crtg_cookiename);crtg_url+='&rnd='+crtg_rnd;crtg_url+='&varName=' + escape(crtg_varname);
+    var crtg_script=document.createElement('script');crtg_script.type='text/javascript';crtg_script.src=crtg_url;crtg_script.async=true;
+    if(document.getElementsByTagName("head").length>0)document.getElementsByTagName("head")[0].appendChild(crtg_script);else if(document.getElementsByTagName("body").length>0)document.getElementsByTagName("body")[0].appendChild(crtg_script);
+  </script>
+  <script type="text/javascript" async src="http://launch.newsinc.com/js/embed.js" id="_nw2e-js"></script>
+   <script type="text/javascript" src="http://aka-cdn-ns.adtechus.com/dt/common/DAC.js"></script>
+    <script type="text/javascript" async>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  </script>
+  <noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&c2=5916149&c3=&c4=&c5=&c6=&c15=&cj=1" alt="" />
+  <img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-703446h&amp;cg=1&amp;cc=1&amp;ts=noscript" width="1" height="1" alt="" />
+  <a href="http://www.quantcast.com/p-c0xFC9HiPwWw-" target="_blank"><img src="http://pixel.quantserve.com/pixel/p-c0xFC9HiPwWw-.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></a>
+</noscript>
+  
+  
+  
+  <script type="text/javascript" async>
+  $(document).ready(function(){ 
+    window.wp.smartbanner.init({
+      daysHidden: 30,
+      title: 'Rewards for Wetpaint VIPs',
+      author: 'Powered by Viggle',
+      layer: true,
+      icon: '/assets/viggle-icon.png',
+      iconGloss: false,
+      url: {
+        android: 'http://ad.apsalar.com/api/v1/ad?re=1&a=Hyun&i=com.functionx.viggle&ca=Viggle+Android&an=Wetpaint&p=Android&pl=Smart+Banner&h=98066edc880d329f2bfc9e1d0cbd764222169a40',
+        ios: 'http://ad.apsalar.com/api/v1/ad?re=1&a=Hyun&i=net.functionxinc.oda-ota&ca=Viggle+iOS&an=Wetpaint&p=iOS&pl=Smart+Banner&h=2554a279cb225e50ffbd6501450d8d4a1c30fbee'        
+      }
+    });
+  });
+</script>
+
+</head>
+
+<body>
+  
+  <div id="fb-root"></div>
+  <div id="container" class="article-page">
+    <section id="content" class="global-content">
+      
+      <header class="global-header js-responsive-header-toggle jss-search-closed loading">
+
+  <a href="/" class="wetpaint-logo"><span class="accessibility">Wetpaint</span></a>
+
+  <div class="search-container header-container">
+    <div id="search-box">
+      <form action="/search" method="get" name="search" id="search">
+        <input id="s" name="q" type="text" placeholder="Find celebs, TV shows...">
+        <button type="submit" class="icon-search js-open-search header-button"></button>
+      </form>                         
+    </div>  
+
+    <div class="topic-bug">
+  <a href="/adam-levine">
+    <img alt="Adam Levine" height="40" src="http://static.wetpaint.me/adam-levine/ROOT/photos/50_40/adamlevine-1388710851.png" width="50" />
+</a></div>    
+
+    <button class="icon-align-justify js-toggle-category-nav js-open-category-nav header-button"><span class="accessibility">Toggle Category Navigation</span></button>
+
+    <button class="icon-viggle-store header-button js-viggle-store-link"><span class="accessibility">Viggle Store</span></button>
+
+    <button class="jss-close-search header-button">
+      <i class="circle-icon icon-chevron-right"></i>
+      <span class="accessibility">Close Search Box</span>
+    </button>
+    <nav id="global-nav" class="global-nav">
+  <ul>
+ 		<li><a href="/viggle/articles/2014-06-05-11-things-know-points-faq" id="topic-nav-link-viggle_points_faq">Viggle Points FAQ&raquo;</a></li><li><a href="/celebrity-moms-babies" id="topic-nav-link-celeb_moms">Celeb Moms&raquo;</a></li><li><a href="/walking-dead" id="topic-nav-link-the_walking_dead">The Walking Dead&raquo;</a></li><li><a href="/wetpaint-video" id="topic-nav-link-watch_and_earn!">Watch and Earn!&raquo;</a></li>
+  </ul>
+</nav>     
+  </div>
+  <div class="category-nav-container header-container">
+  <nav id="category-nav" class="category-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <ul>
+      <li><a href="/shows" class="category-nav-link" id="hot-tv-nav">Hot TV</a></li><li><a href="/wetpaint-video" class="category-nav-link" id="video-nav">Video</a></li><li><a href="/music" class="category-nav-link" id="music-nav">Music</a></li><li><a href="/news" class="category-nav-link" id="news-nav">News</a></li><li><a href="/celebrities" class="category-nav-link" id="celebrity-nav">Celebrity</a></li>
+      <li id="logout-category-nav-item" class="logged-in-ui"><a href="#" id="user-sign-out-nav" class="js-user-logout category-nav-link">Logout</a></li>
+
+      
+    </ul>
+  </nav>
+</div>
+   
+</header> 
+
+
+
+      <div id="pushdown_ad"></div>
+
+      <section id="global-body" class="global-body js-article-pager clearfix">
+        <section class="ads" id="wp-topAds" itemscope itemtype="http://schema.org/WPAdBlock"> 
+          <div id="header-mobile-ad" class="mobile-ad mobile-ad-container"></div>
+          <div id="adtech-banner-ad" class="desktop-ad"></div>
+        </section>   
+
+        <div class="column-container clearfix">
+            <div id="page-content" class="page-content"> 
+    
+  <section id="topic-header" class="topic-header clearfix" itemscope itemtype="http://schema.org/SiteNavigationElement">   
+
+  <div class="topic-title-container"> 
+    <div class="topic-photo">
+  <a href="/the-bachelor">
+    <span class="responsive-image" data-picture data-alt="topicgraphic_thebachelor.png">
+  <span data-src="http://static.wetpaint.me/bachelor/ROOT/photos/50_40/thebachelor-1389912694.png"></span>
+  <span data-src="http://static.wetpaint.me/bachelor/ROOT/photos/75_60/thebachelor-1389912694.png" data-media="(min-width: 460px)"></span>
+  <span data-src="http://static.wetpaint.me/bachelor/ROOT/photos/100_80/thebachelor-1389912694.png" data-media="(min-width: 980px)"></span>
+
+  <!-- Fallback content for non-JS browsers. Same img src as the initial, unqualified source element. -->
+  <noscript>
+      <img src="http://static.wetpaint.me/bachelor/ROOT/photos/50_40/thebachelor-1389912694.png" alt="topicgraphic_thebachelor.png">
+  </noscript>
+</span>
+</a></div>
+
+    <hgroup>
+          
+      <h2 id="primary-title" class="primary-title"><a href="/the-bachelor">The Bachelor</a></h2>
+       
+    </hgroup>
+  </div>  
+
+   
+</section>
+
+   
+
+  <article class="publishable">
+    <header class="content-header article-header clearfix">
+      
+  <em class="spoiler text-flag">Spoiler!</em>
+
+      <h1 class="publishable-title article-title" itemprop="headline">Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?</h1>
+      <div class="share-buttons js-share-buttons">
+  <span class="wp-like share-button">
+  <a class="jss-facebook-share-button">Share</a>
+</span>
+
+
+
+
+  <span class="tweet-button share-button">
+  <a href="https://twitter.com/share" 
+    data-url="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19?utm_source=twitter.com&utm_medium=share&utm_campaign=vrl" 
+    data-text="Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?"
+    data-related="BachelrWetpaint"
+    data-counturl="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19"
+    data-count="none"
+    class="twitter-share-button" >Tweet</a>
+</span>
+
+  <span class="share-button plus-one-button">
+    <g:plusone size="medium" callback="plusone_callback" count="false"></g:plusone>
+</span>
+
+  <span class="pinit-button share-button js-pin-it-button" data-href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19">
+  <a href="//pinterest.com/pin/create/button/?url=http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19%3Futm_source%3Dpinterest.com%26utm_medium%3Dshare%26utm_campaign%3Dvrl&media=http://static.wetpaint.me/bachelor/ROOT/photos/122214alissagiambrone-1419880475.jpg&description=Bachelor 2015 Spoilers: Who Is Alissa Giambrone, Season 19 Contestant?"
+   always-show-count="0"
+   data-pin-do="buttonPin" data-pin-config="none"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" />
+  </a>
+</span>
+
+  <span class="share-button tumblr-button">
+  <a class="js-content-share-icon tumblr js-tumblr-button" href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" title="Share on Tumblr" data-channel="tumblr"></a>
+</span>
+  <div class="viggle-buttons">
+	<span class="share-button dijit-button action-button"> 
+  <a class="js-content-share-icon" data-channel="dijit" data-target="188140" data-category="tv"><span class="icon icon-clock-o"></span>Remind Me To Watch</a>
+</span>
+	<span class="share-button reward-button action-button "> 
+		<a class="js-content-share-icon" alt="Get real rewards for watching TV" data-channel="viggle-reward" data-popup="false"><span class="icon icon-dollar"></span>Reward Me</a>
+	</span>
+</div>
+  
+</div>
+
+              
+    </header>
+
+    <section class="content-body article-body clearfix">
+      <section itemprop="articleBody" class="body wp-article js-article-body js-lg-victim clearfix" id="body-2014-12-29-alissa-giambrone-contestant-season-19">
+    <div class="wp-article-block">
+
+
+      <div class="wp-article-image-Large">
+        <div itemprop="encodings" title="10. Alissa Giambrone&#x27;s Unfortunate Spelling" itemscope itemtype="http://schema.org/MediaObject" class="wp-photo js-shareable-root">
+  <div class="jss-shareable content">
+
+    
+
+    <a href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" class="js-content-link">
+        <img alt="10. Alissa Giambrone&#x27;s Unfortunate Spelling" class="" height="460" itemprop="image" src="http://static.wetpaint.me/bachelor/ROOT/photos/620_460/122214alissagiambrone-1419880475.jpg" width="620" />
+</a>  </div> <!-- shareable content -->
+    <div class="media-meta clearfix">
+      <div class="content-share-block js-share-buttons" data-title="10. Alissa Giambrone&#x27;s Unfortunate Spelling">
+        <a href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" target="_blank" data-channel="facebook" class="js-content-share-icon content-share-icon facebook icon-facebook-sign"></a>
+        <a href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" target="_blank" data-channel="twitter" class="js-content-share-icon content-share-icon twitter icon-twitter-sign"></a>
+        <a href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" target="_blank" data-channel="google_plus" class="js-content-share-icon content-share-icon google-plus icon-google-plus-sign"></a>
+        <a href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19" target="_blank" data-channel="pinterest" class="js-content-share-icon content-share-icon pinterest icon-pinterest-sign"></a>
+      </div>
+    <h6 class="caption">
+        <span class="credit">
+          Credit:
+            Craig Sjodin/ABC Television Group © 2014 Disney
+        </span>
+    </h6>
+  </div>
+
+</div>
+
+      </div>
+
+      <div class="text" id="body-text-block-0-2014-12-29-alissa-giambrone-contestant-season-19"><p><span><p><a href="http://www.wetpaint.com/chris-soules" _mce_href="http://www.wetpaint.com/chris-soules"><span>Chris Soules</span></a><span> has quite the lady trough to drink from on this </span><span style="font-style: italic;" _mce_style="font-style: italic;">Bachelor</span><span> </span><a href="http://www.wetpaint.com/the-bachelor/season-19" _mce_href="http://www.wetpaint.com/the-bachelor/season-19"><span>Season 19</span></a><span> excursion, kicking off on January 5. And one of the foxiest drops in his bucket of babes is </span><a href="http://www.wetpaint.com/the-bachelor/alissa-giambrone" _mce_href="http://www.wetpaint.com/the-bachelor/alissa-giambrone"><span>Alissa Giambrone</span></a><span>!</span></p></span></p></div>
+
+
+          <div class="widget wp-editorAlign-Left">
+    <div id="viggle-points-cta"></div><br />
+</div>
+
+  </div>
+
+  <div class="wp-article-block">
+
+
+
+      <div class="text" id="body-text-block-0-2014-12-29-alissa-giambrone-contestant-season-19"><p><span><p><span>The raven-haired gal bares a striking resemblance to a former Bachelorette who may have broken Chris’s heart last season, with her shiny locks and sparkling eyes. So, what else makes her perfect for Prince Farming? Read on, gentle reader.</span></p><p><span>The 24-year-old from Hamilton, New Jersey was likely the quickest packer of the 30 gals cast on </span><span style="font-style: italic;" _mce_style="font-style: italic;">The Bachelor</span><span> 2015, as she works as a flight attendant. Unfortunately for her, producers sent the lucky ladies on </span><a href="http://www.wetpaint.com/the-bachelor/articles/2014-11-03-spoilers-chris-soules-locations-us" _mce_href="http://www.wetpaint.com/the-bachelor/articles/2014-11-03-spoilers-chris-soules-locations-us"><span>a bizarre tour of ‘Merica</span></a><span> rather than letting them dip their toes into foreign oceans. When Alissa isn’t flying the friendly skies, she keeps her head on her shoulders with “family, friends, laughter, hope, and faith,” according to her official </span><a href="http://abc.go.com/shows/the-bachelor/cast/19-bachelorette-alissa" _mce_href="http://abc.go.com/shows/the-bachelor/cast/19-bachelorette-alissa" target="_blank"><span>ABC bio</span></a><span>.</span></p><p><span>Should you want to hop aboard her social media flight, you’re a bit outta luck. Miss Alissa’s </span><a href="https://www.facebook.com/alissagiambrone?ref=br_rs&amp;fref=browse_search" _mce_href="https://www.facebook.com/alissagiambrone?ref=br_rs&amp;fref=browse_search" target="_blank"><span>Facebook</span></a><span> is currently deactivated, and you’ll need a boarding pass to her </span><a href="http://instagram.com/alissagiambrone" _mce_href="http://instagram.com/alissagiambrone"><span>Instagram</span></a><span>, as it’s set to private. Her </span><a href="https://www.linkedin.com/pub/alissa-giambrone/19/8a9/48a" _mce_href="https://www.linkedin.com/pub/alissa-giambrone/19/8a9/48a" target="_blank"><span>LinkedIn</span></a><span> is also seemingly out of date, as it says she works for Gallo Winery. Needless to say, that job likely gave her the skills needed to hang tough for the hours of drinking before rose ceremonies.</span></p><p><span>Girlfriend keeps it limber between flights with her love of yoga, and she even earned a certificate in being bendy. Let’s hope things work out with Herr Soules, because they might get a touch awkward if not — Alissa says her greatest fear is running into recent exes. She even admits that she once stalked a crush hardcore — and then texted him her findings on accident. Yikes. </span></p><p><span>But just in case you’re wondering, Alissa made the Dean’s List at St. Joseph’s, where she studied business. To sum her up, let’s turn to the gal’s description of her spirit animal: “</span><span>A wild mustang. Free to run and explore, they're unpredictable and beautiful, and are loyal to their herd.” If that’s not a winning </span><span style="font-style: italic;" _mce_style="font-style: italic;">Bachelor</span><span> contestant, we don’t </span><a href="http://www.wetpaint.com/the-bachelor/articles/2014-11-24-spoilers-who-chris-soules-picks" _mce_href="http://www.wetpaint.com/the-bachelor/articles/2014-11-24-spoilers-who-chris-soules-picks"><span>know who is</span></a><span>. </span></p><p><span style="font-style: italic;" _mce_style="font-style: italic;">Do you think Alissa is Chris’ perfect match? Sound off in the comments below.</span></p><strong>Sources: </strong><a href="http://realitysteve.com/chris-girls/" _mce_href="http://realitysteve.com/chris-girls/" target="_blank"><span>Reality Steve</span></a><span>, </span><a href="http://abc.go.com/shows/the-bachelor/cast/19-bachelorette-alissa" _mce_href="http://abc.go.com/shows/the-bachelor/cast/19-bachelorette-alissa" target="_blank"><span>ABC</span></a><span>, </span><span><a href="https://www.linkedin.com/pub/alissa-giambrone/19/8a9/48a" _mce_href="https://www.linkedin.com/pub/alissa-giambrone/19/8a9/48a" target="_blank">LinkedIn</a></span></span></p></div>
+
+
+
+  </div>
+
+
+</section>
+
+      <section class="content-meta">
+        <div class="author-timestamp">
+  <time publdate="true" itemprop="datePublished" datetime="2014-12-29T19:13:00Z" class="timestamp">December 29, 2014 at 02:13PM EST</time> by <span itemprop="author" itemscope itemtype="http://schema.org/Person" class="author"><a href="/author/julia-wayne" itemprop="url">Julia Wayne</a></span>
+</div>
+
+          <section class="wp-related wp-content-module">
+    <h5 class="related-terms-title">Related:</h5>
+    <ul itemprop="keywords" class="terms">
+            <a href="/the-bachelor">The Bachelor</a>,
+            <a href="/the-bachelor/bachelor-in-paradise">Bachelor in Paradise</a>,
+            <a href="/the-bachelor/chris-soules">Chris Soules</a>,
+            <a href="/the-bachelor/features">Features</a>,
+            <a href="/the-bachelor/news">News</a>,
+            <a href="/the-bachelor/spoilers">Spoilers</a>,
+            <a href="/the-bachelor/tv">TV</a>,
+            <a href="/the-bachelor/tv-stars">TV Stars</a>,
+            <a href="/the-bachelor/the-bachelorette">The Bachelorette</a>,
+        <li class="term"><a href="/the-bachelor/season-19">Season 19</a>, </li><li class="term"><a href="/the-bachelor/bachelor-2015">Bachelor 2015</a>, </li><li class="term"><a href="/the-bachelor/season-19-contestants">Season 19 Contestants</a>, </li><li class="term"><a href="/the-bachelor/alissa-giambrone">Alissa Giambrone</a></li>
+    </ul>
+  </section>
+
+      </section>   
+          
+    </section>
+    <footer class="content-footer article-footer">
+  <section class="syndication">
+
+      <script type="text/javascript">
+  window._taboola = window._taboola || [];
+</script>
+
+<div id="taboola-belowarticle" class="taboola"></div>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var taboolaGatedText = '';
+
+    if (wp.flags.vip_limited_access && !wp.isOwnedAndOperatedVideo && wp.page.isPublishable()) {
+      var articleCounter = JSON.parse(window.localStorage.getItem('articleCounter')) || {value:0};
+      if (articleCounter.value >= wp.flags.vip_limited_access_content_limit) {
+        taboolaGatedText = 'gated ';
+      }
+    }
+
+    if ((wp.page_type == "article" || wp.page_type == "gallery") || (wp.page_type == "video" && (wp.currentContext == "desktop" || wp.currentContext == "desktopWide"))) {
+      window._taboola = window._taboola || [];
+      _taboola.push({
+        container:"taboola-belowarticle",
+        placement: taboolaGatedText + (wp.page_type == "video" ? (wp.currentContext == "phone" ? "mobile" : "desktop")+" video page" :
+                                              (wp.currentContext == "phone" ? "mobile -below article" : "below article")),
+        mode: wp.currentContext == "phone" ? "autosized-generated-mobile-article" : "autosized-generated-2r-article" 
+
+      });
+      _taboola.push({flush:true});  
+    }
+  });
+</script>
+
+<script type="text/javascript">
+  _taboola.push({article:'auto'});   
+  !function (e, f, u) { e.async = 1; e.src = u; f.parentNode.insertBefore(e, f); }(document.createElement('script'), document.getElementsByTagName('script')[0], 'http://cdn.taboola.com/libtrc/wetpaint/loader.js');
+</script>
+
+    <div class="content-footer-ad-block clearfix">
+      <div id="300x250-ad-2" class="desktop-ad ad-300x250"></div>
+        <div class="column">
+          <div class="module-title">
+  <h4>Recommended</h4>
+</div>
+          <div id="grv-personalization-syndication" class="column"></div>
+          <script type='text/javascript'>
+            //<![CDATA[
+              (function(){var b,c,d,e,f,g,h;window.gravityInsightsParams={type:"content",site_guid:"934e04f62a151d57b4d8b3817a88c166"};e=(d=(null!=(f=/grvinsights=([^;]+)/.exec(document.cookie))?f[1]:void 0)||"",b=(null!=(g=window.jQuery)?null!=(h=g.fn)?h.jquery:void 0:void 0)||"","http://rma-api.gravity.com/v1/api/intelligence/wl?jq="+b+"&sg="+gravityInsightsParams.site_guid+"&ug="+d+"&pl=7&id=grv-personalization-syndication&type=iframe");
+              window.grvMakeScript=function(i){var a;a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=i;return a};c=document.getElementsByTagName("script")[0];e&&c.parentNode.insertBefore(window.grvMakeScript(e),c);})();
+            //]]>
+          </script> 
+        </div>
+    </div>
+
+  </section>
+</footer> 
+    
+      <section class="facebook-comments comments">
+        <div id="fb-comments" itemscope itemtype="http://schema.org/UserComments" class="fb-comments" data-num-posts="5" data-width="620" data-href="http://www.wetpaint.com/the-bachelor/articles/2014-12-29-alissa-giambrone-contestant-season-19"></div>
+
+      </section>
+
+  </article>       
+
+
+    <footer class="partner-footer" itemtype="http://schema.org/WPFooter">
+  <div class="module-title">
+  <h4>Our Partners</h4>
+</div>
+  <div class="clearfix js-partner-links">
+    <div id="grv-personalization-56"></div>
+<script type='text/javascript'>
+  //<![CDATA[
+    (function(){
+    window.gravityInsightsParams = {
+      'type': 'content',
+      'action': '',
+      'site_guid': '934e04f62a151d57b4d8b3817a88c166'
+    };
+    var adServerReq,bUrl,cburl,doUseGravityUserGuid,includeJs,jq,pfurl,type,ug,wlPrefix,wlUrl,_ref,_ref1,_ref2;includeJs=function(a){var b;b=document.createElement("script");b.async=!0;b.src=a;a=document.getElementsByTagName("script")[0];return a.parentNode.insertBefore(b,a)};bUrl="";ug=(doUseGravityUserGuid=!0===gravityInsightsParams.useGravityUserGuid?1:0)?"":gravityInsightsParams.user_guid||(null!=(_ref=/grvinsights=([^;]+)/.exec(document.cookie))?_ref[1]:void 0)||"";
+    wlUrl=(wlPrefix="https:"===location.protocol?"https://secure-api.gravity.com/v1/api/intelligence":"http://rma-api.gravity.com/v1/api/intelligence",jq=(null!=(_ref1=window.jQuery)?null!=(_ref2=_ref1.fn)?_ref2.jquery:void 0:void 0)||"",type="iframe",adServerReq=gravityInsightsParams.ad||"",cburl=gravityInsightsParams.cburl||"",pfurl=gravityInsightsParams.pfurl||"",""+wlPrefix+"/wl?jq="+jq+"&sg="+gravityInsightsParams.site_guid+"&ug="+ug+"&ugug="+doUseGravityUserGuid+"&id=grv-personalization-56&pl=56"+
+    ("&type="+type+"&ad="+adServerReq+"&cburl=")+encodeURIComponent(cburl)+"&pfurl="+encodeURIComponent(pfurl)+("&x="+(new Date).getTime())+("undefined"!==typeof forceArticleIds&&null!==forceArticleIds&&forceArticleIds.join?"&ai="+forceArticleIds.join(","):"")+("undefined"!==typeof apids&&null!==apids&&""!==apids?"&apids="+encodeURIComponent(apids):""));bUrl&&includeJs(bUrl);wlUrl&&(window.gravityInsightsParams.sidebar&&(window.gravityInsightsParams.wlStartTime=(new Date).getTime()),includeJs(wlUrl));})();
+  //]]>
+</script>
+  </div>
+</footer>
+
+  </div>
+
+  <div id="ad-editorial" class="ad-editorial" itemscope itemtype="http://schema.org/WPSideBar">
+    <div class="column">
+  <section class="ad ad-300 clearfix">
+    <div class="ad-wrapper">
+      <div id="300x250-ad-1" class="desktop-ad ad-editorial-block ad-300x250"></div>
+    </div>
+  </section>
+
+    <section class="ad-editorial-block featured clearfix">
+      <section class="oo-content featured-block clearfix js-oo-video-container">
+        <div class="module-title">
+    <a href="#" class="module-title-link icon-viggle circle-icon js-viggle-points js-ga-points-event" data-ga-points-action="VideoModalEntry_ViggleIconClicked"><span class="accessibility">More</span></a>
+  <h4>Watch and Earn</h4>
+</div>
+        <div class="jss-oo-video"></div>
+      </section>
+    </section>
+
+    <div class="ad-editorial-block hot-list">
+  <div class="module-title">
+    <a href="/shows" class="module-title-link icon-chevron-right circle-icon "><span class="accessibility">More</span></a>
+  <h4>Hot TV</h4>
+</div>
+  <ul> 
+
+        <li class="hotlist-item">
+  <h5 id="" class="hotlist-item-title">
+    <a class="hotlist-item-link" href="/dancing-with-the-stars">
+      	<img src="http://static.wetpaint.me/dwtsthree/ROOT/photos/75_60/dwts-1391124925.png" alt="Dancing With The Stars">
+      Dancing With The Stars      
+    </a>
+  </h5>
+</li> 
+        <li class="hotlist-item">
+  <h5 id="" class="hotlist-item-title">
+    <a class="hotlist-item-link" href="/downton-abbey">
+      	<img src="http://static.wetpaint.me/downton-abbey/ROOT/photos/75_60/downtonabbey-1391125039.png" alt="Downton Abbey">
+      Downton Abbey      
+    </a>
+  </h5>
+</li> 
+        <li class="hotlist-item">
+  <h5 id="" class="hotlist-item-title">
+    <a class="hotlist-item-link" href="/pretty-little-liars">
+      	<img src="http://static.wetpaint.me/pll/ROOT/photos/75_60/prettylittleliars-1388772480.png" alt="Pretty Little Liars">
+      Pretty Little Liars      
+    </a>
+  </h5>
+</li> 
+        <li class="hotlist-item">
+  <h5 id="" class="hotlist-item-title">
+    <a class="hotlist-item-link" href="/teen-mom">
+      	<img src="http://static.wetpaint.me/teenmom/ROOT/photos/75_60/teenmom-1391125248.png" alt="Teen Mom">
+      Teen Mom      
+    </a>
+  </h5>
+</li> 
+
+  </ul>
+</div>
+    <div class="ad-editorial-block popular-list">
+  <div class="module-title">
+    <a href="http://www.facebook.com/profile.php?id=5510619796" class="module-title-link icon-facebook circle-icon "><span class="accessibility">More</span></a>
+  <h4>Popular</h4>
+</div>
+  <ul> 
+
+        <li class="rollup-item clearfix js-ga-event" data-ga-event-key="popularFacebook" data-publishable-url="/pretty-little-liars/articles/2014-12-30-season-5b-7-questions-we">
+
+    <div class="rollup-item-image">
+      <a href="/pretty-little-liars/articles/2014-12-30-season-5b-7-questions-we" class="rollup-image-link" ><img src="http://static.wetpaint.me/pll/ROOT/photos/150/1363880145pre-1416433253.jpg" alt="Pretty Little Liars Season 5B: 7 Questions We Want Answered"></a>
+      
+      
+    </div>
+
+  <section class="rollup-item-body">
+    
+    
+    
+
+
+
+      <h5 id="2014-12-30-season-5b-7-questions-we" class="rollup-item-title">
+        <a href="/pretty-little-liars/articles/2014-12-30-season-5b-7-questions-we" class="" >Pretty Little Liars Season 5B: 7 Questions We Want Answered</a>
+      </h5>
+
+
+  </section>
+
+</li> 
+
+  </ul>
+</div>
+
+</div>
+<div class="column last">
+    <section class="ad-editorial-block gravity">
+      <div class="module-title">
+  <h4>You Might Like</h4>
+</div>
+      <div id="grv-personalization-ad-editorial"></div>
+
+      <script type='text/javascript'>
+        //<![CDATA[
+          (function(){
+          window.gravityInsightsParams = {
+            'type': 'content',
+            'action': '',
+            'site_guid': '934e04f62a151d57b4d8b3817a88c166'
+          };
+          var b,c,d,e,f,g,h,i,j;f=(c=!0===gravityInsightsParams.useGravityUserGuid?1:0)?"":gravityInsightsParams.user_guid||(null!=(h=/grvinsights=([^;]+)/.exec(document.cookie))?h[1]:void 0)||"";g=(d=(null!=(i=window.jQuery)?null!=(j=i.fn)?j.jquery:void 0:void 0)||"",b=gravityInsightsParams.ad||"","http://rma-api.gravity.com/v1/api/intelligence/wl?jq="+d+"&sg="+gravityInsightsParams.site_guid+"&ug="+f+"&ugug="+c+"&pl=18&id=grv-personalization-ad-editorial&type=iframe&ad="+b);
+          window.grvMakeScript=function(k){var a;a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=k;return a};e=document.getElementsByTagName("script")[0];g&&e.parentNode.insertBefore(window.grvMakeScript(g),e);})();
+        //]]>
+      </script>
+    </section>
+
+  <section id="bottom-ad" class="ads">
+    <div id="footer-mobile-ad" class="mobile-ad mobile-ad-container"></div>
+  </section> 
+
+  <section class="ad ad-300 ad-editorial-block">
+    <div class="ad-wrapper">
+      <div id="300x250-ad-3" class="desktop-ad ad-300x250"></div>
+    </div>
+  </section>
+
+  <footer class="wetpaint-footer" itemtype="http://schema.org/WPFooter">
+  <a href="/" class="wetpaint-logo"><span class="accessibility">Wetpaint</span></a>
+  <ul class="follow-icons">
+    <li>
+      <a href="http://www.facebook.com/profile.php?id=5510619796" class="social-link" id="social-links-facebook" target="_BLANK" title="Follow Wetpaint on Facebook">
+        <i class="icon-facebook circle-icon"><span class="accessibility">facebook</i>
+</a>    </li>
+    <li>
+      <a href="http://www.twitter.com/wetpainttv" class="social-link" id="social-links-twitter" target="_BLANK" title="Follow Wetpaint on Twitter">
+        <i class="icon-twitter circle-icon"><span class="accessibility">twitter</i>
+</a>    </li>
+    <li>
+      <a href="https://plus.google.com/114745337135279313902" class="social-link" id="social-links-google-plus" rel="publisher" target="_BLANK" title="Follow Wetpaint on Google+">
+        <i class="icon-google-plus circle-icon"><span class="accessibility">google-plus</i>
+</a>    </li>
+    <li>
+      <a href="http://feeds.wetpaint.com/wetpaint/latest/excerpt" class="social-link" id="social-links-rss" target="_BLANK" title="Follow News&#x27;s RSS">
+        <i class="icon-rss circle-icon"><span class="accessibility">rss</i>
+</a>    </li>
+</ul>
+  <nav class="menu clearfix">
+  <ul>
+ 		<li><a href="/">Home</a></li><li><a href="http://www.wetpaint-inc.com/about">About</a></li><li><a href="http://www.wetpaint-inc.com/company-news">Company News</a></li><li><a href="http://www.wetpaint-inc.com/advertise-with-us">Advertise with Us</a></li><li><a href="http://www.wetpaint-inc.com/jobs">Jobs</a></li><li><a href="http://www.wetpaint-inc.com/privacy">Privacy</a></li><li><a href="http://www.wetpaint-inc.com/terms-and-conditions">Terms and Conditions</a></li><li><a href="http://www.wetpaint-inc.com/contact">Tips And Feedback</a></li>
+  </ul>
+</nav> 
+  <small class="copyright">
+    <p>Wetpaint Entertainment | wetpaint.com, inc. &copy; 2012. All rights reserved. Any images and content contained on this site relating to &ldquo;The Bachelor&rdquo; are not authorized by &ldquo;The Bachelor&rdquo;&trade; and ABC &copy;&nbsp;2012 and its related companies.</p>
+  </small>
+</footer>   
+</div>  
+  </div> 
+      
+        </div>
+
+      </section>
+
+    </section>
+  </div>
+
+  <div id="vip-access-notifier">
+  <div id="article-access-counter" class="collapsed">
+    You've read <span></span> of 5 maximum articles this month.
+  </div>
+  <div id="promo-text">
+    GET UNLIMITED ACCESS WHEN YOU UPGRADE TO VIP <span>&rsaquo;</span>
+  </div>
+  <div id="explanatory-text">
+    <h6>Register now to become a Wetpaint VIP</h6>
+    <p>
+      Perks include access to all Wetpaint content, secret links to exclusive video, and best of all, points earnings and rewards from our partner, Viggle.
+    </p>
+  </div>
+  <div id="tell-me-more-text">
+    <a href="http://www.wetpaint.com/viggle/articles/2014-07-24-vip-register-facebook-perks">Tell me more</a> or sign me up (just click below)</a>
+  </div>
+  <div>
+    <a class="facebook-button no-chevron user-login-action" href="" target="_blank" onclick="" data-fb-login-callback="vipLimitedAccessNotifierLoginCallback">
+      Connect with Facebook
+    </a>
+  </div>
+  <div id="close-text">
+    CLOSE
+  </div>
+</div>
+
+  <b id="wptimestamp" style="display:none !important;" data-time="1023"></b>
+
+  
+<div id="1x1-ad" class="ad-1x1"></div>
+<div id="third-party-placement" class="ad-1x1"></div>
+
+<script type="text/javascript" src="/components/domains"></script>
+<script id="load-gumgum" type="text/javascript">
+  var ggv2id = wp.currentContext == 'phone' ? "292ac839" : "57dd9d65"
+  var gum_script = document.createElement("script");
+  gum_script.type = "text/javascript";
+  gum_script.src = "http://g2.gumgum.com/javascripts/ggv2.js";
+  document.getElementById("load-gumgum").appendChild(gum_script);
+</script>
+
+<script src="http://static2.wetpaint.me/assets/application-faee891d6849733ec831de6f3f56cba5.js" type="text/javascript"></script>
+<script src="http://static2.wetpaint.me/assets/deferred-c13f31042c6a7e530e1c5b7fd00def87.js" type="notJs"></script>
+<script>$(document).trigger('ready');</script>
+
+<script src="http://player.ooyala.com/v3/c8c1928a94304965926a8d746d274e04"></script>
+<script type="text/javascript">
+  OO.ready(function(){wp.video.initializeOoyalaPlayers($('.page-content'))});
+  wp.video.getRightColumnVideos('/the-bachelor/video/oo_videos?page=419026');
+</script>
+<script type="text/javascript" language="javascript" src="http://cdn-static.liverail.com/js/companions.js"></script>
+<script type="text/javascript">
+  var _sf_async_config={
+    uid:5762
+    ,domain:location.host
+    ,sections:wp.site_name
+    ,authors:wp.publish_author
+  };
+  (function(){
+    var js, d = document, s = 'script', l = d.getElementsByTagName(s)[0].parentNode;
+    function loadChartbeat() {
+        window._sf_endpt=(new Date()).getTime();
+        var e = d.createElement('script'); 
+        e.type='text/javascript'; e.async=true; e.src = "http://static.chartbeat.com/js/chartbeat.js"; l.appendChild(e);
+    }
+    var oldonload = window.onload;window.onload = (typeof window.onload != 'function') ? loadChartbeat : function() { oldonload(); loadChartbeat();  };
+  })();
+</script>
+<script type='text/javascript'>
+  //<![CDATA[
+    (function(){var b,c;window.gravityInsightsParams={type:"content",site_guid:"934e04f62a151d57b4d8b3817a88c166"};b="https:"===document.location.protocol?"https://b-ssl.grvcdn.com/moth-min.js":"http://b.grvcdn.com/moth-min.js";window.grvMakeScript=function(d){var a;a=document.createElement("script");a.type="notJs";a.async=!0;a.src=d;return a};c=document.getElementsByTagName("script")[0];b&&c.parentNode.insertBefore(window.grvMakeScript(b),c);})();
+  //]]>
+</script>
+<script type="text/javascript">
+  window.twttr = (function (d,s,id) {
+    var t, js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return; js=d.createElement(s); js.id=id;
+    js.src="//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs);
+    return window.twttr || (t = { _e: [], ready: function(f){ t._e.push(f) } });
+  }(document, "script", "twitter-wjs"));
+</script>
+  <!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+    <div id="parsely-cfg" data-parsely-site="wetpaint.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+  e=d.getElementById(i), r=d.getElementById(p+"-root"),
+  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+  :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+
+
+
+<script type="text/javascript">
+setTimeout(function(){var a=document.createElement("script"); var b=document.getElementsByTagName("script")[0]; a.src=document.location.protocol+"//dnn506yrbagrg.cloudfront.net/pages/scripts/0010/8588.js?"+Math.floor(new Date().getTime()/3600000); a.async=true;a.type="text/javascript";b.parentNode.insertBefore(a,b)}, 1);
+</script>
+
+
+
+
+
+<script type="text/javascript">
+  (function() {
+      wp.socialButtons();
+  })();
+</script>
+
+  <!--                                     Build Version: e6140b1 Last Restarted at: 2014-12-17 09:51:48 -0800 Rendered in: 1148ms Server: c5                                      -->
+
+ 
+</body>
+</html>
+

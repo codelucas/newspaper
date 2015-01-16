@@ -1,0 +1,51 @@
+These Streptococcus pyogenes bacteria use a DNA-cutting defense to battle viruses. The system, called CRISPR, is being harnessed to treat human genetic disease.
+
+Last month in Silicon Valley, biologists Jennifer Doudna and Emmanuelle Charpentier showed up in black gowns to receive the $3 million Breakthrough Prize, a glitzy award put on by Internet billionaires including Mark Zuckerberg. They’d won for developing CRISPR-Cas9, a “powerful and general technology” for editing genomes that’s been hailed as a biotechnology breakthrough.
+
+Not dressing up that night was Feng Zhang (see 35 Innovators Under 35, 2013), a researcher in Cambridge at the MIT-Harvard Broad Institute. But earlier this year Zhang claimed his own reward. In April, he won a broad U.S. patent on CRISPR-Cas9 that could give him and his research center control over just about every important commercial use of the technology.
+
+How did the high-profile prize for CRISPR and the patent on it end up in different hands? That’s a question now at the center of a seething debate over who invented what, and when, that involves three heavily financed startup companies, a half-dozen universities, and thousands of pages of legal documents.
+
+“The intellectual property in this space is pretty complex, to put it nicely,” says Rodger Novak, a former pharmaceutical industry executive who is now CEO of CRISPR Therapeutics, a startup in Basel, Switzerland, that was cofounded by Charpentier. “Everyone knows there are conflicting claims.”
+
+At stake are rights to an invention that may be the most important new genetic engineering technique since the beginning of the biotechnology age in the 1970s. The CRISPR system, dubbed a “search and replace function” for DNA, lets scientists easily disable genes or change their function by replacing DNA letters. During the last few months, scientists have shown that it’s possible to use CRISPR to rid mice of muscular dystrophy, cure them of a rare liver disease, make human cells immune to HIV, and genetically modify monkeys (see “Genome Surgery” and “10 Breakthrough Technologies 2014: Genome Editing”).
+
+No CRISPR drug yet exists. But if CRISPR turns out to be as important as scientists hope, commercial control over the underlying technology could be worth billions.
+
+The control of the patents is crucial to several startups that together quickly raised more than $80 million to turn CRISPR into cures for devastating diseases. They include Editas Medicine and Intellia Therapeutics, both of Cambridge, Massachusetts. Companies expect that clinical trials could begin in as little as three years.
+
+Zhang cofounded Editas Medicine, and this week the startup announced that it had licensed his patent from the Broad Institute. But Editas doesn’t have CRISPR sewn up. That’s because Doudna, a structural biologist at the University of California, Berkeley, was a cofounder of Editas, too. And since Zhang’s patent came out, she’s broken off with the company, and her intellectual property—in the form of her own pending patent—has been licensed to Intellia, a competing startup unveiled only last month. Making matters still more complicated, Charpentier sold her own rights in the same patent application to CRISPR Therapeutics.
+
+No CRISPR drug yet exists. But if CRISPR turns out to be as important as scientists hope, commercial control over the underlying technology could be worth billions.
+
+In an e-mail, Doudna said she no longer has any involvement with Editas. “I am not part of the company’s team at this point,” she said. Doudna declined to answer further questions, citing the patent dispute.
+
+Few researchers are now willing to discuss the patent fight. Lawsuits are certain and they worry anything they say will be used against them. “The technology has brought a lot of excitement, and there is a lot of pressure, too. What are we going to do? What kind of company do we want?” Charpentier says. “It all sounds very confusing for an outsider, and it’s also quite confusing as an insider.”
+
+Academic labs aren’t waiting for the patent claims to get sorted out. Instead, they are racing to assemble very large engineering teams to perfect and improve the genome-editing technique. On the Boston campus of Harvard’s medical school, for instance, George Church, a specialist in genomics technology, says he now has 30 people in his lab working on it.
+
+Because of all the new research, Zhang says, the importance of any patent, including his own, isn’t entirely clear. “It’s one important piece, but I don’t really pay attention to patents,” he says. “What the final form of this technology is that changes people’s lives may be very different.”
+
+Twitter CEO Dick Costolo (far left) and actress Cameron Diaz present the Breakthrough Prize to biologists Jennifer Doudna and Emmanuelle Charpentier last month in Mountain View, California. Each won $3 million.
+
+The new gene-editing system was unearthed in bacteria—organisms that use it as a way to identify, and then carve up, the DNA of invading viruses. That work stretched across a decade. Then, in June 2012, a small team led by Doudna and Charpentier published a key paper showing how to turn that natural machinery into a “programmable” editing tool, to cut any DNA strand, at least in a test tube.
+
+The next step was clear—scientists needed to see if the editing magic could work on the genomes of human cells, too. In January 2013, the laboratories of Harvard’s Church and Broad’s Zhang were first to publish papers showing that the answer was yes. Doudna published her own results a few weeks later.
+
+Everyone by then realized that CRISPR might become an immensely flexible way to rewrite DNA, and possibly to treat rare metabolic problems and genetic diseases as diverse as hemophilia and the neurodegenerative disease Huntington’s.
+
+Venture capital groups quickly began trying to recruit the key scientists behind CRISPR, tie up the patents, and form startups. Charpentier threw in with CRISPR Therapeutics in Europe. Doudna had already started a small company, Caribou Biosciences, but in 2013 she joined Zhang and Church as a cofounder of Editas. With $43 million from leading venture funds Third Rock Ventures (see “50 Smartest Companies: Third Rock Ventures”), Polaris Partners, and Flagship Ventures, Editas looked like the dream team of gene-editing startups.
+
+In April of this year, Zhang and the Broad won the first of several sweeping patents that cover using CRISPR in eukaryotes—or any species whose cells contain a nucleus (see “Broad Institute Gets Patent on Revolutionary Gene-Editing Method”). That meant that they’d won the rights to use CRISPR in mice, pigs, cattle, humans—in essence, in every creature other than bacteria.
+
+The patent came as a shock to some. That was because Broad had paid extra to get it reviewed very quickly, in less than six months, and few knew it was coming. Along with the patent came more than 1,000 pages of documents. According to Zhang, Doudna’s predictions in her own earlier patent application that her discovery would work in humans was “mere conjecture” and that, instead, he was the first to show it, in a separate and “surprising” act of invention.
+
+The patent documents have caused consternation. The scientific literature shows that several scientists managed to get CRISPR to work in human cells. In fact, its easy reproducibility in different organisms is the technology’s most exciting hallmark. That would suggest that, in patent terms, it was “obvious” that CRISPR would work in human cells, and that Zhang’s invention might not be worthy of its own patent.
+
+What’s more, there’s scientific credit at stake. In order to show he was “first to invent” the use of CRISPR-Cas in human cells, Zhang supplied snapshots of lab notebooks that he says show he had the system up and running in early 2012, even before Doudna and Charpentier published their results or filed their own patent application. That timeline would mean he hit on the CRISPR-Cas editing system independently. In an interview, Zhang affirmed he’d made the discoveries on his own. Asked what he’d learned from Doudna and Charpentier’s paper, he said “not much.”
+
+Not everyone is convinced. “All I can say is that we did it in my lab with Jennifer Doudna,” says Charpentier, now a professor at the Helmholtz Centre for Infection Research and Hannover Medical School in Germany. “Everything here is very exaggerated because this is one of those unique cases of a technology that people can really pick up easily, and it’s changing researchers’ lives. Things are happening fast, maybe a bit too fast.”
+
+This isn’t the end of the patent fight. Although Broad moved very swiftly, lawyers for Doudna and Charpentier are expected to mount an interference proceeding in the U.S.—that is, a winner-takes-all legal process in which one inventor can take over another’s patent. Who wins will depend on which scientist can produce lab notebooks, e-mails, or documents with the earliest dates.
+
+“I am very confident that the future will clarify the situation,” says Charpentier. “And I would like to believe the story is going to end up well.”

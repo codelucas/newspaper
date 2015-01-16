@@ -1,0 +1,13 @@
+Investing
+
+New York Governor Andrew Cuomo vetoed a bill last week that would have allowed the New York state, city, and teachers’ pension funds to increase their investment in hedge funds from 25 percent to 30 percent of fund assets. He cited the high fees and risk associated with hedge funds. The now-dead bill contained a memo justifying its proposed increase:
+
+“The portion of the NYCRS [New York City Retirement System] portfolios allocated to public equities is much more volatile than the investments allocated to the basket. As a result, a swing in public markets can push NYCRS dangerously close to the investment cap with no new investments.”
+
+That’s a terrible reason to invest in hedge funds. Stocks are supposed to be riskier; that’s why they normally provide higher returns. If the investment board can’t handle volatility, it should invest in safer, lower-yielding assets—and while that may describe some hedge funds, cheaper options are out there. Hedge funds typically charge 2 percent of assets, plus 20 percent of gains, and rarely outperform the stock market. The figure below, from an article last year, plots an index of hedge fund strategy performance compared with the S&P 500 index.
+
+Underperformance is why such states as California are pulling out of hedge funds (though they are piling into risky alternatives, such as private equity). The sentiment is not uniform, though, and other states, including New Jersey, Ohio, New Mexico, and Illinois, are sticking with or increasing their hedge fund investment.
+
+Cuomo was right to veto the bill. Investing in hedge funds is extra risky for New York, which is also home to a large share of the hedge fund industry. Employees in the finance industry pay a large share of the state’s tax revenue. That would seem to give politicians an incentive to increase their hedge fund investment. But it’s a dangerous strategy. If the hedge fund industry has a bad year, the state would take a twofold hit: Pension fund assets would tank, along with the tax revenue from finance industry professionals whose compensation depends on performance.
+
+Like all states, New York’s pensions are underfunded. In 2013, its assets could cover only 87.3 percent of pension promises, a figure that assumes superior investment performance each and every year. More prudent measures estimate a larger deficit. Making up the difference will require either outstanding, consistent investment performance or more contributions from state employees and taxpayers. The governor made a good choice by realizing that investing in hedge funds isn’t the answer. He has made less progress on how to fill in the gap reliably.
