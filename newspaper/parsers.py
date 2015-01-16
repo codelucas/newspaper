@@ -11,6 +11,7 @@ import lxml.etree
 import lxml.html
 import lxml.html.clean
 
+from bs4 import UnicodeDammit
 from copy import deepcopy
 
 from . import text
@@ -40,8 +41,20 @@ class Parser(object):
         return node.cssselect(selector)
 
     @classmethod
+    def get_unicode_html(cls, html):
+        converted = UnicodeDammit(html, is_html=True)
+        if not converted.unicode_markup:
+            raise Exception(
+                'Failed to detect encoding of article HTML, tried: %s' %
+                ', '.join(converted.tried_encodings))
+        html = converted.unicode_markup
+        return html
+
+    @classmethod
     def fromstring(cls, html):
-        html = utils.encodeValue(html)
+        html = cls.get_unicode_html(html)
+        # Enclosed in a `try` to prevent bringing the entire library
+        # down due to one article (out of potentially many in a `Source`)
         try:
             cls.doc = lxml.html.fromstring(html)
         except Exception, e:
