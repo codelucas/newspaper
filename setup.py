@@ -15,7 +15,7 @@ except ImportError:
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist bdist_wininst upload')
+    os.system('python setup.py sdist upload') # bdist_wininst
     sys.exit()
 
 
@@ -33,7 +33,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='newspaper',
-    version='0.0.9',
+    version='0.0.9.1',
     description='Simplified python article discovery & extraction.',
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',

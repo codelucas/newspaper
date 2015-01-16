@@ -10,6 +10,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import Queue
+import traceback
 from threading import Thread
 
 
@@ -28,12 +29,12 @@ class Worker(Thread):
             try:
                 func, args, kargs = self.tasks.get()
             except Queue.Empty:
-                print 'thread breaking b/c queue is empty'
+                traceback.print_exc()
                 break
             try:
                 func(*args, **kargs)
-            except Exception, e:
-                print 'critical multi-thread err %s' % e
+            except Exception:
+                traceback.print_exc()
 
             self.tasks.task_done()
 

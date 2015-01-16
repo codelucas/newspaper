@@ -160,7 +160,7 @@ class Article(object):
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
-            print '[Article parse ERR] %s' % self.url
+            # `parse` call failed, return nothing
             return
 
         # TODO: Fix this, sync in our fix_url() method
@@ -364,7 +364,7 @@ class Article(object):
         """
         try:
             s = images.Scraper(self)
-            self.set_top_img_no_ckeck(s.largest_image_url())
+            self.set_top_img(s.largest_image_url())
         except Exception, e:
             log.critical('jpeg error with PIL, %s' % e)
 
@@ -399,15 +399,15 @@ class Article(object):
 
     def set_meta_img(self, src_url):
         self.meta_img = encodeValue(src_url)
-        self.set_top_img(src_url)
+        self.set_top_img_no_check(src_url)
 
     def set_top_img(self, src_url):
         if src_url is not None:
             s = images.Scraper(self)
             if s.satisfies_requirements(src_url):
-                self.set_top_img_no_ckeck(src_url)
+                self.set_top_img_no_check(src_url)
 
-    def set_top_img_no_ckeck(self, src_url):
+    def set_top_img_no_check(self, src_url):
         """Provide 2 APIs for images. One at "top_img", "imgs"
         and one at "top_image", "images"
         """

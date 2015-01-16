@@ -10,6 +10,8 @@ import logging
 import lxml.etree
 import lxml.html
 import lxml.html.clean
+import re
+import traceback
 
 from bs4 import UnicodeDammit
 from copy import deepcopy
@@ -56,12 +58,15 @@ class Parser(object):
         # Enclosed in a `try` to prevent bringing the entire library
         # down due to one article (out of potentially many in a `Source`)
         try:
+            # Remove encoding tag because lxml won't accept it for
+            # unicode objects (Issue #78)
+            if html.startswith('<?'):
+                html = re.sub(r'^\<\?.*?\?\>', '', html, flags=re.DOTALL)
             cls.doc = lxml.html.fromstring(html)
-        except Exception, e:
-            print '[Parse lxml ERR]', str(e)
+            return cls.doc
+        except Exception:
+            traceback.print_exc()
             return None
-
-        return cls.doc
 
     # @classmethod
     # def set_doc(cls, html):
