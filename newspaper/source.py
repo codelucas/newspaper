@@ -89,7 +89,7 @@ class Source(object):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
-        self.download(response)
+        self.download()
         self.parse()
 
         self.set_categories()
