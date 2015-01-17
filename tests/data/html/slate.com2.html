@@ -1,0 +1,5245 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 modePublish"> <![endif]-->
+<!--[if IE 7]> <html class="no-js lt-ie9 lt-ie8 modePublish"> <![endif]-->
+<!--[if IE 8]> <html class="no-js lt-ie9 modePublish"> <![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js modePublish"><!--<![endif]-->
+
+
+
+
+  <head>
+    <script>
+
+      //Reload to canonical if you try to paste in the print page
+      if (window.location.search.indexOf("print") > -1) {
+        if (document.referrer.indexOf("http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html") != 0) {
+          window.location = "http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html";
+        }
+      }
+//-- Stop hiding script -->
+
+    </script>
+    
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQ4OUFNbGwEGU1dUAwE="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script>
+    <script type="text/javascript">
+      var slate_public_url = "http://www.slate.com/";
+      window._sf_startpt=(new Date()).getTime();
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Brazil World Cup protests: Striking images of the country&rsquo;s anti-World Cup movement.</title>
+    <meta name="description" content="The biggest challenge to Brazil&rsquo;s World Cup preparations over the past few weeks has been the chaos caused by striking public workers. While S&atilde;o Paulo subway workers voted to at least temporarily suspend their strikes on Monday night, protests by activists angry at the money being spent by Brazil to..." />
+    <meta name="keywords" content="Brazil protests, Rio protests, Sau Paulo protests, World Cup protests, World Cup strikes, strikes, Brazil strikes, Sau Paulo strikes, Brazil subway strikes, Sau Paulo, Rio World Cup" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    
+    
+
+    
+    
+    
+    <script>
+      
+      var commercialNode = 'blogs/thespot';
+      
+      var commercialPageType = 'article';
+      var selectedText = "";
+    </script>
+    <!-- Facebook OG -->
+    <meta id="ogtitle" property="og:title" content="Striking Images of Brazil&rsquo;s Anti-World Cup Protest Movement" />
+    
+
+    <meta property="article:publisher" content="http://www.facebook.com/Slate" />
+
+    
+    <meta property="article:author" content="https://www.facebook.com/jjphotojou,https://www.facebook.com/JeremyDStahl" />
+    
+
+    <meta property="og:type" content="article" />
+    <meta id="ogurl" property="og:url" content="http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html" />
+    <meta id="ogimage" property="og:image" content="http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+    <meta property="og:site_name" content="Slate Magazine" />
+    <meta id="ogdescription" property="og:description" content="The biggest challenge to Brazil&rsquo;s World Cup preparations over the past few weeks has been the chaos caused by striking public workers. While S&atilde;o Paulo subway workers voted to at least temporarily suspend their strikes on Monday night, protests by activists angry at the money being spent by Brazil to..." />
+    <meta property="fb:app_id" content="142011022527753"/>
+    <!-- Twitter -->
+    <meta name="twitter:card" value="summary" />
+    <meta name="twitter:site" value="@slate" />
+    
+    <meta name="twitter:creator" value="@photobomba, @JeremyStahl" />
+    
+    <meta name="twitter:url" value="http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html" />
+    <meta name="twitter:title" value="Striking Images of Brazil&rsquo;s Anti-World Cup Protest Movement" />
+    <meta name="twitter:description" value="The biggest challenge to Brazil&rsquo;s World Cup preparations over the past few weeks has been the chaos caused by striking public workers. While S&atilde;o Paulo subway workers voted to at least temporarily suspend their strikes on Monday night, protests by activists angry at the money being spent by Brazil to..." />
+    <meta name="twitter:image" value="http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+    
+    <link type="text/css" href="http://static.cdnslate.com/etc/designs/slate/css/story.5204e0de.css" rel="stylesheet" />
+    
+    
+    
+    
+    <script data-ad-site="slate" src="http://static.cdnslate.com/etc/designs/slate/js/libs/require.js"></script>
+    <script>
+    requirejs.config({
+      "baseUrl": "http://static.cdnslate.com/etc/designs/slate/js",
+      "waitSeconds": 0,
+      "paths": {
+        "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min",
+        "jqueryui": "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min",
+        "modernizr": "/etc/designs/slate/js/libs/modernizr-2.6.1.min",
+        "announcements": "/etc/designs/slate/js/announcements",
+        "slate": "/etc/designs/slate/lib",
+        "hogan": "libs/hogan-2.0.0",
+        "facebook": "//connect.facebook.net/en_US/all",
+        "livefyre": "http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre",
+        "livefyresidenotes": "//cdn.livefyre.com/Livefyre",
+        "brightcove": "http://admin.brightcove.com/js/BrightcoveExperiences",
+        "brightcovetracking": "/etc/designs/slate/js/brightcovetracking",
+        "mobileredirection": "libs/redirection_mobile_1.0.0.min",
+        "optimizely": "//cdn.optimizely.com/js/37441550",
+        "outbrain": "//widgets.outbrain.com/outbrain",
+        "shared": "http://static.cdnslate.com/etc/designs/shared/js",
+        "instafeed": "/etc/designs/slate/js/instafeed",
+        "campaigns": "http://campaigns.slate.com/campaigns/slate"
+      },
+      "shim": {
+        "shared/devicemode": ["modernizr"],
+        "hcs/script": ["jquery", "modernizr", "shared/devicemode"],
+        "libs/jquery-plugins/jquery.browser": ["jquery"],
+        "hcs/plugins/jquery.transit": ["jquery"],
+        "hcs/plugins/SGFootnote.jquery": ["jquery"],
+        "hcs/plugins/SGSocialIcons.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGNavDropdown.jquery": ["jquery"],
+        "hcs/plugins/SGComments.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGRollup.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGGlobalNav.jquery": ["jquery", "hcs/script"],
+        "hcs/plugins/SGLightbox.jquery": ["jquery"],
+        "hcs/plugins/jQuery.highlighter": ["jquery"],
+        "hcs/libs/swipe": ["jquery"],
+        "hcs/libs/magnific": ["jquery"],
+        "hcs/plugins/jquery.swipebox": ["jquery"],
+        "hcs/plugins/SGBigSlider.jquery": ["jquery", "hcs/script", "hcs/libs/swipe"],
+        "hcs/plugins/jquery.placeholder.min": ["jquery"],
+        "libs/jquery-plugins/jquery.timeago": ["jquery"],
+        "libs/jquery-plugins/jquery.form": ["jquery"],
+        "libs/jquery-plugins/jquery.cookie": ["jquery"],
+        "libs/jquery-plugins/jquery.fittext": ["jquery"],
+        "libs/jquery-plugins/jquery.backgroundSize": ["jquery"],
+        "libs/jquery-plugins/jquery.flexslider": ["jquery"],
+        "libs/jquery-plugins/purl": ["jquery"],
+        "libs/jquery-plugins/jquery.colorbox": [ "jquery" ],
+        "libs/jquery-plugins/jquery.sticky": ["jquery"],
+        "libs/jquery-plugins/jquery.autoComplete": ["jquery"],
+        "libs/jquery-plugins/jquery.boxfit": ["jquery"],
+        "libs/jquery-plugins/jquery.dateformat": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.extra": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.bg": ["jquery"],
+        "libs/jquery-plugins/jquery.lazyloadxt.widget": ["jquery"],
+        "libs/jquery-plugins/jquery.visible": ["jquery"],
+        "optimizely": ["jquery"],
+        "facebook": {
+            deps: ["identity/wapo_site_bottom"],
+            exports: "FB"
+        },
+        "livefyre": {
+            exports: "fyre"
+        },
+        "brightcove": {
+          	"exports": "brightcove"
+        },
+        "mobileredirection": {
+                "exports": "mobileredirection"
+        },
+        "hogan": {
+          	"exports": "Hogan"
+        },
+        "outbrain": {
+          "exports": "OBR"
+        }
+      }
+    });
+
+
+    
+    define("config", {
+      "env": {
+        "edit": false
+      },
+      "identity": {
+		"fb_xd_receiver": "http://www.slate.com/xd_receiver.htm",
+		"fb_app_id": 142011022527753,
+		"publicationName": "Slate",
+		"site_base_domain": "slate.com",
+		"site_path": "/",
+		"wapo_secure_protocol": "https:",
+		"wapo_site_url": "//id.slate.com/identity/",
+		"site_url": "//www.slate.com/",
+		"wapo_public_protocol": "http:",
+		"myslate_domain": "//my.slate.com/",
+		"myslate_https": true,
+		"enabled": true
+	  },
+	  "livefyre": {
+	    "network": "slate.fyre.co",
+	    "jsSourceUrl": "http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js",
+	    "siteId": "337720"
+	  },
+      "campaigns": {
+         "domain":"campaigns.slate.com"
+       },
+       "site": {
+         "site": "slate",
+         "title": "Slate",
+         "staticUrl": "http://static.cdnslate.com",
+         "omniturePrefix": "sl"
+       },
+       "data_domain": "http://www.slate.com/",
+       "page": {
+         "articleId": "245140610005",
+         "roadblocked": false,
+         "embeddedContent": false
+       },
+      "ads": {
+        "viewabilityEnabled": false,
+        "viewability": {
+          "leaderboardRollup": false,
+          "refreshInterval": "",
+          "refreshPolar": false,
+          "testPageList": "",
+          "lazyload": {
+            "homepageBB": false,
+            "tiffTiles": false
+          }
+        }
+      },
+      "_log": [],
+      "log": function(data) {
+         requirejs(["config"], function(config) {
+           if (typeof console != "undefined" &&
+               typeof console.log != "undefined") {
+             console.log(data);
+           }
+           config._log.push(data);
+         });
+       }
+    });
+    var homepagePolarSpot = 'b1';
+    </script>
+
+    
+    <script src="http://static.cdnslate.com/etc/designs/slate/js/main.min.94d806cf.js"></script>
+    
+
+
+<script type="text/javascript" language="javascript">
+requirejs(["s_code"], function(s) {
+
+        s.currencyCode="usd";
+        s.charSet="utf-8";
+        s.trackDownloadLinks=true;
+        s.trackExternalLinks=true;
+        s.trackInlineStats=true;
+        s.linkDownloadFileTypes="exe,zip,wav,mp3,mov,mpg,avi,wmv,doc,pdf,xls";
+        s.linkInternalFilters="javascript:,slate.com,traffic.outbrain.com";
+        s.linkTrackVars="none";
+        s.linkTrackEvents="none";
+        s.pageName="sports:blog:the spot - 20140610 - brazil world cup protests: striking images of the country's anti-world cup movement.";
+        s.channel="sl - sports";
+        s.server="www.slate.com";
+        s.prop2="blog";
+        s.prop3="blog";
+        s.prop4="slate";
+        s.prop5="juliana jiménez jaramillo, jeremy stahl";
+        s.prop12="245140610005";
+        s.prop13="brazil world cup protests: striking images of the country's anti-world cup movement.";
+        s.prop14="1";
+        s.prop25="the spot";
+        s.prop34="3.59.0";
+        s.prop36="general";
+        s.prop39="blogs/thespot";
+        s.hier1="sports|blog|blog";
+        s.eVar8="juliana jiménez jaramillo, jeremy stahl";
+        s.eVar11="the spot";
+        s.eVar17="blog";
+s.t();
+});
+</script>
+
+
+    <script>               
+      var _isNavMoving = false; // acts as a global (sorry) mutex for keeping track of when our nav panels are moving around. Allows us to prevent overlapping actions.
+    </script>
+
+    <!-- Google Sitemap -->
+    <meta name="google-site-verification" content="jXqoqqPSmx_PWchRdG-IXu-X616Ee2Ptf_AiElI9LzQ" />
+    <link rel="canonical" href="http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html" />
+    <link rel="image_src" href="http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg.CROP.thumbnail-small.jpg" />
+
+    <!-- Parsely -->
+        <meta name='parsely-page' content='{
+  "title": "Striking Images of Brazil\u2019s Anti-World Cup Protest Movement",
+  "link": "http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html",
+  "image_url": "http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg.CROP.thumbnail-small.jpg",
+  "type": "post",
+  "post_id": "245140610005",
+  "pub_date": "2014-06-10T17:21:00Z",
+  "section": "Sports",
+  "author": "Juliana Jiménez Jaramillo and Jeremy Stahl",
+  "tags": [
+    "world cup",
+    "world cup 2014",
+    "soccer"
+  ]
+}'/>
+    
+    <!-- RSS -->
+    <link rel="alternate" type="application/rss+xml" title="The Spot (RSS 2.0)" href="http://www.slate.com/blogs/the_spot.fulltext.all.rss" />
+
+    
+    <script>var wp_meta_data = {"authors":["Juliana Jiménez Jaramillo","Jeremy Stahl"],"contentType":"blog","page_id":"245140610005","keywords":"world cup,world cup 2014,soccer,Brazil protests, Rio protests, Sau Paulo protests, World Cup protests, World Cup strikes, strikes, Brazil strikes, Sau Paulo strikes, Brazil subway strikes, Sau Paulo, Rio World Cup","section":"Sports","rubric":"Blog"};</script>
+
+    
+    <![if gte IE 8]>
+    <script type="text/javascript">
+    requirejs(['pagenav', 'jquery'], function(pagenav, $) {
+      var SlateNextbox = {};
+
+      SlateNextbox.data = {
+        'headline': 'How to Follow Soccer Now that the World Cup Is Over',
+        'subhead': '',
+        'url': 'http:\/\/www.slate.com\/blogs\/the_spot\/2014\/07\/21\/mls_premier_league_la_liga_serie_a_champions_league_bundesliga_how_to_follow.html',
+        'article_id': '245140721001',
+        'hasImage': true,
+        
+        'image': 'http:\/\/www.slate.com\/content\/dam\/slate\/blogs\/the_spot\/2014\/07\/21\/mls_premier_league_la_liga_serie_a_champions_league_bundesliga_how_to_follow\/482974577-clint-dempsey-and-deindre-yedlin-of-seattle-sounders-fc.jpg.CROP.rectangle-small.jpg',
+        
+      
+        'section': 'The Spot',
+      
+        'subscribe_type': 'rubric'
+      };
+      $.data(window, "SlateNextbox", SlateNextbox);
+      pagenav.addStory(SlateNextbox.data);
+    });
+
+    </script>
+    <![endif]>
+    
+
+    
+
+      
+        <!-- sailthru meta -->
+        <meta name="sailthru.tags" content="Brazil protests, Rio protests, Sau Paulo protests, World Cup protests, World Cup strikes, strikes, Brazil strikes, Sau Paulo strikes, Brazil subway strikes, Sau Paulo, Rio World Cup" />
+        <meta name="sailthru.author" content="Juliana Jiménez Jaramillo, Jeremy Stahl" />
+        <meta name="sailthru.date" content="2014-06-10T17:21:00Z" />
+        <meta name="sailthru.description" content="The biggest challenge to Brazil&rsquo;s World Cup preparations over the past few weeks has been the chaos caused by striking public workers. While S&atilde;o Paulo subway workers voted to at least temporarily suspend their strikes on Monday night, protests by activists angry at the money being spent by Brazil to..." />
+        <meta name="sailthru.image.full" content="http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg" />
+
+        <meta name="sailthru.headline" content="Striking Images of Brazil&rsquo;s Anti-World Cup Protest Movement" />
+        <meta name="sailthru.subheadline" content="" />
+        <meta name="sailthru.promoheadline" content="Striking Images of Brazil&rsquo;s Anti-World Cup Protest Movement" />
+        
+
+  </head>
+
+
+  <body class="article story">
+    <input type="hidden" id="currPath" value="/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup"/>
+    <!-- HCS: shared/roll_ups/tablet -->
+    <!-- This is the header bar we always show in tablet mode -->
+    <header class="roll-up" id="tablet_header">
+      <div class="container">
+        <div class="main">
+
+        </div>
+        <div class="sidebar">
+          
+
+
+
+
+
+
+
+<section class="nav-panel" >
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link "></a>
+    <a href="#" class="search-link "></a>
+    <a href="#" class="global-nav-handle "></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+        </div>
+      </div><!-- /.container -->
+    </header><!-- /.header.roll-up -->
+    <!-- HCS END: shared/roll_ups/tablet -->
+    
+    <div class="top">
+      
+      
+<div id="slug_t" class="tAd ad " data-ad-type="t" data-ad-mode="mobile"></div>
+
+      
+      
+<div id="slug_leaderboard" class="banner ad " data-ad-type="leaderboard" data-ad-mode="large"></div>
+
+      
+<div id="slug_pushdown" class="banner ad " data-ad-type="pushdown" data-ad-mode="large"></div>
+
+    </div><!-- end #top -->
+    
+    <!-- HCS END: layouts/shared/top -->
+    
+    
+    
+
+<!-- this is the rollup for basic article, no multipart fun -->
+<header class="roll-up with-dropdown" id="article_rollup">
+  <div class="container">
+    
+    <div class="main">
+      
+        
+        
+        
+        
+          <div class="titles centered-titles">
+            <h1 class="primary centered-primary">Striking Images of Brazil’s Anti-World Cup Protest Movement</h1>
+          </div>
+        
+      
+      
+
+
+<div class="social social-with-popup sharing-buttons">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil&rsquo;s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S&atilde;o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night,+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_fb_ru" class="facebook first">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>    
+    
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&count=none&via=slate&url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_tw_ru" class="twitter">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+    </div>
+
+    
+      <a href="#comments" class="comments">
+        <span class="icon"></span>           
+      </a>        
+    
+
+     <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AStriking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%0Ahttp://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_em_ru" class="email">
+        <span class="icon"></span>         
+      </a>        
+</div>
+
+
+    </div>
+    <div class="sidebar">
+      
+
+
+
+
+
+
+
+<section class="nav-panel" >
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link "></a>
+    <a href="#" class="search-link "></a>
+    <a href="#" class="global-nav-handle "></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+    </div>
+  </div><!-- /.container -->
+  <a href="#" class="mobile-social-toggle"><span></span></a> <!-- only shown in mobile -->
+</header><!-- /.header.roll-up -->
+
+
+
+
+
+    <div class="page">
+      
+      <article class="main">
+        
+        <div class="parsys contentWellTop iparsys"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys contentWellTop iparsys">
+</div>
+</div>
+</div>
+
+        
+
+    <header class="article-header" id="article_header">
+      <div class="meta has-image">
+        <div class="prop-name print-only"><a href="http://www.slate.com">Slate</a></div><div class="prop-name"><a href="http://www.slate.com/blogs/the_spot.html">The Spot</a></div><div class="prop-image"><a href="http://www.slate.com/blogs/the_spot.html"><img src="/blogs/the_spot/jcr:content/logo.gif" alt="The Spot" /></a></div><div class="prop-desc">Slate's soccer blog.</div><div class="pub-date">June 10 2014 5:21 PM</div>
+      </div>
+      <h1 class="hed"><div class="fullwidth-page">Striking Images of Brazil’s Anti-World Cup Protest Movement</div></h1>
+      
+
+
+ <div class="social social-with-popup sharing-buttons" id="header_social">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil&rsquo;s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S&atilde;o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night,+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_fb_top" class="facebook">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&count=none&via=slate&url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_tw_top" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html"><span class="count"></span></a>
+    </div>
+    
+      <a href="#comments" class="comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    
+ </div>
+
+
+      <h2 class="dek"></h2>
+      
+      <div class="byline" id="main_byline">
+      <div class="fullwidth-page">
+        By <a href="http://www.slate.com/authors.juliana_jimenez.html">Juliana Jiménez Jaramillo</a> and <a href="http://www.slate.com/authors.jeremy_stahl.html">Jeremy Stahl</a>
+      </div>
+      </div>
+      
+      
+
+
+
+
+
+  
+  
+  
+
+
+<div class="social horiz-counts-mobile centered sharing-buttons">
+  
+    <div class="comments">
+      <a class="mobile-comments" href="#comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    </div>
+  
+  <div class="facebook">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?m2w&s=100&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil&rsquo;s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S&atilde;o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night,+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_fb_top" class="share facebook" target="_blank">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+  </div>
+  <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&count=none&via=slate&url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_tw_top" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html"><span class="count"></span></a>
+  </div>
+  
+  <div class="whatsapp">
+    <a href="whatsapp://send?text=Striking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%20http%3A%2F%2Fwww.slate.com%2Fblogs%2Fthe_spot%2F2014%2F06%2F10%2Fbrazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html%3Fwpsrc%3Dsh_all_mob_wa_top" class="whatsapp">
+       <span class="icon"></span>
+    </a>
+  </div>
+  
+  
+  <div class="email">
+    <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AStriking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%0Ahttp://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_em_top" class="email">
+      <span class="icon"></span>
+      <span class="count">&nbsp;</span>
+    </a>
+  </div>
+</div>
+
+    </header><!-- /header -->
+
+    <section class="content content-full-width">
+        <div class="parsys editorsNote">
+</div>
+
+        
+        <div class="newbody body parsys">
+
+<div class="text text-1 parbase section">
+
+<p>The biggest challenge to Brazil&rsquo;s World Cup preparations over the past few weeks has been the <a href="http://www.slate.com/blogs/the_spot/2014/06/08/s_o_paulo_strikes_brazil_faces_an_unprecedented_labor_crisis_with_the_world.html">chaos caused by striking public workers</a>. While S&atilde;o Paulo subway workers voted to at least <a href="http://www.bbc.com/news/world-latin-america-27761723">temporarily suspend their strikes</a> on Monday night, protests by activists angry at the money being spent by Brazil to host the event are expected to <a href="http://www.usatoday.com/story/news/world/2014/06/09/brazil-world-cup-protests/9910077/">continue throughout the World Cup</a>.</p>
+
+
+</div>
+
+
+<div class="text-2 text parbase section">
+
+<p>Though nowhere near the size of <a href="http://www.slate.com/blogs/the_spot/2014/06/10/futebol_nation_how_the_brazilian_government_tried_to_stamp_out_the_country.html">last year&rsquo;s broad-based social movement</a>, which brought millions to the streets, protests have been building back up in recent months. The tournament, which begins Thursday in S&atilde;o Paulo, has reportedly cost in excess of $11 billion, money protesters say could have been spent on public infrastructure. The movement has already produced its share of <a href="http://www.slate.com/blogs/the_spot/2014/05/20/paulo_ito_world_cup_a_brazilian_street_artist_has_created_the_world_cup.html">powerful images</a>. Here are some of the most striking photos.</p>
+
+
+</div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1440px;  "> <img title="140610_SPOT_WorldCupProtest_20" alt="Demonstrators from the anarchist group Black Bloc clash with police during a protest against the World Cup on the opening day of the event on June 12, 2014 in Sao Paulo, Brazil." src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Demonstrators from the anarchist group Black Bloc clash with police inSão Paulo during a protest against the World Cup on June 12, 2014, the opening day of the event.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1440px;  "> <img title="140610_SPOT_WorldCupProtest_19" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_19.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Police take up positions during a World Cup protest outside Carrao Metro Station on June 12, 2014 in São Paulo.<br></span></figcaption>  <p class="credit">Photo by Mario Tama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1440px;  "> <img title="140610_SPOT_WorldCupProtest_18" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_18.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A journalist is taken from a protest on a stretcher outside Carrao Metro Station on June 12, 2014 in São Paulo.<br></span></figcaption>  <p class="credit">Photo by Mario Tama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1440px;  "> <img title="140610_SPOT_WorldCupProtest_17" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_17.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A journalist is carried after being injured during a World Cup protest in São Paulo on June 12, 2014.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_01" alt="protest its demolition as part of renovations ahead of the World Cup Brazil." src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_01.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Police officers clash with supporters of the native Indian community during a protest outside the Indian museum, next to the Maracanã stadium, in Rio de Janeiro, Dec. 16, 2013. Police arrested more than 20 indigenous people who occupied the abandoned museum to protest its demolition as part of renovations ahead of the World Cup.</span></figcaption>  <p class="credit">Photo by Pilar Olivares/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_02" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_02.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Demonstrators clash with military police officers spraying tear gas during a protest in São Paulo on April 29, 2014. An estimated 1,500 protesters gathered for a march against the costs associated with Brazil's hosting of the World Cup.</span></figcaption>  <p class="credit">Photo by Nacho Doce/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_03" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_03.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A member of Brazil's Homeless Workers' Movement blocks the Octavio Frias de Oliveira Bridge during a protest against the World Cup in São Paulo on May 22, 2014.</span></figcaption>  <p class="credit">Photo by Nacho Doce/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_04" alt="Mvd6613453" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_04.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Police officers search for demonstrators during the &quot;International Day of World Cup Resistance&quot; in São Paulo on May 15, 2014.</span></figcaption>  <p class="credit">Photo by Nelson Almedia/AFP/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_05" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_05.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Protesters clash with police officers during an anti-World Cup protest on May 15, 2014, in São Paulo.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_06" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_06.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>About 25,000 members of the Homeless Workers' Movement held large demonstrations to claim their right to housing on May 22, 2014, in São Paulo. They question government spending for the construction of stadiums for the World Cup.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_07" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_07.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A young protester stands in front of police guarding a government building at a demonstration against the new increase in public bus fares on Feb. 10, 2014 in Rio de Janeiro. Widespread protests began in the country last June following a different bus fare increase in São Paulo.</span></figcaption>  <p class="credit">Photo by Mario Tama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_08" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_08.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Demonstrators attack a Bradesco bank branch during a protest against the World Cup inSão Paulo on Jan. 25, 2014.</span></figcaption>  <p class="credit">Photo by Nacho Doce/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_09" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_09.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Police officers hit a demonstrator during a protest against the government's expenditure for the World Cup in São Paulo on Feb. 22, 2014.</span></figcaption>  <p class="credit">Photo by Nelson Almedia/AFP/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_10" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_10.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Members of the Homeless Workers' Movement hold demonstrations in São Paulo.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_11" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_11.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Police officers stand guard as demonstrators march in São Paulo on March 13, 2014.</span></figcaption>  <p class="credit">Photo by Nelson Almedia/AFP/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_13" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_13.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A member of the Homeless Workers' Movement waves a flag on May 22, 2014 in São Paulo.</span></figcaption>  <p class="credit">Photo by Victor Moriyama/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_14" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_14.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Indigenous Indians dance as they attend a protest against the Indian policy of President Dilma Rousseff's government and the costs of the 2014 World Cup in front of the Brazilian congress in Brasilia, May 28, 2014.</span></figcaption>  <p class="credit">Photo by Joedson Alves/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_15" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_15.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>Brazilian natives from different ethnic groups block the entrance of the Ministry of Justice during a protest as part of Indigenous Mobilization Week, in Brasilia on May 29, 2014.</span></figcaption>  <p class="credit">Photo by Evaristo Sa/AFP/Getty Images</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+
+<div class="parbase image slate_image section">
+
+
+ <div class="">
+        <figure class="image full-width  full-width" style="width: 1065px;  "> <img title="140610_SPOT_WorldCupProtest_16" alt="Brazil protests" src="/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_16.jpg.CROP.original-original.jpg" > <figcaption class="caption"><span>A boy holds a soccer ball, with red tape on it the shape of cross in front of a Brazilian flag at Santa Luzia slum in Brasilia, May 30, 2014.</span></figcaption>  <p class="credit">Photo by Joedson Alves/Reuters</p> 
+        </figure>
+        </div>
+        <script>
+        requirejs(["jquery"], function($) {
+            if ($(window).width() < 640) {
+                $(".slate_image figure").width("100%");
+            }
+        });
+        </script> </div>
+</div>
+
+        
+        
+        
+    </section>
+
+<footer>
+      
+		
+
+
+  
+  <section class="about-the-author multi">
+    
+    <div class="author-bio">
+      <p>
+        <p>Juliana Jiménez Jaramillo is a photo editor at <b><i>Slate</i></b>. Follow her on <a href="https://twitter.com/photobomba" target="_blank">Twitter</a> and <a target="_blank" href="http://instagram.com/fotobomba">Instagram</a>.<br>
+</p>
+
+	  </p>
+	</div>
+	
+    <div class="author-bio">
+      <p>
+        <p>Jeremy Stahl is a&nbsp;<b><i>Slate</i>&nbsp;</b>senior editor.&nbsp;You can follow him on&nbsp;<a href="https://twitter.com/jeremystahl">Twitter</a>.</p>
+<p style="font-family: tahoma, arial, helvetica, sans-serif; font-size: 12px;">&nbsp;</p>
+
+	  </p>
+	</div>
+	
+  </section>
+  
+
+      
+
+  
+  
+  <div class="fullwidth-wrapper">
+  
+    <div class="pagination">  
+      
+
+
+    <div class="social social-with-popup sharing-buttons">
+      <div class="plus-popup">
+        <a href="http://www.slatereprints.com/reprint-products-quote-request/?cf2_field_17=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html&cf2_field_18=www.slate.com&cf2_field_19=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&cf2_field_20=09%2F20%2F2013" class="reprint">REPRINT</a>
+        <a href="http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.single.html?print" target="_blank" class="print">PRINT</a>
+        <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AStriking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%0Ahttp://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_em_bot" class="email">EMAIL</a>
+        <div class="arrow-border"></div>
+        <div class="arrow"></div>        
+      </div>
+      <a href="#" class="plus">
+        <span class="icon"></span>
+      </a>
+      <a href="#" data-share="http://www.facebook.com/sharer.php?s=100&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil&rsquo;s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S&atilde;o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night,+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_fb_bot" class="facebook">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&count=none&via=slate&url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_dt_tw_bot" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html"><span class="count"></span></a>
+    </div>
+      
+        <a href="#comments" class="comments">
+          <span class="icon"></span>         
+          <span class="count"></span>                
+        </a>              
+      
+    </div>
+    
+
+    </div><!-- /.pagination -->
+    
+
+
+
+
+
+
+  
+  
+  
+
+<div class="social horiz-counts-mobile centered sharing-buttons">
+  
+    <div class="comments">
+      <a class="mobile-comments" href="#comments">
+        <span class="icon"></span>
+        <span class="count"></span>
+      </a>
+    </div>
+  
+  <div class="facebook">
+    <a href="#" data-share="http://www.facebook.com/sharer.php?m2w&s=100&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil&rsquo;s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S&atilde;o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night,+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to...&p[ref]=sl_live&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_fb_bot" class="share facebook" target="_blank">
+      <span class="icon"></span>
+      <span class="count"></span>
+    </a>
+  </div>
+  <div class="twitter">
+    <a href="#" data-share="http://twitter.com/share?text=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&count=none&via=slate&url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_tw_bot" class="twitter">
+       <span class="icon"></span>
+    </a>
+    <a class="tw-count" href="http://twitter.com/search?q=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html"><span class="count"></span></a>
+  </div>
+  
+  
+  <div class="whatsapp">
+    <a href="whatsapp://send?text=Striking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%20http%3A%2F%2Fwww.slate.com%2Fblogs%2Fthe_spot%2F2014%2F06%2F10%2Fbrazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html%3Fwpsrc%3Dsh_all_mob_wa_bot" class="whatsapp">
+       <span class="icon"></span>
+    </a>
+  </div>
+  
+  <div class="email">
+    <a href="mailto:?subject=Check%20out%20this%20piece%20on%20Slate&body=I%20thought%20you%20might%20like%20this%20article%20on%20Slate:%0AStriking%20Images%20of%20Brazil%E2%80%99s%20Anti-World%20Cup%20Protest%20Movement%0Ahttp://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html?wpsrc=sh_all_mob_em_bot" class="email">
+      <span class="icon"></span>
+      <span class="count">&nbsp;</span>
+    </a>
+  </div>
+</div>
+
+    <div class="row up-next" id="up-next-box"></div>
+    <!-- Maybe incorporate the wrapper divs into the components -->
+    <div class="footer-tiles">
+      <div class="row">
+        <div class="outbrain">
+
+  <div id="outbrain_placeholder"></div>
+  <div class="sl-outbrain-divider"></div>
+
+  <script type="text/javascript">
+  requirejs(["jquery","myslate"], function($,myslate) {
+    var isCommentUser = $.cookie("s_segs") && $.cookie("s_segs").indexOf('commenter') > -1;
+    if(!myslate.isSlatePlusUser) {
+      var createOutbrainDivs = function(widgetId) {
+        var divHtml = '<div class="OUTBRAIN" data-src="http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html" data-widget-id="' + widgetId + '" data-ob-template="SlateMag" ></div>';
+        $("#outbrain_placeholder").append(divHtml);
+      }
+      if (mobileMode()) {
+        createOutbrainDivs("MB_1");
+      } else {
+        createOutbrainDivs("AR_3");
+        createOutbrainDivs("AR_17");
+      }
+      $('<script>', {src: '//widgets.outbrain.com/outbrain.js'}).appendTo('body');
+    }
+  });
+  </script>
+</div>
+
+      </div>
+    </div> <!-- /.footer-tiles -->
+  
+  </div> <!-- #fullwidth-wrapper -->
+  <div class="sidebar">
+    <div class="parsys iparsys contentSidebar"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys iparsys contentSidebar"><div class="renderHtml section">
+
+<style type="text/css">
+.mostshared {display: none;}
+.mostpopular {display: none;}
+</style>
+
+
+<script type="text/javascript">
+<!-- 
+requirejs(["shared/campaignManager"], function(campaigns) {
+  if (window.location.href.indexOf("seven_wonders")==-1 && !mobileMode()) {
+
+    campaigns.set({
+     id: "picks_all_display_holiday_interstitial",
+     template_id: "slatepicks",
+     data: { 
+       "img": { "src": "slatepicks.png" },
+       "title": "The Right Way to Shop for Gifts",
+       "body": "<div style='font-size: 1em; line-height: 1.1;'><p>GIVE BETTER. Introducing Slate Picks, a curated collection of products selected by <strong><em>Slate</em></strong> editors and writers, in categories from books to toys to kitchen gadgets and more.</p><p>These are <strong><em>Slate</em></strong>'s favorite things we've bought, given and loved.</p><p>Make gift shopping easier by starting with <strong>Slate Picks</strong>.</p></div>",
+       "action": {
+         "text": "Shop now",
+         "url": "http://picks.slate.com/?wpsrc=picks_all_display_holiday_interstitial"
+
+       },
+       "submit": "Sign up"
+     },
+     mode: campaigns.modes.overlay,
+     frequency: 20,
+     resurrection: 0,
+     initialDelay: 1,
+     completeOnClose: false,
+     dismissOnClose: false,     
+   });
+  } 
+
+ });
+-->
+</script> 
+</div>
+<div class="mostpopular section">
+
+
+<section class="items">
+  <a class="header" href="#">Most Read</a>
+  <ul class="numbered-list">
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/news_and_politics/roads/2015/01/australia_s_brothel_boom_as_the_country_s_mining_industry_expands_so_does.html"><small>1.</small> <span>Behind the Scenes of Australia’s Prostitution Boom</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/news_and_politics/foreigners/2014/12/the_world_is_not_falling_apart_the_trend_lines_reveal_an_increasingly_peaceful.html"><small>2.</small> <span>Why the World Is Not Falling Apart</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/blogs/moneybox/2015/01/02/mcdonald_s_chicken_mcnuggets_check_out_the_absurd_calorie_label.html"><small>3.</small> <span>McDonald's Would Clearly Prefer If You Didn't Think About How Many Calories Are in Chicken McNuggets</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/articles/health_and_science/science/2015/01/surprise_journal_notice_the_unexpected_to_fight_confirmation_bias_for_science.html"><small>4.</small> <span>The Most Important Skill for Science or Self-Improvement</span></a></li>
+      
+    
+  
+    
+      
+      <li><a href="http://www.slate.com/blogs/browbeat/2015/01/02/jay_from_the_serial_podcast_interviews_discussed_do_we_think_differently.html"><small>5.</small> <span>Did the Jay Wilds Interview Change Our Perspective on <em>Serial</em>? A Bonus Spoiler Special.</span></a></li>
+      
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+  </ul>
+</section>
+
+</div>
+<div class="mostshared section">
+
+
+<section data-vr-zone="Most Shared">
+    <header class="black-header">Most Shared</header>
+    <ul class="numbered-list">
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/behold/2015/01/01/christian_berthelot_cesar_takes_a_look_at_the_first_few_seconds_of_life.html">
+                    <small>1.</small> <span>These C-Section Babies Were Photographed at Less Than 20 Seconds Old</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/articles/arts/culturebox/2015/01/cheap_high_culture_in_baltimore_buffalo_detroit_and_other_midsize_cities.html">
+                    <small>2.</small> <span>The Rust Belt Theory of Low-Cost High Culture</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/outward/2015/01/02/florida_clerks_cancel_all_courthouse_weddings_to_avoid_gay_ceremonies.html">
+                    <small>3.</small> <span>Florida Clerks Cancel All Courthouse Weddings to Avoid Performing Gay Ceremonies</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/blogs/moneybox/2015/01/02/mcdonald_s_chicken_mcnuggets_check_out_the_absurd_calorie_label.html">
+                    <small>4.</small> <span>McDonald's Would Clearly Prefer If You Didn't Think About How Many Calories Are in Chicken McNuggets</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+                
+                <li data-vr-contentbox="">
+                  <a href="http://www.slate.com/articles/health_and_science/science/2015/01/surprise_journal_notice_the_unexpected_to_fight_confirmation_bias_for_science.html">
+                    <small>5.</small> <span>The Most Important Skill for Science or Self-Improvement</span>
+                  </a>
+                </li>
+                
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+            
+        
+    </ul>
+</section>
+</div>
+<div class="rightrailstories section">
+
+<section class="items">
+  
+  <a class="header" href="#">RECOMMENDED</a>
+  
+
+  
+    <div id="rr-results" data-track-module="smart-rr" data-omit-views="true">
+    <div class="smallvideos">
+
+<div class="row">
+<section class="video-gallery" id="small_videos" style="display: none;">
+    <div id='small_video_gallery_mobile_wrap'>
+        
+        <div class="current-video">
+            <img src="http://www.slate.com/content/dam/slate/articles/video/video/2015/01/perfect_burger_recipe_how_to_cook_the_best_beef_burger_at_home_video/screen_shot_20150102_at_11.34.12_am_1.png.CROP.hd-large.png" />
+            <a href="http://www.slate.com/articles/video/video/2015/01/perfect_burger_recipe_how_to_cook_the_best_beef_burger_at_home_video.html?wpisrc=seg_video" class="primary">
+                <span class="play-button"></span>
+                <span class="main-title">How to Cook a Perfect Burger</span>
+            </a>
+        </div>
+        
+    </div>
+</section>
+</div>
+<script>
+requirejs(["jquery"], function($) {
+	if ($.cookie("s_segs") && $.cookie("s_segs").indexOf('video') > -1) {
+      $([
+        '#small_videos',
+        '#video_gallery_mobile',
+        '#small_video_gallery_mobile_wrap',
+        '.current-video'
+      ].join(',')).show();
+      $(".video-gallery").css('height','auto');
+      $(window).load(function() {
+        var dataCount3 = $('.rr-block[data-count="3"]');
+        dataCount3.addClass('repositioned');
+        $('.rr-block[data-count="9"]').before(dataCount3);
+      });
+	}
+});
+</script></div>
+
+      <div class="rr-block" data-count="3"></div>
+     
+      <div class="item ad-container">
+        
+<div id="slug_rightflex" class="ad " data-ad-type="rightflex" data-ad-mode="desktop"></div>
+
+        
+        
+<div id="slug_rightflex" class="ad " data-ad-type="rightflex" data-ad-mode="tabletLandscape"></div>
+
+        
+      </div>
+      
+      <div class="rr-block" data-count="9"></div>
+     
+      <div class="rr-block"></div>
+    </div>
+
+  
+ </section>
+
+
+ 
+<script type="text/javascript">
+requirejs(["jquery","rrstories"], function($,rrs) {
+  if (!mobileMode()) {
+    rrs.init(12,28,"trending");
+  } else {
+    $(".rightrailstories section").remove();
+  }
+});
+</script>
+
+
+
+</div>
+
+</div>
+</div>
+</div>
+
+  </div>
+  
+</footer>
+
+
+
+
+
+<div id="comments" class="comments-container" data-lf-hash="MzM3NzIwOmNxLTI0NTE0MDYxMDAwNQ==">
+  <div id="livefyre">
+  	<div class="button-container lf-loader" style="text-align:center;">
+      <button class="push-button" onClick="loadLivefyre(); return false;" style="padding: 0 15px;">Load Comments</button>
+    </div>
+  </div>
+  <div id="powered_by_livefyre_new"><a href="http://livefyre.com" target="_blank">Powered by Livefyre</a></div>
+</div>
+<div id="comments-ads" class="comments-ads-container">
+</div>
+
+<script type="text/javascript">
+
+var loadLivefyre = function () {
+   var articleId = "245140610005";
+   if (articleId.length == 0) {
+     
+     return;
+   }
+   if (typeof($) != "undefined") {
+     $(".lf-loader").html("<div style='color:#999;'>Loading...</div>" +
+                         "<div style='color:#999;font-size:smaller; margin: 20px auto'>" +
+                         "Are Slate's comments not loading even after a few seconds? " +
+                         "<br/><a target=\"_blank\" href=\"http://www.slate.com/features/browser-data-comment.html\">"+
+                         "Send us your browser and operating system information.</a></div>");
+   }
+
+  requirejs(["livefyre", "livefyresidenotes", "jquery", "identity/identity", "identity/wapo_env", "libs/jquery-plugins/jquery.cookie", "s_code", "myslate"],
+            function (fyre, sidenotes, $, wapoVisitor, wapoEnv, unused0, s, myslate) {
+    // buttons that may prompt login should not propagate up to the document level; if they do, the login screen will open and close quickly.
+    $("#livefyre").on("click", ".fyre-user-loggedout, .fyre-comment-like-btn, .fyre-post-button", function (event) {
+      event.stopPropagation();
+    });
+
+    function isElementInViewport(el) {
+      var rect = el.getBoundingClientRect();
+
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+      );
+    }
+
+    var authDelegate = new fyre.conv.RemoteAuthDelegate();
+
+    // if the login process completes successfully, call this method: handlers.success();
+    // if the login process failed for any reason, call this method: handlers.failure();
+    authDelegate.login = function (handlers) {
+      wapoVisitor.loginQueue.push(handlers);
+      // open up the login dialog
+      var clickEvent = $('html').hasClass('touch') ? 'touchstart' : 'click';
+
+      // more than on handler may be ":visible"; we want the one that's in the viewport as well.
+      $($(".global-nav-handle:visible").filter(function (idx) {
+        return isElementInViewport(this)
+      }).get(0)).trigger(clickEvent);
+      $("#sign_in_link").click();
+    };
+
+    authDelegate.logout = function (handlers) {
+      $.removeCookie("lf_usertokenValue", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      $.removeCookie("lf_secure_login_id", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      $.removeCookie("lf_networksecret", {
+        path: wapoEnv.site_path,
+        domain: wapoEnv.site_base_domain
+      });
+      handlers.success();
+
+      // added to prevent infinite loop.
+      if ($.cookie("wapo_login_id")) {
+        wapoVisitor.wapoLogout();
+      }
+    };
+
+    authDelegate.viewProfile = function (handlers, author) {
+      /* place custom view profile code here, below is an example */
+      //console.log('here is the user id from livefyre: ',author.id);
+      //console.log('here is the external system user id: ',author.id.split('@')[0]);
+      handlers.success();
+    };
+
+    authDelegate.editProfile = function (handlers, author) {
+      /* place custom edit profile code here, could be as simple as setting document.location */
+      //console.log('here is the user id from livefyre: ',author.id);
+      //console.log('here is the external system user id: ',author.id.split('@')[0]);
+      handlers.success();
+    };
+
+
+
+    var initLivefyre = function(widget) {
+      // listen for widget initialization
+      widget.on('initialRenderComplete', function () {
+        changeUserLabels();
+        $(".lf-loader").remove();
+
+        /**
+         * hack to compensate for livefyres lack of events
+         */
+        setInterval(changeUserLabels, 100);
+
+			if (mobileMode()) {
+        $('#comments #livefyre .fyre-user-loggedout').off().on("click", function(e) {
+
+					$('#livefyre-login-mobile, #mobile_identity_inline').remove();
+
+					$("#comments").before([
+            '<header id="mobile_identity_inline">',
+            '<a href="#"><button class="push-button" id="mobile_sign_in_inline">SIGN IN</button></a>',
+            '<a href="#"><button class="push-button" id="mobile_sign_up_inline">SIGN UP</button></a>',
+            '</header>'
+					].join(''));
+
+          $('#mobile_sign_in_inline, #mobile_sign_up_inline').on('click', function(e) {
+            e.preventDefault();
+            $('#livefyre-login-mobile').remove();
+            var classes = ['livefyre-iframe'],
+                url;
+
+            if ($(this).attr('id') === 'mobile_sign_in_inline') {
+              url = wapoVisitor.identityUser().urls.login;
+              classes.push('livefyre-signin');
+            } else {
+              url = [
+                wapoEnv.wapo_secure_protocol,
+                wapoEnv.wapo_site_url,
+                "siteRegistration/addRegistration?",
+                wapoEnv.param_name_redirect,
+                '=' + encodeURIComponent(window.location),
+                '&' + wapoEnv.param_name_previous_url,
+                '=' + encodeURIComponent(window.location),
+                '&KeepThis=true'
+              ].join('');
+              classes.push('livefyre-signup');
+            }
+
+            $('#mobile_identity_inline').after([
+              "<iframe id='livefyre-login-mobile' class='" + classes.join(' ') + "' src='" + url,
+              "&reg_group=comments&check_default=lf_notification_replies' frameborder='0' allowtransparency='true' scrolling='no'>",
+              "</iframe>"
+            ].join(''));
+          });
+          $(document).bind('wapoRegister.default', function() {
+            $(this).trigger('wapoLogin.livefyre');
+          })
+					$(document).bind('wapoLogin.livefyre', function() {
+            $('#mobile_identity_inline').remove();
+						$('html').addClass('livefyre-loggedin livefyre-loggedin-mobile');
+					});
+
+				});
+			}
+
+
+      });
+
+      widget.on('commentCountUpdated', function () {
+        changeUserLabels();
+      });
+
+      widget.on('commentPosted', function(data) {
+        s.trackComment("", "event3");
+        showCommentOptions();
+        changeUserLabels();
+      });
+
+      doLivefyreAuth();
+
+    }
+
+    var changeUserLabels = function() {
+      $(".fyre-comment-author-tag").each(function() {
+        if ($(this).html() == "staff") {
+          $(this).addClass("fyre-comment-author-tag-writer").html("Slate Writer");
+        } else if ($(this).html() == "plus") {
+          $(this).addClass("fyre-comment-author-tag-plus").html("Member").wrap('<a href="https://secure.slate.com/plus?wpsrc=sp_all_commenter_badge"></a>');
+        }
+      })
+    };
+
+
+    var showCommentOptions = function() {
+      if (wapoVisitor.completedGroups && $.inArray("comments", wapoVisitor.completedGroups.split('-')) === -1) {
+        // show options.
+        var url = wapoVisitor.identityUser().urls.editProfile + '&reg_group=comments&check_default=lf_notification_replies';
+        $(".fyre-stream-header").before("<div class='update-comment-registration' style='clear: both; display:none; margin-top: 10px;'><div class='settings-header'><div style='position:absolute; right:10px; display: block; cursor: pointer;'><strong>X</strong></div>Update Notifications</div><iframe id='lf_prefs_iframe' height='360' width='100%' frameborder='0' allowtransparency='true' scrolling='no'></iframe></div>");
+        document.getElementById('lf_prefs_iframe').src = url;
+
+        $(".update-comment-registration").hide();
+
+        $(".update-comment-registration").slideDown();
+		$(".settings-header").on('click', function() { $(".update-comment-registration").slideUp(); });
+	  }
+    }
+
+    var doLivefyreAuth = function() {
+
+      var cval = $.cookie("lf_secure_login_id");
+      if (cval) {
+        try {
+          fyre.conv.login(cval);
+          while (wapoVisitor.loginQueue.length > 0) {
+            wapoVisitor.loginQueue.shift().success();
+          }
+        } catch (e) {
+          //console.log("Error attempting to login with lf_secure_login_id cookie value: ", cval, " ", e);
+        }
+      }
+    }
+
+    $(document).bind('wapoLogin.livefyre', doLivefyreAuth);
+    $(document).bind('wapoLogout.livefyre', function () {
+      fyre.conv.logout()
+    });
+
+
+    var streamConfig = [{
+      "collectionMeta": "eyJhbGciOiJIUzI1NiJ9.eyJ0aXRsZSI6IlN0cmlraW5nIEltYWdlcyBvZiBCcmF6aWzigJlzIEFudGktV29ybGQgQ3VwIFByb3Rlc3QgTW92ZW1lbnQiLCJ1cmwiOiJodHRwOi8vd3d3LnNsYXRlLmNvbS9ibG9ncy90aGVfc3BvdC8yMDE0LzA2LzEwL2JyYXppbF93b3JsZF9jdXBfcHJvdGVzdHNfc3RyaWtpbmdfaW1hZ2VzX29mX3RoZV9jb3VudHJ5X3NfYW50aV93b3JsZF9jdXAuaHRtbD93cGlzcmNcdTAwM2RsZiIsInRhZ3MiOiJ3b3JsZCBjdXAsd29ybGQgY3VwIDIwMTQsc29jY2VyIiwiY2hlY2tzdW0iOiI1MzU4MDA3NzcwYjRhMjNmZDk5ZjYyMmI2NDYxYjIyYSIsImFydGljbGVJZCI6ImNxLTI0NTE0MDYxMDAwNSJ9.3glZIqOiUnW8MO94gJ9nf5mdfroGmNNotjMfcgBSnTw",
+      "postToButtons": ['tw', 'fb'],
+      "siteId": 337720,
+      "articleId": "cq-245140610005",
+      "el": "livefyre"
+    }];
+
+    fyre.conv.load({
+        network: "slate.fyre.co",
+        authDelegate: authDelegate
+      },
+      streamConfig,
+      initLivefyre
+    );
+
+
+/**
+ * Livefyre Sidenotes Test
+ */
+
+
+  });
+}
+
+var loadLivefyreWithTiming = function() {
+  var loadTiming = "demand";
+  if (loadTiming != "delayed" && loadTiming != "demand") {
+    loadTiming = "immediate";
+  }
+
+  if (window.location.search.indexOf("livefyreLoad=dem") == -1) {
+    if (window.location.search.indexOf("livefyreLoad=del") != -1 || loadTiming == "delayed") {
+      window.setTimeout(loadLivefyre, 500);
+    } else if (window.location.search.indexOf("livefyreLoad=imm") != -1 || loadTiming != "demand") {
+      loadLivefyre();
+    }
+  }
+};
+
+requirejs(["myslate", "jquery", "libs/jquery-plugins/jquery.cookie"], function(myslate, $, unused) {
+  var isCommentUser = $.cookie("s_segs") && $.cookie("s_segs").indexOf('commenter') > -1;
+  if(myslate.isSlatePlusUser || false) {
+    $("#comments").addClass("inline");
+    loadLivefyre();
+    $('.top-comment-link a.primary').bind('click', function(e){
+      if(mobileMode()){return;} 
+      e.stopImmediatePropagation(); 
+      loadLivefyre();
+    });
+  } else {
+    loadLivefyreWithTiming();
+  }
+});
+</script>
+
+
+
+
+        <div class="parsys iparsys contentWellBottom"><div class="section"><div class="new"></div>
+</div><div class="iparys_inherited"><div class="parsys iparsys contentWellBottom">
+</div>
+</div>
+</div>
+
+        
+        <div class="abridgedhomepage">
+
+
+<div class="twocolumn-stories">
+  <div class="twocolumn-stories__left large-tiles tiles">
+    <div class="parsys homepageSectionStoriesLeft"><div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: News & Politics" class="story-box-news-politics">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/news_and_politics.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+News & Politics</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/news_and_politics/politics/2015/01/150102_POL_SelmaLBJ.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/news_and_politics/politics/2015/01/150102_POL_SelmaLBJ.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/news_and_politics/politics/2015/01/selma_and_lbj_why_critics_are_wrong_about_how_the_film_portrays_president.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Politics</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 8:53 PM</span>
+                <!-- <span class="hed">What Matters in <em>Selma</em></span> -->
+                
+                  
+                  
+                    <span class="hed">What Matters in <em>Selma</em></span>
+                  
+                
+                <span class="dek">Critics say Ava DuVernay’s film isn’t fair to LBJ. That’s because it’s about a movement, not leaders.</span>
+                <span class="byline">Jamelle Bouie</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/the_world_/2015/01/02/uncle_xi_s_power_grab_how_the_chinese_president_is_cultivating_his_image.html" class="primary">Chinese Presidents Never Show Off Their Human Sides.&nbsp;Why Is Xi?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/roads/2015/01/australia_s_brothel_boom_as_the_country_s_mining_industry_expands_so_does.html" class="primary">Behind the Scenes of Australia’s Prostitution Boom</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/the_world_/2014/12/31/u_n_security_council_vote_palestinians_continue_to_pursue_statehood_israel.html" class="primary">Palestinians Continue to Pursue Statehood. Israel Continues to Rely on the U.S. to Stop Them.
+&nbsp;</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/photography/2014/12/_2014_the_year_in_pictures.html" class="primary">Some&nbsp;of the Most Striking Images and Memorable Events of the Year</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/politics/2014/12/future_of_america_s_race_relations_why_i_am_optimistic_despite_ferguson.html" class="primary">Why I Am Optimistic About the Future of Race Relations in America</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/news_and_politics/politics/2014/12/kenny_knight_and_barbara_noble_claim_steve_scalise_never_spoke_to_euro_did.html" class="primary">Did Rep. Steve Scalise Admit to Speaking at a White Supremacist Event He Never Attended?</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Business" class="story-box-business">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/business.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Business</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/moneybox/2015/01/02/mcdonald_s_chicken_mcnuggets_check_out_the_absurd_calorie_label/149141019-sign-for-a-mcdonalds-restaurant-sits-in-front-of-an.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/moneybox/2015/01/02/mcdonald_s_chicken_mcnuggets_check_out_the_absurd_calorie_label/149141019-sign-for-a-mcdonalds-restaurant-sits-in-front-of-an.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/moneybox/2015/01/02/mcdonald_s_chicken_mcnuggets_check_out_the_absurd_calorie_label.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Moneybox</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 4:29 PM</span>
+                <!-- <span class="hed">The Subtle Typographical Art of a Chicken McNugget Poster</span> -->
+                
+                  
+                  
+                    <span class="hed">The Subtle Typographical Art of a Chicken McNugget Poster</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Jordan Weissmann</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2014/12/31/best_graph_of_2014_the_rise_and_rise_of_top_0_1.html" class="primary">My Favorite Graph of 2014: The Rise and Rise of the Top 0.1 Percent</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/business_insider/2014/12/31/countries_that_party_hardest_on_new_year_s_eve.html" class="primary">These Are the Countries That Will Rage the Most on New Year’s Eve</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2014/12/31/uber_new_year_s_eve_get_ready_for_surge_pricing.html" class="primary">New Year’s Eve Is the Best and the Worst Day of the Year for Uber</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/business_insider/2014/12/31/skiplagged_founder_fights_lawsuit_from_united_and_orbitz.html" class="primary">Orbitz&nbsp;and United Are Suing a 22-Year-Old Who Figured Out How to Game Airlines</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/moneybox/2014/12/31/google_and_microsoft_oppose_the_hotel_industry_on_personal_wi_fi_hotspot.html" class="primary">Google and Microsoft Side With Travelers Who Want to Use Their Wi-Fi Hot Spots in Hotels</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/business_insider/2014/12/31/dunkin_donuts_is_expanding.html" class="primary">Dunkin’ Donuts Has Huge Expansion Plans</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Life" class="story-box-life">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/life.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Life</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/life/family/2014/12/141230_FAM_ChronicPain.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/life/family/2014/12/141230_FAM_ChronicPain.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/life/family/2015/01/parenting_with_chronic_pain.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Family</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 5:09 PM</span>
+                <!-- <span class="hed">Parenting With Chronic Pain</span> -->
+                
+                  
+                  
+                    <span class="hed">Parenting With Chronic Pain</span>
+                  
+                
+                <span class="dek">What kind of mother refuses to pick up her child? This kind.&nbsp;</span>
+                <span class="byline">Sarah Erdreich</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/outward/2015/01/02/florida_clerks_cancel_all_courthouse_weddings_to_avoid_gay_ceremonies.html" class="primary">Florida Clerks Cancel All Courthouse Weddings to Avoid Performing Gay Ceremonies</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/outward/2015/01/02/leelah_alcorn_suicide_prosecuting_her_parents_won_t_help_other_trans_kids.html" class="primary">Prosecuting Leelah Alcorn’s Parents Won’t Help Isolated, Bullied Trans Kids</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/atlas_obscura/2015/01/02/meoto_iwa_the_married_rocks_in_ise_japan.html" class="primary">These Japanese Rocks Have Been United in Marriage</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/outward/2015/01/02/florida_gay_marriage_controversy_firm_tells_clerks_they_ll_go_to_jail.html" class="primary">Law Firm Issues Bogus Advice to Clerks About Gay Marriage Licenses, Gets Slapped Down</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/outward/2015/01/02/gay_friendship_and_romance_ask_a_homo_considers_platonic_relationships.html" class="primary">Are Gay People Capable of Platonic Friendship?&nbsp;</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/quora/2015/01/02/do_soldiers_in_combat_really_yell_and_scream_like_in_movies.html" class="primary">Do Soldiers in Combat Really Yell and Scream Like in Movies?</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Double X" class="story-box-double-x">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/double_x.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Double X</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/blogs/xx_factor/2015/01/02/mario_cuomo_a_catholic_stood_up_for_abortion_rights_at_notre_dame_in_1984/50825659-former-new-york-governor-mario-cuomo-looks-on-as-nbcs.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/xx_factor/2015/01/02/mario_cuomo_a_catholic_stood_up_for_abortion_rights_at_notre_dame_in_1984/50825659-former-new-york-governor-mario-cuomo-looks-on-as-nbcs.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/xx_factor/2015/01/02/mario_cuomo_a_catholic_stood_up_for_abortion_rights_at_notre_dame_in_1984.html" class="primary"></a>
+            
+            
+                <span class="rubrik">The XX Factor</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 12:43 PM</span>
+                <!-- <span class="hed">Mario Cuomo Made the Case for Catholics to Be Pro-Choice</span> -->
+                
+                  
+                  
+                    <span class="hed">Mario Cuomo Made the Case for Catholics to Be Pro-Choice</span>
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Amanda Marcotte</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2015/01/02/oregon_ducks_chant_no_means_no_players_and_commentators_shame_jameis_winston.html" class="primary">FSU's Rose Bowl Loss Was Not a Victory for Rape Victims</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2014/12/31/the_economist_s_list_of_the_year_s_most_influential_economists_all_men_no.html" class="primary">Fed Chair Janet Yellen Didn't Make the <em>Economist’</em>s Influential Economists List. Only Men Did. &nbsp;</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2014/12/30/_2014_was_a_good_year_for_feminism_what_s_going_to_happen_in_2015.html" class="primary">2014 Was a Great Year for Feminism. Is a Backlash Coming?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2014/12/30/_2014_in_review_the_best_things_written_about_women_this_year.html" class="primary">The Best Things Written About Women This Year</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2014/12/29/nashville_police_chief_steve_anderson_respects_protesters_and_fights_for.html" class="primary">Nashville Police Chief Who Respects Protesters Also Fights for Victims of Domestic Violence</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/xx_factor/2014/12/29/bob_mcdonnell_s_daughters_ask_for_sentencing_leniency_blame_maureen_mcdonnell.html" class="primary">Gov. Bob McDonnell’s Daughters Carry on a Family Tradition: To Save Dad, Blame Mom</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+
+</div>
+
+  </div>
+  <div class="twocolumn-stories__right large-tiles tiles">
+    <div class="parsys homepageSectionStoriesRight"><div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Slate Plus" class="story-box-slate-plus">
+<header class="black-header">
+
+<a href="/plus/home?wpisrc=sp_all_native-by-section" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Slate Plus</header>
+
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+            
+            
+                
+            
+            
+            
+            
+            
+            
+            
+        <div class="tile short long-hed slateplus-preview"  data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/Slate%20Plus/articles/2014/12/141230_PLUS_SlatePicks.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/news_and_politics/behind_the_scenes/2014/12/best_of_slate_2014_staffers_pick_their_favorite_articles_from_the_magazine.html?wpsrc=sp_all_native_by-section" class="primary"></a>
+            
+            
+                <span class="rubrik">Behind the Scenes</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Dec. 31 2014 1:16 PM</span>
+                <!-- <span class="hed">Did You Overlook These <strong><em>Slate </em></strong>Stories in 2014?</span> -->
+                
+                  
+                    <span class="hed"><strong><em>Slate</em></strong> Staffers Pick Their Out-of-Left-Field Favorite <strong><em>Slate</em></strong> Articles of 2014</span>
+                  
+                  
+                
+                <span class="dek">Staffers pick their left-field favorite <strong><em>Slate</em></strong> articles of the year.</span>
+                <span class="byline">Allison Benedikt, Jamelle Bouie, David Haglund, Laura Helmuth, Dan Kois, Joshua Keating, Chris Kirk, Miriam Krule, Dahlia Lithwick, and Katy Waldman</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/behind_the_scenes/2014/12/slate_film_critic_dana_stevens_top_10_movies_of_2014_interview.html?wpsrc=sp_all_native_by-section" class="primary"><strong><em>Slate</em></strong>’s Dana Stevens Watched 150 Movies This Year. Here’s How She Picked Her Top 10.</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/life/holidays/2014/12/slate_s_christmas_roundup_what_hitchens_hated_about_christmas_and_why_santa.html?wpsrc=sp_all_native_by-section" class="primary">18 Years of <strong><em>Slate</em></strong>’s Best #WarOnChristmas Coverage</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list slateplus-preview" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/podcasts/slate_archives/2014/12/christmas_birthdays_why_being_a_christmas_baby_is_the_best.html?wpsrc=sp_all_native_by-section" class="primary">Why I Love My Christmas Birthday (Audio)</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list slateplus-preview last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/podcasts/behind_the_scenes/2014/12/slate_s_culture_gabfest_raw_unfiltered_and_unedited.html?wpsrc=sp_all_native_by-section" class="primary">This Is What the Culture Gabfest Sounds Like Without Any Editing</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+      
+      
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Arts" class="story-box-arts">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/arts.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Arts</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+                
+            
+            
+            
+            
+            
+            
+            
+        <div class="tile short long-hed "  data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/browbeat/2014/12/31/jay_testimony.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/browbeat/2015/01/02/jay_from_the_serial_podcast_interviews_discussed_do_we_think_differently.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Brow Beat</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 3:48 PM</span>
+                <!-- <span class="hed">Did the Jay Wilds Interview Change Our Perspective on <em>Serial</em>? A Bonus Spoiler Special.</span> -->
+                
+                  
+                    <span class="hed">Did the Jay Wilds Interview Change Our Perspective on <em>Serial</em>? A Bonus Spoiler Special.</span>
+                  
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">David Haglund and Katy Waldman</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/01/02/_kanye_west_only_one_hear_his_touching_new_song_with_paul_mccartney_in_memory.html" class="primary">Kanye West’s New Song With Paul McCartney Is a Beautiful Ode to His Late Mother</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/behold/2015/01/02/ross_paxton_photographs_tour_buses_in_the_u_k_in_his_series_a_general_history.html" class="primary">When Looking at the Tourists Is Part of the View</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/movies/2015/01/a_most_violent_year_review_oscar_isaac_and_jessica_chastain_star_in_godfather.html" class="primary"><em>A Most Violent Year</em> Sure Looks Like <em>The Godfather</em>, but Something’s Missing</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/television/2015/01/galavant_review_abc_musical_comedy_is_more_spamalot_than_princess_bride.html" class="primary">This <em>Spamalot</em>-Like Musical Comedy Is the Oddest New TV Show in Years</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/arts/culturebox/2015/01/cheap_high_culture_in_baltimore_buffalo_detroit_and_other_midsize_cities.html" class="primary">The Rust Belt Theory of Low-Cost High Culture</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/browbeat/2015/01/01/jay_from_serial_interview_in_the_intercept_part_3_wilds_discusses_reddit.html" class="primary">In Part 3 of His Interview, Jay From <em>Serial </em>Chastises Reddit and Sarah Koenig</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Technology" class="story-box-technology">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/technology.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Technology</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+            
+            
+                
+            
+            
+            
+            
+            
+            
+            
+        <div class="tile short long-hed "  data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/blogs/future_tense/2014/12/31/imsi.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/blogs/future_tense/2014/12/31/snoopsnitch_is_an_app_by_the_german_srlabs_that_detects_imsi_catchers_stingrays.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Future Tense</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Dec. 31 2014 5:43 PM</span>
+                <!-- <span class="hed">Now There's an App For Detecting Government Stingray Cell Phone Trackers</span> -->
+                
+                  
+                    <span class="hed">Now There's an App For Detecting Government Stingray Cell Phone Trackers</span>
+                  
+                  
+                
+                <span class="dek"></span>
+                <span class="byline">Lily Hay Newman</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2014/12/31/flurry_reports_that_more_than_half_of_smartphones_activated_over_the_holidays.html" class="primary">Android Still Dominates, But People Sure Love Gifting iPhones</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2014/12/31/why_rosetta_s_comet_is_shaped_like_a_duck.html" class="primary">Scientists Are Trying to Figure Out Why Rosetta’s Comet Is Shaped Like a Duck</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2014/12/30/the_internet_of_things_is_a_long_way_from_being_secure.html" class="primary">Pretty Much Every Smart Home Device You Can Think of Has Been Hacked</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2014/12/30/las_vegas_new_year_s_a_snowstorm_is_coming_to_sin_city.html" class="primary">New Year’s Eve Snowstorm Set to Paralyze…Las Vegas?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/future_tense/2014/12/30/echelon_insights_twitter_facebook_google_all_say_that_ferguson_talk_was.html" class="primary">Everyone Was Talking About Ferguson on Social Media This Year</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/technology/technology/2014/12/aol_email_address_why_i_still_use_my_aol_com_account_and_no_i_m_not_a_technophobic.html" class="primary">I Still Use an AOL Email Account, and I’m (Mostly) Proud of It</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Health & Science" class="story-box-health-science">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/health_and_science.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Health & Science</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/health_and_science/science/2014/12/141231_SCI_GirlWriting.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/health_and_science/science/2014/12/141231_SCI_GirlWriting.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/health_and_science/science/2015/01/surprise_journal_notice_the_unexpected_to_fight_confirmation_bias_for_science.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Science</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Jan. 2 2015 11:05 AM</span>
+                <!-- <span class="hed">Surprise!</span> -->
+                
+                  
+                  
+                    <span class="hed">Surprise!</span>
+                  
+                
+                <span class="dek">The most important skill in science or self-improvement is noticing the unexpected.</span>
+                <span class="byline">Julia Galef</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/01/02/aleutian_volcanoes_landsat_8_photo.html" class="primary">An Icy Volcano and the Cosmic Cycle of Life</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2015/01/01/ngc_1169_photo_of_a_barred_spiral_galaxy.html" class="primary">The Beauty of a Grain of Sand on the Cosmic Beach</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/health_and_science/medical_examiner/2014/12/new_year_s_resolution_tips_how_to_start_exercising_and_lose_weight.html" class="primary">Five Data-Driven Tips for Successful New Year’s Resolutions</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/wild_things/2014/12/31/drunk_birds_study_shows_zebra_finches_slur_their_songs_when_drinking_video.html" class="primary">Drunk Zebra Finches Slur Their Songs</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/bad_astronomy/2014/12/31/ba_blog_2014_a_self_indulgent_review.html" class="primary">The BA Blog Year That Was</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/blogs/wild_things/2014/12/30/is_it_crazy_to_say_you_love_your_dog_the_same_as_you_love_a_child.html" class="primary">Is It Crazy to Love a Dog the Way You Love a Child?</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+<div class="storyboxgroupquery section">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div data-vr-zone="Story Box: Sports" class="story-box-sports">
+<header class="black-header">
+
+<a href="http://www.slate.com/articles/sports.html" class="primary"></a>
+<span class="see-all">&nbsp;</span>
+
+Sports</header>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+            
+            
+            
+              
+              
+            
+            
+            
+            
+            
+                
+                
+            
+            
+        <div class="tile stacked long-hed " style="background-image: url('http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/12/141224_SNUT_BoxJump.jpg.CROP.promo-medium2.jpg');" data-vr-contentbox="" data-promo-image="http://www.slate.com/content/dam/slate/articles/sports/sports_nut/2014/12/141224_SNUT_BoxJump.jpg.CROP.promo-medium2.jpg">
+            <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/j_j_watt_box_jump_is_the_internet_s_favorite_exercise_a_worthwhile_training.html" class="primary"></a>
+            
+            
+                <span class="rubrik">Sports Nut</span>
+            
+            <div class="full-tile">
+                <span class="timestamp">Dec. 30 2014 7:08 AM</span>
+                <!-- <span class="hed">The Internet’s Favorite Exercise</span> -->
+                
+                  
+                  
+                    <span class="hed">The Internet’s Favorite Exercise</span>
+                  
+                
+                <span class="dek">Is the box jump a worthwhile training technique or just a fancy party trick?</span>
+                <span class="byline">Alan Siegel</span>
+            </div>
+        </div>
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/topps_bunt_app_can_the_company_save_itself_and_a_beloved_hobby_with_baseball.html" class="primary">Can Topps Save Itself With Baseball Cards That Live Inside Your Phone?</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/nba_presidents_the_best_pro_basketball_analogues_for_george_washington_warren.html" class="primary">Who’s the Best NBA Analogue for Every President? (Ronald Reagan Is Kobe Bryant.)</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/new_olympic_sports_sports_fans_rejoice_the_days_when_sports_had_to_fight.html" class="primary">Sports Fans, Rejoice—the International Olympic Committee Just Reversed Its Dumbest Decision</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/robert_lipsyte_an_exit_interview_with_the_espn_ombudsman.html" class="primary">ESPN Doesn't Do More Great Journalism Because Its Viewers Don’t Want It To</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+            <div class="section-list " data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/fsutwitter_florida_state_football_fans_are_the_new_gamergate.html" class="primary">Florida State Football Fans Are the New Gamergate</a>
+            </div>
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+            <div class="section-list  last" data-vr-contentbox="">
+              <a href="http://www.slate.com/articles/sports/sports_nut/2014/12/johnny_manziel_kerrville_even_in_the_town_where_he_learned_to_play_the_game.html" class="primary">Johnny Manziel Is Polarizing Even in the Town Where He Learned to Play Football</a>
+            </div>
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        
+        
+        
+    
+
+</div>
+</div>
+
+</div>
+
+  </div>
+</div>
+</div>
+
+      </article><!-- /.main -->
+      
+
+      <aside class="sidebar" id="main_sidebar">
+        <div class="sidebar-wrapper">
+          
+          
+          
+          
+
+
+
+
+
+
+  
+  
+  
+
+
+<section class="nav-panel" id='slate_logo'>
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link sidebar-handle"></a>
+    <a href="#" class="search-link sidebar-handle"></a>
+    <a href="#" class="global-nav-handle sidebar-handle"></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+          
+
+          
+        </div><!-- /.sidebar-wrapper -->
+      </aside><!-- /.sidebar -->
+      
+      
+      
+      	
+
+  <footer id="article_footer_tiles">
+     
+  </footer>
+
+<!--YieldMoTag-->
+    <div data-lazy-widget>
+    <!-- <div id="ym_910627945566641941" class="ym" pltag="Sports"></div>
+    <script type="text/javascript">
+    if (mobileMode()) {
+        (function(e,t){if(t._ym===void 0){t._ym="";var m=e.createElement("script");m.type="text/javascript",m.async=!0,m.src="//static.yieldmo.com/ym.min.js",(e.getElementsByTagName("head")[0]||e.getElementsByTagName("body")[0]).appendChild(m)}else
+     t._ym instanceof String||void 0===t._ym.chkPls||t._ym.chkPls()})(document,window);
+      }
+    </script> -->
+    </div>
+    <!-- end yieldmo -->
+
+
+      
+    </div><!-- /.page -->
+
+
+
+<!-- HCS: layout -->
+  
+    <style type="text/css">
+      body > .bottom {
+        text-align: center;
+        padding: 10px 0;
+      }
+      .bottom > #slug_leaderboard_2 {
+        position: relative;
+        width: auto;
+        text-align: center;
+      }
+    </style>
+    <div class="bottom">
+      
+<div id="slug_leaderboard_2" class="banner ad " data-ad-type="leaderboard|2" data-ad-mode="large"></div>
+
+    </div>
+    <footer class="footer-base">
+      <div class="container">
+
+      <div class="sub-slate-row">
+        <div class="left">
+          <span class="label">FOLLOW SLATE</span>
+          <a href="https://twitter.com/slate" class="twitter"><img src="http://static.cdnslate.com/etc/designs/slate/images/social/yellow-twitterNew.821dc365.png" /></a>
+          <a href="http://www.facebook.com/Slate" class="facebook"><img src="http://static.cdnslate.com/etc/designs/slate/images/social/yellow-facebookNew.74981e6f.png" /></a>
+        </div>
+
+        <div class="left slate-on">
+          <span class="label">SLATE ON</span>
+          <a href="http://itunes.apple.com/us/app/slate-magazine/id384914589?mt=8">IPAD</a>
+          <a href="http://itunes.apple.com/us/app/slate-com/id357555242?mt=8">IPHONE</a>
+          <a href="https://market.android.com/details?id=com.wapo.slate.android">ANDROID</a>
+          <a href="http://www.amazon.com/gp/product/B000IOMTC0?ie=UTF8&tag=slatmaga-20&link_code=as3&camp=211189&creative=373489&creativeASIN=B000IOMTC0/">KINDLE</a>
+        </div>
+
+        <div class="right">
+          <a href="http://www.slatereprints.com" class="label reprints">REPRINTS</a>
+
+          <a href="http://innovate.slate.com/" class="label advertise-with-us" target="_blank">ADVERTISE WITH US</a>
+        </div>
+      </div>
+
+      </div><!-- /.container -->
+
+
+    </footer>
+  
+    <footer class="footer-base-toc">
+      <div class="container">
+        <div class="footer-link-cols">
+          <ul>
+            <li><a href="/articles/news_and_politics/slate_fare/2006/08/about_us.html">ABOUT US</a></li>
+            <li><a href="/articles/briefing/contact_us/2006/08/whereto_find_slate_staff.html">CONTACT US</a></li>
+            <li><a href="/articles/news_and_politics/slate_fare/2008/04/a_job_for_you_at_slate.html">WORK WITH US</a></li>
+          </ul>
+          <ul class="center">
+            <li><a href="/articles/briefing/slate_user_agreement_and_privacy_policy/2012/12/slate_s_terms_of_service.html">USER AGREEMENT</a></li>
+            <li><a href="/articles/briefing/slate_user_agreement_and_privacy_policy/2012/12/slate_s_privacy_policy.html">PRIVACY POLICY</a></li>
+            <li><a href="/articles/briefing/slate_fare/2011/12/commenting_on_slate_frequently_asked_questions.html">FAQ</a></li>
+          </ul>
+          <ul class="last">
+            <li><a href="mailto:feedback@slate.com">FEEDBACK</a></li>
+            <li><a href="/articles/news_and_politics/corrections.html">CORRECTIONS</a></li>
+          </ul>
+        </div>
+        <ul class="copyright unstyled">
+          <li><a href="http://www.slate.com"><img src="http://static.cdnslate.com/etc/designs/slate/images/the-slate-group-logo.12cbe5ac.png" /></a></li>
+          <li><a href="http://www.theroot.com"><img src="http://static.cdnslate.com/etc/designs/slate/images/the-root-logo.74009c0a.png" /></a></li>
+          <li class="blurb">Slate is published by The Slate Group, a Graham Holdings Company. All contents &copy; 2014 The Slate Group LLC. All rights reserved.</li>
+        </ul>
+      </div><!-- /.container -->
+    </footer> <!-- /.footer-base-toc -->
+<!-- HCS END: layout -->
+<!-- HCS: layouts/shared/bottom -->
+<div id="sidebar_toggle">
+  <a href="#" id="sidebar_handle"></a>
+</div>
+<script src="http://slate-ad-scripts.s3.amazonaws.com/wp-srv/ad/loaders/latest/js/min/polar_config.min.js"></script>
+<script>
+
+
+requirejs(["jquery", "hcs/libs/iscroll-lite", "modernizr", "hcs/script", "hcs/plugins/SGGlobalNav.jquery", "hcs/plugins/jQuery.highlighter","hcs/plugins/SGGlobalNav.jquery","libs/jquery-plugins/jquery.timeago","announcements","myslate"], function($, iScroll, unused0, unused1, unused2, unused3, unused4, unused5, announcements, myslate) {
+  $(document).ready(function() {
+    announcements.deleteOldCookies();
+    
+    $("span.timeago").timeago();
+  });
+  function pageLoadedForScrolling(){
+
+
+    scroller = new iScroll('main_sidebar', {
+      hScroll: false,
+      hScrollbar: false,
+      bounce: false
+    });
+
+    if(!mobileMode() && tabletMode() && $('html').hasClass('touch')){
+      // Nav gets iScroll if we're on an actual tablet.
+      window.tabletScroller = new iScroll('nav_sections', {
+        hScroll: false,
+        hScrollbar: false,
+        bounce: false,
+        onBeforeScrollStart: function (e) {
+          var target = e.target;
+          while (target.nodeType != 1) target = target.parentNode;
+
+          if (target.tagName != 'SELECT' && target.tagName != 'INPUT' && target.tagName != 'TEXTAREA')
+          e.preventDefault();
+        }
+      });
+    }
+
+  }
+
+  // We institute fancy scrolling on iscroll only on mobile webkit.
+
+  // Webkit detection script
+  Modernizr.addTest('webkit', function(){
+    return RegExp(" AppleWebKit/").test(navigator.userAgent);
+  });
+
+  // Mobile Webkit
+  Modernizr.addTest('mobile', function(){
+    return RegExp(" Mobile/").test(navigator.userAgent);
+  });
+
+  if(Modernizr.webkit && Modernizr.mobile){
+    if (document.addEventListener){
+      document.addEventListener('DOMContentLoaded', function () { setTimeout(pageLoadedForScrolling, 200); }, false);
+    } else if (document.attachEvent){
+      document.attachEvent('DOMContentLoaded', function () { setTimeout(pageLoadedForScrolling, 200); }, false);
+    }
+  }
+
+
+
+  $(function(){
+
+    watchSidebar();
+
+    if ($('body').hasClass('home')
+        || $('body').hasClass('landing')
+        || $('body').hasClass('settings')) {
+      $('.nav-header').SGGlobalNav({
+        noRollup: true, // Need to tell the homepage and landing etc that there's no rollup here, which causes things to behave differently.
+        noBurgerScroll: $('body').hasClass('no-burger-scroll'),
+        isSlatePlusUser: myslate.isSlatePlusUser
+      });
+    } else {
+      $('.nav-header').SGGlobalNav({
+        isSlatePlusUser: myslate.isSlatePlusUser
+      });
+    }
+
+
+    // Input field placeholder plugin to account for placeholder fallbacks.
+    jQuery(document).ready(function($) {
+      $(".field-with-placeholder").placeholder();
+    });
+
+
+    $('.content').highlighter({
+      'selector': '.highlighter-container',
+      'noHighlightIds': $('#podcast-slateplus-page'),
+      'minWords': 0,
+      'complete': function (data) {
+        // Here we have the selected string for use.
+        // console.log(data);
+        selectedText = data;
+      }
+    });
+
+  });
+
+
+  $(document).ready(function() {
+    $(".sticky").each(function() {
+      var stickyTop = $(".sticky").offset().top; // returns number
+      $(window).scroll(function() { // scroll event
+        var windowTop = $(window).scrollTop() + 57 + parseInt($(".sticky").css("margin-top").split("px")[0]); // returns number
+        if (stickyTop < windowTop) {
+          $(".sticky").css({ position: "fixed", top: "53px" });
+        } else {
+          $(".sticky").css("position","static");
+        }
+      });
+    })
+  });
+
+  watchSocialWelcomeNotifications();
+
+});
+    </script>
+
+    
+    
+
+    <script>
+requirejs(["jquery", "myslate", "hcs/script", "hcs/plugins/SGNavDropdown.jquery", 
+		"hcs/plugins/SGBigSlider.jquery","hcs/plugins/SGFootnote.jquery","hcs/plugins/SGRollup.jquery",
+		"hcs/plugins/SGNavDropdown.jquery","hcs/plugins/SGComments.jquery","hcs/plugins/SGLightbox.jquery",
+		"hcs/plugins/SGSocialIcons.jquery"], 
+		function($, myslate, unused0, unused1, unused2, unused3, unused4, unused5, unused6, unused7, unused8) {
+
+    $(function(){
+        
+      $('#big_slider').SGBigSlider({
+        type: 'article'
+      });
+      
+      $('.footnote').SGFootnote();      
+      var multipartArticleRollup = $('#article_rollup');
+    
+      var subHed = $('#sub_hed');
+      if(subHed.length > 0){     
+        subHed.SGNavDropdown({ // Multipart rollup triggered by tapping the subhed.
+          extraId: 'subhed', // Used to name events inside the plugin, so we can be sure to bind/unbind the correct stuff.
+          targetId: '#multipart_nav', // The thing to show.
+          leftOffset: function(){ return $('#sub_hed').position().left; },
+          topOffset: function(){ return $('#sub_hed').position().top + $('#sub_hed').outerHeight(true); },
+          onShow: function(){
+            $('#multipart_nav').css('position', 'absolute');  
+            $('#multipart_nav').css('height', 'auto');
+            $('#multipart_nav').css('overflow', 'auto');
+            // subHed.find('.toggle').addClass('open-toggle');
+          },
+          onHide: function(){
+            // subHed.find('.toggle').removeClass('open-toggle');
+          }        
+        });        
+      }
+    
+      if($('#article_header').length > 0){
+        // The roll up.
+        $('#main_sidebar').SGRollup({ // The main element assigned to this plugin is used to trigger the drop of the rollup on desktop mode.
+          rollupEl: multipartArticleRollup,
+          topOffset: $('#slate_logo').height(), 
+          leftOffset: $('#article_header').offset().left,
+          tablet: {el: $('#article_header'), topOffset: $('#article_header').height()}, // Indicate the visibility triggers for tablet mode.
+          mobile: {el: $('#tablet_header'), topOffset: $('#tablet_header').height()},// Indicate the visibility triggers for mobile mode.
+          onHide: function(){
+            // On roll back up make sure to hide the nav if it's open, assuming it was opened by the rollup toggle.
+            if(multipartArticleRollup.data('plugin_SGNavDropdown').isTargetVisible() && $('#multipart_nav').data('openedByRollup')){
+              multipartArticleRollup.data('plugin_SGNavDropdown').close();
+            }
+            if (!myslate.isSlatePlusUser) {
+              if ($('#comments').length > 0) {
+                $('#comments').data('plugin_SGComments').close();                      
+              }
+            }
+          }          
+        });
+      }      
+    
+    // Multipart dropdown triggered by the rollup in the multipart nav.
+      multipartArticleRollup.SGNavDropdown({
+        targetId: '#multipart_nav', // The thing to show.
+        extraSpecificHandle: '.handle',
+        extraId: 'multipart', // Used to name events inside the plugin, so we can be sure to bind/unbind the correct stuff.
+        leftOffset: function(){ return multipartArticleRollup.find('.main').offset().left; },
+        topOffset: function(){
+          return multipartArticleRollup.outerHeight(true)
+        },
+        onShow: function(){
+          $('#multipart_nav').css('position', ''); // undo the absolute bit we might have affixed in subHed.SGNavDropdown().
+          $('#multipart_nav').addClass('fixed').data('openedByRollup', true);
+          $('#multipart_nav').css('max-height', (mobileMode() ? $(window).outerHeight(true) + 10 : $(window).height() - $('#article_rollup').height()));
+          $('#multipart_nav').css('overflow', 'scroll');
+          if(mobileMode()){
+            $('#multipart_nav').css('right', 0);
+          }
+        },
+        onHide: function(){
+          $('#multipart_nav').data('openedByRollup', false);
+        }        
+      });
+    
+    
+      if (!myslate.isSlatePlusUser) {
+        $('#comments').SGComments({
+          handles: $('.social .comments, .comment-options a'),
+          rollUp: $('#main_sidebar').data('plugin_SGRollup'),
+          leftOffset: function(){
+            // The intent is for the right side of the comments to line up with the sidebar.
+            if(tabletMode()){
+              return 0;
+            } else {
+              return $('#main_sidebar').offset().left - $('#comments').outerWidth() - 11;
+            }
+          },
+          topOffset: function(){ return $('#article_rollup').height(); },
+          onShow: function(){
+            if(multipartArticleRollup.data('plugin_SGNavDropdown').isTargetVisible()){
+              multipartArticleRollup.data('plugin_SGNavDropdown').close();  
+            }
+            if ($("#livefyre .fyre").size() == 0) {
+              loadLivefyre();
+            }
+          },
+          mobile: {
+            handle: $('#see_more_comments') // This both triggers the mobile comments and indicates where to drop the content in the DOM.
+          }
+          
+        });
+      }
+    
+    
+      // Trigger the slideshow lightbox for from the .slideshow-preview example.
+        $('#slideshow_preview_link').SGLightbox({
+          type: 'slideshow',
+          slideshowElement: $('#the_slideshow')
+        });  
+    
+    
+      $('.social-with-popup').SGSocialIcons({});
+      
+      watchMobileRollupSocialToggle();    
+    
+      $('.expandable').find('.toggle').click(function(e){
+        $(this).closest('.social').toggleClass('visible');
+        $('#main_byline').toggle();
+        e.preventDefault();
+      });
+    
+      $('.full-width').setFullWidth();
+    
+      myslate.benefits();
+
+    });
+});
+    </script>
+
+
+    
+    <script>
+    requirejs(["facebook"], function(unused0) {
+      $(function(){
+        FB.XFBML.parse();
+      });
+    });
+    </script>
+    <!-- Buzzfeed -->
+    <!-- Chartbeat -->
+    
+<script type="text/javascript">
+
+var _sf_async_config={uid:9250,domain:"slate.com"};
+_sf_async_config.useCanonical = true;
+if (wp_meta_data) {
+    var sectionsArray = new Array();
+    if (wp_meta_data.section !== undefined) {
+        sectionsArray.push(wp_meta_data.section);
+    }
+    if (wp_meta_data.rubric !== undefined) {
+        sectionsArray.push(wp_meta_data.rubric);
+    }
+    if (wp_meta_data.blog !== undefined) {
+        sectionsArray.push(wp_meta_data.blog);
+    }
+    _sf_async_config.sections = sectionsArray.join(",");
+    if (wp_meta_data.authors !== undefined) {
+        _sf_async_config.authors = wp_meta_data.authors.join(",");
+    }
+}
+
+_sf_async_config.sections = _sf_async_config.sections + ",Blogs";
+
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+</script>
+    <!-- Parsely -->
+    
+
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="slate.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+    
+
+
+
+    
+    
+        <script>
+            requirejs(["shared/sgads"], function(slateads) {
+                slateads.wire("http://js.slate.com/wp-srv/ad/loaders/latest/js/min/loader.min.js");
+            });
+        </script>
+    
+
+<div class="nav-header" id="magic_nav_header">
+  <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+  <div class="buttons">
+  	
+    <span class="link option"><a class="first nav-option sign-in-link" href="#" id="sign_in_link">
+      Sign In
+    </a></span>
+    <span class="link option"><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+    
+  </div>
+</div><!-- /.nav-header -->
+<!-- HCS: layouts/shared/nav/nav -->
+<div id="nav_sections"></div>
+<!-- HCS END: layouts/shared/nav/nav -->
+
+      
+      
+
+
+
+
+
+
+  
+  
+  
+
+
+<section class="nav-panel" id='nav_header_for_rollup_magic'>
+  <div class="nav-header">
+    <a class="slate-logo" href="/"><span class="logo">Slate</span></a>
+    <a href="#" class="user-link sidebar-handle"></a>
+    <a href="#" class="search-link sidebar-handle"></a>
+    <a href="#" class="global-nav-handle sidebar-handle"></a>
+    <div class="buttons">
+      
+      <span class="link option "><a class="first nav-option sign-in-link" href="#" id="sign_in_link">Sign In</a></span>
+      <span class="link option "><a href="#" class="nav-option sign-up-link" id="sign_up_link">Sign Up</a></span>
+      
+    </div>
+  </div>
+  
+</section>
+
+
+    <div id="nav_animation_mask">
+
+    </div>
+
+    
+    <span class='highlighter-container'>
+      <div class="social social-with-popup">
+        <a href="#" data-share="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html&p[images][0]=http://www.slate.com/content/dam/slate/articles/news_and_politics/photography/2014/06/world_cup_protests/140610_SPOT_WorldCupProtest_20.jpg/_jcr_content/renditions/cq5dam.web.1280.1280.jpeg&p[title]=Striking+Images+of+Brazil%E2%80%99s+Anti-World+Cup+Protest+Movement&p[summary]=The+biggest+challenge+to+Brazil%E2%80%99s+World+Cup+preparations+over+the+past+few+weeks+has+been+the+chaos+caused+by+striking+public+workers.+While+S%C3%A3o+Paulo+subway+workers+voted+to+at+least+temporarily+suspend+their+strikes+on+Monday+night%2C+protests+by+activists+angry+at+the+money+being+spent+by+Brazil+to..." class="facebook share highlighter">
+          <span class="icon"></span>
+        </a>
+        <a href="#" data-share="http://twitter.com/share?url=http://www.slate.com/blogs/the_spot/2014/06/10/brazil_world_cup_protests_striking_images_of_the_country_s_anti_world_cup.html&count=none&via=slate" class="twitter">
+          <span class="icon"></span>
+        </a>
+        
+          <a href="#comments" class="comments" style="display: none;">
+            <span class="icon"></span>
+          </a>
+        
+      </div>
+        <div class="arrow-border"></div>
+        <div class="arrow"></div>
+    </span>
+    <!-- Sailthru Horizon -->
+    <script>
+    requirejs(['jquery'], function($) {
+      (function() {
+        function loadHorizon() {
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = location.protocol + '//ak.sail-horizon.com/horizon/v1.js';
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        }
+        loadHorizon();
+        var oldOnLoad = window.onload;
+        window.onload = function() {
+          if (typeof oldOnLoad === 'function') {
+            oldOnLoad();
+          }
+          Sailthru.setup({
+            domain: 'horizon.slate.com'
+          });
+        };
+      })();
+    });
+    </script>
+    
+<!-- HCS END: layouts/shared/bottom -->
+
+    <!-- Campaigns -->
+    <script>
+     requirejs(["shared/campaignManager", "optimizely"], function(campaigns, optimizely) {
+       // setTimeout.  Boo.
+       setTimeout(campaigns.execute, 400);
+     });
+    </script>
+
+  <!--
+  Page Loading starts on 2015/01/03 06:47:27, Total time elapsed to render is 0.3300731 seconds, Server: pub2.slate.com
+  -->
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -19,7 +19,7 @@ from .cleaners import DocumentCleaner
 from .configuration import Configuration
 from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
-from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
+from .utils import (URLHelper, RawHelper, extend_config,
                     get_available_languages)
 from .videos.extractors import VideoExtractor
 
@@ -49,12 +49,11 @@ class Article(object):
             raise ArticleException('input url bad format')
 
         # URL to the main page of the news source which owns this article
-        self.source_url = encodeValue(source_url)
+        self.source_url = source_url
 
-        url = encodeValue(url)
         self.url = urls.prepare_url(url, self.source_url)
 
-        self.title = encodeValue(title)
+        self.title = title
 
         # URL of the "best image" to represent this article
         self.top_img = self.top_image = ''
@@ -143,11 +142,12 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, response=None):
+    def download(self, html=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
         """
-        html = network.get_html(self.url, self.config, response)
+        if html is None:
+            html = network.get_html(self.url, self.config)
         self.set_html(html)
 
     def parse(self):
@@ -365,7 +365,7 @@ class Article(object):
         """
         try:
             s = images.Scraper(self)
-            self.set_top_img_no_ckeck(s.largest_image_url())
+            self.set_top_img(s.largest_image_url())
         except Exception as e:
             log.critical('jpeg error with PIL, %s' % e)
 
@@ -375,44 +375,43 @@ class Article(object):
             # <title> extraction failed
             return
         title = title[:self.config.MAX_TITLE]
-        title = encodeValue(title)
         if title:
             self.title = title
 
     def set_text(self, text):
         text = text[:self.config.MAX_TEXT]
-        text = encodeValue(text)
         if text:
             self.text = text
 
     def set_html(self, html):
         """Encode HTML before setting it
         """
-        self.is_downloaded = True
         if html:
-            self.html = encodeValue(html)
+            if isinstance(html, bytes):
+                html = self.config.get_parser().get_unicode_html(html)
+            self.html = html
+            self.is_downloaded = True
 
     def set_article_html(self, article_html):
         """Sets the HTML of just the article's `top_node`
         """
         if article_html:
-            self.article_html = encodeValue(article_html)
+            self.article_html = article_html
 
     def set_meta_img(self, src_url):
-        self.meta_img = encodeValue(src_url)
-        self.set_top_img(src_url)
+        self.meta_img = src_url
+        self.set_top_img_no_check(src_url)
 
     def set_top_img(self, src_url):
         if src_url is not None:
             s = images.Scraper(self)
             if s.satisfies_requirements(src_url):
-                self.set_top_img_no_ckeck(src_url)
+                self.set_top_img_no_check(src_url)
 
-    def set_top_img_no_ckeck(self, src_url):
+    def set_top_img_no_check(self, src_url):
         """Provide 2 APIs for images. One at "top_img", "imgs"
         and one at "top_image", "images"
         """
-        src_url = encodeValue(src_url)
         self.top_img = src_url
         self.top_image = src_url
 
@@ -420,7 +419,6 @@ class Article(object):
         """The motive for this method is the same as above, provide APIs
         for both `article.imgs` and `article.images`
         """
-        imgs = [encodeValue(i) for i in imgs]
         self.images = imgs
         self.imgs = imgs
 
@@ -430,8 +428,7 @@ class Article(object):
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
         if keywords:
-            self.keywords = [encodeValue(k)
-                             for k in keywords[:self.config.MAX_KEYWORDS]]
+            self.keywords = keywords[:self.config.MAX_KEYWORDS]
 
     def set_authors(self, authors):
         """Authors are in ["firstName lastName", "firstName lastName"] format
@@ -439,15 +436,13 @@ class Article(object):
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
         if authors:
-            authors = authors[:self.config.MAX_AUTHORS]
-            self.authors = [encodeValue(author) for author in authors]
+            self.authors = authors[:self.config.MAX_AUTHORS]
 
     def set_summary(self, summary):
         """Summary here refers to a paragraph of text from the
         title text and body text
         """
-        summary = summary[:self.config.MAX_SUMMARY]
-        self.summary = encodeValue(summary)
+        self.summary = summary[:self.config.MAX_SUMMARY]
 
     def set_meta_language(self, meta_lang):
         """Save langauges in their ISO 2-character form

@@ -12,8 +12,9 @@ import logging
 import math
 import io
 import traceback
-import urllib.request, urllib.parse, urllib.error
-import urllib.request, urllib.error, urllib.parse
+import urllib.request
+import urllib.parse
+import urllib.error
 
 from http.client import InvalidURL
 from PIL import Image, ImageFile
@@ -79,7 +80,8 @@ def clean_url(url):
     """Url quotes unicode data out of urls
     """
     url = url.encode('utf8')
-    url = ''.join([urllib.parse.quote(c) if ord(c) >= 127 else c for c in url.decode('utf-8')])
+    url = ''.join([urllib.parse.quote(c)
+                  if ord(c) >= 127 else c for c in url.decode('utf-8')])
     return url
 
 
@@ -151,7 +153,9 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
             return content_type, content
 
-        except (urllib.error.URLError, urllib.error.HTTPError, InvalidURL) as e:
+        except (urllib.error.URLError,
+                urllib.error.HTTPError,
+                InvalidURL) as e:
             cur_try += 1
             if cur_try >= retries:
                 log.debug('error while fetching: %s refer: %s' %

@@ -1,0 +1,99 @@
+No matter how much traffic your site gets, what really matters is conversions. Convert neutral traffic – people who haven’t decided whether to buy or not – by investing in analyzing and incentivizing them to buy. Increasing conversions is more financially beneficial than driving more traffic. Instead of accepting your current conversion rate, focus on increases of 10% or greater using the methods below.
+
+Your site must grab visitors attention immediately, then lead them from where they land to checkout. Is it obvious how landing on your site will benefit your visitors? If they can’t immediately tell they will leave. Use analytics to check bounce rates and improve any pages that show high exit rates.
+
+1. Upsell and Cross Sell
+
+Offering related products on product pages to sell more than one product is a common strategy known as cross-selling. Upselling is offering more expensive related products to increase the amount spent.
+
+New SaaS provider Fanplayr.com helps to make this process seamless for businesses. Their service analyzes your existing traffic, assessing the behavior and profiles of each visitor in real-time and automatically upsells or offer specifically tailored deals. This is executed based on defined rules and customized offers and incentives set by you for your target customers. This customized approached helps you to increase your average order value and conversions.
+
+Fanplayr analyzes traffic you drive so you can target different offers to segments of visitors based on:
+
+
+
+user type
+
+visit count
+
+past purchases
+
+time on site
+
+page views
+
+cart size
+
+device type
+
+browser
+
+source
+
+search term
+
+location
+
+New visitors who place items with high profit margins in their carts can be offered a higher dollar discount. Reward the loyalty of your repeat buyers with percent off their current purchase. Be sure to let them know they received the discount because they have purchased from you before.
+
+Just as some sites offer free shipping for orders over $50, $75 or $100, increase visitor’s total spend by offering a higher discount based on the dollar amount they have in their carts or how much they have spent with you previously. Read more in Proven Online Cross-Selling and Upselling Techniques.
+
+2. Improve Site Search
+
+Make sure your customers can find what they want quickly. Test your site search to ensure that all your products show up as expected and just as importantly confirm that irrelevant products are not appearing in searches. Consumers will not trudge through page after page of search results.
+
+Standard site search often returns all results for any word in the search. What this means is that if someone searches for ‘pink widgets’ the search will return every pink item on the site. This is unacceptable as not all users will realize the problem and change their search phrases. There are many easily installed third party site search solutions to resolve these issues.
+
+3. Conversion Test eCommerce Incentives
+
+Traffic from AdWords can be offered multiple types of incentives which can be measured to see which increases sales more. For example, test whether your visitors would rather have:
+
+Free shipping if they spend $50 or more
+
+10% off sales of $100 or more
+
+$20 off a $200 purchase
+
+Fanplayr not only analyzes, segments, and allows you to add incentives and offers; it integrates A/B testing into ecommerce software. Changes can be made to text campaigns on the fly.
+
+Conversion testing can increase conversion rates up to 25% ~ Up to 50% higher average order values ~ Targeted offers can generate up to 20% margin improvement.
+
+4. Conversion Tests for SaaS
+
+Solutions providers can use analysis and segmenting to decrease the time it takes to progress through their sales funnels. For example, Neil Patel at QuickSprout suggested in 7 Simple A/B Tests to Increase Conversions 10% or More to test:
+
+Buy now vs free trial
+
+Credit card vs no credit card
+
+Improve your sales funnel by comparing the actions of visitors who have converted with those who haven’t. Check page views to determine whether visiting particular pages increases conversions. If it does, change site navigation to add that page to the sales funnel.
+
+Provide different incentives to repeat visitors or visitors who have downloaded specific white papers or watched specific videos. Analysis can provide your sales team insights into what a particular lead is most interested in.
+
+5. Strengthen Trust Signals
+
+Unless you’re a household name, your site must convey how trustworthy your site is. Adding photos of the business location and people behind the brand to your about page can increase conversions. Your about page is usually visited just before a person checks out to make sure you are a “real” business. Optimize this page. Make it convey why they should buy from you.
+
+Online buyers are more sophisticated today. Many know to verify that your site is secure by looking for the https:// in your url and a Secure Shopping 256 bit icon. Display Trust Signals such as Better Business Bureau, TrustE, Norton Secured, TrustWave, Google Trusted Store.
+
+6. Reviews and Testimonials
+
+Real testimonials are another way to increase trust. If you sell a service, offer it to the leading influencers in your industry and ask for their endorsement. Use their photo, logo and text or even a video. Video testimonials are doable for any size business.
+
+Do your fellow consumers a favor and review the products and services you buy. Even though testimonials and reviews can be manipulated, they are still valuable during the decision-making process. Savvy buyers know to look at a reviewers other reviews or to search for the testimonial giver online to determine whether they can be trusted.
+
+Enable the ability for your buyers to review your products and services. What they write is feedback for you and your customers. No product or service is a perfect fit for everyone. Details left by buyers ensure buyers choose wisely.
+
+7. Be Easy to Contact
+
+People don’t buy unless they’re confident they are making the right decision. Even if you have excellent product descriptions and multiple photos, they may still have a question. At a minimum be sure you have a contact page that is easy to find. Test it to make sure it works.
+
+Better yet, add live chat to your site. Businesses that provide live interactions at least during business hours save money and experience increased sales and conversions.
+
+“According to an article on Sitepoint, the top ten reasons buyers abandon their online shopping sessions are often related to confusion and complications at checkout. Confused customers may have a question that they want answered in real time. “
+
+This is especially true if you are a very small brand. People want to know there is a real person they can contact behind the site. Answering them in real time increases confidence they can reach you should their package not arrive or they have problems with their purchase.
+
+Gail Gardner is the Small Business Marketing Strategist who founded and provides consulting at GrowMap.com. She also answers questions in live chat as Community Manager at SocialImplications.com.
+
+More from AllBusiness.com:

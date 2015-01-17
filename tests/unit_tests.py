@@ -4,12 +4,9 @@ All unit tests for the newspaper library should be contained in this file.
 """
 import sys
 import os
-import re
 import unittest
 import time
-import codecs
-import requests
-import responses
+import traceback
 from collections import defaultdict
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
@@ -22,13 +19,14 @@ sys.path.insert(0, PARENT_DIR)
 
 TEXT_FN = os.path.join(TEST_DIR, 'data/text')
 HTML_FN = os.path.join(TEST_DIR, 'data/html')
+URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
 
 import newspaper
 from newspaper import (
     Article, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
-from newspaper.utils.encoding import smart_str, smart_unicode
-from newspaper.utils import encodeValue
+from newspaper.urls import get_domain
+
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -48,18 +46,74 @@ def print_test(method):
     return run
 
 
-@responses.activate
-def mock_response_with(url, response_file):
-    """Mocks an HTTP request using the `responses` module.
-    Corresponds with the `requests` library.
+def mock_resource_with(filename, resource_type):
+    """Mocks an HTTP request by pulling text from a pre-downloaded file
     """
-    response_path = os.path.join(TEST_DIR,
-                                 "data/html/%s.html" % response_file)
-    with open(response_path, 'r') as f:
-        body = f.read()
-    responses.add(responses.GET, url, body=body, status=200,
-                  content_type='text/html')
-    return requests.get(url)
+    VALID_RESOURCES = ['html', 'txt']
+    if resource_type not in VALID_RESOURCES:
+        raise Exception('Mocked resource must be one of: %s' %
+                        ', '.join(VALID_RESOURCES))
+    subfolder = 'text' if resource_type == 'txt' else 'html'
+    resource_path = os.path.join(TEST_DIR, "data/%s/%s.%s" %
+                                 (subfolder, filename, resource_type))
+    with open(resource_path, 'r') as f:
+        return f.read()
+
+
+def get_base_domain(url):
+    """For example, the base url of uk.reuters.com => reuters.com
+    """
+    domain = get_domain(url)
+    tld = '.'.join(domain.split('.')[-2:])
+    if tld in ['co.uk', 'com.au', 'au.com']:  # edge cases
+        end_chunks = domain.split('.')[-3:]
+    else:
+        end_chunks = domain.split('.')[-2:]
+    base_domain = '.'.join(end_chunks)
+    return base_domain
+
+
+class ExhaustiveFullTextCase(unittest.TestCase):
+
+    @print_test
+    def runTest(self):
+        domain_counters = {}
+
+        with open(URLS_FILE, 'r') as f:
+            urls = [d.strip() for d in f.readlines() if d.strip()]
+
+        failed = 0
+        for url in urls:
+            domain = get_base_domain(url)
+            if domain in domain_counters:
+                domain_counters[domain] += 1
+            else:
+                domain_counters[domain] = 1
+
+            res_filename = domain + str(domain_counters[domain])
+            html = mock_resource_with(res_filename, 'html')
+            try:
+                a = Article(url)
+                a.download(html)
+                a.parse()
+            except Exception:
+                print('<< URL: %s parse ERROR >>' % url)
+                traceback.print_exc()
+                continue
+
+            correct_text = mock_resource_with(res_filename, 'txt')
+            if not (a.text == correct_text):
+                # print('Diff: ', simplediff.diff(correct_text, a.text))
+                # `correct_text` holds the reason of failure if failure
+                print('%s -- %s -- %s' %
+                      ('Fulltext failed', res_filename, correct_text.strip()))
+                failed += 1
+            # TODO: assert statements are commented out for full-text
+            # extraction tests because we are constantly tweaking the
+            # algorithm and improving
+            # assert a.text == correct_text
+        print('%s fulltext extractions failed out of %s' %
+              (failed, len(urls)))
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -91,13 +145,13 @@ class ArticleTestCase(unittest.TestCase):
     def test_url(self):
         assert self.article.url == (
             'http://www.cnn.com/2013/11/27/travel/weather-'
-            'thanksgiving/index.html')
+            'thanksgiving/index.html?iref=allsearch')
 
     @print_test
     def test_download_html(self):
-        resp = mock_response_with(self.article.url, 'cnn_article')
-        self.article.download(resp)
-        assert len(self.article.html) == 75176
+        html = mock_resource_with('cnn_article', 'html')
+        self.article.download(html)
+        assert len(self.article.html) == 75175
 
     @print_test
     def test_pre_download_parse(self):
@@ -116,8 +170,8 @@ class ArticleTestCase(unittest.TestCase):
         self.article.parse()
         self.article.nlp()
 
-        with open(os.path.join(TEXT_FN, 'cnn.txt'), 'r') as f:
-            assert self.article.text == f.read()
+        text = mock_resource_with('cnn', 'txt')
+        assert self.article.text == text
 
         # NOTE: top_img extraction requires an internet connection
         # unlike the rest of this test file
@@ -186,20 +240,17 @@ class ArticleTestCase(unittest.TestCase):
         """Test running NLP algos before parsing the article
         """
         new_article = Article(self.article.url)
-        resp = mock_response_with(new_article.url, 'cnn_article')
-        new_article.download(resp)
+        html = mock_resource_with('cnn_article', 'html')
+        new_article.download(html)
         self.assertRaises(ArticleException, new_article.nlp)
 
     @print_test
     def test_nlp_body(self):
-        KEYWORDS = ['forecasters', 'storm', 'winds', 'sailing',
-                    'great', 'weather', 'balloons', 'snow', 'good',
-                    'flight', 'york', 'roads', 'smooth', 'thanksgiving']
-
-        with open(os.path.join(TEST_DIR,
-                  'data/text/cnn_summary.txt'), 'r') as f:
-            assert self.article.summary == f.read()
-
+        KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
+                    'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
+                    'travel', 'weather', 'winds', 'york']
+        SUMMARY = mock_resource_with('cnn_summary', 'txt')
+        assert self.article.summary == SUMMARY
         assert sorted(self.article.keywords) == sorted(KEYWORDS)
 
 
@@ -249,7 +300,7 @@ class SourceTestCase(unittest.TestCase):
         BRAND = 'cnn'
 
         s = Source('http://cnn.com', verbose=False, memoize_articles=False)
-        # resp = mock_response_with('http://cnn.com', 'cnn_main_site')
+        # html = mock_resource_with('http://cnn.com', 'cnn_main_site')
         s.clean_memo_cache()
         s.build()
 
@@ -259,8 +310,9 @@ class SourceTestCase(unittest.TestCase):
 
         # assert s.brand == BRAND
         # assert s.description == DESC
-        # assert s.size() == 241
+        # assert s.size() == 266
         # assert s.category_urls() == CATEGORY_URLS
+
         # TODO: A lot of the feed extraction is NOT being tested because feeds
         # are primarly extracted from the HTML of category URLs. We lose this
         # effect by just mocking CNN's main page HTML. Warning: tedious fix.
@@ -271,7 +323,7 @@ class SourceTestCase(unittest.TestCase):
         """Builds two same source objects in a row examines speeds of both
         """
         url = 'http://uk.yahoo.com'
-        mock_response_with(url, 'yahoo_main_site')
+        html = mock_resource_with('yahoo_main_site', 'html')
         s = Source(url)
         s.download()
         s.parse()
@@ -335,32 +387,6 @@ class APITestCase(unittest.TestCase):
         """Just make sure this method runs
         """
         newspaper.popular_urls()
-
-
-class EncodingTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_encode_val()
-        self.test_smart_unicode()
-        self.test_smart_str()
-
-    def setUp(self):
-        self.uni_string = "∆ˆˆø∆ßåßlucas yang˜"
-        self.normal_string = "∆ƒˆƒ´´lucas yang"
-
-    @print_test
-    def test_encode_val(self):
-        assert encodeValue(self.uni_string) == self.uni_string
-        assert encodeValue(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_unicode(self):
-        assert smart_unicode(self.uni_string) == self.uni_string
-        assert smart_unicode(self.normal_string) == '∆ƒˆƒ´´lucas yang'
-
-    @print_test
-    def test_smart_str(self):
-        assert smart_str(self.uni_string) == b'\xe2\x88\x86\xcb\x86\xcb\x86\xc3\xb8\xe2\x88\x86\xc3\x9f\xc3\xa5\xc3\x9flucas yang\xcb\x9c'
-        assert smart_str(self.normal_string) == b'\xe2\x88\x86\xc6\x92\xcb\x86\xc6\x92\xc2\xb4\xc2\xb4lucas yang'
 
 
 class MThreadingTestCase(unittest.TestCase):
@@ -438,37 +464,34 @@ class MultiLanguageTestCase(unittest.TestCase):
     def test_chinese_fulltext_extract(self):
         url = 'http://news.sohu.com/20050601/n225789219.shtml'
         article = Article(url=url, language='zh')
-        resp = mock_response_with(url, 'chinese_article')
-        article.download(resp)
+        html = mock_resource_with('chinese_article', 'html')
+        article.download(html)
         article.parse()
-        with codecs.open(os.path.join(TEXT_FN, 'chinese.txt'),
-                         'r', 'utf8') as f:
-            assert article.text == f.read()
+        text = mock_resource_with('chinese', 'txt')
+        assert article.text == text
 
     @print_test
     def test_arabic_fulltext_extract(self):
         url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/'\
               'index.html'
         article = Article(url=url)
-        resp = mock_response_with(url, 'arabic_article')
-        article.download(resp)
+        html = mock_resource_with('arabic_article', 'html')
+        article.download(html)
         article.parse()
         assert article.meta_lang == 'ar'
-        with codecs.open(os.path.join(TEXT_FN, 'arabic.txt'),
-                         'r', 'utf8') as f:
-            assert article.text == f.read()
+        text = mock_resource_with('arabic', 'txt')
+        assert article.text == text
 
     @print_test
     def test_spanish_fulltext_extract(self):
         url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscal'\
               'ia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
         article = Article(url=url, language='es')
-        resp = mock_response_with(url, 'spanish_article')
-        article.download(resp)
+        html = mock_resource_with('spanish_article', 'html')
+        article.download(html)
         article.parse()
-        with codecs.open(os.path.join(TEXT_FN, 'spanish.txt'),
-                         'r', 'utf8') as f:
-            assert article.text == f.read()
+        text = mock_resource_with('spanish', 'txt')
+        assert article.text == text
 
 
 if __name__ == '__main__':
@@ -476,10 +499,11 @@ if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
+    if len(sys.argv) > 1 and sys.argv[1] == 'fulltext':
+        suite.addTest(ExhaustiveFullTextCase())
+
     suite.addTest(ConfigBuildTestCase())
     suite.addTest(MultiLanguageTestCase())
-
-    suite.addTest(EncodingTestCase())
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())

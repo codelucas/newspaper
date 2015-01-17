@@ -1,0 +1,31 @@
+People are silhouetted as they pose with laptops in front of a screen projected with a Google logo, in this picture illustration taken in Zenica October 29, 2014.
+
+Large numbers of Gmail Web addresses were cut off in China on Friday, said GreatFire.org, a China-based freedom of speech advocacy group. Users said the service was still down on Monday.
+
+"I think the government is just trying to further eliminate Google's presence in China and even weaken its market overseas," said a member of GreatFire.org, who uses a pseudonym.
+
+Google's own Transparency Report, which shows real-time traffic to Google services, displayed a sharp drop-off in traffic to Gmail from China on Friday.
+
+"We've checked and there's nothing wrong on our end," a Singapore-based spokesman for Google said in an email.
+
+In Washington, the U.S. State Department expressed concern over China's actions.
+
+"We encourage China to be transparent in its dealings with international companies and to consider the market signal it sends with such acts," State Department spokesman Jeff Rathke said.
+
+Almost all of Google's services have been heavily disrupted in China since June this year, but until last week Gmail users could still access emails downloaded via protocols like IMAP, SMTP and POP3. These had let people communicate using Gmail on apps like the Apple iPhone's Mail and Microsoft Outlook.
+
+China maintains tight control over the Internet, nipping in the bud any signs of dissent or challenges to the ruling Communist Party's leadership.
+
+The country is host to the world's most sophisticated internet censorship mechanism, known as the Great Firewall of China. Critics say China has stepped up its disruption of foreign online services like Google over the past year to create an Internet cut off from the rest of the world.
+
+The Google disruption began in the run-up to the 25th anniversary of the government's bloody crackdown on pro-democracy demonstrators around Beijing's Tiananmen Square on June 4, 1989.
+
+Gmail's setback could make email communication difficult for companies operating in China, said GreatFire.
+
+Chinese Foreign Ministry spokeswoman Hua Chunying said she did not know anything about Gmail being blocked, adding that the government was committed to providing a good business environment for foreign investors.
+
+"China has consistently had a welcoming and supportive attitude towards foreign investors doing legitimate business here," she said. "We will, as always, provide an open, transparent and good environment for foreign companies in China."
+
+One popular way to get around China's internet censorship is to use a Virtual Private Network (VPN), which allows unhindered access to blocked sites and services.
+
+"Using a VPN seems to be the only answer to doing anything these days online in China," said Zach Smith, a Beijing-based digital products manager at City Weekend magazine.

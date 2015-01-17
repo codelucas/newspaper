@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 class Category(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.html = None
         self.doc = None
 
@@ -38,7 +38,7 @@ class Category(object):
 class Feed(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.rss = None
         # TODO self.dom = None, speed up Feedparser
 
@@ -64,7 +64,7 @@ class Source(object):
 
         self.extractor = ContentExtractor(self.config)
 
-        self.url = utils.encodeValue(url)
+        self.url = url
         self.url = urls.prepare_url(url)
 
         self.domain = urls.get_domain(self.url)
@@ -89,7 +89,7 @@ class Source(object):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
-        self.download(response)
+        self.download()
         self.parse()
 
         self.set_categories()
@@ -141,12 +141,12 @@ class Source(object):
         desc html attribute
         """
         desc = self.extractor.get_meta_description(self.doc)
-        self.description = utils.encodeValue(desc)
+        self.description = desc
 
-    def download(self, response=None):
+    def download(self):
         """Downloads html of source
         """
-        self.html = network.get_html(self.url, self.config, response)
+        self.html = network.get_html(self.url, self.config)
 
     def download_categories(self):
         """Download all category html, can use mthreading
@@ -338,8 +338,8 @@ class Source(object):
         self.is_downloaded = True
         if len(failed_articles) > 0:
             if self.config.verbose:
-                print('[ERROR], these article urls failed the download:', \
-                    [a.url for a in failed_articles])
+                print('[ERROR], these article urls failed the download:',
+                      [a.url for a in failed_articles])
 
     def parse_articles(self):
         """Parse all articles, delete if too small

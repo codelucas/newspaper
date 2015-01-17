@@ -352,7 +352,13 @@ class ContentExtractor(object):
                 continue
 
             key = key.split(':')
-            ref = data[key.pop(0)]
+            key_head = key.pop(0)
+            ref = data[key_head]
+
+            if isinstance(ref, str):
+                data[key_head] = {key_head: ref}
+                ref = data[key_head]
+
             for idx, part in enumerate(key):
                 if idx == len(key) - 1:
                     ref[part] = value
@@ -390,7 +396,8 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urllib.parse.urljoin(article_url, url) for url in urls])
+        img_links = set([urllib.parse.urljoin(article_url, url)
+                        for url in urls])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -436,7 +443,7 @@ class ContentExtractor(object):
             doc_or_html = [i.strip() for i in doc_or_html]
             return doc_or_html or []
         # If the doc_or_html is html, parse it into a root
-        if isinstance(doc_or_html, str) or isinstance(doc_or_html, str):
+        if isinstance(doc_or_html, str):
             doc = self.parser.fromstring(doc_or_html)
         else:
             doc = doc_or_html
@@ -457,7 +464,8 @@ class ContentExtractor(object):
 
             if not domain and not path:
                 if self.config.verbose:
-                    print('elim category url %s for no domain and path' % p_url)
+                    print('elim category url %s for no domain and path'
+                          % p_url)
                 continue
             if path and path.startswith('#'):
                 if self.config.verbose:
@@ -858,15 +866,13 @@ class ContentExtractor(object):
         return True
 
     def post_cleanup(self, top_node):
-        """Remove any divs that looks like non-content,
-        clusters of links, or paras with no gusto
+        """Remove any divs that looks like non-content, clusters of links,
+        or paras with no gusto; add adjacent nodes which look contenty
         """
         node = self.add_siblings(top_node)
         for e in self.parser.getChildren(node):
             e_tag = self.parser.getTag(e)
             if e_tag != 'p':
-                if self.is_highlink_density(e) \
-                        or self.is_table_and_no_para_exist(e) \
-                        or not self.is_nodescore_threshold_met(node, e):
+                if self.is_highlink_density(e):
                     self.parser.remove(e)
         return node

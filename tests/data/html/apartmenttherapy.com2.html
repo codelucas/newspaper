@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+
+  <title>Before & After:  A Year of IKEA Hacks  — Best of 2014 | Apartment Therapy</title>
+
+  <script type="text/javascript">var _sf_startpt=(new Date()).getTime()</script>
+
+  <meta content="authenticity_token" name="csrf-param" />
+<meta content="5hOjMXWnGJqAz/C/fX+oFdIsahCBOcYCDRiDwwy3zxY=" name="csrf-token" />
+<meta charset='utf-8'>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-1.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"471a369590","applicationID":"527147","transactionName":"el0KEUMOWg0BR0lBX0pGF0pCCVkW","queueTime":0,"applicationTime":97,"agent":"js-agent.newrelic.com/nr-476.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"Uw8HUEVWCgQBUFY="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script>
+<meta content="Nothing stirs the DIY spirit like a good IKEA hack. IKEA is so accessible — anybody could stroll in there and buy a BEKVAM or two — but its Scandinavian design is deceptively simple. With a little ingenuity a box, or a table, or a stool from IKEA could become pretty much anything. Here's proof." name='description'>
+<meta content='width=device-width, initial-scale=1' name='viewport'>
+<meta content='Before & After:  A Year of IKEA Hacks  — Best of 2014' property='og:title'>
+<meta content="Nothing stirs the DIY spirit like a good IKEA hack. IKEA is so accessible — anybody could stroll in there and buy a BEKVAM or two — but its Scandinavian design is deceptively simple. With a little ingenuity a box, or a table, or a stool from IKEA could become pretty much anything. Here's proof." property='og:description'>
+<meta content='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' property='og:url'>
+<meta content='article' property='og:type'>
+<meta content='Apartment Therapy' property='og:site_name'>
+<meta content='1917611' property='fb:admins'>
+<meta content='http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.1500_s.fit_/shelf.png' property='og:image'>
+<meta content='summary' name='twitter:card'>
+<meta content='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' name='twitter:url'>
+<meta content='Before & After:  A Year of IKEA Hacks  — Best of 2014' name='twitter:title'>
+<meta content="Nothing stirs the DIY spirit like a good IKEA hack. IKEA is so accessible — anybody could stroll in there and buy a BEKVAM or two — but its Scandinavian design is deceptively simple. With a little ingenuity a box, or a table, or a stool from IKEA could become pretty much anything. Here's proof." name='twitter:description'>
+<meta content='AptTherapy' name='twitter:site'>
+<meta content='http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.1500_s.fit_/shelf.png' name='twitter:image'>
+<meta content='#ee2737' name='msapplication-TileColor'>
+<meta content='http://a-fst1.apartmenttherapy.com/assets/favicons/at-metro-tile-0b3d7d7ff8ccb32816d4f23496441f70.png' name='msapplication-TileImage'>
+<meta content='{"title":"Before & After:  A Year of IKEA Hacks  — Best of 2014","link":"http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389","type":"post","image_url":"http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.1500_s.fit_/shelf.png","post_id":214389,"pub_date":"2014-12-24T14:00:00Z","section":"DIY","author":"Nancy Mitchell","tags":["2014","Event Year","Budget Living","Life at Home","Hot Posts","Features","Before & After","Projects"]}' name='parsely-page'>
+<meta content='http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.1500_s.fit_/shelf.png' name='thumbnail'>
+
+
+  <link rel="shortcut icon" href="http://a-fst2.apartmenttherapy.com/assets/favicons/at-favicon-ad3ef31aee0e4fe8aec15a7d0e93ee5f.ico" />
+  <link href="https://plus.google.com/114882182336358417221/" rel="publisher" />
+
+  <link href="http://feeds.apartmenttherapy.com/apartmenttherapy/main" rel="alternate" title="Apartment Therapy" type="application/rss+xml" />
+
+
+  <link rel="apple-touch-icon" sizes="114x114" href="http://a-fst1.apartmenttherapy.com/assets/favicons/at-apple-touch-icon-114x114-47982f87de8c8309ddecfa5f46f13032.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="http://a-fst1.apartmenttherapy.com/assets/favicons/at-apple-touch-icon-72x72-b225f54d067485ec75a937a1f1d80f17.png" />
+  <link rel="apple-touch-icon" href="http://a-fst2.apartmenttherapy.com/assets/favicons/at-apple-touch-icon-a10f7779d24a78533d4da42158b494dc.png" />
+
+    <link rel="canonical" href="http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389" />
+
+
+  <!--[if gte IE 9]><!-->
+      <link href="http://a-fst1.apartmenttherapy.com/assets/application-033b165852fba53b5c149ed3489e9be5.css" media="screen, projection" rel="stylesheet" />
+      <link href="http://a-fst1.apartmenttherapy.com/assets/print-44017d5e2b30ea915ca6346eaae08c58.css" media="print" rel="stylesheet" />
+      <script>
+        window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!!t.document.createElementNS&&!!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect&&!!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1"),A=function(A){var o=t.document.createElement("link"),r=t.document.getElementsByTagName("script")[0];o.rel="stylesheet",o.href=e[A&&n?0:A?1:2],r.parentNode.insertBefore(o,r)},o=new t.Image;o.onerror=function(){A(!1)},o.onload=function(){A(1===o.width&&1===o.height)},o.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
+        grunticon( [ "", "http://a-fst1.apartmenttherapy.com/assets/util/svg/data-png-315c3cab574f11b87cfdd5037e9939dc.css", "http://a-fst2.apartmenttherapy.com/assets/util/svg/fallback-96766b492282211343c10bf0004c226e.css" ] );</script>
+      <noscript><link href="http://a-fst2.apartmenttherapy.com/assets/util/svg/fallback-96766b492282211343c10bf0004c226e.css" rel="stylesheet"></noscript>
+  <!--<![endif]-->
+
+  <!--[if lt IE 9]>
+    <link href="/assets/ie8.css" media="screen, projection" rel="stylesheet" />
+    <link href="/assets/print.css" media="print" rel="stylesheet" />
+    <script src="http://a-fst1.apartmenttherapy.com/assets/oldie-d911f36682a304ad64e563bfbff1e2e9.js"></script>
+  <![endif]-->
+
+  <script src="http://a-fst1.apartmenttherapy.com/assets/head-d7db1ce8e71e9cac5ae606c59989cb55.js"></script>
+
+
+
+
+
+  <script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+// Create AllSites ga tracking object
+ga('create', 'UA-821548-1', 'auto', {
+  'name': 'AllSites'
+});
+
+// Enhanced link attribution - docs say must come after 'create'
+ga('AllSites.require', 'linkid', 'linkid.js');
+
+// For demographic data
+ga('AllSites.require', 'displayfeatures');
+
+// Set User-ID if logged in
+var uid = $.cookie('user_id');
+if (uid) {
+  ga('AllSites.set', '&uid', uid);
+}
+
+// Set custom dimensions
+    ga('AllSites.set', 'dimension1', 'nancy');
+
+  ga('AllSites.set', 'dimension2', 'diy');
+  ga('AllSites.set', 'dimension3', '2014-12-24');
+  ga('AllSites.set', 'dimension5', 'How to');
+
+if (window.AT && window.AT.Visitor) {
+  ga('AllSites.set', 'dimension9', AT.Visitor.OriginatingSource);
+}
+
+// Track pageview
+ga('AllSites.send', 'pageview');
+</script>
+
+  <!-- Yieldbot.com Intent Tag LOADING -->
+<script type="text/javascript">
+var ybotq = ybotq || [];
+(function() {
+  var js = document.createElement('script');
+  js.src = '//cdn.yldbt.com/js/yieldbot.intent.js';
+  var node = document.getElementsByTagName('script')[0];
+  node.parentNode.insertBefore(js, node);
+})();
+</script>
+
+<!-- Yieldbot.com Intent Tag ACTIVATION -->
+<script type="text/javascript">
+ybotq.push(function () {
+
+  // TODO more config that should be contained
+  var ybot_pub_id_mobile  = 'c4a9';
+  var ybot_pub_id_desktop = '0828';
+
+  if(AT.CurrentSite.id === 2) {
+    ybot_pub_id_mobile  = 'af1b';
+    ybot_pub_id_desktop = 'cf43';
+  }
+
+  // Yieldbot's definition of "mobile"
+  var isYbotMobile = ((window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth) < 481);
+
+  if(isYbotMobile){
+    yieldbot.pub(ybot_pub_id_mobile);
+    yieldbot.defineSlot('sidebar');
+  }
+  else {
+    yieldbot.pub(ybot_pub_id_desktop);
+  }
+
+  yieldbot.enableAsync();
+  yieldbot.go();
+});
+</script>
+  <script>(function() {
+var _fbq = window._fbq || (window._fbq = []);
+if (!_fbq.loaded) {
+var fbds = document.createElement('script');
+fbds.async = true;
+fbds.src = '//connect.facebook.net/en_US/fbds.js';
+var s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(fbds, s);
+_fbq.loaded = true;
+}
+_fbq.push(['addPixelId', '531267817007380']);
+})();
+window._fbq = window._fbq || [];
+window._fbq.push(['track', 'PixelInitialized', {}]);
+</script>
+<noscript><img height="1" width="1" alt="" style="display:none" src="https://www.facebook.com/tr?id=531267817007380&amp;ev=PixelInitialized" /></noscript>
+    <!-- SimpleReach -->
+  <script type="text/javascript">
+    __reach_config = {
+      pid: "548f622397b0c99131000032",
+      title: "Before & After: A Year of IKEA Hacks Best of 2014",
+      url: "http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389",
+      date: "2014-12-24T14:00:00Z",
+      authors: "Nancy Mitchell",
+      channels: "DIY",
+      tags: ["2014","Event Year","Budget Living","Life at Home","Hot Posts","Features","Before & After","Projects"],
+      domain: "apartmenttherapy.com",
+      iframe: true
+    };
+    (function(){
+      var s = document.createElement('script');
+      s.async = true;
+      s.type = 'text/javascript';
+      s.src = document.location.protocol + '//d8rk54i4mohrb.cloudfront.net/js/reach.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
+    })();
+  </script>
+
+
+</head>
+<body itemscope itemtype="http://schema.org/WebSite" class="at at-main postpage">
+  <div class='dfp-ad' data-media='' data-slot='leaderboard' id='dfp-ad-leaderboard' style='display: none;'>
+</div>
+
+
+<div class='responsive-wrapper'>
+<header class='page-header' role='banner'>
+<a class='site-logo' href='/'>
+<span class='hide-small-down logo-at'>Apartment Therapy</span>
+<span class='hide-medium-up logo-at-horizontal'>Apartment Therapy</span>
+</a>
+<a class='off-screen-nav-toggle hide-medium-up' href='#off-screen-nav'>
+<i class='icon-triple-line icon-large'>Toggle menu</i>
+</a>
+<div class='header-meta'>
+<div class='header-meta-section icons-muted hide-small-down'>
+<ul class='unstyled social-icon-links'>
+<li>
+<a href='http://www.facebook.com/apartmenttherapy'>
+<i class='icon-facebook'>Follow us on Facebook</i>
+</a>
+</li>
+<li>
+<a href='http://pinterest.com/apttherapy/'>
+<i class='icon-pinterest'>Follow us on Pinterest</i>
+</a>
+</li>
+<li>
+<a href='http://twitter.com/AptTherapy'>
+<i class='icon-twitter'>Follow us on Twitter</i>
+</a>
+</li>
+<li>
+<a href='http://instagram.com/apartmenttherapy'>
+<i class='icon-instagram'>Follow us on Instagram</i>
+</a>
+</li>
+<li>
+<a href='http://apartmenttherapy.tumblr.com/'>
+<i class='icon-tumblr'>Follow us on Tumblr</i>
+</a>
+</li>
+<li>
+<a href='/main/atom.xml'>
+<i class='icon-feed'>Subscribe to our RSS feed</i>
+</a>
+</li>
+<li>
+<a href='/follow-us'>
+<i class='icon-plus-sign'>More ways to follow</i>
+</a>
+</li>
+</ul>
+
+</div>
+<div class='header-meta-section js-account-link-container'></div>
+<!-- .header-meta-section.js-notifications-button-container.notifications-button -->
+<!-- .header-meta-section.js-react-notifications-modal-button-container -->
+<div class='header-meta-section'>
+<form action='/search' itemprop='potentialAction' itemscope itemtype='http://schema.org/SearchAction' method='get' role='search'>
+<meta content='http://www.apartmenttherapy.com/search?q={q}' itemprop='target'>
+<label class='label-inline label-placeholder' for='search-input'>Search</label>
+<span class='input-icon-inset'>
+<input id='search-input' itemprop='query-input' name='q' required type='search'>
+<button class='icon-search icon-muted search-submit btn-unstyled' type='submit'></button>
+</span>
+</form>
+</div>
+</div>
+<nav class='primary-nav hide-small-down' role='navigation'>
+<ul class='unstyled inline-nav'>
+<li><a class="brand-nav-link nav-link channel-link style-link" href="/style">Style</a></li>
+<li><a class="brand-nav-link nav-link channel-link diy-link" href="/diy">DIY</a></li>
+<li><a class="brand-nav-link nav-link channel-link homekeeping-link" href="/homekeeping">Homekeeping</a></li>
+<li><a class="brand-nav-link nav-link channel-link family-link" href="/family">Family</a></li>
+<li><a class="brand-nav-link nav-link channel-link tech-link" href="/tech">Tech</a></li>
+<li><a class="brand-nav-link nav-link channel-link renovating-link" href="/renovating">Renovating</a></li>
+<li><a class="brand-nav-link nav-link channel-link shopping-link" href="/shopping">Shopping</a></li>
+<li><a class="brand-nav-link nav-link channel-link entertaining-link" href="/entertaining">Entertaining</a></li>
+<li class='more-dropdown dropdown-wrapper'>
+<a class='dropdown-toggle nav-link brand-nav-link' href='#'>
+More
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='dropdown'>
+<ul class='unstyled hide-large'>
+<li><a class="brand-link nav-link" href="/renovation-diary-archive-186532">Renovation Diaries</a></li>
+<li><a class="brand-link nav-link" href="/maker_talks">Maker Talks</a></li>
+<li><a class="nav-link" href="/categories/tours">Tours</a></li>
+<li><a class="nav-link" href="/categories/rooms">Rooms</a></li>
+<li><a class="nav-link" href="/categories/before_after">Before &amp; After</a></li>
+<li><a class="nav-link" href="/categories/small_spaces">Small Spaces</a></li>
+<li><a class="nav-link" href="/categories/budget_living">Budget Living</a></li>
+<li><a class="nav-link" href="/categories/video">Video</a></li>
+</ul>
+<ul class='unstyled dropdown-nav'>
+<li><a class="brand-nav-link nav-link" href="/style">Style</a></li>
+<li><a class="brand-nav-link nav-link" href="/diy">DIY</a></li>
+<li><a class="brand-nav-link nav-link" href="/homekeeping">Homekeeping</a></li>
+<li><a class="brand-nav-link nav-link" href="/family">Family</a></li>
+<li><a class="brand-nav-link nav-link" href="/tech">Tech</a></li>
+<li><a class="brand-nav-link nav-link" href="/renovating">Renovating</a></li>
+<li><a class="brand-nav-link nav-link" href="/shopping">Shopping</a></li>
+<li><a class="brand-nav-link nav-link" href="/entertaining">Entertaining</a></li>
+</ul>
+<ul class='unstyled hide-large'>
+<li><a class="brand-nav-link nav-link" href="/categories">All Categories</a></li>
+</ul>
+</div>
+</li>
+<li><a class="brand-link nav-link" href="http://www.thekitchn.com">The Kitchn</a></li>
+</ul>
+</nav>
+<div class='feature-scroll js-feature-scroll'></div>
+
+
+</header>
+
+</div>
+<div class='responsive-wrapper'>
+<div class='page-content'>
+<div class='layout-three-column'>
+<div class='content-column'>
+<main role='main'>
+<article class='full-post post'>
+<header class='post-header'>
+<a class='brand-link' href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389'>
+<h1 class='post-title'>Before & After: <em>A Year of IKEA Hacks</em></h1>
+<p class='post-subtitle'>Best of 2014</p>
+</a>
+</header>
+<div class='post-body branded-links'>
+<div class='image-wrapper mt-image-center' style='max-width: 540.0px;'>
+<span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 101.16666666666664%;'>
+<span data-src='http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.540_s.fit_/shelf.png'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.540_s.fit_/shelf.png" />
+</noscript>
+</div>
+</span>
+<div class='image-controls'>
+<a class="custom-pinterest-button" data-social-action="lazy image pin" data-social-network="pinterest" data-social-target="http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389" data-track-social="true" href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.apartmenttherapy.com%2Fbefore-after-a-year-of-ikea-hacks-best-of-2014-214389&description=Before%20%26%20After%3A%20A%20Year%20of%20IKEA%20Hacks%20%E2%80%94%20Best%20of%202014&media=http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.540_s.fit_/shelf.png"><img alt="Pin it button big" src="http://a-fst1.apartmenttherapy.com/assets/social/pin_it_button_big.png" /></a>
+
+</div>
+</div>
+
+<p>
+	Nothing stirs the DIY spirit like a good IKEA hack. IKEA is so accessible — anybody could stroll in there and buy a BEKVAM or two — but its Scandinavian design is deceptively simple. With a little ingenuity a box, or a table, or a stool from IKEA could become pretty much anything. Here's proof.
+</p>
+
+<div class='popup-gallery-link'>
+<div class='grid-row grid-no-collapse grid-mini-gutters'>
+<div class='col col-1-5'>
+<div class='image-wrapper' style='max-width: 150.0px;'>
+<a href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'><span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst2.pixstatic.com/533dd146dbfa3f7754012509._w.150_h.150_s.centercrop_.jpg'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/533dd146dbfa3f7754012509._w.150_h.150_s.centercrop_.jpg" />
+</noscript>
+</div>
+</span></a>
+</div>
+
+</div>
+<div class='col col-1-5'>
+<div class='image-wrapper' style='max-width: 150.0px;'>
+<a href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'><span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst2.pixstatic.com/5467b0702a099a28e10031b6/_w.150_h.150_s.centercrop_/ikea%20club%20chairs.png'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/5467b0702a099a28e10031b6/_w.150_h.150_s.centercrop_/ikea%20club%20chairs.png" />
+</noscript>
+</div>
+</span></a>
+</div>
+
+</div>
+<div class='col col-1-5'>
+<div class='image-wrapper' style='max-width: 150.0px;'>
+<a href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'><span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst1.pixstatic.com/5322423adbfa3f2e5700a11b._w.150_h.150_s.centercrop_.jpg'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/5322423adbfa3f2e5700a11b._w.150_h.150_s.centercrop_.jpg" />
+</noscript>
+</div>
+</span></a>
+</div>
+
+</div>
+<div class='col col-1-5'>
+<div class='image-wrapper' style='max-width: 150.0px;'>
+<a href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'><span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst1.pixstatic.com/5329bcae697ab04ce1003282._w.150_h.150_s.centercrop_.jpg'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/5329bcae697ab04ce1003282._w.150_h.150_s.centercrop_.jpg" />
+</noscript>
+</div>
+</span></a>
+</div>
+
+</div>
+<div class='col col-1-5'>
+<div class='image-wrapper' style='max-width: 150.0px;'>
+<a href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'><span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst1.pixstatic.com/53ee1e64dbfa3f023500065d/_w.150_h.150_s.centercrop_/IKEA%20desk%20turned%20console.png'></span>
+<noscript>
+<img alt="" src="http://p-fst1.pixstatic.com/53ee1e64dbfa3f023500065d/_w.150_h.150_s.centercrop_/IKEA%20desk%20turned%20console.png" />
+</noscript>
+</div>
+</span></a>
+</div>
+
+</div>
+</div>
+<a class='btn btn-block open-popup-gallery' href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389#gallery/48870/0'>
+Open Slideshow
+</a>
+</div>
+
+<p>
+	 Click on the slideshow to see the projects. To learn more about each project (and see more pictures), click the links in the captions.
+</p>
+<div class="content-highlight">
+	<p>
+		 <strong>→ Welcome to Apartment Therapy's Best of 2014 roundup!</strong> <br>
+		                                                                                              From December 21 through January 1 we are rounding up our favorite (and your favorite) posts from the past year.
+	</p>
+</div><script>
+  if (!window.ATGalleries) ATGalleries = {};
+  ATGalleries[48870] = {"id":48870,"type":"Slideshow","images":[{"pixtruder_id":"545111b4dbfa3f507b00f513","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-this-cheap-ikea-shelf-goes-incognito-212308\"\u003eBefore \u0026amp; After: A Super Cheap IKEA Shelf Goes Incognito\u003c/a\u003e","pixtruder_image":{"id":"545111b4dbfa3f507b00f513","width":600,"height":607,"format":"PNG","created_by_id":275,"updated_by_id":18,"created_at":"2014-10-29T12:11:42.315-04:00","updated_at":"2014-11-07T10:03:44.766-05:00","credit_style":"external","credit_author_id":275,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/00278578/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":44.94,"focus_y":80.75,"filename":"shelf.png"}},{"pixtruder_id":"545111cddbfa3f582700f980","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-this-cheap-ikea-shelf-goes-incognito-212308\"\u003eBefore \u0026amp; After: A Super Cheap IKEA Shelf Goes Incognito\u003c/a\u003e","pixtruder_image":{"id":"545111cddbfa3f582700f980","width":600,"height":800,"format":"PNG","created_by_id":275,"updated_by_id":null,"created_at":"2014-10-29T12:12:24.854-04:00","updated_at":"2014-10-29T12:12:24.854-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Soffia Gardarsdottir","credit_url":"","credit_email":"soffiadogg@yahoo.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"shelvesaf.png"}},{"pixtruder_id":"5467b0702a099a28e10031b6","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-ikea-club-chairs-get-a-black-white-look-for-40-213037\"\u003eBefore \u0026amp; After: IKEA Club Chairs Get a Black \u0026amp; White Look for $40\u003c/a\u003e","pixtruder_image":{"id":"5467b0702a099a28e10031b6","width":800,"height":600,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-11-15T14:58:56.182-05:00","updated_at":"2014-11-15T14:58:56.182-05:00","credit_style":"external","credit_author_id":99,"credit_name":"Brynne Delerson","credit_url":"http://www.thegatheredhome.com/2014/11/diy-ikea-hack-cream-and-black-club.html","credit_email":"thegatheredhome@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"ikea club chairs.png"}},{"pixtruder_id":"5467b0722a099a28cb0032a5","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-ikea-club-chairs-get-a-black-white-look-for-40-213037\"\u003eBefore \u0026amp; After: IKEA Club Chairs Get a Black \u0026amp; White Look for $40\u003c/a\u003e","pixtruder_image":{"id":"5467b0722a099a28cb0032a5","width":800,"height":600,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-11-15T14:58:55.488-05:00","updated_at":"2014-11-15T14:58:55.488-05:00","credit_style":"external","credit_author_id":99,"credit_name":"Brynne Delerson","credit_url":"http://www.thegatheredhome.com/2014/11/diy-ikea-hack-cream-and-black-club.html","credit_email":"thegatheredhome@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"black and white ikea hacked club chairs.png"}},{"pixtruder_id":"543e8b72dbfa3f3d94000ee2","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-a-mirror-transformation-that-will-grow-on-you-211680\"\u003eBefore \u0026amp; After: A Mirror Transformation That Will Grow on You\u003c/a\u003e","pixtruder_image":{"id":"543e8b72dbfa3f3d94000ee2","width":600,"height":592,"format":"JPEG","created_by_id":441,"updated_by_id":null,"created_at":"2014-10-15T10:58:16.380-04:00","updated_at":"2014-10-15T10:58:16.380-04:00","credit_style":"external","credit_author_id":441,"credit_name":"Northstory","credit_url":"http://www.northstory.ca/upcycled-planter/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"planter makeover before.jpg"}},{"pixtruder_id":"543e8cc8dbfa3f3e30000fb9","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-a-mirror-transformation-that-will-grow-on-you-211680\"\u003eBefore \u0026amp; After: A Mirror Transformation That Will Grow on You\u003c/a\u003e","pixtruder_image":{"id":"543e8cc8dbfa3f3e30000fb9","width":600,"height":630,"format":"JPEG","created_by_id":441,"updated_by_id":null,"created_at":"2014-10-15T11:03:46.615-04:00","updated_at":"2014-10-15T11:03:46.615-04:00","credit_style":"external","credit_author_id":441,"credit_name":"Northstory","credit_url":"http://www.northstory.ca/upcycled-planter/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"planter makeover after.jpg"}},{"pixtruder_id":"5449618fdbfa3f53cf005967","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-plain-jane-ikea-bunk-bed-to-indoor-kids-cabin-212066\"\u003eBefore \u0026amp; After: Plain Jane IKEA Bunk Bed To Indoor Kids Cabin\u003c/a\u003e","pixtruder_image":{"id":"5449618fdbfa3f53cf005967","width":2142,"height":1749,"format":"PNG","created_by_id":43,"updated_by_id":null,"created_at":"2014-10-23T16:14:20.807-04:00","updated_at":"2014-10-23T16:14:20.807-04:00","credit_style":"external","credit_author_id":43,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/20102451/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"mydal before.png"}},{"pixtruder_id":"5449629edbfa3f5710003309","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-plain-jane-ikea-bunk-bed-to-indoor-kids-cabin-212066\"\u003eBefore \u0026amp; After: Plain Jane IKEA Bunk Bed To Indoor Kids Cabin\u003c/a\u003e","pixtruder_image":{"id":"5449629edbfa3f5710003309","width":540,"height":617,"format":"JPEG","created_by_id":43,"updated_by_id":null,"created_at":"2014-10-23T16:26:23.555-04:00","updated_at":"2014-10-23T16:26:23.555-04:00","credit_style":"external","credit_author_id":43,"credit_name":"Papotologie","credit_url":"http://papotologie.com/2014/09/my-ikea-hack-loftbed-playhouse/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikea playhouse.jpg"}},{"pixtruder_id":"543564ca2a099a4f470002d6","caption":"\u003ca href=\"http://www.apartmenttherapy.com/round-the-world-ikea-hacked-diy-globe-kristi-murphy-211382\"\u003eBefore \u0026amp; After: IKEA Bowl Goes Global\u003c/a\u003e","pixtruder_image":{"id":"543564ca2a099a4f470002d6","width":600,"height":521,"format":"PNG","created_by_id":230,"updated_by_id":null,"created_at":"2014-10-08T12:23:07.678-04:00","updated_at":"2014-10-08T12:23:07.678-04:00","credit_style":"external","credit_author_id":230,"credit_name":"IKEA","credit_url":"","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikeabowlglobebefore.png"}},{"pixtruder_id":"543564cb2a099a74360002d8","caption":"\u003ca href=\"http://www.apartmenttherapy.com/round-the-world-ikea-hacked-diy-globe-kristi-murphy-211382\"\u003eBefore \u0026amp; After: IKEA Bowl Goes Global\u003c/a\u003e","pixtruder_image":{"id":"543564cb2a099a74360002d8","width":600,"height":800,"format":"PNG","created_by_id":230,"updated_by_id":null,"created_at":"2014-10-08T12:23:19.818-04:00","updated_at":"2014-10-08T12:23:19.818-04:00","credit_style":"external","credit_author_id":230,"credit_name":"Kristi Murphy","credit_url":"","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikeabowlglobeafter.png"}},{"pixtruder_id":"530bb925dbfa3f13ae0071f4","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-how-plycraft-met-ikea-and-made-a-great-chair-baby-200586\"\u003eBefore \u0026amp; After: How Plycraft Met IKEA and Made a Great Chair Baby\u003c/a\u003e","pixtruder_image":{"id":"530bb925dbfa3f13ae0071f4","width":540,"height":720,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-02-24T16:27:12.620-05:00","updated_at":"2014-02-24T16:27:12.620-05:00","credit_style":"external","credit_author_id":147,"credit_name":"Design Stoke","credit_url":"http://designstoke.com/2014/02/20/diy-eames-update/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"530bb925dbfa3f03a4006c37","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-how-plycraft-met-ikea-and-made-a-great-chair-baby-200586\"\u003eBefore \u0026amp; After: How Plycraft Met IKEA and Made a Great Chair Baby\u003c/a\u003e","pixtruder_image":{"id":"530bb925dbfa3f03a4006c37","width":540,"height":720,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-02-24T16:27:12.614-05:00","updated_at":"2014-02-24T16:27:12.614-05:00","credit_style":"external","credit_author_id":147,"credit_name":"Design Stoke","credit_url":"http://designstoke.com/2014/02/20/diy-eames-update/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"52deb711697ab02a3e00ecf6","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-jacobs-malm-miracle-199344\"\u003eBefore \u0026amp; After: Jacob's MALM Miracle\u003c/a\u003e","pixtruder_image":{"id":"52deb711697ab02a3e00ecf6","width":540,"height":407,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-01-21T13:06:49.515-05:00","updated_at":"2014-01-21T13:06:49.515-05:00","credit_style":"external","credit_author_id":275,"credit_name":"Jacob Gibbs","credit_url":"http://www.minimalnest.com/","credit_email":"hello@minimalnest.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"52deb716697ab02a5d00eac4","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-jacobs-malm-miracle-199344\"\u003eBefore \u0026amp; After: Jacob's MALM Miracle\u003c/a\u003e","pixtruder_image":{"id":"52deb716697ab02a5d00eac4","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-01-21T13:06:49.511-05:00","updated_at":"2014-01-21T13:06:49.511-05:00","credit_style":"external","credit_author_id":275,"credit_name":"Jacob Gibbs","credit_url":"http://www.minimalnest.com/","credit_email":"hello@minimalnest.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"52cc777fdbfa3f42c300dfbb","caption":"\u003ca href=\"http://www.apartmenttherapy.com/ikea-drawer-unit-to-diy-designer-desk-ikea-hackers-198830\"\u003eIKEA Drawer Unit to DIY Designer Desk\u003c/a\u003e","pixtruder_image":{"id":"52cc777fdbfa3f42c300dfbb","width":540,"height":500,"format":"JPEG","created_by_id":246,"updated_by_id":null,"created_at":"2014-01-07T16:54:17.538-05:00","updated_at":"2014-01-07T16:54:17.538-05:00","credit_style":"external","credit_author_id":246,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/10192824/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"52cc76b2dbfa3f42bf00e95c","caption":"\u003ca href=\"http://www.apartmenttherapy.com/ikea-drawer-unit-to-diy-designer-desk-ikea-hackers-198830\"\u003eIKEA Drawer Unit to DIY Designer Desk\u003c/a\u003e","pixtruder_image":{"id":"52cc76b2dbfa3f42bf00e95c","width":540,"height":358,"format":"JPEG","created_by_id":246,"updated_by_id":null,"created_at":"2014-01-07T16:50:50.727-05:00","updated_at":"2014-01-07T16:50:50.727-05:00","credit_style":"external","credit_author_id":246,"credit_name":"IKEA Hackers","credit_url":"http://www.ikeahackers.net/2014/01/alex-cavour-desk.html","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"53fb6744697ab07cd1000006","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-a-graphic-ikea-throw-gets-some-surprising-style-207489\"\u003eBefore \u0026amp; After: A Graphic IKEA Throw Gets Some Surprising Style\u003c/a\u003e","pixtruder_image":{"id":"53fb6744697ab07cd1000006","width":496,"height":494,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-08-25T12:41:51.869-04:00","updated_at":"2014-08-25T12:41:51.869-04:00","credit_style":"external","credit_author_id":275,"credit_name":"IKEA","credit_url":" http://www.ikea.com/us/en/catalog/products/10212129/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikeabf.jpg"}},{"pixtruder_id":"53fb675c697ab01abc00004d","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-a-graphic-ikea-throw-gets-some-surprising-style-207489\"\u003eBefore \u0026amp; After: A Graphic IKEA Throw Gets Some Surprising Style\u003c/a\u003e","pixtruder_image":{"id":"53fb675c697ab01abc00004d","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-08-25T12:42:21.392-04:00","updated_at":"2014-08-25T12:42:21.392-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Kristi Murphy","credit_url":"http://www.kristimurphy.com/blog/diy-striped-skirt","credit_email":"kristi@kristimurphy.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikeaaf.jpg"}},{"pixtruder_id":"53ee1e64dbfa3f032a0006b7","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-an-ikea-desk-to-compact-console-for-under-60-207119\"\u003eBefore \u0026amp; After: An IKEA Desk to Compact Console for Under $60\u003c/a\u003e","pixtruder_image":{"id":"53ee1e64dbfa3f032a0006b7","width":1000,"height":750,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-08-15T10:51:56.466-04:00","updated_at":"2014-08-15T10:51:56.466-04:00","credit_style":"external","credit_author_id":99,"credit_name":"Alyssa Valentine","credit_url":"http://buyinlosangeles.com/2014/08/07/ikea-hack/","credit_email":"alyssa@buyinlosangeles.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"IKEA DESK before.png"}},{"pixtruder_id":"53ee1e64dbfa3f023500065d","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-an-ikea-desk-to-compact-console-for-under-60-207119\"\u003eBefore \u0026amp; After: An IKEA Desk to Compact Console for Under $60\u003c/a\u003e","pixtruder_image":{"id":"53ee1e64dbfa3f023500065d","width":540,"height":720,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-08-15T10:51:56.615-04:00","updated_at":"2014-08-15T10:51:56.615-04:00","credit_style":"external","credit_author_id":99,"credit_name":"Alyssa Valentine","credit_url":"http://buyinlosangeles.com/2014/08/07/ikea-hack/","credit_email":"alyssa@buyinlosangeles.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"IKEA desk turned console.png"}},{"pixtruder_id":"539a1a79697ab00f19007a32","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-tray-table-to-doubledecker-cat-bed-hauspanther-204709\"\u003eBefore \u0026amp; After: IKEA Tray Table to Double-Decker Cat Bed\u003c/a\u003e","pixtruder_image":{"id":"539a1a79697ab00f19007a32","width":540,"height":512,"format":"JPEG","created_by_id":246,"updated_by_id":null,"created_at":"2014-06-12T17:24:25.657-04:00","updated_at":"2014-06-12T17:24:25.657-04:00","credit_style":"external","credit_author_id":246,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/70268298/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"ikea cat bed before.jpg"}},{"pixtruder_id":"539a1dce697ab00ffc007a8a","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-tray-table-to-doubledecker-cat-bed-hauspanther-204709\"\u003eBefore \u0026amp; After: IKEA Tray Table to Double-Decker Cat Bed\u003c/a\u003e","pixtruder_image":{"id":"539a1dce697ab00ffc007a8a","width":484,"height":727,"format":"JPEG","created_by_id":246,"updated_by_id":null,"created_at":"2014-06-12T17:38:27.756-04:00","updated_at":"2014-06-12T17:38:27.756-04:00","credit_style":"external","credit_author_id":246,"credit_name":"Pinterest user Hanna","credit_url":"http://www.pinterest.com/pin/524176844101629914/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"IKEA cat bed after.jpg"}},{"pixtruder_id":"53cffc65dbfa3f1f250011e8","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-futon-graduates-from-college-206199\"\u003eBefore \u0026amp; After: IKEA Futon Graduates From College\u003c/a\u003e","pixtruder_image":{"id":"53cffc65dbfa3f1f250011e8","width":540,"height":360,"format":"PNG","created_by_id":147,"updated_by_id":null,"created_at":"2014-07-23T14:18:20.742-04:00","updated_at":"2014-07-23T14:18:20.742-04:00","credit_style":"external","credit_author_id":147,"credit_name":"Instructables","credit_url":"http://www.instructables.com/id/IKEA-Futon-Hack/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"FutonBefore.png"}},{"pixtruder_id":"53cffc66dbfa3f1629001228","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-futon-graduates-from-college-206199\"\u003eBefore \u0026amp; After: IKEA Futon Graduates From College\u003c/a\u003e","pixtruder_image":{"id":"53cffc66dbfa3f1629001228","width":540,"height":360,"format":"PNG","created_by_id":147,"updated_by_id":null,"created_at":"2014-07-23T14:18:20.644-04:00","updated_at":"2014-07-23T14:18:20.644-04:00","credit_style":"external","credit_author_id":147,"credit_name":"Instructables","credit_url":"http://www.instructables.com/id/IKEA-Futon-Hack/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":"FutonAfter.png"}},{"pixtruder_id":"53c0621c697ab06ccd0068dd","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-a-plain-pine-ikea-tables-turns-into-a-bold-bar-cart-205762\"\u003eBefore \u0026amp; After: A Plain Pine IKEA Table Turns into a Bold Bar Cart!\u003c/a\u003e","pixtruder_image":{"id":"53c0621c697ab06ccd0068dd","width":540,"height":540,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-07-11T18:16:30.535-04:00","updated_at":"2014-07-11T18:16:30.535-04:00","credit_style":"external","credit_author_id":99,"credit_name":"IKEA","credit_url":"http://www.ikea.com/hu/hu/catalog/products/40280942/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"an ikea table turned bar cart before.png"}},{"pixtruder_id":"53c06221697ab029b900bf43","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-a-plain-pine-ikea-tables-turns-into-a-bold-bar-cart-205762\"\u003eBefore \u0026amp; After: A Plain Pine IKEA Table Turns into a Bold Bar Cart!\u003c/a\u003e","pixtruder_image":{"id":"53c06221697ab029b900bf43","width":1000,"height":1500,"format":"PNG","created_by_id":99,"updated_by_id":null,"created_at":"2014-07-11T18:16:20.263-04:00","updated_at":"2014-07-11T18:16:20.263-04:00","credit_style":"external","credit_author_id":99,"credit_name":"Kata Szentgyorgyi","credit_url":"http://akicsihaz.blogspot.hu/2014/06/ikea-nornas-hack-masodik-felvonas.html","credit_email":"szentgyorgyikati@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"an ikea table turned bar cart after.png"}},{"pixtruder_id":"5122077ed9127e3d0b002e3a","caption":"\u003ca href=\"http://www.apartmenttherapy.com/ikea-salad-bowl-to-bathroom-vanity-ikea-hackers-204384\"\u003eBefore \u0026amp; After: IKEA Rast + Salad Bowl to Sleek Bathroom Vanity\u003c/a\u003e","pixtruder_image":{"id":"5122077ed9127e3d0b002e3a","width":540,"height":540,"format":"JPEG","created_by_id":272,"updated_by_id":246,"created_at":"2013-02-18T04:50:31.000-05:00","updated_at":"2014-06-04T18:31:59.953-04:00","credit_style":"external","credit_author_id":147,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/75305709/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"538f9e05697ab030040005aa","caption":"\u003ca href=\"http://www.apartmenttherapy.com/ikea-salad-bowl-to-bathroom-vanity-ikea-hackers-204384\"\u003eBefore \u0026amp; After: IKEA Rast + Salad Bowl to Sleek Bathroom Vanity\u003c/a\u003e","pixtruder_image":{"id":"538f9e05697ab030040005aa","width":540,"height":359,"format":"JPEG","created_by_id":246,"updated_by_id":null,"created_at":"2014-06-04T18:30:40.539-04:00","updated_at":"2014-06-04T18:30:40.539-04:00","credit_style":"external","credit_author_id":246,"credit_name":"Clara Arnsberger","credit_url":"http://www.ikeahackers.net/2014/06/rast-bathroom-vanity.html","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"53-550x366.jpg"}},{"pixtruder_id":"536c11cddbfa3f0b4500229d","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-bekvm-stool-203349\"\u003eBefore \u0026amp; After: IKEA BEKVÄM Stool Solves a Special Problem\u003c/a\u003e","pixtruder_image":{"id":"536c11cddbfa3f0b4500229d","width":540,"height":602,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-05-08T19:23:02.982-04:00","updated_at":"2014-05-08T19:23:02.982-04:00","credit_style":"external","credit_author_id":147,"credit_name":"In the Hollow Heart","credit_url":"http://inthehollowheart.com/2014/02/24/ikea-hack-matildas-activity-tower/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"536d1c4cdbfa3f5377000d31","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-bekvm-stool-203349\"\u003eBefore \u0026amp; After: IKEA BEKVÄM Stool Solves a Special Problem\u003c/a\u003e","pixtruder_image":{"id":"536d1c4cdbfa3f5377000d31","width":540,"height":720,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-05-09T14:20:08.895-04:00","updated_at":"2014-05-09T14:20:08.895-04:00","credit_style":"external","credit_author_id":147,"credit_name":"In the Hollow Heart","credit_url":"http://inthehollowheart.com/2014/02/24/ikea-hack-matildas-activity-tower/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":null}},{"pixtruder_id":"5355520c697ab076090107f3","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-ikea-to-the-rescue-for-a-slopedceiling-closet-202672\"\u003eBefore \u0026amp; After: IKEA to the Rescue for a Sloped-Ceiling Closet\u003c/a\u003e","pixtruder_image":{"id":"5355520c697ab076090107f3","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-04-21T13:15:35.721-04:00","updated_at":"2014-04-21T13:15:35.721-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Brit Pierce","credit_url":"http://houseupdated.com/master-closet-reveal-beadboard-sloped-ceilings-kilims/","credit_email":"houseupdated@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"53555212697ab076d20105ac","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-ikea-to-the-rescue-for-a-slopedceiling-closet-202672\"\u003eBefore \u0026amp; After: IKEA to the Rescue for a Sloped-Ceiling Closet\u003c/a\u003e","pixtruder_image":{"id":"53555212697ab076d20105ac","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-04-21T13:15:35.724-04:00","updated_at":"2014-04-21T13:15:35.724-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Brit Pierce","credit_url":"http://houseupdated.com/master-closet-reveal-beadboard-sloped-ceilings-kilims/","credit_email":"houseupdated@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"5322423adbfa3f2e5700a11b","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-ps-collection-201283\"\u003eBefore \u0026amp; After: $30 IKEA Table Gets Milo Baughman Makeover\u003c/a\u003e","pixtruder_image":{"id":"5322423adbfa3f2e5700a11b","width":540,"height":570,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-03-13T19:43:08.371-04:00","updated_at":"2014-03-13T19:43:08.371-04:00","credit_style":"external","credit_author_id":147,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/60210806/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"5322423adbfa3f078b0031bd","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-ps-collection-201283\"\u003eBefore \u0026amp; After: $30 IKEA Table Gets Milo Baughman Makeover\u003c/a\u003e","pixtruder_image":{"id":"5322423adbfa3f078b0031bd","width":540,"height":720,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-03-13T19:43:22.161-04:00","updated_at":"2014-03-13T19:43:22.161-04:00","credit_style":"external","credit_author_id":147,"credit_name":"Yes Spaces","credit_url":"http://www.yesspaces.com/blog/diy-modern-mosaic-cube-table-52/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"5329bcaa697ab053e2002998","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-this-ikea-gets-a-inventive-upgrade-201513\"\u003eBefore \u0026amp; After: IKEA Hemnes Nightstand Gets an Inventive Upgrade\u003c/a\u003e","pixtruder_image":{"id":"5329bcaa697ab053e2002998","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-03-19T11:50:28.385-04:00","updated_at":"2014-03-19T11:50:28.385-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Joy","credit_url":"https://beautifulprotest.squarespace.com/blog/2014/2/16/two-nightstand","credit_email":"joyfulewis@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"5329bcae697ab04ce1003282","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-amp-after-this-ikea-gets-a-inventive-upgrade-201513\"\u003eBefore \u0026amp; After: IKEA Hemnes Nightstand Gets an Inventive Upgrade\u003c/a\u003e","pixtruder_image":{"id":"5329bcae697ab04ce1003282","width":540,"height":720,"format":"JPEG","created_by_id":275,"updated_by_id":null,"created_at":"2014-03-19T11:50:41.153-04:00","updated_at":"2014-03-19T11:50:41.153-04:00","credit_style":"external","credit_author_id":275,"credit_name":"Joy","credit_url":"https://beautifulprotest.squarespace.com/blog/2014/2/16/two-nightstand","credit_email":"joyfulewis@gmail.com","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"533dd146dbfa3f7754012509","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-and-after-ikea-nesting-table-to-chic-glam-ottoman-ikea-hackers-202045\"\u003eBefore \u0026amp; After: IKEA Nesting Table To Chic, Glam Ottoman\u003c/a\u003e","pixtruder_image":{"id":"533dd146dbfa3f7754012509","width":540,"height":360,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-04-03T17:23:34.153-04:00","updated_at":"2014-04-03T17:23:34.153-04:00","credit_style":"external","credit_author_id":147,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/80215332/\"","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"533dd198dbfa3f779a0126f6","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-and-after-ikea-nesting-table-to-chic-glam-ottoman-ikea-hackers-202045\"\u003eBefore \u0026amp; After: IKEA Nesting Table To Chic, Glam Ottoman\u003c/a\u003e","pixtruder_image":{"id":"533dd198dbfa3f779a0126f6","width":540,"height":360,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-04-03T17:24:48.173-04:00","updated_at":"2014-04-03T17:24:48.173-04:00","credit_style":"external","credit_author_id":147,"credit_name":"Krys Melo","credit_url":"http://blog.krysmelo.com/2014/03/17/ikea-vittsjo-table-turned-cocktail-ottoman/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":null,"focus_y":null,"filename":null}},{"pixtruder_id":"538ce9a3dbfa3f338f004da5","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-doll-bed-does-double-triple-duty-reddit-204333\"\u003eBefore \u0026amp; After: IKEA Doll Bed Does Double (\u0026amp; Triple!) Duty\u003c/a\u003e","pixtruder_image":{"id":"538ce9a3dbfa3f338f004da5","width":540,"height":360,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-06-02T17:16:34.502-04:00","updated_at":"2014-06-02T17:16:34.502-04:00","credit_style":"external","credit_author_id":147,"credit_name":"IKEA","credit_url":"http://www.ikea.com/us/en/catalog/products/10101664/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"IKEABefore.jpg"}},{"pixtruder_id":"538ce8c2dbfa3f338f004d7b","caption":"\u003ca href=\"http://www.apartmenttherapy.com/before-after-ikea-doll-bed-does-double-triple-duty-reddit-204333\"\u003eBefore \u0026amp; After: IKEA Doll Bed Does Double (\u0026amp; Triple!) Duty\u003c/a\u003e","pixtruder_image":{"id":"538ce8c2dbfa3f338f004d7b","width":540,"height":960,"format":"JPEG","created_by_id":147,"updated_by_id":null,"created_at":"2014-06-02T17:12:42.825-04:00","updated_at":"2014-06-02T17:12:42.825-04:00","credit_style":"external","credit_author_id":147,"credit_name":"Reddit","credit_url":"http://www.reddit.com/r/aww/comments/26z62d/i_also_bought_ikea_beds_for_my_cats/","credit_email":"","credit_custom":"","credit_license":"","credit_linked_post_id":null,"focus_x":50.0,"focus_y":50.0,"filename":"IKEAAfter2.jpg"}}]};
+</script>
+
+<p>
+<small>(Image credits: <a href="http://www.ikea.com/us/en/catalog/products/00278578/">IKEA</a>; Soffia Gardarsdottir; <a href="http://www.thegatheredhome.com/2014/11/diy-ikea-hack-cream-and-black-club.html">Brynne Delerson</a>; <a href="http://www.northstory.ca/upcycled-planter/">Northstory</a>; <a href="http://www.ikea.com/us/en/catalog/products/20102451/">IKEA</a>; <a href="http://papotologie.com/2014/09/my-ikea-hack-loftbed-playhouse/">Papotologie</a>; IKEA; Kristi Murphy; <a href="http://designstoke.com/2014/02/20/diy-eames-update/">Design Stoke</a>; <a href="http://www.minimalnest.com/">Jacob Gibbs</a>; <a href="http://www.ikea.com/us/en/catalog/products/10192824/">IKEA</a>; <a href="http://www.ikeahackers.net/2014/01/alex-cavour-desk.html">IKEA Hackers</a>; <a href=" http://www.ikea.com/us/en/catalog/products/10212129/">IKEA</a>; <a href="http://www.kristimurphy.com/blog/diy-striped-skirt">Kristi Murphy</a>; <a href="http://buyinlosangeles.com/2014/08/07/ikea-hack/">Alyssa Valentine</a>; <a href="http://www.ikea.com/us/en/catalog/products/70268298/">IKEA</a>; <a href="http://www.pinterest.com/pin/524176844101629914/">Pinterest user Hanna</a>; <a href="http://www.instructables.com/id/IKEA-Futon-Hack/">Instructables</a>; <a href="http://www.ikea.com/hu/hu/catalog/products/40280942/">IKEA</a>; <a href="http://akicsihaz.blogspot.hu/2014/06/ikea-nornas-hack-masodik-felvonas.html">Kata Szentgyorgyi</a>; <a href="http://www.ikea.com/us/en/catalog/products/75305709/">IKEA</a>; <a href="http://www.ikeahackers.net/2014/06/rast-bathroom-vanity.html">Clara Arnsberger</a>; <a href="http://inthehollowheart.com/2014/02/24/ikea-hack-matildas-activity-tower/">In the Hollow Heart</a>; <a href="http://houseupdated.com/master-closet-reveal-beadboard-sloped-ceilings-kilims/">Brit Pierce</a>; <a href="http://www.ikea.com/us/en/catalog/products/60210806/">IKEA</a>; <a href="http://www.yesspaces.com/blog/diy-modern-mosaic-cube-table-52/">Yes Spaces</a>; <a href="https://beautifulprotest.squarespace.com/blog/2014/2/16/two-nightstand">Joy</a>; <a href="http://www.ikea.com/us/en/catalog/products/80215332/&quot;">IKEA</a>; <a href="http://blog.krysmelo.com/2014/03/17/ikea-vittsjo-table-turned-cocktail-ottoman/">Krys Melo</a>; <a href="http://www.ikea.com/us/en/catalog/products/10101664/">IKEA</a>; <a href="http://www.reddit.com/r/aww/comments/26z62d/i_also_bought_ikea_beds_for_my_cats/">Reddit</a>)</small>
+</p>
+</div>
+<footer>
+<div class='CakePusher' data-post-template='templates/objects/advertising/sponsored_post_pusher'>
+<div class='dfp-ad' data-media='' data-slot='sponsored_pusher' id='dfp-ad-sponsored_pusher' style='display: none;'>
+</div>
+
+</div>
+<div class='content-section'>
+<h2 class='section-header'>You Might Also Like</h2>
+<div class='OUTBRAIN' data-ob-template='ApartmentTherapy' data-src='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' data-widget-id='AR_6'></div>
+<h2 class='section-header'>Promoted Stories</h2>
+<div class='OUTBRAIN' data-ob-template='ApartmentTherapy' data-src='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' data-widget-id='AR_7'></div>
+<script async='async' src='http://widgets.outbrain.com/outbrain.js' type='text/javascript'></script>
+
+<h2 class='section-header'>Categories</h2>
+<div class='post-categories branded-links'>
+<a href="/main">Main</a>,
+<a href="/diy">DIY</a>,
+<a href="/categories/2014">2014</a>,
+<a href="/categories/before_after">Before &amp; After</a>,
+<a href="/categories/budget_living">Budget Living</a>,
+<a href="/categories/hot_posts">Hot Posts</a>
+</div>
+</div>
+<div class='post-byline'>
+<ul class='unstyled post-byline-sections'>
+<li>
+<time datetime='2014-12-24 09:00:00 -0500'>
+<a class="muted-link" href="http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389" rel="bookmark">12.24.14&nbsp;&nbsp;  9:00AM</a>
+</time>
+</li>
+<li>
+<a class="muted-link" href="/authors/nancy" rel="author">Nancy Mitchell</a>
+</li>
+</ul>
+</div>
+<div class='social-buttons'>
+<div class='social-button pinterest' data-social-action='article pin' data-social-network='pinterest' data-social-target='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' data-track-social>
+<a data-pin-config="beside" data-pin-do="buttonPin" href="http://pinterest.com/pin/create/button/?url=http%3A%2F%2Fwww.apartmenttherapy.com%2Fbefore-after-a-year-of-ikea-hacks-best-of-2014-214389&description=Before%20%26%20After%3A%20A%20Year%20of%20IKEA%20Hacks&media=http://p-fst2.pixstatic.com/545111b4dbfa3f507b00f513/_w.1500_s.fit_/shelf.png"><img alt="Pin it button" src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a>
+</div>
+
+<div class='social-button facebook'>
+<div class='fb-like' data-href='http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389' data-layout='button_count'></div>
+</div>
+
+<div class='social-button twitter'>
+<a class="twitter-share-button tweet-home" data-align="left" data-text="Before &amp; After: A Year of IKEA Hacks" data-url="http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389" data-via="AptTherapy" href="http://twitter.com/share" target="_blank"></a>
+</div>
+
+</div>
+
+</footer>
+</article>
+<div class='js-tout-container'></div>
+<div class='dfp-ad' data-media='' data-slot='tout' id='dfp-ad-tout' style='display: none;'>
+</div>
+
+
+<div class='grid-row'>
+<div class='col-no-padding col-1-1'>
+<div class='dfp-ad' data-media='small_down' data-slot='top' id='dfp-ad-top' style='display: none;'>
+</div>
+
+</div>
+</div>
+<div class='js-post-comments-controller-container' data-post-id='214389' data-post-title='Before &amp; After: &lt;em&gt;A Year of IKEA Hacks&lt;/em&gt; &lt;small&gt;Best of 2014&lt;/small&gt;' id='comments'></div>
+<div class='grid-row'>
+<div class='col-no-padding col-1-1'>
+<div class='dfp-ad' data-media='' data-slot='midpage' id='dfp-ad-midpage' style='display: none;'>
+</div>
+
+<script>
+  $(function() {
+    $(document).trigger('load-js-comments');
+  });
+</script>
+</div>
+</div>
+<script>
+  AT = window.AT || {};
+  AT.CurrentPost = {
+    id: 214389,
+    title: "Before & After: A Year of IKEA Hacks",
+    subtitle: "Best of 2014",
+    url: "http://www.apartmenttherapy.com/before-after-a-year-of-ikea-hacks-best-of-2014-214389",
+    is_sponsored: false,
+    channel_basename: "diy",
+    comments_allowed: true,
+    comments_enabled: true
+  };
+</script>
+
+<div class='sticky-content-wrapper'><div class='dfp-ad' data-media='small_down' data-slot='sidebar' id='dfp-ad-sidebar' style='display: none;'>
+</div>
+</div>
+</main>
+<nav class='categories-column hide-medium-down'>
+<div>
+<ul class='categories-nav section-border unstyled'>
+<li><a class="brand-link" href="/renovation-diary-archive-186532">Renovation Diaries</a></li>
+<li><a class="brand-link" href="/maker_talks">Maker Talks</a></li>
+<li class='category-flyout-parent'>
+<a href='http://www.apartmenttherapy.com/categories/tours'>
+Tours
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='category-flyout'>
+<ul class='unstyled'>
+<li><a href="/categories/apartment">Apartment</a></li>
+<li><a href="/categories/house">House</a></li>
+<li><a href="/categories/kids">Kids</a></li>
+<li><a href="/categories/workspace">Workspace</a></li>
+</ul>
+</div>
+</li>
+<li class='category-flyout-parent'>
+<a href='http://www.apartmenttherapy.com/categories/rooms'>
+Rooms
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='category-flyout'>
+<ul class='unstyled'>
+<li><a href="/categories/bathroom">Bathroom</a></li>
+<li><a href="/categories/bedroom">Bedroom</a></li>
+<li><a href="/categories/dining_room">Dining Room</a></li>
+<li><a href="/categories/entryway">Entryway</a></li>
+<li><a href="/categories/kitchen">Kitchen</a></li>
+<li><a href="/categories/living_room">Living Room</a></li>
+<li><a href="/categories/outdoor_space">Outdoor Space</a></li>
+<li><a href="/categories/home-office">Home Office</a></li>
+<li><a href="/categories/playroom">Playroom</a></li>
+<li><a href="/categories/nursery_kids">Nursery &amp; Kids</a></li>
+<li><a href="/categories/garage">Garage</a></li>
+<li><a href="/categories/storage-closets">Storage &amp; Closets</a></li>
+<li><a href="/categories/dorm_room">Dorm Room</a></li>
+</ul>
+</div>
+</li>
+<li class='category-flyout-parent'>
+<a href='http://www.apartmenttherapy.com/categories/projects'>
+Projects
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='category-flyout'>
+<ul class='unstyled'>
+<li><a href="/categories/how_to">How To</a></li>
+<li><a href="/categories/before_after">Before &amp; After</a></li>
+<li><a href="/categories/crafting">Crafting</a></li>
+<li><a href="/categories/decorating">Decorating</a></li>
+<li><a href="/categories/renovating_projects">Renovating Projects</a></li>
+<li><a href="/categories/painting">Painting</a></li>
+<li><a href="/categories/gardening">Gardening</a></li>
+<li><a href="/categories/customizing">Customizing</a></li>
+<li><a href="/categories/organizing">Organizing</a></li>
+<li><a href="/categories/cleaning">Cleaning</a></li>
+<li><a href="/categories/space_planning">Space Planning</a></li>
+<li><a href="/categories/tips_techniques">Tips &amp; Techniques</a></li>
+<li><a href="/categories/woodworking">Woodworking</a></li>
+<li><a href="/categories/reusing">Reusing</a></li>
+<li><a href="/categories/kids-crafts">Kids Crafts</a></li>
+<li><a href="/categories/upholstery_1">Upholstery</a></li>
+<li><a href="/categories/makeovers">Makeovers</a></li>
+</ul>
+</div>
+</li>
+<li class='category-flyout-parent'>
+<a href='http://www.apartmenttherapy.com/categories/life_at_home'>
+Life at Home
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='category-flyout'>
+<ul class='unstyled'>
+<li><a href="/categories/budget_living">Budget Living</a></li>
+<li><a href="/categories/entertaining_at_home">Entertaining at Home</a></li>
+<li><a href="/categories/luxury_living">Luxury Living</a></li>
+<li><a href="/categories/pets_at_home">Pets at Home</a></li>
+<li><a href="/categories/healthy_living">Healthy Living</a></li>
+<li><a href="/categories/small_spaces">Small Spaces</a></li>
+<li><a href="/categories/setting_up_home">Setting Up Home</a></li>
+<li><a href="/categories/parenting">Parenting</a></li>
+<li><a href="/categories/mindful_living">Mindful Living</a></li>
+<li><a href="/categories/green_living">Green Living</a></li>
+<li><a href="/categories/renters-solutions">Renters Solutions</a></li>
+<li><a href="/categories/getting-married">Getting Married</a></li>
+</ul>
+</div>
+</li>
+<li class='category-flyout-parent'>
+<a href='http://www.apartmenttherapy.com/categories/decor_styles'>
+Decor Styles
+<i class='icon-arrow-down icon-small'></i>
+</a>
+<div class='category-flyout'>
+<ul class='unstyled'>
+<li><a href="/categories/happy-modern">Happy Modern</a></li>
+<li><a href="/categories/eclectic-collector">Eclectic Collector</a></li>
+<li><a href="/categories/new-traditional">New Traditional</a></li>
+<li><a href="/categories/simple-chic">Simple Chic</a></li>
+<li><a href="/categories/warm-industrial">Warm Industrial</a></li>
+<li><a href="/categories/organic-modern">Organic Modern</a></li>
+<li><a href="/categories/classic-glam">Classic Glam</a></li>
+<li><a href="/categories/dramatic-modern">Dramatic Modern</a></li>
+</ul>
+</div>
+</li>
+<li><a href="/categories/before_after">Before &amp; After</a></li>
+<li><a href="/categories/small_spaces">Small Spaces</a></li>
+<li><a href="/categories/budget_living">Budget Living</a></li>
+<li><a href="/categories/video">Video</a></li>
+<li><a href="http://classifieds.apartmenttherapy.com">Classifieds</a></li>
+<li><a class="brand-link" href="/categories">All Categories</a></li>
+</ul>
+
+</div>
+<div class='content-section'>
+<h2 class='section-header'>Email Updates</h2>
+<form accept-charset="UTF-8" action="/mailing_list" class="mini-email-signup" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="5hOjMXWnGJqAz/C/fX+oFdIsahCBOcYCDRiDwwy3zxY=" /></div>
+<input name='lists[]' type='hidden' value='apartment_therapy'>
+<label class='label-placeholder' for='sidebar-email-signup-input'>Email address:</label>
+<input id='sidebar-email-signup-input' name='email' type='email'>
+<input class='btn btn-block brand-btn' type='submit' value='Sign up'>
+</form>
+
+</div>
+<div class='content-section'>
+<h2 class='section-header'>
+Color Search
+</h2>
+<a href='/color_search'>
+<div class='logo-color-search'>
+<img alt="Color search 2x" src="http://a-fst1.apartmenttherapy.com/assets/logos/color-search-2x-15a8d9442c236b8220b6421c29065b7b.png" />
+</div>
+</a>
+<a class='btn btn-block brand-btn' href='/color_search'>
+Try it
+</a>
+</div>
+<div class='ab-slot-one'></div>
+<div class='ab-slot-two'></div>
+</nav>
+
+</div>
+<aside class='ad-column'>
+<div class='dfp-ad' data-media='medium_up' data-slot='top' id='dfp-ad-top' style='display: none;'>
+</div>
+
+<div class='daily-find-teaser-block media'>
+<div class='media-object'>
+<a href='/meyer-lemon-tree-210426'>
+<div class='image-wrapper' style='max-width: 400.0px;'>
+<span class='image lazy-image' data-alt=''>
+<div class='pad' style='padding-bottom: 100.0%;'>
+<span data-src='http://p-fst1.pixstatic.com/52cf89c7697ab008fb00bbf8._w.400_h.400_s.centercrop_.jpg'></span>
+<noscript>
+<img alt="" src="http://p-fst2.pixstatic.com/52cf89c7697ab008fb00bbf8._w.400_h.400_s.centercrop_.jpg" />
+</noscript>
+</div>
+</span>
+</div>
+
+</a>
+</div>
+<div class='media-body'>
+<h2 class='uppercase'>
+<a href="http://www.apartmenttherapy.com/categories/daily_find">Maxwell&rsquo;s Daily Find</a>
+</h2>
+<ol>
+<li><a href="/meyer-lemon-tree-210426">Meyer Lemon Tree</a></li>
+<li><a href="/de-buyer-copper-sauce-pans-maxwells-daily-find-010115-214479">de Buyer Copper Sauce Pans</a></li>
+<li><a href="/takenaka-bento-boxes-maxwells-daily-find-123014-214475">Takenaka Bento Boxes</a></li>
+</ol>
+<a class="brand-link nav-link daily-find-archive-link" href="http://www.apartmenttherapy.com/categories/daily_find">See more <i class="icon-double-arrow-right"></i></a>
+</div>
+</div>
+
+<div class='sticky-sidebar-with-ad'>
+<div class='dfp-ad' data-media='medium_up' data-slot='sidebar' id='dfp-ad-sidebar' style='display: none;'>
+</div>
+
+</div>
+<div class='ad-column-third-party'>
+<h3 class='section-header'>Around the Web</h3>
+<div id='zergnet-widget-26344'></div>
+<script>
+  (function() {
+    var zergnet = document.createElement('script');
+    zergnet.type = 'text/javascript'; zergnet.async = true;
+    zergnet.src = 'http://www.zergnet.com/zerg.js?id=26344';
+    var znscr = document.getElementsByTagName('script')[0];
+    znscr.parentNode.insertBefore(zergnet, znscr);
+  })();
+</script>
+
+</div>
+</aside>
+
+</div>
+</div>
+</div>
+
+<div class='responsive-wrapper'>
+<div class='page-footer'>
+<div class='grid-row grid-large-gutters'>
+<div class='col-3-4 hide-mini'>
+<div class='content-section'>
+<div class='grid-row grid-large-gutters grid-collapse-medium'>
+<div class='col-1-2 first-posts-row'>
+<div class='ab-slot-one'></div>
+</div>
+<div class='col-1-2'>
+<div class='ab-slot-two'></div>
+</div>
+</div>
+</div>
+<div class='grid-row grid-large-gutters grid-collapse-medium hide-small'>
+<div class='col-1-2'>
+<div class='content-section submit-story'>
+<h2 class='section-header'>Submit a Story</h2>
+<p>Got a tip, home tour, or other story our readers should see?</p>
+<p>
+<a class='brand-link' href='/submissions'>Tell us about it!</a>
+</p>
+</div>
+</div>
+<div class='col-1-2'>
+<div class='content-section our-books'>
+<h2 class='section-header'>Read Our Books</h2>
+<div class='our-book-blurb'>
+<a class='our-book-link media' href='/books/cookbook'>
+<div class='media-object book-5'></div>
+<div class='media-body'>
+The Kitchn Cookbook
+<span class='muted'>(2014)</span>
+</div>
+</a>
+</div>
+<div class='our-book-blurb'>
+<a class='our-book-link media' href='http://www.amazon.com/dp/1616280719/?tag=apartmentth0a-20' rel='nofollow'>
+<div class='media-object book-1'></div>
+<div class='media-body'>
+Good Food to Share
+<span class='muted'>(2010)</span>
+</div>
+</a>
+</div>
+<div class='our-book-blurb'>
+<a class='our-book-link media' href='/books/big-book'>
+<div class='media-object book-2'></div>
+<div class='media-body'>
+The Big Book of Small, Cool Spaces
+<span class='muted'>(2010)</span>
+</div>
+</a>
+</div>
+<div class='our-book-blurb'>
+<a class='our-book-link media' href='http://www.amazon.com/dp/0811859827/?tag=apartmentth0a-20' rel='nofollow'>
+<div class='media-object book-3'></div>
+<div class='media-body'>
+Apartment Therapy Presents
+<span class='muted'>(2008)</span>
+</div>
+</a>
+</div>
+<div class='our-book-blurb'>
+<a class='our-book-link media' href='http://www.amazon.com/dp/0553383124/?tag=apartmentth0a-20' rel='nofollow'>
+<div class='media-object book-4'></div>
+<div class='media-body'>
+The Eight-Step Home Cure
+<span class='muted'>(2006)</span>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class='col-1-4'>
+<div class='content-section'>
+<h2 class='section-header'>Join our email list</h2>
+<form accept-charset="UTF-8" action="/mailing_list" class="mini-email-signup" method="post"><div style="display:none"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="put" /><input name="authenticity_token" type="hidden" value="5hOjMXWnGJqAz/C/fX+oFdIsahCBOcYCDRiDwwy3zxY=" /></div>
+<input name='lists[]' type='hidden' value='apartment_therapy'>
+<label class='label-placeholder' for='footer-email-signup-input'>Email address:</label>
+<input id='footer-email-signup-input' name='email' type='email'>
+<input class='btn btn-block brand-btn' type='submit' value='Sign up'>
+</form>
+
+</div>
+<div class='content-section'>
+<h3 class='uppercase'><a class="brand-link advertise-link" href="http://advertising.apartmenttherapy.com/">Advertise With Us</a></h3>
+</div>
+<div class='content-section'>
+<ul class='unstyled footer-menu'>
+<li><a class="brand-link" href="/about">About Apartment Therapy</a></li>
+<li><a class="brand-link" href="/contact">Contact Us</a></li>
+<li><a class="brand-link" href="/follow-us">Follow Us</a></li>
+<li><a class="brand-link" href="/press">Press</a></li>
+<li><a class="brand-link" href="/legal">Legal</a></li>
+<li><a class="brand-link" href="/privacy">Privacy Policy</a></li>
+<li><a class="brand-link" href="/commentpolicy">Comment Policy</a></li>
+<li><a class="brand-link" href="/team">Our Team</a></li>
+<li><a class="brand-link" href="/categories/sponsored_post">Sponsored Posts</a></li>
+</ul>
+</div>
+<ul class='unstyled social-icon-links'>
+<li>
+<a href='http://www.facebook.com/apartmenttherapy'>
+<i class='icon-facebook'>Follow us on Facebook</i>
+</a>
+</li>
+<li>
+<a href='http://pinterest.com/apttherapy/'>
+<i class='icon-pinterest'>Follow us on Pinterest</i>
+</a>
+</li>
+<li>
+<a href='http://twitter.com/AptTherapy'>
+<i class='icon-twitter'>Follow us on Twitter</i>
+</a>
+</li>
+<li>
+<a href='http://instagram.com/apartmenttherapy'>
+<i class='icon-instagram'>Follow us on Instagram</i>
+</a>
+</li>
+<li>
+<a href='http://apartmenttherapy.tumblr.com/'>
+<i class='icon-tumblr'>Follow us on Tumblr</i>
+</a>
+</li>
+<li>
+<a href='/main/atom.xml'>
+<i class='icon-feed'>Subscribe to our RSS feed</i>
+</a>
+</li>
+<li>
+<a href='/follow-us'>
+<i class='icon-plus-sign'>More ways to follow</i>
+</a>
+</li>
+</ul>
+
+</div>
+</div>
+<h3 class='footer-tagline brand-color'>saving the world, one room at a time</h3>
+<small>&copy; 2015 Apartment Therapy</small>
+</div>
+
+</div>
+<div class='off-screen-nav-cover'></div>
+<div id='off-screen-nav'>
+<a class='close-off-screen-nav muted-white-link' href='#'>
+<i class='icon-close icon-large'>Close menu</i>
+</a>
+<nav class='off-screen-links' role='navigation'>
+<ul class='unstyled'>
+<li><a class="brand-link" href="/renovation-diary-archive-186532">Renovation Diaries</a></li>
+<li><a class="brand-link" href="/maker_talks">Maker Talks</a></li>
+<li><a class="white-link" href="/categories/tours">Tours</a></li>
+<li><a class="white-link" href="/categories/rooms">Rooms</a></li>
+<li><a class="white-link" href="/categories/before_after">Before &amp; After</a></li>
+<li><a class="white-link" href="/categories/small_spaces">Small Spaces</a></li>
+<li><a class="white-link" href="/categories/budget_living">Budget Living</a></li>
+<li><a class="white-link" href="/categories/video">Video</a></li>
+</ul>
+<ul class='unstyled'>
+<li><a class="white-link" href="/style">Style</a></li>
+<li><a class="white-link" href="/diy">DIY</a></li>
+<li><a class="white-link" href="/homekeeping">Homekeeping</a></li>
+<li><a class="white-link" href="/family">Family</a></li>
+<li><a class="white-link" href="/tech">Tech</a></li>
+<li><a class="white-link" href="/renovating">Renovating</a></li>
+<li><a class="white-link" href="/shopping">Shopping</a></li>
+<li><a class="white-link" href="/entertaining">Entertaining</a></li>
+</ul>
+<ul class='unstyled'>
+<li><a class="brand-link" href="http://www.thekitchn.com">The Kitchn</a></li>
+<li><a class="white-link" href="/color_search">Color Search</a></li>
+<li><a class="white-link" href="http://classifieds.apartmenttherapy.com">Classifieds</a></li>
+<li><a class="white-link" href="/categories">All Categories</a></li>
+</ul>
+</nav>
+<div class='icons-white'>
+<ul class='unstyled social-icon-links'>
+<li>
+<a href='http://www.facebook.com/apartmenttherapy'>
+<i class='icon-facebook'>Follow us on Facebook</i>
+</a>
+</li>
+<li>
+<a href='http://pinterest.com/apttherapy/'>
+<i class='icon-pinterest'>Follow us on Pinterest</i>
+</a>
+</li>
+<li>
+<a href='http://twitter.com/AptTherapy'>
+<i class='icon-twitter'>Follow us on Twitter</i>
+</a>
+</li>
+<li>
+<a href='http://instagram.com/apartmenttherapy'>
+<i class='icon-instagram'>Follow us on Instagram</i>
+</a>
+</li>
+<li>
+<a href='http://apartmenttherapy.tumblr.com/'>
+<i class='icon-tumblr'>Follow us on Tumblr</i>
+</a>
+</li>
+<li>
+<a href='/main/atom.xml'>
+<i class='icon-feed'>Subscribe to our RSS feed</i>
+</a>
+</li>
+<li>
+<a href='/follow-us'>
+<i class='icon-plus-sign'>More ways to follow</i>
+</a>
+</li>
+</ul>
+
+</div>
+</div>
+
+
+
+  <script>
+    $(document).on('initialize-posts.LazyImage, initialize-images.LazyImage', function() {
+      $('.lazy-image:not(.initialized):visible').each(function() {
+        $(this)
+          .addClass('initialized')
+          .waypoint({
+            offset: '120%',
+            triggerOnce: true,
+            handler: function() {
+              var $lazy_image = $(this);
+              $lazy_image.attr('data-picture', true);
+              window.picturefill();
+
+              var $img = $lazy_image.find('img');
+              if ($img[0].complete) {
+                $lazy_image.addClass('loaded');
+              } else {
+                $img.one('load', function() { $lazy_image.addClass('loaded'); });
+              }
+            }
+          });
+      });
+    });
+    $(document).trigger('initialize-images.LazyImage');
+    $(window).on('resize.LazyImage', function() { $(document).trigger('initialize-images.LazyImage'); });
+  </script>
+
+  <div id="fb-root"></div>
+
+  <script>
+  AT = window.AT || {};
+  AT.CurrentSite = {"id":1,"name":"Apartment Therapy","domain":"apartmenttherapy.com","slug":"at","tagline":"Saving the world, one room at a time","url":"http://www.apartmenttherapy.com","twitter_username":"AptTherapy","facebook_url":"http://www.facebook.com/apartmenttherapy","cse_id":"004176398225520866731:-lh2pkw5lda","analytics_id":"UA-821548-1","comscore_id":"14868646","skimlinks_code":"34276X922231","sitemeter_code":"s12apartmenttherapyny","myemma_id":"1372627","blog_id":1,"created_at":"2012-09-14T17:39:00.650-04:00","updated_at":"2014-07-28T15:50:41.349-04:00","pinterest_url":"http://pinterest.com/apttherapy/","default_profile_image_id":"50e2fd06dbd0cb6d77006d3d","primary_color":"#ee2737","instagram_username":"apartmenttherapy","google_plus_url":"https://plus.google.com/+apartmenttherapy/posts","tumblr_url":"http://apartmenttherapy.tumblr.com/"};
+  
+
+  AT.config = {
+    proxy: 'http://' + window.location.host + '/community_proxy',
+    host:  'http://community.apartmenttherapy.com',
+    pixtruder_cdn: 'http://p-fst1.pixstatic.com',
+      ATChannels: ["diy"],
+      feature_tower_unit_name: '/6782/ApartmentTherapy/SponsoredPost/FeatureTower',
+    dfp_section: 'ApartmentTherapy',
+    media_queries_mini: '(max-width: 23.99em)',
+    media_queries_medium: '(min-width: 48.5em) and (max-width: 59.99em)',
+    media_queries_medium_up: '(min-width: 48.5em)',    
+    media_queries_large: '(min-width: 60em)',
+    page_type: ["post"],
+      post_id: 214389,
+    environment: "production",
+    slots_tour_size_one: '(min-width: 770px) and (min-height: 612px)'
+  };
+
+
+  if (!window.Community) { Community = {}; }
+  Community.Config = {
+      commentable_id: 214389,
+      commentable_type: 'MovableTypePost',
+      commentable_title: "Before \u0026 After: \u003cem\u003eA Year of IKEA Hacks\u003c/em\u003e \u003csmall\u003eBest of 2014\u003c/small\u003e",
+      author_community_user_id: 333077,
+      author_community_user_ids: [988809,9,868948,86343,1118944,772692,525266,498517,906374,558978,1056003,15853,342676,520044,159626,301,18,215,32928,1068846,1053572,57142,81564,31937,163491,1043488,168043,168813,128758,171327,43559,84319,31997,333077,224321,1061613,9,90382,354570,41130,47096,86806,1220,1124647,5476,446518,444871,488670,350774,35879,491090,195586,79457,252189,408632,263359,139606,300793,1175944,472742,136230,147862,1042135,330912,241326,481095,333031,772534,781847,980390,890947,778881,10,511648,252609,1044009,12,60852,1067475,36917,500398,124251,7,1031654,454644,492851,1016633,108701,244750,130553,165081,107285,101837,21353,1060939,1133012,578609,9,1002126,1146742,772383,585301,296462,174834,571254,281736,241079,4589,1021624,1035561,167865,256321,472575,1048331,160475,27023,1040143,14,1069],
+    cookie_suffix: "",
+    cookie_domain: ".apartmenttherapy.com",
+    proxy: 'http://' + window.location.host + '/community_proxy',
+    host:  'http://community.apartmenttherapy.com',
+    page_title: $('title')[0].text || "N/A"
+  };
+
+</script>
+
+    <script src="http://a-fst1.apartmenttherapy.com/assets/application-bdd2e122f0156ee67b9afe6761d444b2.js"></script>
+
+  <script>AT.DFP.start();</script>
+
+  <script async="true" defer="true" type='text/javascript' src='http://letschipit.com/button/js.ashx'></script>
+
+  <script>
+  _atrk_opts = { atrk_acct:"eobji1agq800Ux", domain:"apartmenttherapy.com",dynamic: true};
+  (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://d31qbv1cthcecs.cloudfront.net/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+</script>
+<noscript><img src="https://d5nxst8fruw4z.cloudfront.net/atrk.gif?account=eobji1agq800Ux" style="display:none" height="1" width="1" alt="" /></noscript>
+  <script>(function(a){var d=document,c=d.createElement("script");c.async=!0,c.defer=!0,c.src=a,d.getElementsByTagName("head")[0].appendChild(c)})((iatDev=(window.location.href.indexOf("iatDev=1")>-1||document.cookie.indexOf("iatDev=1")>-1),"//"+(window.location.protocol=="http:"&&!iatDev?"":"s")+"data.captifymedia.com/231032.js?r="+Math.random()*1e16+"&m=1112&a=231032"+(iatDev?"&d=1":"")))</script>
+  <script>
+  var _sf_async_config={};
+  /** CONFIGURATION START **/
+  _sf_async_config.uid = 1646;
+  _sf_async_config.domain = 'apartmenttherapy.com';
+  _sf_async_config.sections = 'main';
+  _sf_async_config.authors = 'Nancy Mitchell';
+  /** CONFIGURATION END **/
+  (function(){
+    function loadChartbeat() {
+      window._sf_endpt=(new Date()).getTime();
+      var e = document.createElement('script');
+      e.setAttribute('language', 'javascript');
+      e.setAttribute('type', 'text/javascript');
+      e.setAttribute('src',
+         (('https:' == document.location.protocol) ? 'https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/' : 'http://static.chartbeat.com/') +
+         'js/chartbeat.js');
+      document.body.appendChild(e);
+    }
+    var oldonload = window.onload;
+    window.onload = (typeof window.onload != 'function') ?
+       loadChartbeat : function() { oldonload(); loadChartbeat(); };
+  })();
+</script>
+
+  <script>
+  var _comscore = _comscore || [];
+  _comscore.push({ c1: "2", c2: "14868646" });
+  (function() {
+    var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+    s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+    el.parentNode.insertBefore(s, el);
+  })();
+</script>
+<noscript>
+  <img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=14868646&amp;cv=2.0&amp;cj=1" alt="" />
+</noscript>
+  <script async="" defer="" src="//survey.g.doubleclick.net/async_survey?site=3gv225riftp6w"></script>
+  <div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="apartmenttherapy.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+
+  <script type="text/javascript">
+
+  var _qevents = _qevents || [];
+
+  (function() {
+    var elem = document.createElement('script');
+    elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+    elem.async = true;
+    elem.type = "text/javascript";
+    var scpt = document.getElementsByTagName('script')[0];
+    scpt.parentNode.insertBefore(elem, scpt);
+  })();
+
+  _qevents.push({
+    qacct:"p-9e_lGUY-vZpsw",
+    labels: "diy"
+  });
+</script>
+<noscript>
+  <div style="display:none;">
+    <img src="//pixel.quantserve.com/pixel/p-9e_lGUY-vZpsw.gif?labels=diy" border="0" height="1" width="1" alt="Quantcast"/>
+  </div>
+</noscript>
+  <script>
+  
+  var noskimwords='true';
+</script>
+<script async="true" defer="true" type="text/javascript" src="http://s.skimresources.com/js/34276X922231.skimlinks.js"></script>
+
+  <script type="text/javascript">
+  (function() {
+    function async_load(script_url){
+      var protocol = ('https:' == document.location.protocol ? 'https://' : 'http://');
+      var s = document.createElement('script'); s.src = protocol + script_url;
+      var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
+    }
+    bm_website_code = 'C5B1B0053C914570';
+    jQuery(document).ready(function(){async_load('asset.pagefair.com/measure.min.js')});
+    jQuery(document).ready(function(){async_load('asset.pagefair.net/ads.min.js')});
+  })();
+</script>
+  <script type="text/javascript">
+    adroll_adv_id = "LV5EF7VIDNHV5NCHV6QX66";
+    adroll_pix_id = "ZQA5LU445VGZDFIZUFLHHU";
+ (function () {
+  var _onload = function(){
+   if (document.readyState && !/loaded|complete/.test(document.readyState)){setTimeout(_onload, 10);return}
+   if (!window.__adroll_loaded){__adroll_loaded=true;setTimeout(_onload, 50);return}
+   var scr = document.createElement("script");
+   var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+   scr.setAttribute('async', 'true');
+   scr.type = "text/javascript";
+   scr.src = host + "/j/roundtrip.js";
+   ((document.getElementsByTagName('head') || [null])[0] ||
+    document.getElementsByTagName('script')[0].parentNode).appendChild(scr);};
+  if (window.addEventListener) {window.addEventListener('load', _onload, false);}
+  else {window.attachEvent('onload', _onload)}}());
+</script>
+      <script>$.getScript("http://apartmenttherapy.marcobot.com/polo.js");</script>
+
+</body>
+</html>
+
+

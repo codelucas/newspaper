@@ -1,0 +1,1015 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
+  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:fb="http://www.facebook.com/2008/fbml"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+<head profile="http://www.w3.org/1999/xhtml/vocab">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"Ug8FWFVQGwABU1ZXAgQ="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),u=c.length,f=i(a,o,r),d=0;u>d;d++)c[d].apply(f,n);return f}function a(t,e){u[t]=s(t).concat(e)}function s(t){return u[t]||[]}function c(){return n(e)}var u={};return{on:a,emit:e,create:c,listeners:s,_events:u}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(u){try{r("ierr",[u,(new Date).getTime(),!0])}catch(f){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(4),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(u){"stack"in u&&(t(5),t(3),"addEventListener"in window&&t(1),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(2),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:4,2:7,3:5,4:18,5:6,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:18,2:19,ee:"QJf3ax",gos:"7eSDFh"}],5:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:19,2:18,ee:"QJf3ax"}],6:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:19,2:18,ee:"QJf3ax"}],7:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),u=s(a),f=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new f(t);try{i.emit("new-xhr",[],e),u.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=f.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:4,2:19,ee:"QJf3ax"}],8:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,u="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,f=e(u);if(f&&(r.rxSize=f),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,u=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var u=e(o);u&&(r.txSize=u)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var f=0;c>f;f++)n.addEventListener(s[f],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+u(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:9,3:7,4:4,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],9:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,u="addEventListener",f="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[u]?(c[u]("DOMContentLoaded",o,!1),s[u]("load",n,!1)):(c[f]("onreadystatechange",r),s[f]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],18:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],19:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,u;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){f([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return u=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,u],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,u(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,u="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,u?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){f([o,e,n,r])}}function u(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){f([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function f(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:18,ee:"QJf3ax"}]},{},["G9z0Bl",3,8]);</script>
+<meta property="article:tag" content="Movie News" />
+<meta property="article:tag" content="Oprah Winfrey" />
+<meta property="article:tag" content="Ava DuVernay" />
+<meta property="article:tag" content="Movies" />
+<meta property="article:tag" content="Entertainment" />
+<meta name='parsely-page' content='{"link":"https:\/\/www.bostonherald.com\/entertainment\/movies\/movie_news\/2014\/12\/selma_ava_duvernay_and_oprah_winfrey_turn_60s_civil_unrest","type":"post","post_id":"1064698316","title":"\u0027Selma\u0027:  Ava DuVernay and Oprah Winfrey turn \u002760s civil unrest into a stirring, relevant film","pub_date":"2014-12-29T10:38:00Z","tags":["Tribune Content Agency","Selma","Ava DuVernay","Oprah Winfrey","section-Entertainment"],"authors":["April P. Bernard"],"section":"Movie News"}' /><meta property="article:modified_time" content="2014-12-29T05:39:34-05:00" />
+<meta property="article:published_time" content="2014-12-29T05:38:00-05:00" />
+<meta property="article:section" content="Tribune Content Agency" />
+<meta property="article:tag" content="Selma" />
+<meta property="description" content="
+
+    
+          
+      
+" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta property="twitter:title" content="&#039;Selma&#039;:  Ava DuVernay and Oprah Winfrey turn &#039;60s civil unrest into a stirring, relevant film" />
+<meta property="twitter:card" content="summary" />
+<link rel="shortlink" href="/node/1064698316" />
+<link rel="canonical" href="//www.bostonherald.com/entertainment/movies/movie_news/2014/12/selma_ava_duvernay_and_oprah_winfrey_turn_60s_civil_unrest" />
+<meta http-equiv="refresh" content="300" />
+<meta property="news_keywords" content="Tribune Content Agency, Selma, Ava DuVernay, Oprah Winfrey, Movie News, Movies, Entertainment" />
+<meta property="keywords" content="Tribune Content Agency, Selma, Ava DuVernay, Oprah Winfrey, Movie News, Movies, Entertainment" />
+<link rel="shortcut icon" href="//www.bostonherald.com/sites/default/files/images/favicon.ico" type="image/vnd.microsoft.icon" />
+<meta property="article:tag" content="Tribune Content Agency" />
+  <title>&#039;Selma&#039;:  Ava DuVernay and Oprah Winfrey turn &#039;60s civil unrest into a stirring, relevant film | Boston Herald</title>
+  <style type="text/css" media="all">@import url("//www.bostonherald.com/modules/system/system.base.css?nhbap5");
+@import url("//www.bostonherald.com/modules/system/system.menus.css?nhbap5");
+@import url("//www.bostonherald.com/modules/system/system.messages.css?nhbap5");
+@import url("//www.bostonherald.com/modules/system/system.theme.css?nhbap5");</style>
+<style type="text/css" media="all">@import url("//www.bostonherald.com/modules/aggregator/aggregator.css?nhbap5");
+@import url("//www.bostonherald.com/modules/comment/comment.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/date/date_api/date.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/date/date_popup/themes/datepicker.1.7.css?nhbap5");
+@import url("//www.bostonherald.com/modules/field/theme/field.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/mollom/mollom.css?nhbap5");
+@import url("//www.bostonherald.com/modules/node/node.css?nhbap5");
+@import url("//www.bostonherald.com/modules/poll/poll.css?nhbap5");
+@import url("//www.bostonherald.com/modules/user/user.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/views/css/views.css?nhbap5");</style>
+<style type="text/css" media="all">@import url("//www.bostonherald.com/sites/all/modules/ctools/css/ctools.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/lightbox2/css/lightbox.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/panels/css/panels.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/rate/rate.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/libraries/superfish/css/superfish.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/libraries/superfish/css/superfish-vertical.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/libraries/superfish/css/superfish-navbar.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/views_slideshow/views_slideshow.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/modules/views_slideshow/contrib/views_slideshow_cycle/views_slideshow_cycle.css?nhbap5");</style>
+<style type="text/css" media="all">@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/basics.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/custom_blocks.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/navigation.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/view-story_slots.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/taxonomy/taxonomy-styles.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/bhr.css?nhbap5");</style>
+<style type="text/css" media="print">@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/print.css?nhbap5");</style>
+<style type="text/css" media="all">@import url("//www.bostonherald.com/sites/all/themes/omega/alpha/css/alpha-reset.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/omega/alpha/css/alpha-alpha.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/omega/omega/css/formalize.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/omega/omega/css/omega-branding.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/omega/omega/css/omega-forms.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/layout-node.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/layout-node-article.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/global.css?nhbap5");</style>
+<style type="text/css" media="all">@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/ike-omega-alpha-default.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/ike_omega/css/ike-omega-alpha-default-normal.css?nhbap5");
+@import url("//www.bostonherald.com/sites/all/themes/omega/alpha/css/grid/alpha_default/normal/alpha-default-normal-24.css?nhbap5");</style>
+  <script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_xAPl0qIk9eowy_iS9tNkCWXLUVoat94SQT48UBCFkyQ.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var bh_dfp_ad_slot = bh_dfp_ad_slot || "/3771966/BostonHerald/entertainment/movies/movie_news";
+//--><!]]>
+</script>
+<script type="text/javascript" src="//www.googletagservices.com/tag/js/gpt.js"></script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_LPQUedRJ45VZkLLqi74HPxlsWNh1DPKP89Q87dZNdbM.js"></script>
+<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_wADqrksbLjpADrEP1u4pHYthtl35__ZprOG3i8_l2SE.js"></script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/all/modules/lightbox2/js/lightbox.js?1420285615"></script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_e2sncAbbdYKCCjam9NwaQbzOSulMaif70Xg9R0YszdU.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [160,600], "div-gpt-ad-965408323").addService(googletag.pubads());
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-782136025").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-760257953").addService(googletag.pubads());
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-702692301").addService(googletag.pubads());
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [728,90], "div-gpt-ad-1852743940").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [[988,250],[988,90],[970,250],[970,90]], "div-gpt-ad-1606897595").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.defineSlot(bh_dfp_ad_slot, [728,90], "div-gpt-ad-1040227273").addService(googletag.pubads());
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var bh_IsBlog = false; var bh_TID = 136; var bh_Type = "article"; var bh_Source = "Tribune";
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+googletag.pubads().setTargeting("entity","node");
+//--><!]]>
+</script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+//defines
+googletag.defineOutOfPageSlot(bh_dfp_ad_slot, "div-gpt-ad-oop").addService(googletag.pubads());
+         googletag.defineSlot(bh_dfp_ad_slot, [1,1], "div-gpt-ad-1by1").addService(googletag.pubads());
+         googletag.defineSlot(bh_dfp_ad_slot, [1900,2000], "reskin_overlay").addService(googletag.pubads());
+
+         googletag.pubads().enableSyncRendering();
+         googletag.pubads().enableSingleRequest();
+         googletag.enableServices();
+//--><!]]>
+</script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_dFSwRD_YjUaZFy5PeT-GVRxSvG9i3JUg1PWEAXn9noQ.js"></script>
+<script type="text/javascript" src="//www.bostonherald.com/sites/default/files/js/js_uwrfBOJCFVq42muTMjrq2bD-RUh8NNq_fZRTb6dsNb4.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, {"basePath":"\/","pathPrefix":"","ajaxPageState":{"theme":"ike_omega","theme_token":"0pYyb0ozDfjoZv6E84xY3MDFrZjvkkXYP87YphWUEDA","js":{"misc\/jquery.js":1,"misc\/jquery.once.js":1,"misc\/drupal.js":1,"0":1,"http:\/\/www.googletagservices.com\/tag\/js\/gpt.js":1,"sites\/all\/modules\/mollom\/mollom.js":1,"https:\/\/apis.google.com\/js\/plusone.js":1,"sites\/all\/modules\/lightbox2\/js\/auto_image_handling.js":1,"sites\/all\/modules\/lightbox2\/js\/lightbox.js":1,"sites\/all\/modules\/panels\/js\/panels.js":1,"sites\/all\/libraries\/superfish\/jquery.hoverIntent.minified.js":1,"sites\/all\/libraries\/superfish\/jquery.bgiframe.min.js":1,"sites\/all\/libraries\/superfish\/superfish.js":1,"sites\/all\/libraries\/superfish\/supersubs.js":1,"sites\/all\/libraries\/superfish\/supposition.js":1,"sites\/all\/libraries\/superfish\/sftouchscreen.js":1,"sites\/all\/modules\/views_slideshow\/js\/views_slideshow.js":1,"sites\/all\/libraries\/jquery.cycle\/jquery.cycle.all.min.js":1,"sites\/all\/libraries\/json2\/json2.js":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/js\/views_slideshow_cycle.js":1,"1":1,"2":1,"3":1,"4":1,"5":1,"6":1,"7":1,"8":1,"9":1,"10":1,"sites\/all\/themes\/ike_omega\/js\/jquery.equalheights.js":1,"sites\/all\/themes\/ike_omega\/js\/custom.js":1,"sites\/all\/themes\/omega\/omega\/js\/jquery.formalize.js":1,"sites\/all\/themes\/omega\/omega\/js\/omega-mediaqueries.js":1,"sites\/all\/themes\/omega\/omega\/js\/omega-equalheights.js":1},"css":{"modules\/system\/system.base.css":1,"modules\/system\/system.menus.css":1,"modules\/system\/system.messages.css":1,"modules\/system\/system.theme.css":1,"modules\/aggregator\/aggregator.css":1,"modules\/comment\/comment.css":1,"sites\/all\/modules\/date\/date_api\/date.css":1,"sites\/all\/modules\/date\/date_popup\/themes\/datepicker.1.7.css":1,"modules\/field\/theme\/field.css":1,"sites\/all\/modules\/mollom\/mollom.css":1,"modules\/node\/node.css":1,"modules\/poll\/poll.css":1,"modules\/user\/user.css":1,"sites\/all\/modules\/views\/css\/views.css":1,"sites\/all\/modules\/ctools\/css\/ctools.css":1,"sites\/all\/modules\/lightbox2\/css\/lightbox.css":1,"sites\/all\/modules\/panels\/css\/panels.css":1,"sites\/all\/modules\/rate\/rate.css":1,"sites\/all\/libraries\/superfish\/css\/superfish.css":1,"sites\/all\/libraries\/superfish\/css\/superfish-vertical.css":1,"sites\/all\/libraries\/superfish\/css\/superfish-navbar.css":1,"sites\/all\/modules\/views_slideshow\/views_slideshow.css":1,"sites\/all\/modules\/views_slideshow\/contrib\/views_slideshow_cycle\/views_slideshow_cycle.css":1,"sites\/all\/themes\/ike_omega\/css\/basics.css":1,"sites\/all\/themes\/ike_omega\/css\/custom_blocks.css":1,"sites\/all\/themes\/ike_omega\/css\/navigation.css":1,"sites\/all\/themes\/ike_omega\/css\/view-story_slots.css":1,"sites\/all\/themes\/ike_omega\/css\/taxonomy\/taxonomy-styles.css":1,"sites\/all\/themes\/ike_omega\/css\/bhr.css":1,"sites\/all\/themes\/ike_omega\/css\/print.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-reset.css":1,"sites\/all\/themes\/omega\/alpha\/css\/alpha-alpha.css":1,"sites\/all\/themes\/omega\/omega\/css\/formalize.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-branding.css":1,"sites\/all\/themes\/omega\/omega\/css\/omega-forms.css":1,"sites\/all\/themes\/ike_omega\/css\/layout-node.css":1,"sites\/all\/themes\/ike_omega\/css\/layout-node-article.css":1,"sites\/all\/themes\/ike_omega\/css\/global.css":1,"normal::sites\/all\/themes\/ike_omega\/css\/ike-omega-alpha-default.css":1,"normal::sites\/all\/themes\/ike_omega\/css\/ike-omega-alpha-default-normal.css":1,"sites\/all\/themes\/omega\/alpha\/css\/grid\/alpha_default\/normal\/alpha-default-normal-24.css":1}},"jcarousel":{"ajaxPath":"\/jcarousel\/ajax\/views"},"lightbox2":{"rtl":0,"file_path":"\/(\\w\\w\/)public:\/","default_image":"\/sites\/all\/modules\/lightbox2\/images\/brokenimage.jpg","border_size":10,"font_color":"000","box_color":"fff","top_position":"","overlay_opacity":"0.8","overlay_color":"000","disable_close_click":1,"resize_sequence":0,"resize_speed":400,"fade_in_speed":400,"slide_down_speed":600,"use_alt_layout":0,"disable_resize":0,"disable_zoom":1,"force_show_nav":0,"show_caption":1,"loop_items":0,"node_link_text":"View Image Details","node_link_target":0,"image_count":"Image !current of !total","video_count":"Video !current of !total","page_count":"Page !current of !total","lite_press_x_close":"press \u003Ca href=\u0022#\u0022 onclick=\u0022hideLightbox(); return FALSE;\u0022\u003E\u003Ckbd\u003Ex\u003C\/kbd\u003E\u003C\/a\u003E to close","download_link_text":"","enable_login":false,"enable_contact":false,"keys_close":"c x 27","keys_previous":"p 37","keys_next":"n 39","keys_zoom":"z","keys_play_pause":"32","display_image_size":"original","image_node_sizes":"()","trigger_lightbox_classes":"","trigger_lightbox_group_classes":"","trigger_slideshow_classes":"","trigger_lightframe_classes":"","trigger_lightframe_group_classes":"","custom_class_handler":"lightbox","custom_trigger_classes":"img.photo-gal","disable_for_gallery_lists":1,"disable_for_acidfree_gallery_lists":true,"enable_acidfree_videos":true,"slideshow_interval":25000,"slideshow_automatic_start":1,"slideshow_automatic_exit":0,"show_play_pause":1,"pause_on_next_click":0,"pause_on_previous_click":0,"loop_slides":0,"iframe_width":600,"iframe_height":400,"iframe_border":1,"enable_video":0},"viewsSlideshow":{"photo_box-widesinglenode":{"methods":{"goToSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"nextSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"pause":["viewsSlideshowControls","viewsSlideshowCycle"],"play":["viewsSlideshowControls","viewsSlideshowCycle"],"previousSlide":["viewsSlideshowPager","viewsSlideshowSlideCounter","viewsSlideshowCycle"],"transitionBegin":["viewsSlideshowPager","viewsSlideshowSlideCounter"],"transitionEnd":[]},"paused":0}},"viewsSlideshowPager":{"photo_box-widesinglenode":{"bottom":{"type":"viewsSlideshowPagerFields"}}},"viewsSlideshowPagerFields":{"photo_box-widesinglenode":{"bottom":{"activatePauseOnHover":0}}},"viewsSlideshowCycle":{"#views_slideshow_cycle_main_photo_box-widesinglenode":{"num_divs":1,"id_prefix":"#views_slideshow_cycle_main_","div_prefix":"#views_slideshow_cycle_div_","vss_id":"photo_box-widesinglenode","effect":"fade","transition_advanced":1,"timeout":0,"speed":700,"delay":0,"sync":1,"random":0,"pause":1,"pause_on_click":0,"action_advanced":0,"start_paused":0,"remember_slide":0,"remember_slide_days":1,"pause_in_middle":0,"pause_when_hidden":0,"pause_when_hidden_type":"full","amount_allowed_visible":"","nowrap":0,"fixed_height":1,"items_per_slide":1,"wait_for_image_load":1,"wait_for_image_load_timeout":3000,"cleartype":0,"cleartypenobg":0,"advanced_options":"{}"}},"omega":{"layouts":{"primary":"normal","order":["normal"],"queries":{"normal":"all and (min-width: 520px) and (min-device-width: 520px), all and (max-device-width: 1024px) and (min-width: 1024px) and (orientation:landscape)"}}}});
+//--><!]]>
+</script>
+  
+  <!--[if lt IE 8]>
+		<link rel="stylesheet" type="text/css" href="/sites/all/themes/ike_omega/css/ie.css" />
+	<![endif]-->
+	
+	<!-- Windows 8 tile -->
+	<meta name="application-name" content="The Boston Herald"/> 
+	<meta name="msapplication-TileColor" content="#005e9b"/> 
+	<meta name="msapplication-TileImage" content="213c8c33-9b77-486e-a54f-d4efd5a7fe09.png"/>
+	
+<link rel="apple-touch-icon" href="/touch-icon-iphone.png" />
+<link rel="apple-touch-icon" sizes="72x72" href="/touch-icon-ipad.png" />
+<link rel="apple-touch-icon" sizes="114x114" href="/touch-icon-iphone-retina.png" />
+<link rel="apple-touch-icon" sizes="144x144" href="/touch-icon-ipad-retina.png" />
+
+  <script type="text/javascript" async src="//launch.newsinc.com/js/embed.js" id="_nw2e-js"></script>
+	
+</head>
+<body class="html not-front not-logged-in page-node page-node- page-node-1064698316 node-type-article context-entertainment page-taxonomy-term-ancestor-first-3 page-taxonomy-term-ancestor-second-27 page-taxonomy-term-136 page-taxonomy-term-44">
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-5ZZ6"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5ZZ6');</script>
+<!-- End Google Tag Manager -->
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="bostonherald.com"></div>
+</div>
+<script>
+  (function(s, p, d) {
+    var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+        :"static."+p+".com";
+    if (e) return;
+    e = d.createElement(s); e.id = i; e.async = true;
+    e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  })("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+
+  <div id="skip-link">
+    <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
+  </div>
+  <div class="region region-page-top" id="region-page-top">
+  <div class="region-inner region-page-top-inner">
+    <!-- BostonHerald out-of-page -->
+      <div id='div-gpt-ad-oop'>
+      <script type='text/javascript'>
+          googletag.display('div-gpt-ad-oop');
+      </script>
+      </div>
+      <!-- BostonHerald 1x1 -->
+      <div id='div-gpt-ad-1by1'>
+      <script type='text/javascript'>
+          googletag.display('div-gpt-ad-1by1');
+      </script>
+      </div>  </div>
+</div>  <div class="page clearfix" id="page">
+      <header id="section-header" class="section section-header">
+	<div id="header-wrap" class="clearfix">
+  	<div id="zone-top-wrapper" class="zone-wrapper zone-top-wrapper clearfix">  
+  <div id="zone-top" class="zone zone-top clearfix container-24">
+    <div class="grid-5 region region-top-first" id="region-top-first">
+  <div class="region-inner region-top-first-inner">
+    <div class="block block-menu-block block-9 block-menu-block-9 odd block-without-title" id="block-menu-block-9">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="menu-block-wrapper menu-block-9 menu-name-menu-logo-link parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="first leaf menu-mlid-9609"><a href="/" title="">Home - Boston Herald - www.bostonherald.com</a></li>
+<li class="leaf menu-mlid-9610"><a href="/" title="RSS - The Boston Herald">RSS</a></li>
+<li class="leaf menu-mlid-9615"><a href="/subscribe" title="Subscribe to The Boston Herald">Subscribe</a></li>
+<li class="leaf menu-mlid-16516"><a href="/classifieds/extras" title="The Boston Herald - Extras - Shopping, Crossword, Sudoku, Lottery Results, Coupons, Horoscope, Weather">Extras</a></li>
+<li class="leaf menu-mlid-9611"><a href="/classifieds/extras/crossword" title="Crossword - The Boston Herald">Crossword</a></li>
+<li class="last leaf menu-mlid-9614"><a href="/classifieds/extras/lottery" title="Lottery - The Boston Herald">Lottery</a></li>
+</ul></div>
+    </div>
+  </div>
+</div>  </div>
+</div><div class="grid-19 region region-top-second" id="region-top-second">
+  <div class="region-inner region-top-second-inner">
+    <div class="block block-oas block-top block-oas-top odd block-without-title" id="block-oas-top">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="div-gpt-ad-1852743940" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [728,90], "div-gpt-ad-1852743940").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+                       */
+                     	      googletag.display("div-gpt-ad-1852743940");
+                     	    </script>
+                     	  </div>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div>  
+  <div id="zone-menu" class="zone zone-menu clearfix container-24">
+    <div class="grid-24 region region-menu full-width" id="region-menu">
+  <div class="region-inner region-menu-inner">
+        <div class="block block-block block-1084 block-block-1084 odd block-without-title" id="block-block-1084">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <ul id="herald-nav" class="clearfix">
+  <li id="home"><a href="/" title="The Boston Herald - Home">Home</a></li>
+  <li id="news"><a href="/news" title="News & Opinion">News & Opinion</a></li>
+  <li id="sports"><a href="/sports" title="Sports">Sports</a></li>
+  <li id="business"><a href="/business" title="Business">Business</a></li>
+
+  <li id="entertainment" class="active">
+  	<a href="/entertainment" title="Entertainment" >Entertainment</a>
+    <ul>
+      <li><a href="/entertainment/arts_culture" title="Entertainment - Arts & Culture">Arts & Culture</a></li>
+      <li><a href="/entertainment/movies" title="Entertainment - Movies">Movies</a></li>
+      <li><a href="/entertainment/television" title="Entertainment - Television">Television</a></li>
+      <li><a href="/entertainment/music" title="Entertainment - Music">Music</a></li>
+      <li><a href="/entertainment/food_dining" title="Entertainment - Food & Dining">Food & Dining</a></li>
+      <li><a href="/entertainment/health_fitness" title="Entertainment - Health & Fitness">Health & Fitness</a></li>
+      <li><a href="/entertainment/travel" title="Entertainment - Travel">Travel</a></li>
+      <li><a href="/entertainment/lifestyle" title="Entertainment - Lifestyle">Lifestyle</a></li>
+      <li><a href="/entertainment/style_fashion" title="Entertainment - Style & Fashion">Style & Fashion</a></li>
+      <li><a href="/entertainment/books" title="Entertainment - Books">Books</a></li>
+      <li><a href="/entertainment/travel/nesnow" title="The Herald Ski Report">Ski Report</a></li>
+    </ul>
+  </li>
+
+  <li id="track"><a href="/track" title="Inside Track" class="sf-depth-1 menuparent">Inside Track</a></li>
+  <li id="blogs"><a href="/blogs" title="Blogs">Blogs</a></li>
+  <li id="photo"><a href="/photos" title="Photos">Photos</a></li>
+  <li id="video"><a href="/video" title="Herald Video" >Video</a></li>
+  <li id="radio"><a href="/herald_radio" title="Boston Herald Radio" >Radio</a></li>
+  <li id="obituaries"><a href="http://www.legacy.com/obituaries/bostonherald/" title="Obituaries" target="_blank">Obituaries</a></li>
+  <li id="features"><a href="/news_opinion/databases" title="Special coverage and hot topics" target="_blank">Features</a></li>
+  <li id="classifieds"><a href="/classifieds" title="Jobs, Autos, Homes, and Business listings" >Classifieds</a></li>
+</ul>    </div>
+  </div>
+</div>  </div>
+</div>
+  </div>
+  
+  <div id="zone-header" class="zone zone-header clearfix container-24">
+    <div class="grid-6 region region-header-first" id="region-header-first">
+  <div class="region-inner region-header-first-inner">
+    <!-- ESI: esi/block/ike_omega:header_first:views:last_updated-block--><div class="block block-views block-last-updated-block block-views-last-updated-block odd block-without-title" id="block-views-last-updated-block">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="view view-last-updated view-id-last_updated view-display-id-block view-dom-id-039cc32b31a9278c00192aef2ac4c4dc">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+    
+ 
+<article>
+   
+  <span class="views-field views-field-changed">        <span class="field-content">Saturday, January 3, 2015</span>  </span></article>
+ 
+  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>    </div>
+  </div>
+</div>  </div>
+</div><div class="grid-12 region region-header-second" id="region-header-second">
+  <div class="region-inner region-header-second-inner">
+    <!-- ESI: esi/block/ike_omega:header_second:views:abe4c28d5d96be0601864cc375a839c4--><div class="block block-views block-abe4c28d5d96be0601864cc375a839c4 block-views-abe4c28d5d96be0601864cc375a839c4 odd block-without-title" id="block-views-abe4c28d5d96be0601864cc375a839c4">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="view view-weather-current-conditions view-id-weather_current_conditions view-display-id-block view-dom-id-6fd8f9991a22c88b12055b581454a939">
+        
+  
+  
+      <div class="view-content">
+        <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+    <div id="weather-teaser">
+  <a href="/extras/weather"><strong>Weather</strong><img src="http://www.bostonherald.com/sites/default/files/nt_partlycloudy_422.gif" width="30" height="30" /> 23° F</a>
+</div>  </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>    </div>
+  </div>
+</div><div class="block block-block block-11 block-block-11 odd block-without-title" id="block-block-11">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <ul id="social-head-nav">
+	<li id="social-fb"> <a href="http://www.facebook.com/pages/BostonHeraldcom/197211981599" target="_blank" title="Join the Boston Herald on Twitter">Join the Boston Herald on Twitter</a></li>
+	<li id="social-twt"><a href="http://twitter.com/bostonherald" target="_blank" title="Follow the Boston Herald on Twitter">Follow the Boston Herald on Twitter</a></li>
+	<li id="social-goog"><a href="https://plus.google.com/u/0/113097839281026181771?prsrc=3" target="_blank" title="Join the Boston Herald on Google+">Join the Boston Herald on Google+</a></li>
+	<li id="social-toob"><a href="http://www.youtube.com/user/bostonherald" target="_blank" title="View Boston Herald videos on YouTube">View Boston Herald videos on YouTube</a></li>
+</ul>    </div>
+  </div>
+</div>  </div>
+</div><div class="grid-6 region region-header-third" id="region-header-third">
+  <div class="region-inner region-header-third-inner">
+    <div class="block block-block block-1110 block-block-1110 odd block-without-title" id="block-block-1110">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <script>
+  (function() {
+    var cx = '011156039655073670009:mv2nojszjlc';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+        '//www.google.com/cse/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:searchbox-only queryParameterName="query" resultsUrl="/search"></gcse:searchbox-only>
+    </div>
+  </div>
+</div><!-- ESI: esi/block/ike_omega:header_third:views:6b7d5589cc19b27f22fd254c79bd7b30--><div class="block block-views block-6b7d5589cc19b27f22fd254c79bd7b30 block-views-6b7d5589cc19b27f22fd254c79bd7b30 odd block-without-title" id="block-views-6b7d5589cc19b27f22fd254c79bd7b30">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="view view-herald-radio-now-playing view-id-herald_radio_now_playing view-display-id-block_5 view-dom-id-18d52cdfda0bc853f5c068a09ef2bb79">
+        
+  
+  
+      <div class="view-empty">
+      <h2 class="hr-show-title"><a href="http://bostonherald.com/herald_radio" title="Boston Herald Radio Weekdays 6am to 6pm"><strong>Listen Live</strong>Weekdays 6am to 6pm</a></h2>    </div>
+  
+  
+  
+  
+  
+  
+</div>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+<div id="zone-alert-wrapper" class="zone-wrapper zone-alert-wrapper clearfix">  
+  <div id="zone-alert" class="zone zone-alert clearfix container-24">
+    <div class="grid-24 region region-alert" id="region-alert">
+  <div class="region-inner region-alert-inner">
+    <!-- ESI: esi/block/ike_omega:alert:views:breaking_news-breaking_news_bar--><div class="block block-oas block-x80 block-oas-x80 odd block-without-title" id="block-oas-x80">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="div-gpt-ad-1606897595" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [[988,250],[988,90],[970,250],[970,90]], "div-gpt-ad-1606897595").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+                       */
+                     	      googletag.display("div-gpt-ad-1606897595");
+                     	    </script>
+                     	  </div>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div>  </div>
+</header>    
+      <section id="section-content" class="section section-content">
+  <div id="zone-content-wrapper" class="zone-wrapper zone-content-wrapper clearfix">  
+  <div id="zone-content" class="zone zone-content clearfix container-24">    
+          <div id="breadcrumb" class="grid-24"><h2 class="element-invisible">You are here</h2><div class="breadcrumb"><a href="/">Home</a> » <a href="/entertainment">Entertainment</a> » <a href="/entertainment/movies">Movies</a> » <a href="/entertainment/movies/movie_news">Movie News</a></div></div>
+        
+        <div class="grid-24 region region-content" id="region-content">
+  <div class="region-inner region-content-inner">
+    <a id="main-content"></a>
+                <h1 class="title" id="page-title">&#039;Selma&#039;:  Ava DuVernay and Oprah Winfrey turn &#039;60s civil unrest into a stirring, relevant film</h1>
+                <div class="tabs clearfix"></div>        <div class="block block-system block-main block-system-main odd block-without-title" id="block-system-main">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div class="panel-display omega-24-twocol-6-18" id="bh_article">
+  <div class="panel-panel grid-17 alpha">
+    <div class="inside"><div class="panel-pane pane-node-content" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <article itemscope itemtype="http://schema.org/NewsArticle"  about="/entertainment/movies/movie_news/2014/12/selma_ava_duvernay_and_oprah_winfrey_turn_60s_civil_unrest" typeof="sioc:Item foaf:Document" class="node node-article node-published node-not-promoted node-not-sticky author-anonymous odd clearfix" id="node-article-1064698316">
+  
+  <header>
+    
+    <meta itemprop="name" content="'Selma':  Ava DuVernay and Oprah Winfrey turn '60s civil unrest into a stirring, relevant film | Boston Herald" />
+    
+    <!-- Title -->
+    <h1 itemprop="headline"  property="dc:title" datatype="" class="node-title">'Selma':  Ava DuVernay and Oprah Winfrey turn '60s civil unrest into a stirring, relevant film</h1>
+
+    <!-- Subtitle -->
+        
+  </header>
+
+  <div class="view view-photo-box view-id-photo_box view-display-id-widesinglenode view-dom-id-6c2308a40bb2e1ffbff8b963d6cfd894">
+        
+  
+  
+      <div class="view-content">
+      
+  <div class="skin-default">
+    
+    <div id="views_slideshow_cycle_main_photo_box-widesinglenode" class="views_slideshow_cycle_main views_slideshow_main"><div id="views_slideshow_cycle_teaser_section_photo_box-widesinglenode" class="views-slideshow-cycle-main-frame views_slideshow_cycle_teaser_section">
+  <div id="views_slideshow_cycle_div_photo_box-widesinglenode_0" class="views-slideshow-cycle-main-frame-row views_slideshow_cycle_slide views_slideshow_slide views-row-1 views-row-odd">
+  <div class="views-slideshow-cycle-main-frame-row-item views-row views-row-0 views-row-first views-row-odd">
+  
+ 
+<article>
+   
+  <div class="views-field views-field-field-media">        <div class="field-content"><div id="file-4461876" class="file file-image file-image-jpeg" class="file file-image file-image-jpeg">
+
+        <h2 class="element-invisible"><a href="/file/4461876">544d821ca7e14a199c3247b449ab2a7e.jpg</a></h2>
+    
+  
+  <div class="content">
+    <img typeof="foaf:Image" src="http://www.bostonherald.com/sites/default/files/styles/full/public/media/ap/544d821ca7e14a199c3247b449ab2a7e.jpg?itok=0ABjbYlU&amp;c=106f597d84c9f0827ef87ff0f7254847" width="960" height="540" alt="" title="" />
+<div class="field field-name-field-authors field-type-entityreference field-label-inline clearfix">
+      <h3 class="field-label">Photo by:&nbsp;</h3>
+    <div class="field-items">
+          <div class="field-item even">The Associated Press</div>
+      </div>
+</div>
+<div class="field field-name-field-description field-type-text-long field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even">              This image released by Paramount Pictures shows, standing from left, Tessa Thompson, Omar Dorsey, Colman Domingo, David Oyelowo as Martin Luther King, Jr., André Holland, Corey Reynolds and Lorraine Toussaint in a scene from &quot;Selma.&quot; (AP Photo/Paramount Pictures, Atsushi Nishijima)
+            </div>
+      </div>
+</div>  </div>
+
+  
+</div>
+</div>  </div></article>
+ 
+</div>
+</div>
+</div>
+</div>
+          <div class="views-slideshow-controls-bottom clearfix">
+        <div id="widget_pager_bottom_photo_box-widesinglenode" class="views-slideshow-pager-fields widget_pager widget_pager_bottom views_slideshow_pager_field">
+  <div id="views_slideshow_pager_field_item_bottom_photo_box-widesinglenode_0" class="views-slideshow-pager-field-item views_slideshow_pager_field_item views-row-odd">
+  <div class="views-field-counter">
+    <div class="views-content-counter">
+    1  </div>
+</div>
+</div>
+</div>
+      </div>
+      </div>
+    </div>
+  
+  
+  
+  
+  
+  
+</div>
+  <!-- Content -->
+  <div class="content clearfix">
+  
+	  <!-- date/email/print/comments -->
+    <div class="node-metainfo clearfix">
+      <!-- Published At Date -->
+      <time itemprop="datePublished" datetime="2014-12-29T05:38:00-05:00" class="field field-name-field-published-at field-type-datestamp field-label-hidden">Monday, December 29, 2014</time>
+      <div class="node-action">
+      
+        <!-- Print/Email -->
+        <a href="javascript:void();" onclick="window.print();">Print</a>
+        <a href="javascript:void();" onclick='sendByEmail({"title":"\u0027Selma\u0027:  Ava DuVernay and Oprah Winfrey turn \u002760s civil unrest into a stirring, relevant film","link":"\/entertainment\/movies\/movie_news\/2014\/12\/selma_ava_duvernay_and_oprah_winfrey_turn_60s_civil_unrest"});'>Email</a>
+
+                <!-- Comment Count-->
+        <span class="node_commentcount"><a href="/comments/1064698316#disqus_thread" data-disqus-identifier="node/1064698316" itemprop="discussionUrl">Comments</a></span>
+        
+
+              </div>
+
+    </div>
+    
+  	<!-- Authors -->
+    <div class="node_author-inline clearfix">
+	    <h3>By:</h3>
+	    
+<div class="field field-name-field-authors field-type-entityreference field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even"><a href="/users/april_p_bernard">April P. Bernard</a></div>
+      </div>
+</div>    </div>
+    
+    <div id="fullwide-skyscraper"><div id="div-gpt-ad-965408323" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [160,600], "div-gpt-ad-965408323").addService(googletag.pubads());
+                       */
+                     	      googletag.display("div-gpt-ad-965408323");
+                     	    </script>
+                     	  </div></div>
+    <!-- Content Insert -->
+    <div id="node_article-insert" class="clearfix">
+    	
+    	    	
+<div class="field field-name-field-insert-body field-type-text-long field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even"><div class="ndn_embed" data-config-widget-id="2" style="width:460px;height:248px" data-config-type="VideoPlayer/Single" data-config-tracking-group="90017" data-config-playlist-id="13434" data-config-video-id="28283488" data-config-site-section="bostonherald"></div></div>
+      </div>
+</div>
+
+
+      
+      <!-- Related Audio -->
+          </div>
+    
+    <!-- This is the body -->
+    
+<div class="field field-name-body field-type-text-with-summary field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even" property="content:encoded"><p><body.content></body.content></p><p><person>Annie Lee Cooper</person>, a 54-year-old motel maid, simply wanted to vote. But in 1965, as one of 100-plus black locals in line to register in <location>Selma, Alabama</location>, she confronted a segregationist sheriff - and ended up on the ground, beaten viciously with a billy club. When asked to portray the unlikely freedom fighter in the big-screen drama <location>Selma</location>, <person>Oprah Winfrey</person> hesitated: &quot;I didn&#39;t want to do it because in every movie I&#39;m hitting somebody!&quot; she tells Us. (Previous wallops: The Color Purple and The Butler.) But director <person>Ava DuVernay</person>, 42, persuaded her (more on that below), and Winfrey, 60, joined the <chron>Christmas Day</chron> release - about <person>Martin Luther King Jr.</person> (<person>David Oyelowo</person>) and his <location>Selma</location>-to&shy;Montgomery marches for civil rights - as a star and producer. Shortly after DuVernay became the first black female director nominated for a Golden Globe (and the film&#39;s Oscar buzz began building), the two sat down with Us to talk, laugh and, in Winfrey&#39;s case, get a little misty-eyed.</p><p><strong>Ava, how did Oprah do when she had to punch the sheriff?</strong></p><p>AD She was all in. She had no problem working with the stunt guys to be taken down. I kept saying to them, &quot;Please, can you just be a little more careful?&quot; And they&#39;re like, &quot;She&#39;s falling on her own!&quot;</p><p>OW I did it every time.</p><p><strong>With </strong><person><strong>Ferguson and Eric Garner</strong></person><strong> in the headlines, is </strong><location><strong>Selma</strong></location><strong> particularly meaningful now?</strong></p><p>OW It&#39;s a jaw-dropping thing that this piece of art can meet this cultural moment that&#39;s so rich, so robust, so bursting with the energy of people finding their voices. This film&#39;s about being heard. I feel like this film, not to overstate it, but it is here for a reason in this moment.</p><p><strong>Will you be screening this for your close friend </strong><person><strong>Barack Obama</strong></person><strong>?</strong></p><p>OW For sure. Our desire is to go to the <org>White House</org> and show it to him.</p><p><strong>With such intense scenes - marchers were teargassed - was it tough keeping your emotions in check?</strong></p><p>OW The very first time I saw it with the other producers, they&#39;re all taking notes. And I&#39;m, like, sobbing. And I thought, OK, I guess as a producer you&#39;re not supposed to sob (continuing in a choked voice) so let me just take some notes too. I&#39;m gonna blow my nose and stop crying.</p><p><strong>Oprah, how did Ava try to woo you for </strong><location><strong>Selma</strong></location><strong>?</strong></p><p>OW I was just gonna be in the background going, &quot;Yay!&quot; But she sent me the link to a story about <person>Annie Lee Cooper</person> when she turned 100, and it said every day she watched the Oprah show eating a tuna-fish sandwich! And Ava says, &quot;Don&#39;t you think it would make her proud to know that you played her?&quot; And I go, &quot;Yeeesss, yes, it would.&quot;</p><p><strong>It probably also helped that as a girl you &shy;wanted to be Dr. King!</strong></p><p>OW What made me think I was gonna do that? I was 12, 13. I remember being at our yellow Formica kitchen table filling out one of those &quot;What are you gonna be when you grow up?&quot; forms, and my father was saying, &quot;You can&#39;t be Dr. King because Dr. King is a man!&quot; &quot;Well, I&#39;m gonna have me a church,&quot; I said.</p><p><strong>What about you, Ava? Who was your idol?</strong></p><p>AD (Pointing at Winfrey.) My mom had magazines with you on the cover on our coffee table since as long as I can remember, to the point where I thought you were my family member. She would tape your show at work and watch it at night. My mom would just say, &quot;Look at her. Don&#39;t be like me, be like her,&quot; and get emotional.</p><p>OW Oh, God, I&#39;m emo&shy;tional about that (tearing up). You never told me that! (She playfully smacks DuVernay.) Don&#39;t tell me that in an interview for the first time!</p><p><strong>Let&#39;s talk about something lighter. Ava, you worked on Scandal!</strong></p><p>AD Imagine a geek fan getting a chance to direct her favorite show! I can make <person>Tony Goldwyn</person> be Fitz, and I can do whatever I want: &quot;Walk over there. Now walk back. Turn. Oh, that looks good.&quot; You know what I mean? (Laughs.) So that was fun-fun.</p><p><strong>So you&#39;re Team Fitz, then - not Team Jake?</strong></p><p>AD Oh, Fitz.</p><p>OW Fitz.</p><p>AD Sorry, <person>Scott Foley</person>!</p><p><strong>The Real-Life Heroes</strong></p><p>Oyelowo says he gained insight from King friend <person>Andrew Young</person>, who revealed &quot;the prankster &hellip; the man who was at times unsure.&quot; As for Ejogo, Winfrey says <person>Martin Luther King III</person> and sister Bernice found she &quot;depicted their mother beautifully.&quot;</p><p>&nbsp;</p><p>&nbsp;</p><div class="ndn_embed" data-config-playlist-id="13434" data-config-site-section="bostonherald" data-config-tracking-group="90017" data-config-type="VideoPlayer/Single" data-config-video-id="28289418" data-config-widget-id="2" style="width:640px;height:360px">&nbsp;</div><p>&nbsp;</p></div>
+      </div>
+</div>		
+		<div id="related-article-media">
+			<a name="relatedmedia"></a>
+	    <!-- documents & audio -->
+	    		</div>
+    
+    <!-- Tags -->
+    	    <div id="node_article-tags" class="clearfix">
+	    	<h3>More On:</h3>
+	    	
+<div class="field field-name-field-tag-entity field-type-entityreference field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even"><a href="/topic/tribune_content_agency">Tribune Content Agency</a></div>
+          <div class="field-item odd"><a href="/topic/selma">Selma</a></div>
+          <div class="field-item even"><a href="/topic/ava_duvernay">Ava DuVernay</a></div>
+          <div class="field-item odd"><a href="/2012/12/oprah_winfrey">Oprah Winfrey</a></div>
+      </div>
+</div>	    </div>
+	      
+    
+    
+    <!-- Authors -->
+    <div id="node_author-blocks" class="clearfix">
+    	<h3>Author(s):</h3>
+      
+<div class="field field-name-field-authors field-type-entityreference field-label-hidden">
+    <div class="field-items">
+          <div class="field-item even"><div class="author_blocks"><div class="author_block clearfix" itemprop="author" itemscope itemtype="http://schema.org/Person"><h3 class="author_name"><a href="/users/april_p_bernard" itemprop="url"><span itemprop="name">April P. Bernard</span></a></h3><div class="placeholder-last">&nbsp;</div></div></div></div>
+      </div>
+</div>    </div>
+    <br />
+    
+    
+    <!-- OutBrain -->
+    <div class="OUTBRAIN" data-src="https://www.bostonherald.com/node/1064698316" data-widget-id="AR_1" data-ob-template="bostonherald" ></div>
+		<br />
+		
+		<div class="OUTBRAIN" data-src="https://www.bostonherald.com/node/1064698316" data-widget-id="AR_2" data-ob-template="bostonherald" ></div>
+		<script type="text/javascript" async="async" src="//widgets.outbrain.com/outbrain.js"></script>
+    <br />
+        
+    <!-- Social Links -->
+    <iframe src="/socialbuttons.html?url=https://www.bostonherald.com/entertainment/movies/movie_news/2014/12/selma_ava_duvernay_and_oprah_winfrey_turn_60s_civil_unrest&shorturl=https://www.bostonherald.com/node/1064698316" width="640" height="85" scrolling="no" id="sociallinks"></iframe>
+    
+     <!-- Share Url / Print -->
+    
+		 <div id="printpage">
+	    <a href="javascript:void();" onclick="window.print();" class="printbutton">Print This Page</a>
+	    <a href="javascript:emailCurrentPage()" target="_new" class="emailbutton">Email This Page</a>
+    </div>
+
+    
+    <div class="clearfix">
+	    	      <nav class="links node-links clearfix"></nav>
+	    	  </div>
+
+  </div>
+
+  
+</article>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-311" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <!-- outbrain -->  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-bh-custom-blocks-join-convo" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    
+  <div class="view view-comment-button view-id-comment_button">
+    <div class="view-content">
+      <div class="views-row views-row-1 views-row-odd views-row-first views-row-last">
+        <article>
+          <h2>
+            <a href="/comments/1064698316">Join The Conversation</a>
+          </h2>
+          <h3>
+              <a href="/comments/1064698316" title="Join The Conversation">View Comments</a> (<a href="/comments/1064698316#disqus_thread" data-disqus-identifier="node/1064698316" itemprop="discussionUrl">Be the first to comment</a>)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/comments/1064698316" title="Join The Conversation - Add a Comment">Add a Comment</a>
+          </h3>
+        </article>
+      </div>
+    </div>
+  </div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-151" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <center><script type="text/javascript"><!--
+google_ad_client = "ca-pub-1030395994297178";
+/* Edge Display */
+google_ad_slot = "8361389890";
+google_ad_width = 336;
+google_ad_height = 280;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></center>  </div>
+
+  
+  </div>
+</div>
+  </div>
+  <div class="panel-panel grid-7 omega">
+    <div class="inside"><div class="panel-pane pane-block pane-oas-middle" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <div id="div-gpt-ad-782136025" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-782136025").addService(googletag.pubads()).setTargeting("above_the_fold", "True");
+                       */
+                     	      googletag.display("div-gpt-ad-782136025");
+                     	    </script>
+                     	  </div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-custom pane-1" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <div class="ndn_embed" data-config-widget-id="21772" data-config-type="VideoLauncher/Slider300x250" data-config-tracking-group="90017"></div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-1105" >
+  
+        <h2 class="pane-title" class="panel-title">Top Entertainment Stories</h2>
+    
+  
+  <div class="pane-content clearfix">
+    <div id="parselyTop"></div>
+<script> 
+function parselyTop(response) {
+    var parselyTopDiv = jQuery("#parselyTop");
+
+        jQuery.each(response.data, function(i, record) {
+            parselyTopDiv.append(jQuery('<div class="shared-item clearfix"><dl class="field field-name-field-section clearfix">'+
+   '<dt class="field-label element-invisible">Section:&nbsp;</dt>'+
+   '<dd class="field-item">'+record.section+'</dd>'+
+'</dl>'+
+'<h2 class="node-title"><a href="'+record.url+'?utm_campaign=bostonherald_top_stories&utm_source=bostonherald&utm_medium=top_stories" title="'+record.title+'">'+record.title+'</a></h2>'));
+        });
+    }
+</script>
+<script src="http://api.parsely.com/v2/analytics/tag/section-Entertainment/detail?apikey=bostonherald.com&pub_days=2&limit=4&callback=parselyTop" async></script>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-oas-middle1" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <div id="div-gpt-ad-760257953" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-760257953").addService(googletag.pubads());
+                       */
+                     	      googletag.display("div-gpt-ad-760257953");
+                     	    </script>
+                     	  </div>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-block-316" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <div id="nmWidgetContainer" data-client="548"></div>
+<script src="http://cdn.nmcdn.us/js/connect.js"></script>
+<script type="text/javascript">
+NM.init({ClientID: 548});
+</script>  </div>
+
+  
+  </div>
+<div class="panel-separator"></div><div class="panel-pane pane-block pane-oas-middle2" >
+  
+      
+  
+  <div class="pane-content clearfix">
+    <div id="div-gpt-ad-702692301" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [[300,250],[300,600],[300,1050]], "div-gpt-ad-702692301").addService(googletag.pubads());
+                       */
+                     	      googletag.display("div-gpt-ad-702692301");
+                     	    </script>
+                     	  </div>  </div>
+
+  
+  </div>
+</div>
+  </div>
+</div>    </div>
+  </div>
+</div>      </div>
+</div>  </div>
+</div></section>    
+  
+      <footer id="section-footer" class="section section-footer">
+  <div id="zone-footer-wrapper" class="zone-wrapper zone-footer-wrapper clearfix">  
+  <div id="zone-footer" class="zone zone-footer clearfix container-24">
+    <div class="grid-24 region region-footer-first" id="region-footer-first">
+  <div class="region-inner region-footer-first-inner">
+    <div class="block block-oas block-bottom block-oas-bottom odd block-without-title" id="block-oas-bottom">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <div id="div-gpt-ad-1040227273" >
+                       <script type="text/javascript">
+                       /*
+                       googletag.defineSlot(bh_dfp_ad_slot, [728,90], "div-gpt-ad-1040227273").addService(googletag.pubads());
+                       */
+                     	      googletag.display("div-gpt-ad-1040227273");
+                     	    </script>
+                     	  </div>    </div>
+  </div>
+</div>  </div>
+</div><div class="grid-24 region region-footer-second" id="region-footer-second">
+  <div class="region-inner region-footer-second-inner">
+    <div class="block block-block block-436 block-block-436 odd block-without-title" id="block-block-436">
+  <div class="block-inner clearfix">
+                
+    <div class="content clearfix">
+      <ul id="bh-site-map">
+	<li>
+		<a href="/news" title="News & Opinion"><strong>News & Opinion</strong></a>
+		<ul>
+			<li><a href="/news_opinion/local_coverage" title="Local Coverage">Local Coverage</a></li>
+			<li><a href="/news_opinion/local_politics" title="Local Politics">Local Politics</a></li>
+			<li><a href="/news_opinion/columnists" title="Columnists">Columnists</a></li>
+			<li><a href="/news_opinion/opinion" title="Opinion">Opinion</a></li>
+			<li><a href="/news_opinion/national" title="National">National</a></li>
+			<li><a href="/news_opinion/us_politics" title="U.S. Politics">U.S. Politics</a></li>
+			<li><a href="/news_opinion/international" title="International">International</a></li>
+			<li><a href="/news_opinion/offbeat_news" title="Offbeat News">Offbeat News</a></li>
+			<li><a href="/news_opinion/obituaries" title="Obituaries">Obituaries</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/sports" title="Sports"><strong>Sports</strong></a>
+		<ul>
+			<li><a href="/sports/red_sox_mlb" title="Red Sox &amp; MLB">Red Sox &amp; MLB</a></li>
+			<li><a href="/sports/patriots_nfl" title="Patriots &amp; NFL">Patriots &amp; NFL</a></li>
+			<li><a href="/sports/celtics_nba" title="Celtics &amp; NBA">Celtics &amp; NBA</a></li>
+			<li><a href="/sports/bruins_nhl" title="Bruins &amp; NHL">Bruins &amp; NHL</a></li>
+			<li><a href="/sports/college" title="College">College</a></li>
+			<li><a href="/sports/revolution_soccer" title="Revolution &amp; Soccer">Revolution &amp; Soccer</a></li>
+			<li><a href="/sports/golf" title="Golf">Golf</a></li>
+			<li><a href="/sports/columnists" title="Columnists">Columnists</a></li>
+			<li><a href="/sports/high_school" title="High School">High School</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/entertainment" title="Entertainment"><strong>Entertainment</strong></a>
+		<ul>
+			<li><a href="/entertainment/arts_culture" title="Arts & Culture">Arts & Culture</a></li>
+			<li><a href="/entertainment/movies" title="">Movies</a></li>
+			<li><a href="/entertainment/music" title="">Music</a></li>
+			<li><a href="/entertainment/food_dining" title="">Food & Dining</a></li>
+			<li><a href="/entertainment/health_fitness" title="">Health & Fitness</a></li>
+			<li><a href="/entertainment/travel" title="Travel">Travel</a></li>
+			<li><a href="/entertainment/lifestyle" title="Lifestyle">Lifestyle</a></li>
+			<li><a href="/entertainment/style_fashion" title="Style & Fashion">Style & Fashion</a></li>
+			<li><a href="/entertainment/books" title="Books">Books</a></li>
+			<li><a href="/entertainment/television" title="Television">Television</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/inside_track/inside_track" title="The Inside Track"><strong>The Inside Track</strong></a>
+		<ul>
+			<li><a href="/inside_track/celebrity_news" title="">Celebrity News</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/business" title="Business"><strong>Business</strong></a>
+		<ul>
+			<li><a href="/business/real_estate" title="Real Estate">Real Estate</a></li>
+			<li><a href="/business/media_marketing" title="Media & Marketing">Media & Marketing</a></li>
+			<li><a href="/business/automotive" title="Automotive">Automotive</a></li>
+			<li><a href="/business/business_markets" title="Business & Markets">Business & Markets</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="http://www.heraldmedia.com/bostonHerald/index.html" title="About The Boston Herald"><strong>About The Herald</strong></a>
+		<ul>
+			<li><a href="/about/news_tip" title="Send a News Tip">Send a News Tip</a></li>
+			<li><a href="/about/contact" title="Contact Us">Contact Us</a></li>
+			<li><a href="https://plus.google.com/u/0/113097839281026181771?prsrc=3" title="The Boston Herald on Google+" target="_blank">Google+</a></li>
+			<li><a href="http://twitter.com/bostonherald" title="The Boston Herald on Twitter" target="_blank">Twitter</a></li>
+			<li><a href="http://www.facebook.com/pages/BostonHeraldcom/197211981599" title="The Boston Herald on Facebook" target="_blank">Facebook</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/classifieds" title="Boston Herald Classifieds"><strong>Classifieds</strong></a>
+		<ul>
+			<li><a href="http://directory.bostonherald.com/boston+ma.z.html" title="Boston Business Directory" target="_blank">Boston Business Directory</a></li>
+			<li><a href="http://www.carfind.com/" title="Carfind">Carfind</a></li>
+			<li><a href="http://www.homefind.com/" title="Homefind">Homefind</a></li>
+			<li><a href="/classifieds/jobfind" title="Jobfind">Jobfind</a></li>
+		</ul>
+	</li>
+	
+	<li>
+		<a href="/classifieds/extras" title="Boston Herald Extras"><strong>Extras</strong></a>
+		<ul>
+			<li><a href="/about/home_delivery/" title="The Boston Herald - Home Delivery">Home Delivery</a></li>
+			<li><a href="/classifieds/extras/horoscope">Horoscope</a></li>
+			<li><a href="/classifieds/extras/lottery" title="The Boston Herald - Lottery Results">Lottery</a></li>
+			<li><a href="/classifieds/extras/contests" title="Contest Corner">Contest Corner</a></li>
+			<li><a href="/classifieds/extras/crossword" title="The Boston Herald - Crossword">Crossword</a></li>
+			<li><a href="/classifieds/extras/weather" title="Weather">Weather</a></li>
+<li><a href="/user">Log In</a></li>
+		</ul>
+	</li>
+</ul>
+
+<!-- Orange -->
+
+<ul id="bh-footer-nav" class="clearfix">
+	<li class="first"><a href="/about/advertising/advertise_with_us" title="Advertise With Us">Advertise With Us</a></li>
+	<li><a href="http://store.heraldinteractive.com/" title="Purchase Boston Herald Back Copies">Purchase Back Copies</a></li>
+	<li><a href="/about/news_tip" title="Send a News Tip">Send a News Tip</a></li>
+	<li><a href="/about/herald_history/2012/12/send_letter_editor" title="Contact Us">Contact Us</a></li>
+	<li><a href="/about/home_delivery" title="Boston Herald Home Delivery">Home Delivery</a></li>
+	<li><a href="http://bostonherald.newspaperdirect.com/epaper/viewer.aspx" title="Boston Herald Electronic Edition" target="_blank">Electronic Edition</a></li>
+	<li><a href="/about/apps" title="Mobile and Apps">Mobile and Apps</a></li>
+<li class="last"><a href="/about/newsletters" title="Sign up for Herald Newsletters">Herald Newsletters</a></li>
+</ul>
+
+<!-- Extras -->
+
+<ul id="footer-extra">
+	<li>
+		<p><a href="http://www.bostonherald.com/about/home_delivery/" title="$ave on Boston Herald Home Delivery">$ave on Boston Herald Home Delivery</a></p>
+	</li>
+	<!--
+<li>
+		<p><a href="http://hotjobs.yahoo.com/job-search;_ylc=X3oDMTFka204b2luBF9TAzM5NjUxMTI1MQRwYXJ0bmVyA2Jvc3RvbmhlcmFsZARzcmMDY29uc29sZQ--?partner=bostonherald&kw=bostonherald.com&locations=Boston%2C+MA&metro_search_proxy=1&metro_search=1&industry=" target="_new" title="Jobs with Herald Media">Jobs with Herald Media</a></p>
+		</li>
+-->
+	<li>
+		<p>For back copy and collectible issue information please call 617-619-6265.&nbsp;&nbsp;<a href="http://www.bostonherald.com/store" title="Click here for Celtics, Patriots and Red Sox, and Bruins back copies">Click here for Celtics, Patriots and Red Sox, and Bruins back copies</a></p>
+	</li>
+	<li>
+			<a href="http://www.bostonheraldineducation.com" target="_blank" id="nie">Newspapers In Education</a>
+      <a href="http://bostonheraldnie.newspaperdirect.com" target="_blank" id="niesmart">Boston Herald NIE SmartEdition!</a>
+      <a href="http://www.massliteracy.org" target="_blank" id="masslit">Mass Literacy</a>
+	</li>
+	<li>
+		<p>&copy; Copyright by the Boston Herald and Herald Media.</p><br />
+		<p>No portion of BostonHerald.com or its content may be reproduced without the owner's written permission.</p> <br>
+		<p><a href="/about/privacy_policy" title="The Boston Herald Privacy Policy">Privacy Policy</a> | <a href="/about/terms_of_service" title="The Boston Herald Terms of Service">Terms of Service</a></p>
+	</li>
+</ul>    </div>
+  </div>
+</div>  </div>
+</div>  </div>
+</div></footer>  </div>  <script type="text/javascript">
+<!--
+	sr_actioncode = 0;
+	sr_actionvalue = 10128362;
+-->
+</script>
+<script type="text/javascript">
+	document.write("<scr"+"ipt type='text/javascr"+"ipt' src='"+(location.protocol.indexOf('https')>-1 ? "https://" : "http://")+"beacon.afy11.net/srbeacon.js?behavioralGroupId=10128362'>");
+	document.write("</scr"+"ipt>");
+</script>  
+<!-- Reskin Overlay -->
+<div id="reskin_overlay">
+	<script type='text/javascript'>
+    googletag.display('reskin_overlay');
+  </script>
+</div>
+<!-- Reskin Overlay -->
+
+<!-- DISQUS -->
+<script type="text/javascript">
+  /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  var disqus_shortname = 'bostonherald'; // required: replace example with your forum shortname
+
+  /* * * DON'T EDIT BELOW THIS LINE * * */
+  (function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = 'https://' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  }());
+</script>
+<!-- END DISQUS -->
+
+<script type="text/javascript">
+var pubId=27330;
+var pixId=114;
+var pm_async = true;
+</script>
+
+<script src='https://ads.pubmatic.com/AdServer/js/universalpixel.js' type="text/javascript">
+</script>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-1.newrelic.com","licenseKey":"db1f826034","applicationID":"3177555","transactionName":"ZQZVYkFQDEBUVk0KWFxMdlVHWA1dGkVYBFJtDlZYUlYHQWpbVgdSbRVeU0RuElJSUA==","queueTime":0,"applicationTime":664,"ttGuid":"","agentToken":"","atts":"SUFWFAlKH04=","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-476.min.js"}</script></body>
+</html>

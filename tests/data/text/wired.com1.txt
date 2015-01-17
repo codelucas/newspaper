@@ -1,0 +1,21 @@
+A shiny Morpho butterfly is a master of nanoscale light bending. That blue isn’t from a pigment — it’s light reflecting off scales built from the same strings of sugars that the rest of the insect’s skeleton is made of. A butterfly scale is basically a big, flat hair made of chitin.
+
+If it’s all made of the same stuff, why are some parts so shiny, and other parts not? This video by KQED explains:
+
+How to Build A Butterfly Wing
+
+The shine of butterflies (and beetles) is created by incredibly detailed nanostructures of longitudinal ridges and crossribs. They reflect specific wavelengths of light, creating the insect’s sparkle. The photo at right shows some detail; the white scale bar is is 65 µm long, or 0.0650 mm.
+
+Butterflies extrude their scales during metamorphosis from cells on their epidermis, just like we do with hair. And, just like our hair, the final version of a butterfly’s scales are not living cells.
+
+The lab profiled in the video published a new paper this year where they closely examined developing wings from a pupa, the transitional stage between a caterpillar and a butterfly. Their stunning microphotographs document how you build a shiny butterfly from a caterpillar.
+
+Two kinds of cells are involved; scale cells and socket cells. In a caterpillar, they are just ordinary cells, and don’t have any distinguishing characteristics. But early on in pupal development (7% complete), they begin to organize in rows corresponding to where the future wing will grow. Each butterfly scale is the product of a single scale cell.
+
+The socket cell anchors the scale to the membrane of the insects’ wing; the scale cell pokes through the insect’s wing surface like a hernia. The scale cell forms strings of proteins called F-actins, which provides a framework on which the detailed nanostructures of the scales are built. At 28% complete metamorphosis, you can see both cells and ribbed bundles of actins forming. It’s a ghostly outline of the scale structure to come.
+
+Like a pasta maker, the scale cell squeezes out and assembles a lattice of actins. These actins form the template on which the rest of the scale’s cuticle will be laid down, and foreshadow the fine ribs of the finished scale. At around 64% of the way through metamorphosis, the actin bundles begin to disappear, and the finishing touches are added to the scale. Eventually, the scale cell dies, revealing the finished scale which hardens upon emergence.
+
+And the butterfly flies away, to the delight of everyone.
+
+Dinwiddie et al. 2014. Dynamics of F-actin prefigure the structure of butterfly wing scales. Developmental Biology 392(2): 404–418. doi:10.1016/j.ydbio.2014.06.005

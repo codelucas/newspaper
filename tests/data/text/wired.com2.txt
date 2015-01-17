@@ -1,0 +1,25 @@
+The call came while Hal Finney was in the final stages of his five-year battle with Lou Gehrig’s disease. When the phone rang, his wife Fran was giving him a shower, with help from his nurse. Fran took the call, which came from a 911 emergency dispatch operator. “Are you OK?” the voice asked. “Is anyone being attacked in your house?”
+
+Fran didn’t quite know what to make of the bizarre call, and the operator kept talking, in rather pleasant tones. “I need to let you know that you are about to have a SWAT team come to your home,” the voice said, “and they’re going to ask you to leave.”
+
+When Fran poked her head out the door of her Santa Barbara home, she found the building surrounded by police, and a helicopter buzzing in the air above. It was just days after a disturbed young man named Elliot Rodger had killed six people near Santa Barbara’s University of California campus and the police were especially concerned. The cops yelled at her to drop her telephone and come out onto the lawn, and that’s what she did, leaving her disabled husband, her son Jason, and the nurse in house behind her.
+
+The police eventually cleared the building, and Hal Finney, a noted computer cryptography expert, waited on the lawn for a half hour, shivering in the morning air. Fran worried that Hal, who was unable to swallow, might choke on his own saliva. “I was just panicking that he was going to need suction or something,” she says. “He didn’t have anything with him except his ventilator.”
+
+The Finneys were the victims of a “swatting,” a nasty online hoax where the perpetrator calls up emergency dispatch using a spoofed telephone number and pretends to have committed a heinous crime in the hopes of provoking an armed police response to the victim’s home. In this case, the caller phoned 911, announced that he had just murdered two people, and said was going to kill himself too.
+
+For a year, the caller had been demanding that the Finneys pay an extortion fee of 1,000 bitcoin—worth more than $400,000 at the time—and according to Fran Finney, the FBI agents working the case believe that Hal was just one of several people extorted in this way by the caller. The incident further exposes the rather bizarre and often criminal element that continues to hover around bitcoin, a digital currency that grew out of the internet underworld but has since expanded into the mainstream.
+
+Previously, Fran Finney has not publicly spoken about this incident for fear of compromising the investigation, but she spoke with WIRED after the investigating agent gave her the go-ahead. The FBI did not have a comment for this story.
+
+What I’m angry about is it took away some of the peace that he could have had for the last few months of his life.
+
+When someone calling himself Satoshi Nakamoto first proposed the idea of bitcoin back in 2008, his ideas went largely unnoticed. But Hal Finney paid attention. He quickly became one of the world’s first bitcoin users. That early enthusiasm proved lucrative for Hal Finney, allowing him to join the digital currency’s network and “mine” many bitcoins during the early days. The stash helped the Finneys cover Hal’s medical expenses, but it also came at a price.
+
+Hal Finney died in August, and his wife Fran says he spent his final months being harassed by the online extortionist. He called the Finney’s home number nine times in the two months after the attack, threatening to assault family members and expose their personal information. “What I’m angry about is it took away some of the peace that he could have had for the last few months of his life,” she says. “This was taking up a lot of his emotional energy.”
+
+Roger Ver, another early bitcoin adopter, believes he was victimized by the same person the week before the Finney family was swatted. That’s when someone using the names Nitrous and Savaged hacked into Ver’s email accounts and demanded that he cough up 37 bitcoins—about $20,000 at the time—in order to prevent his private information from being published online. Ver refused, and the hacker apparently backed off after Ver put a 37 bitcoin bounty on his head.
+
+Ver, who was himself sentenced to 10 months in federal prison for illegally shipping explosive across state lines, believes that Savaged is not only the same person who swatted Hal Finney, but also the person who gained access to Satoshi Nakamoto’s email account earlier this year. And he’s mad that this extortionist hasn’t been caught.
+
+The “police have been devoting a huge amount of resources to track down peaceful people engaged in voluntary trade like Charlie Shrem and the operators of the Silk Road Market,” Ver says, “while evil hackers were busy terrorizing quadriplegic Hal Finney and his family.”

@@ -83,12 +83,12 @@ def prepare_url(url, source_url=None):
             source_domain = urlparse(source_url).netloc
             proper_url = urljoin(source_url, url)
             proper_url = redirect_back(proper_url, source_domain)
-            proper_url = remove_args(proper_url)
+            # proper_url = remove_args(proper_url)
         else:
-            proper_url = remove_args(url)
+            # proper_url = remove_args(url)
+            proper_url = url
     except ValueError as e:
         log.critical('url %s failed on err %s' % (url, str(e)))
-        # print('url %s failed on err %s' % (url, str(e)))
         proper_url = ''
 
     return proper_url

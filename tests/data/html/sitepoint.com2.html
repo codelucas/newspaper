@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" ><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en" ><!--<![endif]-->
+  <head>
+    <link href="//dab1nmslvvntp.cloudfront.net" ref="dns-prefetch">
+    <link href="//d2sis3lil8ndrq.cloudfront.net" ref="dns-prefetch">
+    <link href="//sitepoint.com" ref="dns-prefetch">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta property="og:image" content="http://www.sitepoint.com/wp-content/themes/sitepoint/assets/images/icon.php.png">
+        
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    <link rel="apple-touch-icon-precomposed" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-57x57-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-72x72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-114x114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/wp-content/themes/sitepoint/assets/images/apple-touch-icon-144x144-precomposed.png" />
+
+        <link href="https://plus.google.com/113214561650167033983" rel="publisher" />
+        <meta property="twitter:account_id" content="15743570" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+
+    <script type="text/javascript">
+    function r(f){/in/.test(document.readyState)?setTimeout(r,9,f):f()}
+    </script>
+
+    
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-30131-1', '.sitepoint.com');
+
+  ga('set', 'dimension1', 'post');
+ga('set', 'dimension2', 'PHP');
+ga('set', 'dimension3', 'PHP');
+ga('set', 'dimension4', '2014-12-20');
+ga('set', 'dimension5', 'Lukas White');
+
+  ga('set', 'contentGroup5', 'php');
+  // Cross Domain Tracking to Learnable
+  ga('require', 'linker');
+  // command, domains, useAnchor, enableForms
+  ga('linker:autoLink', ['learnable.com'], false, true);
+
+  ga('send', 'pageview');
+</script>
+    <script type="text/javascript">
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+    
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.4.24 - http://yoast.com/wordpress/seo/ -->
+<title>3 Ways to Implement Embeddable Custom Badges</title>
+<meta name="description" content="You know those custom badges, like number of retweets or likes, or someone&#039;s StackOverflow score? Here&#039;s Lukas White&#039;s three ways to make them with PHP!"/>
+<link rel="canonical" href="http://www.sitepoint.com/3-ways-implement-embeddable-custom-badges/" />
+<link rel="author" href="https://plus.google.com/102837735704375262863"/>
+<link rel="publisher" href="https://plus.google.com/+sitepoint/"/>
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="3 Ways to Implement Embeddable Custom Badges" />
+<meta property="og:description" content="You know those custom badges, like number of retweets or likes, or someone&#039;s StackOverflow score? Here&#039;s Lukas White&#039;s three ways to make them with PHP!" />
+<meta property="og:url" content="http://www.sitepoint.com/3-ways-implement-embeddable-custom-badges/" />
+<meta property="og:site_name" content="SitePoint" />
+<meta property="article:publisher" content="https://www.facebook.com/sitepoint" />
+<meta property="article:tag" content="badge" />
+<meta property="article:tag" content="BrunoS" />
+<meta property="article:tag" content="embed" />
+<meta property="article:tag" content="iframe" />
+<meta property="article:tag" content="OOPHP" />
+<meta property="article:tag" content="PHP" />
+<meta property="article:tag" content="png" />
+<meta property="article:tag" content="wideimage" />
+<meta property="article:section" content="APIs" />
+<meta property="article:section" content="PHP" />
+<meta property="article:published_time" content="2014-12-20T09:00:47+00:00" />
+<meta property="article:modified_time" content="2014-12-14T19:11:52+00:00" />
+<meta property="og:image" content="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/11/1415490092badge.png" />
+<meta property="og:image" content="http://f.cl.ly/items/0n220s3M2Q0U2X1k1T0B/badges.png" />
+<meta property="og:image" content="http://f.cl.ly/items/3b0g1W2K2z0a3F082N1i/image-badge.png" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@sitepointdotcom"/>
+<meta name="twitter:domain" content="SitePoint"/>
+<meta name="twitter:creator" content="@lukaswhite"/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel="alternate" type="application/rss+xml" title="SitePoint &raquo; 3 Ways to Implement Embeddable Custom Badges Comments Feed" href="http://www.sitepoint.com/3-ways-implement-embeddable-custom-badges/feed/" />
+<link rel='stylesheet' id='discourse_comments-css'  href='http://www.sitepoint.com/wp-content/plugins/wp-discourse/css/style.css?ver=4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='sitepoint-fonts-css'  href='//fonts.googleapis.com/css?family=Noto+Sans%3A400%2C700&#038;ver=4.0' type='text/css' media='all' />
+<link rel='stylesheet' id='sitepoint-styles-css'  href='//www.sitepoint.com/wp-content/themes/sitepoint/assets/stylesheets/styles-31a4bb2d26d39d616c98d64e6854264d.css?ver=4.0' type='text/css' media='all' />
+<script type='text/javascript' src='//www.sitepoint.com/wp-content/themes/sitepoint/assets/javascripts/scripts-head-e4a2be27db699092d2993e42901cedf6.js?ver=4.0'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.sitepoint.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://www.sitepoint.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 4.0" />
+<link rel='shortlink' href='http://www.sitepoint.com/?p=94248' />
+
+<!--Plugin WP Missed Schedule 2013.1231.2013 Active - Tag 6707293c0218e2d8b7aa38d418ffa608-->
+
+<!-- This site is patched which an important unfixed problem since WordPress 2.5+ to 3.9+ -->
+
+<!-- wp-parsely Plugin Version 1.5 -->
+<meta name='wp-parsely_version' id='wp-parsely_version' content='1.5' />
+<meta name='parsely-page' id='parsely-page' content='{"title":"3 Ways to Implement Embeddable Custom Badges","link":"http:\/\/www.sitepoint.com\/3-ways-implement-embeddable-custom-badges\/","image_url":"","type":"post","post_id":"94248","pub_date":"2014-12-20T17:00:47Z","section":"PHP","author":"Lukas White","tags":["badge","brunos","embed","iframe","oophp","php","png","wideimage","php\/apis"]}' />
+<script type="text/javascript">
+    googletag.cmd.push(function() {
+		googletag.defineSlot("/7448792/SP2013_Articles_300x250_1", [300, 250], "div-gpt-ad-1392428092543-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_728x90_1", [728, 90], "div-gpt-ad-article-header").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_300x250_4", [300, 250], "div-gpt-ad-1392428092543-3").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_300x600_1", [300, 600], "div-gpt-ad-1392428092543-4").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_320x50_1", [320, 50], "div-gpt-ad-1392428092543-5").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/SP2013_Articles_320x50_2", [320, 50], "div-gpt-ad-1392428092543-6").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125_2", [125, 125], "div-gpt-ad-1400782268851-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125_3", [125, 125], "div-gpt-ad-1400782991292-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125_4", [125, 125], "div-gpt-ad-1400783440189-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125_5", [125, 125], "div-gpt-ad-1400783664460-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125_6", [125, 125], "div-gpt-ad-1400783847643-0").addService(googletag.pubads());
+		googletag.defineSlot("/7448792/Sitepoint_125x125", [125, 125], "div-gpt-ad-1400800012700-0").addService(googletag.pubads());
+		googletag.pubads().setTargeting("channel", "PHP");
+		googletag.pubads().setTargeting("post_id", "94248");
+		googletag.pubads().setTargeting("OpenX",["true", "false"]);
+		googletag.pubads().setTargeting("Tribal",["true", "false"]);
+		googletag.pubads().enableSingleRequest();
+        googletag.pubads().collapseEmptyDivs();
+        googletag.enableServices();
+    });
+</script>
+        <style type="text/css" id="syntaxhighlighteranchor"></style>
+    <!--[if lt IE 9]>
+      <script src="/wp-content/themes/sitepoint/assets/javascripts/vendor/respond.custom.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <header class="main-header" role="banner">
+      <nav class="top-bar" role="navigation">
+        <ul class="title-area">
+          <li class="name">
+            <div class="logo">
+              <a class="logomark" href="http://www.sitepoint.com" tabindex="1">
+                <img src="//www.sitepoint.com/wp-content/themes/sitepoint/assets/svg/sitepoint.svg" alt="SitePoint">
+              </a>
+            </div>
+          </li>
+          <li class="toggle-topbar menu-icon">
+            <a href="#"><span>Menu</span></a>
+          </li>
+        </ul>
+
+        <section class="top-bar-section">
+          <ul class="right">
+            <li class="has-dropdown">
+              <a href="#" tabindex="-1">Topics</a>
+              <ul class="dropdown">
+                <li>
+                  <a class="category-html-css menuitem" href="http://www.sitepoint.com/html-css/">HTML &amp; CSS</a>
+                </li>
+                <li>
+                  <a class="category-javascript menuitem" href="http://www.sitepoint.com/javascript/">JS</a>
+                </li>
+                <li>
+                  <a class="category-php menuitem" href="http://www.sitepoint.com/php/">PHP</a>
+                </li>
+                <li>
+                  <a class="category-ruby menuitem" href="http://www.sitepoint.com/ruby/">Ruby</a>
+                </li>
+                <li>
+                  <a class="category-mobile menuitem" href="http://www.sitepoint.com/mobile/">Mobile</a>
+                </li>
+                <li>
+                  <a class="category-design-ux menuitem" href="http://www.sitepoint.com/design-ux/">Design &amp; UX</a>
+                </li>
+                <li>
+                  <a class="category-business-marketing menuitem" href="http://www.sitepoint.com/business-marketing/">Business</a>
+                </li>
+                <li>
+                  <a class="category-wordpress menuitem" href="http://www.sitepoint.com/wordpress/">WordPress</a>
+                </li>
+                <li>
+                  <a class="category-design menuitem" href="/web-foundations/">Web Foundations</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="/store" tabindex="2">Books</a>
+            </li>
+            <li>
+              <a href="https://learnable.com/topics/all/course?utm_source=sitepoint&utm_medium=link&utm_content=top-nav" target="_blank" tabindex="3">Courses</a>
+            </li>
+<!--             <li>
+              <a href="/store/" tabindex="2">Store</a>
+            </li>
+ -->            <li>
+              <a href="http://community.sitepoint.com" tabindex="4">Forums</a>
+            </li>
+            <li>
+              <a href="/newsletter" tabindex="5">Newsletters</a>
+            </li>
+            <li class="top-bar_search">
+              <form method="get" action="http://www.sitepoint.com/">
+                <input autocomplete="off" class="searchquery" id="search-box" name="s" placeholder="Search&hellip;" type="text" tabindex="4">
+                <button tabindex="-1"></button>
+              </form>
+            </li>
+          </ul>
+        </section>
+      </nav>
+    </header>
+<div class="awesome-bar awesome-bar--default" data-campaign="newrelic" style="background:#038D98;">
+ <a class="awesome-bar_container" target="_blank" href="" id="bar-new-relic-link-1">
+   <img class="awesome-bar_brand" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2013/09/NewRelic-logo-w.png" alt="New Relic" style="height:22px;">
+   <span class="awesome-bar_message" style="color:#fff;" id="bar-new-relic-message-1"></span>
+   <span class="button small radius awesome-bar_action" style="background:#78cbd1;" id="bar-new-relic-button-1"></span>
+ </a>
+ <span class="awesome-bar_close">x</span>
+</div>
+<script>
+(function(){
+var rand = Math.random();
+var link  = document.getElementById("bar-new-relic-link-1");
+var message  = document.getElementById("bar-new-relic-message-1");
+var button  = document.getElementById("bar-new-relic-button-1");
+if (rand < 0.5) {
+link.href = "http://newrelic.com/sp/datanerd?utm_source=SITE&utm_medium=text_ad&utm_content=nerdtiffic&utm_campaign=datanerd&mpc=TA-SITE-generic-EN-Signup-datanerd-nerdtiffic"
+message.innerHTML = "Make your software run better, and look better (with a free nerdiffic t-shirt!) in the process.";
+button.innerHTML = "Yes, please";
+} else {
+link.href = "http://newrelic.com/sp/datanerd?utm_source=SITE&utm_medium=text_ad&utm_content=LookGood&utm_campaign=DataNerd&mpc=TA-SITE-generic-EN-Signup-DataNerd-LookGood";
+message.innerHTML = "When your software looks good, you do too. Deploy New Relic and see for yourself.";
+button.innerHTML = "Free t-shirt, please!";
+}
+})()
+</script><div class="awesome-bar awesome-bar--alternative" data-campaign="newrelic" style="background:#038D98;">
+ <a class="awesome-bar_container" target="_blank" href="" id="bar-new-relic-link-2">
+   <img class="awesome-bar_brand" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2013/09/NewRelic-logo-w.png" alt="New Relic" style="height:22px;">
+   <span class="awesome-bar_message" style="color:#fff;" id="bar-new-relic-message-2"></span>
+   <span class="button small radius awesome-bar_action" style="background:#78cbd1;" id="bar-new-relic-button-2"></span>
+ </a>
+ <span class="awesome-bar_close">x</span>
+</div>
+<script>
+(function(){
+var rand = Math.random();
+var link  = document.getElementById("bar-new-relic-link-2");
+var message  = document.getElementById("bar-new-relic-message-2");
+var button  = document.getElementById("bar-new-relic-button-2");
+if (rand < 0.5) {
+link.href = "http://newrelic.com/sp/datanerd?utm_source=SITE&utm_medium=text_ad&utm_content=Sweat&utm_campaign=DataNerd&mpc=TA-SITE-generic-EN-Signup-DataNerd-Sweat";
+message.innerHTML = "Improve your app and get a free t-shirt. We get it, coding is sweaty business.";
+button.innerHTML = "Show me how";
+} else {
+link.href = "http://newrelic.com/sp/datanerd?utm_source=SITE&utm_medium=text_ad&utm_content=swlove&utm_campaign=datanerd&mpc=TA-SITE-generic-EN-Signup-datanerd-swlove"
+message.innerHTML = "Give your software the love it needs. And we'll give you the new t-shirt you need.";
+button.innerHTML = "Create free account";
+}
+})()
+</script><div class="Panel u-slimline u-inverse u-xmasbg-1">
+  <div class="Panel_header u-mb">
+    SitePoint Christmas Sale
+    <a class="Panel_action u-inline" href="/christmas-sale/">Shop Now</a>
+  </div>
+</div>
+<main role="main" class="page page--primary category-php">
+
+  <header role="banner" class="page_banner page_banner--category">
+    <h2 class="page_banner_title">
+        <a href="http://www.sitepoint.com/php/" class="page_banner_title_category">
+    <svg class="Logo" width="90px" height="90px" viewBox="0 0 90 90">
+  <g fill-rule="evenodd">
+    <path class="Logo_fg" d="M20.3838696,61.9238537 L21.8840874,54.1602265 L21.9590983,54.1602265 C22.5966909,54.5352809 23.871876,54.9103354 25.3720938,54.9103354 C31.7480196,54.9103354 35.986135,49.0594858 35.986135,42.6835601 C35.986135,38.9330155 34.0733572,35.7450526 30.09778,35.7450526 C27.8849587,35.7450526 25.7096428,36.8327106 24.209425,38.8204992 L24.1344141,38.8204992 L24.4719631,36.1576125 L19.6337606,36.1576125 C19.408728,38.0328848 18.9586626,41.0708259 18.5461027,43.2461418 L15.0205908,61.9238537 L20.3838696,61.9238537 L20.3838696,61.9238537 Z M23.3843052,45.9840393 C24.0594032,42.3835165 25.9346755,40.0956843 27.9599696,40.0956843 C29.7227255,40.0956843 30.3228127,41.6334076 30.3228127,43.09612 C30.3228127,46.6966428 28.0724859,50.8222418 25.1845666,50.8222418 C24.1344141,50.8222418 23.3092943,50.4846928 22.7092072,49.9221111 L23.3843052,45.9840393 L23.3843052,45.9840393 Z M41.3650694,54.4977755 L42.9402981,46.0965556 C43.6529016,42.3835165 45.5656793,40.0956843 47.4409516,40.0956843 C48.7911477,40.0956843 49.3162239,40.9583096 49.3162239,42.1584838 C49.3162239,42.9460982 49.2037076,43.7337126 49.0536858,44.446316 L47.1784135,54.4977755 L52.5791977,54.4977755 L54.5669863,43.9962507 C54.7545135,42.9460982 54.9045353,41.5583967 54.9045353,40.6957715 C54.9045353,37.545314 53.1417794,35.7450526 50.2913655,35.7450526 C47.8535115,35.7450526 45.9407338,36.8327106 44.440516,38.5204556 L44.3655051,38.4829502 L46.3907991,27.868909 L40.990015,27.868909 L35.9642852,54.4977755 L41.3650694,54.4977755 L41.3650694,54.4977755 Z M59.3833391,61.9238537 L60.8835569,54.1602265 L60.9585678,54.1602265 C61.5961604,54.5352809 62.8713455,54.9103354 64.3715633,54.9103354 C70.7474891,54.9103354 74.9856045,49.0594858 74.9856045,42.6835601 C74.9856045,38.9330155 73.0728267,35.7450526 69.0972495,35.7450526 C66.8844282,35.7450526 64.7091124,36.8327106 63.2088945,38.8204992 L63.1338836,38.8204992 L63.4714327,36.1576125 L58.6332302,36.1576125 C58.4081975,38.0328848 57.9581321,41.0708259 57.5455722,43.2461418 L54.0200603,61.9238537 L59.3833391,61.9238537 L59.3833391,61.9238537 Z M62.3837747,45.9840393 C63.0588727,42.3835165 64.934145,40.0956843 66.9594391,40.0956843 C68.722195,40.0956843 69.3222822,41.6334076 69.3222822,43.09612 C69.3222822,46.6966428 67.0719554,50.8222418 64.1840361,50.8222418 C63.1338836,50.8222418 62.3087638,50.4846928 61.7086767,49.9221111 L62.3837747,45.9840393 L62.3837747,45.9840393 Z"></path>
+  </g>
+</svg>
+    PHP  </a>
+        </h2>
+    <div class="page_banner_adspot">
+      <div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-37"><!-- SP2013_Articles_728x90_1 -->
+<div id="div-gpt-ad-article-header" style="width:728px; height:90px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-article-header"); });</script>
+ </div></div>      <div class="widget maestro maestro-content-type-ad hide-for-desktop-SP hide-for-tablet-SP" id="maestro-product-50"><!-- SP2013_Articles_320x50_1 -->
+<div id="div-gpt-ad-1392428092543-5" style="width:320px; height:50px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-5"); });</script>
+ </div></div>    </div>
+
+    <div class="page_banner_divider-container">
+      <hr/>
+    </div>
+  </header>
+
+      <div class="page_content">
+      <article class="article" id="post-94248">
+        <header class="article_header">
+          <h1 class="article_title">3 Ways to Implement Embeddable Custom Badges</h1>
+
+          
+    <div class="contributor article_contributor">
+
+          <figure class="contributor_avatar">
+      <a href="http://www.sitepoint.com/author/lwhite/">
+        <img alt='' src='http://0.gravatar.com/avatar/c76b522207ee70f781873cbd444c1935?s=96&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D96&amp;r=G' class='avatar avatar-96 photo' height='96' width='96' />      </a>
+    </figure>
+  
+      <div class="contributor_details">
+          <div class="contributor_name">
+    <a href="http://www.sitepoint.com/author/lwhite/">Lukas White</a>
+  </div>
+
+        </div>
+
+    </div>
+
+    
+          <div class="article_meta-data">
+            <p class="article_pub-date">Published <time datetime="2014-12-20" pubdate>December 20, 2014</time></p>
+          </div>
+          <div class="article_header__buttons">
+            
+            <!-- make sure to update trackTweetsAndSubscriptions in scripts.js if the Tweet button DOM path changes in the future -->
+            <a class="button small transparent radius sp-twitter-share-button" target="_blank" href="https://twitter.com/share?text=3+Ways+to+Implement+Embeddable+Custom+Badges&via=sitepointdotcom">
+              <i class="icon-twitter"></i>
+              Tweet
+            </a>
+            
+            <!-- make sure to update trackTweetsAndSubscriptions in scripts.js if the Subscribe button DOM path changes in the future -->
+            <a class="button small transparent radius subscribe-button" target="_blank" href="https://confirmsubscription.com/h/y/1FD5B523FA48AA2B">
+              <!--<i class="icon-envelope-alt"></i>-->
+              Subscribe
+            </a>
+            
+          </div>
+
+        </header>
+
+        <section class="article_body">
+
+            <p>One great way of organically promoting your application is to provide “badges”; snippets of content that people can embed on their own websites. </p>
+<p><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/11/1415490092badge.png" alt="badge" width="400" height="419" class="alignnone size-full wp-image-94253" /></p>
+<p>This can contain up-to-the-minute information from your application about a user, piece of content or another object, dynamically generated and inserted into other websites. This is probably best illustrated with some examples:</p>
+<p><img src="http://f.cl.ly/items/0n220s3M2Q0U2X1k1T0B/badges.png" alt="Some examples of embedded content" title=""/></p>
+<p>In this article I’m going to take a look at some of the ways you can implement this.</p>
+<h2 id="setting-up-our-example-application">Setting up our Example Application</h2>
+<p>All the code from this tutorial is <a href="https://github.com/sitepoint-examples/Embeddable-Badges">available on Github</a>. There’s also an <a href="http://badges.demos.lukaswhite.com">online demo</a>.</p>
+<p>First, we’ll define our application’s dependencies using Composer:</p>
+<pre class="brush: plain; title: ; notranslate" title="">
+&quot;silex/silex&quot;: &quot;~2.0@dev&quot;,
+&quot;twig/twig&quot;: &quot;&gt;=1.8,&lt;2.0-dev&quot;,
+&quot;smottt/wideimage&quot;: &quot;dev-master&quot;
+</pre>
+<p>Now, in <code>index.php</code>, let’s pull in the Composer-generated autoloader, add our <code>use</code> statement, initialize our Silex application and setup Twig templating:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+require_once __DIR__.'/../vendor/autoload.php';
+
+use Symfony\Component\HttpFoundation\Request,
+		Symfony\Component\HttpFoundation\Response,
+		WideImage\WideImage;
+
+$app = new Silex\Application();
+
+// Register the Twig service provider
+$app-&gt;register(new Silex\Provider\TwigServiceProvider(), array(
+	'twig.path' =&gt; __DIR__.'/../views',
+));
+</pre>
+<p>Let’s create a data-store of users, with some information about them which will form the basis of our example “badges”. For simplicity, we’ll use a static array; in practice you’d use a database, but it ought to be pretty simple to swap this out for something more dynamic. We’ll inject it into the application container like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * For simplicity, our datastore is a really simple, static array
+ */
+$app['datastore'] = function(){
+	return [
+		'users'	=&gt;	[
+			'dave'	=&gt;	[				
+				'avatar'			=&gt;	'man1.png',
+				'trophies'		=&gt;	1,
+				'rank'				=&gt;	'Novice',
+			],
+			'jim'	=&gt;	[
+				'avatar'			=&gt;	'man2.png',
+				'trophies'		=&gt;	2,
+				'rank'				=&gt;	'Intermediate',
+			],
+			'helen' =&gt; [
+				'avatar'			=&gt;	'woman1.png',
+				'trophies'		=&gt;	4,
+				'rank'				=&gt;	'Grand Master',
+			],
+		]
+	];
+};
+</pre>
+<p>Now that we’ve got a basic application set up along with some data, let’s go through three approaches to how you can provide an embeddable “badge” which displays this data for a given user.</p>
+<h2 id="iframes">IFrames</h2>
+<p>IFrames are arguably a dirty word in web circles, perhaps deservedly so. But they are a common and practical approach to embedding content from one site into another.</p>
+<p>Let’s start with this approach; later we can reuse some of the code when we try out the JavaScript method.</p>
+<p>Start with a simple Twig template, which creates some HTML &#8211; with inlined styles, to minimize HTTP requests &#8211; which contains our “badge” as a <code>&lt;div&gt;</code>:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+&lt;!-- /views/badge.twig --&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;{{ username }}&lt;/title&gt;
+    &lt;style&gt;
+      .badge {
+        width: 250px;
+        height: 80px;
+        border: solid 1px #ccc;
+        clear: both;
+      }
+      .avatar {
+        float: left;
+        width: 80px;
+      }
+      .badge .avatar img {
+        margin: 10px 0 0 10px
+      }
+      .badge .info {
+        width: 170px;
+        float: right;
+      }
+      .badge .info h3 {
+        margin: 0.25em 0;
+      }
+      .badge .info h4 {
+        margin: 0.25em 0;
+        color: #666;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt; 
+  &lt;body&gt;
+    &lt;div class=&quot;badge&quot;&gt;
+      &lt;div class=&quot;avatar&quot;&gt;
+        &lt;img src=&quot;{{ imagepath }}/{{ user.avatar }}&quot;&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;info&quot;&gt;
+        &lt;h3&gt;{{ username }}&lt;/h3&gt;
+        &lt;h4&gt;{{ user.rank }}&lt;/h4&gt;
+        &lt;div class=&quot;trophies&quot;&gt;
+          {% for i in 1..user.trophies %}
+          &lt;img src=&quot;{{ imagepath }}/trophy.png&quot;&gt;
+          {% endfor %}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>This is all pretty straightforward. Notice how we’re incorporating a variable named <code>imagepath</code> which we’ll set server-side, which is going to take care of one very important aspect &#8211; any images we incorporate must be referenced using absolute URLs.</p>
+<p>Now the corresponding route:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Dynamically-generated HTML for embedding in an iFrame
+ */
+$app-&gt;get('/iframe/{username}', function(Request $request, $username) use ($app) {
+
+	// Check that the user in question exists
+	if (!isset($app['datastore']['users'][$username])) {
+		// No user with that username, throw a 404
+		$app-&gt;abort(404, &quot;User $username does not exist.&quot;);
+	}
+
+	// Get the user record
+	$user = $app['datastore']['users'][$username];
+
+	return $app['twig']-&gt;render('badge.twig',
+		[
+			'username'		=&gt;	$username,
+			'imagepath'		=&gt;	( ($request-&gt;server-&gt;get('HTTP_PORT') == 443) ? 'https' : 'http' ) . '://' . $request-&gt;server-&gt;get('HTTP_HOST') . '/images',
+			'user'  			=&gt; 	$user,
+		]
+	);
+
+});
+</pre>
+<p>All pretty straightforward. The bit which populates <code>$imagepath</code> is a bit quick-and-dirty, but it’ll do the job for now.</p>
+<p>Embedding this into a third-party site is really simple:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;iframe src=&quot;/iframe/dave&quot; width=&quot;300&quot; height=&quot;100&quot;&gt;&lt;/iframe&gt;
+</pre>
+<p>Later we’ll look at some of the things you need to think about with the iframe approach; for now, let’s move onto method number two.</p>
+<h2 id="dynamically-created-images">Dynamically Created Images</h2>
+<p>One of the simplest ways to implement this is to provide a URL to an image, which gets created server-side. </p>
+<p>Here’s a screenshot of the sort of image we’re going to create:</p>
+<p><img src="http://f.cl.ly/items/3b0g1W2K2z0a3F082N1i/image-badge.png" alt="The dynamically-generated image we're going to create" title=""/></p>
+<p>Okay, it won’t win any awards for design, but you can use the same approach to create much more visually appealing images than this.</p>
+<p>You’ll find the necessary resources &#8211; the background and trophy images, avatars and fonts &#8211; in <a href="https://github.com/sitepoint-examples/Embeddable-Badges">the example application’s repository</a>.</p>
+<p>Here’s some example code to dynamically generate an embeddable image:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Dynamically-generated image
+ */
+$app-&gt;get('/image/{username}', function($username) use ($app) {
+
+	// Check that the user in question exists
+	if (!isset($app['datastore']['users'][$username])) {
+		// No user with that username, throw a 404
+		$app-&gt;abort(404, &quot;User $username does not exist.&quot;);
+	}
+
+	// Get the user record
+	$user = $app['datastore']['users'][$username];
+	
+	// Load the background
+	$background = WideImage::load(__DIR__.'/../resources/images/background.png');
+
+	// Load the avatar
+	$avatar = WideImage::load(__DIR__.'/images/' . $user['avatar']);
+
+	// Load the trophy image
+	$trophy = WideImage::load(__DIR__.'/images/trophy.png');
+
+	// Paste the avatar onto the background
+	$im = $background-&gt;merge($avatar, 10, 20);
+
+	// Get the canvas
+	$canvas = $im-&gt;getCanvas();
+
+	// Set the font for the username
+	$canvas-&gt;useFont(__DIR__.'/../resources/fonts/VeraBd.ttf', 12, $im-&gt;allocateColor(0, 0, 0));
+
+	// Write the username onto the canvas
+	$canvas-&gt;writeText(70, 15, $username);
+
+	// Choose a slightly smaller, non-bold font
+	$canvas-&gt;useFont(__DIR__.'/../resources/fonts/Vera.ttf', 9, $im-&gt;allocateColor(0, 0, 0));
+
+	// Write the rank
+	$canvas-&gt;writeText(70, 35, $user['rank']);
+
+	// Now add the appropriate number of trophies
+	$x = 70;
+
+	for ($i = 0; $i &lt; $user['trophies']; $i++) {
+		$im = $im-&gt;merge($trophy, $x, 55);
+		$x += 20;
+	}
+
+	// Finally, output the image to the screen
+	return $im-&gt;output('png');
+
+});
+</pre>
+<p>It’s pretty much self-documented, and should be pretty simple to adapt to your needs or with better images. Note that we’re taking the background image from a non-web accessible directory (<code>resources</code>), but the avatars and trophy icon are in the <code>public</code> directory.</p>
+<p>Embedding this into a third-party website couldn’t be simpler:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;img src=&quot;http://example.com/image/helen&quot;&gt;
+</pre>
+<blockquote>
+<p>You’ll note that there’s no file extension; this doesn’t matter, though, since WideImage’s <code>output()</code> method will set the appropriate headers for you.</p>
+</blockquote>
+<p>There are a couple of improvements we could make. For one thing, we’re generating a new image on each request. However you can use WideImage’s <code>saveToFile()</code> method to cache the results, like so:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+$im-&gt;saveToFile('/path/to/badge.png');
+</pre>
+<p>It might also be better to provide a default image when the requested user cannot be found, rather than issuing a 404 error.</p>
+<p>Now onto the third and final approach.</p>
+<h2 id="javascript">Javascript</h2>
+<p>Using JavaScript to dynamically create embedded content is amongst the most common, and perhaps the most flexible approach.</p>
+<p>Again we’re going to generate some HTML, but this time we’ll return a simple snippet of JavaScript that will write it to the host page. All that requires is that the host website insert a simple <code>&lt;script&gt;</code> tag where they want our content to appear.</p>
+<p>We’ll re-use the Twig template from earlier, but this time the route looks slightly different:</p>
+<pre class="brush: php; title: ; notranslate" title="">
+/**
+ * Dynamically-generated JavaScript
+ */
+$app-&gt;get('/js/{username}', function(Request $request, $username) use ($app) {
+
+	// Check that the user in question exists
+	if (!isset($app['datastore']['users'][$username])) {
+		// No user with that username, throw a 404
+		$app-&gt;abort(404, &quot;User $username does not exist.&quot;);
+	}
+
+	// Get the user record
+	$user = $app['datastore']['users'][$username];
+
+	// Build the HTML
+	$html = $app['twig']-&gt;render('badge.twig',
+		[
+			'username'		=&gt;	$username,
+			'imagepath'		=&gt;	( ($request-&gt;server-&gt;get('HTTP_PORT') == 443) ? 'https' : 'http' ) . '://' . $request-&gt;server-&gt;get('HTTP_HOST') . '/images',
+			'user'  			=&gt; 	$user,
+		]
+	);
+	
+	// Minify the HTML, ensuring we wind up with one long string
+	$minified = preg_replace(
+    array(
+			'/ {2,}/',
+			'/&lt;!--.*?--&gt;|\t|(?:\r?\n[ \t]*)+/s'
+    ),
+    array(
+			' ',
+			''
+		),
+    $html
+  );
+
+	// Return a document.write with the minified, populated HTML as its argument
+	return new Response(
+		sprintf('document.write(\'%s\');', $minified),
+		200,
+		[ 'Content-Type', 'text/javascript' ]
+	);
+
+});
+</pre>
+<p>The first part is identical to the iframe approach. This time, though, we’re generating a simple <code>document.write</code>. Before we can do that, we use a little <code>preg_replace</code> magic to minify the resulting HTML &#8211; which also ensures it will all be on one line &#8211; then insert it into some very simple dynamically created JavaScript.</p>
+<p>Embedding this into a page is just as simple:</p>
+<pre class="brush: xml; title: ; notranslate" title="">
+&lt;div&gt;&lt;script src=&quot;/js/jim&quot;&gt;&lt;/script&gt;&lt;/div&gt;
+</pre>
+<p>Strictly speaking, we don’t even need that container DIV, but it can be used to apply styling on the host site.</p>
+<p>Now that we’ve examined three approaches, let’s look at some of the things you need to think about when deciding which of these approaches to take.</p>
+<h2 id="considerations">Considerations</h2>
+<p>When choosing an approach to this problem, there are a few things you need to weigh up.</p>
+<h3 id="cmss">CMS’s</h3>
+<p>If you’re intending people to be able to embed content into the body of CMS-driven content or within blog posts, it’s worth bearing in mind that any CMS or blog software worth its salt will block certain types of content. Inline scripts are almost certainly out. IFrames are probably going to be stripped out. That probably just leaves image tags.</p>
+<h3 id="styling">Styling</h3>
+<p>There are a few ways to approach styling; perhaps you want to control everything, keeping your badges consistent across sites. Alternatively, you could provide default styles but allow site owners the flexibility to override them to better fit the design of their site.</p>
+<p>Obviously images cannot be customized; aside, perhaps, their sizing. If you use iframes, it’s worth noting that any styling applied to the parent page will not be inherited by your content. On the other hand if you use the JavaScript approach, it may well be possible to override the styling, depending on specificity and how you incorporate your styles. The demo page that comes with the <a href="https://github.com/sitepoint-examples/Embeddable-Badges">example application</a> shows this in action.</p>
+<h3 id="customization">Customization</h3>
+<p>Perhaps, like Stackoverflow and their “User Flair” badges, you want to provide a number of alternative styles &#8211; light and dark, for example. This is entirely possible with any of the approaches I’ve outlined, though it’s arguably slightly more difficult with the image tag approach.</p>
+<h2 id="advanced">Advanced</h2>
+<p>So far our embeddable content has been dynamically generated, but in no way interactive. A Facebook “like” button, for example, doesn’t just provide a count &#8211; it also allows people to perform the “like” action from within the page. That sort of interactivity will be covered in a later article.</p>
+<h2 id="summary">Summary</h2>
+<p>Embeddable content is great way to promote your site. It can be used not only to link back to your site but to provide “live” content, right there on a third-party “host” website.</p>
+<p>We’ve looked at three common approaches to this &#8211; images, iframes and JavaScript. We’ve looked at some of the things you need to think about when deciding which one to use, along with some pitfalls to be wary of.</p>
+
+        </section>
+
+        <div class="article__author-bios">
+          
+    <div class="contributor contributor--large">
+
+          <figure class="contributor_avatar">
+      <a href="http://www.sitepoint.com/author/lwhite/">
+        <img alt='' src='http://0.gravatar.com/avatar/c76b522207ee70f781873cbd444c1935?s=96&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D96&amp;r=G' class='avatar avatar-96 photo' height='96' width='96' />      </a>
+    </figure>
+  
+      <div class="contributor_details">
+
+          <div class="contributor_name">
+    <a href="http://www.sitepoint.com/author/lwhite/">Lukas White</a>
+  </div>
+
+  
+        <p class="contributor_longdesc">Lukas is a freelance web and mobile developer based in Manchester in the North of England. He's been developing in PHP since moving away from those early days in web development of using all manner of tools such as Java Server Pages, classic ASP and XML data islands, along with JavaScript - back when it really was JavaScript and Netscape ruled the roost. When he's not developing websites and mobile applications and complaining that this was all fields, Lukas likes to cook all manner of World foods.</p>
+
+        <ul class="contributor_social">
+          <li><a href="https://twitter.com/lukaswhite" target="_blank"><i class="icon-twitter"></i></a></li><li><a href="https://plus.google.com/102837735704375262863" target="_blank"><i class="icon-google-plus"></i></a></li>        </ul>
+      </div>
+    </div>
+
+          </div>
+
+                  <div class="related-content">
+            <h2>You might also like:</h2>
+            <ul class="article-list article-list--related">
+              <li class="article-list_item  tile post-tile">
+  <article class="article article--micro article--micro--related category-php " data-disqus-id="http://www.sitepoint.com/build-custom-entities-drupal-setup/">
+    <header class="article_category"><h2 class="article_category_title"><a href="http://www.sitepoint.com/php/">PHP</a></h2></header>
+    
+    <section class="article_header">
+      <h1 class="article_title"><a href="http://www.sitepoint.com/build-custom-entities-drupal-setup/">Build Your Own Custom Entities in Drupal - Setup</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/dsipos/">Daniel Sipos</a></p>
+      </div>
+      
+      <div class="article_meta-data"><p class="article_pub-date"><time datetime="2014-05-14 09:00:36" pubdate>May 14, 2014</time></p></div>
+      </section>
+  </article>
+</li>              <div class="widget maestro maestro-content-type-html " id="maestro-product-19"><li class="article-list_item  tile post-tile">
+  <article class="article article--micro article--micro--related category-web">
+    <header class="article_category"><h2 class="article_category_title"><a href="https://learnable.com?utm_source=sitepoint&utm_medium=related-items&utm_content=phpmysql-beginners">Learnable</a></h2></header>
+    <section class="article_header">
+      <h1 class="article_title"><a href="https://learnable.com/courses/php-mysql-web-development-for-beginners-13?utm_source=sitepoint&utm_medium=related-items&utm_content=phpmysql-beginners">Course: PHP & MySQL Web Development for Beginners</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/kevin-yank/">Kevin Yank</a></p>
+      </div>
+      <div class="article_meta-data"><p class="article_pub-date">PREMIUM</p></div>
+    </section>
+  </article>
+</li></div>              <li class="article-list_item  tile post-tile">
+  <article class="article article--micro article--micro--related category-php " data-disqus-id="http://www.sitepoint.com/building-engaging-web-apps-game-mechanics/">
+    <header class="article_category"><h2 class="article_category_title"><a href="http://www.sitepoint.com/php/">PHP</a></h2></header>
+    
+    <section class="article_header">
+      <h1 class="article_title"><a href="http://www.sitepoint.com/building-engaging-web-apps-game-mechanics/">Building Engaging Web Apps with Game Mechanics</a></h1>
+      <div class="contributor article_contributor">
+        <p class="contributor_name article_author-name">by <a href="http://www.sitepoint.com/author/iteo/">Ignatius Teo</a></p>
+      </div>
+      
+      <div class="article_meta-data"><p class="article_pub-date"><time datetime="2014-03-08 11:00:58" pubdate>Mar 08, 2014</time></p></div>
+      </section>
+  </article>
+</li>          </ul>
+        </div>
+        
+        <div class="promo-panel">
+          <div class="widget maestro maestro-content-type-product " id="maestro-product-29"><div class="promo-panel_media-object"><img src="https://d2sis3lil8ndrq.cloudfront.net/books/jshtml-basics1_medium_3d.png" /></div>
+<div class="promo-panel_content">
+  <h1 class="promo-panel_title">
+    Free book: Jump Start HTML5 Basics
+  </h1>
+  <p>Grab a free copy of one our latest ebooks! Packed with hints and tips on HTML5's most powerful new features.</p>
+  <form class="promo-panel_action"><input type="email" name="email" class="promo-panel_email" placeholder="email address" /><input type="hidden" name="content" value="29" /><button class="button radius">Claim Book</button></form>
+</div></div>        </div>
+
+                <div class="widget maestro maestro-content-type-ad hide-for-desktop-SP hide-for-tablet-SP" id="maestro-product-51"><!-- SP2013_Articles_320x50_2 -->
+<div id="div-gpt-ad-1392428092543-6" style="width:320px; height:50px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-6"); });</script>
+ </div></div>
+        <a id="comments"></a>
+        <div class="Comments">
+  <div class="Comments_header">
+    <i class="icon-comment"></i>
+    <span class="u-base">Comments</span>
+  </div>
+  <div class="Comments_actions">
+    <a href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892" class="Comments_action">
+        <i class="icon-reply"></i>
+        <span class="u-base">Have Your Say</span>
+    </a>
+  </div>
+ 
+  <div class="CommentsContent"><div class="Comment">
+  <a class="CommentAvatar" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/2" target="_blank">
+    <img alt="collizo4sky" src=" http://community.sitepoint.com/user_avatar/community.sitepoint.com/collizo4sky/64/18752.png" class="CommentAvatar_img">
+  </a>
+
+  <div class="CommentContent">
+    <div class="CommentHeader">
+      <a class="CommentDate" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/2" target="_blank">December 21, 2014</a>
+      <a class="CommentAuthor" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/2" target="_blank">collizo4sky:</a>
+    </div>
+
+    <div class="CommentMessage"><p>Awesome tutorial, period.</p></div>
+  </div>
+</div><div class="Comment">
+  <a class="CommentAvatar" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/3" target="_blank">
+    <img alt="wesleypatricklewis" src=" http://community.sitepoint.com/letter_avatar/wesleypatricklewis/64/2.png" class="CommentAvatar_img">
+  </a>
+
+  <div class="CommentContent">
+    <div class="CommentHeader">
+      <a class="CommentDate" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/3" target="_blank">December 24, 2014</a>
+      <a class="CommentAuthor" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/3" target="_blank">wesleypatricklewis:</a>
+    </div>
+
+    <div class="CommentMessage"><p>Does it work with wordpress</p></div>
+  </div>
+</div><div class="Comment">
+  <a class="CommentAvatar" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/4" target="_blank">
+    <img alt="swader" src=" http://community.sitepoint.com/user_avatar/community.sitepoint.com/swader/64/17674.png" class="CommentAvatar_img">
+  </a>
+
+  <div class="CommentContent">
+    <div class="CommentHeader">
+      <a class="CommentDate" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/4" target="_blank">December 24, 2014</a>
+      <a class="CommentAuthor" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/4" target="_blank">swader:</a>
+    </div>
+
+    <div class="CommentMessage"><p>It works with everything.</p></div>
+  </div>
+</div><div class="Comment">
+  <a class="CommentAvatar" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/5" target="_blank">
+    <img alt="wesleypatricklewis" src=" http://community.sitepoint.com/letter_avatar/wesleypatricklewis/64/2.png" class="CommentAvatar_img">
+  </a>
+
+  <div class="CommentContent">
+    <div class="CommentHeader">
+      <a class="CommentDate" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/5" target="_blank">December 24, 2014</a>
+      <a class="CommentAuthor" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/5" target="_blank">wesleypatricklewis:</a>
+    </div>
+
+    <div class="CommentMessage"><p>Ok thanks i was going to use it for my site</p></div>
+  </div>
+</div><div class="Comment">
+  <a class="CommentAvatar" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/7" target="_blank">
+    <img alt="lemoniasty" src=" http://community.sitepoint.com/letter_avatar/lemoniasty/64/2.png" class="CommentAvatar_img">
+  </a>
+
+  <div class="CommentContent">
+    <div class="CommentHeader">
+      <a class="CommentDate" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/7" target="_blank">December 31, 2014</a>
+      <a class="CommentAuthor" href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892/7" target="_blank">lemoniasty:</a>
+    </div>
+
+    <div class="CommentMessage"><p>Super article Lucas <br>And what about SEO aspect? Which solution will be better to gain additional external links?</p></div>
+  </div>
+</div></div>
+    <div class="Comments_actions">
+      <a href="http://community.sitepoint.com/t/3-ways-to-implement-embeddable-custom-badges/107892" class="Comments_action">
+        <i class="icon-reply"></i>
+        <span class="u-base">Have Your Say</span>
+      </a>
+    </div>
+</div>
+      </article>
+    </div>
+  
+  <aside class="page_aside article_aside">
+    <div class="adrow--top">
+      <div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-1"><!-- SP2013_Articles_300x250_1 -->
+<div id="div-gpt-ad-1392428092543-0" style="width:300px; height:250px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-0"); });</script>
+ </div></div>    </div>
+    <div class="adrow--middle">
+      <div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-172"><!-- Sitepoint_125x125 -->
+<div id="div-gpt-ad-1400800012700-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400800012700-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-166"><!-- Sitepoint_125x125_2 -->
+<div id="div-gpt-ad-1400782268851-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400782268851-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-167"><!-- Sitepoint_125x125_3 -->
+<div id="div-gpt-ad-1400782991292-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400782991292-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-168"><!-- Sitepoint_125x125_4 -->
+<div id="div-gpt-ad-1400783440189-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400783440189-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-169"><!-- Sitepoint_125x125_5 -->
+<div id="div-gpt-ad-1400783664460-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400783664460-0"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-170"><!-- Sitepoint_125x125_6 -->
+<div id="div-gpt-ad-1400783847643-0" style="width:125px; height:125px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1400783847643-0"); });</script>
+ </div></div>    </div>
+    <div class="adrow--bottom">
+      <div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-48"><!-- SP2013_Articles_300x250_4 -->
+<div id="div-gpt-ad-1392428092543-3" style="width:300px; height:250px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-3"); });</script>
+ </div></div><div class="widget maestro maestro-content-type-ad hide-for-mobile-SP" id="maestro-product-49"><!-- SP2013_Articles_300x600_1 -->
+<div id="div-gpt-ad-1392428092543-4" style="width:300px; height:600px;" class="adspot">
+    <script type="text/javascript">googletag.cmd.push(function() { googletag.display("div-gpt-ad-1392428092543-4"); });</script>
+ </div></div>    </div>
+  </aside>
+
+</main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="row">
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>About</h3>
+          </li>
+          <li class="foot-link_item">
+            <a href="/about-us/">About us</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/advertising">Advertise</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/press">Press Room</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/legals">Legals</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="mailto:feedback@sitepoint.com">Feedback</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/write-for-us">Write for Us</a>
+          </li>
+        </ul>
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>Our Sites</h3>
+          </li>
+          <li class="foot-link_item">
+            <a href="https://learnable.com" target="_blank">Learnable</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="http://reference.sitepoint.com" target="_blank">Reference</a>
+          </li>
+          <li class="foot-link_item">
+            <a href="/web-foundations/">Web Foundations</a>
+          </li>
+        </ul>
+
+        <ul class="footer-links">
+          <li class="foot-link_item">
+            <h3>Connect</h3>
+          </li>
+          <li class="foot-link_item foot-link_item--icons">
+            <a href="/feed"><i class="icon-rss icon-blocks icon-blocks--rss"></i></a>
+            <a href="/newsletter"><i class="icon-envelope-alt icon-blocks icon-blocks--newsletter"></i></a>
+            <a href="https://www.facebook.com/sitepoint" target="_blank"><i class="icon-facebook icon-blocks icon-blocks--facebook"></i></a>
+            <a href="http://twitter.com/sitepointdotcom" target="_blank"><i class="icon-twitter icon-blocks icon-blocks--twitter"></i></a>
+            <a href="https://plus.google.com/+sitepoint" target="_blank"><i class="icon-google-plus icon-blocks icon-blocks--google-plus"></i></a>
+          </li>
+        </ul>
+
+        <p class="site-footer_copyright">
+          &copy; 2000 &ndash; 2015 SitePoint Pty. Ltd.
+        </p>
+
+      </div>
+    </footer>
+
+    <div id="search-dropdown">
+      <div data-role="search-for">
+        <a class="search-link" href="#">Search for...</a>
+      </div>
+      <ul data-role="results"></ul>
+    </div>
+
+    				<script type='text/javascript'><!--
+			var seriesdropdown = document.getElementById("orgseries_dropdown");
+			if (seriesdropdown) { 
+			 function onSeriesChange() {
+					if ( seriesdropdown.options[seriesdropdown.selectedIndex].value != ( 0 || -1 ) ) {
+						location.href = "http://www.sitepoint.com/series/"+seriesdropdown.options[seriesdropdown.selectedIndex].value;
+					}
+				}
+				seriesdropdown.onchange = onSeriesChange;
+			}
+			--></script>
+			
+<div id="triggered-cta-box-wrapper" class="triggered-cta-box-wrapper triggered-cta-box-wrapper--bottom"><a href="#close" id="triggered-cta-box-close">x</a></div>
+<script type="text/javascript">
+  (function () {
+    var variant = (Math.random() < 0.5 ? "a" : "b");
+    var boxContents = {
+      a: '<div class="triggered-cta-box campaign-free-ebook">  <div class="campaign-free-ebook__row1" style="max-width:40em">    <div class="campaign-free-ebook__row1__column1" style="margin-left:1em;width:60%">      <p class="logo-wrapper"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/02/1392770725sp-logo-42x50.png" alt="SitePoint logo" /></p>      <h1>Get 50% Off Learnable and Help the Penguin Foundation!</h1>      <p>This is your chance to access all SitePoint books and courses for two years for just $144, <em>plus</em> help us raise $50,000 for the Penguin Foundation!</p>    </div>    <div class="campaign-free-ebook__row1__column2"style="width:35%">      <img class="books-image" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/1417752395penguin_sitepoint.jpg" alt="Penguin holding a SitePoint sign" />    </div>  </div>  <div class="campaign-free-ebook__row2">    <form>     <div align="center" class="campaign-free-trial-v2__row2">    <a class="submit-btn btn-buy button" href="http://www.sitepoint.com/christmas-sale-1/" style="margin-bottom: 0px;">Get 50% Off Now!</a>    </div>      <div class="campaign-free-ebook__row2__div2">        <div class="campaign-free-ebook__row2__div2__column1">          <p id="triggered-cta-box-message"></p>        </div>      </div>    </form>  </div></div>',
+      b: '<div class="triggered-cta-box campaign-free-ebook">  <div class="campaign-free-ebook__row1" style="max-width:40em">    <div class="campaign-free-ebook__row1__column1" style="margin-left:1em;width:60%">      <p class="logo-wrapper"><img src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/02/1392770725sp-logo-42x50.png" alt="SitePoint logo" /></p>      <h1>Your first month of Learnable for just $1!</h1>      <p>This month only, we\'re dropping the price of your first month of Learnable to $1. That gives you access to all SitePoint books and web development courses!</p>    </div>    <div class="campaign-free-ebook__row1__column2"style="width:35%">      <img class="books-image" src="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/12/14189681031dollarslider_360.png" alt="Learnable for $1" />    </div>  </div>  <div class="campaign-free-ebook__row2">    <form>     <div align="center" class="campaign-free-trial-v2__row2">    <a class="submit-btn btn-buy button" href="http://www.sitepoint.com/christmas-sale-13/?utm_source=SitePoint&utm_medium=Slider&utm_campaign=1dollarslider" style="margin-bottom: 0px;">Start Learning Now</a>    </div>      <div class="campaign-free-ebook__row2__div2">        <div class="campaign-free-ebook__row2__div2__column1">          <p id="triggered-cta-box-message"></p>        </div>      </div>    </form>  </div></div>'
+    };
+    var campaigns = {
+      a: "sitepoint-penguin-slideup",
+      b: "learnable-dollar-slideup"
+    };
+    var triggeredCtaBoxWrapperEl = document.getElementById("triggered-cta-box-wrapper");
+    var boxContentsEl = document.createElement("div");
+
+    boxContentsEl.innerHTML = boxContents[variant];
+    triggeredCtaBoxWrapperEl.appendChild(boxContentsEl);
+
+    window.triggeredCtaBox = {
+      variant: variant,
+      boxSelector: "#triggered-cta-box-wrapper",
+      bgSelector: ".triggered-cta-box-wrapper-bg",
+      closeSelector: "#triggered-cta-box-close",
+      closeLinkSelector: ".triggered-cta-box-close-link",
+      campaign: campaigns[variant],
+      boxType: "bottom",
+      mobileEnabled: false,
+      cookieLife: 14,
+      triggerType: "scroll",
+      triggerRequiredPages: 0,
+      triggerValue: 25,
+      slideSpeed: 1000,
+      ajaxUrl: "https://www.sitepoint.com/wp-admin/admin-ajax.php"
+    };
+  })();
+</script>
+<!--Plugin WP Missed Schedule 2013.1231.2013 Active - Tag 6707293c0218e2d8b7aa38d418ffa608-->
+
+<!-- This site is patched which an important unfixed problem since WordPress 2.5+ to 3.9+ -->
+
+
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="sitepoint.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
+
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.83c'></script>
+<script type='text/javascript' src='http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.83c'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.83c";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.getElementsByTagName("head")[0].insertBefore( corecss, document.getElementById("syntaxhighlighteranchor") );
+		var themecssurl = "http://www.sitepoint.com/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.83c";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		//document.getElementById("syntaxhighlighteranchor").appendChild(themecss);
+		document.getElementsByTagName("head")[0].insertBefore( themecss, document.getElementById("syntaxhighlighteranchor") );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.defaults['wrap-lines'] = false;
+	SyntaxHighlighter.all();
+</script>
+<script type='text/javascript' src='//www.sitepoint.com/wp-content/themes/sitepoint/assets/javascripts/scripts-foot-1fff1067b547366e2ddc5d3cb9d0cb1f.js?ver=4.0'></script>
+<script>
+                    $(document).ready(function() {
+                      $(".article_header__buttons .sp-twitter-share-button").on("click", function (evt) {
+                        evt.preventDefault();
+
+                        var url = "https://twitter.com/intent/tweet?" + $.param({
+                          url: "http://www.sitepoint.com/3-ways-implement-embeddable-custom-badges/",
+                          text: "3 Ways to Implement Embeddable Custom Badges",
+                          via: "sitepointdotcom"
+                        });
+
+                        var popupWidth = 550,
+                            popupHeight = 420,
+                            screenWidth = screen.width,
+                            screenHeight = screen.height,
+                            popupLeftOffset = Math.round(screenWidth / 2 - popupWidth / 2),
+                            popupTopOffset = 0;
+                        if (screenHeight > popupHeight) {
+                          popupTopOffset = Math.round(screenHeight / 2 - popupHeight / 2);
+                        }
+                        window.open(url, null, "scrollbars=yes,resizable=yes,toolbar=no,location=yes" + ", width=" + popupWidth + ", height=" + popupHeight + ", left=" + popupLeftOffset + ",top=" + popupTopOffset);
+                      });
+                    });
+                  </script><script>
+                    $(document).ready(function() {
+                      $(".article_header__buttons .subscribe-button").on("click", function (evt) {
+                        evt.preventDefault();
+
+                        var url = evt.target.href;
+
+                        var popupWidth = 550,
+                            popupHeight = 720,
+                            screenWidth = screen.width,
+                            screenHeight = screen.height,
+                            popupLeftOffset = Math.round(screenWidth / 2 - popupWidth / 2),
+                            popupTopOffset = 0;
+                        if (screenHeight > popupHeight) {
+                          popupTopOffset = Math.round(screenHeight / 2 - popupHeight / 2);
+                        }
+                        window.open(url, null, "scrollbars=yes,resizable=yes,toolbar=no,location=yes" + ", width=" + popupWidth + ", height=" + popupHeight + ", left=" + popupLeftOffset + ",top=" + popupTopOffset);
+                      });
+                    });
+                  </script><script>(function($){$(document).ready(function(){ if(typeof DISQUSWIDGETS != "undefined"){DISQUSWIDGETS.loadCount($, "sitepointproduction")} });})(jQuery);</script>
+  </body>
+</html>
+
+<!-- Performance optimized by W3 Total Cache. Learn more: http://www.w3-edge.com/wordpress-plugins/
+
+Page Caching using memcached
+Object Caching 900/953 objects using memcached
+Content Delivery Network via Amazon Web Services: CloudFront: dab1nmslvvntp.cloudfront.net
+
+ Served from: www.sitepoint.com @ 2015-01-03 03:40:01 by W3 Total Cache -->

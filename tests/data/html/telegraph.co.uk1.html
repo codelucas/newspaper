@@ -1,0 +1,2694 @@
+<!--[if IE ]>
+<!doctype html>
+<![endif]-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/">
+<head>
+
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"XAIAUl5ACwUBXVJUAQ=="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script><script src="//cdn.optimizely.com/js/1425218314.js"></script>
+        <script type="text/javascript">
+        // <![CDATA[
+        for(var i = 0; i < optimizely["activeExperiments"].length; i++){
+            var expid = optimizely["activeExperiments"][i];
+            var experimentname = optimizely.data.experiments[expid].name;
+            var variationname = optimizely.variationNamesMap[expid];
+            optimizely.$("head").prepend("<meta name=\"DCSext.opt\" content=\"" + experimentname + "-" + variationname +"\" />");
+        }
+        // ]]>
+    </script>
+<script type="text/javascript">
+           /* EPOCH time at the start of the page */
+
+           /*As IE8 doest support Date.now() functionality,using the diffrent one*/
+             if (!Date.now) {
+                    Date.now = function now() {
+                      return new Date().getTime();
+                   };
+              }
+
+              var pageStartTime = Date.now();
+</script>
+
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<title>AirAsia plane reported missing with 162 passengers on board: latest - Telegraph</title>
+
+
+
+<meta name="description" content="Search teams in the Java Sea are to resume looking for bodies from AirAsia 
+  flight QZ8501 at dawn, as authorities say they could begin to wash ashore" />
+
+<meta name="keywords" content="airasia, live, missing, malaysia, indonesia, singaport, Briton, missing plane, airasia, latest, news, plane, video,, Indonesia,Asia,World News,News" />
+
+<meta name="news_keywords" content="airasia, live, missing, malaysia, indonesia, singaport, Briton, missing plane, airasia, latest, news, plane, video,"> 
+<meta name="parsely-page" content='{"title": "AirAsia plane found in Java Sea: latest ","link": "http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html","image_url": "http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151358k.jpg","type": "post","post_id": "11315001", "pub_date": "2014-12-31T17:00:37Z","section": "World","authors": ["Harriet Alexander"],"tags": ["Story","News","World News","Asia","Indonesia","Singapore","Harriet Alexander","Mobile","Josie Ensor","Andrew Marszal"]}'/>
+    <meta property="article:publisher" content="143666524748" />
+
+    <meta property="article:subsection" content="Indonesia" />
+
+                    <meta property="article:section" content="World" />
+
+                <meta property="article:tag" content="News" />
+    <meta property="article:tag" content="World News" />
+    <meta property="article:tag" content="Asia" />
+    <meta property="article:tag" content="Indonesia" />
+    <meta property="article:tag" content="Singapore" />
+    <meta property="article:tag" content="Harriet Alexander" />
+    <meta property="article:tag" content="Mobile" />
+    <meta property="article:tag" content="Josie Ensor" />
+    <meta property="article:tag" content="Andrew Marszal" />
+    <meta property="article:authorName" content="Harriet Alexander" />
+
+    <meta property="article:contenttype" content="story" />
+                <meta property="article:imagecount" content="22" />
+
+
+            <meta property="article:videocount" content="0" />
+
+
+            <meta property="article:embedcount" content="12" />
+
+
+            <meta property="article:internallinkcount" content="0" />
+
+            <meta property="article:externallinkcount" content="31" />
+
+
+            <meta property="article:wordcount" content="3335" />
+        <meta name="tmgads.zone" content="news.worldnews.asia.indonesia" />
+<meta name="tmgads.channel" content="news" />
+<meta name="tmgads.section" content="news-worldnews-asia-indonesia" />
+
+<meta name="tmgads.articleid" content="11315001" />
+<input type="hidden" value="article" id="pageType" name="pageType" />
+<input type="hidden" value="Live" id="templateName" name="templateName" />
+<meta name="tmgads.pagetype" content="Live" />
+<meta name="tmgads.level" content="5" />
+<meta name="tmgads.otherdata" content="" />
+
+
+
+<meta name="tmgads.geo" content="US" />
+
+
+
+
+
+<meta name="DCSext.akamigeo" content="US" />
+
+
+
+<meta name="section-id" content="2128" />
+
+<meta name="last-modified" content="2014-12-31" />
+		<meta name="article-id" content="11315001" />
+		<meta name="title" content="AirAsia plane found in Java Sea: latest" />
+		<meta name="GSAMLC" content="news/worldnews/asia/indonesia" />
+<meta name="GSAChannel" content="news" />
+
+<meta name="GSAChannelName" content="News" />
+
+<meta name="GSACategory" content="worldnews" />
+	<meta name="GSAGenre" content="asia" />
+	<meta name="GSASectionUniqueName" content="news-world_news-asia-indonesia" />
+
+<meta name="GSAArticleType" content="Story" />
+	<meta name="DC.date.issued" content="2014-12-31" />
+<meta name="robots" content="noarchive,noodp" />
+	<meta property="fb:app_id" content="120118784736295" />
+<meta property="fb:admins" content="686953094,531239902,100002344351237" />
+
+<meta property="og:description" content="Search teams in the Java Sea are to resume looking for bodies from AirAsia   flight QZ8501 at dawn, as authorities say they could begin to wash ashore" />
+<meta property="og:site_name" content="Telegraph.co.uk" />
+<meta property="og:title" content="AirAsia plane found in Java Sea: latest - Telegraph" />
+<meta property="og:url" content="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" />
+
+<meta property="og:image" content="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151358k.jpg" />
+<meta property="og:type" content="article" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@Telegraph" />
+
+<meta name="twitter:creator" content="@h_alexander" />
+<link rel="canonical" href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html"/>
+
+<!--  Line no 278 normal.jsp where 1st code change should be made -->
+
+
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/screen.css" media="screen" />
+
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/newscreen.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/templates/fragments/common/tmglBrandCSS.jsp" media="screen" />
+	<!--[if lte IE 6]>
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/ie6.css" media="screen" />
+<![endif]-->
+<!--[if lte IE 7]>
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/ie7.css" media="screen" />
+<![endif]-->
+
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for Indonesia articles - Telegraph.co.uk" href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/rss" />
+
+<script type="text/javascript" src="/template/ver1-0/js/jquery-1.4.2.min.js"></script>
+
+<script type="text/javascript" src="/template/ver1-0/js/jquery-1.11.1.min.js"></script>
+
+<script>
+    jq1_11=$.noConflict(true);
+</script>
+
+<script type="text/javascript" src="/template/ver1-0/js/jquery.scrolldepth.js"></script>
+
+<script>
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-7226372-1']);
+    _gaq.push(['_setDomainName', 'telegraph.co.uk']);
+    jq1_11.scrollDepth();
+</script>
+
+<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/jquery.cookie.js"></script>
+
+<script src='//d3c3cq33003psk.cloudfront.net/opentag-35657-106653.js'></script>
+		<meta name="DCSext.MLC" content="/news/worldnews/asia/indonesia" />
+	<meta name="DCSext.Genre" content="asia" />
+								<meta name="DCSext.Category" content="worldnews"/>
+									<meta name="WT.cg_s" content="worldnews"/>
+								<meta name="DCSext.Channel" content="news" />
+					<meta name="WT.cg_n" content="news" />
+						<meta name="DCSext.Content_Type" content="Live" />
+    <meta name="DCSext.Level" content="5" />
+	<meta name="DCSext.author" content="Harriet Alexander" />
+			<meta name="DCSext.articleFirstPublished" content="2014-12-28 04:48" />
+	<meta name="DCSext.articleId" content="11315001" />
+
+	<meta name="DCSext.cmsSect" content="News;World_News;Asia;Indonesia;Singapore;Harriet_Alexander;Mobile;Josie_Ensor;Andrew_Marszal" />
+	
+	
+
+
+
+		
+
+		
+		  		
+					
+						
+					
+		  
+		
+
+		
+			<meta name="DCSext.cf" content="1"/>	
+			  	<meta name="DCSext.pd" content="1"/>
+			  
+		
+
+
+		<script src="/template/ver1-0/js/webtrends/WTDcsVid.js" type="text/javascript"></script>
+<script src="/template/ver1-0/js/webtrends/LIVE/WTID.js" type="text/javascript"></script>
+
+<script>
+window.webtrendsAsyncInit=function(){
+    var dcs=new Webtrends.dcs().init({
+        dcsid:"dcsshgbi400000gscd62rrg43_4o2o",
+        domain:"webtrends.telegraph.co.uk",
+        timezone:0,
+        adimpressions:true,
+        adsparam:"WT.ac",
+        offsite:false,
+        download:true,
+        downloadtypes:"xls,doc,pdf,txt,csv,zip,docx,xlsx,rar,gzip",
+        metanames:"DCSext.MLC, DCSext.source, DCSext.Category, DCSext.Genre, DCSext.Channel, DCSext.imageNo, DCSext.GalleryType, DCSext.Content_Type, DCSext.Level, DCSext.author, DCSext.articleFirstPublished, DCSext.articleId, DCSext.productProvider, DCSext.productName, DCSext.EA_Search_Type, DCSext.EA_Search_Engine, DCSext.EA_Search_Phrase, DCSext.oss, DCSext.ossType, DCSext.cf, DCSext.cn, DCSext.cd, DCSext.pd,DCSext.cmsSect",        
+        fpcdom:".telegraph.co.uk",
+        plugins:{
+            hm:{src:"/template/ver1-0/js/asyncwebtrends/webtrends.hm.js",hmurlparams:"frame,image"},
+            qbert: { src:"/template/ver1-0/js/asyncwebtrends/qbert-wtplugin.js" }
+        }
+        });
+    if ($.cookie("tmg_subs") != null){
+    	var ts = $.parseJSON($.cookie("tmg_subs"));
+        dcs.DCSext.location = ts.location;
+    	dcs.DCSext.trialDescription =ts.trialDescription;
+	    dcs.DCSext.subscriptionType = ts.subscriptionType;
+	    dcs.DCSext.flowType = ts.flowType;
+	    dcs.DCSext.productType = ts.productType;
+	    dcs.DCSext.serviceId = ts.serviceId;
+	    dcs.DCSext.servicePriceId = ts.servicePriceId;
+	
+	    dcs.DCSext.discountVoucher = ts.discountVoucher;
+	    dcs.DCSext.partnerName = ts.partnerName;
+	    dcs.DCSext.currentPromoName = ts.currentPromoName;
+	    dcs.DCSext.sourcePromoName = ts.sourcePromoName;
+	    dcs.DCSext.promoType = ts.promoType;
+	    dcs.DCSext.tCode = ts.tCode;
+	    dcs.DCSext.status = ts.status == true  && ts.acquisitionCompleted == true ? 'Active':'Inactive';
+
+   }
+   if( /Android|webOS|iPad|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) { dcs.DCSext.platform="tablet";}    
+   dcs.track();
+
+};
+(function(){
+    var s=document.createElement("script"); s.async=true; s.src="/template/ver1-0/js/asyncwebtrends/webtrends.js";
+    var s2=document.getElementsByTagName("script")[0]; s2.parentNode.insertBefore(s,s2);
+}());
+</script>
+
+<noscript>< img alt="dcsimg" id="dcsimg" width="1" height="1" src="//webtrends.telegraph.co.uk/dcsshgbi400000gscd62rrg43_4o2o/njs.gif?MLC=&amp;Channel=&amp;Genre=&amp;Category=&amp;Content_Type=&amp;Level=&amp;source=&amp;dcsuri=/nojavascript&amp;WT.js=No&amp;WT.tv=10.2.10&amp;dcssip=www.telegraph.co.uk"/></noscript>
+
+<script type="text/javascript"> 
+//Events tracking for Google Analytics 
+function trackGoogle() { 
+try {var pageTracker = _gat._getTracker("UA-7226372-1");pageTracker._trackPageview();} catch(err) {} 
+} 
+
+//External links tracking through Google Analytics 
+function isLinkExternal(link) { 
+    var r = new RegExp('^https?://(?:www.)?' + location.host.replace(/^www./, '')); 
+        return !r.test(link); 
+} 
+$(document).ready(function() { 
+    $(document).bind('click', function(e) { 
+        var target = (window.event) ? e.srcElement : e.target; 
+        while (target) { 
+            if (target.href) break; 
+            target = target.parentNode; 
+        } 
+        if (!target || !isLinkExternal(target.href)) return true; 
+        var link = target.href; 
+        link = '/outgoing/' + link.replace(/:\/\//, '/'); 
+        _gaq.push(['_trackPageview', link]); 
+    }); 
+}); 
+
+  var _gaq = _gaq || []; 
+  _gaq.push(['_setAccount', 'UA-7226372-1']); 
+  _gaq.push(['_setDomainName', 'telegraph.co.uk']); 
+  _gaq.push(['_trackPageview']); 
+
+  (function() { 
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true; 
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s); 
+  })(); 
+
+</script>		
+<script type="text/javascript">
+  var gs_channels="default";
+  // Last-updated: 2015-01-03 11:42:11.41
+gs_channels="malaysian_airline_negative";
+
+</script>
+<script type="text/javascript">
+    // <![CDATA[
+  var qcSegs = ''; 
+  var qcResults = function(qc){ 
+    for (var i=0;i<=qc.segments.length-1;i++){ 
+      if(qc.segments[i].id != 'D' && qc.segments[i].id != 'T') qcSegs += ';qc='+qc.segments[i].id; 
+    } 
+  }
+    // ]]>
+</script> 
+<script type="text/javascript" src="http://pixel.quantserve.com/api/segments.json?a=p-gyXAHFFgnNQDj&callback=qcResults"></script>
+
+
+		
+			<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/gpt.js"></script>
+		
+	
+<script src="http://s.telegraph.co.uk/toolbar/disqus_parameters_prod.js" type="text/javascript" ></script>
+
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/subscriber.css" media="screen" />
+<div bucket-id="mpu">
+</div><script src='http://player.ooyala.com/v3/ZTIxYmJjZDM2NWYzZDViZGRiOWJjYzc5?platform=html5-fallback'></script>
+<script src="/template/ver1-0/js/ooyala.js" type="text/javascript"></script>
+
+<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/ajax.js"></script>
+
+<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/commWidget.js"></script>
+
+
+<!-- Begin KRUX Digital Control Tag for The Telegraph -->
+<!-- End KRUX Digital Control Tag for The Telegraph -->
+
+
+		<!-- Begin comScore Tag -->
+<script>
+	var _comscore = _comscore || [];
+	_comscore.push({
+		c1 : "2",
+		c2 : "6035736"
+	});
+	(function() {
+		var s = document.createElement("script"), el = document
+				.getElementsByTagName("script")[0];
+		s.async = true;
+		s.src = (document.location.protocol == "https:" ? "https://sb"
+				: "http://b")
+				+ ".scorecardresearch.com/beacon.js";
+		el.parentNode.insertBefore(s, el);
+	})();
+</script>
+<noscript>
+	<img src="http://b.scorecardresearch.com/p?c1=2&c2=6035736&cv=2.0&cj=1" />
+</noscript>
+<!-- End comScore Tag -->
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/majornews.css" media="screen" />
+</head>
+
+<body class="news">
+	<!-- invitationUrl contains the baseUrl for the invitation(paywall). The whole url is completed by the esi tags -->
+<script type="text/javascript">
+		var subsInfo = new Object();
+		subsInfo.channel =  $('meta[name="DCSext.Channel"]').attr("content");
+		if(subsInfo.channel==undefined){subsInfo.channel='';}
+		subsInfo.mlc = $('meta[name="DCSext.MLC"]').attr("content");
+		if(subsInfo.mlc==undefined){subsInfo.mlc='';}
+		subsInfo.category = $('meta[name="DCSext.Category"]').attr("content");
+		if(subsInfo.category==undefined){subsInfo.category='';}
+		subsInfo.level = $('meta[name="DCSext.Level"]').attr("content");
+		if(subsInfo.level==undefined){subsInfo.level='';}
+		subsInfo.author = $('meta[name="DCSext.author"]').attr("content");
+		if(subsInfo.author==undefined){subsInfo.author='';}
+		subsInfo.content_type = $('meta[name="DCSext.Content_Type"]').attr("content");
+		if(subsInfo.content_type==undefined){subsInfo.content_type='';}
+		subsInfo.articleId = $('meta[name="DCSext.articleId"]').attr("content");
+		if(subsInfo.articleId==undefined){subsInfo.articleId='';}
+		var subsJson = JSON.stringify(subsInfo);
+		$.cookie("tmg_subs_referer",subsJson, { path: '/', domain: 'telegraph.co.uk'});
+		var inviteWTUrlSuffix='?channel='+ subsInfo.channel+'&mlc='+subsInfo.mlc+'&category='+ subsInfo.category+'&level='+subsInfo.level+'&author='+subsInfo.author+'&content_type='+subsInfo.content_type+'&articleId='+subsInfo.articleId;
+		
+		<!-- default inviteUrl value is UK-->
+		var inviteUrl = "" + '/subscriptions/invitation/';
+		
+			
+				
+					var inviteUrl = "" + "/subscriptions/invitation-intl/";
+				
+			
+	
+		
+				
+				
+				
+			
+		var plink = "http://www.telegraph.co.uk/template/ver1-0/templates/fragments/common/toolBar-js.jsp";
+	</script>
+	<script src="" type="text/javascript" ></script>
+	<script src="http://s.telegraph.co.uk/toolbar/js/tmgMenu.js" type="text/javascript" ></script>
+<!--[if lte IE 6]>
+<div id="ieLteSix">
+	<div class="ieLteSixBanner">
+		<table cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr>
+					<td class="ieLteSixLeft">
+						<p class="ieFirstP">We no longer check to see whether Telegraph.co.uk displays properly in Internet Explorer version 6 or earlier.</p>
+						<p class="ieSecondtP">To see our content at its best we recommend <a href="/browser-support/">upgrading if you wish to continue using IE or using another browser such as Firefox, Safari or Google Chrome.</a></p>
+					</td>
+					<td valign="top" class="ieLteSixRight">
+						<a href="#" id="ieX"><img width="20" height="20" border="0" alt="Hide this banner" src="/template/ver1-0/i/ieX.gif"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/ieSix.js"></script>
+<![endif]-->
+
+<!-- googleoff: all -->
+<a name="top"></a>
+
+<div class="hidden">
+	<p>Accessibility links</p>
+	<ul>
+	<li><a href="#article">Skip to article</a></li>
+		<li><a href="#mainsections">Skip to navigation</a></li>
+	</ul>
+</div><div id="tmglSite">
+	<div class="printLogo"><img src="/template/ver1-0/i/telegraph_print_190.gif"/></div>
+
+	<div id="tmglHeader" class="">
+	<div id="tmglBannerAd">
+    
+              <script type="text/javascript">
+                  /* EPOCH time at the start of banner Ad */
+                var bannerTimerStart = Date.now();
+              
+            </script>
+		<div class="access">Advertisement</div>
+<div class="adbanner" align="center">
+	<div id="banner" class="InSkinHide">
+		<div bucket-id="mpu">
+<script type="text/javascript">
+		document.write(tmgAdsBuildAdTag("ban", "970x250,970x90,940x250,728x90,468x60", "adj", "", 2));
+		</script>
+	</div></div>
+</div>
+
+
+
+
+
+
+</div>
+	<div id="tmglBrandLarge">
+			<a href="/">
+					<div id="brand">Telegraph.co.uk</div></a>
+			<div id="topBarRightContainer">
+				<div id="searchBar">
+					<div id="searchBlock">
+				<form name="otsn_search" id="otsn_search" method="get" action="/search/">
+					<input type="text" class="searchBox otsn"  value="" size="19" tabindex="1"  />
+					<input type="hidden" id="hiddenQueryText"  name="queryText"  value=""/>
+					<input type="hidden" name="sort" value="recent" checked="checked"/>
+					<input type="submit" class="formSubmit" tabindex="2" id="go" value="" />
+                                        <div class="searchText  new">
+                                        Search - enhanced by OpenText</div>
+
+				</form>
+				<div class="cl"></div>
+			</div>
+		</div>
+				<div id="tmgTopBar">
+				<div id="tmglTopRight" class="tmgTopBarDate">
+					<div id="tmglLasUpdatedDateFeed">
+	<p>
+		Saturday 03 January 2015</p>
+</div>
+
+</div>
+			</div></div>
+			
+			<div class="cl"></div>
+		</div>
+		<div class="cl"></div>
+	</div>
+<script type="text/javaScript">
+/* EPOCH time at the  end of Header */
+var tmgHeaderTimerEnd=Date.now();
+</script>
+<!-- googleon: all -->
+			<!-- googleoff: all -->
+	<div id="tmglMenu">
+	<div id="tmglPriExWrap">
+		<div id="tmglPrimaryNav" class="nonActiveNav">
+			<div class="access"><a name="mainsections"></a></div>
+	<ul class="mainNav">
+		<li class="first styleOne"><a href="http://www.telegraph.co.uk/">Home</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/telegraphtv/">Video</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/news/">News</a></li>
+							<li class="selected styleOne" id="menuItemstyleOne"><a href="http://www.telegraph.co.uk/news/worldnews/">World</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/sport/">Sport</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/finance/">Finance</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/comment/">Comment</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/culture/">Culture</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/travel/">Travel</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/lifestyle/">Life</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/women/">Women</a></li>
+							<li class="styleOne"><a href="http://fashion.telegraph.co.uk">Fashion</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/luxury/">Luxury</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/technology/">Tech</a></li>
+							<li class="styleOne"><a href="http://www.telegraph.co.uk/motoring/">Cars</a></li>
+							</ul></div>
+		<div id="tmglExtraNav">
+	<ul class="extraNav">
+		</ul>
+	<div class="cl"></div>
+</div> 
+<div class="cl"></div>
+	</div>
+
+	<div id="tmglSecondNav" class="activeNav styleOne">
+				<ul class="mainNav">
+						<li class="first styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/">USA</a></li>
+									<li class="selected styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/asia/">Asia</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/asia/china/">China</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/europe/">Europe</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/middleeast/">Middle East</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/australiaandthepacific/">Australasia</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/africaandindianocean/">Africa</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/southamerica/">South America</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/asia/central-asia/">Central Asia</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/expat/">Expat</a></li>
+									<li class="styleOne"><a href="http://www.telegraph.co.uk/sponsored/lifestyle/honduras-gangs/">Honduras</a></li></ul>
+					<div class="cl"></div>
+				</div>
+		<div id="tmglThirdNav">
+					<ul class="mainNav">
+						<li class="first "><a href="http://www.telegraph.co.uk/news/worldnews/asia/afghanistan/">Afghanistan</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/pakistan/">Pakistan</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/india/">India</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/northkorea/">North Korea</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/southkorea/">South Korea</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/japan/">Japan</a></li>
+														<li class=""><a href="http://www.telegraph.co.uk/news/worldnews/asia/kazakhstan/">Kazakhstan</a></li>
+														</ul>
+					<div class="cl"></div>
+				</div>
+				<div id="tmglCrumbtrail">
+		<ol>
+			<li class="first"><a href="/">Home</a><span>&raquo;</span></li>
+			<li><a href="http://www.telegraph.co.uk/news/">News</a><span>&raquo;</span></li>
+					<li><a href="http://www.telegraph.co.uk/news/worldnews/">World News</a><span>&raquo;</span></li>
+					<li><a href="http://www.telegraph.co.uk/news/worldnews/asia/">Asia</a><span>&raquo;</span></li>
+					<li class="styleOne"><a href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/">Indonesia</a></li></ol>
+		<div class="cl"></div>
+	</div>
+</div>
+
+<!-- googleon: all -->
+<div id="tmglBody" itemscope itemtype="http://schema.org/Article" >
+	<div class="access"><a name="article"></a></div>
+
+	<script type="text/javascript" src="/template/ver1-0/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/jquery.multiselect.js"></script>
+
+<div class="storyHead">
+
+<h1 itemprop="headline name" class='storyHeadFull'>AirAsia plane found in Java Sea: latest</h1>
+			<h2  itemprop="alternativeHeadline description">
+Search teams in the Java Sea are to resume looking for bodies from AirAsia 
+  flight QZ8501 at dawn, as authorities say they could begin to wash ashore
+
+</h2>						
+	<style media="print">
+    .newGigyaShare { display: none !important; }
+</style>
+<div id="newGigyaShareTop" class="newGigyaShare"></div>
+
+<!-- Opta Widget start -->
+	<!-- Opta Widget end -->
+	
+	<div class="artIntroFullWidthIFrame">							
+							<div
+					class="summary html mnHTML">
+					<!-- 11317238 -->
+                    <script type="text/javascript" src="http://s.telegraph.co.uk/graphics/SourceFiles/Modernizr/compiled.min.js"><noscript> </noscript></script>  <script type="text/javascript">   var parentElm = document.getElementsByTagName('script'),    domOutput = document.createElement('div');    parentElm = parentElm[ parentElm.length-2 ];   if(Telegraphics.Modernizr.mobileonmobilesite){ domOutput.innerHTML = '<img src="http://s.telegraph.co.uk/graphics/html/Years/2014/December/img/AirAsia_SearchArea2_mobile.png" style="margin:0 auto;display:block;" width="320" height="375"> </img> <br/>'} else {    domOutput.innerHTML = '<img style="margin:0 auto;display:block;" src="http://s.telegraph.co.uk/graphics/html/Years/2014/December/img/AirAsia_SearchArea2_desktop.png" width="940" height="600"> </img> <br/>';   }   parentElm.parentNode.insertBefore(domOutput, parentElm);  </script></div>
+			</div>						
+					</div>
+<div class="twoThirdsThird2 gutterUnder">
+		<div class="twoThirds gutter" >
+			<div class="oneHalf gutter">
+						<div class="story">
+		<div class="cl"> </div>
+		<!-- remove the whitespace added by escenic before end of </a> tag -->
+				<div class="bylineComments">
+		<div >
+			
+			<p class="bylineBody">
+							By <a rel="author" title="Harriet Alexander" href="http://www.telegraph.co.uk/journalists/harriet-alexander/" >
+											Harriet Alexander</a>, <span >Andrew Marszal and Josie Ensor</span></p>
+					
+					</div>
+		<p class="publishedDate">5:00PM GMT 31 Dec 2014</p>
+		<meta itemprop="datePublished" content="2014-12-31"/><p class="comments">
+				<img src="/template/ver1-0/i/share/comments.gif" alt="Comments" /><a href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html#disqus_thread" dsqid="11315001">Comments</a>
+			</p>
+		<div class="cl"> </div>
+	</div>
+	<script type="text/javascript">
+		runUpdate = true;
+	</script>
+	
+	<div id="liveBloggingInfo">
+		<div class="hide" id="updateFreq">90000</div>
+		<div class="hide" id="artLastModified">2014-12-31 17:13:38.0</div>
+		<div class="hide" id="articleUrl">http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html?service=artBody</div>
+		<div class="loadingImg">
+			This page will automatically update every 90 seconds<span id="liveBloggingOn" class="selected">On</span>
+			<span id="liveBloggingOff">Off</span>
+		</div>
+	</div>
+	
+<div id="mainBodyArea" itemprop="articleBody">
+
+	
+			  	
+					<div class="firstPar"><p>
+<strong>&bull; Seven bodies from 162 on board found so far</strong><br>
+<strong>&bull; <a id="11318692" href="/news/worldnews/asia/indonesia/11318692/AirAsia-pilots-son-thinks-daddy-is-still-at-work.html">AirAsia pilot's son 'thinks daddy is still 
+  at work'</a></strong><br>
+<strong>&bull; <a id="11317419" href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html">AirAsia plane found in Java Sea, in pictures</a></strong><br>
+<strong>&bull; Plane thought to be upside down in sea</strong><br>
+<strong>&bull; <a id="11315705" href="/news/worldnews/asia/indonesia/11315705/Brother-of-missing-Air-Asia-Briton-Choi-Chi-Man-speaks-of-unbearable-heartache.html">Brother of missing Briton speaks of 
+  'unbearable' heartache</a></strong><br>
+<strong>&bull; Pilot had asked to change route to 'avoid bad weather'</strong><br>
+<strong>&bull; <a id="11315486" href="/news/worldnews/asia/indonesia/11315486/Air-Asia-missing-plane-Sunday-December-28-as-it-happened.html">Air Asia missing plane: How the news unfolded</a> 
+  </strong><br></p></div><div class="secondPar">
+<h3>
+Latest 
+</h3>
+<p>
+<strong>17.00 </strong>We are going to leave our live coverage here for today, but will 
+  be back at first light in Indonesia (around midnight GMT) with further 
+  updates as the search continues. 
+</p></div><div class="thirdPar">
+<p>
+Meanwhile, <strong>Jonathan Pearlman </strong>in Pangkalan Bun, and <strong>Tom Phillips</strong> 
+  in Surabaya have this wrap of the day's events:
+</p></div><div class="fourthPar">
+<p>
+<strong><a id="11319668" href="/news/worldnews/asia/indonesia/11319668/AirAsia-Flight-QZ8501-evidence-suggests-plane-stalled-before-passengers-felt-violent-descent.html">AirAsia Flight QZ8501: evidence suggests plane 
+  stalled before passengers felt violent descent
+</a></strong></p></div><div class="fifthPar">
+<p>
+<strong><a id="11319668" href="/news/worldnews/asia/indonesia/11319668/AirAsia-Flight-QZ8501-evidence-suggests-plane-stalled-before-passengers-felt-violent-descent.html">
+</a></strong></p></div><div class="body">
+<p>
+ <strong>16.06 </strong>AirAsia QZ8501 made an "unbelievably" steep climb 
+  before it crashed, possibly pushing it beyond the Airbus A320's limits, 
+  according to radar data, a source close to the investigation has told <strong>Reuters</strong>. </p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+"So far, the numbers taken by the radar are unbelievably high. This rate 
+  of climb is very high, too high. It appears to be beyond the performance 
+  envelope of the aircraft," he said. </i>
+</p>
+<p>
+<i>The source, who declined to be named, added that more information was 
+  needed to come to a firm conclusion. </i>
+</p>
+<p></p>
+<p>
+<strong>15.25 </strong>As night falls in southeast Asia, the search has been called off 
+  until tomorrow. 
+</p>
+<p>
+Meanwhile, Indonesians in Surabaya, East Java are holding a candle-lit vigil 
+  for the victims of the crashed AirAsia airplane 
+</p>
+<p>
+<image refid="3151768" version="c" width="460" height="287" caption="Indonesians hold candles during a vigil for the victims of the crashed AirAsia airplane in Surabaya, East Java" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/air-asia-candles_3151768c.jpg" photographer="" name="air-asia-candles" alttext="Indonesians hold candles during a vigil for the victims of the crashed AirAsia airplane in Surabaya, East Java" copyright="Fully Handoko/EPA"></image></p>
+<p>
+<strong>14.53 </strong>These latest images from the search mission have just been 
+  released by the Malaysian Navy: 
+</p>
+<p>
+Royal Malaysian Navy ship KD Lekir is show here retrieving the body of a 
+  victim 
+</p>
+<p>
+<image refid="3151695" version="c" width="460" height="287" caption="Royal Malaysian Navy ship KD Lekir retrieving the body of a victims from AirAsia flight QZ8501 during the search and rescue mission of the plane" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/air-asia-search_3151695c.jpg" photographer="" name="air-asia-search" alttext="Royal Malaysian Navy ship KD Lekir retrieving the body of a victims from AirAsia flight QZ8501 during the search and rescue mission of the plane" copyright="Malaysia Navy/EPA"></image></p>
+<p></p>
+<p>
+The same ship is here shown retrieving AirAsia flight QZ8501's emergency 
+  evacuation tube 
+</p>
+<p>
+<image refid="3151697" version="c" width="460" height="287" caption="Royal Malaysian Navy ship KD Lekir retrieving the emergency evacuation tube from AirAsia flight QZ8501" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/air-asia-search-3_3151697c.jpg" photographer="" name="air-asia-search-3" alttext="Royal Malaysian Navy ship KD Lekir retrieving the emergency evacuation tube from AirAsia flight QZ8501" copyright="Malaysia Navy/EPA"></image></p>
+<p></p>
+<p>
+<strong>14.29 </strong>Indonesian authorities are hoping to bring the five remaining 
+  bodies that have been recovered from the AirAsia plane back to land at 
+  around midnight, local time. The bodies have been stranded on an Indonesian 
+  naval vessel and could not be flown back from sea due to the poor weather. 
+  Only two bodies were able to be transferred by helicopter. 
+</p>
+<p>
+The new plan is for the naval ship to approach land near the coastal town of 
+  Kumai and transfer the bodies to a smaller boat that can enter the town's 
+  bay. The bodies will be left in hospital overnight and then flown to 
+  Surabaya tomorrow. The plan was due to have happened already but was delayed 
+  due to the poor weather. 
+</p>
+<p></p>
+<p></p>
+<p>
+<strong>14.07 </strong>An Indonesian search and rescue official has cast further doubt 
+  on claims that one of the bodies recovered from the crashed AirAsia jet had 
+  been wearing a life jacket. 
+</p>
+<p>
+"There is no victim that has been found wearing a life jacket," said 
+  Tatang Zaenudin, deputy head of operations at the national search and rescue 
+  agency. 
+</p>
+<p>
+"We found a body at 8.20 a.m. and a life jacket at 10.32 a.m. so there 
+  was a time difference. This is the latest information we have," he 
+  added. 
+</p>
+<p>
+The same official told Reuters earlier that one of the recovered bodies had 
+  been wearing a life jacket 
+</p>
+<p></p>
+<p>
+<strong>13.45 </strong>There remain several possible explanations for why QZ8501 
+  crashed. <strong>David Millward</strong>, the Telegraph's US correspondent and former 
+  Transport Editor, explains the most likely: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+The smart money seems to be moving towards the pitots freezing &ndash; they are the 
+  little detectors near the nose of the aircraft measuring wind velocity they 
+  are vital for the pilot when judging the wind speed. This is what did for 
+  the Air France airbus, albeit rather a larger one. </i>
+</p>
+<p>
+<i>There was also a suggestion on NBC that the fuel flow could have been 
+  interfered with because of extreme cold. That is what caused the BA 747 to 
+  pancake at Heathrow a few years ago. Simplest way of explaining is to think 
+  of it as an aviation equivalent to a cardiac arrest because of blocked fuel 
+  intake pipes. It had a different engine, however to the BA jumbo. </i>
+</p>
+<p></p>
+<p>
+<strong>13.08</strong> Tony Fernandes, the Air Asia chief, has been speaking at 
+  Surabaya's airport about the rescue operation, badly hampered today by poor 
+  weather. 
+</p>
+<p>
+"The weather unfortunately is not looking good for the next two or three 
+  days," he told reporters. "That is slowing us down."
+</p>
+<p>
+Mr Fernandes refused to discuss speculation about whether or not a passenger 
+  was found wearing a life-jacket but confirmed that the main fuselage of 
+  Flight QZ8501 had not been found. 
+</p>
+<p></p>
+<p>
+<strong>12.15 </strong>More photos are coming in from the search. 
+</p>
+<p>
+<image refid="3151358" version="c" width="460" height="287" caption="Indonesian national search and rescue agency members and Indonesian Air Force crew carry a dead body from a helicopter, during search and rescue operations for the crashed AirAsia plane, at Iskandar Military Airport, in Pangkalan Bun, Central Borneo, Indonesia" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151358c.jpg" photographer="" name="AirAsia-Indonesia-helicopter" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="EPA/BAGUS INDAHONO"></image></p>
+<p></p>
+<p>
+<strong>11.48</strong> There are still conflicting reports about whether a body was 
+  found wearing a life jacket. 
+</p>
+<p>
+We are trying to get the answers for you. 
+</p>
+<p></p>
+<p>
+<strong>11.23 </strong>Our picture desk have compiled a gallery of some of the most 
+  powerful images from the search. 
+</p>
+<p>
+<strong><a id="11317419" href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html">AirAsia plane found in Java Sea, in pictures</a> 
+  </strong>
+</p>
+<p>
+<image refid="3151355" version="c" width="460" height="287" caption="Members of an Indonesian search and rescue team carry a body on a stretcher during the recovery of victims" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151355c.jpg" photographer="" name="AirAsia-Indonesia-bodybag" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="YANUAR/AFP/Getty Images"></image></p>
+<p></p>
+<p>
+<strong>11.18</strong> More from <strong>Tom Phillips</strong> in Indonesia. 
+</p>
+<p>
+<image align="left" refid="1817836" width="45" height="40" caption="" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/01817/T_logo_1817836a.gif" photographer="" name="T_logo"></image>
+<i>I've just spoken to one of the relatives who has come to a Disaster Victim 
+  Identification centre set up beside the hospital. </i>
+</p>
+<p>
+<i>"I hope they can identify my brother soon," said Sigit Heriyanto, 
+  who had three family members on the plane. </i>
+</p>
+<p>
+<i>Family members are tonight giving blood samples for DNA analysis. But no 
+  more bodies are expected to arrive today. </i>
+</p>
+<p></p>
+<p>
+<strong>10.58</strong> The latest updates from <strong>Tom Phillips</strong> in Indonesia. 
+</p>
+<p>
+Police forensic chiefs have just been briefing us here at the hospital where 
+  15 forensic doctors will identify victims brought here from crash site. 
+</p>
+<p>
+They don't expect any more bodies to arrive in Surabaya today because bad 
+  weather has hampered the search. 
+</p>
+<p>
+An AirAsia pilot, who is helping with the identification process, told me just 
+  after the bodies arrived: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+It&rsquo;s already 6 o&rsquo;clock now. I guess it is very hard to find anything if it 
+  dark.</i>
+</p>
+<p></p>
+<p>
+<strong>09.52</strong> In Indonesia, <strong>Tom Phillips</strong> has been speaking to the family 
+  of the pilot, Captain Irianto. 
+</p>
+<p>
+He writes: 
+</p>
+<p>
+<image align="left" refid="1817836" width="45" height="40" caption="" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/01817/T_logo_1817836a.gif" photographer="" name="T_logo"></image>
+<i>When the devastating images of Flight QZ8501's wreckage flashed up on 
+  television screens on Tuesday, few were left with any illusions about what 
+  had happened to the 162 people on board. </i>
+</p>
+<p>
+<i>But on Wednesday, as the first of the victims' bodies were flown back to the<strong> 
+  <a href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/" target="_blank">Indonesian</a> 
+  </strong>city of Surabaya, one person remained completely in the dark: an 
+  8-year-old boy called Arya Galih Gegana. </i>
+</p>
+<p>
+<i>Galih, as he is known, is the son of Irianto, the veteran pilot who was 
+  flying the doomed AirAsia flight when it took off in the early hours of 
+  Sunday. Relatives have yet to tell him that the father he so adored is gone. </i>
+</p>
+<p>
+<i>"I told Galih that his father will not be coming straight home because 
+  he has another job to do," said Budi Sutiono, the pilot's 55-year-old 
+  brother and the boy's uncle. "He thinks daddy is still at work. </i>
+</p>
+<p>
+<strong><a id="11318692" href="/news/worldnews/asia/indonesia/11318692/AirAsia-pilots-son-thinks-daddy-is-still-at-work.html">AirAsia pilot's son 'thinks daddy is still at work' </a></strong>
+</p>
+<p>
+<image refid="3151371" version="c" width="460" height="287" caption="Arya Galih Gegara, 8, the son of AirAsia QZ8501 pilot Irianto" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/airasia-child_3151371c.jpg" photographer="" name="airasia-child" alttext="Arya Galih Gegara, 8, the son of AirAsia QZ8501 pilot Irianto"></image></p>
+<p></p>
+<p>
+<strong>08.55</strong> Here's the latest from our video team on the search for wreckage 
+  and bodies. 
+</p>
+<p>
+<iframe width="460" height="259" src="//www.youtube.com/embed/K7yr8Sg44cA" frameborder="0" allowfullscreen> </iframe></p>
+<p></p>
+<p>
+<strong>08.21 </strong>Following the offer by the British government to assist in the 
+  search for missing Air Asia flight QZ8501, an investigator from the UK's Air 
+  Accident Investigation Branch (AAIB) is now helping with the search for the 
+  plane's flight recorders. 
+</p>
+<p>
+The AAIB investigator has joined Singaporean experts to assist the Indonesian 
+  operation. They hope to reach the search area on an Indonesian naval vessel 
+  as soon as possible. The AAIB investigator is carrying specialist technical 
+  equipment that can help locate the flight recorders. 
+</p>
+<p>
+<strong>Moazzam Malik</strong>, the British Ambassador to Indonesia, said: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+On behalf of British people and Her Majesty's Government I would like to 
+  express our deepest condolences to the family of the passengers and crew. 
+  Our thoughts and prayers are with them at this difficult time. </i>
+</p>
+<p>
+<i>The UK Air Accident Investigation Branch has long experience, expertise and 
+  technical equipment that can help locate flight recorders underwater. I hope 
+  their assistance can help the Indonesian authorities locate the black box 
+  for Air Asia flight 8501 quickly. We stand ready to help with the subsequent 
+  investigation if required."</i>
+</p>
+<p></p>
+<p>
+<strong>07.49</strong> AirAsia boss Tony Fernandes has just tweeted his thanks to the 
+  authorities in Indonesia. 
+</p>
+<p>
+<iframe src="http://s.telegraph.co.uk/graphics/html/TwitterEmbed/Version1/web27806.html" width="460" height="133" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" id="tweetframe55019618797056000013697052191420012234"><noframe>Twitter: Tony Fernandes - Besanas and the Indonesia army, navy and police have been very transparent and very detailed. I thnk them all for their incredible efforts.</noframe></iframe></p>
+<p>
+You can read more about Mr Fernandes - Asia's answer to Richard Branson - 
+  here. 
+</p>
+<p>
+<strong><a id="11315024" href="/news/worldnews/asia/indonesia/11315024/AirAsia-plane-missing-profile-of-airline-boss-Tony-Fernandes.html">AirAsia plane missing: profile of airline boss Tony 
+  Fernandes</a> </strong>
+</p>
+<p></p>
+<p>
+<strong>07.38 </strong>Our correspondent <strong>Jonathan Pearlman</strong>, in Pangkalan Bun - 
+  where the bodies are being brought from the crash site - brings us the 
+  following update: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+The two bodies from the crashed AirAsia flight that were returned to land 
+  earlier today have now been identified, prepared in coffins and flown to 
+  Surabaya. The Indonesian search authority said the bodies belonged to a boy, 
+  140cm tall, wearing a blue shirt and brown trousers, and a woman, 160cm 
+  tall, wearing blue jeans and a dark blue shirt. </i>
+</p>
+<p>
+<i>Some of the remaining five bodies found so far are due to land here soon 
+  and will be identified and flown off in similar fashion. </i>
+</p>
+<p>
+<i>Separately, AirAsia owner Tony Fernandes is at the airport in Pangkalan Bun 
+  to meet with the Indonesian search authority.</i>
+</p>
+<p></p>
+<p>
+<strong>07.13 </strong>
+</p>
+<p>
+<iframe src="http://s.telegraph.co.uk/graphics/html/TwitterEmbed/Version1/web27804.html" width="460" height="133" marginheight="0" marginwidth="0" frameborder="0" scrolling="no" id="tweetframe5501858650548060183806213001420010041"><noframe>Twitter: Tom Phillips - The Indonesian gov this morning asked its citizens to cancel outdoor New Year's Eve celebrations as sign of respect to <a href="https://twitter.com/search?src=hash&q=%23QZ8501" target="_blank">#QZ8501</a> victims</noframe></iframe></p>
+<p></p>
+<p>
+<strong>06.59 </strong>More on that body recovered from the crashed plane. 
+</p>
+<p>
+Tatang Zaenudin, an official with the search and rescue agency, said: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+This morning, we recovered a total of four bodies and one of them was wearing 
+  a life jacket. </i>
+</p>
+<p></p>
+<p>
+<strong>06.48</strong> Reuters - INDONESIA SEARCH AND RESCUE AGENCY SAYS BODY RECOVERED 
+  FROM AIRASIA JET WAS WEARING LIFE JACKET 
+</p>
+<p></p>
+<p>
+<image refid="3151363" version="c" width="460" height="287" caption="Relatives of the missing passengers on board the AirAsia plane pray at Juanda Airport, in Surabaya, Indonesia" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151363c.jpg" photographer="" name="AirAsia-Indonesia-cry" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="EPA/MADE NAGI"></image>
+ <sup>Relatives of the missing passengers on board the AirAsia plane pray at 
+  Juanda Airport, in Surabaya, Indonesia (EPA)</sup>
+</p>
+<p>
+<strong>06.25 Jonathan Pearlman </strong>in Palangkan Bun has spoken to the head of the 
+  search and rescue agency: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+The Indonesian search authority says it expects bodies of survivors from the 
+  AirAsia flight to start washing up ashore along the coastline in the coming 
+  days.</i> <i>Air Vice Marshal Sunarbowo Sandi, the mission coordinator in 
+  Palangkan Bun, says strong winds and currents have already moved debris up 
+  to 30 miles since they were first seen yesterday. He says one more body was 
+  found today but poor weather and visibility has made searching all but 
+  impossible and is preventing authorities from flying all seven bodies back 
+  to shore. The bodies are on naval vessels; two have been flown to land by 
+  helicopter. </i>
+</p>
+<p>
+<i>He says there has been no sign of the black box but a vessel with detection 
+  equipment is being dispatched. He is not aware of any bodies being found in 
+  life jackets. More than 90 divers are ready on ships to start searching but 
+  have been unable due to the poor weather conditions. He also said there had 
+  been no confirmation that the body of the plane has been spotted, though 
+  some search personnel have reported seeing something that "seemed" 
+  to be the plane.</i>
+</p>
+<p>
+<strong>06.20 </strong>This from <strong>Tom Phillips</strong>, our correspondent in Surabaya: 
+</p>
+<p>
+<i><img width="45" alt="Quote" align="left" src="http://i.telegraph.co.uk/multimedia/archive/01817/quotes_1817837a.gif" height="40">
+There are 75 ambulances lined up at Surabaya airport this morning in 
+  anticipation of the arrival of the victims' bodies. </i>
+</p>
+<p>
+<i>It's not clear when the victims will start arriving here, but when they do 
+  they will be taken to the city's Bhayankara Hospital, around 6 miles away. 
+  Already six bodies have been recovered we now understand, including one 
+  wearing an AirAsia uniform. </i>
+</p>
+<p>
+<i>Relatives have been holding prayer sessions this morning at the airport as 
+  they wait for news about the progress of the rescue operation. </i>
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p>So many ambulances lined up outside military airport in Surabaya this morning to receive bodies of <a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a> victims <a href="http://t.co/16xocpihlY">pic.twitter.com/16xocpihlY</a></p>&mdash; Tom Phillips (@tomphillipsin) <a href="https://twitter.com/tomphillipsin/status/550153893359804418">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p>I counted nearly 30 ambulances on standby to take <a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a> victims&#39; bodies to hospital in Surabaya for identification <a href="http://t.co/PhMGY3uuzf">pic.twitter.com/PhMGY3uuzf</a></p>&mdash; Tom Phillips (@tomphillipsin) <a href="https://twitter.com/tomphillipsin/status/550155752703148032">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>06.10</strong> Update: total of 7 bodies - 4 men, 3 women - recovered so far, 
+  says search chief. One was air hostess Khairunisa Haidar Fauzi,, who was in 
+  uniform, one was in a life jacket according to reports, and three were found 
+  still holding hands. 
+</p>
+<p>
+<image refid="3151361" version="c" width="460" height="287" caption="Indonesian police collect AirAsia passenger identifications from relatives to help identification of the victims at Juanda Airport, in Surabaya, Indonesia" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151361c.jpg" photographer="" name="AirAsia-Indonesia-paperwork-2" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="EPA/MADE NAGI"></image>
+ <sup>Indonesian police collect AirAsia passenger records from relatives to 
+  help identification of the victims at Juanda Airport, in Surabaya, Indonesia 
+  (EPA)</sup>
+</p>
+<p>
+<strong>05.20</strong> Seventh body has reportedly just been found. Our correspondent <strong>Jonathan 
+  Pearlman </strong>has just arrived in Pangkalan Bun airport, where Indonesian 
+  military just arrived with two bodies. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a>: Search teams have just brought a body back to Pangkalan Bun from sea via helicopter <a href="http://t.co/fU1QeMQPFC">http://t.co/fU1QeMQPFC</a> <a href="http://t.co/xrDVp5Qaqn">pic.twitter.com/xrDVp5Qaqn</a></p>&mdash; Channel NewsAsia (@ChannelNewsAsia) <a href="https://twitter.com/ChannelNewsAsia/status/550171972366110720">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>04.25</strong> Three people killed on AirAsia flight QZ8501 were holding hands 
+  when their bodies were spotted floating in the Java sea off Indonesia, a 
+  pilot involved in the search for the missing plane has claimed. 
+</p>
+<p>
+Lieutenant Airman Tri Wobowo, who co-piloted the C130 Hercules aircraft that 
+  first saw debris of the plane on Tuesday, told Indonesian newspaper Kompas: "There 
+  are seven to eight people. Three [of them] again hold hands."
+</p>
+<p>
+<image refid="3151355" version="c" width="460" height="287" caption="Members of an Indonesian search and rescue team carry a body on a stretcher during the recovery of victims" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151355c.jpg" photographer="" name="AirAsia-Indonesia-bodybag" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="YANUAR/AFP/Getty Images"></image>
+ <sup>Members of an Indonesian search and rescue team carry a body on a 
+  stretcher during the recovery operation (AFP/Getty)</sup>
+</p>
+<p>
+<strong>04.00</strong> Searchers says they've seen a sonar image appears to show an 
+  aircraft lying upside down on the ocean floor. The newspaper quoted the 
+  agency as saying the image appeared to show an airplane upside down in 24-30 
+  meters of water. 
+</p>
+<p>
+<strong>03.12</strong> We have a little more on the bodies pulled up today: apparently 
+  three are male and three female including, according to reports, 20-year-old 
+  trainee flight assistant Khairunisa Haidar Fauzi. Ms Khairunisa&rsquo;s father, 
+  Haidar Fauzi, has said: &ldquo;This is what we expected, and the sooner the body 
+  is returned, the sooner we can have her back.&rdquo;
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/PrayForAirAsia?src=hash">#PrayForAirAsia</a> ✈&#10;Air Asia flight attendant Khairunisa Haidar Fauzi was travelling on the missing flight. <a href="http://t.co/RBBPdyUNaS">pic.twitter.com/RBBPdyUNaS</a></p>&mdash; J (@jealousay) <a href="https://twitter.com/jealousay/status/549734896499830785">December 30, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>02.50</strong> As we reported earlier, searchers found three more bodies this 
+  morning, including a flight attendant still wearing her AirAsia uniform, 
+  bringing the total to six so far, Fully clothed bodies could also indicate 
+  the plane was intact when it hit the water and support a theory that the 
+  Airbus A320-200 suffered an aerodynamic stall and plunged into the sea. 
+</p>
+<p>
+"The fact that the debris appears fairly contained suggests the aircraft 
+  broke up when it hit the water, rather than in the air," said Neil 
+  Hansford, a former pilot and chairman of consultancy firm Strategic Aviation 
+  Solutions. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a> search: Backpack, food, kid&#39;s shoes found by Indonesia ship Bung Tomo: <a href="https://twitter.com/detikcom">@detikcom</a> <a href="http://t.co/fU1QeMQPFC">http://t.co/fU1QeMQPFC</a> <a href="http://t.co/QiXysgpqA4">pic.twitter.com/QiXysgpqA4</a></p>&mdash; Channel NewsAsia (@ChannelNewsAsia) <a href="https://twitter.com/ChannelNewsAsia/status/550126047144841216">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>02.10</strong> AIrAsia boss is on his way to the island receiving bodies to 
+  comfort relatives. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p>I hope to fly to evacuation site to thank everyone for putting in so much effort in finding the site. And keep everyone informed.</p>&mdash; Tony Fernandes (@tonyfernandes) <a href="https://twitter.com/tonyfernandes/status/550111045792976896">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>02.10</strong> Stormy weather has forced Indonesian rescuers to suspend their 
+  search for the bodies. 
+</p>
+<p>
+"We are experiencing bad weather now. Rains and winds prevented us from 
+  resuming the search operation this morning," air force rescue 
+  coordinator S.B. Supriyadi told AFP. 
+</p>
+<p>
+<image refid="3151362" version="c" width="460" height="287" caption="Indonesian Navy divers inspect their gear upon arrival for the search operation for the victims of AirAsia flight QZ 8501 at the airport in Pangkalan Bun, Indonesia" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03151/AirAsia-Indonesia-_3151362c.jpg" photographer="" name="AirAsia-Indonesia-team" alttext=" A massive recovery operation has begun following confirmation from Indonesian officials that remains and debris found in waters off Borneo are from the missing AirAsia plane. Indonesian officials have confirmed that debris and dead bodies that have been sighted in the Java Sea are from the AirAsia flight QZ8501 that went missing on Sunday" copyright="AP Photo/Dewi Nurcahyani"></image>
+ <sup>Indonesian Navy divers inspect their gear upon arrival for the search 
+  operation for the victims of AirAsia flight QZ 8501 at the airport in 
+  Pangkalan Bun, Indonesia (AP)</sup>
+</p>
+<p>
+National Search and Rescue Agency chief Bambang Soelistyo told a press 
+  conference Wednesday that six bodies had now been recovered, including a 
+  woman in crew uniform. 
+</p>
+<p>
+"As soon as the weather is clear, the bodies will be brought to Pangkalan 
+  Bun," the town with the nearest airstrip to the crash site, said 
+  Soelistyo. 
+</p>
+<p>
+Supriyadi said that hundreds of people from the military, police and national 
+  rescue agency were on standby waiting for clear weather in Pangkalan Bun. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p><a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a> search: DNA tests on recovered bodies being conducted by police, says police chief <a href="http://t.co/fU1QeMQPFC">http://t.co/fU1QeMQPFC</a> <a href="http://t.co/3dieemkTkT">pic.twitter.com/3dieemkTkT</a></p>&mdash; Channel NewsAsia (@ChannelNewsAsia) <a href="https://twitter.com/ChannelNewsAsia/status/550111059504156672">December 31, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>02.00</strong> The UK air investigation bureau join will join today's search 
+  with special technology to track the exact location of the airplane beacon 
+  under water. 
+</p>
+<p>
+<strong>00.35</strong> The Telegraph team in China has been speaking to families of the 
+  passengers of Malaysia Airlines Flight MH370 that disappeared in March and, 
+  unlike QZ8501, has still yet to be found. 
+</p>
+<p>
+&ldquo;Many people say they share the pain and sorrow of the victims&rsquo; families, but 
+  only we, the families, know exactly how it feels. We have been there 
+  before,&rdquo; said Steve Wang, whose mother was one of 239 people on the plane. 
+</p>
+<p>
+&ldquo;I feel so sad that history is repeating itself. I don&rsquo;t know why it is 
+  happening again,&rdquo; he said. 
+</p>
+<p>
+Dai Shuqin, a 61-year-old who had five relations on MH370, said she had been 
+  constantly thinking about those caught up in the latest Asian air disaster. 
+  I pray for them to have at least one people survive,&rdquo; she said. &ldquo;If just one 
+  person might survive on QZ8501, it would give me hope for MH370.&rdquo;
+</p>
+<p>
+Mrs Dai said she was asking for a &ldquo;miracle&rdquo;. &ldquo;I cannot believe that 10 months 
+  later another group of people has been on a lost plane again. All those 
+  lives!&rdquo; 
+</p>
+<p>
+Jiang Hui, whose mother was on MH370, said: &ldquo;I don't know how to describe the 
+  feeling I had when I heard [about QZ8501]&rdquo;
+</p>
+<p>
+&ldquo;It was like waking up from a nightmare &ndash; I was covered in goose-bumps. How 
+  could there be so many disasters this year?&rdquo;
+</p>
+<p>
+<image refid="3150180" version="c" width="460" height="336" caption="Sudarsan Pattnaik works on a sand sculpture portraying the missing AirAsia and Malayasia Airlines planes, on Golden Sea Beach in Puri, in India's eastern Odisha state (Getty Images)" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03150/gal1_3150180c.jpg" photographer="" name="gal1"></image>
+ <sub>Sudarsan Pattnaik works on a sand sculpture portraying the missing 
+  AirAsia and Malayasia Airlines planes, on Golden Sea Beach in Puri, in 
+  India's eastern Odisha state </sub>
+</p>
+<p>
+<strong>00.30</strong> Aviation experts believe the fuselage may be easily found as the 
+  aircraft probably only broke up when it hit the water. 
+</p>
+<p>
+"The fact that the debris appears fairly contained suggests the aircraft 
+  broke up when it hit the water, rather than in the air," Neil Hansford, 
+  a former pilot and chairman of consultancy firm Strategic Aviation 
+  Solutions, said on Wednesday. 
+</p>
+<p>
+<strong>00.20 </strong>Relatives had been holding out hope that against all odds, their 
+  family members would be saved. One father learned the horrible news that his 
+  daughter Maria Widodo had likely not made it. 
+</p>
+<p>
+Maria had recently graduated from the National Institute of Education, the 
+  Straits Times reported. In college she was part of her university&rsquo;s guitar 
+  ensemble, along with her boyfriend, Andy Paul Chen, who is from Singapore. 
+</p>
+<p>
+Following news of the plane&rsquo;s disappearance, Florentina Maria Widodo&rsquo;s father 
+  changed his profile picture on Facebook to one of him and his daughter, and 
+  Chen posted the news that his girlfriend was on the flight. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p>Our deepest condolences <a href="https://twitter.com/hashtag/airasiamissing?src=hash">#airasiamissing</a> <a href="http://t.co/Nli9H4c2md">pic.twitter.com/Nli9H4c2md</a></p>&mdash; Bigi (@DrBigi) <a href="https://twitter.com/DrBigi/status/549884936254025728">December 30, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>00.04</strong> The grim task of identification of bodies from #QZ8501 will begin 
+  today. Family members have already been asked for photos and provided DNA. 
+  Due to bad weather, only three bodies have so far been recovered. 
+</p>
+<p>
+<strong>23.46</strong> This is the search area teams will be concentrating on this 
+  morning - it's about the size of Wales. 
+</p>
+<p>
+<blockquote class="twitter-tweet" lang="en"><p>Malaysia&rsquo;s <a href="https://twitter.com/ChiefofNavy">@ChiefofNavy</a>: today&rsquo;s ongoing <a href="https://twitter.com/hashtag/QZ8501?src=hash">#QZ8501</a> search is split into four sea sectors totalling 5378 square km. <a href="http://t.co/ha8AezcsjR">pic.twitter.com/ha8AezcsjR</a></p>&mdash; John Walton (@thatjohn) <a href="https://twitter.com/thatjohn/status/550073209379246080">December 30, 2014</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script></p>
+<p>
+<strong>23.45 </strong>It is now approaching 7am in Jakarta.The search for more bodies - 
+  and clues as to the cause behind AirAsia Flight QZ8501's crash into the Java 
+  Sea - continues. It was a long night for families, who learnt the fate of 
+  their loved ones in the most devastating of ways. 
+</p>
+<p>
+<image refid="3150722" version="c" width="460" height="287" caption="Relatives of passengers on AirAsia flight QZ 8501 react to the breaking news of debris and bodies being found on December 30" declared-caption="" src="http://i.telegraph.co.uk/multimedia/archive/03150/AirAsia_hug_3150722c.jpg" photographer="" name="AirAsia hug" alttext="Relatives of passengers on AirAsia flight QZ 8501 react to the breaking news of debris and bodies being found" copyright="Getty"></image>
+<br><sup>Relatives of passengers on AirAsia flight QZ 8501 console each other 
+  (Getty)</sup>
+</p></div>
+			   
+		<div class="cl"></div>
+</div></div><div class="isaSeason">
+			</div></div>
+
+					<div class="oneSixth">
+							<!-- googleoff: all -->
+
+	<style media="print">
+    #newGigyaShareSide { display: none !important; }
+</style>
+<div id="newGigyaShareSide">
+    <a href="javascript:print()" alt="Print" title="Print">&nbsp;</a>
+</div>
+
+<div class="storyfct">
+			<div id="storyMoreOnFucntion">
+		<div class="secLinks">
+
+			<div class="section">
+				<div class="name">
+					<h2><a href="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/">Indonesia</a></h2>
+				</div>
+				
+				<div class="cl"></div>
+			</div>
+
+			<ul>
+					<li class="first">
+									<h3><a href="http://www.telegraph.co.uk/news/">News &#187;</a></h3>
+								</li>
+								<li>
+									<h3><a href="http://www.telegraph.co.uk/news/worldnews/">World News &#187;</a></h3>
+								</li>
+								<li>
+									<h3><a href="http://www.telegraph.co.uk/news/worldnews/asia/">Asia &#187;</a></h3>
+								</li>
+								<li>
+									<h3><a href="http://www.telegraph.co.uk/news/worldnews/asia/singapore/">Singapore &#187;</a></h3>
+								</li>
+								<li>
+									<h3><a href="http://www.telegraph.co.uk/journalists/harriet-alexander/">Harriet Alexander &#187;</a></h3>
+								</li>
+								</ul>
+				<div class="cl"></div>
+		</div>
+	</div>
+</div>
+	<div class="related_links">
+		<div id="artComRelLinks" class="summaryMedium gutterUnder">
+		<div class="headerOne styleTen"><p>Related Partners</p></div>
+		<div bucket-id="article_commercial_related_content_01" >	
+	<ul>
+		<li>
+			<div class="comLink">
+				<!-- 9612015 -->
+				<p class="comLinkText"><a href="http://www.telegraph.co.uk/financialservices/money-transfer-and-expat/foreign-ex-and-money-transfer?utm_source=tmg&utm_medium=related_savings&utm_campaign=moneycorp_private" rel="nofollow">The best way to transfer money overseas</a></p>
+			</div>
+		</li>
+	</ul>
+</div></div>
+</div>
+
+    <div class="summaryMedium secPuffs section-puffs">
+                <div class="headerOne styleOne"><p>In Indonesia</p></div>
+                <div bucket-id="section_puffs_01" >	
+	<div class="summary imageCentreHeadline">
+			<div class="summarySmall">
+				<!-- imagePosition: centre, columnContext: oneSixth -->
+<div class="piccentre containerdiv  ">
+        <a  href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03153/airasia-coffin_3153343g.jpg" alt="Members of an Indonesian search and rescue team carry a coffin containing a victim of AirAsia flight 8501 at Iskandar Airbase " border="0" width="140"  height="87" />
+									<span class="cornerimagephotocentre">&nbsp;</span></a>
+                </div>
+	
+<h3>
+                    <a  href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html">The search for AirAsia QZ8501</a>
+                </h3>
+
+	</div>
+		</div>
+	<div class="summary imageCentreHeadline">
+			<div class="summarySmall">
+				<!-- imagePosition: centre, columnContext: oneSixth -->
+<div class="piccentre containerdiv  ">
+        <a  href="/news/picturegalleries/worldnews/11313588/Boxing-Day-Tsunami-Victims-remembered-on-10th-anniversary-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03148/tsunami-summ_3148684g.jpg" alt="An Acehnese child plays on Syiah Kuala beach during the 10th anniversary of the tsunami in Banda Aceh, Indonesia" border="0" width="140"  height="87" />
+									<span class="cornerimagephotocentre">&nbsp;</span></a>
+                </div>
+	
+<h3>
+                    <a  href="/news/picturegalleries/worldnews/11313588/Boxing-Day-Tsunami-Victims-remembered-on-10th-anniversary-in-pictures.html">Tsunami 10th anniversary</a>
+                </h3>
+
+	</div>
+		</div>
+	<div class="summary imageCentreHeadline">
+			<div class="summarySmall">
+				<!-- imagePosition: centre, columnContext: oneSixth -->
+<div class="piccentre containerdiv  ">
+        <a  href="/news/picturegalleries/worldnews/11309996/Boxing-Day-Tsunami-Possessions-of-victims-revealed-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03146/tsunami-summ_3146673g.jpg" alt="Thai police opened a shipping container filled with documents and possessions of victims of the 2004 Indian Ocean Tsunami" border="0" width="140"  height="87" />
+									<span class="cornerimagephotocentre">&nbsp;</span></a>
+                </div>
+	
+<h3>
+                    <a  href="/news/picturegalleries/worldnews/11309996/Boxing-Day-Tsunami-Possessions-of-victims-revealed-in-pictures.html">Unclaimed possessions</a>
+                </h3>
+
+	</div>
+		</div>
+	<div class="summary imageCentreHeadline">
+			<div class="summarySmall">
+				<!-- imagePosition: centre, columnContext: oneSixth -->
+<div class="piccentre containerdiv  ">
+        <a  href="/news/picturegalleries/worldnews/11304701/Boxing-Day-tsunami-then-and-now-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03144/tsunami-boxing-sum_3144073g.jpg" alt="Ten years since the Boxing Day tsunami that hit South East Asia in 2004" border="0" width="140"  height="87" />
+									<span class="cornerimagephotocentre">&nbsp;</span></a>
+                </div>
+	
+<h3>
+                    <a  href="/news/picturegalleries/worldnews/11304701/Boxing-Day-tsunami-then-and-now-in-pictures.html">Boxing Day tsunami: then and now</a>
+                </h3>
+
+	</div>
+		</div>
+	<div class="summary imageCentreHeadline">
+			<div class="summarySmall">
+				<!-- imagePosition: centre, columnContext: oneSixth -->
+<div class="piccentre containerdiv  ">
+        <a  href="/news/picturegalleries/earth/11193394/Under-the-sea-The-weird-and-wonderful-creatures-from-the-bottom-of-the-ocean.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03088/creatures-sea-sum_3088124g.jpg" alt="British wildlife photographer Alex Mustard has travelled the world snapping pictures of the weird and wonderful creatures found beneath the sea" border="0" width="140"  height="87" />
+									<span class="cornerimagephotocentre">&nbsp;</span></a>
+                </div>
+	
+<h3>
+                    <a  href="/news/picturegalleries/earth/11193394/Under-the-sea-The-weird-and-wonderful-creatures-from-the-bottom-of-the-ocean.html">Creatures from beneath the sea</a>
+                </h3>
+
+	</div>
+		</div>
+	</div>
+	</div>
+        <!-- googleon: all --></div>
+					<div class="cl"></div>
+
+			<div class="storyFt">
+				<style media="print">
+    .newGigyaShare { display: none !important; }
+</style>
+<div id="newGigyaShareBottom" class="newGigyaShare"></div>
+<div id="outbrain-links">
+						<div class="OUTBRAIN" data-src="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" data-widget-id="AR_16" data-ob-template="telegraph"></div>
+						<div class="OUTBRAIN" data-src="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" data-widget-id="AR_30" data-ob-template="telegraph"></div>						
+						<script type="text/javascript" src="http://widgets.outbrain.com/outbrain.js"></script>						
+					</div>
+				<div id="outbrain-links">
+						<div class="OUTBRAIN" data-src="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" data-widget-id="AR_4" data-ob-template="telegraph"></div>											
+					</div>				
+				
+	  	
+            <div class="summaryMedium artCommercial">
+                        <div bucket-id="article_commercial_06" >	
+	<div class="headerOne styleOne">
+				<!-- 10828170 -->
+				<p>
+							<span>Top news galleries</span>
+							</p></div>
+		<div class="gutterUnder noSummaryTopBorder">
+	
+			<div class="summary headlineImageLeft">
+			<!-- 11317419 -->
+			<h3>
+                    <a  href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html">The search for AirAsia QZ8501</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03153/airasia-coffin_3153343f.jpg" alt="Members of an Indonesian search and rescue team carry a coffin containing a victim of AirAsia flight 8501 at Iskandar Airbase " border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/worldnews/11317419/AirAsia-plane-found-in-Java-Sea-in-pictures.html" 
+                         	 
+                         >
+							<p>
+<strong>In pics:</strong> Wreckage and bodies from the missing AirAsia flight have been 
+  found.
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 9848319 -->
+			<h3>
+                    <a  href="/culture/culturepicturegalleries/9848319/The-49-best-British-films-of-all-time.html">The 49 best British films of all time</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/culture/culturepicturegalleries/9848319/The-49-best-British-films-of-all-time.html"><img src="http://i.telegraph.co.uk/multimedia/archive/02470/zulu_2470772f.jpg" alt="Zulu (1964). Directed by Cy Endfield and starring Stanley Baker, Jack Hawkins and Michael Caine." border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<span class="labelOnSec"><a href="http://www.telegraph.co.uk/culture/film/"> Film</a></span>	
+<a href= "/culture/culturepicturegalleries/9848319/The-49-best-British-films-of-all-time.html" 
+                         	 
+                         >
+							<p>
+From Skyfall to Zulu, critic Barry Norman's choice of the 49 best British 
+  films of all time 
+</p></a>
+                </div><span class="comments">
+			            	<a href="/culture/culturepicturegalleries/9848319/The-49-best-British-films-of-all-time.html#disqus_thread" dsqid="9848319" class="">Comments</a>
+			            </span>
+					<div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11322460 -->
+			<h3>
+                    <a  href="/news/picturegalleries/celebritynews/11322460/Artist-transforms-off-the-shelf-dolls-into-hyper-realistic-models-of-celebrities.html">Hyper-realistic celebrity dolls</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/celebritynews/11322460/Artist-transforms-off-the-shelf-dolls-into-hyper-realistic-models-of-celebrities.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03153/dolls-sum_3153058f.jpg" alt="Artist Noel Cruz transforms off-the-shelf dolls into hyper realistic models of celebrities." border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/celebritynews/11322460/Artist-transforms-off-the-shelf-dolls-into-hyper-realistic-models-of-celebrities.html" 
+                         	 
+                         >
+							<p>
+A portrait artist transforms off-the-shelf dolls into hyper-realistic models 
+  of celebrities
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11321463 -->
+			<h3>
+                    <a  href="/news/picturegalleries/theweekinpictures/11321463/The-week-in-pictures-2-January-2015.html">The week in pictures</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/theweekinpictures/11321463/The-week-in-pictures-2-January-2015.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/p_otd-japan_3152716f.jpg" alt="Men ride on a mikoshi or portable shrine as local people carry it into the sea during a festival to wish for calm waters in the ocean and good fortune in the new year in Oiso, Japan" border="0" width="219"  height="128" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/theweekinpictures/11321463/The-week-in-pictures-2-January-2015.html" 
+                         	 
+                         >
+							<p>
+A round-up of our favourite photographs of the week 
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11321464 -->
+			<h3>
+                    <a  href="/news/picturegalleries/earth/11321464/Animal-photos-of-the-week.html">Animal photos of the week</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/earth/11321464/Animal-photos-of-the-week.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/animals-woof_3152782f.jpg" alt="Border Collie Mumpitz shakes himself after taking a dip in the North Sea in Hedehusum on the island of Foehr, Germany" border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/earth/11321464/Animal-photos-of-the-week.html" 
+                         	 
+                         >
+							<p>
+All creatures great and small in our ever popular animal gallery. 
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11321135 -->
+			<h3>
+                    <a  href="/news/picturegalleries/howaboutthat/11321135/New-Years-Day-swimmers-in-pictures.html">New Year's Day swimmers</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/howaboutthat/11321135/New-Years-Day-swimmers-in-pictures.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/NYD_swimmers_hotti_3152526f.jpg" alt=" Hundreds of people take part in the traditional Loony Dook at South Queensferry" border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/howaboutthat/11321135/New-Years-Day-swimmers-in-pictures.html" 
+                         	 
+                         >
+							<p>
+Swimmers plunge into the sea around the world on New Year's Day
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11321271 -->
+			<h3>
+                    <a  href="/news/picturegalleries/picturesoftheday/11321271/Pictures-of-the-day-2-January-2015.html">Pictures of the day</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/picturesoftheday/11321271/Pictures-of-the-day-2-January-2015.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/potd-seal_3152625f.jpg" alt="A seal pup seems to be in deep thought as it rests its chin on its paw before staring into the camera. The one-month-old grey seal pup - the same size as a small dog - lays down on its side while getting used to its surroundings. Its mother is nearby as she keeps a watchful eye on the beach on the north Norfolk coast near Horsey.  " border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/picturesoftheday/11321271/Pictures-of-the-day-2-January-2015.html" 
+                         	 
+                         >
+							<p>
+A thoughtful seal, a diving Super Woman and Kim Jong-un visits orphanage 
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11310148 -->
+			<h3>
+                    <a  href="/news/picturegalleries/11310148/Celebrities-and-their-winter-coats.html">Celebrities and their winter coats</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/11310148/Celebrities-and-their-winter-coats.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03146/summ_big-please_04_3146856f.jpg" alt="Like his Teenage Mutant 
+Ninja Turtle namesake, Leonardo DiCaprio – honestly, it is – appeared to be shrinking into 
+his polyester shell as he took his mother for lunch in New York in 2004." border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/11310148/Celebrities-and-their-winter-coats.html" 
+                         	 
+                         >
+							<p>
+When fashion and practicality collide in an eruption of layers and nobody 
+  judges you for wearing the same outfit 98 times in a row
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 11308565 -->
+			<h3>
+                    <a  href="/news/picturegalleries/11308565/Chris-Froomes-appy-snaps-On-the-road-with-the-Tour-de-France-winner.html">On the road with Froome</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/news/picturegalleries/11308565/Chris-Froomes-appy-snaps-On-the-road-with-the-Tour-de-France-winner.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03145/SUM_Honeymoon_3145896f.jpg" alt="'Enjoying this while it lasts… #honeymoon #stellenbosch.’ Nov 11
+" border="0" width="219"  height="137" />
+									<span class="cornerimagephotoleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<a href= "/news/picturegalleries/11308565/Chris-Froomes-appy-snaps-On-the-road-with-the-Tour-de-France-winner.html" 
+                         	 
+                         >
+							<p>
+Cyclist Chris Froome
+ shares his Instagram moments with the Telegraph Magazine
+</p></a>
+                </div><div class="cl"></div>
+		</div>
+	<div class="summary headlineImageLeft">
+			<!-- 10547314 -->
+			<h3>
+                    <a  href="/culture/culturepicturegalleries/10547314/Culture-stars-who-died-in-2014.html">Culture stars who died in 2014</a>
+                </h3>
+
+	<!-- imagePosition: left, columnContext: twoThirds -->
+<div class="picleft containerdiv  ">
+        <a  href="/culture/culturepicturegalleries/10547314/Culture-stars-who-died-in-2014.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03145/CultureDeath2014_3145800f.jpg" alt="Rik Mayall, Shirley Temple, Robin Williams, Maya Angelou, Philip Seymour Hoffman and Lauren Bacall" border="0" width="219"  height="137" />
+									<span class="cornerimageleft">&nbsp;</span></a>
+                </div>
+	
+<div class="labelAbstract">
+<span class="labelOnSec"><a href="http://www.telegraph.co.uk/culture/culturenews/"> Culture News</a></span>	
+<a href= "/culture/culturepicturegalleries/10547314/Culture-stars-who-died-in-2014.html" 
+                         	 
+                         >
+							<p>
+We celebrate and remember the stars who passed away last year
+</p></a>
+                </div><span class="comments">
+			            	<a href="/culture/culturepicturegalleries/10547314/Culture-stars-who-died-in-2014.html#disqus_thread" dsqid="10547314" class="">Comments</a>
+			            </span>
+					<div class="cl"></div>
+		</div>
+	</div>
+	</div>
+	</div>
+                
+	
+
+<!-- googleoff: all -->
+
+	<input type="hidden" name="numofAds" id="numofAds" value="3">
+
+<div class="googleads ">
+		<div class="access">Advertisement</div>
+		
+		<script type="text/javascript">
+		<!--
+			google_ad_client = 'ca-telegraph_uk_300x250';
+			google_ad_channel = 'news';
+			google_max_num_ads = '3';
+			google_ad_output="js";
+			google_ad_type="text";
+			google_language="en";
+			google_encoding="utf8";
+			google_safe="high";
+			
+			
+									
+		// -->
+		</script>
+		
+		<script type="text/javascript" src="/template/ver1-0/js/googleAds.js"></script>
+		
+	<div id="google-ads-container"></div>
+		<script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+		<noscript>
+			<img height="1" width="1" border="0" src="http://pagead2.googlesyndication.com/pagead/imp.gif?client=ca-telegraph_uk_420x200&amp;event=noscript" alt=""/>
+		</noscript>
+	</div>
+
+<!-- googleon: all -->
+</div>
+
+			<div class="twoThirds btop">
+				<!--comments=disqus<br>
+disqusComments=inactive<br>
+userCommentsState=active<br>
+showComments=true<br>
+article.articleTypeName=tmglstory<br>-->
+
+		
+<a class="moderate" href="http://my.telegraph.co.uk/aboutus/mytelegraph/12/moderation-faqs/" target="_new">How we moderate</a>
+	
+	<div class="gutterUnder fclear">
+	<div class="hide" id="disqusAcc">telegraphuk</div>
+		<div id="disqus_thread"></div>
+		<script type="text/javascript">
+		var disqus_title = "AirAsia plane found in Java Sea: latest";
+		var disqus_identifier = "11315001";
+		var disqus_developer = 1;
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript=telegraphuk">comments powered by Disqus.</a></noscript>
+		<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+	</div> 		
+</div>
+			<div class="cl"></div>
+		</div>
+
+		<div class="oneThird">
+			<div class="articleSponsor">
+            <div bucket-id="article_sponsor_01" >	
+	<div
+					class="summary html mnHTML">
+					<!-- 8015432 -->
+                    <iframe allowTransparency="true" style="border:none; overflow:hidden; width:292px; height:62px;" frameborder="0" scrolling="no" src="http://www.facebook.com/plugins/likebox.php?href=http%3A%2F%2Fwww.facebook.com%2Ftelegraph.co.uk&amp;width=292&amp;connections=0&amp;stream=false&amp;header=false&amp;height=62">Telegraph on Facebook</iframe></div>
+			</div>
+	</div>
+
+    <div class="summaryMedium">
+		</div>
+	<div class="summaryPadding"></div>
+<div class="admpu gutterUnder">
+  <script type="text/javascript">
+     /* EPOCH time at the start of MPU Ad */
+     var mpuAdTimerStart = Date.now();
+  </script>
+<div class="access">Advertisement</div>
+<div id="mpu" class="InSkinHide">
+	<div bucket-id="mpu">
+<script type="text/javascript">
+		document.write(tmgAdsBuildAdTag("mpu", "300x250,300x600", "adj", "", 2));
+		</script>
+	</div></div>
+</div>
+
+<div class="summaryMedium  gutterUnder  tps5 top-stories05">
+				<div bucket-id="top_stories_05" >	
+	<div class="headerOne styleOne">
+				<!-- 10816946 -->
+				<p>
+							<a href="http://www.telegraph.co.uk/telegraphtv/"><span>Latest Video&#187;</span></a>
+							</p></div>
+		<div class="summaryMedium pictureGrid  oneThirdGrid">
+	<div class="summary picGrid-02">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/news/worldnews/asia/indonesia/11323040/AirAsia-Flight-QZ8501-search-two-large-parts-of-plane-found-on-seabedA.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03153/airasia_3153334g.jpg" alt="Indonesian Navy personnel line up recovered bodies of passengers from AirAsia flight QZ8501 on the the deck of the Indonesian Navy vessel KRI Banda Aceh" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/news/worldnews/asia/indonesia/11323040/AirAsia-Flight-QZ8501-search-two-large-parts-of-plane-found-on-seabedA.html">AirAsia search: two large objects found</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="summary picGrid-03">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/finance/personalfinance/money-saving-tips/11317552/Train-ticket-price-rises-explained.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03151/Train_ticket_price_3151739g.jpg" alt="Train prices have gone up more than the rate of inflation in the last decade" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/finance/personalfinance/money-saving-tips/11317552/Train-ticket-price-rises-explained.html">Animation: train fare rises explained</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="summary picGrid-04">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/news/worldnews/asia/northkorea/11322838/Watch-Barack-Obama-explains-US-sanctions-on-North-Korea-over-Sony-attack.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03153/obama1_3153260g.jpg" alt="Watch: Barack Obama explains US sanctions against North Korea over Sony attack" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/news/worldnews/asia/northkorea/11322838/Watch-Barack-Obama-explains-US-sanctions-on-North-Korea-over-Sony-attack.html">Obama: North Korea's hacking has caused 'a lot of damage'</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="summary picGrid-05">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/news/newsvideo/viral-video/11322220/Watch-Puppies-struggle-to-walk-in-new-shoes.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/puppies1_3152982g.jpg" alt="Puppies struggle to walk with new shoes" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/news/newsvideo/viral-video/11322220/Watch-Puppies-struggle-to-walk-in-new-shoes.html">Cute puppies struggle to walk in new shoes</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="summary picGrid-06">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/sport/football/players/steven-gerrard/11321591/12-year-old-Steven-Gerrard-shows-off-his-football-skills.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/12-year-old_Steven_3152685g.jpg" alt="12-year-old Steven Gerrard shows off his football skills" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/sport/football/players/steven-gerrard/11321591/12-year-old-Steven-Gerrard-shows-off-his-football-skills.html">One to watch! 12-year-old Gerrard shows off his skills</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="summary picGrid-07">
+							<div class="summarySmall">
+								<!-- imagePosition: centre, columnContext: oneThirdWithGrid -->
+<div class="piccentre containerdiv  ">
+        <div class="playButton" style="width: 140px; height: 87px;"><a  href="/news/worldnews/europe/russia/11321207/Russias-Red-Army-Choir-cover-Pharrell-Williams-Happy.html"><img src="http://i.telegraph.co.uk/multimedia/archive/03152/Russia_s_Red_Army__3152562g.jpg" alt="Russia's Red Army Choir cover Pharrell Williams' Happy" border="0" width="140"  height="87" />
+									<span class="playBtt" style="width: 140px; opacity: 0; filter: alpha(opacity = 0);">&nbsp;</span><span class="playBttTop" style="width: 140px;"></span></a>
+                </div></div>
+	
+<h3>
+                    <a  href="/news/worldnews/europe/russia/11321207/Russias-Red-Army-Choir-cover-Pharrell-Williams-Happy.html">Russia's Red Army Choir get 'Happy'</a>
+                </h3>
+
+	</div>
+						</div>
+						
+						<div class="cl"> </div>
+	</div>
+</div>
+	</div>
+		<div class="summaryMedium gutterUnder">
+						<div bucket-id="widget_01">
+			
+                    
+                                <div class="headerOne styleOne">
+				<!-- 9054378 -->
+				<p>
+							<span>More from the web</span>
+							</p></div>
+		<div class="summary iframeSummary mnIframe">
+							<!-- 10718861 -->
+							<iframe width="300" height="430" marginwidth="0" scrolling="no" src="http://s.telegraph.co.uk/international/pricegrabber/PricegrabberUSNews2.html" frameborder="0" marginheight="0"></iframe>
+						</div>
+                        
+		    </div>
+		</div>
+				<div class="access">Advertisement</div>
+<div id="yell">
+	<div class="adyell InSkinHide">
+		<div bucket-id="mpu">
+<script type="text/javascript">
+		document.write(tmgAdsBuildAdTag("yell", "300x150", "adj", "", 2));
+		</script>
+	</div></div>
+</div>
+
+
+
+
+
+
+
+<div class="summaryMedium gutterUnder">
+	<div bucket-id="widget_02">
+			
+                    
+                                <div class="headerOne styleOne">
+				<!-- 9625766 -->
+				<p>
+							<span>More from the web </span>
+							</p></div>
+		<div class="summary iframeSummary mnIframe">
+							<!-- 9880801 -->
+							<iframe width="300" height="350" marginwidth="0" scrolling="no" src="http://s.telegraph.co.uk/international/newsmax/newsmaxusv1.html" frameborder="0" marginheight="0"></iframe>
+						</div>
+                        
+		    </div>
+		</div>
+<div class="summaryMedium gutterUnder">
+		<div bucket-id="most_popular_01" >	
+	<div class="mostPopular"><div id="mostPopular">
+<div class="headerOne styleNine">
+				<p>News Most Viewed</p>
+			</div>
+		<div id="mostpop">
+		<div class="tabs">
+				<ul>
+					<li id="TODAY" class="first current" onclick="return false">
+						<a>
+							<span>TODAY</span>
+						</a>
+					</li>
+					<li id="THIS_WEEK" onclick="return false">
+						<a>
+							<span>PAST WEEK</span>
+						</a>
+					</li>
+					<li id="THIS_MONTH" onclick="return false" class="last">
+						<a>
+							<span>PAST MONTH</span>
+						</a>
+					</li>
+				</ul>
+		</div>
+		<div class="cl"></div>
+	
+		<div class="lists">
+			<div id="div-TODAY" class="view-content" style="display: block;">
+				<ol>
+						<li><a href="/news/uknews/11322905/Couple-stranded-in-New-York-with-newborn-baby-freed-from-130000-medical-bill.html">Couple stranded in New York with newborn baby freed from £130,000 medical bill</a></li>
+							
+						<li><a href="/news/shopping-and-consumer-news/11322711/Holiday-windfall-for-Britons-as-euro-slides.html">Holiday windfall for Britons as euro slides</a></li>
+							
+						<li><a href="/news/worldnews/middleeast/israel/11321651/Meet-the-Arab-Christians-who-want-to-fight-for-Israel.html">Meet the Arab Christians who want to fight for Israel</a></li>
+							
+						<li><a href="/news/weather/11322787/UK-weather-Gales-and-snow-to-divide-the-country.html">Gales and snow to divide the country</a></li>
+							
+						<li><a href="/news/science/science-news/11280504/Has-Stanford-University-found-a-cure-for-Alzheimers-disease.html">Has Stanford University found a cure for Alzheimer&#039;s disease?</a></li>
+							
+						</ol>
+				</div>
+			<div id="div-THIS_WEEK" class="view-content" style="display: none">
+				<ol>
+						<li><a href="/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html">AirAsia: search resumes for remaining bodies</a></li>
+							
+						<li><a href="/news/worldnews/southamerica/argentina/11309075/Top-Gear-Christmas-Special-What-really-happened-in-Patagonia.html">Top Gear: What really happened in Patagonia?</a></li>
+							
+						<li><a href="/news/science/science-news/11298927/Young-people-are-lost-generation-who-can-no-longer-fix-gadgets-warns-professor.html">&#039;Young people lost generation who can&#039;t fix gadgets&#039;</a></li>
+							
+						<li><a href="/news/newstopics/howaboutthat/11310800/How-to-see-Santa-aka-the-ISS-flying-by-on-Christmas-Eve.html">How to see Santa (aka the ISS) flying by on Christmas Eve</a></li>
+							
+						<li><a href="/news/newstopics/howaboutthat/11310883/The-baby-from-Teletubbies-reveals-herself.html">The baby from Teletubbies reveals herself</a></li>
+							
+						</ol>
+				</div>
+			<div id="div-THIS_MONTH" class="view-content" style="display: none">
+				<ol>
+						<li><a href="/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html">AirAsia: search resumes for remaining bodies</a></li>
+							
+						<li><a href="/news/worldnews/australiaandthepacific/australia/11293694/Islamists-take-hostages-in-Sydney-cafe-siege-live.html">Gunman and two hostages killed in bloody end to Sydney siege</a></li>
+							
+						<li><a href="/news/worldnews/southamerica/argentina/11309075/Top-Gear-Christmas-Special-What-really-happened-in-Patagonia.html">Top Gear: What really happened in Patagonia?</a></li>
+							
+						<li><a href="/news/science/science-news/11298927/Young-people-are-lost-generation-who-can-no-longer-fix-gadgets-warns-professor.html">&#039;Young people lost generation who can&#039;t fix gadgets&#039;</a></li>
+							
+						<li><a href="/news/newstopics/howaboutthat/11275180/Worlds-fattest-man-Keith-Martin-dies-aged-44.html">World&#039;s fattest man Keith Martin dies, aged 44</a></li>
+							
+						</ol>
+				</div>
+		</div>
+	
+	</div>
+
+</div>
+</div>
+	</div></div>
+<div class="adarea gutterUnder">
+			<div class="adsky">
+				<script type="text/javascript">
+     /* EPOCH time at the start of skyscraper Ad */
+     var startOfSkyscraper = Date.now();
+  </script>
+<div class="access">Advertisement</div>
+<div class="InSkinHide" align="center">
+	<div bucket-id="mpu">
+<script type="text/javascript">
+		document.write(tmgAdsBuildAdTag("hpg,sks,skl", "300x600,120x600,160x600", "adj", "", 2));
+		</script>
+	</div></div></div>
+	
+			<div class="cl"></div>
+		</div>
+		
+	<div class="summaryMedium gutterUnder">
+						<div bucket-id="widget_03">
+			
+                    
+                                <div class="headerOne styleOne">
+				<!-- 9054378 -->
+				<p>
+							<span>More from the web</span>
+							</p></div>
+		<div class="summary iframeSummary mnIframe">
+							<!-- 10874647 -->
+							<iframe width="300" height="550" marginwidth="0" scrolling="no" src="http://s.telegraph.co.uk/international/Barnebys/2014/Barnebys_US_300x550.html" frameborder="0" marginheight="0"></iframe>
+						</div>
+                        
+		    </div>
+		</div>
+				<div class="OUTBRAIN" data-src="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" data-widget-id="AR_3" data-ob-template="telegraph" ></div>
+<script type="text/javascript"> 
+					(function() { 
+			        var outbrainScriptTag = document.createElement('script'); 
+			        outbrainScriptTag.type = 'text/javascript'; 
+			        outbrainScriptTag.async = true; 
+			        outbrainScriptTag.id = "outbrain"; 
+			        outbrainScriptTag.src = 'http://widgets.outbrain.com/outbrain.js' ; 
+			        var s = document.getElementsByTagName('script')[0]; 
+			        s.parentNode.insertBefore(outbrainScriptTag, s); 
+					})(); 
+					
+</script> 		 	
+<script type="text/javascript">
+                /* EPOCH time at the end of right hand column */
+                 var rightHandTimer=Date.now();
+                </script>
+		</div>
+		<div class="cl"></div>
+
+		<div class="OUTBRAIN" data-src="http://www.telegraph.co.uk/news/worldnews/asia/indonesia/11315001/AirAsia-plane-reported-missing-with-162-passengers-onboard-latest.html" data-widget-id="TR_1" data-ob-template="telegraph" ></div>		
+		</div>
+	
+	<div class="printHide">
+		<div id="trafficDrivers">
+
+	<div bucket-id="commercial_services_three_01" >	
+	<div class="headerOne styleOne">
+				<!-- 9612843 -->
+				<p>
+							<span>MORE FROM TELEGRAPH.CO.UK</span>
+							</p></div>
+		</div>
+	<div class="gutterUnder">							
+		<div id="tmgPortalRand">
+			
+						
+							<!-- 11255356 -->
+<div class="oneQuarter servicesSmall ">
+	<div class="summarySmall">
+		<div class="headerFive">		
+			<a href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/"> 
+				US News</a>
+		</div>
+		<!-- imagePosition: centre, columnContext: oneQuarter -->
+<div class="piccentre containerdiv  ">
+        <a  href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/">
+                                <img src="http://i.telegraph.co.uk/multimedia/archive/02626/obama_2626645f.jpg" alt="Barack Obama warns American dream is in danger of becoming a 'myth'" border="0" width="219"  height="137" /><span class="imgSlantOverlay">&nbsp;</span>
+                                </a>
+                            </div>
+	
+<h3>
+			<a  href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/">
+                                Latest and breaking stories from the United States</a>
+                            </h3>
+		<div class="traffdrivViewLink">
+			<a  href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/">
+                                View</a>
+                            </div>
+
+	</div>
+</div>
+					
+				
+
+			
+						
+							<!-- 11202156 -->
+<div class="oneQuarter servicesSmall ">
+	<div class="summarySmall">
+		<div class="headerFive">		
+			<a href="http://www.telegraph.co.uk/sport/football/"> 
+				Football</a>
+		</div>
+		<!-- imagePosition: centre, columnContext: oneQuarter -->
+<div class="piccentre containerdiv  ">
+        <a  href="http://www.telegraph.co.uk/sport/football/">
+                                <img src="http://i.telegraph.co.uk/multimedia/archive/03089/rooneyget_3089939f.jpg" alt="" border="0" width="219"  height="137" /><span class="imgSlantOverlay">&nbsp;</span>
+                                </a>
+                            </div>
+	
+<h3>
+			<a  href="http://www.telegraph.co.uk/sport/football/">
+                                Catch up on all the latest football news</a>
+                            </h3>
+		<div class="traffdrivViewLink">
+			<a  href="http://www.telegraph.co.uk/sport/football/">
+                                View</a>
+                            </div>
+
+	</div>
+</div>
+					
+				
+
+			
+						
+							<!-- 11143068 -->
+<div class="oneQuarter servicesSmall ">
+	<div class="summarySmall">
+		<div class="headerFive">		
+			<a href="http://www.telegraph.co.uk/motoring/festival-of-motoring/audi/10816464/Audi-r18-e-tron-quattro.html?WT.mc_id=605786&source=USTrafficDriver"> 
+				Audi</a>
+		</div>
+		<!-- imagePosition: centre, columnContext: oneQuarter -->
+<div class="piccentre containerdiv  ">
+        <a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/audi/10816464/Audi-r18-e-tron-quattro.html?WT.mc_id=605786&source=USTrafficDriver">
+                                <img src="http://i.telegraph.co.uk/multimedia/archive/02904/Homologation_for_t_2904842f.jpg" alt="" border="0" width="220"  height="146" /><span class="imgSlantOverlay">&nbsp;</span>
+                                </a>
+                            </div>
+	
+<h3>
+			<a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/audi/10816464/Audi-r18-e-tron-quattro.html?WT.mc_id=605786&source=USTrafficDriver">
+                                Audi R18 in pictures</a>
+                            </h3>
+		<div class="traffdrivViewLink">
+			<a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/audi/10816464/Audi-r18-e-tron-quattro.html?WT.mc_id=605786&source=USTrafficDriver">
+                                View</a>
+                            </div>
+
+	</div>
+</div>
+					
+				
+
+			
+						
+							<!-- 10995247 -->
+<div class="oneQuarter servicesSmall last">
+	<div class="summarySmall">
+		<div class="headerFive">		
+			<a href="http://www.telegraph.co.uk/motoring/festival-of-motoring/goodwood/?WT.mc_id=605787&source=TrafficDriver"> 
+				Goodwood</a>
+		</div>
+		<!-- imagePosition: centre, columnContext: oneQuarter -->
+<div class="piccentre containerdiv  ">
+        <a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/goodwood/10814590/moving-motor-show-images.html?WT.mc_id=605787&source=USTrafficDriver">
+                                <img src="http://i.telegraph.co.uk/multimedia/archive/02904/moving-motor-show-_2904112f.jpg" alt="" border="0" width="220"  height="146" /><span class="imgSlantOverlay">&nbsp;</span>
+                                </a>
+                            </div>
+	
+<h3>
+			<a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/goodwood/10814590/moving-motor-show-images.html?WT.mc_id=605787&source=USTrafficDriver">
+                                The very best of Goodwood's Moving Motor Show in pictures</a>
+                            </h3>
+		<div class="traffdrivViewLink">
+			<a  href="http://www.telegraph.co.uk/motoring/festival-of-motoring/goodwood/10814590/moving-motor-show-images.html?WT.mc_id=605787&source=USTrafficDriver">
+                                View</a>
+                            </div>
+
+	</div>
+</div>
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			
+						
+							
+					
+				
+
+			<div class="cl"></div>		
+	</div>					
+</div>
+</div>
+<div class="cl"></div>
+
+		</div>
+	<!-- googleon: all -->
+</div><!-- googleoff: all -->
+			<script type="text/javascript">
+/* EPOCH time at the end of content Area */
+                var contentEndTimer = Date.now();
+            </script>
+<div class="backtotop"><p><a href="#top">Back to top</a></p></div>
+<div id="tmglFooterLarge">
+		<a href="http://www.telegraph.co.uk/" id="footerlogolink" title="Telegraph.co.uk: news, business, sport, the Daily Telegraph newspaper, Sunday Telegraph - Telegraph"></a>
+		<div id="tmglFooterLargeItems">		
+			<div class="footercolumn">									
+				<ul class="menu1"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/?utm_source=TMG&utm_medium=footer_home&utm_campaign=footerhomelink">HOME</a></li>								
+
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/">News</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/uknews/">UK News</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/politics/">Politics</a></li>
+					</ul>
+					
+					<ul class="menu2"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/features/">Long Reads</a></li>								
+
+					</ul>
+					
+					<ul class="menu3"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/wikileaks-files/">Wikileaks</a></li>								
+
+					<li><a  target="_parent" href="http://jobs.telegraph.co.uk/">Jobs</a></li>
+					</ul>
+					
+					</div> <div class="footercolumn">
+						<ul class="menu1"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/worldnews/">World News</a></li>								
+
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/worldnews/europe/">Europe</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/worldnews/northamerica/usa/">USA</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/worldnews/asia/china/">China</a></li>
+					</ul>
+					
+					<ul class="menu2"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/uknews/theroyalfamily/">Royal Family News</a></li>								
+
+					</ul>
+					
+					<ul class="menu3"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/celebritynews/">Celebrity news</a></li>								
+
+					<li><a  target="_parent" href="http://dating.telegraph.co.uk/s/a/4168">Dating</a></li>
+					</ul>
+					
+					</div> <div class="footercolumn">
+						<ul class="menu1"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/finance/">Finance</a></li>								
+
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/education/">Education</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/uknews/defence/">Defence</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/health/">Health</a></li>
+					</ul>
+					
+					<ul class="menu2"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/newstopics/howaboutthat/">Weird News</a></li>								
+
+					</ul>
+					
+					<ul class="menu3"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/editors-choice/">Editor's Choice</a></li>								
+
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/financialservices/">Financial Services</a></li>
+					</ul>
+					
+					</div> <div class="footercolumn">
+						<ul class="menu1"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/news/picturegalleries/">Pictures</a></li>								
+
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/newsvideo/">Video</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/news/matt/">Matt</a></li>
+					<li><a  target="_parent" href="http://www.telegraph.co.uk/finance/alex/">Alex</a></li>
+					</ul>
+					
+					<ul class="menu2"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/comment/">Comment</a></li>								
+
+					</ul>
+					
+					<ul class="menu3"><li class="itemfocus"><a target="_parent" href="http://blogs.telegraph.co.uk">Blogs</a></li>								
+
+					<li><a  target="_parent" href="http://puzzles.telegraph.co.uk/">Crossword</a></li>
+					</ul>
+					
+					</div> <div class="footercolumn">
+						<ul class="menu1"><li class="itemfocus"><a target="_parent" href="http://www.telegraph.co.uk/topics/about-us/">Contact Us</a></li>								
+
+					<li><a  target="_parent" href="/topics/about-us/3691972/Privacy-and-Cookie-Policy.html">Privacy and Cookies</a></li>
+					<li><a  target="_parent" href="/advertising/">Advertising</a></li>
+					<li><a  target="_parent" href="http://fantasyfootball.telegraph.co.uk/">Fantasy Football</a></li>
+					</ul>
+					
+					<ul class="menu2"><li class="itemfocus"><a target="_parent" href="http://tickets.telegraph.co.uk/">Tickets</a></li>								
+
+					</ul>
+					
+					<ul>
+					<li><a target="_parent" href="http://announcements.telegraph.co.uk/">Announcements</a></li>
+						<li><a target="_parent" href="http://3276.e-printphoto.co.uk/dailytelegraph/">Reader Prints</a></li>
+						<li><a target="_parent" href=""></a></li>
+						</ul>
+			</div>
+
+			<!-- RSSFeeds Menu-->
+			
+			<div id="footercolumn_last">
+				<ul class="imgBulletList">
+					<li class="footrss"><a target="_parent" href="http://www.telegraph.co.uk/topics/follow-us/">Follow Us</a></li>
+							<li class="footmobile"><a target="_parent" href="http://www.telegraph.co.uk/apps/">Apps</a></li>
+							<li class="footepaper"><a target="_parent" href="http://dailytelegraph.newspaperdirect.com/epaper/viewer.aspx ">Epaper</a></li>
+							<li class=""><a target="_parent" href="http://www.telegraph.co.uk/expat/">Expat</a></li>
+							</ul>
+			
+				<ul class="ullast">
+					<li><a target="_parent" href="http://www.telegraph.co.uk/promotions/">Promotions</a></li>
+						<li><a target="_parent" href="http://subscriber.telegraph.co.uk/loyalty/">Subscriber</a></li>
+						<li><a target="_parent" href="http://www.telegraph.co.uk/topics/syndication-services/">Syndication</a></li>
+						</ul>
+			</div>	
+			<div class="cl"></div>
+		</div> <!-- end of tmglFooterLargeItems div -->
+	
+<div id="footerinfo">
+			<p>&copy; Copyright of Telegraph Media Group Limited 2015</p>
+			<p><a target="_parent" href="http://www.telegraph.co.uk/termsandconditions">Terms and Conditions</a> </p>
+			<p><a target="_parent" href="/archive/2015-1-3.html">Today's News</a></p>
+			<p ><a target="_parent" href="http://www.telegraph.co.uk/archive/">Archive</a></p>
+					<p ><a target="_parent" href="http://www.telegraph.co.uk/topics/about-us/style-book/">Style Book</a></p>
+					<p class="last"><a target="_parent" href="/news/weather/4142730/Weather-forecast.html">Weather Forecast</a></p>
+					<div class="cl"></div>			
+		</div>
+	</div> <!-- end of tmglFooterLargeNew div -->
+	<script type="text/javascript">
+/* EPOCH time at the end of footer */
+                var footerEndTimer = Date.now();
+            </script></div>
+<script type="text/javascript">
+    g_opt_ch = '{}';g_opt_cv = '{}';g_opt_b = true;g_opt_s = true;</script>
+<script type="text/javascript">
+    var s = document.createElement('script');
+    s.type='text/javascript';
+    s.src = "http://cdn.gigya.com/js/socialize.js?apikey=2_ASmwJuFXoCCY8YP8uB6mzZphj_UToZbQkeeM6bMOA8swtMk2P3Rwu2WSger_DOSt";
+    document.getElementsByTagName('head')[0].appendChild(s);
+
+    function onGigyaServiceReady(e) {
+        var s = document.createElement('script');
+        s.type='text/javascript';
+        s.src = "/template/ver1-0/js/shareTools.js";
+        document.getElementsByTagName('head')[0].appendChild(s);
+    }
+</script>
+<script type="text/javascript" src="/template/ver1-0/js/jquery-ui-1.8.4.custom.min.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/jquery.tablesorter.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/jquery.ticker.js"></script>
+
+<script type="text/javascript" src="/template/ver1-0/js/common.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/viewabilityCode.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/tmglSlideShow.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/jquery.cycle.all.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/supersleight.plugin.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/tracker.js"></script>
+<link rel="stylesheet" type="text/css" href="/template/ver1-0/css/printArticle.css" media="print" />
+
+	<script type="text/javascript" src="/template/ver1-0/js/liveBloggingArticle.js"> </script>
+<script type="text/javascript">
+			(function() {
+				var links = $("a[href*='disqus_thread']");
+				var query = "";
+				var blogQuery = "";
+				var normal = new Array();
+				var normalCounts = new Array();
+				var blog = new Array();
+				var blogCounts = new Array();
+
+				for(var i = 0; i < links.length; i++) {
+					if (links[i].getAttribute('dsqid')) {
+						var dsqid = links[i].getAttribute('dsqid');
+						if (links[i].className == 'dsqblog') { blogQuery += 'dsqid' + i + '=' + dsqid + '&'; } else { query += 'dsqid' + i + '=' + dsqid + '&'; }
+					}
+				}
+				if (query.length != "" && blogQuery.length != "") {
+					$("a[href*='disqus_thread']") && $("a.dsqblog").each(function(i) {
+						blog[i] = $(this).attr("href");
+						$(this).attr("href","blog_link");
+					});
+					loadScript("http://telegraphuk.disqus.com/get_num_replies_from_dsqid.js?" + query, function() {
+						$("a[href*='disqus_thread']").not(".dsqblog").each(function(i) {
+							normal[i] = $(this).attr("href");
+							normalCounts[i] = $(this).html();
+							$(this).attr("href","normal_link");
+						});
+
+						$("a[href*='blog_link']").each(function(i) { $(this).attr("href",blog[i]); });
+
+						loadScript("http://telegraphblogs.disqus.com/get_num_replies_from_dsqid.js?" + blogQuery, function() {
+							$("a[href*='normal_link']").each(function(i) { $(this).attr("href",normal[i]); });
+						});
+					});
+				} else {
+					document.write('<script charset="utf-8" type="text/javascript" src="http://telegraphuk.disqus.com/get_num_replies_from_dsqid.js?' + query + '"></' + 'script>');
+				}
+			})();
+		</script>
+		<script type="text/javascript" src="/template/ver1-0/js/tmglMultitrackSelector1.js"></script>
+<script type="text/javascript" src="/template/ver1-0/js/popup.js"></script>
+
+<script language="Javascript" type="text/javascript" src="/template/ver1-0/js/poll.js"></script>
+<script type="text/javascript">
+		var _sf_async_config={uid:22437,domain:"telegraph.co.uk"};
+
+		
+			_sf_async_config.sections = "News, World News, Asia, Indonesia, Singapore, Harriet Alexander, Mobile, Josie Ensor, Andrew Marszal";
+		
+			_sf_async_config.authors = "Harriet Alexander";
+		
+
+		(function(){
+			function loadChartbeat() {
+			window._sf_endpt=(new Date()).getTime();
+			var e = document.createElement('script');
+			e.setAttribute('language', 'javascript');
+			e.setAttribute('type', 'text/javascript');
+			e.setAttribute('src',
+			(("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://") +
+			"static.chartbeat.com/js/chartbeat.js"); document.body.appendChild(e);
+		}
+		var oldonload = window.onload;
+		window.onload = (typeof window.onload != 'function') ?
+		loadChartbeat : function() { oldonload(); loadChartbeat(); }; })();
+	</script>
+<!-- START Nielsen Online SiteCensus V6.0 -->
+		<!-- COPYRIGHT 2010 Nielsen Online -->
+		<script type="text/javascript" src="//secure-uk.imrworldwide.com/v60.js">
+		</script>
+		<script type="text/javascript">
+			 var pvar = { cid: "uk-101665h", content: "0", server: "secure-uk" };
+			 var feat = { surveys_enabled: 1 };
+			 var trac = nol_t(pvar, feat);
+			 trac.record().post().do_sample();
+		</script>
+		<noscript>
+		 <div>
+			 <img src="//secure-uk.imrworldwide.com/cgi-bin/m?ci=uk-101665h&amp;cg=0&amp;cc=1&amp;ts=noscript"
+			 width="1" height="1" alt="" />
+		 </div>
+		</noscript>
+		<!-- END Nielsen Online SiteCensus V6.0 -->
+	<div bucket-id="mpu">
+<script type="text/javascript">
+		document.write(tmgAdsBuildAdTag("ftr", "1x1", "adj", "", 2));
+		</script>
+	</div><script type="text/javascript" src='/template/ver1-0/js/aws-sdk-2.0.0-rc9.min.js' async="async"></script> 
+<script type="text/javascript" src='/template/ver1-0/js/hmac-sha256.js' async="async"></script>	
+<script type="text/javascript" src='/template/ver1-0/js/sha256.js' async="async"></script>	
+<script type="text/javascript" src='/template/ver1-0/js/viewability.js' async="async"></script>
+<script>
+
+    if(!( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )) {
+
+        /*
+         Read Next Widget Data
+         */
+        var readNextArticleList = [{"id":"11322905","title":"Couple stranded in New York with newborn baby freed from £130,000 medical bill","url":"/news/uknews/11322905/Couple-stranded-in-New-York-with-newborn-baby-freed-from-130000-medical-bill.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/Stranded_3152349g.jpg"},{"id":"11322711","title":"Holiday windfall for Britons as euro slides","url":"/news/shopping-and-consumer-news/11322711/Holiday-windfall-for-Britons-as-euro-slides.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03132/tuscany_3132203g.jpg"},{"id":"11321651","title":"Meet the Arab Christians who want to fight for Israel","url":"/news/worldnews/middleeast/israel/11321651/Meet-the-Arab-Christians-who-want-to-fight-for-Israel.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/Shalayan_3152740g.jpg"},{"id":"11322787","title":"Gales and snow to divide the country ","url":"/news/weather/11322787/UK-weather-Gales-and-snow-to-divide-the-country.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02922/Storms_2922771g.jpg"},{"id":"11280504","title":"Has Stanford University found a cure for Alzheimer&#39;s disease? ","url":"/news/science/science-news/11280504/Has-Stanford-University-found-a-cure-for-Alzheimers-disease.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02902/dementia_2902785g.jpg"},{"id":"11322798","title":"Amal Clooney threatened with arrest by Egypt over criticism of justice system","url":"/news/worldnews/africaandindianocean/egypt/11322798/Amal-Clooney-threatened-with-arrest-by-Egypt-over-criticism-of-justice-system.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/Amal_Alamuddin_Clo_3153238g.jpg"},{"id":"11321947","title":"Prince Andrew &#39;categorically denies&#39; claims he sexually abused teenager","url":"/news/uknews/theroyalfamily/11321947/Prince-Andrew-categorically-denies-claims-he-sexually-abused-teenager.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/andrew-epsteins-wa_3152973g.jpg"},{"id":"11321854","title":"Gwyneth Paltrow: I didn&#39;t invent &#39;conscious uncoupling&#39; phrase","url":"/news/celebritynews/11321854/Gwyneth-Paltrow-I-didnt-invent-conscious-uncoupling-phrase.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02865/gwyneth_2865872g.jpg"},{"id":"11321710","title":"You&#39;re a keeper! Southampton FC steps in after fan asks club to help him meet girl of his dreams","url":"/news/newstopics/howaboutthat/11321710/Southampton-FC-acts-as-matchmaker-after-fan-asks-club-to-help-him-meet-girl.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/southampton-2_3152774g.jpg"},{"id":"11320497","title":"Most cancers are caused by bad luck not genes or lifestyle, say scientists ","url":"/news/science/science-news/11320497/Most-cancers-are-caused-by-bad-luck-not-genes-or-lifestyle-say-scientists.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02130/cancer1_2130923g.jpg"},{"id":"11322309","title":"The battle to keep our Union together has only just begun","url":"/news/uknews/scotland/11322309/The-battle-to-keep-our-Union-together-has-only-just-begun.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03110/salmond_3110243g.jpg"},{"id":"11314580","title":"Sir Winston Churchill &#39;s family feared he might convert to Islam","url":"/news/religion/11314580/Sir-Winston-Churchill-s-family-feared-he-might-convert-to-Islam.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03149/churchill-family_3149302g.jpg"},{"id":"11321499","title":"Al Qaed Arr: Bristol bus timetable hacked by terrorists (who thought they would cause travel chaos in &#39;the West&#39;)","url":"/news/uknews/terrorism-in-the-uk/11321499/Bristol-bus-timetable-hacked-by-terrorists.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/travel-west-screen_3152659g.jpg"},{"id":"11322503","title":"Roman Holiday: Italian police &#39;skive off&#39; New Year&#39;s Eve as 83 per cent call in sick ","url":"/news/worldnews/europe/italy/11322503/Roman-Holiday-Italian-police-skive-off-New-Years-Eve-as-83-per-cent-call-in-sick.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/carabinieri-roma_3153115g.jpg"},{"id":"11321846","title":"Elvis Presley&#39;s personal jets go on sale","url":"/news/celebritynews/11321846/Elvis-Presleys-personal-jets-go-on-sale.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/elvis-summ_3152815g.jpg"},{"id":"11321815","title":"Prince Andrew named in underage &#39;sex slave&#39; case","url":"/news/uknews/theroyalfamily/11321815/Prince-Andrew-named-in-underage-sex-slave-case.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02681/Prince-Andrew_2681629g.jpg"},{"id":"11322583","title":"Conservatives call time on taxpayer-funded six-figure &#39;golden goodbyes&#39;","url":"/news/politics/11322583/Conservatives-call-time-on-taxpayer-funded-six-figure-golden-goodbyes.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02394/Entwistle-Saturday_2394977g.jpg"},{"id":"11321890","title":"Benjamin Netanyahu &#39;repelled&#39; by success of female MP","url":"/news/worldnews/middleeast/israel/11321890/Benjamin-Netanyahu-repelled-by-success-of-female-MP.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/Miri-Regev-netanya_3153123g.jpg"},{"id":"11322759","title":"Quadrantids meteor shower to light up your weekend","url":"/news/science/space/11322759/Quadrantids-meteor-shower-to-light-up-your-weekend.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02440/Quadrantid-Meteor_2440906g.jpg"},{"id":"11321779","title":"I wished I&#39;d been sent to state school, says Earl Spencer","url":"/news/uknews/theroyalfamily/11321779/I-wished-Id-been-sent-to-state-school-says-Earl-Spencer.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02554/earl-spence_2554688g.jpg"},{"id":"11322251","title":"Opportunity for the Tories as Ukip swings Left","url":"/news/politics/ukip/11322251/Opportunity-for-the-Tories-as-Ukip-swings-Left.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03151/PX12568722_BRITAIN_3151952a.jpg"},{"id":"11322957","title":"Girl, 7, is sole survivor of plane crash in US","url":"/news/worldnews/northamerica/usa/11322957/Girl-7-is-only-survivor-of-plane-crash-that-kills-pilot-and-three-passengers-in-US.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02054/Plane_2054581g.jpg"},{"id":"11322956","title":"AirAsia search finds two &#39;big&#39; parts of  plane","url":"/news/worldnews/asia/indonesia/11322956/AirAsia-search-finds-two-big-parts-of-plane.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/airasia-bodies_3153336g.jpg"},{"id":"9041875","title":"116 people snubbed honours in past three years","url":"/news/uknews/honours-list/9041875/Revealed-116-people-have-turned-down-an-honour-in-three-years.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/02119/hon_2119931g.jpg"},{"id":"11322572","title":"Former British soldier becomes first man to walk the Nile","url":"/news/worldnews/africaandindianocean/11322572/Former-British-soldier-becomes-first-person-to-walk-the-Nile.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/Levison-Wood-Nile-_3153137g.jpg"},{"id":"11318824","title":"My £35 little red dress saved my life, says crash victim","url":"/news/uknews/11318824/My-35-little-red-dress-saved-my-life-says-crash-victim.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03151/Zoe-Turner_3151466g.jpg"},{"id":"11322615","title":"Cologne cathedral will go dark in protest at anti-Islam march","url":"/news/worldnews/europe/germany/11322615/Cologne-cathedral-will-go-dark-in-protest-at-anti-Islam-march.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/Cologne_Cathedral_3153175g.jpg"},{"id":"11321260","title":"Google thinks this is Kim Jong-un&#39;s younger sister","url":"/news/worldnews/asia/northkorea/11321260/Google-thinks-this-is-Kim-Jong-uns-younger-sister.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03152/Not_Kim_Yo-jong_3152624g.jpg"},{"id":"11322800","title":"Hostage rescue mission in Isil&#39;s capital Raqqa foiled, claims group","url":"/news/worldnews/islamic-state/11322800/Hostage-rescue-mission-in-Isils-capital-Raqqa-foiled-claims-group.html","imgUrl":"http://i.telegraph.co.uk/multimedia/archive/03153/isil-raqqa_3153245g.jpg"},]
+;
+        var readNextCurrentArticleId = "11315001";
+
+        /*
+         Read Next Widget
+         */
+        var readNextWidget = (function(){
+
+            var settings = {
+                articleImage: "",
+                articleTitle: "",
+                articleUrl: "#",
+                articleId: "",
+                currentArticleId: "",
+                articleList: [],
+                articleListToSkip: [],
+                readNextCookieName: "tmg_read_next",
+                openButton: "#readNextOpen a",
+                closeButton: "#closeBtn a",
+                articleContainer: "#readNextArticleContainer",
+                widgetContainer: "#readNextWidget",
+                displayThumbnail: false,
+                panelOpen: false,
+                autoOpen: true
+            };
+
+            var renderTemplate = function() {
+                var template = '<div id="readNextWidget" style="display:none">' +
+                        '<div id="readNextOpen"><div class="topBar"></div><div id="readNextOpenInner"><a href="' + settings.articleUrl + '"><span>Next Story</span><span class="icn"></span></a></div></div>' +
+                        '<div id="readNextArticleContainer" style="display:none">' +
+                        '<div id="nextArticle"><div class="topBar"></div>' +
+                        '<div id="nextArticleWrapper">'+
+                        '<div id="nextArticleInnerWrapper">'+
+                        '<p id="readNextLabel">MOST VIEWED IN NEWS</p>';
+                        
+				if(settings.articleImage && settings.articleImage!="null" && settings.displayThumbnail){
+					template = template + '<a id="nextPageThumbnail" href="' + settings.articleUrl + '"><img src="'+ settings.articleImage +'"/></a>';
+				}
+                        
+				template = template + '<a id="nextPageTitle" href="' + settings.articleUrl + '"><span>' + settings.articleTitle + '</span></a></div></div>' +
+                        '</div>' +
+                        '<div id="closeBtn"><div class="topBar"></div><a href="#"><span></span></a></div>' +
+                        '</div>' +
+                        '<iframe style="border:none;position:absolute;top:0;left:0; height:100%;width:100%;z-index:-1;" id="iefix" src="about:blank"></iframe>' + //fix for IE bug
+                        '</div>';
+                return template;
+            };
+
+
+            var init = function(currentArticleId, articleList, displayThumbnail) {
+
+                settings.articleList = articleList;
+                settings.currentArticleId = currentArticleId;
+                settings.displayThumbnail = displayThumbnail;
+
+                settings.articleListToSkip = unescape($.cookie(settings.readNextCookieName)).split(',');
+
+                if ($.cookie(settings.readNextCookieName) != null) {
+                    chooseNextArticle(settings.currentArticleId, settings.articleList, settings.articleListToSkip);
+                    updateCookieBasedOnArticleList(settings.currentArticleId, settings.articleList, settings.articleListToSkip);
+                } else {
+                    chooseNextArticle(settings.currentArticleId, settings.articleList, settings.articleListToSkip);
+                    createCookieBasedOnArticleList(settings.currentArticleId, settings.articleList, settings.articleListToSkip);
+                }
+
+
+                if (settings.articleId != "") {
+
+                    $(renderTemplate()).appendTo("body");
+
+                    $("#nextArticleWrapper a, #readNextOpenInner a").click(function () {
+                        _gaq.push(['_trackEvent', 'wayfarer_read_next', 'click_headline', 'version_1']);
+
+                        getNavPos($(this).attr("href"), "wayfarerReadNext");
+                    });
+
+                    bindUIActions();
+
+                    var displayed = false;
+
+                    setTimeout(function () {
+                        if (!displayed) {
+                            displayed == true;
+                            readNextWidget.display();
+                        }
+
+                    }, 10000);
+
+                    $(window).scroll(function () {
+                        if (isScrolledIntoView("#tmg-related-links")) {
+                            if (!displayed) {
+                                displayed == true;
+                                readNextWidget.display();
+                            }
+                        }
+
+                        if(isScrolledIntoView("#shareBottom") || isScrolledIntoView("#newGigyaShareBottom")) {
+                            if(settings.autoOpen) {
+                                openArticleContainer();
+                            }
+                        }
+
+                        if($(window).scrollTop() + $(window).height() == $(document).height()) {
+                            if(settings.autoOpen) {
+                                openArticleContainer();
+                            }
+                        }
+                    });
+                }
+            };
+
+            var display = function () {
+                $(settings.widgetContainer).fadeIn(2000, function () {
+                    //animation complete
+                    _gaq.push(['_trackEvent', 'wayfarer_read_next', 'display_closed', 'version_1']);
+                });
+            };
+
+            var bindUIActions = function () {
+                $(settings.openButton).mouseenter(function (event) {
+                    event.preventDefault();
+                    _gaq.push(['_trackEvent', 'wayfarer_read_next', 'hover_closed', 'version_1']);
+                    openArticleContainer();
+                });
+                $(settings.widgetContainer).mouseleave(function (event) {
+                    event.preventDefault();
+                    closeArticleContainer();
+                });
+                $(settings.closeButton).click(function (event) {
+                    event.preventDefault();
+                    _gaq.push(['_trackEvent', 'wayfarer_read_next', 'click_close', 'version_1']);
+                    updateCookie(settings.articleId, settings.articleListToSkip);
+                    closeArticleContainer();
+                    settings.autoOpen = false;
+                });
+            };
+
+            var openArticleContainer = function () {
+                if (!settings.panelOpen) {
+                	$("#readNextArticleContainer").show();//show/hide because height is calculated incorrectly for elements with display:none
+                    $("#readNextArticleContainer").hide();
+                    $(settings.articleContainer).toggle('slide', {direction: 'left'}, function () {
+                        //animation complete
+                        _gaq.push(['_trackEvent', 'wayfarer_read_next', 'display_open', 'version_1']);
+                    });
+                    settings.panelOpen = !settings.panelOpen;
+                    settings.autoOpen = false; //set auto open to false once user has viewed this once
+                }
+                return false;
+            };
+
+            var closeArticleContainer = function () {
+                if (settings.panelOpen) {
+                    $(settings.articleContainer).toggle('slide', {direction: 'left'}, function () {
+                        //animation complete
+                    });
+                    settings.panelOpen = !settings.panelOpen;
+                }
+                return false;
+            };
+
+
+            var isScrolledIntoView = function(elem) {
+                if($(elem).length) { //check if element exists
+                    var docViewTop = $(window).scrollTop();
+                    var docViewBottom = docViewTop + $(window).height();
+
+                    var elemTop = $(elem).offset().top;
+                    var elemBottom = elemTop + $(elem).height();
+
+                    return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+                } else {
+                    return false;
+                }
+            };
+
+            var unique = function(array) {
+                return array.filter(function (el, index, arr) {
+                    return index == arr.indexOf(el);
+                });
+            }
+
+            var createCookieBasedOnArticleList = function(currentArticleId, articleList, articleListToSkip) {
+                articleList.some(function (article) {
+                    if (article.id == currentArticleId) {
+                        articleListToSkip[0] = currentArticleId;
+                        $.cookie(settings.readNextCookieName, escape(articleListToSkip.join(',')), {path: '/', expires: 1, domain: 'telegraph.co.uk'});
+                        return true;
+                    }
+                });
+            }
+
+            var updateCookieBasedOnArticleList = function(currentArticleId, articleList, articleListToSkip) {
+                articleList.some(function (article) {
+                    if (article.id == currentArticleId) {
+                        updateCookie(currentArticleId, articleListToSkip);
+                        return true;
+                    }
+                });
+            }
+
+            var updateCookie = function(articleIdToSkip, articleListToSkip) {
+                articleListToSkip.push(articleIdToSkip);
+                articleListToSkip = unique(articleListToSkip);
+                $.cookie(settings.readNextCookieName, escape(articleListToSkip.join(',')), {path: '/', expires: 1, domain: 'telegraph.co.uk'});
+            }
+
+            var chooseNextArticle = function (currentArticleId, articleList, articleListToSkip) {
+                articleList.some(function (article) {
+                    if ((article.id != currentArticleId) && ($.inArray(article.id, articleListToSkip) === -1)) {
+
+                        //set article
+                        settings.articleTitle = article.title;
+                        settings.articleUrl = article.url;
+                        settings.articleId = article.id;
+						settings.articleImage = article.imgUrl;
+                        return true;
+                    }
+                });
+            }
+
+            //public API
+            return {
+                settings: settings,
+                init: init,
+                display: display,
+                openArticleContainer: openArticleContainer,
+                closeArticleContainer: closeArticleContainer
+            }
+        })();
+
+    };
+</script>
+
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"applicationID":"3619366","applicationTime":403,"beacon":"beacon-3.newrelic.com","queueTime":0,"licenseKey":"586c10d321","transactionName":"Z1NTNUNQDxZZAhILXl4ZezJhHhUAVREKA0VVGVIOXFwOCxYLFRI=","agent":"js-agent.newrelic.com\/nr-476.min.js","errorBeacon":"bam.nr-data.net"}</script></body>
+</html>
+
+<!-- googleon: all -->
