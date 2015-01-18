@@ -164,6 +164,20 @@ class ContentExtractor(object):
 
     def get_title(self, doc):
         """Fetch the article title and analyze it
+
+        Assumptions:
+        - title tag is the most reliable (inherited from Goose)
+        - h1, if properly detected, is the best (visible to users)
+        - og:title and h1 can help improve the title extraction
+        - python == is too strict, often we need to compare fitlered
+          versions, i.e. lowercase and ignoring special chars
+
+        Explicit rules:
+        1. title == h1, no need to split
+        2. h1 similar to og:title, use h1
+        3. title contains h1, title contains og:title, len(h1) > len(og:title), use h1
+        4. title starts with og:title, use og:title
+        5. title starts with h1 and h1 long enough, use h1
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
@@ -175,48 +189,116 @@ class ContentExtractor(object):
         title_text = self.parser.getText(title_element[0])
         used_delimeter = False
 
+        # title from h1
+        # - extract the longest text from all h1 elements
+        # - too short texts (less than 2 words) are discarded
+        # - clean double spaces
+        title_text_h1 = ''
+        title_element_h1_list = self.parser.getElementsByTag(doc, tag='h1') or []
+        title_text_h1_list = [self.parser.getText(tag) for tag in title_element_h1_list]
+        if title_text_h1_list:
+            # sort by len and set the longest
+            title_text_h1_list.sort(key=len, reverse=True)
+            title_text_h1 = title_text_h1_list[0]
+            # discard too short texts
+            if len(title_text_h1.split(' ')) <= 2:
+                title_text_h1 = ''
+            # clean double spaces
+            title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
+
+        # title from og:title
+        title_text_fb = self.get_meta_content(doc, 'meta[property="og:title"]')
+        if not title_text_fb:
+            title_text_fb = self.get_meta_content(doc, 'meta[name="og:title"]')
+        if not title_text_fb:
+            title_text_fb = ''
+
+        # create filtered versions of title_text, title_text_h1, title_text_fb
+        # for finer comparison
+        filter_regex = re.compile(r'[^a-zA-Z0-9\ ]')
+        filter_title_text = filter_regex.sub('', title_text).lower()
+        filter_title_text_h1 = filter_regex.sub('', title_text_h1).lower()
+        filter_title_text_fb = filter_regex.sub('', title_text_fb).lower()
+        words_title_text_h1 = len(title_text_h1.split(' '))
+
+        # check for better alternatives for title_text and possibly skip splitting
+        if title_text_h1 == title_text:
+            used_delimeter = True
+        elif filter_title_text_h1 and filter_title_text_h1 == filter_title_text_fb:
+            title_text = title_text_h1
+            used_delimeter = True
+        elif filter_title_text_h1 and filter_title_text_h1 in filter_title_text \
+            and filter_title_text_fb and filter_title_text_fb in filter_title_text \
+            and len(title_text_h1) > len(title_text_fb):
+            title_text = title_text_h1
+            used_delimeter = True
+        elif filter_title_text_fb and filter_title_text_fb != filter_title_text \
+            and filter_title_text.startswith(filter_title_text_fb):
+            title_text = title_text_fb
+            used_delimeter = True
+        elif filter_title_text_h1 and filter_title_text_h1 != filter_title_text \
+            and filter_title_text.startswith(filter_title_text_h1) and words_title_text_h1 >= 4:
+            title_text = title_text_h1
+            used_delimeter = True
+
         # split title with |
-        if '|' in title_text:
-            title_text = self.split_title(title_text, PIPE_SPLITTER)
+        if not used_delimeter and '|' in title_text:
+            title_text = self.split_title(title_text, PIPE_SPLITTER, title_text_h1)
             used_delimeter = True
 
         # split title with -
         if not used_delimeter and '-' in title_text:
-            title_text = self.split_title(title_text, DASH_SPLITTER)
+            title_text = self.split_title(title_text, DASH_SPLITTER, title_text_h1)
             used_delimeter = True
 
         # split title with _
         if not used_delimeter and '_' in title_text:
-            title_text = self.split_title(title_text, UNDERSCORE_SPLITTER)
+            title_text = self.split_title(title_text, UNDERSCORE_SPLITTER, title_text_h1)
 
         # split title with /
         if not used_delimeter and '/' in title_text:
-            title_text = self.split_title(title_text, SLASH_SPLITTER)
+            title_text = self.split_title(title_text, SLASH_SPLITTER, title_text_h1)
             used_delimeter = True
 
         # split title with »
-        if not used_delimeter and '»' in title_text:
-            title_text = self.split_title(title_text, ARROWS_SPLITTER)
+        if not used_delimeter and u'»' in title_text:
+            title_text = self.split_title(title_text, ARROWS_SPLITTER, title_text_h1)
             used_delimeter = True
 
+        # deleted as too often removes relevant parts of the title
         # split title with :
-        if not used_delimeter and ':' in title_text:
-            title_text = self.split_title(title_text, COLON_SPLITTER)
-            used_delimeter = True
+        # if not used_delimeter and ':' in title_text:
+        #     title_text = self.split_title(title_text, COLON_SPLITTER, title_text_h1)
+        #     used_delimeter = True
 
         title = MOTLEY_REPLACEMENT.replaceAll(title_text)
+
+        # in some cases the final title is quite similar to title_text_h1
+        # (either it differs for case, for special chars, or it's truncated)
+        # in these cases, we prefer the title_text_h1
+        filter_title = filter_regex.sub('', title).lower()
+        if filter_title_text_h1 == filter_title or filter_title_text_h1.startswith(filter_title):
+            title = title_text_h1
+
         return title
 
-    def split_title(self, title, splitter):
+    def split_title(self, title, splitter, hint=None):
         """Split the title to best part possible
         """
         large_text_length = 0
         large_text_index = 0
         title_pieces = splitter.split(title)
 
+        if hint:
+            filter_regex = re.compile(r'[^a-zA-Z0-9\ ]')
+            hint = filter_regex.sub('', hint).lower()
+
         # find the largest title piece
         for i in range(len(title_pieces)):
-            current = title_pieces[i]
+            current = title_pieces[i].strip()
+            if hint and hint in filter_regex.sub('', current).lower():
+                large_text_index = i
+                break
             if len(current) > large_text_length:
                 large_text_length = len(current)
                 large_text_index = i
