@@ -15,15 +15,12 @@ except ImportError:
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python setup.py sdist upload') # bdist_wininst
+    os.system('python setup.py sdist upload')  # bdist_wininst
     sys.exit()
 
 
 packages = [
     'newspaper',
-    'newspaper.packages',
-    'newspaper.packages.tldextract',
-    'newspaper.packages.feedparser',
 ]
 
 
