@@ -3,8 +3,10 @@
 All unit tests for the newspaper library should be contained in this file.
 """
 from __future__ import print_function
+import codecs
 import sys
 import os
+import simplediff
 import unittest
 import time
 import traceback
@@ -28,7 +30,6 @@ from newspaper import (
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
-import codecs
 
 # from newspaper import Config
 # from newspaper.network import multithread_request
@@ -154,7 +155,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_download_html(self):
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
-        assert len(self.article.html) == 75175
+        assert len(self.article.html) == 75244
 
     @print_test
     def test_pre_download_parse(self):
@@ -249,10 +250,11 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_nlp_body(self):
-        KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
-                    'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
-                    'travel', 'weather', 'winds', 'york']
+        KEYWORDS = [u'balloons', u'delays', u'flight', u'forecasters',
+                    u'good', u'sailing', u'smooth', u'storm', u'thanksgiving',
+                    u'travel', u'weather', u'winds', u'york']
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
+
         assert self.article.summary == SUMMARY
         assert sorted(self.article.keywords) == sorted(KEYWORDS)
 

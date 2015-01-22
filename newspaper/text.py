@@ -13,7 +13,7 @@ import string
 
 from .utils import FileHelper
 
-TABSSPACE = re.compile(r'[\s\t]+')
+TABSSPACE = re.compile(r'[\s\t]+', flags=re.UNICODE)
 
 
 def innerTrim(value):

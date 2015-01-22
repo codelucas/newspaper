@@ -20,10 +20,11 @@ import sys
 import threading
 import time
 
+from bs4 import UnicodeDammit
+
 from hashlib import sha1
 
-from . import encoding
-from .. import settings
+from . import settings
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -36,7 +37,7 @@ class FileHelper(object):
             # _PARENT_DIR = os.path.join(_TEST_DIR, '../..') # packages/goose
             # dirpath = os.path.dirname(goose.__file__)
             dirpath = os.path.abspath(os.path.dirname(__file__))
-            path = os.path.join(dirpath, '../resources', filename)
+            path = os.path.join(dirpath, 'resources', filename)
         else:
             path = filename
         try:
@@ -115,6 +116,17 @@ class ReplaceSequence(object):
         for rp in self.replacements:
             mutatedString = rp.replaceAll(mutatedString)
         return mutatedString
+
+
+def get_unicode(text, is_html=False):
+    if isinstance(text, unicode):
+        return text
+    converted = UnicodeDammit(text, is_html=is_html)
+    if not converted.unicode_markup:
+        raise Exception(
+            'Failed to detect encoding of article text, tried: %s' %
+            ', '.join(converted.tried_encodings))
+    return converted.unicode_markup
 
 
 class TimeoutError(Exception):
@@ -257,19 +269,6 @@ def clear_memo_cache(source):
         print 'memo file for', source.domain, 'has already been deleted!'
 
 
-def encodeValue(value):
-    if value is None:
-        return u''
-    string_org = value
-    try:
-        value = encoding.smart_unicode(value)
-    except (UnicodeEncodeError, encoding.DjangoUnicodeDecodeError):
-        value = encoding.smart_str(value)
-    except:
-        value = string_org
-    return value.strip()
-
-
 def memoize_articles(source, articles):
     """When we parse the <a> links in an <html> page, on the 2nd run
     and later, check the <a> links of previous runs. If they match,
@@ -301,11 +300,11 @@ def memoize_articles(source, articles):
         valid_urls = memo.keys() + cur_articles.keys()
 
         memo_text = u'\r\n'.join(
-            [encodeValue(href.strip()) for href in (valid_urls)])
+            [get_unicode(href.strip()) for href in (valid_urls)])
     # Our first run with memoization, save every url as valid
     else:
         memo_text = u'\r\n'.join(
-            [encodeValue(href.strip()) for href in cur_articles.keys()])
+            [get_unicode(href.strip()) for href in cur_articles.keys()])
 
     # new_length = len(cur_articles)
     if len(memo) > config.MAX_FILE_MEMO:

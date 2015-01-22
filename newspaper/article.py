@@ -19,8 +19,8 @@ from .cleaners import DocumentCleaner
 from .configuration import Configuration
 from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
-from .utils import (URLHelper, encodeValue, RawHelper, extend_config,
-                    get_available_languages)
+from .utils import (URLHelper, RawHelper, extend_config,
+                    get_available_languages, get_unicode)
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
@@ -49,12 +49,12 @@ class Article(object):
             raise ArticleException('input url bad format')
 
         # URL to the main page of the news source which owns this article
-        self.source_url = encodeValue(source_url)
+        self.source_url = get_unicode(source_url)
 
-        url = encodeValue(url)
+        url = get_unicode(url)
         self.url = urls.prepare_url(url, self.source_url)
 
-        self.title = encodeValue(title)
+        self.title = get_unicode(title)
 
         # URL of the "best image" to represent this article
         self.top_img = self.top_image = u''
@@ -319,7 +319,7 @@ class Article(object):
         self.set_keywords(keyws)
 
         summary_sents = nlp.summarize(title=self.title, text=self.text)
-        summary = '\r\n'.join(summary_sents)
+        summary = '\n'.join(summary_sents)
         self.set_summary(summary)
 
     def get_parse_candidate(self):
@@ -374,31 +374,25 @@ class Article(object):
             # <title> extraction failed
             return
         title = title[:self.config.MAX_TITLE]
-        title = encodeValue(title)
-        if title:
-            self.title = title
+        self.title = get_unicode(title)
 
     def set_text(self, text):
         text = text[:self.config.MAX_TEXT]
-        text = encodeValue(text)
-        if text:
-            self.text = text
+        self.text = get_unicode(text)
 
     def set_html(self, html):
         """Encode HTML before setting it
         """
         self.is_downloaded = True
-        if html:
-            self.html = encodeValue(html)
+        self.html = get_unicode(html, is_html=True)
 
     def set_article_html(self, article_html):
         """Sets the HTML of just the article's `top_node`
         """
-        if article_html:
-            self.article_html = encodeValue(article_html)
+        self.article_html = get_unicode(article_html)
 
     def set_meta_img(self, src_url):
-        self.meta_img = encodeValue(src_url)
+        self.meta_img = get_unicode(src_url)
         self.set_top_img_no_check(src_url)
 
     def set_top_img(self, src_url):
@@ -411,7 +405,7 @@ class Article(object):
         """Provide 2 APIs for images. One at "top_img", "imgs"
         and one at "top_image", "images"
         """
-        src_url = encodeValue(src_url)
+        src_url = get_unicode(src_url)
         self.top_img = src_url
         self.top_image = src_url
 
@@ -419,7 +413,7 @@ class Article(object):
         """The motive for this method is the same as above, provide APIs
         for both `article.imgs` and `article.images`
         """
-        imgs = [encodeValue(i) for i in imgs]
+        imgs = [get_unicode(i) for i in imgs]
         self.images = imgs
         self.imgs = imgs
 
@@ -429,7 +423,7 @@ class Article(object):
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
         if keywords:
-            self.keywords = [encodeValue(k)
+            self.keywords = [get_unicode(k)
                              for k in keywords[:self.config.MAX_KEYWORDS]]
 
     def set_authors(self, authors):
@@ -439,14 +433,14 @@ class Article(object):
             raise Exception("authors input must be list!")
         if authors:
             authors = authors[:self.config.MAX_AUTHORS]
-            self.authors = [encodeValue(author) for author in authors]
+            self.authors = [get_unicode(author) for author in authors]
 
     def set_summary(self, summary):
         """Summary here refers to a paragraph of text from the
         title text and body text
         """
         summary = summary[:self.config.MAX_SUMMARY]
-        self.summary = encodeValue(summary)
+        self.summary = get_unicode(summary)
 
     def set_meta_language(self, meta_lang):
         """Save langauges in their ISO 2-character form

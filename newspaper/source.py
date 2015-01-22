@@ -20,6 +20,7 @@ from .configuration import Configuration
 from .packages.feedparser import feedparser
 from .packages.tldextract import tldextract
 from .settings import ANCHOR_DIRECTORY
+from .utils import get_unicode
 
 log = logging.getLogger(__name__)
 
@@ -27,7 +28,7 @@ log = logging.getLogger(__name__)
 class Category(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = get_unicode(url)
         self.html = None
         self.doc = None
 
@@ -35,7 +36,7 @@ class Category(object):
 class Feed(object):
 
     def __init__(self, url):
-        self.url = utils.encodeValue(url)
+        self.url = get_unicode(url)
         self.rss = None
         # TODO self.dom = None, speed up Feedparser
 
@@ -61,7 +62,7 @@ class Source(object):
 
         self.extractor = ContentExtractor(self.config)
 
-        self.url = utils.encodeValue(url)
+        self.url = get_unicode(url)
         self.url = urls.prepare_url(url)
 
         self.domain = urls.get_domain(self.url)
@@ -138,7 +139,7 @@ class Source(object):
         desc html attribute
         """
         desc = self.extractor.get_meta_description(self.doc)
-        self.description = utils.encodeValue(desc)
+        self.description = get_unicode(desc)
 
     def download(self):
         """Downloads html of source
