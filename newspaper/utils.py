@@ -119,6 +119,8 @@ class ReplaceSequence(object):
 
 
 def get_unicode(text, is_html=False):
+    if text is None:
+        return u''
     if isinstance(text, unicode):
         return text
     converted = UnicodeDammit(text, is_html=is_html)
