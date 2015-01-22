@@ -13,7 +13,7 @@ import re
 
 from urlparse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
 
-from .packages.tldextract import tldextract
+from tldextract import tldextract
 
 log = logging.getLogger(__name__)
 

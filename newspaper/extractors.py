@@ -17,9 +17,10 @@ import logging
 import re
 import urlparse
 
+from tldextract import tldextract
+
 from . import urls
 
-from .packages.tldextract import tldextract
 from .utils import ReplaceSequence, StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)

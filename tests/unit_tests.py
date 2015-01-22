@@ -6,7 +6,7 @@ from __future__ import print_function
 import codecs
 import sys
 import os
-import simplediff
+# import simplediff
 import unittest
 import time
 import traceback
