@@ -204,7 +204,9 @@ class Article(object):
         meta_data = self.extractor.get_meta_data(self.clean_doc)
         self.set_meta_data(meta_data)
 
-        # TODO self.publish_date = ...
+        self.publish_date = self.extractor.get_publishing_date(
+            self.url,
+            self.clean_doc)
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
