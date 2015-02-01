@@ -16,7 +16,7 @@ from .configuration import Configuration
 from .mthreading import NewsPool
 from .settings import POPULAR_URLS, TRENDING_URL
 from .source import Source
-from .utils import extend_config, print_available_languages
+from .utils import extend_config, get_unicode, print_available_languages
 
 
 def build(url=u'', dry=False, config=None, **kwargs):
@@ -91,4 +91,4 @@ def fulltext(html, language='en'):
     top_node = extractor.calculate_best_node(doc)
     top_node = extractor.post_cleanup(top_node)
     text, article_html = output_formatter.get_formatted(top_node)
-    return text
+    return get_unicode(text)
