@@ -26,7 +26,7 @@ URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
 
 import newspaper
 from newspaper import (
-    Article, Source, ArticleException, news_pool)
+    Article, fulltext, Source, ArticleException, news_pool)
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -176,6 +176,7 @@ class ArticleTestCase(unittest.TestCase):
 
         text = mock_resource_with('cnn', 'txt')
         assert self.article.text == text
+        assert fulltext(self.article.html) == text
 
         # NOTE: top_img extraction requires an internet connection
         # unlike the rest of this test file
@@ -474,6 +475,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.parse()
         text = mock_resource_with('chinese', 'txt')
         assert article.text == text
+        assert fulltext(article.html, 'zh') == text
 
     @print_test
     def test_arabic_fulltext_extract(self):
@@ -486,6 +488,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         assert article.meta_lang == 'ar'
         text = mock_resource_with('arabic', 'txt')
         assert article.text == text
+        assert fulltext(article.html, 'ar') == text
 
     @print_test
     def test_spanish_fulltext_extract(self):
@@ -497,6 +500,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.parse()
         text = mock_resource_with('spanish', 'txt')
         assert article.text == text
+        assert fulltext(article.html, 'es') == text
 
 
 if __name__ == '__main__':

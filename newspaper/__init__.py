@@ -8,8 +8,8 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from .article import Article, ArticleException
-from .api import (build, build_article, hot, languages, popular_urls,
-                  NewsPool, Configuration as Config)
+from .api import (build, build_article, fulltext, hot, languages,
+                  popular_urls, NewsPool, Configuration as Config)
 from .source import Source
 from .version import __version__
 
