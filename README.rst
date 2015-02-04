@@ -85,13 +85,18 @@ A Glance:
     http://tech.cnn.com
     ...
 
-.. code-block:: pycon
-
     >>> cnn_article = cnn_paper.articles[0]
     >>> cnn_article.download()
     >>> cnn_article.parse()
     >>> cnn_article.nlp()
     ...
+
+.. code-block:: pycon
+
+    >>> from newspaper import fulltext
+
+    >>> html = requests.get(...).text
+    >>> text = fulltext(html)
 
 
 Newspaper has *seamless* language extraction and detection.
@@ -294,6 +299,9 @@ LICENSE
 
 Authored and maintained by `Lucas Ou-Yang`_.
 
+`Parse.ly`_ sponsored some work on newspaper, specifically focused on
+automatic extraction.
+
 Newspaper uses a lot of `python-goose's`_ parsing code. View their license `here`_.
 
 Please feel free to `email & contact me`_ if you run into issues or just would like
@@ -308,3 +316,4 @@ to talk about the future of this library and news extraction in general!
 .. _`The Documentation`: http://newspaper.readthedocs.org
 .. _`lxml`: http://lxml.de/
 .. _`requests`: https://github.com/kennethreitz/requests
+.. _`Parse.ly`: http://parse.ly
