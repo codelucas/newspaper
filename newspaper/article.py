@@ -83,8 +83,7 @@ class Article(object):
         # List of authors who have published the article, via parse()
         self.authors = []
 
-        # TODO: Date of when this article was published
-        self.published_date = u''
+        self.publish_date = u''
 
         # Summary generated from the article's body txt
         self.summary = u''

@@ -10,5 +10,4 @@ jieba==0.35
 feedparser==5.1.3
 tldextract==1.5.1
 feedfinder2==0.0.1
-simplediff==1.0
 python-dateutil==2.4.0
