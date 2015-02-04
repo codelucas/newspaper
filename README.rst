@@ -298,6 +298,7 @@ LICENSE
 -------
 
 Authored and maintained by `Lucas Ou-Yang`_.
+
 `Parse.ly`_ sponsored some work on newspaper, specifically focused on
 automatic extraction.
 
