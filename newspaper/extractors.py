@@ -13,6 +13,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from collections import defaultdict
 import copy
+from dateutil.parser import parse as date_parser
 import logging
 import re
 import urllib.parse
@@ -161,6 +162,58 @@ class ContentExtractor(object):
         # except:
         #    return [] # Failed to find anything
         # return authors
+
+    def get_publishing_date(self, url, doc):
+        """3 strategies for publishing date extraction. The strategies
+        are descending in accuracy and the next strategy is only
+        attempted if a preferred one fails.
+
+        1. Pubdate from URL
+        2. Pubdate from metadata
+        3. Raw regex searches in the HTML + added heuristics
+        """
+
+        def parse_date_str(date_str):
+            try:
+                datetime_obj = date_parser(date_str)
+                return datetime_obj
+            except:
+                # near all parse failures are due to URL dates without a day
+                # specifier, e.g. /2014/04/
+                return None
+
+        date_match = re.search(urls.DATE_REGEX, url)
+        if date_match:
+            date_str = date_match.group(0)
+            datetime_obj = parse_date_str(date_str)
+            if datetime_obj:
+                return datetime_obj
+
+        PUBLISH_DATE_TAGS = [
+            {'attribute': 'property', 'value': 'rnews:datePublished', 'content': 'content'},
+            {'attribute': 'property', 'value': 'article:published_time', 'content': 'content'},
+            {'attribute': 'name', 'value': 'OriginalPublicationDate', 'content': 'content'},
+            {'attribute': 'itemprop', 'value': 'datePublished', 'content': 'datetime'},
+            {'attribute': 'property', 'value': 'og:published_time', 'content': 'content'},
+            {'attribute': 'name', 'value': 'article_date_original', 'content': 'content'},
+            {'attribute': 'name', 'value': 'publication_date', 'content': 'content'},
+            {'attribute': 'name', 'value': 'sailthru.date', 'content': 'content'},
+            {'attribute': 'name', 'value': 'PublishDate', 'content': 'content'},
+        ]
+        for known_meta_tag in PUBLISH_DATE_TAGS:
+            meta_tags = self.parser.getElementsByTag(
+                doc,
+                attr=known_meta_tag['attribute'],
+                value=known_meta_tag['value'])
+            if meta_tags:
+                date_str = self.parser.getAttribute(
+                    meta_tags[0],
+                    known_meta_tag['content'])
+                datetime_obj = parse_date_str(date_str)
+                if datetime_obj:
+                    return datetime_obj
+
+        return None
 
     def get_title(self, doc):
         """Fetch the article title and analyze it

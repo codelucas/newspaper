@@ -43,6 +43,9 @@ A Glance:
     >>> article.authors
     ['Leigh Ann Caldwell', 'John Honway']
 
+    >>> article.publish_date
+    datetime.datetime(2013, 12, 30, 0, 0)
+
     >>> article.text
     'Washington (CNN) -- Not everyone subscribes to a New Year's resolution...'
 
@@ -70,16 +73,16 @@ A Glance:
 
     >>> for article in cnn_paper.articles:
     >>>     print(article.url)
-    'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
-    'http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html'
+    http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/
+    http://www.cnn.com/2013/12/11/us/texas-teen-dwi-wreck/index.html
     ...
 
     >>> for category in cnn_paper.category_urls():
     >>>     print(category)
 
-    'http://lifestyle.cnn.com'
-    'http://cnn.com/world'
-    'http://tech.cnn.com'
+    http://lifestyle.cnn.com
+    http://cnn.com/world
+    http://tech.cnn.com
     ...
 
 .. code-block:: pycon
@@ -125,9 +128,9 @@ If you are certain that an *entire* news source is in one language, **go ahead a
 
     >>> for category in sina_paper.category_urls():
     >>>     print(category)
-    'http://health.sina.com.cn'
-    'http://eladies.sina.com.cn'
-    'http://english.sina.com'
+    http://health.sina.com.cn
+    http://eladies.sina.com.cn
+    http://english.sina.com
     ...
 
     >>> article = sina_paper.articles[0]

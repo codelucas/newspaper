@@ -82,7 +82,8 @@ class ExhaustiveFullTextCase(unittest.TestCase):
         with open(URLS_FILE, 'r') as f:
             urls = [d.strip() for d in f.readlines() if d.strip()]
 
-        failed = 0
+        fulltext_failed = 0
+        pubdates_failed = 0
         for url in urls:
             domain = get_base_domain(url)
             if domain in domain_counters:
@@ -96,6 +97,8 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 a = Article(url)
                 a.download(html)
                 a.parse()
+                if a.publish_date is None:
+                    pubdates_failed += 1
             except Exception:
                 print('<< URL: %s parse ERROR >>' % url)
                 traceback.print_exc()
@@ -107,13 +110,17 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 # `correct_text` holds the reason of failure if failure
                 print('%s -- %s -- %s' %
                       ('Fulltext failed', res_filename, correct_text.strip()))
-                failed += 1
+                fulltext_failed += 1
             # TODO: assert statements are commented out for full-text
             # extraction tests because we are constantly tweaking the
             # algorithm and improving
             # assert a.text == correct_text
         print('%s fulltext extractions failed out of %s' %
-              (failed, len(urls)))
+              (fulltext_failed, len(urls)))
+        print('%s pubdate extractions failed out of %s' %
+              (pubdates_failed, len(urls)))
+        assert pubdates_failed == 47
+        assert fulltext_failed == 20
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -184,6 +191,7 @@ class ArticleTestCase(unittest.TestCase):
         assert self.article.title == TITLE
         assert len(self.article.imgs) == LEN_IMGS
         assert self.article.meta_lang == META_LANG
+        assert str(self.article.publish_date) == '2013-11-27 00:00:00'
 
     @print_test
     def test_meta_type_extraction(self):
