@@ -30,7 +30,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='newspaper',
-    version='0.0.9.2',
+    version='0.0.9.3',
     description='Simplified python article discovery & extraction.',
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
