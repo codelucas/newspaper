@@ -119,15 +119,16 @@ class ReplaceSequence(object):
 
 
 def get_unicode(text, is_html=False):
-    if text is None:
+    if not text:
         return u''
     if isinstance(text, unicode):
         return text
     converted = UnicodeDammit(text, is_html=is_html)
     if not converted.unicode_markup:
         raise Exception(
-            'Failed to detect encoding of article text, tried: %s' %
-            ', '.join(converted.tried_encodings))
+            'Failed to detect encoding of text: "%s"...,'
+            '\ntried encodings: "%s"' %
+            (text[:20], ', '.join(converted.tried_encodings)))
     return converted.unicode_markup
 
 
