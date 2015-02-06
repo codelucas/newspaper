@@ -371,7 +371,7 @@ class ContentExtractor(object):
 
         if top_meta_image:
             return urllib.parse.urljoin(article_url, top_meta_image)
-        return u''
+        return ''
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
