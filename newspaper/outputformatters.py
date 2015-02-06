@@ -70,7 +70,7 @@ class OutputFormatter(object):
 
     def convert_to_html(self):
         cleaned_node = self.parser.clean_article_html(self.get_top_node())
-        return self.parser.node_to_string(cleaned_node)
+        return self.parser.nodeToString(cleaned_node)
 
     def add_newline_to_br(self):
         for e in self.parser.getElementsByTag(self.top_node, tag='br'):

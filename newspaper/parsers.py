@@ -58,10 +58,6 @@ class Parser(object):
             return None
 
     @classmethod
-    def node_to_string(cls, node):
-        return lxml.html.tostring(node)
-
-    @classmethod
     def clean_article_html(cls, node):
         article_cleaner = lxml.html.clean.Cleaner()
         article_cleaner.javascript = True
