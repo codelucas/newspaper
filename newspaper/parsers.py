@@ -45,6 +45,8 @@ class Parser(object):
     def get_unicode_html(cls, html):
         if isinstance(html, str):
             return html
+        if not html:
+            return html
         converted = UnicodeDammit(html, is_html=True)
         if not converted.unicode_markup:
             raise Exception(
