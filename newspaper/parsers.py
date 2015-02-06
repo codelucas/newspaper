@@ -65,7 +65,8 @@ class Parser(object):
         article_cleaner.allow_tags = [
             'a', 'span', 'p', 'br', 'strong', 'b',
             'em', 'i', 'tt', 'code', 'pre', 'blockquote', 'img', 'h1',
-            'h2', 'h3', 'h4', 'h5', 'h6']
+            'h2', 'h3', 'h4', 'h5', 'h6',
+            'ul', 'ol', 'li', 'dl', 'dt', 'dd']
         article_cleaner.remove_unknown_tags = False
         return article_cleaner.clean_html(node)
 
