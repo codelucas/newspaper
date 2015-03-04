@@ -3,7 +3,7 @@ Pillow==2.6.1
 PyYAML==3.11
 cssselect==0.9.1
 lxml==3.3.5
-nltk==3.0.0
+nltk==3.0.1
 requests==2.3.0
 six==1.7.3
 feedparser==5.1.3
