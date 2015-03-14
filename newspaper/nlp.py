@@ -20,8 +20,8 @@ with open(settings.NLP_STOPWORDS_EN, 'r') as f:
 ideal = 20.0
 
 
-def summarize(url='', title='', text=''):
-    if (text == '' or title == ''):
+def summarize(url='', title='', text='', max_sents=5):
+    if (text == '' or title == '' or max_sents <= 0):
         return []
 
     summaries = []
@@ -29,8 +29,8 @@ def summarize(url='', title='', text=''):
     keys = keywords(text)
     titleWords = split_words(title)
 
-    # Score setences, and use the top 5 sentences
-    ranks = score(sentences, titleWords, keys).most_common(5)
+    # Score setences, and use the top 5 or max_sents sentences
+    ranks = score(sentences, titleWords, keys).most_common(max_sents)
     for rank in ranks:
         summaries.append(rank[0])
     return summaries
