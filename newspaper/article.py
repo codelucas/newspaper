@@ -141,13 +141,16 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, html=None):
+    def download(self, html=None, title=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
         """
         if html is None:
             html = network.get_html(self.url, self.config)
         self.set_html(html)
+
+        if title is not None:
+            self.set_title(title)
 
     def parse(self):
         if not self.is_downloaded:
@@ -170,7 +173,11 @@ class Article(object):
         output_formatter = OutputFormatter(self.config)
 
         title = self.extractor.get_title(self.clean_doc)
-        self.set_title(title)
+        """if title has successfully extracted, 
+        override any existing title
+        """
+        if title is not None:
+            self.set_title(title)
 
         authors = self.extractor.get_authors(self.clean_doc)
         self.set_authors(authors)
