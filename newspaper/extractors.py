@@ -95,9 +95,9 @@ class ContentExtractor(object):
             search_str = search_str.strip()
 
             # Chunk the line by non alphanumeric tokens (few name exceptions)
-            # >>> re.split("[^\w\'\-]", "Lucas Ou, Dean O'Brian and Ronald")
-            # ['Lucas Ou', '', 'Dean O'Brian', 'and', 'Ronald']
-            name_tokens = re.split("[^\w\'\-]", search_str)
+            # >>> re.split("[^\w\'\-\.]", "Tyler G. Jones, Lucas Ou, Dean O'Brian and Ronald")
+            # ['Tyler', 'G.', 'Jones', '', 'Lucas', 'Ou', '', 'Dean', "O'Brian", 'and', 'Ronald']
+            name_tokens = re.split("[^\w\'\-\.]", search_str)
             name_tokens = [s.strip() for s in name_tokens]
 
             _authors = []
