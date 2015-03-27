@@ -149,7 +149,7 @@ class ContentExtractor(object):
 
         uniq = list(set([s.lower() for s in _authors]))
         for name in uniq:
-            names = [w.capitalize() for w in name.split(' ')]
+            names = [w.title() for w in name.split(' ')]
             authors.append(' '.join(names))
         return authors or []
 
