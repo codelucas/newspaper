@@ -169,7 +169,7 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_parse_html(self):
-        AUTHORS = ['Dana A. Ford', 'James S.A. Corey', 'Chien-Ming Wang', 'Tom Watkins']
+        AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
@@ -187,7 +187,7 @@ class ArticleTestCase(unittest.TestCase):
                    '01-weather-1128-story-top.jpg')
         assert self.article.top_img == TOP_IMG
 
-        assert self.article.authors == AUTHORS
+        assert sorted(self.article.authors) == AUTHORS
         assert self.article.title == TITLE
         assert len(self.article.imgs) == LEN_IMGS
         assert self.article.meta_lang == META_LANG

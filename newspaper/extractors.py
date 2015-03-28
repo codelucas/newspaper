@@ -86,9 +86,9 @@ class ContentExtractor(object):
            seen = {}
            result = []
            for item in l:
-               if item in seen: continue
-               seen[item] = 1
-               result.append(item)
+               if item.lower() in seen: continue
+               seen[item.lower()] = 1
+               result.append(item.title())
            return result
 
         def parse_byline(search_str):
