@@ -12,18 +12,31 @@ import logging
 import re
 
 from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
-
 from tldextract import tldextract
 
-log = logging.getLogger(__name__)
 
+log = logging.getLogger(__name__)
 
 MAX_FILE_MEMO = 20000
 
 DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
 
+regexDelimiter = r'[ -:\/\\.,]\s*'
+regexDay = r'((?:[0-3]?\d{1})|(?:[3][01]{1}))'
+regexYear = r'((?:[1]{1}\d{1}\d{1}\d{1})|(?:[2]{1}\d{3}))'
+regexMonth = r'(?:([0]?[1-9]|[1][012])|(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?))'
+regexEndswith = r'(?![\d])'
+
+regexDateEuropean = regexDay + regexDelimiter + regexMonth + regexDelimiter + regexYear + regexEndswith
+# MM/DD/YYYY
+regexDateAmerican = regexMonth + regexDelimiter + regexDay + regexDelimiter + regexYear + regexEndswith
+# YYYY/MM/DD
+regexDateTechnical = regexYear + regexDelimiter + regexMonth + regexDelimiter + regexDay + regexEndswith
+
+DATE_REGEXES = [regexDateEuropean, regexDateAmerican, regexDateTechnical]
+
 ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
-                'xhtml', 'jhtml', 'asp']
+                 'xhtml', 'jhtml', 'asp']
 
 GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
@@ -35,14 +48,15 @@ BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 
 BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
 
+
 def remove_args(url, keep_params=(), frags=False):
     """
     Remove all param arguments from a url.
     """
     parsed = urlsplit(url)
-    filtered_query= '&'.join(
+    filtered_query = '&'.join(
         qry_item for qry_item in parsed.query.split('&')
-            if qry_item.startswith(keep_params)
+        if qry_item.startswith(keep_params)
     )
     if frags:
         frag = parsed[4:]
@@ -50,6 +64,7 @@ def remove_args(url, keep_params=(), frags=False):
         frag = ('',)
 
     return urlunsplit(parsed[:3] + (filtered_query,) + frag)
+
 
 def redirect_back(url, source_domain):
     """
@@ -73,6 +88,7 @@ def redirect_back(url, source_domain):
 
     return url
 
+
 def prepare_url(url, source_url=None):
     """
     Operations that purify a url, removes arguments,
@@ -92,6 +108,7 @@ def prepare_url(url, source_url=None):
         proper_url = ''
 
     return proper_url
+
 
 def valid_url(url, verbose=False, test=False):
     """
@@ -137,7 +154,7 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('\t%s rejected because len of url is less than 11' % url)
         return False
 
-    r1 = ('mailto:' in url) # TODO not sure if these rules are redundant
+    r1 = ('mailto:' in url)  # TODO not sure if these rules are redundant
     r2 = ('http://' not in url) and ('https://' not in url)
 
     if r1 or r2:
@@ -196,12 +213,12 @@ def valid_url(url, verbose=False, test=False):
     if url_slug and (dash_count > 4 or underscore_count > 4):
 
         if dash_count >= underscore_count:
-            if tld not in [ x.lower() for x in url_slug.split('-') ]:
+            if tld not in [x.lower() for x in url_slug.split('-')]:
                 if verbose: print('%s verified for being a slug' % url)
                 return True
 
         if underscore_count > dash_count:
-            if tld not in [ x.lower() for x in url_slug.split('_') ]:
+            if tld not in [x.lower() for x in url_slug.split('_')]:
                 if verbose: print('%s verified for being a slug' % url)
                 return True
 
@@ -232,6 +249,7 @@ def valid_url(url, verbose=False, test=False):
     if verbose: print('%s caught for default false' % url)
     return False
 
+
 def url_to_filetype(abs_url):
     """
     Input a URL and output the filetype of the file
@@ -248,6 +266,7 @@ def url_to_filetype(abs_url):
     file_type = last_chunk[-1] if len(last_chunk) >= 2 else None
     return file_type or None
 
+
 def get_domain(abs_url, **kwargs):
     """
     returns a url's domain, this method exists to
@@ -257,12 +276,14 @@ def get_domain(abs_url, **kwargs):
         return None
     return urlparse(abs_url, **kwargs).netloc
 
+
 def get_scheme(abs_url, **kwargs):
     """
     """
     if abs_url is None:
         return None
     return urlparse(abs_url, **kwargs).scheme
+
 
 def get_path(abs_url, **kwargs):
     """
@@ -271,17 +292,18 @@ def get_path(abs_url, **kwargs):
         return None
     return urlparse(abs_url, **kwargs).path
 
+
 def is_abs_url(url):
     """
     this regex was brought to you by django!
     """
     regex = re.compile(
-        r'^(?:http|ftp)s?://'                                                                 # http:// or https://
+        r'^(?:http|ftp)s?://'  # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
-        r'localhost|'                                                                         # localhost...
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'                                                # ...or ipv4
-        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)'                                                        # ...or ipv6
-        r'(?::\d+)?'                                                                          # optional port
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'  # ...or ipv4
+        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)'  # ...or ipv6
+        r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
     c_regex = re.compile(regex)
