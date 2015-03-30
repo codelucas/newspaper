@@ -40,3 +40,5 @@ nosetests.xml
 .project
 .pydevproject
 venv
+
+.idea
