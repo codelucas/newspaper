@@ -17,7 +17,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
 **This is newspaper's Python2 branch**! Or, view the `Python3 branch`_
 
-.. _`Python3 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
+.. _`Python3 branch`: https://github.com/codelucas/newspaper/tree/master
 
 A Glance:
 ---------
