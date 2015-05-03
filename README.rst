@@ -215,6 +215,10 @@ package name is ``newspaper``.
 
 **If you are on Debian / Ubuntu**, install using the following:
 
+- Install ``pip3`` command needed to install ``newspaper3k`` package::
+
+    $ sudo apt-get install python3-pip
+
 - Python development version, needed for Python.h::
 
     $ sudo apt-get install python-dev
