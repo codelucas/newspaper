@@ -59,7 +59,11 @@ class OutputFormatter(object):
     def convert_to_text(self):
         txts = []
         for node in list(self.get_top_node()):
-            txt = self.parser.getText(node)
+            try:
+                txt = self.parser.getText(node)
+            except ValueError:  # lxml error
+                txt = None
+
             if txt:
                 txt = HTMLParser().unescape(txt)
                 txt_lis = innerTrim(txt).split(r'\n')
