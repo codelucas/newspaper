@@ -269,7 +269,8 @@ class Article(object):
         wordcount = self.text.split(' ')
         sentcount = self.text.split('.')
 
-        if meta_type == 'article' and wordcount > (self.config.MIN_WORD_COUNT):
+        if (meta_type == 'article' and len(wordcount) >
+                (self.config.MIN_WORD_COUNT)):
             log.debug('%s verified for article and wc' % self.url)
             return True
 
