@@ -33,14 +33,17 @@ class ArticleException(Exception):
 class Article(object):
     """Article objects abstract an online news article page
     """
-    def __init__(self, url, title='', source_url='', config=None, **kwargs):
+    def __init__(self, url, title='', source_url='', config=None, content_extractor=None, **kwargs):
         """The **kwargs argument may be filled with config values, which
         is added into the config object
         """
         self.config = config or Configuration()
         self.config = extend_config(self.config, kwargs)
 
-        self.extractor = ContentExtractor(self.config)
+        if content_extractor is None:
+            self.extractor = ContentExtractor(self.config)
+        else:
+            self.extractor = content_extractor
 
         if source_url == '':
             source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
