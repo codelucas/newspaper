@@ -64,7 +64,7 @@ class DocumentCleaner(object):
                                                self.facebook_braodcasting_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.twitter_re)
         doc_to_clean = self.clean_para_spans(doc_to_clean)
-        doc_to_clean = self.div_to_para(doc_to_clean, 'div')
+        #doc_to_clean = self.div_to_para(doc_to_clean, 'div')
         doc_to_clean = self.div_to_para(doc_to_clean, 'span')
         return doc_to_clean
 

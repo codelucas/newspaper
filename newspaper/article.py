@@ -215,6 +215,7 @@ class Article(object):
 
         text = ''
         self.top_node = self.extractor.calculate_best_node(self.doc)
+        #self.top_node = document_cleaner.clean(self.top_node)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
