@@ -367,6 +367,11 @@ class Article(object):
         try:
             s = images.Scraper(self)
             self.set_top_img(s.largest_image_url())
+        except TypeError as e:
+            if "Can't convert 'NoneType' object to str implicitly" in e.args[0]:
+                log.debug("No pictures found. Top image not set.")
+            else:
+                log.critical('jpeg error with PIL, %s' % e)
         except Exception as e:
             log.critical('jpeg error with PIL, %s' % e)
 
