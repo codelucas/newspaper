@@ -348,6 +348,7 @@ def print_available_languages():
         'zh':   'Chinese',
         'id':   'Indonesian',
         'vi':   'Vietnamese',
+        'mk':   'Macedonian',
     }
 
     codes = get_available_languages()
