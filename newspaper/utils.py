@@ -349,6 +349,7 @@ def print_available_languages():
         'id':   'Indonesian',
         'vi':   'Vietnamese',
         'mk':   'Macedonian',
+        'tr':   'Turkish',
     }
 
     codes = get_available_languages()
