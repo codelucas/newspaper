@@ -202,6 +202,7 @@ Features
       zh              Chinese
       id              Indonesian
       vi              Vietnamese
+      tr              Turkish
 
 
 Get it now
