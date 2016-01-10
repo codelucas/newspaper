@@ -79,6 +79,18 @@ class ContentExtractor(object):
         def contains_digits(d):
             return bool(_digits.search(d))
 
+        def uniqify_list(l):
+           """Remove duplicates from provided list but maintain original order.
+              Derived from http://www.peterbe.com/plog/uniqifiers-benchmark
+           """
+           seen = {}
+           result = []
+           for item in l:
+               if item.lower() in seen: continue
+               seen[item.lower()] = 1
+               result.append(item.title())
+           return result
+
         def parse_byline(search_str):
             """Takes a candidate line of html or text and
             extracts out the name(s) in list form
@@ -95,21 +107,19 @@ class ContentExtractor(object):
             search_str = search_str.strip()
 
             # Chunk the line by non alphanumeric tokens (few name exceptions)
-            # >>> re.split("[^\w\'\-]", "Lucas Ou, Dean O'Brian and Ronald")
-            # ['Lucas Ou', '', 'Dean O'Brian', 'and', 'Ronald']
-            name_tokens = re.split("[^\w\'\-]", search_str)
+            # >>> re.split("[^\w\'\-\.]", "Tyler G. Jones, Lucas Ou, Dean O'Brian and Ronald")
+            # ['Tyler', 'G.', 'Jones', '', 'Lucas', 'Ou', '', 'Dean', "O'Brian", 'and', 'Ronald']
+            name_tokens = re.split("[^\w\'\-\.]", search_str)
             name_tokens = [s.strip() for s in name_tokens]
 
             _authors = []
             # List of first, last name tokens
             curname = []
-            DELIM = ['and', '']
+            DELIM = ['and', ',', '']
 
             for token in name_tokens:
                 if token in DELIM:
-                    # should we allow middle names?
-                    valid_name = (len(curname) == 2)
-                    if valid_name:
+                    if len(curname) > 0:
                         _authors.append(' '.join(curname))
                         curname = []
 
@@ -126,9 +136,9 @@ class ContentExtractor(object):
         # Try 1: Search popular author tags for authors
 
         ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline']
+        VALS = ['author', 'byline', 'dc.creator']
         matches = []
-        _authors, authors = [], []
+        authors = []
 
         for attr in ATTRS:
             for val in VALS:
@@ -145,13 +155,9 @@ class ContentExtractor(object):
             else:
                 content = match.text or ''
             if len(content) > 0:
-                _authors.extend(parse_byline(content))
+                authors.extend(parse_byline(content))
 
-        uniq = list(set([s.lower() for s in _authors]))
-        for name in uniq:
-            names = [w.capitalize() for w in name.split(' ')]
-            authors.append(' '.join(names))
-        return authors or []
+        return uniqify_list(authors)
 
         # TODO Method 2: Search raw html for a by-line
         # match = re.search('By[\: ].*\\n|From[\: ].*\\n', html)

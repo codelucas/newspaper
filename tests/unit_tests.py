@@ -158,7 +158,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_download_html(self):
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
-        assert len(self.article.html) == 75175
+        assert len(self.article.html) == 75406
 
     @print_test
     def test_pre_download_parse(self):
@@ -169,7 +169,7 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_parse_html(self):
-        AUTHORS = ['Dana Ford', 'Tom Watkins']
+        AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
@@ -209,7 +209,7 @@ class ArticleTestCase(unittest.TestCase):
             'title': 'After storm, forecasters see smooth sailing for Thanksgiving - CNN.com',
             'og': {'site_name': 'CNN','description': 'A strong storm struck much of the eastern United States on Wednesday, complicating holiday plans for many of the 43 million Americans expected to travel.', 'title': 'After storm, forecasters see smooth sailing for Thanksgiving', 'url': 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html', 'image': 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg', 'type': 'article'},
             'section': 'travel',
-            'author': 'Dana Ford and Tom Watkins, CNN',
+            'author': 'Dana A. Ford, James S.A. Corey, Chien-Ming Wang, and Tom Watkins, CNN',
             'robots': 'index,follow',
             'vr': {'canonical': 'http://edition.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'},
             'source': 'CNN',
