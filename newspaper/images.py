@@ -195,7 +195,7 @@ class Scraper:
             if area > max_area:
                 max_area = area
                 max_url = img_url
-        log.debug('using max img ' + max_url)
+        log.debug('using max img {}'.format(max_url))
         return max_url
 
     def calculate_area(self, img_url, dimension):
