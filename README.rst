@@ -15,7 +15,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 .. _`tweeted by`: https://twitter.com/kennethreitz/status/419520678862548992
 .. _`The Changelog`: http://thechangelog.com/newspaper-delivers-instapaper-style-article-extraction/
 
-**Newspaper is a Python3 library**! Or, view the `Python2 branch`_
+**Newspaper is a Python3 library**! Or, view our **deprecated and buggy** `Python2 branch`_
 
 .. _`Python2 branch`: https://github.com/codelucas/newspaper/tree/python-2-head
 
@@ -164,7 +164,6 @@ Interested in adding a new language for us? Refer to: `Docs - Adding new languag
 Features
 --------
 
-- Full Python3 and Python2 support
 - Multi-threaded article download framework
 - News url identification
 - Text extraction from html
@@ -211,7 +210,7 @@ Get it now
 Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
 However, you will run into fixable issues if you are trying to install on ubuntu.
 
-Note that our Python3 package name is ``newspaper3k`` while our Python2
+Note that the Python3 package name is ``newspaper3k`` while our Python2
 package name is ``newspaper``.
 
 **If you are on Debian / Ubuntu**, install using the following:
@@ -270,9 +269,6 @@ NOTE: You will still most likely need to install the following libraries via you
 
 Development
 -----------
-
-Newspaper has two branches up for development. *This* branch, the master, is our Python3
-codebase while our Python2 branch is located on *python-2-head*.
 
 If you'd like to contribute and hack on the newspaper project, feel free to clone
 a development version of this repository locally::
