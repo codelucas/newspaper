@@ -92,8 +92,9 @@ def multithread_request(urls, config=None):
     """
     config = config or Configuration()
     num_threads = config.number_threads
+    timeout = config.thread_timeout_seconds
 
-    pool = ThreadPool(num_threads)
+    pool = ThreadPool(num_threads, timeout)
 
     m_requests = []
     for url in urls:

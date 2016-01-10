@@ -13,23 +13,26 @@ import queue
 import traceback
 from threading import Thread
 
+from .configuration import Configuration
+
 
 class Worker(Thread):
     """
     Thread executing tasks from a given tasks queue.
     """
-    def __init__(self, tasks):
+    def __init__(self, tasks, timeout_seconds):
         Thread.__init__(self)
         self.tasks = tasks
+        self.timeout = timeout_seconds
         self.daemon = True
         self.start()
 
     def run(self):
         while True:
             try:
-                func, args, kargs = self.tasks.get()
+                func, args, kargs = self.tasks.get(timeout=self.timeout)
             except queue.Empty:
-                traceback.print_exc()
+                # Extra thread allocated, no job, exit gracefully
                 break
             try:
                 func(*args, **kargs)
@@ -40,35 +43,21 @@ class Worker(Thread):
 
 
 class ThreadPool:
-    """
-    Pool of threads consuming tasks from a queue.
-    """
-    def __init__(self, num_threads):
+    def __init__(self, num_threads, timeout_seconds):
         self.tasks = queue.Queue(num_threads)
         for _ in range(num_threads):
-            Worker(self.tasks)
+            Worker(self.tasks, timeout_seconds)
 
     def add_task(self, func, *args, **kargs):
-        """
-        Add a task to the queue.
-        """
         self.tasks.put((func, args, kargs))
 
     def wait_completion(self):
-        """
-        Wait for completion of all the tasks in the queue.
-        """
         self.tasks.join()
-
-    def clear_threads(self):
-        """
-        """
-        pass
 
 
 class NewsPool(object):
 
-    def __init__(self):
+    def __init__(self, config=None):
         """
         Abstraction of a threadpool. A newspool can accept any number of
         source OR article objects together in a list. It allocates one
@@ -94,6 +83,7 @@ class NewsPool(object):
         """
         self.papers = []
         self.pool = None
+        self.config = config or Configuration()
 
     def join(self):
         """
@@ -109,12 +99,10 @@ class NewsPool(object):
         self.pool = None
 
     def set(self, paper_list, threads_per_source=1):
-        """
-        Sets the job batch.
-        """
         self.papers = paper_list
         num_threads = threads_per_source * len(self.papers)
-        self.pool = ThreadPool(num_threads)
+        timeout = self.config.thread_timeout_seconds
+        self.pool = ThreadPool(num_threads, timeout)
 
         for paper in self.papers:
             self.pool.add_task(paper.download_articles)
