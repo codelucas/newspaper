@@ -3,7 +3,6 @@ python:
  - "3.2"
  - "3.3"
  - "3.4"
- - "3.5"
 install:
  - pip install -r requirements.txt
  - python -c "import nltk ; nltk.download('punkt')"
