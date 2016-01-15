@@ -519,7 +519,9 @@ if __name__ == '__main__':
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
-    unittest.TextTestRunner().run(suite)
+    result = unittest.TextTestRunner().run(suite)
+    exit_code = 0 if result.wasSuccessful() else 1
+    sys.exit(exit_code)
 
     # TODO: suite.addTest(SourceTestCase())
     # suite.addTest(MThreadingTestCase())
