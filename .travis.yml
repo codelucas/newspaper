@@ -6,5 +6,6 @@ python:
  - "3.5"
 install:
  - pip install -r requirements.txt
+ - python -c "import nltk ; nltk.download('punkt')"
 script:
   - python tests/unit_tests.py
