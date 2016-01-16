@@ -7,6 +7,13 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import os
+if "CASPERJS_PATH" in os.environ:
+    CASPERJS_PATH = os.environ["CASPERJS_PATH"]
+else:
+    CASPERJS_PATH = '/usr/bin/casperjs'
+del os
+
 from .article import Article, ArticleException
 from .api import (build, build_article, fulltext, hot, languages,
                   popular_urls, NewsPool, Configuration as Config)
@@ -26,11 +33,3 @@ except ImportError:
             pass
 
 logging.getLogger(__name__).addHandler(NullHandler())
-
-
-import os
-if "CASPERJS_PATH" in os.environ:
-    CASPERJS_PATH = os.environ["CASPERJS_PATH"]
-else:
-    CASPERJS_PATH = '/usr/bin/casperjs'
-del os

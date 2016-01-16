@@ -5,7 +5,7 @@ must be abstracted in this file.
 """
 import os
 import subprocess
-import newspaper
+from . import CASPERJS_PATH
 
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
@@ -52,7 +52,7 @@ def get_html(url, config=None, response=None):
 
     base_dir = os.path.abspath(os.path.dirname(__file__))
     command = command_formula.format(
-        casperjs=newspaper.CASPERJS_PATH,
+        casperjs=CASPERJS_PATH,
         script=os.path.join(base_dir, 'casperjs/get_page_content.js'),
         url=url)
 
