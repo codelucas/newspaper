@@ -3,6 +3,10 @@
 All code involving requests and responses over the http network
 must be abstracted in this file.
 """
+import os
+import subprocess
+import newspaper
+
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
@@ -39,29 +43,24 @@ def get_html(url, config=None, response=None):
     encoding in a lot of cases.
     """
     FAIL_ENCODING = 'ISO-8859-1'
-    config = config or Configuration()
-    useragent = config.browser_user_agent
-    timeout = config.request_timeout
-
     if response is not None:
         if response.encoding != FAIL_ENCODING:
             return response.text
         return response.content
 
-    try:
-        html = None
-        response = requests.get(
-            url=url, **get_request_kwargs(timeout, useragent))
-        if response.encoding != FAIL_ENCODING:
-            html = response.text
-        else:
-            html = response.content
-        if html is None:
-            html = ''
-        return html
-    except Exception as e:
-        log.debug('%s on %s' % (e, url))
-        return ''
+    command_formula = ('{casperjs} {script} {url}')
+
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    command = command_formula.format(
+        casperjs=newspaper.CASPERJS_PATH,
+        script=os.path.join(base_dir, 'casperjs/get_page_content.js'),
+        url=url)
+
+    p = subprocess.Popen(command.split(), stdout=subprocess.PIPE,
+                         stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+    output, err = p.communicate()
+
+    return output
 
 
 class MRequest(object):
