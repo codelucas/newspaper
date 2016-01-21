@@ -5,7 +5,7 @@ Newspaper3k: Article scraping & curation
     :target: http://badge.fury.io/py/newspaper3k.svg
         :alt: Latest version
 
-.. image:: https://secure.travis-ci.org/codelucas/newspaper.png
+.. image:: https://travis-ci.org/codelucas/newspaper.svg
         :target: http://travis-ci.org/codelucas/newspaper/
         :alt: Build status
 
