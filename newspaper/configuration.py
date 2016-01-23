@@ -27,13 +27,14 @@ class Configuration(object):
         Modify any of these Article / Source properties
         TODO: Have a seperate ArticleConfig and SourceConfig extend this!
         """
-        self.MIN_WORD_COUNT = 300  # num of word tokens in text
-        self.MIN_SENT_COUNT = 7    # num of sentence tokens
-        self.MAX_TITLE = 200       # num of chars
-        self.MAX_TEXT = 100000     # num of chars
-        self.MAX_KEYWORDS = 35     # num of strings in list
-        self.MAX_AUTHORS = 10      # num strings in list
-        self.MAX_SUMMARY = 5000    # num of chars
+        self.MIN_WORD_COUNT = 300    # num of word tokens in text
+        self.MIN_SENT_COUNT = 7      # num of sentence tokens
+        self.MAX_TITLE = 200         # num of chars
+        self.MAX_TEXT = 100000       # num of chars
+        self.MAX_KEYWORDS = 35       # num of strings in list
+        self.MAX_NAMED_ENTITIES = 35 # num of strings in list
+        self.MAX_AUTHORS = 10        # num strings in list
+        self.MAX_SUMMARY = 5000      # num of chars
 
         # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000

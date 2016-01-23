@@ -142,6 +142,37 @@ def split_sentences(text):
     sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
     return sentences
 
+def chunked_sentences(text):
+    """Splits a large string into chunked sentences [http://www.nltk.org/book/ch07.html#chunking]
+    """
+    import nltk
+    sentences = split_sentences(text)
+    tokenized_sentences = [nltk.word_tokenize(sentence) for sentence in sentences]
+    tagged_sentences = [nltk.pos_tag(sentence) for sentence in tokenized_sentences]
+    chunked_sentences = nltk.ne_chunk_sents(tagged_sentences, binary=True)
+    return chunked_sentences
+
+def extract_entity_names(tree):
+    """ Extracts named entities from a nltk chunked tree
+    """
+    entity_names = []
+    if hasattr(tree, 'label'):
+        if tree.label() == 'NE':
+            entity_names.append(' '.join([child[0] for child in tree]))
+        else:
+            for child in tree:
+                entity_names.extend(extract_entity_names(child))
+    return entity_names
+
+def named_entities(text):
+    """ Get all the named entities
+    """
+    entity_names = []
+    chunked = chunked_sentences(text)
+    for tree in chunked:
+        entity_names.extend(extract_entity_names(tree))
+    entity_names = list(set(entity_names))
+    return entity_names
 
 def length_score(sentence_len):
     return 1 - math.fabs(ideal - sentence_len) / ideal
@@ -188,3 +219,4 @@ def sentence_position(i, size):
         return 0.17
     else:
         return 0
+
