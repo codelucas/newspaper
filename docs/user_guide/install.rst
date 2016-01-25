@@ -55,9 +55,12 @@ NOTE: You will still most likely need to install the following libraries via you
 - lxml: ``libxml2-dev`` ``libxslt-dev``
 - Python Development version: ``python-dev``
 
+Note that the Python3 package name is ``newspaper3k`` while our Python2
+package name is ``newspaper``.
+
 ::
 
-    $ pip install newspaper
+    $ pip install newspaper3k
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
