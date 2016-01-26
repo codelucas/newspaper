@@ -190,6 +190,7 @@ Features
       en              English
       es              Spanish
       fr              French
+      he              Hebrew
       it              Italian
       ko              Korean
       no              Norwegian
