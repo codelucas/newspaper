@@ -66,7 +66,7 @@ def get_html(url, config=None, response=None):
             html = ''
 
         return html
-    except Exception as e:
+    except requests.exceptions.RequestException as e:
         log.debug('%s on %s' % (e, url))
         return ''
 
