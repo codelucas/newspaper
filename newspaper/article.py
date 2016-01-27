@@ -160,9 +160,8 @@ class Article(object):
 
     def parse(self):
         if not self.is_downloaded:
-            print('You must `download()` an article before '
+            raise ArticleException('You must `download()` an article before '
                   'calling `parse()` on it!')
-            raise ArticleException()
 
         self.doc = self.config.get_parser().fromstring(self.html)
         self.clean_doc = copy.deepcopy(self.doc)
@@ -254,9 +253,9 @@ class Article(object):
         @rtype: str
         """
         if not self.is_downloaded or not self.is_parsed:
-            print('You must `download()` and `parse()` an article '
-                  'before calling `detect_language()` on it!')
-            raise ArticleException()
+            raise ArticleException(
+                    'You must `download()` and `parse()` an article before '
+                    'calling `detect_language()` on it!')
 
         if text is None:
             text = self.text
@@ -376,9 +375,9 @@ class Article(object):
         """Keyword extraction wrapper
         """
         if not self.is_downloaded or not self.is_parsed:
-            print('You must `download()` and `parse()` an article '
-                  'before calling `nlp()` on it!')
-            raise ArticleException()
+            raise ArticleException(
+                    'You must `download()` and `parse()` an article before '
+                    'calling `nlp()` on it!')
 
         text_keyws = list(nlp.keywords(self.text).keys())
         title_keyws = list(nlp.keywords(self.title).keys())
