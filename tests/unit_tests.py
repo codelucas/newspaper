@@ -505,6 +505,52 @@ class MultiLanguageTestCase(unittest.TestCase):
         assert article.text == text
         assert fulltext(article.html, 'es') == text
 
+class LanguageDetectionTestCase(unittest.TestCase):
+    def runTest(self):
+        self.test_detect_english_language()
+        self.test_detect_spanish_language()
+        self.test_detect_polish_language()
+        self.test_detect_french_language()
+
+    def test_detect_english_language(self):
+        url = 'http://example.com'
+
+        article = Article(url=url)
+        html = mock_resource_with('bloomberg.com1', 'html')
+        article.download(html)
+        article.parse()
+        article.detect_language()
+        self.assertTrue(article.language == 'en')
+
+    def test_detect_spanish_language(self):
+        url = 'http://example.com'
+
+        article = Article(url=url)
+        html = mock_resource_with('spanish_article', 'html')
+        article.download(html)
+        article.parse()
+        article.detect_language()
+        self.assertTrue(article.language == 'es')
+
+    def test_detect_polish_language(self):
+        url = 'http://example.com'
+
+        article = Article(url=url)
+        html = mock_resource_with('polish_article', 'html')
+        article.download(html)
+        article.parse()
+        article.detect_language()
+        self.assertTrue(article.language == 'pl')
+
+    def test_detect_french_language(self):
+        url = 'http://example.com'
+
+        article = Article(url=url)
+        html = mock_resource_with('french_article', 'html')
+        article.download(html)
+        article.parse()
+        article.detect_language()
+        self.assertTrue(article.language == 'fr')
 
 if __name__ == '__main__':
     # unittest.main()  # run all units and their cases
@@ -519,6 +565,7 @@ if __name__ == '__main__':
     suite.addTest(UrlTestCase())
     suite.addTest(ArticleTestCase())
     suite.addTest(APITestCase())
+    suite.addTest(LanguageDetectionTestCase())
     unittest.TextTestRunner().run(suite)
 
     # TODO: suite.addTest(SourceTestCase())
