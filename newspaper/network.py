@@ -43,10 +43,29 @@ def get_html(url, config=None, response=None):
     encoding in a lot of cases.
     """
     FAIL_ENCODING = 'ISO-8859-1'
+    config = config or Configuration()
+    useragent = config.browser_user_agent
+    timeout = config.request_timeout
+
     if response is not None:
         if response.encoding != FAIL_ENCODING:
             return response.text
         return response.content
+
+    if not config.user_casperjs:
+        try:
+            response = requests.get(
+                url=url, **get_request_kwargs(timeout, useragent))
+            if response.encoding != FAIL_ENCODING:
+                html = response.text
+            else:
+                html = response.content
+            if html is None:
+                html = ''
+            return html
+        except Exception as e:
+            log.debug('%s on %s' % (e, url))
+            return ''
 
     command_formula = ('{casperjs} {script} {url}')
 

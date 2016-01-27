@@ -65,6 +65,9 @@ class Configuration(object):
 
         self.thread_timeout_seconds = 1
 
+        # strategy for network.get_html()
+        self.user_casperjs = False
+
         # Set this to False if you want to recompute the categories
         # *every* time you build a `Source` object
         # TODO: Actually make this work
