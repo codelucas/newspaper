@@ -51,6 +51,9 @@ class Configuration(object):
         # You may keep the html of just the main article body
         self.keep_article_html = False
 
+        # Fail for error respones (e.g. 404 page)
+        self.http_success_only = True
+
         # English is the fallback
         self._language = 'en'
 

@@ -50,14 +50,21 @@ def get_html(url, config=None, response=None):
 
     try:
         html = None
+
         response = requests.get(
             url=url, **get_request_kwargs(timeout, useragent))
+
         if response.encoding != FAIL_ENCODING:
             html = response.text
         else:
             html = response.content
+
+        if config.http_success_only:
+            response.raise_for_status()  # fail if other than "ok" response
+
         if html is None:
             html = ''
+
         return html
     except Exception as e:
         log.debug('%s on %s' % (e, url))
