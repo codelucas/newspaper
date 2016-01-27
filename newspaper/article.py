@@ -9,6 +9,12 @@ import copy
 import os
 import glob
 
+try:
+    from nltk import wordpunct_tokenize
+    from nltk.corpus import stopwords, swadesh
+except ImportError:
+    print('[!] You need to install nltk (http://nltk.org/index.html)')
+
 from . import images
 from . import network
 from . import nlp
@@ -132,6 +138,8 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
+        self.language = ""
+
     def build(self):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
@@ -140,6 +148,7 @@ class Article(object):
         self.download()
         self.parse()
         self.nlp()
+        self.detect_language()
 
     def download(self, html=None):
         """Downloads the link's HTML content, don't use if you are batch async
@@ -151,9 +160,8 @@ class Article(object):
 
     def parse(self):
         if not self.is_downloaded:
-            print('You must `download()` an article before '
+            raise ArticleException('You must `download()` an article before '
                   'calling `parse()` on it!')
-            raise ArticleException()
 
         self.doc = self.config.get_parser().fromstring(self.html)
         self.clean_doc = copy.deepcopy(self.doc)
@@ -229,6 +237,61 @@ class Article(object):
 
         self.is_parsed = True
         self.release_resources()
+
+    def detect_language(self, text=None):
+        """
+        Calculate probability of given text to be written in several languages and
+        return the highest scored.
+
+        It uses a stopwords based approach, counting how many unique stopwords
+        are seen in analyzed text.
+
+        @param text: Text whose language want to be detected
+        @type text: str
+
+        @return: Most scored language guessed
+        @rtype: str
+        """
+        if not self.is_downloaded or not self.is_parsed:
+            raise ArticleException(
+                    'You must `download()` and `parse()` an article before '
+                    'calling `detect_language()` on it!')
+
+        if text is None:
+            text = self.text
+
+        ratios = self._calculate_languages_ratios(text)
+
+        most_rated_language = max(ratios, key=ratios.get)
+
+        self.set_language(most_rated_language)
+
+    def _calculate_languages_ratios(self, text):
+        """
+        Calculate probability of given text to be written in several languages and
+        return a dictionary that looks like {'french': 2, 'spanish': 4, 'english': 0}
+
+        @param text: Text whose language want to be detected
+        @type text: str
+
+        @return: Dictionary with languages and unique stopwords seen in analyzed text
+        @rtype: dict
+        """
+
+        languages_ratios = {}
+
+        tokens = wordpunct_tokenize(text)
+        words = [word.lower() for word in tokens]
+
+        # Compute per language included in nltk number of unique stopwords appearing in analyzed text
+        for language in swadesh.fileids():
+            stopwords_set = set(swadesh.words(language))
+            words_set = set(words)
+            common_elements = words_set.intersection(stopwords_set)
+
+            languages_ratios[language] = len(common_elements)  # language "score"
+
+        return languages_ratios
 
     def fetch_images(self):
         if self.clean_doc is not None:
@@ -312,9 +375,9 @@ class Article(object):
         """Keyword extraction wrapper
         """
         if not self.is_downloaded or not self.is_parsed:
-            print('You must `download()` and `parse()` an article '
-                  'before calling `nlp()` on it!')
-            raise ArticleException()
+            raise ArticleException(
+                    'You must `download()` and `parse()` an article before '
+                    'calling `nlp()` on it!')
 
         text_keyws = list(nlp.keywords(self.text).keys())
         title_keyws = list(nlp.keywords(self.title).keys())
@@ -483,3 +546,7 @@ class Article(object):
         """
         movie_urls = [o.src for o in movie_objects if o and o.src]
         self.movies = movie_urls
+
+    def set_language(self, language):
+        if language:
+            self.language = language
