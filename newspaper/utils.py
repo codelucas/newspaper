@@ -336,6 +336,7 @@ def print_available_languages():
         'en':   'English',
         'es':   'Spanish',
         'fr':   'French',
+        'he':   'Hebrew',
         'it':   'Italian',
         'ko':   'Korean',
         'no':   'Norwegian',
