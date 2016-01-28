@@ -302,7 +302,7 @@ class ContentExtractor(object):
         total_feed_urls = list(set(total_feed_urls))
         return total_feed_urls
 
-    def get_favicon(self, doc):
+    def get_favicon(self, article_url, doc):
         """Extract the favicon from a website http://en.wikipedia.org/wiki/Favicon
         <link rel="shortcut icon" type="image/png" href="favicon.png" />
         <link rel="icon" type="image/png" href="favicon.png" />
@@ -311,7 +311,7 @@ class ContentExtractor(object):
         meta = self.parser.getElementsByTag(doc, **kwargs)
         if meta:
             favicon = self.parser.getAttribute(meta[0], 'href')
-            return favicon
+            return urllib.parse.urljoin(article_url, favicon)
         return ''
 
     def get_meta_lang(self, doc):

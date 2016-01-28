@@ -190,7 +190,7 @@ class Article(object):
             self.extractor.update_language(self.meta_lang)
             output_formatter.update_language(self.meta_lang)
 
-        meta_favicon = self.extractor.get_favicon(self.clean_doc)
+        meta_favicon = self.extractor.get_favicon(self.url, self.clean_doc)
         self.set_meta_favicon(meta_favicon)
 
         meta_description = \
