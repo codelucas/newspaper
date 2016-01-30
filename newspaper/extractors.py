@@ -267,11 +267,8 @@ class ContentExtractor(object):
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
 
         # title from og:title
-        title_text_fb = self.get_meta_content(doc, 'meta[property="og:title"]')
-        if not title_text_fb:
-            title_text_fb = self.get_meta_content(doc, 'meta[name="og:title"]')
-        if not title_text_fb:
-            title_text_fb = ''
+        title_text_fb = (self.get_meta_content(doc, 'meta[property="og:title"]') or
+                         self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -288,16 +285,16 @@ class ContentExtractor(object):
             title_text = title_text_h1
             used_delimeter = True
         elif filter_title_text_h1 and filter_title_text_h1 in filter_title_text \
-            and filter_title_text_fb and filter_title_text_fb in filter_title_text \
-            and len(title_text_h1) > len(title_text_fb):
+                and filter_title_text_fb and filter_title_text_fb in filter_title_text \
+                and len(title_text_h1) > len(title_text_fb):
             title_text = title_text_h1
             used_delimeter = True
         elif filter_title_text_fb and filter_title_text_fb != filter_title_text \
-            and filter_title_text.startswith(filter_title_text_fb):
+                and filter_title_text.startswith(filter_title_text_fb):
             title_text = title_text_fb
             used_delimeter = True
         elif filter_title_text_h1 and filter_title_text_h1 != filter_title_text \
-            and filter_title_text.startswith(filter_title_text_h1) and words_title_text_h1 >= 4:
+                and filter_title_text.startswith(filter_title_text_h1) and words_title_text_h1 >= 4:
             title_text = title_text_h1
             used_delimeter = True
 
