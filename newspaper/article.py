@@ -73,6 +73,9 @@ class Article(object):
         # `keywords` are extracted via nlp() from the body text
         self.keywords = []
 
+        # `named entities` are extracted via nlp() from the body text
+        self.named_entities = []
+
         # `meta_keywords` are extracted via parse() from <meta> tags
         self.meta_keywords = []
 
@@ -325,6 +328,9 @@ class Article(object):
         summary = '\n'.join(summary_sents)
         self.set_summary(summary)
 
+        named_entities = nlp.named_entities(self.text)
+        self.set_named_entities(named_entities)
+
     def get_parse_candidate(self):
         """A parse candidate is a wrapper object holding a link hash of this
         article and a final_url of the article
@@ -436,6 +442,14 @@ class Article(object):
             raise Exception("Keyword input must be list!")
         if keywords:
             self.keywords = keywords[:self.config.MAX_KEYWORDS]
+
+    def set_named_entities(self, named_entities):
+        """named    entities are stored in list format
+        """
+        if not isinstance(named_entities, list):
+            raise Exception("Named entities input must be list!")
+        if named_entities:
+            self.named_entities = named_entities[:self.config.MAX_NAMED_ENTITIES]
 
     def set_authors(self, authors):
         """Authors are in ["firstName lastName", "firstName lastName"] format
