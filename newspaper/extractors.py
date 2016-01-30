@@ -237,7 +237,6 @@ class ContentExtractor(object):
         2. h1 similar to og:title, use h1
         3. title contains h1, title contains og:title, len(h1) > len(og:title), use h1
         4. title starts with og:title, use og:title
-        5. title starts with h1 and h1 long enough, use h1
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
@@ -276,7 +275,6 @@ class ContentExtractor(object):
         filter_title_text = filter_regex.sub('', title_text).lower()
         filter_title_text_h1 = filter_regex.sub('', title_text_h1).lower()
         filter_title_text_fb = filter_regex.sub('', title_text_fb).lower()
-        words_title_text_h1 = len(title_text_h1.split(' '))
 
         # check for better alternatives for title_text and possibly skip splitting
         if title_text_h1 == title_text:
@@ -292,10 +290,6 @@ class ContentExtractor(object):
         elif filter_title_text_fb and filter_title_text_fb != filter_title_text \
                 and filter_title_text.startswith(filter_title_text_fb):
             title_text = title_text_fb
-            used_delimeter = True
-        elif filter_title_text_h1 and filter_title_text_h1 != filter_title_text \
-                and filter_title_text.startswith(filter_title_text_h1) and words_title_text_h1 >= 4:
-            title_text = title_text_h1
             used_delimeter = True
 
         # split title with |
@@ -334,7 +328,7 @@ class ContentExtractor(object):
         # (either it differs for case, for special chars, or it's truncated)
         # in these cases, we prefer the title_text_h1
         filter_title = filter_regex.sub('', title).lower()
-        if filter_title_text_h1 == filter_title or filter_title_text_h1.startswith(filter_title):
+        if filter_title_text_h1 == filter_title:
             title = title_text_h1
 
         return title
