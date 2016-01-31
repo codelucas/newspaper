@@ -237,6 +237,7 @@ class ContentExtractor(object):
         2. h1 similar to og:title, use h1
         3. title contains h1, title contains og:title, len(h1) > len(og:title), use h1
         4. title starts with og:title, use og:title
+        5. use title, after splitting
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
@@ -315,12 +316,6 @@ class ContentExtractor(object):
         if not used_delimeter and ' » ' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER, title_text_h1)
             used_delimeter = True
-
-        # deleted as too often removes relevant parts of the title
-        # split title with :
-        # if not used_delimeter and ':' in title_text:
-        #     title_text = self.split_title(title_text, COLON_SPLITTER, title_text_h1)
-        #     used_delimeter = True
 
         title = MOTLEY_REPLACEMENT.replaceAll(title_text)
 
