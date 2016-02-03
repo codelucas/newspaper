@@ -29,8 +29,8 @@ log.setLevel(logging.DEBUG)
 
 
 class FileHelper(object):
-    @classmethod
-    def loadResourceFile(self, filename):
+    @staticmethod
+    def loadResourceFile(filename):
         if not os.path.isabs(filename):
             dirpath = os.path.abspath(os.path.dirname(__file__))
             path = os.path.join(dirpath, 'resources', filename)
@@ -53,8 +53,8 @@ class ParsingCandidate(object):
 
 
 class RawHelper(object):
-    @classmethod
-    def get_parsing_candidate(self, url, raw_html):
+    @staticmethod
+    def get_parsing_candidate(url, raw_html):
         if isinstance(raw_html, str):
             raw_html = raw_html.encode('utf-8')
         link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
@@ -62,8 +62,8 @@ class RawHelper(object):
 
 
 class URLHelper(object):
-    @classmethod
-    def get_parsing_candidate(self, url_to_crawl):
+    @staticmethod
+    def get_parsing_candidate(url_to_crawl):
         # Replace shebang in urls
         final_url = url_to_crawl.replace('#!', '?_escaped_fragment_=') \
             if '#!' in url_to_crawl else url_to_crawl
@@ -187,7 +187,7 @@ def to_valid_filename(s):
     return ''.join(c for c in s if c in valid_chars)
 
 
-def cache_disk(seconds=(86400*5), cache_folder="/tmp"):
+def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
     """Caching extracting category locations & rss feeds for 5 days
     """
     def do_cache(function):
@@ -223,7 +223,7 @@ def print_duration(method):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-        print('%r %2.2f sec' % (method.__name__, te-ts))
+        print('%r %2.2f sec' % (method.__name__, te - ts))
         return result
     return timed
 
@@ -232,9 +232,9 @@ def chunks(l, n):
     """Yield n successive chunks from l
     """
     newn = int(len(l) / n)
-    for i in range(0, n-1):
-        yield l[i*newn:i*newn+newn]
-    yield l[n*newn-newn:]
+    for i in range(0, n - 1):
+        yield l[i * newn:i * newn + newn]
+    yield l[n * newn - newn:]
 
 
 def purge(fn, pattern):
@@ -310,7 +310,7 @@ def get_useragent():
     """
     with open(settings.USERAGENTS, 'r') as f:
         agents = f.readlines()
-        selection = random.randint(0, len(agents)-1)
+        selection = random.randint(0, len(agents) - 1)
         agent = agents[selection]
         return agent.strip()
 
@@ -329,28 +329,28 @@ def print_available_languages():
     """Prints available languages with their full names
     """
     language_dict = {
-        'ar':   'Arabic',
-        'ru':   'Russian',
-        'nl':   'Dutch',
-        'de':   'German',
-        'en':   'English',
-        'es':   'Spanish',
-        'fr':   'French',
-        'he':   'Hebrew',
-        'it':   'Italian',
-        'ko':   'Korean',
-        'no':   'Norwegian',
-        'nb':   'Norwegian (Bokmål)',
-        'pt':   'Portuguese',
-        'sv':   'Swedish',
-        'hu':   'Hungarian',
-        'fi':   'Finnish',
-        'da':   'Danish',
-        'zh':   'Chinese',
-        'id':   'Indonesian',
-        'vi':   'Vietnamese',
-        'mk':   'Macedonian',
-        'tr':   'Turkish',
+        'ar': 'Arabic',
+        'ru': 'Russian',
+        'nl': 'Dutch',
+        'de': 'German',
+        'en': 'English',
+        'es': 'Spanish',
+        'fr': 'French',
+        'he': 'Hebrew',
+        'it': 'Italian',
+        'ko': 'Korean',
+        'no': 'Norwegian',
+        'nb': 'Norwegian (Bokmål)',
+        'pt': 'Portuguese',
+        'sv': 'Swedish',
+        'hu': 'Hungarian',
+        'fi': 'Finnish',
+        'da': 'Danish',
+        'zh': 'Chinese',
+        'id': 'Indonesian',
+        'vi': 'Vietnamese',
+        'mk': 'Macedonian',
+        'tr': 'Turkish',
     }
 
     codes = get_available_languages()

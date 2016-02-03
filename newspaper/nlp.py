@@ -45,13 +45,13 @@ def score(sentences, titleWords, keywords):
         sentence = split_words(s)
         titleFeature = title_score(titleWords, sentence)
         sentenceLength = length_score(len(sentence))
-        sentencePosition = sentence_position(i+1, senSize)
+        sentencePosition = sentence_position(i + 1, senSize)
         sbsFeature = sbs(sentence, keywords)
         dbsFeature = dbs(sentence, keywords)
         frequency = (sbsFeature + dbsFeature) / 2.0 * 10.0
         # Weighted average of scores from four categories
-        totalScore = (titleFeature*1.5 + frequency*2.0 +
-                      sentenceLength*1.0 + sentencePosition*1.0)/4.0
+        totalScore = (titleFeature * 1.5 + frequency * 2.0 +
+                      sentenceLength * 1.0 + sentencePosition * 1.0) / 4.0
         ranks[s] = totalScore
     return ranks
 
@@ -63,7 +63,7 @@ def sbs(words, keywords):
     for word in words:
         if word in keywords:
             score += keywords[word]
-    return (1.0 / math.fabs(len(words)) * score)/10.0
+    return (1.0 / math.fabs(len(words)) * score) / 10.0
 
 
 def dbs(words, keywords):
@@ -82,10 +82,10 @@ def dbs(words, keywords):
                 second = first
                 first = [i, score]
                 dif = first[0] - second[0]
-                summ += (first[1]*second[1]) / (dif ** 2)
+                summ += (first[1] * second[1]) / (dif ** 2)
     # Number of intersections
-    k = len(set(keywords.keys()).intersection(set(words)))+1
-    return (1/(k*(k+1.0))*summ)
+    k = len(set(keywords.keys()).intersection(set(words))) + 1
+    return (1 / (k * (k + 1.0)) * summ)
 
 
 def split_words(text):
@@ -125,7 +125,7 @@ def keywords(text):
         keywords = dict((x, y) for x, y in keywords)
 
         for k in keywords:
-            articleScore = keywords[k]*1.0 / max(num_words, 1)
+            articleScore = keywords[k] * 1.0 / max(num_words, 1)
             keywords[k] = articleScore * 1.5 + 1
         return dict(keywords)
     else:
