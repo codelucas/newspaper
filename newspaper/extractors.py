@@ -225,13 +225,25 @@ class ContentExtractor(object):
         """Fetch the article title and analyze it
         """
         title = ''
-        title_element = self.parser.getElementsByTag(doc, tag='title')
-        # no title found
+
+        kwargs = {'tag': 'meta', 'attr': 'property', 'value': 'og:title'}
+        title_element = self.parser.getElementsByTag(doc, **kwargs)
+
         if title_element is None or len(title_element) == 0:
+            title_element = self.parser.getElementsByTag(doc, tag='title')
+            # no title found
+            if title_element is None or len(title_element) == 0:
+                return title
+            else:
+                title_text = self.parser.getText(title_element[0])
+        else:
+            title_text = self.parser.getAttribute(title_element[0], 'content')
+
+        # title text is empty
+        if not title_text:
             return title
 
         # title elem found
-        title_text = self.parser.getText(title_element[0])
         used_delimeter = False
 
         # split title with |
