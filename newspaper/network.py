@@ -52,7 +52,7 @@ def get_html(url, config=None, response=None):
             return response.text
         return response.content
 
-    if not config.user_casperjs:
+    if not config.use_casperjs:
         try:
             response = requests.get(
                 url=url, **get_request_kwargs(timeout, useragent))
