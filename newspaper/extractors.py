@@ -867,7 +867,7 @@ class ContentExtractor(object):
             return False
 
         text = self.parser.getText(e)
-        words = filter(lambda word: word.isalnum(), text.split())
+        words = [word for word in text.split() if word.isalnum()]
         if not words:
             return True
         words_number = float(len(words))
