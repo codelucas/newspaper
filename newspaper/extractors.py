@@ -79,17 +79,18 @@ class ContentExtractor(object):
         def contains_digits(d):
             return bool(_digits.search(d))
 
-        def uniqify_list(l):
-           """Remove duplicates from provided list but maintain original order.
+        def uniqify_list(lst):
+            """Remove duplicates from provided list but maintain original order.
               Derived from http://www.peterbe.com/plog/uniqifiers-benchmark
-           """
-           seen = {}
-           result = []
-           for item in l:
-               if item.lower() in seen: continue
-               seen[item.lower()] = 1
-               result.append(item.title())
-           return result
+            """
+            seen = {}
+            result = []
+            for item in lst:
+                if item.lower() in seen:
+                    continue
+                seen[item.lower()] = 1
+                result.append(item.title())
+            return result
 
         def parse_byline(search_str):
             """Takes a candidate line of html or text and
@@ -565,7 +566,7 @@ class ContentExtractor(object):
                                'subdomain' % p_url))
                     continue
                 else:
-                    valid_categories.append(scheme+'://'+domain)
+                    valid_categories.append(scheme + '://' + domain)
                     # TODO account for case where category is in form
                     # http://subdomain.domain.tld/category/ <-- still legal!
             else:
@@ -576,7 +577,7 @@ class ContentExtractor(object):
                     path_chunks.remove('index.html')
 
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
-                    valid_categories.append(domain+path)
+                    valid_categories.append(domain + path)
                 else:
                     if self.config.verbose:
                         print(('elim category url %s for >1 path chunks '

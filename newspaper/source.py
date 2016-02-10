@@ -117,7 +117,7 @@ class Source(object):
             articles[:] = [a for a in articles if a.is_valid_body()]
         return articles
 
-    @utils.cache_disk(seconds=(86400*1), cache_folder=ANCHOR_DIRECTORY)
+    @utils.cache_disk(seconds=(86400 * 1), cache_folder=ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
         """The domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right.
@@ -395,10 +395,10 @@ class Source(object):
     def print_summary(self):
         """Prints out a summary of the data in our source instance
         """
-        print('[source url]:',              self.url)
-        print('[source brand]:',            self.brand)
-        print('[source domain]:',           self.domain)
-        print('[source len(articles)]:',    len(self.articles))
+        print('[source url]:', self.url)
+        print('[source brand]:', self.brand)
+        print('[source domain]:', self.domain)
+        print('[source len(articles)]:', len(self.articles))
         print('[source description[:50]]:', self.description[:50])
 
         print('printing out 10 sample articles...')

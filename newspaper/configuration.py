@@ -43,7 +43,7 @@ class Configuration(object):
 
         # Set this to false if you don't care about getting images
         self.fetch_images = True
-        self.image_dimension_ration = 16/9.0
+        self.image_dimension_ration = 16 / 9.0
 
         # Don't toggle this variable, done internally
         self.use_meta_language = True

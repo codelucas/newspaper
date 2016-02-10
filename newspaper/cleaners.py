@@ -224,9 +224,9 @@ class DocumentCleaner(object):
                 self.replace_with_para(doc, div)
                 bad_divs += 1
             elif div is not None:
-                replaceNodes = self.get_replacement_nodes(doc, div)
+                replace_nodes = self.get_replacement_nodes(doc, div)
                 div.clear()
-                for c, n in enumerate(replaceNodes):
+                for c, n in enumerate(replace_nodes):
                     div.insert(c, n)
                 else_divs += 1
         return doc
