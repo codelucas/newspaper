@@ -7,7 +7,7 @@ import os
 import unittest
 import time
 import traceback
-from collections import defaultdict
+from collections import defaultdict, OrderedDict
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
@@ -135,6 +135,22 @@ class ArticleTestCase(unittest.TestCase):
         self.test_pre_parse_nlp()
         self.test_nlp_body()
 
+    def setup_stage(self, stage_name):
+        stages = OrderedDict([
+            ('initial', lambda: None),
+            ('download', lambda: self.article.download(
+                mock_resource_with('cnn_article', 'html'))),
+            ('parse', lambda: self.article.parse()),
+            ('meta', lambda: None), # Alias for nlp
+            ('nlp', lambda: self.article.nlp())
+        ])
+        assert stage_name in stages
+        for name, action in stages.items():
+            if name == stage_name:
+                break
+            action()
+
+
     def setUp(self):
         """Called before the first test case of this unit begins
         """
@@ -156,6 +172,7 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_download_html(self):
+        self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
         assert len(self.article.html) == 75406
@@ -169,6 +186,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_parse_html(self):
+        self.setup_stage('parse')
+
         AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey', 'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
@@ -195,12 +214,14 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_meta_type_extraction(self):
+        self.setup_stage('meta')
         meta_type = self.article.extractor.get_meta_type(
             self.article.clean_doc)
         assert 'article' == meta_type
 
     @print_test
     def test_meta_extraction(self):
+        self.setup_stage('meta')
         meta = self.article.extractor.get_meta_data(self.article.clean_doc)
         META_DATA = defaultdict(dict, {
             'medium': 'news',
@@ -241,6 +262,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_pre_download_nlp(self):
         """Test running NLP algos before even downloading the article
         """
+        self.setup_stage('initial')
         new_article = Article(self.article.url)
         self.assertRaises(ArticleException, new_article.nlp)
 
@@ -248,6 +270,7 @@ class ArticleTestCase(unittest.TestCase):
     def test_pre_parse_nlp(self):
         """Test running NLP algos before parsing the article
         """
+        self.setup_stage('parse')
         new_article = Article(self.article.url)
         html = mock_resource_with('cnn_article', 'html')
         new_article.download(html)
@@ -255,6 +278,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_nlp_body(self):
+        self.setup_stage('nlp')
+        self.article.nlp()
         KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
                     'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
                     'travel', 'weather', 'winds', 'york']
