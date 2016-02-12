@@ -27,6 +27,7 @@ from newspaper import (
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
+
 # from newspaper import Config
 # from newspaper.network import multithread_request
 # from newspaper.text import (StopWords, StopWordsArabic,
@@ -37,12 +38,14 @@ def print_test(method):
     """Utility method for print verbalizing test suite, prints out
     time taken for test and functions name, and status
     """
+
     def run(*args, **kw):
         ts = time.time()
         print('\ttesting function %r' % method.__name__)
         method(*args, **kw)
         te = time.time()
-        print('\t[OK] in %r %2.2f sec' % (method.__name__, te-ts))
+        print('\t[OK] in %r %2.2f sec' % (method.__name__, te - ts))
+
     return run
 
 
@@ -74,9 +77,8 @@ def get_base_domain(url):
 
 
 class ExhaustiveFullTextCase(unittest.TestCase):
-
     @print_test
-    def runTest(self):
+    def test_exhaustive(self):
         domain_counters = {}
 
         with open(URLS_FILE, 'r') as f:
@@ -111,10 +113,10 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 print('%s -- %s -- %s' %
                       ('Fulltext failed', res_filename, correct_text.strip()))
                 fulltext_failed += 1
-            # TODO: assert statements are commented out for full-text
-            # extraction tests because we are constantly tweaking the
-            # algorithm and improving
-            # assert a.text == correct_text
+                # TODO: assert statements are commented out for full-text
+                # extraction tests because we are constantly tweaking the
+                # algorithm and improving
+                # assert a.text == correct_text
         print('%s fulltext extractions failed out of %s' %
               (fulltext_failed, len(urls)))
         print('%s pubdate extractions failed out of %s' %
@@ -124,24 +126,13 @@ class ExhaustiveFullTextCase(unittest.TestCase):
 
 
 class ArticleTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_url()
-        self.test_download_html()
-        self.test_pre_download_parse()
-        self.test_parse_html()
-        self.test_meta_type_extraction()
-        self.test_meta_extraction()
-        self.test_pre_download_nlp()
-        self.test_pre_parse_nlp()
-        self.test_nlp_body()
-
     def setup_stage(self, stage_name):
         stages = OrderedDict([
             ('initial', lambda: None),
             ('download', lambda: self.article.download(
                 mock_resource_with('cnn_article', 'html'))),
             ('parse', lambda: self.article.parse()),
-            ('meta', lambda: None), # Alias for nlp
+            ('meta', lambda: None),  # Alias for nlp
             ('nlp', lambda: self.article.nlp())
         ])
         assert stage_name in stages
@@ -181,7 +172,8 @@ class ArticleTestCase(unittest.TestCase):
     def test_parse_html(self):
         self.setup_stage('parse')
 
-        AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey', 'Tom Watkins']
+        AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey',
+                   'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
@@ -221,18 +213,28 @@ class ArticleTestCase(unittest.TestCase):
             'googlebot': 'noarchive',
             'pubdate': '2013-11-27T08:36:32Z',
             'title': 'After storm, forecasters see smooth sailing for Thanksgiving - CNN.com',
-            'og': {'site_name': 'CNN','description': 'A strong storm struck much of the eastern United States on Wednesday, complicating holiday plans for many of the 43 million Americans expected to travel.', 'title': 'After storm, forecasters see smooth sailing for Thanksgiving', 'url': 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html', 'image': 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg', 'type': 'article'},
+            'og': {'site_name': 'CNN',
+                   'description': 'A strong storm struck much of the eastern United States on Wednesday, complicating holiday plans for many of the 43 million Americans expected to travel.',
+                   'title': 'After storm, forecasters see smooth sailing for Thanksgiving',
+                   'url': 'http://www.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html',
+                   'image': 'http://i2.cdn.turner.com/cnn/dam/assets/131129200805-01-weather-1128-story-top.jpg',
+                   'type': 'article'},
             'section': 'travel',
             'author': 'Dana A. Ford, James S.A. Corey, Chien-Ming Wang, and Tom Watkins, CNN',
             'robots': 'index,follow',
-            'vr': {'canonical': 'http://edition.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'},
+            'vr': {
+                'canonical': 'http://edition.cnn.com/2013/11/27/travel/weather-thanksgiving/index.html'},
             'source': 'CNN',
             'fb': {'page_id': 18793419640, 'app_id': 80401312489},
             'keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm',
-            'article': {'publisher': 'https://www.facebook.com/cnninternational'},
+            'article': {
+                'publisher': 'https://www.facebook.com/cnninternational'},
             'lastmod': '2013-11-28T02:03:23Z',
-            'twitter': {'site': {'identifier': '@CNNI', 'id': 2097571}, 'card': 'summary', 'creator': {'identifier': '@cnntravel', 'id': 174377718}},
-            'viewport':'width=1024',
+            'twitter': {'site': {'identifier': '@CNNI', 'id': 2097571},
+                        'card': 'summary',
+                        'creator': {'identifier': '@cnntravel',
+                                    'id': 174377718}},
+            'viewport': 'width=1024',
             'news_keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm'
         })
 
@@ -279,15 +281,11 @@ class ArticleTestCase(unittest.TestCase):
 
 
 class SourceTestCase(unittest.TestCase):
-    def runTest(self):
-        self.source_url_input_none()
-        self.test_cache_categories()
-        self.test_source_build()
-
     @print_test
     def source_url_input_none(self):
         def failfunc():
             Source(url=None)
+
         self.assertRaises(Exception, failfunc)
 
     @print_test
@@ -360,9 +358,6 @@ class SourceTestCase(unittest.TestCase):
 
 
 class UrlTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_valid_urls()
-
     @print_test
     def test_valid_urls(self):
         """Prints out a list of urls with our heuristic guess if it is a
@@ -388,7 +383,7 @@ class UrlTestCase(unittest.TestCase):
                 raise
 
     @print_test
-    def test_prepare_url(self):
+    def _test_prepare_url(self):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
@@ -396,10 +391,6 @@ class UrlTestCase(unittest.TestCase):
 
 
 class APITestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_hot_trending()
-        self.test_popular_urls()
-
     @print_test
     def test_hot_trending(self):
         """Grab google trending, just make sure this runs
@@ -414,9 +405,6 @@ class APITestCase(unittest.TestCase):
 
 
 class MThreadingTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_download_works()
-
     @print_test
     def test_download_works(self):
         config = Configuration()
@@ -442,9 +430,6 @@ class MThreadingTestCase(unittest.TestCase):
 
 
 class ConfigBuildTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_config_build()
-
     @print_test
     def test_config_build(self):
         """Test if our **kwargs to config building setup actually works.
@@ -452,13 +437,13 @@ class ConfigBuildTestCase(unittest.TestCase):
         objects, not actually calling download(..)
         """
         a = Article(url='http://www.cnn.com/2013/11/27/'
-                    'travel/weather-thanksgiving/index.html')
+                        'travel/weather-thanksgiving/index.html')
         assert a.config.language == 'en'
         assert a.config.memoize_articles is True
         assert a.config.use_meta_language is True
 
         a = Article(url='http://www.cnn.com/2013/11/27/travel/'
-                    'weather-thanksgiving/index.html',
+                        'weather-thanksgiving/index.html',
                     language='zh', memoize_articles=False)
         assert a.config.language == 'zh'
         assert a.config.memoize_articles is False
@@ -479,11 +464,6 @@ class ConfigBuildTestCase(unittest.TestCase):
 
 
 class MultiLanguageTestCase(unittest.TestCase):
-    def runTest(self):
-        self.test_chinese_fulltext_extract()
-        self.test_arabic_fulltext_extract()
-        self.test_spanish_fulltext_extract()
-
     @print_test
     def test_chinese_fulltext_extract(self):
         url = 'http://news.sohu.com/20050601/n225789219.shtml'
@@ -497,7 +477,7 @@ class MultiLanguageTestCase(unittest.TestCase):
 
     @print_test
     def test_arabic_fulltext_extract(self):
-        url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/'\
+        url = 'http://arabic.cnn.com/2013/middle_east/8/3/syria.clashes/' \
               'index.html'
         article = Article(url=url)
         html = mock_resource_with('arabic_article', 'html')
@@ -510,7 +490,7 @@ class MultiLanguageTestCase(unittest.TestCase):
 
     @print_test
     def test_spanish_fulltext_extract(self):
-        url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscal'\
+        url = 'http://ultimahora.es/mallorca/noticia/noticias/local/fiscal' \
               'ia-anticorrupcion-estudia-recurre-imputacion-infanta.html'
         article = Article(url=url, language='es')
         html = mock_resource_with('spanish_article', 'html')
@@ -524,19 +504,22 @@ class MultiLanguageTestCase(unittest.TestCase):
 if __name__ == '__main__':
     # unittest.main()  # run all units and their cases
 
-    suite = unittest.TestSuite()
+    test_cases = [
+        ConfigBuildTestCase,
+        MultiLanguageTestCase,
+        UrlTestCase,
+        ArticleTestCase,
+        APITestCase,
+        # TODO:  SourceTestCase,
+        # MThreadingTestCase
+    ]
 
     if len(sys.argv) > 1 and sys.argv[1] == 'fulltext':
-        suite.addTest(ExhaustiveFullTextCase())
+        test_cases.append(ExhaustiveFullTextCase)
 
-    suite.addTest(ConfigBuildTestCase())
-    suite.addTest(MultiLanguageTestCase())
-    suite.addTest(UrlTestCase())
-    suite.addTest(ArticleTestCase())
-    suite.addTest(APITestCase())
-    result = unittest.TextTestRunner().run(suite)
+    suite = unittest.TestSuite()
+    for test_case in test_cases:
+        suite.addTests(unittest.TestLoader().loadTestsFromTestCase(test_case))
+    result = unittest.TextTestRunner(verbosity=0).run(suite)
     exit_code = 0 if result.wasSuccessful() else 1
     sys.exit(exit_code)
-
-    # TODO: suite.addTest(SourceTestCase())
-    # suite.addTest(MThreadingTestCase())
