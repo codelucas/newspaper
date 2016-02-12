@@ -271,10 +271,7 @@ class ArticleTestCase(unittest.TestCase):
         """Test running NLP algos before parsing the article
         """
         self.setup_stage('parse')
-        new_article = Article(self.article.url)
-        html = mock_resource_with('cnn_article', 'html')
-        new_article.download(html)
-        self.assertRaises(ArticleException, new_article.nlp)
+        self.assertRaises(ArticleException, self.article.nlp)
 
     @print_test
     def test_nlp_body(self):
