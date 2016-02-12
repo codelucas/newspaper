@@ -150,19 +150,12 @@ class ArticleTestCase(unittest.TestCase):
                 break
             action()
 
-
     def setUp(self):
         """Called before the first test case of this unit begins
         """
         self.article = Article(
             url='http://www.cnn.com/2013/11/27/travel/weather-'
                 'thanksgiving/index.html?iref=allsearch')
-
-    def tearDown(self):
-        """Called after all cases have been completed, intended to
-        free resources and etc
-        """
-        pass
 
     @print_test
     def test_url(self):
