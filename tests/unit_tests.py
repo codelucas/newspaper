@@ -121,8 +121,8 @@ class ExhaustiveFullTextCase(unittest.TestCase):
               (fulltext_failed, len(urls)))
         print('%s pubdate extractions failed out of %s' %
               (pubdates_failed, len(urls)))
-        assert pubdates_failed == 47
-        assert fulltext_failed == 20
+        self.assertEqual(47, pubdates_failed)
+        self.assertEqual(20, fulltext_failed)
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -150,16 +150,17 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_url(self):
-        assert self.article.url == (
+        self.assertEqual(
             'http://www.cnn.com/2013/11/27/travel/weather-'
-            'thanksgiving/index.html?iref=allsearch')
+            'thanksgiving/index.html?iref=allsearch',
+            self.article.url)
 
     @print_test
     def test_download_html(self):
         self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
-        assert len(self.article.html) == 75406
+        self.assertEqual(75406, len(self.article.html))
 
     @print_test
     def test_pre_download_parse(self):
@@ -182,27 +183,27 @@ class ArticleTestCase(unittest.TestCase):
         self.article.nlp()
 
         text = mock_resource_with('cnn', 'txt')
-        assert self.article.text == text
-        assert fulltext(self.article.html) == text
+        self.assertEqual(text, self.article.text)
+        self.assertEqual(text, fulltext(self.article.html))
 
         # NOTE: top_img extraction requires an internet connection
         # unlike the rest of this test file
         TOP_IMG = ('http://i2.cdn.turner.com/cnn/dam/assets/131129200805-'
                    '01-weather-1128-story-top.jpg')
-        assert self.article.top_img == TOP_IMG
+        self.assertEqual(TOP_IMG, self.article.top_img)
 
-        assert sorted(self.article.authors) == AUTHORS
-        assert self.article.title == TITLE
-        assert len(self.article.imgs) == LEN_IMGS
-        assert self.article.meta_lang == META_LANG
-        assert str(self.article.publish_date) == '2013-11-27 00:00:00'
+        self.assertCountEqual(AUTHORS, self.article.authors)
+        self.assertEqual(TITLE, self.article.title)
+        self.assertEqual(LEN_IMGS, len(self.article.imgs))
+        self.assertEqual(META_LANG, self.article.meta_lang)
+        self.assertEqual('2013-11-27 00:00:00', str(self.article.publish_date))
 
     @print_test
     def test_meta_type_extraction(self):
         self.setup_stage('meta')
         meta_type = self.article.extractor.get_meta_type(
             self.article.clean_doc)
-        assert 'article' == meta_type
+        self.assertEqual('article', meta_type)
 
     @print_test
     def test_meta_extraction(self):
@@ -238,20 +239,20 @@ class ArticleTestCase(unittest.TestCase):
             'news_keywords': 'winter storm,holiday travel,Thanksgiving storm,Thanksgiving winter storm'
         })
 
-        assert meta == META_DATA
+        self.assertDictEqual(META_DATA, meta)
 
         # if the value for a meta key is another dict, that dict ought to be
         # filled with keys and values
         dict_values = [v for v in list(meta.values()) if isinstance(v, dict)]
-        assert all([len(d) > 0 for d in dict_values])
+        self.assertTrue(all([len(d) > 0 for d in dict_values]))
 
         # there are exactly 5 top-level "og:type" type keys
         is_dict = lambda v: isinstance(v, dict)
-        assert len(list(filter(is_dict, list(meta.values())))) == 5
+        self.assertEqual(5, len([i for i in meta.values() if is_dict(i)]))
 
         # there are exactly 12 top-level "pubdate" type keys
         is_string = lambda v: isinstance(v, str)
-        assert len(list(filter(is_string, list(meta.values())))) == 12
+        self.assertEqual(12, len([i for i in meta.values() if is_string(i)]))
 
     @print_test
     def test_pre_download_nlp(self):
@@ -276,17 +277,15 @@ class ArticleTestCase(unittest.TestCase):
                     'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
                     'travel', 'weather', 'winds', 'york']
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
-        assert self.article.summary == SUMMARY
-        assert sorted(self.article.keywords) == sorted(KEYWORDS)
+        self.assertEqual(SUMMARY, self.article.summary)
+        self.assertCountEqual(KEYWORDS, self.article.keywords)
 
 
 class SourceTestCase(unittest.TestCase):
     @print_test
     def source_url_input_none(self):
-        def failfunc():
+        with self.assertRaises(Exception):
             Source(url=None)
-
-        self.assertRaises(Exception, failfunc)
 
     @print_test
     def test_source_build(self):
@@ -354,7 +353,7 @@ class SourceTestCase(unittest.TestCase):
         saved_urls = s.category_urls()
         s.categories = []
         s.set_categories()
-        assert sorted(s.category_urls()) == sorted(saved_urls)
+        self.assertCountEqual(saved_urls, s.category_urls())
 
 
 class UrlTestCase(unittest.TestCase):
@@ -374,10 +373,10 @@ class UrlTestCase(unittest.TestCase):
         for tup in test_tuples:
             lst = int(tup[0])
             url = tup[1]
-            assert len(tup) == 2
+            self.assertEqual(2, len(tup))
             truth_val = True if lst == 1 else False
             try:
-                assert truth_val == valid_url(url, test=True)
+                self.assertEqual(truth_val, valid_url(url, test=True))
             except AssertionError:
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
@@ -430,37 +429,44 @@ class MThreadingTestCase(unittest.TestCase):
 
 
 class ConfigBuildTestCase(unittest.TestCase):
+    """Test if our **kwargs to config building setup actually works.
+    NOTE: No need to mock responses as we are just initializing the
+    objects, not actually calling download(..)
+    """
     @print_test
-    def test_config_build(self):
-        """Test if our **kwargs to config building setup actually works.
-        NOTE: No need to mock responses as we are just initializing the
-        objects, not actually calling download(..)
-        """
+    def test_article_default_params(self):
+
         a = Article(url='http://www.cnn.com/2013/11/27/'
                         'travel/weather-thanksgiving/index.html')
-        assert a.config.language == 'en'
-        assert a.config.memoize_articles is True
-        assert a.config.use_meta_language is True
+        self.assertEqual('en', a.config.language)
+        self.assertTrue(a.config.memoize_articles)
+        self.assertTrue(a.config.use_meta_language)
 
+    @print_test
+    def test_article_custom_params(self):
         a = Article(url='http://www.cnn.com/2013/11/27/travel/'
                         'weather-thanksgiving/index.html',
                     language='zh', memoize_articles=False)
-        assert a.config.language == 'zh'
-        assert a.config.memoize_articles is False
-        assert a.config.use_meta_language is False
+        self.assertEqual('zh', a.config.language)
+        self.assertFalse(a.config.memoize_articles)
+        self.assertFalse(a.config.use_meta_language)
 
+    @print_test
+    def test_source_default_params(self):
         s = Source(url='http://cnn.com')
-        assert s.config.language == 'en'
-        assert s.config.MAX_FILE_MEMO == 20000
-        assert s.config.memoize_articles is True
-        assert s.config.use_meta_language is True
+        self.assertEqual('en', s.config.language)
+        self.assertEqual(20000, s.config.MAX_FILE_MEMO)
+        self.assertTrue(s.config.memoize_articles)
+        self.assertTrue(s.config.use_meta_language)
 
+    @print_test
+    def test_source_custom_params(self):
         s = Source(url="http://cnn.com", memoize_articles=False,
                    MAX_FILE_MEMO=10000, language='en')
-        assert s.config.memoize_articles is False
-        assert s.config.MAX_FILE_MEMO == 10000
-        assert s.config.language == 'en'
-        assert s.config.use_meta_language is False
+        self.assertFalse(s.config.memoize_articles)
+        self.assertEqual(10000, s.config.MAX_FILE_MEMO)
+        self.assertEqual('en', s.config.language)
+        self.assertFalse(s.config.use_meta_language)
 
 
 class MultiLanguageTestCase(unittest.TestCase):
@@ -472,8 +478,8 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.download(html)
         article.parse()
         text = mock_resource_with('chinese', 'txt')
-        assert article.text == text
-        assert fulltext(article.html, 'zh') == text
+        self.assertEqual(text, article.text)
+        self.assertEqual(text,  fulltext(article.html, 'zh'))
 
     @print_test
     def test_arabic_fulltext_extract(self):
@@ -483,10 +489,10 @@ class MultiLanguageTestCase(unittest.TestCase):
         html = mock_resource_with('arabic_article', 'html')
         article.download(html)
         article.parse()
-        assert article.meta_lang == 'ar'
+        self.assertEqual('ar', article.meta_lang)
         text = mock_resource_with('arabic', 'txt')
-        assert article.text == text
-        assert fulltext(article.html, 'ar') == text
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ar'))
 
     @print_test
     def test_spanish_fulltext_extract(self):
@@ -497,8 +503,8 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.download(html)
         article.parse()
         text = mock_resource_with('spanish', 'txt')
-        assert article.text == text
-        assert fulltext(article.html, 'es') == text
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'es'))
 
 
 if __name__ == '__main__':
