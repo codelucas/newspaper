@@ -435,12 +435,12 @@ class ContentExtractor(object):
         return data
 
     def get_canonical_link(self, article_url, doc):
-        """If the article has meta canonical link set in the url
-        """
-        kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'canonical'}
-        meta = self.parser.getElementsByTag(doc, **kwargs)
-        if meta is not None and len(meta) > 0:
-            href = self.parser.getAttribute(meta[0], 'href')
+        """If the article has meta canonical link set in the url"""
+
+        link = self.parser.getElementsByTag(doc, tag='link', attr='rel', value='canonical')
+
+        if link:
+            href = self.parser.getAttribute(link[0], 'href')
             if href:
                 href = href.strip()
                 o = urllib.parse.urlparse(href)
