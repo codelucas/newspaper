@@ -9,7 +9,6 @@ import time
 import traceback
 from collections import defaultdict, OrderedDict
 import concurrent.futures
-from multiprocessing import Pool
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
