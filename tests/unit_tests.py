@@ -527,12 +527,10 @@ if __name__ == '__main__':
         UrlTestCase,
         ArticleTestCase,
         APITestCase,
+        ExhaustiveFullTextCase,
         # TODO:  SourceTestCase,
         # MThreadingTestCase
     ]
-
-    if len(sys.argv) > 1 and sys.argv[1] == 'fulltext':
-        test_cases.append(ExhaustiveFullTextCase)
 
     suite = unittest.TestSuite()
     for test_case in test_cases:
