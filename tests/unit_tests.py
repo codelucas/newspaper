@@ -98,6 +98,7 @@ class ExhaustiveFullTextCase(unittest.TestCase):
         except Exception:
             print('<< URL: %s parse ERROR >>' % url)
             traceback.print_exc()
+            pubdate_failed, fulltext_failed = True, True
         else:
             correct_text = mock_resource_with(res_filename, 'txt')
             if not (a.text == correct_text):
@@ -106,7 +107,7 @@ class ExhaustiveFullTextCase(unittest.TestCase):
                 print('%s -- %s -- %s' %
                       ('Fulltext failed',
                        res_filename, correct_text.strip()))
-                fulltext_failed += 1
+                fulltext_failed = True
                 # TODO: assert statements are commented out for full-text
                 # extraction tests because we are constantly tweaking the
                 # algorithm and improving
@@ -297,13 +298,13 @@ class ArticleTestCase(unittest.TestCase):
         self.assertCountEqual(KEYWORDS, self.article.keywords)
 
 
-@unittest.skip("Need to mock download")
 class SourceTestCase(unittest.TestCase):
     @print_test
-    def source_url_input_none(self):
+    def test_source_url_input_none(self):
         with self.assertRaises(Exception):
             Source(url=None)
 
+    @unittest.skip("Need to mock download")
     @print_test
     def test_source_build(self):
         """
@@ -356,6 +357,7 @@ class SourceTestCase(unittest.TestCase):
         # effect by just mocking CNN's main page HTML. Warning: tedious fix.
         # assert s.feed_urls() == FEEDS
 
+    @unittest.skip("Need to mock download")
     @print_test
     def test_cache_categories(self):
         """Builds two same source objects in a row examines speeds of both
