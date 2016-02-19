@@ -2,6 +2,7 @@
 """
 All unit tests for the newspaper library should be contained in this file.
 """
+import logging
 import sys
 import os
 import unittest
@@ -74,40 +75,44 @@ def get_base_domain(url):
     return base_domain
 
 
-def check_url(args):
-    """
-    :param (basestr, basestr) url, res_filename:
-    :return: (pubdate_failed, fulltext_failed)
-    """
-    url, res_filename = args
-    pubdate_failed, fulltext_failed = False, False
-    html = mock_resource_with(res_filename, 'html')
-    try:
-        a = Article(url)
-        a.download(html)
-        a.parse()
-        if a.publish_date is None:
-            pubdate_failed = True
-    except Exception:
-        print('<< URL: %s parse ERROR >>' % url)
-        traceback.print_exc()
-    else:
-        correct_text = mock_resource_with(res_filename, 'txt')
-        if not (a.text == correct_text):
-            # print('Diff: ', simplediff.diff(correct_text, a.text))
-            # `correct_text` holds the reason of failure if failure
-            print('%s -- %s -- %s' %
-                  ('Fulltext failed',
-                   res_filename, correct_text.strip()))
-            fulltext_failed += 1
-            # TODO: assert statements are commented out for full-text
-            # extraction tests because we are constantly tweaking the
-            # algorithm and improving
-            # assert a.text == correct_text
-    return pubdate_failed, fulltext_failed
+def check_url(*args, **kwargs):
+    return ExhaustiveFullTextCase.check_url(*args, **kwargs)
 
 
 class ExhaustiveFullTextCase(unittest.TestCase):
+    @staticmethod
+    def check_url(args):
+        """
+        :param (basestr, basestr) url, res_filename:
+        :return: (pubdate_failed, fulltext_failed)
+        """
+        url, res_filename = args
+        pubdate_failed, fulltext_failed = False, False
+        html = mock_resource_with(res_filename, 'html')
+        try:
+            a = Article(url)
+            a.download(html)
+            a.parse()
+            if a.publish_date is None:
+                pubdate_failed = True
+        except Exception:
+            print('<< URL: %s parse ERROR >>' % url)
+            traceback.print_exc()
+        else:
+            correct_text = mock_resource_with(res_filename, 'txt')
+            if not (a.text == correct_text):
+                # print('Diff: ', simplediff.diff(correct_text, a.text))
+                # `correct_text` holds the reason of failure if failure
+                print('%s -- %s -- %s' %
+                      ('Fulltext failed',
+                       res_filename, correct_text.strip()))
+                fulltext_failed += 1
+                # TODO: assert statements are commented out for full-text
+                # extraction tests because we are constantly tweaking the
+                # algorithm and improving
+                # assert a.text == correct_text
+        return pubdate_failed, fulltext_failed
+
     @print_test
     def test_exhaustive(self):
         with open(URLS_FILE, 'r') as f:
@@ -292,6 +297,7 @@ class ArticleTestCase(unittest.TestCase):
         self.assertCountEqual(KEYWORDS, self.article.keywords)
 
 
+@unittest.skip("Need to mock download")
 class SourceTestCase(unittest.TestCase):
     @print_test
     def source_url_input_none(self):
@@ -381,19 +387,17 @@ class UrlTestCase(unittest.TestCase):
             # tuples are ('1', 'url_goes_here') form, '1' means valid,
             # '0' otherwise
 
-        for tup in test_tuples:
-            lst = int(tup[0])
-            url = tup[1]
-            self.assertEqual(2, len(tup))
-            truth_val = True if lst == 1 else False
+        for lst, url in test_tuples:
+            truth_val = bool(int(lst))
             try:
                 self.assertEqual(truth_val, valid_url(url, test=True))
             except AssertionError:
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+    @unittest.skip("Need to write an actual test")
     @print_test
-    def _test_prepare_url(self):
+    def test_prepare_url(self):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
@@ -414,6 +418,7 @@ class APITestCase(unittest.TestCase):
         newspaper.popular_urls()
 
 
+@unittest.skip("Need to mock download")
 class MThreadingTestCase(unittest.TestCase):
     @print_test
     def test_download_works(self):
@@ -519,22 +524,4 @@ class MultiLanguageTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    # unittest.main()  # run all units and their cases
-
-    test_cases = [
-        ConfigBuildTestCase,
-        MultiLanguageTestCase,
-        UrlTestCase,
-        ArticleTestCase,
-        APITestCase,
-        ExhaustiveFullTextCase,
-        # TODO:  SourceTestCase,
-        # MThreadingTestCase
-    ]
-
-    suite = unittest.TestSuite()
-    for test_case in test_cases:
-        suite.addTests(unittest.TestLoader().loadTestsFromTestCase(test_case))
-    result = unittest.TextTestRunner(verbosity=0).run(suite)
-    exit_code = 0 if result.wasSuccessful() else 1
-    sys.exit(exit_code)
+    unittest.main(verbosity=0)
