@@ -173,7 +173,11 @@ class Article(object):
         output_formatter = OutputFormatter(self.config)
 
         title = self.extractor.get_title(self.clean_doc)
-        self.set_title(title)
+        """if title has successfully extracted, 
+        override any existing title
+        """
+        if title is not None:
+            self.set_title(title)
 
         authors = self.extractor.get_authors(self.clean_doc)
         self.set_authors(authors)
