@@ -34,6 +34,7 @@ class Configuration(object):
         self.MAX_KEYWORDS = 35     # num of strings in list
         self.MAX_AUTHORS = 10      # num strings in list
         self.MAX_SUMMARY = 5000    # num of chars
+        self.MAX_SUMMARY_SENT = 5  # num of sentences
 
         # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000

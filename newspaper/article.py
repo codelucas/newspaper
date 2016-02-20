@@ -141,13 +141,16 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, html=None):
+    def download(self, html=None, title=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
         """
         if html is None:
             html = network.get_html(self.url, self.config)
         self.set_html(html)
+
+        if title is not None:
+            self.set_title(title)
 
     def parse(self):
         if not self.is_downloaded:
@@ -321,7 +324,9 @@ class Article(object):
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
 
-        summary_sents = nlp.summarize(title=self.title, text=self.text)
+        max_sents = self.config.MAX_SUMMARY_SENT
+
+        summary_sents = nlp.summarize(title=self.title, text=self.text, max_sents=max_sents)
         summary = '\n'.join(summary_sents)
         self.set_summary(summary)
 
