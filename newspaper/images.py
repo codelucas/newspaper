@@ -90,6 +90,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
     if not url.startswith(('http://', 'https://')):
         return nothing
 
+    response = None
     while True:
         try:
             response = requests.get(url, stream=True, timeout=5, headers={
@@ -156,8 +157,10 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                           (url, referer))
                 return nothing
         finally:
-            if 'response' in locals():
+            if response is not None:
                 response.raw.close()
+                if response.raw._connection:
+                    response.raw._connection.close()
 
 
 def fetch_image_dimension(url, useragent, referer=None, retries=1):
