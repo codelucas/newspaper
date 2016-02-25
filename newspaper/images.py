@@ -12,11 +12,9 @@ import logging
 import math
 import io
 import traceback
-import urllib.request
 import urllib.parse
-import urllib.error
 
-from http.client import InvalidURL
+import requests
 from PIL import Image, ImageFile
 
 from . import urls
@@ -91,24 +89,22 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
     url = clean_url(url)
     if not url.startswith(('http://', 'https://')):
         return nothing
+
     while True:
         try:
-            req = urllib.request.Request(url)
-            req.add_header('User-Agent', useragent)
-            if referer:
-                req.add_header('Referer', referer)
-
-            opener = urllib.request.build_opener()
-            open_req = opener.open(req, timeout=5)
+            response = requests.get(url, stream=True, timeout=5, headers={
+                'User-Agent': useragent,
+                'Referer': referer,
+            })
 
             # if we only need the dimension of the image, we may not
             # need to download the entire thing
             if dimension:
-                content = open_req.read(chunk_size)
+                content = response.raw.read(chunk_size)
             else:
-                content = open_req.read()
+                content = response.raw.read()
 
-            content_type = open_req.headers.get('content-type')
+            content_type = response.headers.get('Content-Type')
 
             if not content_type:
                 return nothing
@@ -137,7 +133,7 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                             raise e
                         p = None
                         break
-                    new_data = open_req.read(chunk_size)
+                    new_data = response.raw.read(chunk_size)
                     content += new_data
 
                 if p is None:
@@ -153,17 +149,15 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
             return content_type, content
 
-        except (urllib.error.URLError,
-                urllib.error.HTTPError,
-                InvalidURL) as e:
+        except requests.exceptions.RequestException as e:
             cur_try += 1
             if cur_try >= retries:
                 log.debug('error while fetching: %s refer: %s' %
                           (url, referer))
                 return nothing
         finally:
-            if 'open_req' in locals():
-                open_req.close()
+            if 'response' in locals():
+                response.raw.close()
 
 
 def fetch_image_dimension(url, useragent, referer=None, retries=1):
