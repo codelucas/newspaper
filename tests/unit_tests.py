@@ -311,20 +311,20 @@ class ContentExtractorTestCase(unittest.TestCase):
 
     def test_get_title_basic(self):
         html = '<title>Test title</title>'
-        assert self._get_title(html) == 'Test title'
+        self.assertEqual(self._get_title(html), 'Test title')
 
     def test_get_title_split(self):
         html = '<title>Test page » Test title</title>'
-        assert self._get_title(html) == 'Test title'
+        self.assertEqual(self._get_title(html), 'Test title')
 
     def test_get_title_split_escaped(self):
         html = '<title>Test page &raquo; Test title</title>'
-        assert self._get_title(html) == 'Test title'
+        self.assertEqual(self._get_title(html), 'Test title')
 
     def test_get_title_quotes(self):
         title = 'Test page and «something in quotes»'
         html = '<title>{}</title>'.format(title)
-        assert self._get_title(html) == title
+        self.assertEqual(self._get_title(html), title)
 
 
 class SourceTestCase(unittest.TestCase):
