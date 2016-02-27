@@ -2,7 +2,6 @@
 """
 All unit tests for the newspaper library should be contained in this file.
 """
-import logging
 import sys
 import os
 import unittest
@@ -497,7 +496,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.parse()
         text = mock_resource_with('chinese', 'txt')
         self.assertEqual(text, article.text)
-        self.assertEqual(text,  fulltext(article.html, 'zh'))
+        self.assertEqual(text, fulltext(article.html, 'zh'))
 
     @print_test
     def test_arabic_fulltext_extract(self):
