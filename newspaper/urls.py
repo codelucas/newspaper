@@ -12,15 +12,28 @@ import logging
 import re
 
 from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
-
 from tldextract import tldextract
 
-log = logging.getLogger(__name__)
 
+log = logging.getLogger(__name__)
 
 MAX_FILE_MEMO = 20000
 
 DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
+
+regexDelimiter = r'[ -:\/\\.,]\s*'
+regexDay = r'((?:[0-3]?\d{1})|(?:[3][01]{1}))'
+regexYear = r'((?:[1]{1}\d{1}\d{1}\d{1})|(?:[2]{1}\d{3}))'
+regexMonth = r'(?:([0]?[1-9]|[1][012])|(Jan(?:uary)?|Feb(?:ruary)?|Mar(?:ch)?|Apr(?:il)?|May|Jun(?:e)?|Jul(?:y)?|Aug(?:ust)?|Sep(?:tember)?|Sept|Oct(?:ober)?|Nov(?:ember)?|Dec(?:ember)?))'
+regexEndswith = r'(?![\d])'
+
+regexDateEuropean = regexDay + regexDelimiter + regexMonth + regexDelimiter + regexYear + regexEndswith
+# MM/DD/YYYY
+regexDateAmerican = regexMonth + regexDelimiter + regexDay + regexDelimiter + regexYear + regexEndswith
+# YYYY/MM/DD
+regexDateTechnical = regexYear + regexDelimiter + regexMonth + regexDelimiter + regexDay + regexEndswith
+
+DATE_REGEXES = [regexDateEuropean, regexDateAmerican, regexDateTechnical]
 
 ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
                  'xhtml', 'jhtml', 'asp']
@@ -259,6 +272,7 @@ def url_to_filetype(abs_url):
     return None
 
 
+
 def get_domain(abs_url, **kwargs):
     """
     returns a url's domain, this method exists to
@@ -290,12 +304,12 @@ def is_abs_url(url):
     this regex was brought to you by django!
     """
     regex = re.compile(
-        r'^(?:http|ftp)s?://'                                                                 # http:// or https://
+        r'^(?:http|ftp)s?://'  # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
-        r'localhost|'                                                                         # localhost...
-        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'                                                # ...or ipv4
-        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)'                                                        # ...or ipv6
-        r'(?::\d+)?'                                                                          # optional port
+        r'localhost|'  # localhost...
+        r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}|'  # ...or ipv4
+        r'\[?[A-F0-9]*:[A-F0-9:]+\]?)'  # ...or ipv6
+        r'(?::\d+)?'  # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
     c_regex = re.compile(regex)

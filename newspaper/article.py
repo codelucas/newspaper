@@ -14,7 +14,6 @@ from . import network
 from . import nlp
 from . import settings
 from . import urls
-
 from .cleaners import DocumentCleaner
 from .configuration import Configuration
 from .extractors import ContentExtractor
@@ -22,6 +21,7 @@ from .outputformatters import OutputFormatter
 from .utils import (URLHelper, RawHelper, extend_config,
                     get_available_languages)
 from .videos.extractors import VideoExtractor
+
 
 log = logging.getLogger(__name__)
 
@@ -208,7 +208,7 @@ class Article(object):
 
         self.publish_date = self.extractor.get_publishing_date(
             self.url,
-            self.clean_doc)
+            self.clean_doc, self.html)
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)

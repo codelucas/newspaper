@@ -13,16 +13,15 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from collections import defaultdict
 import copy
-from dateutil.parser import parse as date_parser
 import logging
 import re
+
+from dateutil.parser import parse as date_parser
 import urllib.parse
-
 from tldextract import tldextract
-
 from . import urls
-
 from .utils import ReplaceSequence, StringReplacement, StringSplitter
+
 
 log = logging.getLogger(__name__)
 
@@ -170,7 +169,7 @@ class ContentExtractor(object):
         #    return [] # Failed to find anything
         # return authors
 
-    def get_publishing_date(self, url, doc):
+    def get_publishing_date(self, url, doc, html):
         """3 strategies for publishing date extraction. The strategies
         are descending in accuracy and the next strategy is only
         attempted if a preferred one fails.
@@ -188,7 +187,6 @@ class ContentExtractor(object):
                 # near all parse failures are due to URL dates without a day
                 # specifier, e.g. /2014/04/
                 return None
-
         date_match = re.search(urls.DATE_REGEX, url)
         if date_match:
             date_str = date_match.group(0)
@@ -220,6 +218,16 @@ class ContentExtractor(object):
                 if datetime_obj:
                     return datetime_obj
 
+        for reg_ex in url.DATE_REGEXES:
+            date_match = re.search(reg_ex, html)
+            iter_date = re.finditer(reg_ex, html)
+            for date_match in iter_date:
+                if date_match:
+                    date_str = date_match.group(0)
+                    print  date_str
+                    datetime_obj = parse_date_str(date_str)
+                    if datetime_obj:
+                        return datetime_obj
         return None
 
     def get_title(self, doc):
