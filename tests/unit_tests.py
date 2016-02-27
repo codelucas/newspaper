@@ -317,6 +317,10 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>Test page » Test title</title>'
         assert self._get_title(html) == 'Test title'
 
+    def test_get_title_split_escaped(self):
+        html = '<title>Test page &raquo; Test title</title>'
+        assert self._get_title(html) == 'Test title'
+
 
 class SourceTestCase(unittest.TestCase):
     @print_test

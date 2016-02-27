@@ -22,14 +22,14 @@ from tldextract import tldextract
 
 from . import urls
 
-from .utils import ReplaceSequence, StringReplacement, StringSplitter
+from .utils import StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
 ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(
     "#!", "?_escaped_fragment_=")
-TITLE_REPLACEMENTS = ReplaceSequence().create("&raquo;").append("»")
+TITLE_REPLACEMENTS = StringReplacement("&raquo;", "»")
 PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
 UNDERSCORE_SPLITTER = StringSplitter("_")
