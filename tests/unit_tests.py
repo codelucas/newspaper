@@ -78,6 +78,7 @@ def check_url(*args, **kwargs):
     return ExhaustiveFullTextCase.check_url(*args, **kwargs)
 
 
+@unittest.skipIf('fulltext' not in sys.argv, 'Skipping fulltext tests')
 class ExhaustiveFullTextCase(unittest.TestCase):
     @staticmethod
     def check_url(args):
@@ -525,4 +526,8 @@ class MultiLanguageTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=0)
+    argv = list(sys.argv)
+    if 'fulltext' in argv:
+        argv.remove('fulltext')  # remove it here, so it doesn't pass to unittest
+
+    unittest.main(verbosity=0, argv=argv)
