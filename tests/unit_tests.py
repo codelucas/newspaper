@@ -321,6 +321,11 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>Test page &raquo; Test title</title>'
         assert self._get_title(html) == 'Test title'
 
+    def test_get_title_quotes(self):
+        title = 'Test page and «something in quotes»'
+        html = '<title>{}</title>'.format(title)
+        assert self._get_title(html) == title
+
 
 class SourceTestCase(unittest.TestCase):
     @print_test

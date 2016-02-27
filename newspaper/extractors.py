@@ -34,7 +34,7 @@ PIPE_SPLITTER = StringSplitter("\\|")
 DASH_SPLITTER = StringSplitter(" - ")
 UNDERSCORE_SPLITTER = StringSplitter("_")
 SLASH_SPLITTER = StringSplitter("/")
-ARROWS_SPLITTER = StringSplitter("»")
+ARROWS_SPLITTER = StringSplitter(" » ")
 COLON_SPLITTER = StringSplitter(":")
 SPACE_SPLITTER = StringSplitter(' ')
 NO_STRINGS = set()
@@ -255,7 +255,7 @@ class ContentExtractor(object):
             used_delimeter = True
 
         # split title with »
-        if not used_delimeter and '»' in title_text:
+        if not used_delimeter and ' » ' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER)
             used_delimeter = True
 
