@@ -18,13 +18,12 @@ PARENT_DIR = os.path.join(TEST_DIR, '..')
 # core module
 sys.path.insert(0, PARENT_DIR)
 
-TEXT_FN = os.path.join(TEST_DIR, 'data/text')
-HTML_FN = os.path.join(TEST_DIR, 'data/html')
-URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
+TEXT_FN = os.path.join(TEST_DIR, 'data', 'text')
+HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
+URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
-from newspaper import (
-    Article, fulltext, Source, ArticleException, news_pool)
+from newspaper import Article, fulltext, Source, ArticleException, news_pool
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
