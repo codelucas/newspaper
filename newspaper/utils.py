@@ -56,7 +56,7 @@ class RawHelper(object):
     @staticmethod
     def get_parsing_candidate(url, raw_html):
         if isinstance(raw_html, str):
-            raw_html = raw_html.encode('utf-8')
+            raw_html = raw_html.encode('utf-8', 'replace')
         link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
         return ParsingCandidate(url, link_hash)
 
