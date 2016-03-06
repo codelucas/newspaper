@@ -47,8 +47,8 @@ class FileHelper(object):
 
 class ParsingCandidate(object):
 
-    def __init__(self, urlString, link_hash):
-        self.urlString = self.url = urlString
+    def __init__(self, url, link_hash):
+        self.url = url
         self.link_hash = link_hash
 
 
