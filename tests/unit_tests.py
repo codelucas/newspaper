@@ -298,6 +298,35 @@ class ArticleTestCase(unittest.TestCase):
         self.assertCountEqual(KEYWORDS, self.article.keywords)
 
 
+class ContentExtractorTestCase(unittest.TestCase):
+    """Test specific element extraction cases"""
+
+    def setUp(self):
+        self.extractor = newspaper.extractors.ContentExtractor(Configuration())
+        self.parser = newspaper.parsers.Parser
+
+    def _get_title(self, html):
+        doc = self.parser.fromstring(html)
+        return self.extractor.get_title(doc)
+
+    def test_get_title_basic(self):
+        html = '<title>Test title</title>'
+        self.assertEqual(self._get_title(html), 'Test title')
+
+    def test_get_title_split(self):
+        html = '<title>Test page » Test title</title>'
+        self.assertEqual(self._get_title(html), 'Test title')
+
+    def test_get_title_split_escaped(self):
+        html = '<title>Test page &raquo; Test title</title>'
+        self.assertEqual(self._get_title(html), 'Test title')
+
+    def test_get_title_quotes(self):
+        title = 'Test page and «something in quotes»'
+        html = '<title>{}</title>'.format(title)
+        self.assertEqual(self._get_title(html), title)
+
+
 class SourceTestCase(unittest.TestCase):
     @print_test
     def test_source_url_input_none(self):
