@@ -2,7 +2,6 @@
 """
 All unit tests for the newspaper library should be contained in this file.
 """
-import logging
 import sys
 import os
 import unittest
@@ -19,13 +18,12 @@ PARENT_DIR = os.path.join(TEST_DIR, '..')
 # core module
 sys.path.insert(0, PARENT_DIR)
 
-TEXT_FN = os.path.join(TEST_DIR, 'data/text')
-HTML_FN = os.path.join(TEST_DIR, 'data/html')
-URLS_FILE = os.path.join(TEST_DIR, 'data/fulltext_url_list.txt')
+TEXT_FN = os.path.join(TEST_DIR, 'data', 'text')
+HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
+URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
-from newspaper import (
-    Article, fulltext, Source, ArticleException, news_pool)
+from newspaper import Article, fulltext, Source, ArticleException, news_pool
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -79,6 +77,7 @@ def check_url(*args, **kwargs):
     return ExhaustiveFullTextCase.check_url(*args, **kwargs)
 
 
+@unittest.skipIf('fulltext' not in sys.argv, 'Skipping fulltext tests')
 class ExhaustiveFullTextCase(unittest.TestCase):
     @staticmethod
     def check_url(args):
@@ -526,7 +525,7 @@ class MultiLanguageTestCase(unittest.TestCase):
         article.parse()
         text = mock_resource_with('chinese', 'txt')
         self.assertEqual(text, article.text)
-        self.assertEqual(text,  fulltext(article.html, 'zh'))
+        self.assertEqual(text, fulltext(article.html, 'zh'))
 
     @print_test
     def test_arabic_fulltext_extract(self):
@@ -555,4 +554,8 @@ class MultiLanguageTestCase(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=0)
+    argv = list(sys.argv)
+    if 'fulltext' in argv:
+        argv.remove('fulltext')  # remove it here, so it doesn't pass to unittest
+
+    unittest.main(verbosity=0, argv=argv)
