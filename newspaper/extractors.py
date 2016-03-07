@@ -876,18 +876,20 @@ class ContentExtractor(object):
         link to text ratio, then the text is less likely to be relevant
         """
         links = self.parser.getElementsByTag(e, tag='a')
-        if links is None or len(links) == 0:
+        if not links:
             return False
 
         text = self.parser.getText(e)
-        words = text.split(' ')
+        words = [word for word in text.split() if word.isalnum()]
+        if not words:
+            return True
         words_number = float(len(words))
         sb = []
         for link in links:
             sb.append(self.parser.getText(link))
 
         linkText = ''.join(sb)
-        linkWords = linkText.split(' ')
+        linkWords = linkText.split()
         numberOfLinkWords = float(len(linkWords))
         numberOfLinks = float(len(links))
         linkDivisor = float(numberOfLinkWords / words_number)
