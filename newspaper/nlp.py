@@ -21,7 +21,7 @@ ideal = 20.0
 
 
 def summarize(url='', title='', text='', max_sents=5):
-    if (text == '' or title == '' or max_sents <= 0):
+    if not text or not title or max_sents <= 0:
         return []
 
     summaries = []
@@ -29,11 +29,12 @@ def summarize(url='', title='', text='', max_sents=5):
     keys = keywords(text)
     titleWords = split_words(title)
 
-    # Score setences, and use the top 5 or max_sents sentences
+    # Score sentences, and use the top 5 or max_sents sentences
     ranks = score(sentences, titleWords, keys).most_common(max_sents)
     for rank in ranks:
         summaries.append(rank[0])
-    return summaries
+    summaries.sort(key=lambda summary: summary[0])
+    return [summary[1] for summary in summaries]
 
 
 def score(sentences, titleWords, keywords):
@@ -50,9 +51,9 @@ def score(sentences, titleWords, keywords):
         dbsFeature = dbs(sentence, keywords)
         frequency = (sbsFeature + dbsFeature) / 2.0 * 10.0
         # Weighted average of scores from four categories
-        totalScore = (titleFeature * 1.5 + frequency * 2.0 +
-                      sentenceLength * 1.0 + sentencePosition * 1.0) / 4.0
-        ranks[s] = totalScore
+        totalScore = (titleFeature*1.5 + frequency*2.0 +
+                      sentenceLength*1.0 + sentencePosition*1.0)/4.0
+        ranks[(i, s)] = totalScore
     return ranks
 
 
