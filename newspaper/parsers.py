@@ -12,6 +12,7 @@ import lxml.html
 import lxml.html.clean
 import re
 import traceback
+from html.parser import HTMLParser
 
 from bs4 import UnicodeDammit
 from copy import deepcopy
@@ -244,7 +245,9 @@ class Parser(object):
     @classmethod
     def getAttribute(cls, node, attr=None):
         if attr:
-            return node.attrib.get(attr, None)
+            attr = node.attrib.get(attr, None)
+        if attr:
+            attr = HTMLParser().unescape(attr)
         return attr
 
     @classmethod
