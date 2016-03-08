@@ -306,6 +306,7 @@ class ContentExtractor(object):
         # split title with _
         if not used_delimeter and '_' in title_text:
             title_text = self.split_title(title_text, UNDERSCORE_SPLITTER, title_text_h1)
+            used_delimeter = True
 
         # split title with /
         if not used_delimeter and '/' in title_text:
