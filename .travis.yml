@@ -4,8 +4,9 @@ python:
  - "3.4"
  - "3.5"
 install:
- - pip install -r requirements.txt coverage
+ - pip install -r requirements.txt coverage coveralls
  - python download_corpora.py
 script:
   - coverage run --source newspaper tests/unit_tests.py
-  - coverage report --show-missing --fail-under=50
+after_success:
+  coveralls
