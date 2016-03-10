@@ -9,6 +9,10 @@ Newspaper3k: Article scraping & curation
         :target: http://travis-ci.org/codelucas/newspaper/
         :alt: Build status
 
+.. image:: https://coveralls.io/repos/github/codelucas/newspaper/badge.svg?branch=master
+        :target: https://coveralls.io/github/codelucas/newspaper
+        :alt: Coverage status
+
 
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
