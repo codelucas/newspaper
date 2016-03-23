@@ -512,23 +512,24 @@ class ContentExtractor(object):
         2. The og:url tag
         """
 
-        result = ''
+        url = ''
 
         links = self.parser.getElementsByTag(doc, tag='link', attr='rel', value='canonical')
 
         canonical = self.parser.getAttribute(links[0], 'href') if links else ''
         og_url = self.get_meta_content(doc, 'meta[property="og:url"]')
 
-        result = canonical or og_url or ''
-        if result:
-            result = result.strip()
-            o = urllib.parse.urlparse(result)
-            if not o.hostname:
-                z = urllib.parse.urlparse(article_url)
-                domain = '%s://%s' % (z.scheme, z.hostname)
-                result = urllib.parse.urljoin(domain, result)
+        url = canonical or og_url or ''
+        if url:
+            url = url.strip()
+            parsed_url = urllib.parse.urlparse(url)
+            if not parsed_url.hostname:
+                parsed_article_url = urllib.parse.urlparse(article_url)
+                domain = '{}://{}'.format(parsed_article_url.scheme,
+                                          parsed_article_url.hostname)
+                url = urllib.parse.urljoin(domain, url)
 
-        return result
+        return url
 
     def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root
