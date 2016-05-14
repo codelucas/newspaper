@@ -351,6 +351,7 @@ def print_available_languages():
         'vi': 'Vietnamese',
         'mk': 'Macedonian',
         'tr': 'Turkish',
+        'hi': 'Hindi'
     }
 
     codes = get_available_languages()
