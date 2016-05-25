@@ -55,6 +55,7 @@ class DocumentCleaner(object):
         doc_to_clean = self.clean_em_tags(doc_to_clean)
         doc_to_clean = self.remove_drop_caps(doc_to_clean)
         doc_to_clean = self.remove_scripts_styles(doc_to_clean)
+        doc_to_clean = self.remove_br_tags(doc_to_clean)
         doc_to_clean = self.clean_bad_tags(doc_to_clean)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.caption_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.google_re)
@@ -113,6 +114,18 @@ class DocumentCleaner(object):
         for item in comments:
             self.parser.remove(item)
 
+        return doc
+
+    def remove_br_tags(self, doc):
+        """ Replace <br> tags with <span></span> tags.
+        This solves the issue when a br tag is between two sentences without
+        space. eg. 'Take this sentence.<br>And this sentence.' Removing br tag
+        will change it to 'Take this sentence.And this sentence.' which leads to
+        incorrect sentence tokenization.
+        """
+
+        for br in self.parser.getElementsByTag(doc,"br"):
+            br.tail = "<span></span> " + br.tail if br.tail else "<span></span> "
         return doc
 
     def clean_bad_tags(self, doc):
