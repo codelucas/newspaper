@@ -61,7 +61,6 @@ class Configuration(object):
         # English is the fallback
         self._language = 'en'
 
-
         # Unique stopword classes for oriental languages, don't toggle
         self.stopwords_class = StopWords
 
