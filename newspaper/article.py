@@ -20,7 +20,7 @@ from .configuration import Configuration
 from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
 from .utils import (URLHelper, RawHelper, extend_config,
-                    get_available_languages)
+                    get_available_languages, extract_meta_refresh)
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
@@ -147,6 +147,12 @@ class Article(object):
         """
         if html is None:
             html = network.get_html(self.url, self.config)
+
+        if self.config.follow_meta_refresh:
+            meta_refresh_url = extract_meta_refresh(html)
+            if meta_refresh_url:
+                return self.download(html=network.get_html(meta_refresh_url))
+
         self.set_html(html)
 
         if title is not None:
