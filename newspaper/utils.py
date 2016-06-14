@@ -191,7 +191,7 @@ def extract_meta_refresh(html):
     element = soup.find('meta', attrs={'http-equiv': 'refresh'})
     if element:
         try:
-            wait, url = element['content'].split("=")
+            wait_part, url_part = element['content'].split(";")
         except ValueError:
             # In case there are not enough values to unpack
             # for instance: <meta http-equiv="refresh" content="600" />
@@ -200,7 +200,8 @@ def extract_meta_refresh(html):
             # Get rid of any " or ' inside the element
             # for instance:
             # <meta http-equiv="refresh" content="0;URL='http://sfbay.craigslist.org/eby/cto/5617800926.html'" />
-            return url.replace('"', '').replace("'", '')
+            if url_part.lower().startswith("url="):
+                return url_part[4:].replace('"', '').replace("'", '')
 
 
 def to_valid_filename(s):
