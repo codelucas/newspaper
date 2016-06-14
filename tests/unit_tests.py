@@ -180,6 +180,8 @@ class ArticleTestCase(unittest.TestCase):
 
     @print_test
     def test_meta_refresh_redirect(self):
+        # TODO: We actually hit example.com in this unit test ... which is bad
+        # Figure out how to mock an actual redirect
         config = Configuration()
         config.follow_meta_refresh = True
         article = Article(
