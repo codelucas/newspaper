@@ -22,6 +22,8 @@ import time
 
 from hashlib import sha1
 
+from bs4 import BeautifulSoup
+
 from . import settings
 
 log = logging.getLogger(__name__)
@@ -177,6 +179,29 @@ def is_ascii(word):
         if not onlyascii(c):
             return False
     return True
+
+
+def extract_meta_refresh(html):
+    """ Parses html for a tag like:
+    <meta http-equiv="refresh" content="0;URL='http://sfbay.craigslist.org/eby/cto/5617800926.html'" />
+    Example can be found at: https://www.google.com/url?rct=j&sa=t&url=http://sfbay.craigslist.org/eby/cto/
+    5617800926.html&ct=ga&cd=CAAYATIaYTc4ZTgzYjAwOTAwY2M4Yjpjb206ZW46VVM&usg=AFQjCNF7zAl6JPuEsV4PbEzBomJTUpX4Lg
+    """
+    soup = BeautifulSoup(html, 'html.parser')
+    element = soup.find('meta', attrs={'http-equiv': 'refresh'})
+    if element:
+        try:
+            wait_part, url_part = element['content'].split(";")
+        except ValueError:
+            # In case there are not enough values to unpack
+            # for instance: <meta http-equiv="refresh" content="600" />
+            return None
+        else:
+            # Get rid of any " or ' inside the element
+            # for instance:
+            # <meta http-equiv="refresh" content="0;URL='http://sfbay.craigslist.org/eby/cto/5617800926.html'" />
+            if url_part.lower().startswith("url="):
+                return url_part[4:].replace('"', '').replace("'", '')
 
 
 def to_valid_filename(s):

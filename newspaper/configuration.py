@@ -46,6 +46,9 @@ class Configuration(object):
         self.fetch_images = True
         self.image_dimension_ration = 16 / 9.0
 
+        # Follow meta refresh redirect when downloading
+        self.follow_meta_refresh = False
+
         # Don't toggle this variable, done internally
         self.use_meta_language = True
 

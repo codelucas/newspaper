@@ -179,6 +179,30 @@ class ArticleTestCase(unittest.TestCase):
         self.assertEqual(75406, len(self.article.html))
 
     @print_test
+    def test_meta_refresh_redirect(self):
+        # TODO: We actually hit example.com in this unit test ... which is bad
+        # Figure out how to mock an actual redirect
+        config = Configuration()
+        config.follow_meta_refresh = True
+        article = Article(
+            '', config=config)
+        html = mock_resource_with('google_meta_refresh', 'html')
+        article.download(html=html)
+        article.parse()
+        self.assertEqual(article.title, 'Example Domain')
+
+    @print_test
+    def test_meta_refresh_no_url_redirect(self):
+        config = Configuration()
+        config.follow_meta_refresh = True
+        article = Article(
+            '', config=config)
+        html = mock_resource_with('ap_meta_refresh', 'html')
+        article.download(html=html)
+        article.parse()
+        self.assertEqual(article.title, 'News from The Associated Press')
+
+    @print_test
     def test_pre_download_parse(self):
         """Calling `parse()` before `download()` should yield an error
         """

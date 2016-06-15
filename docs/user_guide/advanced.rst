@@ -219,6 +219,8 @@ Here is a full list of the configuration options:
 
 ``fetch_images``, default True, "set this to false if you don't care about getting images"
 
+``follow_meta_refresh``, default False, "follows a redirect url in a meta refresh html tag"
+
 ``image_dimension_ration``, default 16/9.0, "max ratio for height/width, we ignore if greater"
 
 ``language``, default 'en', "run ``newspaper.languages()`` to see available options."
