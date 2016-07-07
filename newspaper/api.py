@@ -13,13 +13,12 @@ import feedparser
 
 from .article import Article
 from .configuration import Configuration
-from .mthreading import NewsPool
 from .settings import POPULAR_URLS, TRENDING_URL
 from .source import Source
 from .utils import extend_config, print_available_languages
 
 
-def build(url='', dry=False, config=None, **kwargs):
+def build(url='', dry=False, config=None, **kwargs) -> Source:
     """Returns a constructed source object without
     downloading or parsing the articles
     """
@@ -32,7 +31,7 @@ def build(url='', dry=False, config=None, **kwargs):
     return s
 
 
-def build_article(url='', config=None, **kwargs):
+def build_article(url='', config=None, **kwargs) -> Article:
     """Returns a constructed article object without downloading
     or parsing
     """
