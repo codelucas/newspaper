@@ -229,7 +229,7 @@ class ContentExtractor(object):
         - title tag is the most reliable (inherited from Goose)
         - h1, if properly detected, is the best (visible to users)
         - og:title and h1 can help improve the title extraction
-        - python == is too strict, often we need to compare fitlered
+        - python == is too strict, often we need to compare filtered
           versions, i.e. lowercase and ignoring special chars
 
         Explicit rules:
@@ -251,7 +251,7 @@ class ContentExtractor(object):
 
         # title from h1
         # - extract the longest text from all h1 elements
-        # - too short texts (less than 2 words) are discarded
+        # - too short texts (fewer than 2 words) are discarded
         # - clean double spaces
         title_text_h1 = ''
         title_element_h1_list = self.parser.getElementsByTag(doc, tag='h1') or []

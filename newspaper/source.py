@@ -98,7 +98,7 @@ class Source(object):
 
         self.set_feeds()
         self.download_feeds()       # mthread
-        # TODO: self.parse_feeds()  # regex for now
+        # self.parse_feeds()
 
         self.generate_articles()
 
@@ -204,21 +204,17 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
-    def parse_feeds(self):
-        """DEPRECATED
-        Due to the slow speed of feedparser, we won't be dom parsing
-        our .rss feeds, but rather regex searching for urls in the .rss
-        text and then relying on our article logic to detect false urls.
-        """
-        for feed in self.feeds:
-            try:
-                feed.dom = feedparser.parse(feed.html)
-            except Exception as e:
-                log.critical('feedparser failed %s' % e)
-                if self.config.verbose:
-                    print('feed %s has failed parsing' % feed.url)
+    def _map_title_to_feed(self,feed):
+        doc = self.config.get_parser().fromstring(feed.rss)
+        feed.title = self.config.get_parser().getElementsByTag(doc, tag='title')[0].text or ''
+        return feed
 
-        self.feeds = [feed for feed in self.feeds if feed.dom is not None]
+    def parse_feeds(self):
+        """Add titles to feeds
+        """
+        log.debug('We are parsing %d feeds' %
+                  len(self.feeds))
+        self.feeds = [self._map_title_to_feed(f) for f in self.feeds]
 
     def feeds_to_articles(self):
         """Returns articles given the url of a feed

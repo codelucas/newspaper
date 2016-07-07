@@ -25,7 +25,7 @@ class Configuration(object):
     def __init__(self):
         """
         Modify any of these Article / Source properties
-        TODO: Have a seperate ArticleConfig and SourceConfig extend this!
+        TODO: Have a separate ArticleConfig and SourceConfig extend this!
         """
         self.MIN_WORD_COUNT = 300  # num of word tokens in text
         self.MIN_SENT_COUNT = 7    # num of sentence tokens
@@ -55,7 +55,7 @@ class Configuration(object):
         # You may keep the html of just the main article body
         self.keep_article_html = False
 
-        # Fail for error respones (e.g. 404 page)
+        # Fail for error responses (e.g. 404 page)
         self.http_success_only = True
 
         # English is the fallback
