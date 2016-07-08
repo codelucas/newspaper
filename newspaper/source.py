@@ -10,25 +10,20 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 
-import feedparser
-
 from tldextract import tldextract
 
 from . import network
 from . import urls
 from . import utils
-
 from .article import Article
-from .extractors import ContentExtractor
 from .configuration import Configuration
+from .extractors import ContentExtractor
 from .settings import ANCHOR_DIRECTORY
-
 
 log = logging.getLogger(__name__)
 
 
 class Category(object):
-
     def __init__(self, url):
         self.url = url
         self.html = None
@@ -36,7 +31,6 @@ class Category(object):
 
 
 class Feed(object):
-
     def __init__(self, url):
         self.url = url
         self.rss = None
@@ -52,6 +46,7 @@ class Source(object):
     articles   =  [<article obj>, <article obj>, ..]
     brand      =  'cnn'
     """
+
     def __init__(self, url, config=None, **kwargs):
         """The config object for this source will be passed into all of this
         source's children articles unless specified otherwise or re-set.
@@ -85,7 +80,7 @@ class Source(object):
         self.is_parsed = False
         self.is_downloaded = False
 
-    def build(self, response=None):
+    def build(self):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
@@ -97,7 +92,7 @@ class Source(object):
         self.parse_categories()
 
         self.set_feeds()
-        self.download_feeds()       # mthread
+        self.download_feeds()  # mthread
         # self.parse_feeds()
 
         self.generate_articles()
@@ -118,7 +113,7 @@ class Source(object):
         return articles
 
     @utils.cache_disk(seconds=(86400 * 1), cache_folder=ANCHOR_DIRECTORY)
-    def _get_category_urls(self, domain):
+    def _get_category_urls(self):
         """The domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right.
         We are caching categories for 1 day.
@@ -204,9 +199,10 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
-    def _map_title_to_feed(self,feed):
+    def _map_title_to_feed(self, feed):
         doc = self.config.get_parser().fromstring(feed.rss)
-        feed.title = self.config.get_parser().getElementsByTag(doc, tag='title')[0].text or ''
+        feed.title = self.config.get_parser().getElementsByTag(doc, tag='title')[
+                         0].text or self.brand
         return feed
 
     def parse_feeds(self):
@@ -243,7 +239,7 @@ class Source(object):
 
             if self.config.verbose:
                 print(('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, feed.url)))
+                       (before_purge, after_purge, after_memo, feed.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, feed.url))
         return articles
@@ -373,20 +369,6 @@ class Source(object):
         """Returns a list of article urls
         """
         return [article.url for article in self.articles]
-
-    def get_key(self):
-        # TODO
-        pass
-
-    def clear_anchor_directory(self):
-        """Clears out all files in our directory where we cache anchors
-        the key is sha1(self.domain).hexdigest() fn is ANCHOR_DIR/key.
-        """
-        pass
-        # TODO:
-        # d_pth = os.path.join(
-        #   settings.MEMO_DIR, domain_to_filename(source_domain))
-        # os.path.remove(ANCHOR_DIRECTORY)
 
     def print_summary(self):
         """Prints out a summary of the data in our source instance
