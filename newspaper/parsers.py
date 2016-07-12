@@ -39,6 +39,14 @@ class Parser(object):
             nodes.drop_tag()
 
     @classmethod
+    def drop_tree(cls, nodes):
+        if isinstance(nodes, list):
+            for node in nodes:
+                node.drop_tree()
+        else:
+            nodes.drop_tree()
+
+    @classmethod
     def css_select(cls, node, selector):
         return node.cssselect(selector)
 
@@ -98,6 +106,13 @@ class Parser(object):
     @classmethod
     def stripTags(cls, node, *tags):
         lxml.etree.strip_tags(node, *tags)
+
+    @classmethod
+    def getElementsByAttr(cls, node, attr, value):
+        NS = "http://exslt.org/regular-expressions"
+        selector = '//*[re:test(@%s, "%s", "i")]' % (attr, value)
+        elems = node.xpath(selector, namespaces={"re": NS})
+        return elems
 
     @classmethod
     def getElementById(cls, node, idd):
