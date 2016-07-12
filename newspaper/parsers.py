@@ -109,7 +109,7 @@ class Parser(object):
 
     @classmethod
     def getElementsByTag(
-            cls, node, tag=None, attr=None, value=None, childs=False):
+            cls, node, tag=None, attr=None, value=None, childs=False) -> list:
         NS = "http://exslt.org/regular-expressions"
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')

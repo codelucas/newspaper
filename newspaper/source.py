@@ -9,6 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
+from urllib.parse import urljoin
 
 from tldextract import tldextract
 
@@ -113,7 +114,7 @@ class Source(object):
         return articles
 
     @utils.cache_disk(seconds=(86400 * 1), cache_folder=ANCHOR_DIRECTORY)
-    def _get_category_urls(self):
+    def _get_category_urls(self, domain):
         """The domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right.
         We are caching categories for 1 day.
@@ -128,7 +129,30 @@ class Source(object):
         """Don't need to cache getting feed urls, it's almost
         instant with xpath
         """
-        urls = self.extractor.get_feed_urls(self.url, self.categories)
+        common_feed_urls = ['/feeds', '/rss']
+        common_feed_urls = [urljoin(self.url, url) for url in common_feed_urls]
+
+        common_feed_urls_as_categories = [Category(url=url) for url in common_feed_urls]
+
+        category_urls = [c.url for c in common_feed_urls_as_categories]
+        requests = network.multithread_request(category_urls, self.config)
+
+        for index, _ in enumerate(common_feed_urls_as_categories):
+            req = requests[index]
+            if req.resp.ok:
+                common_feed_urls_as_categories[index].html = network.get_html(
+                    req.url, response=req.resp)
+
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.html]
+
+        for _ in common_feed_urls_as_categories:
+            doc = self.config.get_parser().fromstring(_.html)
+            _.doc = doc
+
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.doc is not None]
+
+        categories_and_common_feed_urls = self.categories + common_feed_urls_as_categories
+        urls = self.extractor.get_feed_urls(self.url, categories_and_common_feed_urls)
         self.feeds = [Feed(url=url) for url in urls]
 
     def set_description(self):
@@ -201,8 +225,8 @@ class Source(object):
 
     def _map_title_to_feed(self, feed):
         doc = self.config.get_parser().fromstring(feed.rss)
-        feed.title = self.config.get_parser().getElementsByTag(doc, tag='title')[
-                         0].text or self.brand
+        elements =  self.config.get_parser().getElementsByTag(doc, tag='title')
+        feed.title = next((element.text for element in elements if element.text), self.brand)
         return feed
 
     def parse_feeds(self):
