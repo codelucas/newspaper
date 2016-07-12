@@ -115,28 +115,3 @@ def multithread_request(urls, config=None):
     pool.wait_completion()
     return m_requests
 
-# def async_request(urls, timeout=7):
-#    """receives a list of requests and sends them all
-#    asynchronously at once"""
-#
-#    rs = (grequests.request('GET', url,
-#          **get_request_kwargs(timeout)) for url in urls)
-#    responses = grequests.map(rs, size=10)
-#
-#    return responses
-
-
-# def sync_request(urls_or_url, config=None):
-#    """
-#    Wrapper for a regular request, no asyn nor multithread.
-#    """
-#    # TODO config = default_config if not config else config
-#    useragent = config.browser_user_agent
-#    timeout = config.request_timeout
-#    if isinstance(urls_or_url, list):
-#        resps = [requests.get(url, **get_request_kwargs(timeout, useragent))
-#                                                for url in urls_or_url]
-#        return resps
-#    else:
-#        return requests.get(urls_or_url,
-#                            **get_request_kwargs(timeout, useragent))

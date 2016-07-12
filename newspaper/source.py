@@ -138,10 +138,10 @@ class Source(object):
         requests = network.multithread_request(category_urls, self.config)
 
         for index, _ in enumerate(common_feed_urls_as_categories):
-            req = requests[index]
-            if req.resp.ok:
+            response = requests[index].resp
+            if response and response.ok:
                 common_feed_urls_as_categories[index].html = network.get_html(
-                    req.url, response=req.resp)
+                    response.url, response=response)
 
         common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.html]
 
