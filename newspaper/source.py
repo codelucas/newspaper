@@ -225,6 +225,9 @@ class Source(object):
 
     def _map_title_to_feed(self, feed):
         doc = self.config.get_parser().fromstring(feed.rss)
+        if not doc:
+            return None
+
         elements =  self.config.get_parser().getElementsByTag(doc, tag='title')
         feed.title = next((element.text for element in elements if element.text), self.brand)
         return feed
