@@ -129,7 +129,7 @@ class Source(object):
         """Don't need to cache getting feed urls, it's almost
         instant with xpath
         """
-        common_feed_urls = ['/feeds', '/rss']
+        common_feed_urls = ['/feed', '/feeds', '/rss']
         common_feed_urls = [urljoin(self.url, url) for url in common_feed_urls]
 
         common_feed_urls_as_categories = [Category(url=url) for url in common_feed_urls]
@@ -149,7 +149,8 @@ class Source(object):
             doc = self.config.get_parser().fromstring(_.html)
             _.doc = doc
 
-        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.doc is not None]
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if
+                                          c.doc is not None]
 
         categories_and_common_feed_urls = self.categories + common_feed_urls_as_categories
         urls = self.extractor.get_feed_urls(self.url, categories_and_common_feed_urls)
@@ -228,7 +229,7 @@ class Source(object):
         if not doc:
             return None
 
-        elements =  self.config.get_parser().getElementsByTag(doc, tag='title')
+        elements = self.config.get_parser().getElementsByTag(doc, tag='title')
         feed.title = next((element.text for element in elements if element.text), self.brand)
         return feed
 
