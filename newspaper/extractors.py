@@ -179,13 +179,13 @@ class ContentExtractor(object):
         """
 
         def parse_date_str(date_str):
-            try:
-                datetime_obj = date_parser(date_str)
-                return datetime_obj
-            except (ValueError, OverflowError):
-                # near all parse failures are due to URL dates without a day
-                # specifier, e.g. /2014/04/
-                return None
+            if date_str:
+                try:
+                    return date_parser(date_str)
+                except (ValueError, OverflowError, AttributeError):
+                    # near all parse failures are due to URL dates without a day
+                    # specifier, e.g. /2014/04/
+                    return None
 
         date_match = re.search(urls.DATE_REGEX, url)
         if date_match:
