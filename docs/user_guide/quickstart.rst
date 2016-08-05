@@ -254,6 +254,7 @@ of popular news source urls.. In case you need help choosing a news source!
       fr              French
       he              Hebrew
       it              Italian
+      ja              Japanese
       ko              Korean
       no              Norwegian
       pt              Portuguese
