@@ -7,7 +7,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from html import unescape
+from html.parser import HTMLParser
 import logging
 
 from .text import innerTrim
@@ -70,7 +70,7 @@ class OutputFormatter(object):
                 txt = None
 
             if txt:
-                txt = unescape(txt)
+                txt = HTMLParser().unescape(txt)
                 txt_lis = innerTrim(txt).split(r'\n')
                 txt_lis = [n.strip(' ') for n in txt_lis]
                 txts.extend(txt_lis)
