@@ -16,7 +16,7 @@ import copy
 from dateutil.parser import parse as date_parser
 import logging
 import re
-import urllib.parse
+from urllib.parse import urljoin, urlunparse, urlparse
 
 from tldextract import tldextract
 
@@ -446,7 +446,7 @@ class ContentExtractor(object):
         top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
-            return urllib.parse.urljoin(article_url, top_meta_image)
+            return urljoin(article_url, top_meta_image)
         return ''
 
     def get_meta_type(self, doc):
@@ -511,25 +511,35 @@ class ContentExtractor(object):
         1. The rel=canonical tag
         2. The og:url tag
         """
-
-        url = ''
-
-        links = self.parser.getElementsByTag(doc, tag='link', attr='rel', value='canonical')
+        links = self.parser.getElementsByTag(doc, tag='link', attr='rel',
+                                             value='canonical')
 
         canonical = self.parser.getAttribute(links[0], 'href') if links else ''
         og_url = self.get_meta_content(doc, 'meta[property="og:url"]')
+        meta_url = canonical or og_url or ''
+        if meta_url:
+            meta_url = meta_url.strip()
+            parsed_meta_url = urlparse(meta_url)
+            if not parsed_meta_url.hostname:
+                # MIGHT not have a hostname in meta_url
+                # parsed_url.path might be 'example.com/article.html' where
+                # clearly example.com is the hostname
+                parsed_article_url = urlparse(article_url)
+                strip_hostname_in_meta_path = re.\
+                            match(".*{}(?=/)/(.*)".
+                            format(parsed_article_url.hostname),
+                                  parsed_meta_url.path)
+                try:
+                    true_path = strip_hostname_in_meta_path.group(1)
+                except AttributeError:
+                    true_path = parsed_meta_url.path
 
-        url = canonical or og_url or ''
-        if url:
-            url = url.strip()
-            parsed_url = urllib.parse.urlparse(url)
-            if not parsed_url.hostname:
-                parsed_article_url = urllib.parse.urlparse(article_url)
-                domain = '{}://{}'.format(parsed_article_url.scheme,
-                                          parsed_article_url.hostname)
-                url = urllib.parse.urljoin(domain, url)
+                # true_path may contain querystrings and fragments
+                meta_url = urlunparse((parsed_article_url.scheme,
+                                       parsed_article_url.hostname,true_path,
+                                       '', '', ''))
 
-        return url
+        return meta_url
 
     def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root
@@ -538,7 +548,7 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urllib.parse.urljoin(article_url, url)
+        img_links = set([urljoin(article_url, url)
                         for url in urls])
         return img_links
 
@@ -550,7 +560,7 @@ class ContentExtractor(object):
         node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
         if node_images:
-            return urllib.parse.urljoin(article_url, node_images[0])
+            return urljoin(article_url, node_images[0])
         return ''
 
     def _get_urls(self, doc, titles):
