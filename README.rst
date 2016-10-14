@@ -168,7 +168,7 @@ Documentation
 
 Check out `The Documentation`_ for full and detailed guides using newspaper.
 
-Interested in adding a new language for us? Refer to: `Docs - Adding new languages <http://newspaper.readthedocs.org/en/latest/user_guide/advanced.html#adding-new-languages>`_
+Interested in adding a new language for us? Refer to: `Docs - Adding new languages <https://newspaper.readthedocs.io/en/latest/user_guide/advanced.html#adding-new-languages>`_
 
 Features
 --------
@@ -323,8 +323,8 @@ to talk about the future of this library and news extraction in general!
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
 
-.. _`Quickstart guide`: https://newspaper.readthedocs.org/en/latest/
-.. _`The Documentation`: http://newspaper.readthedocs.org
+.. _`Quickstart guide`: https://newspaper.readthedocs.io/en/latest/
+.. _`The Documentation`: https://newspaper.readthedocs.io
 .. _`lxml`: http://lxml.de/
 .. _`requests`: https://github.com/kennethreitz/requests
 .. _`Parse.ly`: http://parse.ly
