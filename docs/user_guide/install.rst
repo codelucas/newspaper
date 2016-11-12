@@ -23,15 +23,19 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
 - For PIL to recognize .jpg images::
 
-    $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev  
+    $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev
 
 - Install the distribution via pip::
 
-    $ pip install newspaper 
+    $ pip install newspaper
+
+- If you are using Python 3.x install the following package instead::
+
+    $ pip install newspaper3k
 
 - Download NLP related corpora::
 
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python
 
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
@@ -42,9 +46,9 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
     $ brew install libtiff libjpeg webp little-cms2
 
-    $ pip install newspaper 
+    $ pip install newspaper
 
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python
 
 
 **Otherwise**, install with the following:
@@ -54,15 +58,6 @@ NOTE: You will still most likely need to install the following libraries via you
 - PIL: ``libjpeg-dev`` ``zlib1g-dev`` ``libpng12-dev``
 - lxml: ``libxml2-dev`` ``libxslt-dev``
 - Python Development version: ``python-dev``
-
-Note that the Python3 package name is ``newspaper3k`` while our Python2
-package name is ``newspaper``.
-
-::
-
-    $ pip install newspaper3k
-
-    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
 Get the Code
 ------------
