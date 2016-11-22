@@ -43,6 +43,9 @@ class Article(object):
         self.extractor = ContentExtractor(self.config)
 
         if source_url == '':
+            scheme = urls.get_scheme(url)
+            if scheme is None:
+                scheme = 'http'
             source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
 
         if source_url is None or source_url == '':
