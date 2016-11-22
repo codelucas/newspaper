@@ -46,7 +46,7 @@ class Article(object):
             scheme = urls.get_scheme(url)
             if scheme is None:
                 scheme = 'http'
-            source_url = urls.get_scheme(url) + '://' + urls.get_domain(url)
+            source_url = scheme + '://' + urls.get_domain(url)
 
         if source_url is None or source_url == '':
             raise ArticleException('input url bad format')
