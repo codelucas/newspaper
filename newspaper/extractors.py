@@ -11,14 +11,15 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import copy
 import logging
-import urllib.parse
+import re
+import re
 from collections import defaultdict
 
-import copy
-import re
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
+from urllib.parse import urljoin, urlparse, urlunparse
 
 from . import urls
 from .utils import StringReplacement, StringSplitter
@@ -195,15 +196,24 @@ class ContentExtractor(object):
                 return datetime_obj
 
         PUBLISH_DATE_TAGS = [
-            {'attribute': 'property', 'value': 'rnews:datePublished', 'content': 'content'},
-            {'attribute': 'property', 'value': 'article:published_time', 'content': 'content'},
-            {'attribute': 'name', 'value': 'OriginalPublicationDate', 'content': 'content'},
-            {'attribute': 'itemprop', 'value': 'datePublished', 'content': 'datetime'},
-            {'attribute': 'property', 'value': 'og:published_time', 'content': 'content'},
-            {'attribute': 'name', 'value': 'article_date_original', 'content': 'content'},
-            {'attribute': 'name', 'value': 'publication_date', 'content': 'content'},
-            {'attribute': 'name', 'value': 'sailthru.date', 'content': 'content'},
-            {'attribute': 'name', 'value': 'PublishDate', 'content': 'content'},
+            {'attribute': 'property', 'value': 'rnews:datePublished',
+             'content': 'content'},
+            {'attribute': 'property', 'value': 'article:published_time',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'OriginalPublicationDate',
+             'content': 'content'},
+            {'attribute': 'itemprop', 'value': 'datePublished',
+             'content': 'datetime'},
+            {'attribute': 'property', 'value': 'og:published_time',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'article_date_original',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'publication_date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'sailthru.date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'PublishDate',
+             'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -252,8 +262,10 @@ class ContentExtractor(object):
         # - too short texts (fewer than 2 words) are discarded
         # - clean double spaces
         title_text_h1 = ''
-        title_element_h1_list = self.parser.getElementsByTag(doc, tag='h1') or []
-        title_text_h1_list = [self.parser.getText(tag) for tag in title_element_h1_list]
+        title_element_h1_list = self.parser.getElementsByTag(doc,
+                                                             tag='h1') or []
+        title_text_h1_list = [self.parser.getText(tag) for tag in
+                              title_element_h1_list]
         if title_text_h1_list:
             # sort by len and set the longest
             title_text_h1_list.sort(key=len, reverse=True)
@@ -265,8 +277,9 @@ class ContentExtractor(object):
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
 
         # title from og:title
-        title_text_fb = (self.get_meta_content(doc, 'meta[property="og:title"]') or
-                         self.get_meta_content(doc, 'meta[name="og:title"]') or '')
+        title_text_fb = (
+        self.get_meta_content(doc, 'meta[property="og:title"]') or
+        self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -293,27 +306,32 @@ class ContentExtractor(object):
 
         # split title with |
         if not used_delimeter and '|' in title_text:
-            title_text = self.split_title(title_text, PIPE_SPLITTER, title_text_h1)
+            title_text = self.split_title(title_text, PIPE_SPLITTER,
+                                          title_text_h1)
             used_delimeter = True
 
         # split title with -
         if not used_delimeter and '-' in title_text:
-            title_text = self.split_title(title_text, DASH_SPLITTER, title_text_h1)
+            title_text = self.split_title(title_text, DASH_SPLITTER,
+                                          title_text_h1)
             used_delimeter = True
 
         # split title with _
         if not used_delimeter and '_' in title_text:
-            title_text = self.split_title(title_text, UNDERSCORE_SPLITTER, title_text_h1)
+            title_text = self.split_title(title_text, UNDERSCORE_SPLITTER,
+                                          title_text_h1)
             used_delimeter = True
 
         # split title with /
         if not used_delimeter and '/' in title_text:
-            title_text = self.split_title(title_text, SLASH_SPLITTER, title_text_h1)
+            title_text = self.split_title(title_text, SLASH_SPLITTER,
+                                          title_text_h1)
             used_delimeter = True
 
         # split title with »
         if not used_delimeter and ' » ' in title_text:
-            title_text = self.split_title(title_text, ARROWS_SPLITTER, title_text_h1)
+            title_text = self.split_title(title_text, ARROWS_SPLITTER,
+                                          title_text_h1)
             used_delimeter = True
 
         title = MOTLEY_REPLACEMENT.replaceAll(title_text)
@@ -444,7 +462,7 @@ class ContentExtractor(object):
         top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
-            return urllib.parse.urljoin(article_url, top_meta_image)
+            return urljoin(article_url, top_meta_image)
         return ''
 
     def get_meta_type(self, doc):
@@ -509,26 +527,35 @@ class ContentExtractor(object):
         1. The rel=canonical tag
         2. The og:url tag
         """
+        links = self.parser.getElementsByTag(doc, tag='link', attr='rel',
+                                             value='canonical')
 
-        result = ''
-
-        links = self.parser.getElementsByTag(doc, tag='link', attr='rel', value='canonical')
         canonical = self.parser.getAttribute(links[0], 'href') if links else ''
-
         og_url = self.get_meta_content(doc, 'meta[property="og:url"]')
+        meta_url = canonical or og_url or ''
+        if meta_url:
+            meta_url = meta_url.strip()
+            parsed_meta_url = urlparse(meta_url)
+            if not parsed_meta_url.hostname:
+                # MIGHT not have a hostname in meta_url
+                # parsed_url.path might be 'example.com/article.html' where
+                # clearly example.com is the hostname
+                parsed_article_url = urlparse(article_url)
+                strip_hostname_in_meta_path = re. \
+                    match(".*{}(?=/)/(.*)".
+                          format(parsed_article_url.hostname),
+                          parsed_meta_url.path)
+                try:
+                    true_path = strip_hostname_in_meta_path.group(1)
+                except AttributeError:
+                    true_path = parsed_meta_url.path
 
-        if canonical:
-            canonical = canonical.strip()
-            o = urllib.parse.urlparse(canonical)
-            if not o.hostname:
-                z = urllib.parse.urlparse(article_url)
-                domain = '%s://%s' % (z.scheme, z.hostname)
-                canonical = urllib.parse.urljoin(domain, canonical)
-            result = canonical
-        elif og_url:
-            result = og_url  # fallback to og:url tag, must be the full url
+                # true_path may contain querystrings and fragments
+                meta_url = urlunparse((parsed_article_url.scheme,
+                                       parsed_article_url.hostname, true_path,
+                                       '', '', ''))
 
-        return result
+        return meta_url
 
     def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root
@@ -537,7 +564,7 @@ class ContentExtractor(object):
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urllib.parse.urljoin(article_url, url)
+        img_links = set([urljoin(article_url, url)
                          for url in urls])
         return img_links
 
@@ -549,7 +576,7 @@ class ContentExtractor(object):
         node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
         if node_images:
-            return urllib.parse.urljoin(article_url, node_images[0])
+            return urljoin(article_url, node_images[0])
         return ''
 
     def _get_urls(self, doc, titles):
@@ -872,7 +899,8 @@ class ContentExtractor(object):
                 for first_paragraph in potential_paragraphs:
                     text = self.parser.getText(first_paragraph)
                     if len(text) > 0:
-                        word_stats = self.stopwords_class(language=self.language). \
+                        word_stats = self.stopwords_class(
+                            language=self.language). \
                             get_stopword_count(text)
                         paragraph_score = word_stats.get_stopword_count()
                         sibling_baseline_score = float(.30)
