@@ -66,7 +66,7 @@ class OutputFormatter(object):
             try:
                 txt = self.parser.getText(node)
             except ValueError as err:  # lxml error
-                log.warning('%s ignoring lxml node error: %s', __title__, err)
+                log.info('%s ignoring lxml node error: %s', __title__, err)
                 txt = None
 
             if txt:
