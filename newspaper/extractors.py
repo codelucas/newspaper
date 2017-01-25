@@ -431,7 +431,7 @@ class ContentExtractor(object):
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
         if try_one == '':
             link_img_src_kwargs = \
-                {'tag': 'link', 'attr': 'rel', 'value': 'img_src'}
+                {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
             elems = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
 
