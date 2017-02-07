@@ -88,6 +88,10 @@ class Article(object):
         # Summary generated from the article's body txt
         self.summary = u''
 
+        # Summary generated from the article's body txt stored as
+        # a list of sentences
+        self.summary_as_list = list()
+
         # This article's unchanged and raw HTML
         self.html = u''
 
@@ -321,6 +325,7 @@ class Article(object):
 
         summary_sents = nlp.summarize(title=self.title, text=self.text)
         summary = '\n'.join(summary_sents)
+        self.set_summary_list(summary_sents)
         self.set_summary(summary)
 
     def get_parse_candidate(self):
@@ -442,6 +447,12 @@ class Article(object):
         """
         summary = summary[:self.config.MAX_SUMMARY]
         self.summary = get_unicode(summary)
+
+    def set_summary_list(self, summary):
+        """Summary here refers to a paragraph of text from the
+        title text and body text
+        """
+        self.summary_as_list = summary
 
     def set_meta_language(self, meta_lang):
         """Save langauges in their ISO 2-character form
