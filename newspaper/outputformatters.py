@@ -8,12 +8,8 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from HTMLParser import HTMLParser
-import logging
 
 from .text import innerTrim
-
-
-log = logging.getLogger(__name__)
 
 
 class OutputFormatter(object):
@@ -64,12 +60,7 @@ class OutputFormatter(object):
     def convert_to_text(self):
         txts = []
         for node in list(self.get_top_node()):
-            try:
-                txt = self.parser.getText(node)
-            except ValueError:  # lxml error
-                log.warning('Error parsing lxml node', exc_info=True)
-                txt = None
-
+            txt = self.parser.getText(node)
             if txt:
                 txt = HTMLParser().unescape(txt)
                 txt_lis = innerTrim(txt).split(r'\n')
