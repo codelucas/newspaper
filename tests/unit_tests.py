@@ -13,7 +13,7 @@ import concurrent.futures
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
 
-# newspaper's unit tests are in their own seperate module, so
+# newspaper's unit tests are in their own separate module, so
 # insert the parent directory manually to gain scope of the
 # core module
 sys.path.insert(0, PARENT_DIR)
@@ -349,6 +349,32 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>{}</title>'.format(title)
         self.assertEqual(self._get_title(html), title)
 
+    def _get_canonical_link(self, article_url, html):
+        doc = self.parser.fromstring(html)
+        return self.extractor.get_canonical_link(article_url, doc)
+
+    def test_get_canonical_link_rel_canonical(self):
+        url = 'http://www.example.com/article.html'
+        html = '<link rel="canonical" href="{}">'.format(url)
+        self.assertEqual(self._get_canonical_link('', html), url)
+
+    def test_get_canonical_link_rel_canonical_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<link rel="canonical" href="article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_canonical_link_og_url_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<meta property="og:url" content="article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_canonical_link_hostname_og_url_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<meta property="og:url" content="www.example.com/article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
 
 class SourceTestCase(unittest.TestCase):
     @print_test
