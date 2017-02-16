@@ -1,7 +1,7 @@
 #!/bin/python2.7
 # -*- coding: utf-8 -*-
 """
-Lucas Ou 2014 -- http://lucasou.com
+Lucas Ou-Yang 2014 -- http://codelucas.com
 """
 
 import sys
@@ -34,7 +34,7 @@ with codecs.open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='newspaper3k',
-    version='0.1.8',
+    version='0.1.9',
     description='Simplified python article discovery & extraction.',
     long_description=readme,
     author='Lucas Ou-Yang',

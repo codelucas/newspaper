@@ -241,6 +241,8 @@ package name is ``newspaper``.
 
     $ sudo apt-get install libjpeg-dev zlib1g-dev libpng12-dev
 
+NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-dev``.
+
 - Install the distribution via pip::
 
     $ pip3 install newspaper3k
