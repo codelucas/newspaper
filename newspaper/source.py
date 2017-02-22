@@ -9,7 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from tldextract import tldextract
 
@@ -131,6 +131,14 @@ class Source(object):
         """
         common_feed_urls = ['/feed', '/feeds', '/rss']
         common_feed_urls = [urljoin(self.url, url) for url in common_feed_urls]
+
+        split = urlsplit(self.url)
+        if split.netloc in ('medium.com', 'www.medium.com'):
+            # should handle URL to user or user's post
+            if split.path.startswith('/@'):
+                new_path = '/feed/' + split.path.split('/')[1]
+                new_parts = split.scheme, split.netloc, new_path, '', ''
+                common_feed_urls.append(urlunsplit(new_parts))
 
         common_feed_urls_as_categories = [Category(url=url) for url in common_feed_urls]
 
