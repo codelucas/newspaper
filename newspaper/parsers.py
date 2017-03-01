@@ -48,7 +48,17 @@ class Parser(object):
             return html
         if not html:
             return html
-        converted = UnicodeDammit(html, is_html=True)
+
+        # Guess encoding using "meta" tag.
+        guessed_encodings = None
+
+        document = lxml.html.fromstring(str(html))
+        meta_tag = document.xpath("//meta[@charset] | //meta[@http-equiv='Content-Type']")
+        if meta_tag:
+            charset = meta_tag[0].get("charset", None) or meta_tag[0].get("content").split(";")[1].split("=")[1]
+            guessed_encodings = [charset]
+
+        converted = UnicodeDammit(html, guessed_encodings, is_html=True)
         if not converted.unicode_markup:
             raise Exception(
                 'Failed to detect encoding of article HTML, tried: %s' %
