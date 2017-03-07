@@ -144,17 +144,21 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, html=None, title=None):
+    def download(self, html=None, title=None, recursion_counter=0):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
+
+        recursion_counter (currently 1) stops refreshes that are potentially
+        infinite
         """
         if html is None:
             html = network.get_html(self.url, self.config)
 
         if self.config.follow_meta_refresh:
             meta_refresh_url = extract_meta_refresh(html)
-            if meta_refresh_url:
-                return self.download(html=network.get_html(meta_refresh_url))
+            if meta_refresh_url and recursion_counter < 1:
+                return self.download(html=network.get_html(meta_refresh_url),
+                                     recursion_counter=recursion_counter + 1)
 
         self.set_html(html)
 
