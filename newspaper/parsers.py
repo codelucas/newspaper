@@ -12,6 +12,7 @@ import lxml.html
 import lxml.html.clean
 import re
 import traceback
+import string
 from html.parser import HTMLParser
 
 from bs4 import UnicodeDammit
@@ -117,7 +118,8 @@ class Parser(object):
             if use_regex:
                 selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
             else:
-                selector = '%s[contains(@%s, "%s")]' % (selector, attr.lower(), value.lower())
+                trans = 'translate(@%s, "%s", "%s")' % (attr, string.ascii_uppercase, string.ascii_lowercase)
+                selector = '%s[contains(%s, "%s")]' % (selector, trans, value.lower())
                 NS = {}
         elems = node.xpath(selector, namespaces=NS)
         # remove the root node
