@@ -243,14 +243,13 @@ package name is ``newspaper``.
 
 NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-dev``.
 
-- Install the distribution via pip::
-
-    $ pip3 install newspaper3k
-
 - Download NLP related corpora::
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
+- Install the distribution via pip::
+
+    $ pip3 install newspaper3k
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
 
