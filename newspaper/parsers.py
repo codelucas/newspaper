@@ -111,16 +111,16 @@ class Parser(object):
     @classmethod
     def getElementsByTag(
             cls, node, tag=None, attr=None, value=None, childs=False, use_regex=False):
-        NS = {"re": "http://exslt.org/regular-expressions"}
+        NS = None
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
         if attr and value:
             if use_regex:
+                NS = {"re": "http://exslt.org/regular-expressions"}
                 selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
             else:
                 trans = 'translate(@%s, "%s", "%s")' % (attr, string.ascii_uppercase, string.ascii_lowercase)
                 selector = '%s[contains(%s, "%s")]' % (selector, trans, value.lower())
-                NS = {}
         elems = node.xpath(selector, namespaces=NS)
         # remove the root node
         # if we have a selection tag
