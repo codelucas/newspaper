@@ -7,9 +7,7 @@ import os
 import unittest
 import time
 import traceback
-import re
 from collections import defaultdict, OrderedDict
-from dateutil.parser import parse as date_parser
 import concurrent.futures
 
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
