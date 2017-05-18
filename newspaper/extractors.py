@@ -20,6 +20,8 @@ from urllib.parse import urljoin, urlunparse, urlparse
 
 from tldextract import tldextract
 
+from lxml import etree
+
 from . import urls
 
 from .utils import StringReplacement, StringSplitter
@@ -154,7 +156,7 @@ class ContentExtractor(object):
                 if len(mm) > 0:
                     content = mm[0]
             else:
-                content = match.text or ''
+                content = match.text or ''.join([str(etree.tostring(c)) for c in match.getchildren()])
             if len(content) > 0:
                 authors.extend(parse_byline(content))
 
