@@ -12,6 +12,9 @@ from .api import (build, build_article, fulltext, hot, languages,
                   popular_urls, NewsPool, Configuration as Config)
 from .source import Source
 from .version import __version__
+from .extractors import ContentExtractor
+from .parsers import Parser
+from .network import get_html
 
 news_pool = NewsPool()
 

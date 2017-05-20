@@ -33,14 +33,17 @@ class ArticleException(Exception):
 class Article(object):
     """Article objects abstract an online news article page
     """
-    def __init__(self, url, title='', source_url='', config=None, **kwargs):
+    def __init__(self, url, title='', source_url='', config=None, content_extractor=None, **kwargs):
         """The **kwargs argument may be filled with config values, which
         is added into the config object
         """
         self.config = config or Configuration()
         self.config = extend_config(self.config, kwargs)
 
-        self.extractor = ContentExtractor(self.config)
+        if content_extractor is None:
+            self.extractor = ContentExtractor(self.config)
+        else:
+            self.extractor = content_extractor
 
         if source_url == '':
             scheme = urls.get_scheme(url)
@@ -224,6 +227,7 @@ class Article(object):
 
         text = ''
         self.top_node = self.extractor.calculate_best_node(self.doc)
+        #self.top_node = document_cleaner.clean(self.top_node)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())

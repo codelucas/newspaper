@@ -58,6 +58,7 @@ class OutputFormatter(object):
         self.remove_trailing_media_div()
         text = self.convert_to_text()
         # print(self.parser.nodeToString(self.get_top_node()))
+        #print(text)
         return (text, html)
 
     def convert_to_text(self):
