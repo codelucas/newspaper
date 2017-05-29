@@ -212,6 +212,7 @@ Features
       id              Indonesian
       vi              Vietnamese
       tr              Turkish
+      el              Greek
 
 
 Get it now
