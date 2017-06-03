@@ -14,6 +14,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 from collections import defaultdict
 import copy
 from dateutil.parser import parse as date_parser
+import dateparser
 import logging
 import re
 from urllib.parse import urljoin, urlunparse, urlparse
@@ -187,7 +188,7 @@ class ContentExtractor(object):
             except:
                 # near all parse failures are due to URL dates without a day
                 # specifier, e.g. /2014/04/
-                return None
+                return dateparser.parse(date_str)
 
         date_match = re.search(urls.DATE_REGEX, url)
         if date_match:
