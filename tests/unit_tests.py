@@ -210,6 +210,15 @@ class ArticleTestCase(unittest.TestCase):
         self.assertRaises(ArticleException, article.parse)
 
     @print_test
+    def test_no_download_but_html_kwarg_parse(self):
+        """Calling `parse()` after passing `html` kwarg should work
+        """
+        html = 'foo.bar'
+        article = Article('http://foo.bar', html=html)
+        article.parse()
+        self.assertEqual(article.html, html)
+
+    @print_test
     def test_parse_html(self):
         self.setup_stage('parse')
 

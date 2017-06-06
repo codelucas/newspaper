@@ -33,7 +33,7 @@ class ArticleException(Exception):
 class Article(object):
     """Article objects abstract an online news article page
     """
-    def __init__(self, url, title='', source_url='', config=None, **kwargs):
+    def __init__(self, url, html='', title='', source_url='', config=None, **kwargs):
         """The **kwargs argument may be filled with config values, which
         is added into the config object
         """
@@ -92,6 +92,8 @@ class Article(object):
 
         # This article's unchanged and raw HTML
         self.html = ''
+        if html:
+            self.set_html(html)
 
         # The HTML of this article's main node (most important part)
         self.article_html = ''
@@ -99,7 +101,11 @@ class Article(object):
         # Flags warning users in-case they forget to download() or parse()
         # or if they call methods out of order
         self.is_parsed = False
+
         self.is_downloaded = False
+        if self.html:
+            # User has loaded html content, does not require download restriction
+            self.is_downloaded = True
 
         # Meta description field in the HTML source
         self.meta_description = ""
