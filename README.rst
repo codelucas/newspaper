@@ -218,6 +218,9 @@ Features
 Get it now
 ----------
 
+On python3 **you must install newspaper3k, NOT newspaper**  Attempting ``pip3 install 
+newspaper`` *will result in errors*!
+
 Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
 However, you will run into fixable issues if you are trying to install on ubuntu.
 
@@ -250,7 +253,7 @@ NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-d
 
 - Install the distribution via pip::
 
-    $ pip3 install newspaper3k
+    $ pip3 install newspaper3k (NOT newspaper)
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
 
@@ -260,7 +263,7 @@ NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-d
 
     $ brew install libtiff libjpeg webp little-cms2
 
-    $ pip3 install newspaper3k
+    $ pip3 install newspaper3k (NOT newspaper)
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
