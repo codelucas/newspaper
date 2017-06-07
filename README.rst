@@ -218,14 +218,13 @@ Features
 Get it now
 ----------
 
-On python3 **you must install newspaper3k, NOT newspaper**  Attempting ``pip3 install 
-newspaper`` *will result in errors*!
+Run ✅ ``pip3 install newspaper3k`` ✅
 
-Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
-However, you will run into fixable issues if you are trying to install on ubuntu.
+NOT ⛔ ``pip3 install newspaper`` ⛔
 
-Note that the Python3 package name is ``newspaper3k`` while our Python2
-package name is ``newspaper``.
+On python3 you must install ``newspaper3k``, **not** ``newspaper``. ``newspaper`` is our python2 library.
+Although installing newspaper is simple with `pip <http://www.pip-installer.org/>`_, you will
+run into fixable issues if you are trying to install on ubuntu.
 
 **If you are on Debian / Ubuntu**, install using the following:
 
@@ -253,7 +252,7 @@ NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-d
 
 - Install the distribution via pip::
 
-    $ pip3 install newspaper3k (NOT newspaper)
+    $ pip3 install newspaper3k
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
 
@@ -263,7 +262,7 @@ NOTE: If you find problem installing ``libpng12-dev``, try installing ``libpng-d
 
     $ brew install libtiff libjpeg webp little-cms2
 
-    $ pip3 install newspaper3k (NOT newspaper)
+    $ pip3 install newspaper3k
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
