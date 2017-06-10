@@ -9,6 +9,8 @@ import copy
 import os
 import glob
 
+import requests
+
 from . import images
 from . import network
 from . import nlp
@@ -24,6 +26,12 @@ from .utils import (URLHelper, RawHelper, extend_config,
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
+
+
+class ArticleDownloadState(object):
+    NOT_STARTED = 0
+    FAILED_RESPONSE = 1
+    SUCCESS = 2
 
 
 class ArticleException(Exception):
@@ -96,10 +104,10 @@ class Article(object):
         # The HTML of this article's main node (most important part)
         self.article_html = ''
 
-        # Flags warning users in-case they forget to download() or parse()
-        # or if they call methods out of order
+        # Keep state for downloads and parsing
         self.is_parsed = False
-        self.is_downloaded = False
+        self.download_state = ArticleDownloadState.NOT_STARTED
+        self.download_exception_msg = None
 
         # Meta description field in the HTML source
         self.meta_description = ""
@@ -144,31 +152,48 @@ class Article(object):
         self.parse()
         self.nlp()
 
-    def download(self, html=None, title=None, recursion_counter=0):
+    def download(self, input_html=None, title=None, recursion_counter=0):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
 
         recursion_counter (currently 1) stops refreshes that are potentially
         infinite
         """
-        if html is None:
-            html = network.get_html(self.url, self.config)
+        if input_html is None:
+            try:
+                html = network.get_html_2XX_only(self.url, self.config)
+            except requests.exceptions.RequestException as e:
+                self.download_state = ArticleDownloadState.FAILED_RESPONSE
+                self.download_exception_msg = str(e)
+                log.debug('Download failed on URL %s because of %s' %
+                          (self.url, self.download_exception_msg))
+                return
+        else:
+            html = input_html
+
+        if html is not None:
+            self.download_state = ArticleDownloadState.SUCCESS
 
         if self.config.follow_meta_refresh:
-            meta_refresh_url = extract_meta_refresh(html)
+            meta_refresh_url = extract_meta_refresh(input_html)
             if meta_refresh_url and recursion_counter < 1:
-                return self.download(html=network.get_html(meta_refresh_url),
-                                     recursion_counter=recursion_counter + 1)
+                return self.download(
+                    input_html=network.get_html(meta_refresh_url),
+                    recursion_counter=recursion_counter + 1)
 
-        self.set_html(html)
+        self.set_html(input_html)
 
         if title is not None:
             self.set_title(title)
 
     def parse(self):
-        if not self.is_downloaded:
+        if self.download_state == ArticleDownloadState.NOT_STARTED:
             print('You must `download()` an article before '
                   'calling `parse()` on it!')
+            raise ArticleException()
+        elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
+            print('Article `download()` on URL %s failed with %s' %
+                  (self.url, self.download_exception_msg))
             raise ArticleException()
 
         self.doc = self.config.get_parser().fromstring(self.html)
@@ -327,7 +352,7 @@ class Article(object):
     def nlp(self):
         """Keyword extraction wrapper
         """
-        if not self.is_downloaded or not self.is_parsed:
+        if self.download_state != ArticleDownloadState.SUCCESS or not self.is_parsed:
             print('You must `download()` and `parse()` an article '
                   'before calling `nlp()` on it!')
             raise ArticleException()
@@ -417,7 +442,6 @@ class Article(object):
             if isinstance(html, bytes):
                 html = self.config.get_parser().get_unicode_html(html)
             self.html = html
-            self.is_downloaded = True
 
     def set_article_html(self, article_html):
         """Sets the HTML of just the article's `top_node`

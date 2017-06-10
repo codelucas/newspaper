@@ -187,7 +187,7 @@ class ArticleTestCase(unittest.TestCase):
         article = Article(
             '', config=config)
         html = mock_resource_with('google_meta_refresh', 'html')
-        article.download(html=html)
+        article.download(input_html=html)
         article.parse()
         self.assertEqual(article.title, 'Example Domain')
 
@@ -198,7 +198,7 @@ class ArticleTestCase(unittest.TestCase):
         article = Article(
             '', config=config)
         html = mock_resource_with('ap_meta_refresh', 'html')
-        article.download(html=html)
+        article.download(input_html=html)
         article.parse()
         self.assertEqual(article.title, 'News from The Associated Press')
 
