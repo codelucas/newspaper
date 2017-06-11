@@ -8,6 +8,16 @@ python setup.py sdist bdist_wininst upload
 import sys
 import os
 
+
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+if not sys.version_info[0] == 3:
+    sys.exit('WARNING! You are attempting to install newspaper\'s '
+             'python2 repository on python3. PLEASE RUN '
+             '`$ pip3 install newspaper3k` for python3 or '
+             '`$ pip install newspaper` for python2')
+
+
 try:
     from setuptools import setup
 except ImportError:
