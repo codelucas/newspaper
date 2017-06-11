@@ -398,19 +398,19 @@ class Article(object):
             self.set_top_img(s.largest_image_url())
         except TypeError as e:
             if "Can't convert 'NoneType' object to str implicitly" in e.args[0]:
-                log.debug("No pictures found. Top image not set, %s" % e)
-            elif "timed out" in e.args[0]:
-                log.debug("Download of picture timed out. Top image not set, %s" % e)
+                log.debug('No pictures found. Top image not set, %s' % e)
+            elif 'timed out' in e.args[0]:
+                log.debug('Download of picture timed out. Top image not set, %s' % e)
             else:
-                log.critical('TypeError other than None type error. Cannot set top image using the Reddit algorithm. Possible error with PIL., %s' % e)
+                log.critical('TypeError other than None type error. '
+                             'Cannot set top image using the Reddit '
+                             'algorithm. Possible error with PIL., %s' % e)
         except Exception as e:
-            log.critical('Other error with setting top image using the Reddit algorithm. Possible error with PIL, %s' % e)
+            log.critical('Other error with setting top image using the '
+                         'Reddit algorithm. Possible error with PIL, %s' % e)
 
     def set_title(self, input_title):
         if input_title:
-            if self.title:
-                # Title has already been set by an educated guess
-                return
             self.title = input_title[:self.config.MAX_TITLE]
 
     def set_text(self, text):
