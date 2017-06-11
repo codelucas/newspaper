@@ -33,16 +33,17 @@ def get_request_kwargs(timeout, useragent):
 
 
 def get_html(url, config=None, response=None):
+    """HTTP response code agnostic 
+    """
     try:
         return get_html_2XX_only(url, config, response)
     except requests.exceptions.RequestException as e:
-        log.debug('%s on %s' % (e, url))
+        log.debug('get_html() error. %s on URL: %s' % (e, url))
         return ''
 
 
 def get_html_2XX_only(url, config=None, response=None):
-    """
-    Consolidated logic for http requests from newspaper. We handle error cases:
+    """Consolidated logic for http requests from newspaper. We handle error cases:
     - Attempt to find encoding of the html by using HTTP header. Fallback to 
       'ISO-8859-1' if not provided.
     - Error out if a non 2XX HTTP response code is returned.
@@ -54,8 +55,12 @@ def get_html_2XX_only(url, config=None, response=None):
     if response is not None:
         return _get_html_from_response(response)
 
-    response = requests.get(
-        url=url, **get_request_kwargs(timeout, useragent))
+    try:
+        response = requests.get(
+            url=url, **get_request_kwargs(timeout, useragent))
+    except requests.exceptions.RequestException as e:
+        log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
+        return ''
 
     html = _get_html_from_response(response)
 

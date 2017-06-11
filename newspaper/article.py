@@ -171,30 +171,18 @@ class Article(object):
         else:
             html = input_html
 
-        if html is not None:
-            self.download_state = ArticleDownloadState.SUCCESS
-
         if self.config.follow_meta_refresh:
-            meta_refresh_url = extract_meta_refresh(input_html)
+            meta_refresh_url = extract_meta_refresh(html)
             if meta_refresh_url and recursion_counter < 1:
                 return self.download(
                     input_html=network.get_html(meta_refresh_url),
                     recursion_counter=recursion_counter + 1)
 
-        self.set_html(input_html)
-
-        if title is not None:
-            self.set_title(title)
+        self.set_html(html)
+        self.set_title(title)
 
     def parse(self):
-        if self.download_state == ArticleDownloadState.NOT_STARTED:
-            print('You must `download()` an article before '
-                  'calling `parse()` on it!')
-            raise ArticleException()
-        elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
-            print('Article `download()` on URL %s failed with %s' %
-                  (self.url, self.download_exception_msg))
-            raise ArticleException()
+        self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
         self.clean_doc = copy.deepcopy(self.doc)
@@ -251,7 +239,6 @@ class Article(object):
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
 
-        text = ''
         self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
@@ -352,10 +339,8 @@ class Article(object):
     def nlp(self):
         """Keyword extraction wrapper
         """
-        if self.download_state != ArticleDownloadState.SUCCESS or not self.is_parsed:
-            print('You must `download()` and `parse()` an article '
-                  'before calling `nlp()` on it!')
-            raise ArticleException()
+        self.throw_if_not_downloaded_verbose()
+        self.throw_if_not_parsed_verbose()
 
         text_keyws = list(nlp.keywords(self.text).keys())
         title_keyws = list(nlp.keywords(self.title).keys())
@@ -421,14 +406,12 @@ class Article(object):
         except Exception as e:
             log.critical('Other error with setting top image using the Reddit algorithm. Possible error with PIL, %s' % e)
 
-    def set_title(self, title):
-        if self.title and not title:
-            # Title has already been set by an educated guess and
-            # <title> extraction failed
-            return
-        title = title[:self.config.MAX_TITLE]
-        if title:
-            self.title = title
+    def set_title(self, input_title):
+        if input_title:
+            if self.title:
+                # Title has already been set by an educated guess
+                return
+            self.title = input_title[:self.config.MAX_TITLE]
 
     def set_text(self, text):
         text = text[:self.config.MAX_TEXT]
@@ -442,6 +425,7 @@ class Article(object):
             if isinstance(html, bytes):
                 html = self.config.get_parser().get_unicode_html(html)
             self.html = html
+            self.download_state = ArticleDownloadState.SUCCESS
 
     def set_article_html(self, article_html):
         """Sets the HTML of just the article's `top_node`
@@ -527,3 +511,27 @@ class Article(object):
         """
         movie_urls = [o.src for o in movie_objects if o and o.src]
         self.movies = movie_urls
+
+    def throw_if_not_downloaded_verbose(self):
+        """Parse ArticleDownloadState -> log readable status
+        -> throw ArticleException or return boolean
+        """
+        if self.download_state == ArticleDownloadState.NOT_STARTED:
+            print('You must `download()` an article first!')
+            raise ArticleException()
+        elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
+            print('Article `download()` on URL %s failed with %s' %
+                  (self.url, self.download_exception_msg))
+            raise ArticleException()
+
+        return True
+
+    def throw_if_not_parsed_verbose(self):
+        """Parse `is_parsed` status -> log readable status 
+        -> throw ArticleException or return boolean
+        """
+        if not self.is_parsed:
+            print('You must `parse()` an article first!')
+            raise ArticleException()
+
+        return True
