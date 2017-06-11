@@ -8,6 +8,16 @@ import sys
 import os
 import codecs
 
+
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+if sys.version_info[0] == 2:
+    sys.exit('WARNING! You are attempting to install newspaper3k\'s '
+             'python3 repository on python2. PLEASE RUN '
+             '`$ pip3 install newspaper3k` for python3 or '
+             '`$ pip install newspaper` for python2')
+
+
 try:
     from setuptools import setup
 except ImportError:
