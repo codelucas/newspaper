@@ -21,6 +21,7 @@ def hilight(input_string):
 
 # This *must* run early. Please see this API limitation on our users:
 # https://github.com/codelucas/newspaper/issues/155
+'''
 if sys.version_info[0] == 3:
     warning_string = hilight(
         'WARNING! You are attempting to install newspaper\'s '
@@ -28,7 +29,7 @@ if sys.version_info[0] == 3:
         '`$ pip3 install newspaper3k` for python3 or '
         '`$ pip install newspaper` for python2')
     sys.exit(warning_string)
-
+'''
 
 try:
     from setuptools import setup
@@ -48,6 +49,20 @@ packages = [
 
 with open('requirements.txt') as f:
     required = f.read().splitlines()
+
+'''
+
+    package_data = {
+        'newspaper': ['resources/misc/*.txt', 'resources/text/*.txt', 'resources/images/*.txt'],
+    },
+    data_files=[
+        ('newspaper', [
+            'resources/misc/*.txt',
+            'resources/text/*.txt',
+            'resources/images/*.txt',
+        ]),
+    ],
+'''
 
 
 setup(
