@@ -54,7 +54,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='newspaper',
-    version='0.1.0.4',
+    version='0.1.0.5',
     description='Simplified python article discovery & extraction.',
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
