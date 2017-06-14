@@ -9,15 +9,6 @@ import os
 import codecs
 
 
-# This *must* run early. Please see this API limitation on our users:
-# https://github.com/codelucas/newspaper/issues/155
-if sys.version_info[0] == 2:
-    sys.exit('WARNING! You are attempting to install newspaper3k\'s '
-             'python3 repository on python2. PLEASE RUN '
-             '`$ pip3 install newspaper3k` for python3 or '
-             '`$ pip install newspaper` for python2')
-
-
 try:
     from setuptools import setup
 except ImportError:
@@ -32,6 +23,15 @@ packages = [
 if sys.argv[-1] == 'publish':
     os.system('python3 setup.py sdist upload')  # bdist_wininst
     sys.exit()
+
+
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+if sys.version_info[0] == 2 and sys.argv[-1] not in ['publish', 'upload']:
+    sys.exit('WARNING! You are attempting to install newspaper3k\'s '
+             'python3 repository on python2. PLEASE RUN '
+             '`$ pip3 install newspaper3k` for python3 or '
+             '`$ pip install newspaper` for python2')
 
 
 with open('requirements.txt') as f:
