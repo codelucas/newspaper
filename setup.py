@@ -34,14 +34,15 @@ if sys.argv[-1] == 'publish':
 # https://github.com/codelucas/newspaper/issues/155
 # But, this can't run before the `os.system('python setup.py sdist upload')` publish
 # command because publishing only works in python3 for my MANIFEST.in format
-if sys.version_info[0] == 3:
+'''
+if sys.version_info[0] == 3 and sys.argv[-1] != 'publish':
     warning_string = hilight(
         'WARNING! You are attempting to install newspaper\'s '
         'python2 repository on python3. PLEASE RUN '
         '`$ pip3 install newspaper3k` for python3 or '
         '`$ pip install newspaper` for python2')
     sys.exit(warning_string)
-
+'''
 
 packages = [
     'newspaper',
@@ -54,7 +55,7 @@ with open('requirements.txt') as f:
 
 setup(
     name='newspaper',
-    version='0.1.0.5',
+    version='0.1.0.6',
     description='Simplified python article discovery & extraction.',
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
