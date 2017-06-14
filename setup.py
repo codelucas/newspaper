@@ -19,16 +19,6 @@ def hilight(input_string):
     return '\x1b[%sm%s\x1b[0m' % (';'.join(attr), input_string)
 
 
-# This *must* run early. Please see this API limitation on our users:
-# https://github.com/codelucas/newspaper/issues/155
-if sys.version_info[0] == 3:
-    warning_string = hilight(
-        'WARNING! You are attempting to install newspaper\'s '
-        'python2 repository on python3. PLEASE RUN '
-        '`$ pip3 install newspaper3k` for python3 or '
-        '`$ pip install newspaper` for python2')
-    sys.exit(warning_string)
-
 try:
     from setuptools import setup
 except ImportError:
@@ -38,6 +28,19 @@ except ImportError:
 if sys.argv[-1] == 'publish':
     os.system('python setup.py sdist upload')  # bdist_wininst
     sys.exit()
+
+
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+# But, this can't run before the `os.system('python setup.py sdist upload')` publish
+# command because publishing only works in python3 for my MANIFEST.in format
+if sys.version_info[0] == 3:
+    warning_string = hilight(
+        'WARNING! You are attempting to install newspaper\'s '
+        'python2 repository on python3. PLEASE RUN '
+        '`$ pip3 install newspaper3k` for python3 or '
+        '`$ pip install newspaper` for python2')
+    sys.exit(warning_string)
 
 
 packages = [
