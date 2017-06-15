@@ -21,6 +21,11 @@ from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
+from extruct.jsonld import JsonLdExtractor
+from extruct.rdfa import RDFaExtractor
+from extruct.w3cmicrodata import MicrodataExtractor
+from extruct.xmldom import XmlDomHTMLParser
+
 from . import urls
 from .utils import StringReplacement, StringSplitter
 
@@ -50,7 +55,6 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
               'account', 'subscribe', 'donate', 'shop', 'admin']
 bad_domains = ['amazon', 'doubleclick', 'twitter']
-
 
 class ContentExtractor(object):
     def __init__(self, config):
@@ -194,6 +198,16 @@ class ContentExtractor(object):
             datetime_obj = parse_date_str(date_str)
             if datetime_obj:
                 return datetime_obj
+
+        JSONLD_TAGS = [
+            'datePublished'
+        ]
+        jsonlde = JsonLdExtractor()
+        jsonlddata = jsonlde.extract_items(doc)
+        if jsonlddata:
+            for known_meta_tag in JSONLD_TAGS:
+                if known_meta_tag in jsonlddata[0]:
+                    return jsonlddata[0][known_meta_tag]
 
         PUBLISH_DATE_TAGS = [
             {'attribute': 'property', 'value': 'rnews:datePublished',
