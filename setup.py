@@ -8,6 +8,7 @@ import sys
 import os
 import codecs
 
+
 try:
     from setuptools import setup
 except ImportError:
@@ -24,6 +25,15 @@ if sys.argv[-1] == 'publish':
     sys.exit()
 
 
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+if sys.version_info[0] == 2 and sys.argv[-1] not in ['publish', 'upload']:
+    sys.exit('WARNING! You are attempting to install newspaper3k\'s '
+             'python3 repository on python2. PLEASE RUN '
+             '`$ pip3 install newspaper3k` for python3 or '
+             '`$ pip install newspaper` for python2')
+
+
 with open('requirements.txt') as f:
     required = f.read().splitlines()
 
@@ -34,7 +44,7 @@ with codecs.open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='newspaper3k',
-    version='0.1.9',
+    version='0.2.2',
     description='Simplified python article discovery & extraction.',
     long_description=readme,
     author='Lucas Ou-Yang',

@@ -9,26 +9,22 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-
-import feedparser
+from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from tldextract import tldextract
 
 from . import network
 from . import urls
 from . import utils
-
 from .article import Article
-from .extractors import ContentExtractor
 from .configuration import Configuration
+from .extractors import ContentExtractor
 from .settings import ANCHOR_DIRECTORY
-
 
 log = logging.getLogger(__name__)
 
 
 class Category(object):
-
     def __init__(self, url):
         self.url = url
         self.html = None
@@ -36,7 +32,6 @@ class Category(object):
 
 
 class Feed(object):
-
     def __init__(self, url):
         self.url = url
         self.rss = None
@@ -52,6 +47,7 @@ class Source(object):
     articles   =  [<article obj>, <article obj>, ..]
     brand      =  'cnn'
     """
+
     def __init__(self, url, config=None, **kwargs):
         """The config object for this source will be passed into all of this
         source's children articles unless specified otherwise or re-set.
@@ -85,7 +81,7 @@ class Source(object):
         self.is_parsed = False
         self.is_downloaded = False
 
-    def build(self, response=None):
+    def build(self):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
@@ -97,8 +93,8 @@ class Source(object):
         self.parse_categories()
 
         self.set_feeds()
-        self.download_feeds()       # mthread
-        # TODO: self.parse_feeds()  # regex for now
+        self.download_feeds()  # mthread
+        # self.parse_feeds()
 
         self.generate_articles()
 
@@ -133,7 +129,39 @@ class Source(object):
         """Don't need to cache getting feed urls, it's almost
         instant with xpath
         """
-        urls = self.extractor.get_feed_urls(self.url, self.categories)
+        common_feed_urls = ['/feed', '/feeds', '/rss']
+        common_feed_urls = [urljoin(self.url, url) for url in common_feed_urls]
+
+        split = urlsplit(self.url)
+        if split.netloc in ('medium.com', 'www.medium.com'):
+            # should handle URL to user or user's post
+            if split.path.startswith('/@'):
+                new_path = '/feed/' + split.path.split('/')[1]
+                new_parts = split.scheme, split.netloc, new_path, '', ''
+                common_feed_urls.append(urlunsplit(new_parts))
+
+        common_feed_urls_as_categories = [Category(url=url) for url in common_feed_urls]
+
+        category_urls = [c.url for c in common_feed_urls_as_categories]
+        requests = network.multithread_request(category_urls, self.config)
+
+        for index, _ in enumerate(common_feed_urls_as_categories):
+            response = requests[index].resp
+            if response and response.ok:
+                common_feed_urls_as_categories[index].html = network.get_html(
+                    response.url, response=response)
+
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.html]
+
+        for _ in common_feed_urls_as_categories:
+            doc = self.config.get_parser().fromstring(_.html)
+            _.doc = doc
+
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if
+                                          c.doc is not None]
+
+        categories_and_common_feed_urls = self.categories + common_feed_urls_as_categories
+        urls = self.extractor.get_feed_urls(self.url, categories_and_common_feed_urls)
         self.feeds = [Feed(url=url) for url in urls]
 
     def set_description(self):
@@ -204,21 +232,22 @@ class Source(object):
 
         self.categories = [c for c in self.categories if c.doc is not None]
 
-    def parse_feeds(self):
-        """DEPRECATED
-        Due to the slow speed of feedparser, we won't be dom parsing
-        our .rss feeds, but rather regex searching for urls in the .rss
-        text and then relying on our article logic to detect false urls.
-        """
-        for feed in self.feeds:
-            try:
-                feed.dom = feedparser.parse(feed.html)
-            except Exception as e:
-                log.critical('feedparser failed %s' % e)
-                if self.config.verbose:
-                    print('feed %s has failed parsing' % feed.url)
+    def _map_title_to_feed(self, feed):
+        doc = self.config.get_parser().fromstring(feed.rss)
+        if doc is None:
+            # http://stackoverflow.com/a/24893800
+            return None
 
-        self.feeds = [feed for feed in self.feeds if feed.dom is not None]
+        elements = self.config.get_parser().getElementsByTag(doc, tag='title')
+        feed.title = next((element.text for element in elements if element.text), self.brand)
+        return feed
+
+    def parse_feeds(self):
+        """Add titles to feeds
+        """
+        log.debug('We are parsing %d feeds' %
+                  len(self.feeds))
+        self.feeds = [self._map_title_to_feed(f) for f in self.feeds]
 
     def feeds_to_articles(self):
         """Returns articles given the url of a feed
@@ -247,7 +276,7 @@ class Source(object):
 
             if self.config.verbose:
                 print(('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, feed.url)))
+                       (before_purge, after_purge, after_memo, feed.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, feed.url))
         return articles
@@ -377,20 +406,6 @@ class Source(object):
         """Returns a list of article urls
         """
         return [article.url for article in self.articles]
-
-    def get_key(self):
-        # TODO
-        pass
-
-    def clear_anchor_directory(self):
-        """Clears out all files in our directory where we cache anchors
-        the key is sha1(self.domain).hexdigest() fn is ANCHOR_DIR/key.
-        """
-        pass
-        # TODO:
-        # d_pth = os.path.join(
-        #   settings.MEMO_DIR, domain_to_filename(source_domain))
-        # os.path.remove(ANCHOR_DIRECTORY)
 
     def print_summary(self):
         """Prints out a summary of the data in our source instance
