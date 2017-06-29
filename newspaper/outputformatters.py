@@ -7,7 +7,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from html.parser import HTMLParser
+from html import unescape
 import logging
 
 from .text import innerTrim
@@ -65,12 +65,12 @@ class OutputFormatter(object):
         for node in list(self.get_top_node()):
             try:
                 txt = self.parser.getText(node)
-            except ValueError:  # lxml error
-                log.warning('Error parsing lxml node', exc_info=True)
+            except ValueError as err:  # lxml error
+                log.info('%s ignoring lxml node error: %s', __title__, err)
                 txt = None
 
             if txt:
-                txt = HTMLParser().unescape(txt)
+                txt = unescape(txt)
                 txt_lis = innerTrim(txt).split(r'\n')
                 txt_lis = [n.strip(' ') for n in txt_lis]
                 txts.extend(txt_lis)
@@ -106,7 +106,7 @@ class OutputFormatter(object):
             self.top_node, "*[gravityScore]")
         for item in gravity_items:
             score = self.parser.getAttribute(item, 'gravityScore')
-            score = int(score, 0)
+            score = float(score) if score else 0
             if score < 1:
                 item.getparent().remove(item)
 

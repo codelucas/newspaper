@@ -1,1 +1,1 @@
-include requirements.txt README.rst LICENSErecursive-include newspaper *
+include requirements.txt README.rst LICENSErecursive-include newspaper *recursive-exclude * __pycache__recursive-exclude * *.py[co]

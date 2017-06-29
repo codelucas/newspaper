@@ -11,8 +11,7 @@ import lxml.etree
 import lxml.html
 import lxml.html.clean
 import re
-import traceback
-from html.parser import HTMLParser
+from html import unescape
 
 from bs4 import UnicodeDammit
 from copy import deepcopy
@@ -68,7 +67,7 @@ class Parser(object):
             cls.doc = lxml.html.fromstring(html)
             return cls.doc
         except Exception:
-            traceback.print_exc()
+            log.warn('fromstring() returned an invalid string: %s...', html[:20])
             return
 
     @classmethod
@@ -109,7 +108,7 @@ class Parser(object):
 
     @classmethod
     def getElementsByTag(
-            cls, node, tag=None, attr=None, value=None, childs=False):
+            cls, node, tag=None, attr=None, value=None, childs=False) -> list:
         NS = "http://exslt.org/regular-expressions"
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
@@ -247,7 +246,7 @@ class Parser(object):
         if attr:
             attr = node.attrib.get(attr, None)
         if attr:
-            attr = HTMLParser().unescape(attr)
+            attr = unescape(attr)
         return attr
 
     @classmethod
