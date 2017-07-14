@@ -2,6 +2,8 @@
 """
 Stopword extraction and stopword classes.
 """
+import json
+
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
@@ -62,11 +64,27 @@ class StopWords(object):
     _cached_stop_words = {}
 
     def __init__(self, language='en'):
+        self.load_stop_words()
         if language not in self._cached_stop_words:
             path = os.path.join('text', 'stopwords-%s.txt' % language)
             self._cached_stop_words[language] = \
                 set(FileHelper.loadResourceFile(path).splitlines())
         self.STOP_WORDS = self._cached_stop_words[language]
+
+    @classmethod
+    def load_stop_words(cls):
+        if not cls._cached_stop_words:
+            dirpath = os.path.abspath(os.path.dirname(__file__))
+            path = os.path.join(dirpath, 'resources', 'text', 'stopwords-iso.json')
+            f = FileHelper.loadResourceFile(path, as_fp=True)
+            stopwords_source = json.load(f)
+            for language, words in stopwords_source.items():
+                cls._cached_stop_words[language] = set(words)
+
+    @classmethod
+    def get_available_languages(cls):
+        cls.load_stop_words()
+        return cls._cached_stop_words.keys()
 
     def remove_punctuation(self, content):
         # code taken form
