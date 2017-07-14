@@ -76,15 +76,15 @@ class StopWords(object):
         if not cls._cached_stop_words:
             dirpath = os.path.abspath(os.path.dirname(__file__))
             path = os.path.join(dirpath, 'resources', 'text', 'stopwords-iso.json')
-            f = FileHelper.loadResourceFile(path, as_fp=True)
-            stopwords_source = json.load(f)
+            with FileHelper.loadResourceFile(path, as_fp=True) as f:
+                stopwords_source = json.load(f)
             for language, words in stopwords_source.items():
                 cls._cached_stop_words[language] = set(words)
 
     @classmethod
     def get_available_languages(cls):
         cls.load_stop_words()
-        return cls._cached_stop_words.keys()
+        return list(cls._cached_stop_words.keys())
 
     def remove_punctuation(self, content):
         # code taken form

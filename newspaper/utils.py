@@ -3,6 +3,8 @@
 Holds misc. utility methods which prove to be
 useful throughout this library.
 """
+import glob
+
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
@@ -345,7 +347,7 @@ def get_useragent():
 def get_available_languages():
     """Returns a list of available languages and their 2 char input codes
     """
-    stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
+    stopword_files = glob.glob(os.path.join(settings.STOPWORDS_DIR, 'stopwords-*.txt'))
     two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
