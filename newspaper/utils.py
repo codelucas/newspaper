@@ -26,7 +26,7 @@ from hashlib import sha1
 
 from bs4 import BeautifulSoup
 
-from . import settings, text
+from . import settings
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -351,6 +351,7 @@ def get_available_languages():
     two_dig_codes = [os.path.basename(f).split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
+    from . import text
     return text.StopWords.get_available_languages() + two_dig_codes
 
 
