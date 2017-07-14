@@ -348,7 +348,7 @@ def get_available_languages():
     """Returns a list of available languages and their 2 char input codes
     """
     stopword_files = glob.glob(os.path.join(settings.STOPWORDS_DIR, 'stopwords-*.txt'))
-    two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
+    two_dig_codes = [os.path.basename(f).split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
     return text.StopWords.get_available_languages() + two_dig_codes
