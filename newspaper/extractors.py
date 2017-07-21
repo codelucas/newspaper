@@ -445,23 +445,21 @@ class ContentExtractor(object):
     def get_meta_img_url(self, article_url, doc):
         """Returns the 'top img' as specified by the website
         """
-        top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
-        try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
-        if try_one is None:
+        top_meta_image = self.get_meta_content(doc, 'meta[property="og:image"]')
+        if top_meta_image is None:
             link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
             elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
-            try_two = elems[0].get('href') if elems else None
+            top_meta_image = elems[0].get('href') if elems else None
 
-        if try_two is None:
+        if top_meta_image is None:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src'}
             elems = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
-            try_three = elems[0].get('href') if elems else None
+            top_meta_image = elems[0].get('href') if elems else None
 
-        if try_three is None:
-            try_four = self.get_meta_content(doc, 'meta[name="og:image"]')
+        if top_meta_image is None:
+            top_meta_image = self.get_meta_content(doc, 'meta[name="og:image"]')
 
-        top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
             return urljoin(article_url, top_meta_image)
