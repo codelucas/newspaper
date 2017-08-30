@@ -261,7 +261,7 @@ class Source(object):
             for url in urls:
                 article = Article(
                     url=url,
-                    source_url=self.url,
+                    source_url=feed.url,
                     config=self.config)
                 cur_articles.append(article)
 
@@ -297,7 +297,7 @@ class Source(object):
 
                 _article = Article(
                     url=indiv_url,
-                    source_url=self.url,
+                    source_url=category.url,
                     title=indiv_title,
                     config=self.config
                 )
