@@ -827,6 +827,9 @@ class ContentExtractor(object):
         for e in parent_nodes:
             score = self.get_score(e)
 
+            if not self.parser.getText(self.post_cleanup(copy.deepcopy(e))):
+                continue
+
             if score > top_node_score:
                 top_node = e
                 top_node_score = score
