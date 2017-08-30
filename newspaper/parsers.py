@@ -162,8 +162,8 @@ class Parser(object):
 
     @classmethod
     def getElementsByTags(cls, node, tags):
-        selector = 'descendant::*[%s]' * (
-            ' or '.join(self::%s' % tag for tag in tags))
+        selector = 'descendant::*[%s]' % (
+            ' or '.join('self::%s' % tag for tag in tags))
         elems = node.xpath(selector)
         return elems
 
