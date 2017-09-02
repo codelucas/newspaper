@@ -260,3 +260,4 @@ of popular news source urls.. In case you need help choosing a news source!
       pt              Portuguese
       sv              Swedish
       zh              Chinese
+      uk              Ukrainian
