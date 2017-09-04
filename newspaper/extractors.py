@@ -410,9 +410,9 @@ class ContentExtractor(object):
         if attr is None:
             # look up for a Content-Language in meta
             items = [
-                {'tag': 'meta', 'attr': 'http-equiv',
-                 'value': 'content-language'},
-                {'tag': 'meta', 'attr': 'name', 'value': 'lang'}
+                {'tag': 'meta', 'attr': 'http-equiv', 'value': 'content-language'},
+                {'tag': 'meta', 'attr': 'name', 'value': 'lang'},
+				{'tag': 'meta', 'attr': 'property', 'value': 'og:locale'}
             ]
             for item in items:
                 meta = self.parser.getElementsByTag(doc, **item)
