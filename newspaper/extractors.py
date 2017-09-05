@@ -196,26 +196,16 @@ class ContentExtractor(object):
                 return datetime_obj
 
         PUBLISH_DATE_TAGS = [
-            {'attribute': 'property', 'value': 'rnews:datePublished',
-             'content': 'content'},
-            {'attribute': 'property', 'value': 'article:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'OriginalPublicationDate',
-             'content': 'content'},
-            {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
-            {'attribute': 'property', 'value': 'og:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'article_date_original',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'publication_date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'sailthru.date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'PublishDate',
-             'content': 'content'},
-            {'attribute': 'pubdate', 'value': 'pubdate',
-             'content': 'datetime'},
+            {'attribute': 'property', 'value': 'rnews:datePublished', 'content': 'content'},
+            {'attribute': 'property', 'value': 'article:published_time', 'content': 'content'},
+            {'attribute': 'name', 'value': 'OriginalPublicationDate', 'content': 'content'},
+            {'attribute': 'itemprop', 'value': 'datePublished', 'content': 'datetime'},
+            {'attribute': 'property', 'value': 'og:published_time', 'content': 'content'},
+            {'attribute': 'name', 'value': 'article_date_original', 'content': 'content'},
+            {'attribute': 'name', 'value': 'publication_date', 'content': 'content'},
+            {'attribute': 'name', 'value': 'sailthru.date', 'content': 'content'},
+            {'attribute': 'name', 'value': 'PublishDate', 'content': 'content'},
+            {'attribute': 'name', 'value': 'pubdate', 'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -412,7 +402,7 @@ class ContentExtractor(object):
             items = [
                 {'tag': 'meta', 'attr': 'http-equiv', 'value': 'content-language'},
                 {'tag': 'meta', 'attr': 'name', 'value': 'lang'},
-				{'tag': 'meta', 'attr': 'property', 'value': 'og:locale'}
+                {'tag': 'meta', 'attr': 'property', 'value': 'og:locale'}
             ]
             for item in items:
                 meta = self.parser.getElementsByTag(doc, **item)
@@ -807,19 +797,15 @@ class ContentExtractor(object):
             upscore = int(word_stats.get_stopword_count() + boost_score)
 
             parent_node = self.parser.getParent(node)
-            self.update_score(parent_node, upscore)
-            self.update_node_count(parent_node, 1)
+            while upscore > 0 and parent_node is not None:
+                self.update_score(parent_node, upscore)
+                self.update_node_count(parent_node, 1)
 
-            if parent_node not in parent_nodes:
-                parent_nodes.append(parent_node)
+                if parent_node not in parent_nodes:
+                    parent_nodes.append(parent_node)
 
-            # Parent of parent node
-            parent_parent_node = self.parser.getParent(parent_node)
-            if parent_parent_node is not None:
-                self.update_node_count(parent_parent_node, 1)
-                self.update_score(parent_parent_node, upscore / 2)
-                if parent_parent_node not in parent_nodes:
-                    parent_nodes.append(parent_parent_node)
+                parent_node = self.parser.getParent(parent_node)
+                upscore = upscore // self.config.PARENT_DECAY
             cnt += 1
             i += 1
 

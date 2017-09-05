@@ -30,6 +30,7 @@ class Configuration(object):
         self.MIN_SENT_COUNT = 7  # num of sentence tokens
         self.MAX_TITLE = 200  # num of chars
         self.MAX_TEXT = 100000  # num of chars
+        self.PARENT_DECAY = 2.0  # upscore parent decay
         self.MAX_KEYWORDS = 35  # num of strings in list
         self.MAX_AUTHORS = 10  # num strings in list
         self.MAX_SUMMARY = 5000  # num of chars
