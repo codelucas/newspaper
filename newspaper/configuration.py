@@ -65,6 +65,7 @@ class Configuration(object):
 
         self.browser_user_agent = 'newspaper/%s' % __version__
         self.request_timeout = 7
+        self.proxies = {}
         self.number_threads = 10
 
         self.verbose = False  # for debugging
