@@ -34,7 +34,7 @@ def get_request_kwargs(timeout, useragent, proxies):
 
 
 def get_html(url, config=None, response=None):
-    """HTTP response code agnostic 
+    """HTTP response code agnostic
     """
     try:
         return get_html_2XX_only(url, config, response)
@@ -45,7 +45,7 @@ def get_html(url, config=None, response=None):
 
 def get_html_2XX_only(url, config=None, response=None):
     """Consolidated logic for http requests from newspaper. We handle error cases:
-    - Attempt to find encoding of the html by using HTTP header. Fallback to 
+    - Attempt to find encoding of the html by using HTTP header. Fallback to
       'ISO-8859-1' if not provided.
     - Error out if a non 2XX HTTP response code is returned.
     """
@@ -76,6 +76,7 @@ def get_html_2XX_only(url, config=None, response=None):
 def _get_html_from_response(response):
     if response.encoding != FAIL_ENCODING:
         # return response as a unicode string
+        response.encoding = response.apparent_encoding
         html = response.text
     else:
         # don't attempt decode, return response in bytes
