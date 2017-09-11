@@ -602,6 +602,20 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'es'))
 
+    @print_test
+    def test_japanese_fulltext_extract(self):
+        try:
+            url = 'http://www.cnn.co.jp/tech/35087106.html'
+            article = Article(url=url, language='ja')
+            html = mock_resource_with('japanese_article', 'html')
+            article.download(html)
+            article.parse()
+            text = mock_resource_with('japanese', 'txt')
+            self.assertEqual(text, article.text)
+            self.assertEqual(text, fulltext(article.html, 'ja'))
+        except Exception as e:
+            print('ERR', str(e))
+
 
 if __name__ == '__main__':
     argv = list(sys.argv)

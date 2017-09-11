@@ -33,6 +33,23 @@ However, you will run into fixable issues if you are trying to install on ubuntu
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python2.7
 
+**If you are on CentOS** and use Japanese language support, install using the following:
+
+- Install ``mecab`` - Japanese morphological analyzer::
+
+    $ rpm -ivh http://packages.groonga.org/centos/groonga-release-1.1.0-1.noarch.rpm
+
+    $ yum install mecab mecab-devel mecab-ipadic
+
+    $ pip install mecab-python3
+
+- Install ``mecab-ipadic-NEologd`` - Neologism dictionary for MeCab (Optional)::
+
+    $ mkdir ~/src && cd ~/src && git clone --depth 1 https://github.com/neologd/mecab-ipadic-neologd.git
+
+    $ cd ~/src/mecab-ipadic-neologd && ./bin/install-mecab-ipadic-neologd -n
+
+    $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
 **If you are on OSX**, install using the following, you may use both homebrew or macports:
 

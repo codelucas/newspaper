@@ -32,6 +32,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
       fr              French
       he              Hebrew
       it              Italian
+      ja              Japanese
       ko              Korean
       no              Norwegian
       pt              Portuguese

@@ -363,6 +363,7 @@ def print_available_languages():
         'fr': 'French',
         'he': 'Hebrew',
         'it': 'Italian',
+        'ja': 'Japanese',
         'ko': 'Korean',
         'no': 'Norwegian',
         'nb': 'Norwegian (Bokmål)',

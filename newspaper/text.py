@@ -156,3 +156,65 @@ class StopWordsKorean(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
+
+
+class StopWordsJapanese(StopWords):
+    """Japanese segmentation
+    """
+    def __init__(self, language='ja'):
+        super(StopWordsJapanese, self).__init__(language='ja')
+
+    def candidate_words(self, stripped_input):
+        words = []
+        try:
+            import MeCab
+            import os, subprocess
+            # Check if MecCab is installed
+            mecab_path = subprocess.Popen(
+                ['which', 'mecab'],
+                stdout=subprocess.PIPE
+            ).communicate()[0].decode().replace('\n', '')
+            if os.path.exists(mecab_path):
+                # Check if MecCab dictionary exists
+                dic_basedir = subprocess.Popen(
+                    ['mecab-config', '--dicdir'],
+                    stdout=subprocess.PIPE
+                ).communicate()[0].decode().replace('\n', '')
+                if os.path.exists(dic_basedir):
+                    # Setup MecCab dictionary
+                    dic_dir = os.path.join(dic_basedir, 'mecab-ipadic-neologd')
+                    if os.path.exists(dic_dir):
+                        mecab = MeCab.Tagger('-d {}'.format(dic_dir))
+                    else:
+                        mecab = MeCab.Tagger('mecabrc')
+                    if mecab:
+                        mecab.parse('')
+                        node = mecab.parseToNode(stripped_input)
+                        while node:
+                            word = node.surface.lower()
+                            pos = node.feature.split(',')[0]
+                            if len(word) > 0 and not pos == '記号':
+                                words.append(word)
+                            node = node.next
+        except Exception as e:
+            pass
+
+        return words
+
+    def get_stopword_count(self, content):
+        if not content:
+            return WordStats()
+        ws = WordStats()
+        candidate_words = self.candidate_words(content)
+        overlapping_stopwords = []
+        regexp = u'^({})$'.format(u'|'.join(self.STOP_WORDS))
+        c = 0
+        for w in candidate_words:
+            c += 1
+            if re.match(regexp, w):
+                overlapping_stopwords.append(w)
+
+        ws.set_word_count(c)
+        ws.set_stopword_count(len(overlapping_stopwords))
+        ws.set_stop_words(overlapping_stopwords)
+        return ws
