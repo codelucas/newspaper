@@ -609,7 +609,7 @@ class SyntheticPageTestCase(unittest.TestCase):
     def test_add_siblings_order(self):
         article = Article(url='http://example.com/')
         html = mock_resource_with('synthetic_para_order', 'html')
-        article.download(html=html)
+        article.download(input_html=html)
         article.parse()
         text = mock_resource_with('synthetic_para_order', 'txt')
         self.assertEqual(text, article.text)
