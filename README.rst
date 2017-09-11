@@ -214,6 +214,7 @@ Features
       vi              Vietnamese
       tr              Turkish
       el              Greek
+      uk              Ukrainian
 
 
 Get it now
