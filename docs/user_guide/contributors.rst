@@ -41,3 +41,6 @@ Thanks to all who have contributed to requests.
 You can find the contributors list here:
 https://github.com/kennethreitz/requests/graphs/contributors
 
+Thanks to all who have contributed to stopwords-iso.
+You can find the credits here:
+https://github.com/stopwords-iso/stopwords-iso/blob/master/CREDITS.md

@@ -3,6 +3,8 @@
 Holds misc. utility methods which prove to be
 useful throughout this library.
 """
+import glob
+
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
@@ -32,7 +34,7 @@ log.setLevel(logging.DEBUG)
 
 class FileHelper(object):
     @staticmethod
-    def loadResourceFile(filename):
+    def loadResourceFile(filename, as_fp=False):
         if not os.path.isabs(filename):
             dirpath = os.path.abspath(os.path.dirname(__file__))
             path = os.path.join(dirpath, 'resources', filename)
@@ -40,6 +42,8 @@ class FileHelper(object):
             path = filename
         try:
             f = codecs.open(path, 'r', 'utf-8')
+            if as_fp:
+                return f
             content = f.read()
             f.close()
             return content
@@ -343,41 +347,76 @@ def get_useragent():
 def get_available_languages():
     """Returns a list of available languages and their 2 char input codes
     """
-    stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
-    two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
+    stopword_files = glob.glob(os.path.join(settings.STOPWORDS_DIR, 'stopwords-*.txt'))
+    two_dig_codes = [os.path.basename(f).split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
-    return two_dig_codes
+    from . import text
+    return text.StopWords.get_available_languages() + two_dig_codes
 
 
 def print_available_languages():
     """Prints available languages with their full names
     """
     language_dict = {
+        'af': 'Afrikaans',
         'ar': 'Arabic',
-        'ru': 'Russian',
-        'nl': 'Dutch',
+        'bg': 'Bulgarian',
+        'bn': 'Bengali',
+        'br': 'Breton',
+        'ca': 'Catalan',
+        'cs': 'Czech',
+        'da': 'Danish',
         'de': 'German',
+        'el': 'Greek',
         'en': 'English',
+        'eo': 'Esperanto',
         'es': 'Spanish',
+        'et': 'Estonian',
+        'eu': 'Basque',
+        'fa': 'Persian',
+        'fi': 'Finnish',
         'fr': 'French',
+        'ga': 'Irish',
+        'gl': 'Galician',
+        'ha': 'Hausa',
         'he': 'Hebrew',
+        'hi': 'Hindi',
+        'hr': 'Croatian',
+        'hu': 'Hungarian',
+        'hy': 'Armenian',
+        'id': 'Indonesian',
         'it': 'Italian',
+        'ja': 'Japanese',
         'ko': 'Korean',
+        'ku': 'Kurdish',
+        'la': 'Latin',
+        'lt': 'Lithuanian',
+        'lv': 'Latvian',
+        'mk': 'Macedonian',
+        'mr': 'Marathi',
+        'ms': 'Malay',
+        'nl': 'Dutch',
         'no': 'Norwegian',
-        'nb': 'Norwegian (Bokmål)',
         'pl': 'Polish',
         'pt': 'Portuguese',
+        'ro': 'Romanian',
+        'ru': 'Russian',
+        'sk': 'Slovak',
+        'sl': 'Slovenian',
+        'so': 'Somali',
+        'st': 'Sotho',
         'sv': 'Swedish',
-        'hu': 'Hungarian',
-        'fi': 'Finnish',
-        'da': 'Danish',
-        'zh': 'Chinese',
-        'id': 'Indonesian',
-        'vi': 'Vietnamese',
-        'mk': 'Macedonian',
+        'sw': 'Swahili',
+        'th': 'Thai',
+        'tl': 'Tagalog',
         'tr': 'Turkish',
-        'el': 'Greek'
+        'uk': 'Ukrainian',
+        'ur': 'Urdu',
+        'vi': 'Vietnamese',
+        'yo': 'Yoruba',
+        'zh': 'Chinese',
+        'zu': 'Zulu',
     }
 
     codes = get_available_languages()
