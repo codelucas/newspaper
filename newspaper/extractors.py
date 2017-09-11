@@ -285,7 +285,7 @@ class ContentExtractor(object):
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
-        filter_regex = re.compile(r'[^a-zA-Z0-9\ ]')
+        filter_regex = re.compile(r'[^\u4e00-\u9fa5a-zA-Z0-9\ ]')
         filter_title_text = filter_regex.sub('', title_text).lower()
         filter_title_text_h1 = filter_regex.sub('', title_text_h1).lower()
         filter_title_text_fb = filter_regex.sub('', title_text_fb).lower()
