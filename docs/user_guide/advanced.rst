@@ -112,6 +112,13 @@ in ``newspaper/resources/text/.``
 1. Push up a stopwords file in the format of ``stopwords-<2-char-language-code>.txt``
 in ``newspaper/resources/text/.`` and we are done!
 
+**Finally, add the new language to the list of available languages in the following files:**
+
+* README.rst
+* docs/index.rst
+* docs/user_guide/quickstart.rst
+* newspaper/utils.py
+
 
 Explicitly building a news source
 ---------------------------------

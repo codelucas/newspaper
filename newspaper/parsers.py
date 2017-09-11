@@ -162,12 +162,9 @@ class Parser(object):
 
     @classmethod
     def getElementsByTags(cls, node, tags):
-        selector = ','.join(tags)
-        elems = cls.css_select(node, selector)
-        # remove the root node
-        # if we have a selection tag
-        if node in elems:
-            elems.remove(node)
+        selector = 'descendant::*[%s]' % (
+            ' or '.join('self::%s' % tag for tag in tags))
+        elems = node.xpath(selector)
         return elems
 
     @classmethod

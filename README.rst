@@ -203,6 +203,7 @@ Features
       it              Italian
       ko              Korean
       no              Norwegian
+      pl              Polish
       pt              Portuguese
       sv              Swedish
       hu              Hungarian
@@ -213,16 +214,19 @@ Features
       vi              Vietnamese
       tr              Turkish
       el              Greek
+      uk              Ukrainian
 
 
 Get it now
 ----------
 
-Installing newspaper is simple with `pip <http://www.pip-installer.org/>`_.
-However, you will run into fixable issues if you are trying to install on ubuntu.
+Run ✅ ``pip3 install newspaper3k`` ✅
 
-Note that the Python3 package name is ``newspaper3k`` while our Python2
-package name is ``newspaper``.
+NOT ⛔ ``pip3 install newspaper`` ⛔
+
+On python3 you must install ``newspaper3k``, **not** ``newspaper``. ``newspaper`` is our python2 library.
+Although installing newspaper is simple with `pip <http://www.pip-installer.org/>`_, you will
+run into fixable issues if you are trying to install on ubuntu.
 
 **If you are on Debian / Ubuntu**, install using the following:
 

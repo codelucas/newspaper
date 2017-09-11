@@ -106,7 +106,7 @@ class OutputFormatter(object):
             self.top_node, "*[gravityScore]")
         for item in gravity_items:
             score = self.parser.getAttribute(item, 'gravityScore')
-            score = int(score, 0)
+            score = float(score) if score else 0
             if score < 1:
                 item.getparent().remove(item)
 
