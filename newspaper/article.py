@@ -342,8 +342,8 @@ class Article(object):
         self.throw_if_not_downloaded_verbose()
         self.throw_if_not_parsed_verbose()
 
-        text_keyws = list(nlp.keywords(self.text).keys())
-        title_keyws = list(nlp.keywords(self.title).keys())
+        text_keyws = list(nlp.keywords(self.text, self.get_language).keys())
+        title_keyws = list(nlp.keywords(self.title, self.get_language).keys())
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
 
