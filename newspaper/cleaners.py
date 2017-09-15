@@ -46,6 +46,7 @@ class DocumentCleaner(object):
             .create("\n", "\n\n")\
             .append("\t")\
             .append("^\\s+$")
+        self.contains_article = './/article|.//*[@id="article"]|.//*[@itemprop="articleBody"]'
 
     def clean(self, doc_to_clean):
         """Remove chunks of the DOM as specified
@@ -119,15 +120,18 @@ class DocumentCleaner(object):
         # ids
         naughty_list = self.parser.xpath_re(doc, self.nauthy_ids_re)
         for node in naughty_list:
-            self.parser.remove(node)
+            if not node.xpath(self.contains_article):
+                self.parser.remove(node)
         # class
         naughty_classes = self.parser.xpath_re(doc, self.nauthy_classes_re)
         for node in naughty_classes:
-            self.parser.remove(node)
+            if not node.xpath(self.contains_article):
+                self.parser.remove(node)
         # name
         naughty_names = self.parser.xpath_re(doc, self.nauthy_names_re)
         for node in naughty_names:
-            self.parser.remove(node)
+            if not node.xpath(self.contains_article):
+                self.parser.remove(node)
         return doc
 
     def remove_nodes_regex(self, doc, pattern):
