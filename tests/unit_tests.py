@@ -55,7 +55,7 @@ def mock_resource_with(filename, resource_type):
     subfolder = 'text' if resource_type == 'txt' else 'html'
     resource_path = os.path.join(TEST_DIR, "data/%s/%s.%s" %
                                  (subfolder, filename, resource_type))
-    with open(resource_path, 'r') as f:
+    with open(resource_path, 'r', encoding='utf-8') as f:
         return f.read()
 
 
