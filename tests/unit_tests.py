@@ -475,13 +475,24 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
-    @unittest.skip("Need to write an actual test")
     @print_test
     def test_prepare_url(self):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
-        pass
+        from newspaper.urls import prepare_url
+
+        with open(os.path.join(TEST_DIR, 'data/test_prepare_urls.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('real_url', 'url_path', 'source_url') form
+
+        for real, url, source in test_tuples:
+            try:
+                self.assertEqual(real, prepare_url(url, source))
+            except AssertionError:
+                print('\t\turl: %s + %s is supposed to be %s' % (url, source, real))
+                raise
 
 
 class APITestCase(unittest.TestCase):
