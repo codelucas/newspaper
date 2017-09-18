@@ -20,12 +20,13 @@ log = logging.getLogger(__name__)
 
 FAIL_ENCODING = 'ISO-8859-1'
 
-def get_request_kwargs(timeout, useragent, proxies):
+
+def get_request_kwargs(timeout, useragent, proxies, headers):
     """This Wrapper method exists b/c some values in req_kwargs dict
     are methods which need to be called every time we make a request
     """
     return {
-        'headers': {'User-Agent': useragent},
+        'headers': headers if headers else {'User-Agent': useragent},
         'cookies': cj(),
         'timeout': timeout,
         'allow_redirects': True,
@@ -53,13 +54,14 @@ def get_html_2XX_only(url, config=None, response=None):
     useragent = config.browser_user_agent
     timeout = config.request_timeout
     proxies = config.proxies
+    headers = config.headers
 
     if response is not None:
         return _get_html_from_response(response)
 
     try:
         response = requests.get(
-            url=url, **get_request_kwargs(timeout, useragent, proxies))
+            url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
     except requests.exceptions.RequestException as e:
         log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
         return ''
