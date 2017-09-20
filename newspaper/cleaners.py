@@ -3,6 +3,7 @@
 Holds the code for cleaning out unwanted tags from the lxml
 dom xpath.
 """
+import copy
 from .utils import ReplaceSequence
 
 
@@ -230,8 +231,11 @@ class DocumentCleaner(object):
             elif div is not None:
                 replace_nodes = self.get_replacement_nodes(doc, div)
                 replace_nodes = [n for n in replace_nodes if n is not None]
+                attrib = copy.deepcopy(div.attrib)
                 div.clear()
                 for i, node in enumerate(replace_nodes):
                     div.insert(i, node)
+                for name, value in attrib.items():
+                    div.set(name, value)
                 else_divs += 1
         return doc
