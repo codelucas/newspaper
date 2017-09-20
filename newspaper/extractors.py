@@ -504,7 +504,7 @@ class ContentExtractor(object):
             key_head = key.pop(0)
             ref = data[key_head]
 
-            if isinstance(ref, str):
+            if isinstance(ref, str) or isinstance(ref, int):
                 data[key_head] = {key_head: ref}
                 ref = data[key_head]
 
@@ -514,7 +514,7 @@ class ContentExtractor(object):
                     break
                 if not ref.get(part):
                     ref[part] = dict()
-                elif isinstance(ref.get(part), str):
+                elif isinstance(ref.get(part), str) or isinstance(ref.get(part), int):
                     # Not clear what to do in this scenario,
                     # it's not always a URL, but an ID of some sort
                     ref[part] = {'identifier': ref[part]}
