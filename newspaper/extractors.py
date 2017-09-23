@@ -972,6 +972,9 @@ class ContentExtractor(object):
         """Checks the density of links within a node, if there is a high
         link to text ratio, then the text is less likely to be relevant
         """
+        if e.xpath('ancestor-or-self::a'):  # if within a link return true
+            return True
+
         links = self.parser.getElementsByTag(e, tag='a')
         if not links:
             return False
