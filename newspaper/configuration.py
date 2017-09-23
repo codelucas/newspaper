@@ -64,6 +64,7 @@ class Configuration(object):
         self.stopwords_class = StopWords
 
         self.browser_user_agent = 'newspaper/%s' % __version__
+        self.headers = {}
         self.request_timeout = 7
         self.proxies = {}
         self.number_threads = 10
