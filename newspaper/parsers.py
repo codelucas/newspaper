@@ -211,28 +211,18 @@ class Parser(object):
 
     @classmethod
     def previousSiblings(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=True)):
-            nodes.append(n)
-        return nodes
+        """
+            returns preceding siblings in reverse order (nearest sibling is first)
+        """
+        return [n for n in node.itersiblings(preceding=True)]
 
     @classmethod
     def previousSibling(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=True)):
-            nodes.append(n)
-            if c == 0:
-                break
-        return nodes[0] if nodes else None
+        return node.getprevious()
 
     @classmethod
     def nextSibling(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=False)):
-            nodes.append(n)
-            if c == 0:
-                break
-        return nodes[0] if nodes else None
+        return node.getnext()
 
     @classmethod
     def isTextNode(cls, node):
