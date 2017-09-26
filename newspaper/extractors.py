@@ -447,19 +447,19 @@ class ContentExtractor(object):
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
-        if try_one is None:
-            link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
-            elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
+        if not try_one:
+            link_img_src_kwargs = \
+                {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
+            elems = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
 
-        if try_two is None:
-            link_img_src_kwargs = \
-                {'tag': 'link', 'attr': 'rel', 'value': 'img_src'}
-            elems = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
-            try_three = elems[0].get('href') if elems else None
+            if not try_two:
+                try_three = self.get_meta_content(doc, 'meta[name="og:image"]')
 
-        if try_three is None:
-            try_four = self.get_meta_content(doc, 'meta[name="og:image"]')
+                if not try_three:
+                    link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
+                    elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
+                    try_four = elems[0].get('href') if elems else None
 
         top_meta_image = try_one or try_two or try_three or try_four
 
