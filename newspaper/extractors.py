@@ -450,7 +450,7 @@ class ContentExtractor(object):
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
-            elems = self.parser.getElementsByTag(doc, **link_img_src_kwargs)
+            elems = self.parser.getElementsByTag(doc, use_regex=True, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
 
             if not try_two:
