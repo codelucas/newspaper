@@ -35,7 +35,7 @@ def get_request_kwargs(timeout, useragent, proxies, headers):
 
 
 def get_html(url, config=None, response=None):
-    """HTTP response code agnostic 
+    """HTTP response code agnostic
     """
     try:
         return get_html_2XX_only(url, config, response)
@@ -46,7 +46,7 @@ def get_html(url, config=None, response=None):
 
 def get_html_2XX_only(url, config=None, response=None):
     """Consolidated logic for http requests from newspaper. We handle error cases:
-    - Attempt to find encoding of the html by using HTTP header. Fallback to 
+    - Attempt to find encoding of the html by using HTTP header. Fallback to
       'ISO-8859-1' if not provided.
     - Error out if a non 2XX HTTP response code is returned.
     """
@@ -98,12 +98,13 @@ class MRequest(object):
         self.useragent = config.browser_user_agent
         self.timeout = config.request_timeout
         self.proxies = config.proxies
+        self.headers = config.headers
         self.resp = None
 
     def send(self):
         try:
             self.resp = requests.get(self.url, **get_request_kwargs(
-                                     self.timeout, self.useragent, self.proxies))
+                self.timeout, self.useragent, self.proxies, self.headers))
             if self.config.http_success_only:
                 self.resp.raise_for_status()
         except requests.exceptions.RequestException as e:
