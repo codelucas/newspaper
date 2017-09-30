@@ -863,12 +863,7 @@ class ContentExtractor(object):
         return False
 
     def walk_siblings(self, node):
-        current_sibling = self.parser.previousSibling(node)
-        b = []
-        while current_sibling is not None:
-            b.append(current_sibling)
-            current_sibling = self.parser.previousSibling(current_sibling)
-        return b
+        return self.parser.previousSiblings(node)
 
     def add_siblings(self, top_node):
         baseline_score_siblings_para = self.get_siblings_score(top_node)
