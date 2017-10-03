@@ -378,7 +378,8 @@ def print_available_languages():
         'mk': 'Macedonian',
         'tr': 'Turkish',
         'el': 'Greek',
-        'uk': 'Ukrainian'
+        'uk': 'Ukrainian',
+        'hi': 'Hindi'
     }
 
     codes = get_available_languages()

@@ -657,6 +657,12 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, fulltext(article.html, 'es'))
 
 
+class TestNewspaperLanguagesApi(unittest.TestCase):
+    @print_test
+    def test_languages_api_call(self):
+        newspaper.languages()
+
+
 if __name__ == '__main__':
     argv = list(sys.argv)
     if 'fulltext' in argv:
