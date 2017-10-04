@@ -21,7 +21,7 @@ packages = [
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python3 setup.py sdist upload')  # bdist_wininst
+    os.system('python3 setup.py sdist upload -r pypi')
     sys.exit()
 
 
