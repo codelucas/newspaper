@@ -9,17 +9,34 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import re
 import math
+from os import path
 
 from collections import Counter
 
 from . import settings
 
-with open(settings.NLP_STOPWORDS_EN, 'r') as f:
-    stopwords = set([w.strip() for w in f.readlines()])
-
 ideal = 20.0
 
+stopwords = set()
 
+def load_stopwords(language):
+    """ 
+    Loads language-specific stopwords for keyword selection
+    """
+    global stopwords
+    
+    # stopwords for nlp in English are not the regular stopwords
+    # to pass the tests
+    # can be changed with the tests
+    if language == 'en':
+        stopwordsFile = settings.NLP_STOPWORDS_EN
+    else:
+        stopwordsFile = path.join(settings.STOPWORDS_DIR,\
+                                  'stopwords-{}.txt'.format(language))
+    with open(stopwordsFile, 'r', encoding='utf-8') as f:
+        stopwords.update(set([w.strip() for w in f.readlines()]))
+        
+        
 def summarize(url='', title='', text='', max_sents=5):
     if not text or not title or max_sents <= 0:
         return []
