@@ -305,7 +305,11 @@ class Source(object):
         """
         articles = self._generate_articles()
         self.articles = articles[:limit]
-        log.debug(len(articles), 'articles generated and cutoff at', limit)
+        log.debug(
+            '%d articles generated and cutoff at %d',
+            len(articles),
+            limit
+        )
 
     def download_articles(self, threads=1):
         """Downloads all articles attached to self
