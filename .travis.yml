@@ -1,0 +1,10 @@
+language: python
+python:
+ - "2.7"
+install:
+ - pip install -r requirements.txt coverage coveralls
+ - python download_corpora.py
+script:
+  - coverage run --source newspaper tests/unit_tests.py
+after_success:
+  coverallsn
