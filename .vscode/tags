@@ -1,0 +1,608 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ALLOWED_TYPES	../newspaper/urls.py	/^ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',$/;"	kind:variable	line:25
+ANCHOR_DIRECTORY	../newspaper/settings.py	/^ANCHOR_DIRECTORY = os.path.join(TOP_DIRECTORY, CF_CACHE_DIRECTORY)$/;"	kind:variable	line:52
+APITestCase	../tests/unit_tests.py	/^class APITestCase(unittest.TestCase):$/;"	kind:class	line:541
+ARROWS_SPLITTER	../newspaper/extractors.py	/^ARROWS_SPLITTER = StringSplitter(" » ")$/;"	kind:variable	line:37
+A_HREF_TAG_SELECTOR	../newspaper/extractors.py	/^A_HREF_TAG_SELECTOR = ("a[href*='\/tag\/'], a[href*='\/tags\/'], "$/;"	kind:variable	line:42
+Article	../newspaper/article.py	/^class Article(object):$/;"	kind:class	line:41
+ArticleConfiguration	../newspaper/configuration.py	/^class ArticleConfiguration(Configuration):$/;"	kind:class	line:122
+ArticleDownloadState	../newspaper/article.py	/^class ArticleDownloadState(object):$/;"	kind:class	line:31
+ArticleException	../newspaper/article.py	/^class ArticleException(Exception):$/;"	kind:class	line:37
+ArticleTestCase	../tests/unit_tests.py	/^class ArticleTestCase(unittest.TestCase):$/;"	kind:class	line:144
+BAD_CHUNKS	../newspaper/urls.py	/^BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',$/;"	kind:variable	line:32
+BAD_DOMAINS	../newspaper/urls.py	/^BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']$/;"	kind:variable	line:36
+CF_CACHE_DIRECTORY	../newspaper/settings.py	/^CF_CACHE_DIRECTORY = 'feed_category_cache'$/;"	kind:variable	line:51
+COLON_SPLITTER	../newspaper/extractors.py	/^COLON_SPLITTER = StringSplitter(":")$/;"	kind:variable	line:38
+Category	../newspaper/source.py	/^class Category(object):$/;"	kind:class	line:27
+ConfigBuildTestCase	../tests/unit_tests.py	/^class ConfigBuildTestCase(unittest.TestCase):$/;"	kind:class	line:581
+Configuration	../newspaper/configuration.py	/^class Configuration(object):$/;"	kind:class	line:23
+ContentExtractor	../newspaper/extractors.py	/^class ContentExtractor(object):$/;"	kind:class	line:55
+ContentExtractorTestCase	../tests/unit_tests.py	/^class ContentExtractorTestCase(unittest.TestCase):$/;"	kind:class	line:324
+DASH_SPLITTER	../newspaper/extractors.py	/^DASH_SPLITTER = StringSplitter(" - ")$/;"	kind:variable	line:34
+DATA_DIRECTORY	../newspaper/settings.py	/^DATA_DIRECTORY = '.newspaper_scraper'$/;"	kind:variable	line:32
+DATE_REGEX	../newspaper/urls.py	/^DATE_REGEX = r'([\\.\/\\-_]{0,1}(19|20)\\d{2})[\\.\/\\-_]{0,1}(([0-3]{0,1}[0-9][\\.\/\\-_])|(\\w{3,5}[\\.\/\\-_]))([0-3]{0,1}[0-9][\\.\/\\-]{0,1})?'$/;"	kind:variable	line:23
+Dispatch	../newspaper/utils.py	/^            class Dispatch(threading.Thread):$/;"	kind:class	line:128
+DocumentCleaner	../newspaper/cleaners.py	/^class DocumentCleaner(object):$/;"	kind:class	line:10
+ESCAPED_FRAGMENT_REPLACEMENT	../newspaper/extractors.py	/^ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement($/;"	kind:variable	line:30
+ExhaustiveFullTextCase	../tests/unit_tests.py	/^class ExhaustiveFullTextCase(unittest.TestCase):$/;"	kind:class	line:81
+FAILED_RESPONSE	../newspaper/article.py	/^    FAILED_RESPONSE = 1$/;"	kind:variable	line:33
+FAIL_ENCODING	../newspaper/network.py	/^FAIL_ENCODING = 'ISO-8859-1'$/;"	kind:variable	line:21
+Feed	../newspaper/source.py	/^class Feed(object):$/;"	kind:class	line:34
+FileHelper	../newspaper/utils.py	/^class FileHelper(object):$/;"	kind:class	line:33
+FlaskyStyle	../docs/_themes/flask_theme_support.py	/^class FlaskyStyle(Style):$/;"	kind:class	line:7
+GOOD_PATHS	../newspaper/urls.py	/^GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',$/;"	kind:variable	line:28
+HTML_FN	../tests/unit_tests.py	/^HTML_FN = os.path.join(TEST_DIR, 'data', 'html')$/;"	kind:variable	line:22
+LOGFILE	../newspaper/settings.py	/^LOGFILE = os.path.join(TOP_DIRECTORY, 'newspaper_errors_%s.log' % __version__)$/;"	kind:variable	line:39
+MAX_FILE_MEMO	../newspaper/urls.py	/^MAX_FILE_MEMO = 20000$/;"	kind:variable	line:21
+MEMO_DIR	../newspaper/settings.py	/^MEMO_DIR = os.path.join(TOP_DIRECTORY, MEMO_FILE)$/;"	kind:variable	line:45
+MEMO_FILE	../newspaper/settings.py	/^MEMO_FILE = 'memoized'$/;"	kind:variable	line:44
+MONITOR_LOGFILE	../newspaper/settings.py	/^MONITOR_LOGFILE = os.path.join($/;"	kind:variable	line:40
+MOTLEY_REPLACEMENT	../newspaper/extractors.py	/^MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")$/;"	kind:variable	line:29
+MRequest	../newspaper/network.py	/^class MRequest(object):$/;"	kind:class	line:88
+MThreadingTestCase	../tests/unit_tests.py	/^class MThreadingTestCase(unittest.TestCase):$/;"	kind:class	line:556
+MultiLanguageTestCase	../tests/unit_tests.py	/^class MultiLanguageTestCase(unittest.TestCase):$/;"	kind:class	line:622
+NLP_STOPWORDS_EN	../newspaper/settings.py	/^NLP_STOPWORDS_EN = os.path.join($/;"	kind:variable	line:29
+NOT_STARTED	../newspaper/article.py	/^    NOT_STARTED = 0$/;"	kind:variable	line:32
+NO_STRINGS	../newspaper/extractors.py	/^NO_STRINGS = set()$/;"	kind:variable	line:40
+NewsPool	../newspaper/mthreading.py	/^class NewsPool(object):$/;"	kind:class	line:58
+NullHandler	../newspaper/__init__.py	/^    class NullHandler(logging.Handler):$/;"	kind:class	line:25
+NullHandler	../tests/benchmarks.py	/^    class NullHandler(logging.Handler):$/;"	kind:class	line:22
+OutputFormatter	../newspaper/outputformatters.py	/^class OutputFormatter(object):$/;"	kind:class	line:19
+PARENT_DIR	../tests/benchmarks.py	/^PARENT_DIR = os.path.dirname(os.path.abspath(__file__))$/;"	kind:variable	line:29
+PARENT_DIR	../tests/unit_tests.py	/^PARENT_DIR = os.path.join(TEST_DIR, '..')$/;"	kind:variable	line:14
+PARENT_DIRECTORY	../newspaper/settings.py	/^PARENT_DIRECTORY = os.path.dirname(os.path.abspath(__file__))$/;"	kind:variable	line:20
+PIPE_SPLITTER	../newspaper/extractors.py	/^PIPE_SPLITTER = StringSplitter("\\\\|")$/;"	kind:variable	line:33
+POPULAR_URLS	../newspaper/settings.py	/^POPULAR_URLS = os.path.join($/;"	kind:variable	line:22
+Parser	../newspaper/parsers.py	/^class Parser(object):$/;"	kind:class	line:25
+ParsingCandidate	../newspaper/utils.py	/^class ParsingCandidate(object):$/;"	kind:class	line:50
+REQUIRED_CORPORA	../download_corpora.py	/^REQUIRED_CORPORA = [$/;"	kind:variable	line:8
+RE_LANG	../newspaper/extractors.py	/^RE_LANG = r'^[A-Za-z]{2}$'$/;"	kind:variable	line:44
+RawHelper	../newspaper/utils.py	/^class RawHelper(object):$/;"	kind:class	line:57
+ReplaceSequence	../newspaper/utils.py	/^class ReplaceSequence(object):$/;"	kind:class	line:97
+SLASH_SPLITTER	../newspaper/extractors.py	/^SLASH_SPLITTER = StringSplitter("\/")$/;"	kind:variable	line:36
+SPACE_SPLITTER	../newspaper/extractors.py	/^SPACE_SPLITTER = StringSplitter(' ')$/;"	kind:variable	line:39
+STOPWORDS_DIR	../newspaper/settings.py	/^STOPWORDS_DIR = os.path.join(PARENT_DIRECTORY, 'resources\/text')$/;"	kind:variable	line:26
+SUCCESS	../newspaper/article.py	/^    SUCCESS = 2$/;"	kind:variable	line:34
+Scraper	../newspaper/images.py	/^class Scraper:$/;"	kind:class	line:170
+Source	../newspaper/source.py	/^class Source(object):$/;"	kind:class	line:41
+SourceConfiguration	../newspaper/configuration.py	/^class SourceConfiguration(Configuration):$/;"	kind:class	line:126
+SourceTestCase	../tests/unit_tests.py	/^class SourceTestCase(unittest.TestCase):$/;"	kind:class	line:422
+StopWords	../newspaper/text.py	/^class StopWords(object):$/;"	kind:class	line:59
+StopWordsArabic	../newspaper/text.py	/^class StopWordsArabic(StopWords):$/;"	kind:class	line:117
+StopWordsChinese	../newspaper/text.py	/^class StopWordsChinese(StopWords):$/;"	kind:class	line:104
+StopWordsHindi	../newspaper/text.py	/^class StopWordsHindi(StopWords):$/;"	kind:class	line:161
+StopWordsKorean	../newspaper/text.py	/^class StopWordsKorean(StopWords):$/;"	kind:class	line:136
+StringReplacement	../newspaper/utils.py	/^class StringReplacement(object):$/;"	kind:class	line:86
+StringSplitter	../newspaper/utils.py	/^class StringSplitter(object):$/;"	kind:class	line:76
+TABSSPACE	../newspaper/text.py	/^TABSSPACE = re.compile(r'[\\s\\t]+')$/;"	kind:variable	line:16
+TEST_DIR	../tests/unit_tests.py	/^TEST_DIR = os.path.abspath(os.path.dirname(__file__))$/;"	kind:variable	line:13
+TEXT_FN	../tests/unit_tests.py	/^TEXT_FN = os.path.join(TEST_DIR, 'data', 'text')$/;"	kind:variable	line:21
+TITLE_REPLACEMENTS	../newspaper/extractors.py	/^TITLE_REPLACEMENTS = StringReplacement("&raquo;", "»")$/;"	kind:variable	line:32
+TOP_DIRECTORY	../newspaper/settings.py	/^TOP_DIRECTORY = os.path.join(os.path.expanduser("~"), DATA_DIRECTORY)$/;"	kind:variable	line:34
+TRANS_TABLE	../newspaper/text.py	/^    TRANS_TABLE = str.maketrans('', '')$/;"	kind:variable	line:61
+TestNewspaperLanguagesApi	../tests/unit_tests.py	/^class TestNewspaperLanguagesApi(unittest.TestCase):$/;"	kind:class	line:660
+ThreadPool	../newspaper/mthreading.py	/^class ThreadPool:$/;"	kind:class	line:45
+TimeoutError	../newspaper/utils.py	/^class TimeoutError(Exception):$/;"	kind:class	line:119
+UNDERSCORE_SPLITTER	../newspaper/extractors.py	/^UNDERSCORE_SPLITTER = StringSplitter("_")$/;"	kind:variable	line:35
+URLHelper	../newspaper/utils.py	/^class URLHelper(object):$/;"	kind:class	line:66
+URLS_FILE	../tests/unit_tests.py	/^URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')$/;"	kind:variable	line:23
+USERAGENTS	../newspaper/settings.py	/^USERAGENTS = os.path.join(PARENT_DIRECTORY, 'resources\/misc\/useragents.txt')$/;"	kind:variable	line:24
+UrlTestCase	../tests/unit_tests.py	/^class UrlTestCase(unittest.TestCase):$/;"	kind:class	line:499
+VIDEOS_TAGS	../newspaper/videos/extractors.py	/^VIDEOS_TAGS = ['iframe', 'embed', 'object', 'video']$/;"	kind:variable	line:4
+VIDEO_PROVIDERS	../newspaper/videos/extractors.py	/^VIDEO_PROVIDERS = ['youtube', 'vimeo', 'dailymotion', 'kewego']$/;"	kind:variable	line:5
+Video	../newspaper/videos/videos.py	/^class Video(object):$/;"	kind:class	line:4
+VideoExtractor	../newspaper/videos/extractors.py	/^class VideoExtractor(object):$/;"	kind:class	line:8
+WordStats	../newspaper/text.py	/^class WordStats(object):$/;"	kind:class	line:28
+Worker	../newspaper/mthreading.py	/^class Worker(Thread):$/;"	kind:class	line:19
+_1	../newspaper/utils.py	/^    def _1(function):$/;"	kind:function	line:126
+_2	../newspaper/utils.py	/^        def _2(*args, **kw):$/;"	kind:function	line:127
+__author__	../newspaper/__init__.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:6
+__author__	../newspaper/api.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:8
+__author__	../newspaper/article.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:3
+__author__	../newspaper/configuration.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:9
+__author__	../newspaper/extractors.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:10
+__author__	../newspaper/images.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/mthreading.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:8
+__author__	../newspaper/network.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/nlp.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:6
+__author__	../newspaper/outputformatters.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:6
+__author__	../newspaper/settings.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/source.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/text.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:6
+__author__	../newspaper/urls.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/utils.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:7
+__author__	../newspaper/version.py	/^__author__ = 'Lucas Ou-Yang'$/;"	kind:variable	line:6
+__copyright__	../newspaper/__init__.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:8
+__copyright__	../newspaper/api.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:10
+__copyright__	../newspaper/article.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:5
+__copyright__	../newspaper/configuration.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:11
+__copyright__	../newspaper/extractors.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:12
+__copyright__	../newspaper/images.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/mthreading.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:10
+__copyright__	../newspaper/network.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/nlp.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:8
+__copyright__	../newspaper/outputformatters.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:8
+__copyright__	../newspaper/settings.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/source.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/text.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:8
+__copyright__	../newspaper/urls.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/utils.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:9
+__copyright__	../newspaper/version.py	/^__copyright__ = 'Copyright 2014, Lucas Ou-Yang'$/;"	kind:variable	line:8
+__init__	../newspaper/article.py	/^    def __init__(self, url, title='', source_url='', config=None, **kwargs):$/;"	kind:member	line:44
+__init__	../newspaper/cleaners.py	/^    def __init__(self, config):$/;"	kind:member	line:12
+__init__	../newspaper/configuration.py	/^    def __init__(self):$/;"	kind:member	line:24
+__init__	../newspaper/extractors.py	/^    def __init__(self, config):$/;"	kind:member	line:56
+__init__	../newspaper/images.py	/^    def __init__(self, article):$/;"	kind:member	line:172
+__init__	../newspaper/mthreading.py	/^    def __init__(self, config=None):$/;"	kind:member	line:60
+__init__	../newspaper/mthreading.py	/^    def __init__(self, num_threads, timeout_seconds):$/;"	kind:member	line:46
+__init__	../newspaper/mthreading.py	/^    def __init__(self, tasks, timeout_seconds):$/;"	kind:member	line:23
+__init__	../newspaper/network.py	/^    def __init__(self, url, config=None):$/;"	kind:member	line:94
+__init__	../newspaper/outputformatters.py	/^    def __init__(self, config):$/;"	kind:member	line:21
+__init__	../newspaper/source.py	/^    def __init__(self, url):$/;"	kind:member	line:28
+__init__	../newspaper/source.py	/^    def __init__(self, url):$/;"	kind:member	line:35
+__init__	../newspaper/source.py	/^    def __init__(self, url, config=None, **kwargs):$/;"	kind:member	line:51
+__init__	../newspaper/text.py	/^    def __init__(self):$/;"	kind:member	line:30
+__init__	../newspaper/text.py	/^    def __init__(self, language='ar'):$/;"	kind:member	line:120
+__init__	../newspaper/text.py	/^    def __init__(self, language='en'):$/;"	kind:member	line:64
+__init__	../newspaper/text.py	/^    def __init__(self, language='hi'):$/;"	kind:member	line:164
+__init__	../newspaper/text.py	/^    def __init__(self, language='ko'):$/;"	kind:member	line:139
+__init__	../newspaper/text.py	/^    def __init__(self, language='zh'):$/;"	kind:member	line:107
+__init__	../newspaper/utils.py	/^                def __init__(self):$/;"	kind:member	line:129
+__init__	../newspaper/utils.py	/^    def __init__(self):$/;"	kind:member	line:98
+__init__	../newspaper/utils.py	/^    def __init__(self, pattern):$/;"	kind:member	line:77
+__init__	../newspaper/utils.py	/^    def __init__(self, pattern, replaceWith):$/;"	kind:member	line:87
+__init__	../newspaper/utils.py	/^    def __init__(self, url, link_hash):$/;"	kind:member	line:52
+__init__	../newspaper/videos/extractors.py	/^    def __init__(self, config, top_node):$/;"	kind:member	line:11
+__init__	../newspaper/videos/videos.py	/^    def __init__(self):$/;"	kind:member	line:7
+__init__.py	../newspaper/__init__.py	1;"	kind:file	line:1
+__init__.py	../newspaper/videos/__init__.py	1;"	kind:file	line:1
+__init__.py	../tests/__init__.py	1;"	kind:file	line:1
+__license__	../newspaper/__init__.py	/^__license__ = 'MIT'$/;"	kind:variable	line:7
+__license__	../newspaper/api.py	/^__license__ = 'MIT'$/;"	kind:variable	line:9
+__license__	../newspaper/article.py	/^__license__ = 'MIT'$/;"	kind:variable	line:4
+__license__	../newspaper/configuration.py	/^__license__ = 'MIT'$/;"	kind:variable	line:10
+__license__	../newspaper/extractors.py	/^__license__ = 'MIT'$/;"	kind:variable	line:11
+__license__	../newspaper/images.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/mthreading.py	/^__license__ = 'MIT'$/;"	kind:variable	line:9
+__license__	../newspaper/network.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/nlp.py	/^__license__ = 'MIT'$/;"	kind:variable	line:7
+__license__	../newspaper/outputformatters.py	/^__license__ = 'MIT'$/;"	kind:variable	line:7
+__license__	../newspaper/settings.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/source.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/text.py	/^__license__ = 'MIT'$/;"	kind:variable	line:7
+__license__	../newspaper/urls.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/utils.py	/^__license__ = 'MIT'$/;"	kind:variable	line:8
+__license__	../newspaper/version.py	/^__license__ = 'MIT'$/;"	kind:variable	line:7
+__title__	../newspaper/__init__.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:5
+__title__	../newspaper/api.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:7
+__title__	../newspaper/article.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:2
+__title__	../newspaper/configuration.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:8
+__title__	../newspaper/extractors.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:9
+__title__	../newspaper/images.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/mthreading.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:7
+__title__	../newspaper/network.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/nlp.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:5
+__title__	../newspaper/outputformatters.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:5
+__title__	../newspaper/settings.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/source.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/text.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:5
+__title__	../newspaper/urls.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/utils.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:6
+__title__	../newspaper/version.py	/^__title__ = 'newspaper'$/;"	kind:variable	line:5
+__version__	../newspaper/version.py	/^__version__ = ".".join(map(str, version_info))$/;"	kind:variable	line:11
+_cached_stop_words	../newspaper/text.py	/^    _cached_stop_words = {}$/;"	kind:variable	line:62
+_generate_articles	../newspaper/source.py	/^    def _generate_articles(self):$/;"	kind:member	line:322
+_get_canonical_link	../tests/unit_tests.py	/^    def _get_canonical_link(self, article_url, html):$/;"	kind:member	line:352
+_get_category_urls	../newspaper/source.py	/^    def _get_category_urls(self, domain):$/;"	kind:member	line:117
+_get_html_from_response	../newspaper/network.py	/^def _get_html_from_response(response):$/;"	kind:function	line:78
+_get_title	../tests/unit_tests.py	/^    def _get_title(self, html):$/;"	kind:member	line:331
+_get_urls	../newspaper/extractors.py	/^    def _get_urls(self, doc, titles):$/;"	kind:member	line:584
+_map_title_to_feed	../newspaper/source.py	/^    def _map_title_to_feed(self, feed):$/;"	kind:member	line:235
+add_newline_to_br	../newspaper/outputformatters.py	/^    def add_newline_to_br(self):$/;"	kind:member	line:83
+add_newline_to_li	../newspaper/outputformatters.py	/^    def add_newline_to_li(self):$/;"	kind:member	line:87
+add_siblings	../newspaper/extractors.py	/^    def add_siblings(self, top_node):$/;"	kind:member	line:868
+add_task	../newspaper/mthreading.py	/^    def add_task(self, func, *args, **kargs):$/;"	kind:member	line:51
+api.py	../newspaper/api.py	1;"	kind:file	line:1
+append	../newspaper/utils.py	/^    def append(self, pattern, replaceWith=None):$/;"	kind:member	line:106
+appendChild	../newspaper/parsers.py	/^    def appendChild(cls, node, child):$/;"	kind:member	line:131
+argv	../tests/unit_tests.py	/^    argv = list(sys.argv)$/;"	kind:variable	line:667
+article.py	../newspaper/article.py	1;"	kind:file	line:1
+article_urls	../newspaper/source.py	/^    def article_urls(self):$/;"	kind:member	line:405
+asyncio_run	../tests/benchmarks.py	/^def asyncio_run(urls):$/;"	kind:function	line:55
+author	../setup.py	/^    author='Lucas Ou-Yang',$/;"	kind:variable	line:50
+author_email	../setup.py	/^    author_email='lucasyangpersonal@gmail.com',$/;"	kind:variable	line:51
+background_color	../docs/_themes/flask_theme_support.py	/^    background_color = "#f8f8f8"$/;"	kind:variable	line:8
+bad_chunks	../newspaper/extractors.py	/^bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',$/;"	kind:variable	line:49
+bad_domains	../newspaper/extractors.py	/^bad_domains = ['amazon', 'doubleclick', 'twitter']$/;"	kind:variable	line:52
+benchmark	../tests/benchmarks.py	/^def benchmark():$/;"	kind:function	line:64
+benchmarks.py	../tests/benchmarks.py	1;"	kind:file	line:1
+build	../newspaper/api.py	/^def build(url='', dry=False, config=None, **kwargs) -> Source:$/;"	kind:function	line:21
+build	../newspaper/article.py	/^    def build(self):$/;"	kind:member	line:146
+build	../newspaper/source.py	/^    def build(self):$/;"	kind:member	line:84
+build_article	../newspaper/api.py	/^def build_article(url='', config=None, **kwargs) -> Article:$/;"	kind:function	line:34
+build_resource_path	../newspaper/article.py	/^    def build_resource_path(self):$/;"	kind:member	line:365
+cache_disk	../newspaper/utils.py	/^def cache_disk(seconds=(86400 * 5), cache_folder="\/tmp"):$/;"	kind:function	line:215
+calculate_area	../newspaper/images.py	/^    def calculate_area(self, img_url, dimension):$/;"	kind:member	line:198
+calculate_best_node	../newspaper/extractors.py	/^    def calculate_best_node(self, doc):$/;"	kind:member	line:766
+candidate_words	../newspaper/text.py	/^    def candidate_words(self, stripped_input):$/;"	kind:member	line:110
+candidate_words	../newspaper/text.py	/^    def candidate_words(self, stripped_input):$/;"	kind:member	line:127
+candidate_words	../newspaper/text.py	/^    def candidate_words(self, stripped_input):$/;"	kind:member	line:82
+categories_to_articles	../newspaper/source.py	/^    def categories_to_articles(self):$/;"	kind:member	line:284
+category_urls	../newspaper/source.py	/^    def category_urls(self):$/;"	kind:member	line:400
+check_url	../tests/unit_tests.py	/^    def check_url(args):$/;"	kind:member	line:83
+check_url	../tests/unit_tests.py	/^def check_url(*args, **kwargs):$/;"	kind:function	line:76
+childNodes	../newspaper/parsers.py	/^    def childNodes(cls, node):$/;"	kind:member	line:135
+childNodesWithText	../newspaper/parsers.py	/^    def childNodesWithText(cls, node):$/;"	kind:member	line:139
+chunk_size	../newspaper/images.py	/^chunk_size = 1024$/;"	kind:variable	line:24
+chunks	../newspaper/utils.py	/^def chunks(l, n):$/;"	kind:function	line:256
+classifiers	../setup.py	/^    classifiers=[$/;"	kind:variable	line:58
+clean	../newspaper/cleaners.py	/^    def clean(self, doc_to_clean):$/;"	kind:member	line:52
+clean_article_html	../newspaper/parsers.py	/^    def clean_article_html(cls, node):$/;"	kind:member	line:75
+clean_article_tags	../newspaper/cleaners.py	/^    def clean_article_tags(self, doc):$/;"	kind:member	line:82
+clean_bad_tags	../newspaper/cleaners.py	/^    def clean_bad_tags(self, doc):$/;"	kind:member	line:120
+clean_body_classes	../newspaper/cleaners.py	/^    def clean_body_classes(self, doc):$/;"	kind:member	line:73
+clean_em_tags	../newspaper/cleaners.py	/^    def clean_em_tags(self, doc):$/;"	kind:member	line:89
+clean_memo_cache	../newspaper/source.py	/^    def clean_memo_cache(self):$/;"	kind:member	line:390
+clean_para_spans	../newspaper/cleaners.py	/^    def clean_para_spans(self, doc):$/;"	kind:member	line:146
+clean_url	../newspaper/images.py	/^def clean_url(url):$/;"	kind:function	line:77
+cleaners.py	../newspaper/cleaners.py	1;"	kind:file	line:1
+clear_memo_cache	../newspaper/utils.py	/^def clear_memo_cache(source):$/;"	kind:function	line:273
+conf.py	../docs/conf.py	1;"	kind:file	line:1
+configuration.py	../newspaper/configuration.py	1;"	kind:file	line:1
+contains_digits	../newspaper/extractors.py	/^        def contains_digits(d):$/;"	kind:function	line:78
+convert_to_html	../newspaper/outputformatters.py	/^    def convert_to_html(self):$/;"	kind:member	line:79
+convert_to_text	../newspaper/outputformatters.py	/^    def convert_to_text(self):$/;"	kind:member	line:63
+create	../newspaper/utils.py	/^    def create(self, firstPattern, replaceWith=None):$/;"	kind:member	line:101
+createElement	../newspaper/parsers.py	/^    def createElement(cls, tag='p', text=None, tail=None):$/;"	kind:member	line:177
+css_select	../newspaper/parsers.py	/^    def css_select(cls, node, selector):$/;"	kind:member	line:42
+dbs	../newspaper/nlp.py	/^def dbs(words, keywords):$/;"	kind:function	line:87
+default_style	../docs/_themes/flask_theme_support.py	/^    default_style = ""$/;"	kind:variable	line:9
+delAttribute	../newspaper/parsers.py	/^    def delAttribute(cls, node, attr=None):$/;"	kind:member	line:246
+del_language	../newspaper/configuration.py	/^    def del_language(self):$/;"	kind:member	line:84
+description	../setup.py	/^    description='Simplified python article discovery & extraction.',$/;"	kind:variable	line:48
+div_to_para	../newspaper/cleaners.py	/^    def div_to_para(self, doc, dom_type):$/;"	kind:member	line:220
+do_cache	../newspaper/utils.py	/^    def do_cache(function):$/;"	kind:function	line:218
+domain_to_filename	../newspaper/utils.py	/^def domain_to_filename(domain):$/;"	kind:function	line:153
+download	../newspaper/article.py	/^    def download(self, input_html=None, title=None, recursion_counter=0):$/;"	kind:member	line:155
+download	../newspaper/source.py	/^    def download(self):$/;"	kind:member	line:174
+download_articles	../newspaper/source.py	/^    def download_articles(self, threads=1):$/;"	kind:member	line:340
+download_categories	../newspaper/source.py	/^    def download_categories(self):$/;"	kind:member	line:179
+download_corpora.py	../download_corpora.py	1;"	kind:file	line:1
+download_feeds	../newspaper/source.py	/^    def download_feeds(self):$/;"	kind:member	line:196
+drop_tag	../newspaper/parsers.py	/^    def drop_tag(cls, nodes):$/;"	kind:member	line:34
+emit	../newspaper/__init__.py	/^        def emit(self, record):$/;"	kind:member	line:26
+emit	../tests/benchmarks.py	/^        def emit(self, record):$/;"	kind:member	line:23
+exclude_patterns	../docs/conf.py	/^exclude_patterns = ['_build']$/;"	kind:variable	line:75
+extend_config	../newspaper/utils.py	/^def extend_config(config, config_items):$/;"	kind:function	line:393
+extensions	../docs/conf.py	/^extensions = [$/;"	kind:variable	line:34
+extract_meta_refresh	../newspaper/utils.py	/^def extract_meta_refresh(html):$/;"	kind:function	line:184
+extract_tags	../newspaper/extractors.py	/^    def extract_tags(self, doc):$/;"	kind:member	line:748
+extractors.py	../newspaper/extractors.py	1;"	kind:file	line:1
+extractors.py	../newspaper/videos/extractors.py	1;"	kind:file	line:1
+feed_urls	../newspaper/source.py	/^    def feed_urls(self):$/;"	kind:member	line:395
+feeds_to_articles	../newspaper/source.py	/^    def feeds_to_articles(self):$/;"	kind:member	line:252
+fetch_image_dimension	../newspaper/images.py	/^def fetch_image_dimension(url, useragent, referer=None, retries=1):$/;"	kind:function	line:166
+fetch_images	../newspaper/article.py	/^    def fetch_images(self):$/;"	kind:member	line:261
+fetch_url	../newspaper/images.py	/^def fetch_url(url, useragent, referer=None, retries=1, dimension=False):$/;"	kind:function	line:86
+filename_to_domain	../newspaper/utils.py	/^def filename_to_domain(filename):$/;"	kind:function	line:164
+flask_theme_support.py	../docs/_themes/flask_theme_support.py	1;"	kind:file	line:1
+fromstring	../newspaper/parsers.py	/^    def fromstring(cls, html):$/;"	kind:member	line:60
+fulltext	../newspaper/api.py	/^def fulltext(html, language='en'):$/;"	kind:function	line:71
+generate_articles	../newspaper/source.py	/^    def generate_articles(self, limit=5000):$/;"	kind:member	line:332
+getAttribute	../newspaper/parsers.py	/^    def getAttribute(cls, node, attr=None):$/;"	kind:member	line:238
+getChildren	../newspaper/parsers.py	/^    def getChildren(cls, node):$/;"	kind:member	line:166
+getComments	../newspaper/parsers.py	/^    def getComments(cls, node):$/;"	kind:member	line:185
+getElementById	../newspaper/parsers.py	/^    def getElementById(cls, node, idd):$/;"	kind:member	line:103
+getElementsByTag	../newspaper/parsers.py	/^    def getElementsByTag($/;"	kind:member	line:111
+getElementsByTags	../newspaper/parsers.py	/^    def getElementsByTags(cls, node, tags):$/;"	kind:member	line:170
+getParent	../newspaper/parsers.py	/^    def getParent(cls, node):$/;"	kind:member	line:189
+getTag	../newspaper/parsers.py	/^    def getTag(cls, node):$/;"	kind:member	line:210
+getText	../newspaper/parsers.py	/^    def getText(cls, node):$/;"	kind:member	line:214
+get_authors	../newspaper/extractors.py	/^    def get_authors(self, doc):$/;"	kind:member	line:72
+get_available_languages	../newspaper/utils.py	/^def get_available_languages():$/;"	kind:function	line:343
+get_base_domain	../tests/unit_tests.py	/^def get_base_domain(url):$/;"	kind:function	line:62
+get_canonical_link	../newspaper/extractors.py	/^    def get_canonical_link(self, article_url, doc):$/;"	kind:member	line:524
+get_category_urls	../newspaper/extractors.py	/^    def get_category_urls(self, source_url, doc):$/;"	kind:member	line:622
+get_depth	../newspaper/outputformatters.py	/^        def get_depth(node, depth=1):$/;"	kind:function	line:147
+get_domain	../newspaper/urls.py	/^def get_domain(abs_url, **kwargs):$/;"	kind:function	line:262
+get_embed_code	../newspaper/videos/extractors.py	/^    def get_embed_code(self, node):$/;"	kind:member	line:18
+get_embed_tag	../newspaper/videos/extractors.py	/^    def get_embed_tag(self, node):$/;"	kind:member	line:62
+get_embed_type	../newspaper/videos/extractors.py	/^    def get_embed_type(self, node):$/;"	kind:member	line:23
+get_favicon	../newspaper/extractors.py	/^    def get_favicon(self, doc):$/;"	kind:member	line:393
+get_feed_urls	../newspaper/extractors.py	/^    def get_feed_urls(self, source_url, categories):$/;"	kind:member	line:375
+get_filename	../tests/unit_tests.py	/^        def get_filename(url):$/;"	kind:function	line:123
+get_first_img_url	../newspaper/extractors.py	/^    def get_first_img_url(self, article_url, top_node):$/;"	kind:member	line:573
+get_flushed_buffer	../newspaper/cleaners.py	/^    def get_flushed_buffer(self, replacement_text, doc):$/;"	kind:member	line:152
+get_formatted	../newspaper/outputformatters.py	/^    def get_formatted(self, top_node):$/;"	kind:member	line:41
+get_height	../newspaper/videos/extractors.py	/^    def get_height(self, node):$/;"	kind:member	line:29
+get_html	../newspaper/network.py	/^def get_html(url, config=None, response=None):$/;"	kind:function	line:37
+get_html_2XX_only	../newspaper/network.py	/^def get_html_2XX_only(url, config=None, response=None):$/;"	kind:function	line:47
+get_iframe_tag	../newspaper/videos/extractors.py	/^    def get_iframe_tag(self, node):$/;"	kind:member	line:54
+get_img_urls	../newspaper/extractors.py	/^    def get_img_urls(self, article_url, doc):$/;"	kind:member	line:562
+get_language	../newspaper/configuration.py	/^    def get_language(self):$/;"	kind:member	line:81
+get_meta_content	../newspaper/extractors.py	/^    def get_meta_content(self, doc, metaname):$/;"	kind:member	line:430
+get_meta_data	../newspaper/extractors.py	/^    def get_meta_data(self, doc):$/;"	kind:member	line:485
+get_meta_description	../newspaper/extractors.py	/^    def get_meta_description(self, doc):$/;"	kind:member	line:475
+get_meta_img_url	../newspaper/extractors.py	/^    def get_meta_img_url(self, article_url, doc):$/;"	kind:member	line:445
+get_meta_keywords	../newspaper/extractors.py	/^    def get_meta_keywords(self, doc):$/;"	kind:member	line:480
+get_meta_lang	../newspaper/extractors.py	/^    def get_meta_lang(self, doc):$/;"	kind:member	line:405
+get_meta_type	../newspaper/extractors.py	/^    def get_meta_type(self, doc):$/;"	kind:member	line:470
+get_node_gravity_score	../newspaper/extractors.py	/^    def get_node_gravity_score(self, node):$/;"	kind:member	line:999
+get_object_tag	../newspaper/videos/extractors.py	/^    def get_object_tag(self, node):$/;"	kind:member	line:73
+get_parse_candidate	../newspaper/article.py	/^    def get_parse_candidate(self):$/;"	kind:member	line:357
+get_parser	../newspaper/configuration.py	/^    def get_parser():$/;"	kind:member	line:118
+get_parsing_candidate	../newspaper/utils.py	/^    def get_parsing_candidate(url, raw_html):$/;"	kind:member	line:59
+get_parsing_candidate	../newspaper/utils.py	/^    def get_parsing_candidate(url_to_crawl):$/;"	kind:member	line:68
+get_path	../newspaper/urls.py	/^def get_path(abs_url, **kwargs):$/;"	kind:function	line:280
+get_provider	../newspaper/videos/extractors.py	/^    def get_provider(self, src):$/;"	kind:member	line:35
+get_publishing_date	../newspaper/extractors.py	/^    def get_publishing_date(self, url, doc):$/;"	kind:member	line:172
+get_replacement_nodes	../newspaper/cleaners.py	/^    def get_replacement_nodes(self, doc, div):$/;"	kind:member	line:185
+get_request_kwargs	../newspaper/network.py	/^def get_request_kwargs(timeout, useragent, proxies, headers):$/;"	kind:function	line:24
+get_resource_path	../newspaper/article.py	/^    def get_resource_path(self):$/;"	kind:member	line:372
+get_scheme	../newspaper/urls.py	/^def get_scheme(abs_url, **kwargs):$/;"	kind:function	line:272
+get_score	../newspaper/extractors.py	/^    def get_score(self, node):$/;"	kind:member	line:994
+get_siblings_content	../newspaper/extractors.py	/^    def get_siblings_content($/;"	kind:member	line:878
+get_siblings_score	../newspaper/extractors.py	/^    def get_siblings_score(self, top_node):$/;"	kind:member	line:914
+get_src	../newspaper/videos/extractors.py	/^    def get_src(self, node):$/;"	kind:member	line:32
+get_stop_words	../newspaper/text.py	/^    def get_stop_words(self):$/;"	kind:member	line:40
+get_stopword_count	../newspaper/text.py	/^    def get_stopword_count(self):$/;"	kind:member	line:46
+get_stopword_count	../newspaper/text.py	/^    def get_stopword_count(self, content):$/;"	kind:member	line:142
+get_stopword_count	../newspaper/text.py	/^    def get_stopword_count(self, content):$/;"	kind:member	line:167
+get_stopword_count	../newspaper/text.py	/^    def get_stopword_count(self, content):$/;"	kind:member	line:85
+get_stopwords_class	../newspaper/configuration.py	/^    def get_stopwords_class(language):$/;"	kind:member	line:106
+get_title	../newspaper/extractors.py	/^    def get_title(self, doc):$/;"	kind:member	line:235
+get_top_node	../newspaper/outputformatters.py	/^    def get_top_node(self):$/;"	kind:member	line:38
+get_unicode_html	../newspaper/parsers.py	/^    def get_unicode_html(cls, html):$/;"	kind:member	line:46
+get_urls	../newspaper/extractors.py	/^    def get_urls(self, doc_or_html, titles=False, regex=False):$/;"	kind:member	line:600
+get_useragent	../newspaper/utils.py	/^def get_useragent():$/;"	kind:function	line:333
+get_video	../newspaper/videos/extractors.py	/^    def get_video(self, node):$/;"	kind:member	line:42
+get_video_tag	../newspaper/videos/extractors.py	/^    def get_video_tag(self, node):$/;"	kind:member	line:57
+get_videos	../newspaper/videos/extractors.py	/^    def get_videos(self):$/;"	kind:member	line:100
+get_width	../newspaper/videos/extractors.py	/^    def get_width(self, node):$/;"	kind:member	line:26
+get_word_count	../newspaper/text.py	/^    def get_word_count(self):$/;"	kind:member	line:52
+good_paths	../newspaper/extractors.py	/^good_paths = ['story', 'article', 'feature', 'featured', 'slides',$/;"	kind:variable	line:46
+has_top_image	../newspaper/article.py	/^    def has_top_image(self):$/;"	kind:member	line:280
+hot	../newspaper/api.py	/^def hot():$/;"	kind:function	line:59
+html_sidebars	../docs/conf.py	/^html_sidebars = {$/;"	kind:variable	line:152
+html_static_path	../docs/conf.py	/^html_static_path = ['_static']$/;"	kind:variable	line:136
+html_theme	../docs/conf.py	/^html_theme = 'kr'$/;"	kind:variable	line:115
+html_theme_path	../docs/conf.py	/^html_theme_path = ['_themes']$/;"	kind:variable	line:113
+htmlhelp_basename	../docs/conf.py	/^htmlhelp_basename = 'newspaperdoc'$/;"	kind:variable	line:189
+ideal	../newspaper/nlp.py	/^ideal = 20.0$/;"	kind:variable	line:18
+image_entropy	../newspaper/images.py	/^def image_entropy(img):$/;"	kind:function	line:49
+image_to_str	../newspaper/images.py	/^def image_to_str(image):$/;"	kind:function	line:29
+images.py	../newspaper/images.py	1;"	kind:file	line:1
+include_package_data	../setup.py	/^    include_package_data=True,$/;"	kind:variable	line:54
+innerTrim	../newspaper/text.py	/^def innerTrim(value):$/;"	kind:function	line:19
+inner_function	../newspaper/utils.py	/^        def inner_function(*args, **kwargs):$/;"	kind:function	line:219
+install_requires	../setup.py	/^    install_requires=required,$/;"	kind:variable	line:55
+isTextNode	../newspaper/parsers.py	/^    def isTextNode(cls, node):$/;"	kind:member	line:234
+is_abs_url	../newspaper/urls.py	/^def is_abs_url(url):$/;"	kind:function	line:288
+is_ascii	../newspaper/utils.py	/^def is_ascii(word):$/;"	kind:function	line:170
+is_boostable	../newspaper/extractors.py	/^    def is_boostable(self, node):$/;"	kind:member	line:838
+is_highlink_density	../newspaper/extractors.py	/^    def is_highlink_density(self, e):$/;"	kind:member	line:966
+is_media_news	../newspaper/article.py	/^    def is_media_news(self):$/;"	kind:member	line:328
+is_nodescore_threshold_met	../newspaper/extractors.py	/^    def is_nodescore_threshold_met(self, node, e):$/;"	kind:member	line:1027
+is_table_and_no_para_exist	../newspaper/extractors.py	/^    def is_table_and_no_para_exist(self, e):$/;"	kind:member	line:1015
+is_valid_body	../newspaper/article.py	/^    def is_valid_body(self):$/;"	kind:member	line:289
+is_valid_url	../newspaper/article.py	/^    def is_valid_url(self):$/;"	kind:member	line:283
+join	../newspaper/mthreading.py	/^    def join(self):$/;"	kind:member	line:88
+keywords	../newspaper/nlp.py	/^def keywords(text):$/;"	kind:function	line:119
+language	../newspaper/configuration.py	/^    language = property(get_language, set_language,$/;"	kind:variable	line:102
+languages	../newspaper/api.py	/^def languages():$/;"	kind:function	line:45
+largest_image_url	../newspaper/images.py	/^    def largest_image_url(self):$/;"	kind:member	line:179
+latex_documents	../docs/conf.py	/^latex_documents = [$/;"	kind:variable	line:208
+latex_elements	../docs/conf.py	/^latex_elements = {$/;"	kind:variable	line:194
+length_score	../newspaper/nlp.py	/^def length_score(sentence_len):$/;"	kind:function	line:164
+license	../setup.py	/^    license='MIT',$/;"	kind:variable	line:56
+links_to_text	../newspaper/outputformatters.py	/^    def links_to_text(self):$/;"	kind:member	line:95
+loadResourceFile	../newspaper/utils.py	/^    def loadResourceFile(filename):$/;"	kind:member	line:35
+load_stopwords	../newspaper/nlp.py	/^def load_stopwords(language):$/;"	kind:function	line:22
+log	../newspaper/article.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:28
+log	../newspaper/configuration.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:20
+log	../newspaper/extractors.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:27
+log	../newspaper/images.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:22
+log	../newspaper/network.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:18
+log	../newspaper/outputformatters.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:16
+log	../newspaper/parsers.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:22
+log	../newspaper/settings.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:18
+log	../newspaper/source.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:24
+log	../newspaper/urls.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:18
+log	../newspaper/utils.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:29
+log	../tests/benchmarks.py	/^log = logging.getLogger(__name__)$/;"	kind:variable	line:27
+long_description	../setup.py	/^    long_description=readme,$/;"	kind:variable	line:49
+main	../download_corpora.py	/^def main():$/;"	kind:function	line:17
+man_pages	../docs/conf.py	/^man_pages = [$/;"	kind:variable	line:238
+master_doc	../docs/conf.py	/^master_doc = 'index'$/;"	kind:variable	line:48
+memoize_articles	../newspaper/utils.py	/^def memoize_articles(source, articles):$/;"	kind:function	line:283
+minimal_area	../newspaper/images.py	/^minimal_area = 5000$/;"	kind:variable	line:26
+mock_resource_with	../tests/unit_tests.py	/^def mock_resource_with(filename, resource_type):$/;"	kind:function	line:47
+mthread_run	../tests/benchmarks.py	/^def mthread_run(urls):$/;"	kind:function	line:47
+mthreading.py	../newspaper/mthreading.py	1;"	kind:file	line:1
+multithread_request	../newspaper/network.py	/^def multithread_request(urls, config=None):$/;"	kind:function	line:114
+naive_run	../tests/benchmarks.py	/^def naive_run(urls):$/;"	kind:function	line:37
+name	../setup.py	/^    name='newspaper3k',$/;"	kind:variable	line:46
+network.py	../newspaper/network.py	1;"	kind:file	line:1
+news_pool	../newspaper/__init__.py	/^news_pool = NewsPool()$/;"	kind:variable	line:17
+nextSibling	../newspaper/parsers.py	/^    def nextSibling(cls, node):$/;"	kind:member	line:230
+nlp	../newspaper/article.py	/^    def nlp(self):$/;"	kind:member	line:339
+nlp.py	../newspaper/nlp.py	1;"	kind:file	line:1
+nodeToString	../newspaper/parsers.py	/^    def nodeToString(cls, node):$/;"	kind:member	line:88
+nodes_to_check	../newspaper/extractors.py	/^    def nodes_to_check(self, doc):$/;"	kind:member	line:1005
+onlyascii	../newspaper/utils.py	/^    def onlyascii(char):$/;"	kind:function	line:173
+outerHtml	../newspaper/parsers.py	/^    def outerHtml(cls, node):$/;"	kind:member	line:258
+outputformatters.py	../newspaper/outputformatters.py	1;"	kind:file	line:1
+packages	../setup.py	/^    packages=packages,$/;"	kind:variable	line:53
+packages	../setup.py	/^packages = [$/;"	kind:variable	line:18
+parse	../newspaper/article.py	/^    def parse(self):$/;"	kind:member	line:184
+parse	../newspaper/source.py	/^    def parse(self):$/;"	kind:member	line:213
+parse_articles	../newspaper/source.py	/^    def parse_articles(self):$/;"	kind:member	line:374
+parse_byline	../newspaper/extractors.py	/^        def parse_byline(search_str):$/;"	kind:function	line:94
+parse_categories	../newspaper/source.py	/^    def parse_categories(self):$/;"	kind:member	line:224
+parse_date_str	../newspaper/extractors.py	/^        def parse_date_str(date_str):$/;"	kind:function	line:182
+parse_feeds	../newspaper/source.py	/^    def parse_feeds(self):$/;"	kind:member	line:245
+parsers.py	../newspaper/parsers.py	1;"	kind:file	line:1
+popular_urls	../newspaper/api.py	/^def popular_urls():$/;"	kind:function	line:51
+post_cleanup	../newspaper/extractors.py	/^    def post_cleanup(self, top_node):$/;"	kind:member	line:1036
+prepare_image	../newspaper/images.py	/^def prepare_image(image):$/;"	kind:function	line:43
+prepare_url	../newspaper/urls.py	/^def prepare_url(url, source_url=None):$/;"	kind:function	line:79
+previousSibling	../newspaper/parsers.py	/^    def previousSibling(cls, node):$/;"	kind:member	line:226
+previousSiblings	../newspaper/parsers.py	/^    def previousSiblings(cls, node):$/;"	kind:member	line:219
+print_available_languages	../newspaper/utils.py	/^def print_available_languages():$/;"	kind:function	line:353
+print_duration	../newspaper/utils.py	/^def print_duration(method):$/;"	kind:function	line:244
+print_summary	../newspaper/source.py	/^    def print_summary(self):$/;"	kind:member	line:410
+print_test	../tests/unit_tests.py	/^def print_test(method):$/;"	kind:function	line:31
+project	../docs/conf.py	/^project = 'newspaper'$/;"	kind:variable	line:51
+purge	../newspaper/utils.py	/^def purge(fn, pattern):$/;"	kind:function	line:265
+purge_articles	../newspaper/source.py	/^    def purge_articles(self, reason, articles):$/;"	kind:member	line:101
+pygments_style	../docs/conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:93
+readme	../setup.py	/^    readme = f.read()$/;"	kind:variable	line:42
+redirect_back	../newspaper/urls.py	/^def redirect_back(url, source_domain):$/;"	kind:function	line:56
+release	../docs/conf.py	/^release = '0.0.2'$/;"	kind:variable	line:61
+release_resources	../newspaper/article.py	/^    def release_resources(self):$/;"	kind:member	line:383
+remove	../newspaper/parsers.py	/^    def remove(cls, node):$/;"	kind:member	line:193
+remove_args	../newspaper/urls.py	/^def remove_args(url, keep_params=(), frags=False):$/;"	kind:function	line:39
+remove_drop_caps	../newspaper/cleaners.py	/^    def remove_drop_caps(self, doc):$/;"	kind:member	line:97
+remove_empty_tags	../newspaper/outputformatters.py	/^    def remove_empty_tags(self):$/;"	kind:member	line:123
+remove_negativescores_nodes	../newspaper/outputformatters.py	/^    def remove_negativescores_nodes(self):$/;"	kind:member	line:101
+remove_nodes_regex	../newspaper/cleaners.py	/^    def remove_nodes_regex(self, doc, pattern):$/;"	kind:member	line:138
+remove_punctuation	../newspaper/text.py	/^    def remove_punctuation(self, content):$/;"	kind:member	line:124
+remove_punctuation	../newspaper/text.py	/^    def remove_punctuation(self, content):$/;"	kind:member	line:71
+remove_scripts_styles	../newspaper/cleaners.py	/^    def remove_scripts_styles(self, doc):$/;"	kind:member	line:104
+remove_trailing_media_div	../newspaper/outputformatters.py	/^    def remove_trailing_media_div(self):$/;"	kind:member	line:141
+replaceAll	../newspaper/utils.py	/^    def replaceAll(self, string):$/;"	kind:member	line:109
+replaceAll	../newspaper/utils.py	/^    def replaceAll(self, string):$/;"	kind:member	line:91
+replaceTag	../newspaper/parsers.py	/^    def replaceTag(cls, node, tag):$/;"	kind:member	line:95
+replace_walk_left_right	../newspaper/cleaners.py	/^    def replace_walk_left_right(self, kid, kid_text,$/;"	kind:member	line:155
+replace_with_para	../newspaper/cleaners.py	/^    def replace_with_para(self, doc, div):$/;"	kind:member	line:217
+replace_with_text	../newspaper/outputformatters.py	/^    def replace_with_text(self):$/;"	kind:member	line:113
+required	../setup.py	/^    required = f.read().splitlines()$/;"	kind:variable	line:38
+run	../newspaper/mthreading.py	/^    def run(self):$/;"	kind:member	line:30
+run	../newspaper/utils.py	/^                def run(self):$/;"	kind:member	line:137
+run	../tests/unit_tests.py	/^    def run(*args, **kw):$/;"	kind:function	line:37
+satisfies_requirements	../newspaper/images.py	/^    def satisfies_requirements(self, img_url):$/;"	kind:member	line:222
+sbs	../newspaper/nlp.py	/^def sbs(words, keywords):$/;"	kind:function	line:77
+score	../newspaper/nlp.py	/^def score(sentences, titleWords, keywords):$/;"	kind:function	line:57
+send	../newspaper/network.py	/^    def send(self):$/;"	kind:member	line:104
+sentence_position	../newspaper/nlp.py	/^def sentence_position(i, size):$/;"	kind:function	line:180
+set	../newspaper/mthreading.py	/^    def set(self, paper_list, threads_per_source=1):$/;"	kind:member	line:101
+setAttribute	../newspaper/parsers.py	/^    def setAttribute(cls, node, attr=None, value=None):$/;"	kind:member	line:253
+setUp	../tests/unit_tests.py	/^    def setUp(self):$/;"	kind:member	line:160
+setUp	../tests/unit_tests.py	/^    def setUp(self):$/;"	kind:member	line:327
+set_article_html	../newspaper/article.py	/^    def set_article_html(self, article_html):$/;"	kind:member	line:431
+set_authors	../newspaper/article.py	/^    def set_authors(self, authors):$/;"	kind:member	line:469
+set_canonical_link	../newspaper/article.py	/^    def set_canonical_link(self, canonical_link):$/;"	kind:member	line:504
+set_categories	../newspaper/source.py	/^    def set_categories(self):$/;"	kind:member	line:124
+set_description	../newspaper/source.py	/^    def set_description(self):$/;"	kind:member	line:167
+set_feeds	../newspaper/source.py	/^    def set_feeds(self):$/;"	kind:member	line:128
+set_html	../newspaper/article.py	/^    def set_html(self, html):$/;"	kind:member	line:422
+set_imgs	../newspaper/article.py	/^    def set_imgs(self, imgs):$/;"	kind:member	line:454
+set_keywords	../newspaper/article.py	/^    def set_keywords(self, keywords):$/;"	kind:member	line:461
+set_language	../newspaper/configuration.py	/^    def set_language(self, language):$/;"	kind:member	line:87
+set_meta_data	../newspaper/article.py	/^    def set_meta_data(self, meta_data):$/;"	kind:member	line:501
+set_meta_description	../newspaper/article.py	/^    def set_meta_description(self, meta_description):$/;"	kind:member	line:498
+set_meta_favicon	../newspaper/article.py	/^    def set_meta_favicon(self, meta_favicon):$/;"	kind:member	line:495
+set_meta_img	../newspaper/article.py	/^    def set_meta_img(self, src_url):$/;"	kind:member	line:437
+set_meta_keywords	../newspaper/article.py	/^    def set_meta_keywords(self, meta_keywords):$/;"	kind:member	line:490
+set_meta_language	../newspaper/article.py	/^    def set_meta_language(self, meta_lang):$/;"	kind:member	line:483
+set_movies	../newspaper/article.py	/^    def set_movies(self, movie_objects):$/;"	kind:member	line:510
+set_reddit_top_img	../newspaper/article.py	/^    def set_reddit_top_img(self):$/;"	kind:member	line:393
+set_stop_words	../newspaper/text.py	/^    def set_stop_words(self, words):$/;"	kind:member	line:43
+set_stopword_count	../newspaper/text.py	/^    def set_stopword_count(self, wordcount):$/;"	kind:member	line:49
+set_summary	../newspaper/article.py	/^    def set_summary(self, summary):$/;"	kind:member	line:477
+set_tags	../newspaper/article.py	/^    def set_tags(self, tags):$/;"	kind:member	line:507
+set_text	../newspaper/article.py	/^    def set_text(self, text):$/;"	kind:member	line:417
+set_title	../newspaper/article.py	/^    def set_title(self, input_title):$/;"	kind:member	line:413
+set_top_img	../newspaper/article.py	/^    def set_top_img(self, src_url):$/;"	kind:member	line:441
+set_top_img_no_check	../newspaper/article.py	/^    def set_top_img_no_check(self, src_url):$/;"	kind:member	line:447
+set_word_count	../newspaper/text.py	/^    def set_word_count(self, cnt):$/;"	kind:member	line:55
+settings.py	../newspaper/settings.py	1;"	kind:file	line:1
+setup.py	../setup.py	1;"	kind:file	line:1
+setup_stage	../tests/unit_tests.py	/^    def setup_stage(self, stage_name):$/;"	kind:member	line:145
+size	../newspaper/source.py	/^    def size(self):$/;"	kind:member	line:383
+source.py	../newspaper/source.py	1;"	kind:file	line:1
+source_suffix	../docs/conf.py	/^source_suffix = '.rst'$/;"	kind:variable	line:42
+split	../newspaper/utils.py	/^    def split(self, string):$/;"	kind:member	line:80
+split_sentences	../newspaper/nlp.py	/^def split_sentences(text):$/;"	kind:function	line:153
+split_title	../newspaper/extractors.py	/^    def split_title(self, title, splitter, hint=None):$/;"	kind:member	line:350
+split_words	../newspaper/nlp.py	/^def split_words(text):$/;"	kind:function	line:109
+square_image	../newspaper/images.py	/^def square_image(img):$/;"	kind:function	line:58
+stopwords	../newspaper/nlp.py	/^stopwords = set()$/;"	kind:variable	line:20
+str_to_image	../newspaper/images.py	/^def str_to_image(s):$/;"	kind:function	line:36
+stripTags	../newspaper/parsers.py	/^    def stripTags(cls, node, *tags):$/;"	kind:member	line:99
+styles	../docs/_themes/flask_theme_support.py	/^    styles = {$/;"	kind:variable	line:11
+summarize	../newspaper/nlp.py	/^def summarize(url='', title='', text='', max_sents=5):$/;"	kind:function	line:40
+templates_path	../docs/conf.py	/^templates_path = ['_templates']$/;"	kind:variable	line:39
+test_arabic_fulltext_extract	../tests/unit_tests.py	/^    def test_arabic_fulltext_extract(self):$/;"	kind:member	line:635
+test_article_custom_params	../tests/unit_tests.py	/^    def test_article_custom_params(self):$/;"	kind:member	line:596
+test_article_default_params	../tests/unit_tests.py	/^    def test_article_default_params(self):$/;"	kind:member	line:587
+test_cache_categories	../tests/unit_tests.py	/^    def test_cache_categories(self):$/;"	kind:member	line:483
+test_chinese_fulltext_extract	../tests/unit_tests.py	/^    def test_chinese_fulltext_extract(self):$/;"	kind:member	line:624
+test_download_html	../tests/unit_tests.py	/^    def test_download_html(self):$/;"	kind:member	line:175
+test_download_works	../tests/unit_tests.py	/^    def test_download_works(self):$/;"	kind:member	line:558
+test_exhaustive	../tests/unit_tests.py	/^    def test_exhaustive(self):$/;"	kind:member	line:117
+test_get_canonical_link_hostname_og_url_absolute_url	../tests/unit_tests.py	/^    def test_get_canonical_link_hostname_og_url_absolute_url(self):$/;"	kind:member	line:373
+test_get_canonical_link_og_url_absolute_url	../tests/unit_tests.py	/^    def test_get_canonical_link_og_url_absolute_url(self):$/;"	kind:member	line:367
+test_get_canonical_link_rel_canonical	../tests/unit_tests.py	/^    def test_get_canonical_link_rel_canonical(self):$/;"	kind:member	line:356
+test_get_canonical_link_rel_canonical_absolute_url	../tests/unit_tests.py	/^    def test_get_canonical_link_rel_canonical_absolute_url(self):$/;"	kind:member	line:361
+test_get_title_basic	../tests/unit_tests.py	/^    def test_get_title_basic(self):$/;"	kind:member	line:335
+test_get_title_quotes	../tests/unit_tests.py	/^    def test_get_title_quotes(self):$/;"	kind:member	line:347
+test_get_title_split	../tests/unit_tests.py	/^    def test_get_title_split(self):$/;"	kind:member	line:339
+test_get_title_split_escaped	../tests/unit_tests.py	/^    def test_get_title_split_escaped(self):$/;"	kind:member	line:343
+test_get_top_image_from_meta	../tests/unit_tests.py	/^    def test_get_top_image_from_meta(self):$/;"	kind:member	line:379
+test_hot_trending	../tests/unit_tests.py	/^    def test_hot_trending(self):$/;"	kind:member	line:543
+test_languages_api_call	../tests/unit_tests.py	/^    def test_languages_api_call(self):$/;"	kind:member	line:662
+test_meta_extraction	../tests/unit_tests.py	/^    def test_meta_extraction(self):$/;"	kind:member	line:249
+test_meta_refresh_no_url_redirect	../tests/unit_tests.py	/^    def test_meta_refresh_no_url_redirect(self):$/;"	kind:member	line:195
+test_meta_refresh_redirect	../tests/unit_tests.py	/^    def test_meta_refresh_redirect(self):$/;"	kind:member	line:182
+test_meta_type_extraction	../tests/unit_tests.py	/^    def test_meta_type_extraction(self):$/;"	kind:member	line:242
+test_nlp_body	../tests/unit_tests.py	/^    def test_nlp_body(self):$/;"	kind:member	line:313
+test_parse_html	../tests/unit_tests.py	/^    def test_parse_html(self):$/;"	kind:member	line:213
+test_popular_urls	../tests/unit_tests.py	/^    def test_popular_urls(self):$/;"	kind:member	line:549
+test_pre_download_nlp	../tests/unit_tests.py	/^    def test_pre_download_nlp(self):$/;"	kind:member	line:298
+test_pre_download_parse	../tests/unit_tests.py	/^    def test_pre_download_parse(self):$/;"	kind:member	line:206
+test_pre_parse_nlp	../tests/unit_tests.py	/^    def test_pre_parse_nlp(self):$/;"	kind:member	line:306
+test_prepare_url	../tests/unit_tests.py	/^    def test_prepare_url(self):$/;"	kind:member	line:522
+test_source_build	../tests/unit_tests.py	/^    def test_source_build(self):$/;"	kind:member	line:430
+test_source_custom_params	../tests/unit_tests.py	/^    def test_source_custom_params(self):$/;"	kind:member	line:613
+test_source_default_params	../tests/unit_tests.py	/^    def test_source_default_params(self):$/;"	kind:member	line:605
+test_source_url_input_none	../tests/unit_tests.py	/^    def test_source_url_input_none(self):$/;"	kind:member	line:424
+test_spanish_fulltext_extract	../tests/unit_tests.py	/^    def test_spanish_fulltext_extract(self):$/;"	kind:member	line:648
+test_url	../tests/unit_tests.py	/^    def test_url(self):$/;"	kind:member	line:168
+test_valid_urls	../tests/unit_tests.py	/^    def test_valid_urls(self):$/;"	kind:member	line:501
+texinfo_documents	../docs/conf.py	/^texinfo_documents = [$/;"	kind:variable	line:252
+text.py	../newspaper/text.py	1;"	kind:file	line:1
+textToPara	../newspaper/parsers.py	/^    def textToPara(cls, text):$/;"	kind:member	line:162
+throw_if_not_downloaded_verbose	../newspaper/article.py	/^    def throw_if_not_downloaded_verbose(self):$/;"	kind:member	line:516
+throw_if_not_parsed_verbose	../newspaper/article.py	/^    def throw_if_not_parsed_verbose(self):$/;"	kind:member	line:528
+thumbnail	../newspaper/images.py	/^    def thumbnail(self):$/;"	kind:member	line:228
+thumbnail_size	../newspaper/images.py	/^thumbnail_size = 90, 90$/;"	kind:variable	line:25
+timed	../newspaper/utils.py	/^    def timed(*args, **kw):$/;"	kind:function	line:247
+timelimit	../newspaper/utils.py	/^def timelimit(timeout):$/;"	kind:function	line:123
+title_score	../newspaper/nlp.py	/^def title_score(title, sentence):$/;"	kind:function	line:168
+to_valid_filename	../newspaper/utils.py	/^def to_valid_filename(s):$/;"	kind:function	line:207
+uniqify_list	../newspaper/extractors.py	/^        def uniqify_list(lst):$/;"	kind:function	line:81
+unit_tests.py	../tests/unit_tests.py	1;"	kind:file	line:1
+update_language	../newspaper/extractors.py	/^    def update_language(self, meta_lang):$/;"	kind:member	line:62
+update_language	../newspaper/outputformatters.py	/^    def update_language(self, meta_lang):$/;"	kind:member	line:28
+update_node_count	../newspaper/extractors.py	/^    def update_node_count(self, node, add_to_count):$/;"	kind:member	line:955
+update_score	../newspaper/extractors.py	/^    def update_score(self, node, add_to_score):$/;"	kind:member	line:942
+url	../setup.py	/^    url='https:\/\/github.com\/codelucas\/newspaper\/',$/;"	kind:variable	line:52
+url_to_filetype	../newspaper/urls.py	/^def url_to_filetype(abs_url):$/;"	kind:function	line:240
+urls.py	../newspaper/urls.py	1;"	kind:file	line:1
+utils.py	../newspaper/utils.py	1;"	kind:file	line:1
+valid_url	../newspaper/urls.py	/^def valid_url(url, verbose=False, test=False):$/;"	kind:function	line:100
+version	../docs/conf.py	/^version = '0.0.2'$/;"	kind:variable	line:59
+version	../setup.py	/^    version='0.2.5',$/;"	kind:variable	line:47
+version.py	../newspaper/version.py	1;"	kind:file	line:1
+version_info	../newspaper/version.py	/^version_info = (0, 2, 5)$/;"	kind:variable	line:10
+videos.py	../newspaper/videos/videos.py	1;"	kind:file	line:1
+wait_completion	../newspaper/mthreading.py	/^    def wait_completion(self):$/;"	kind:member	line:54
+walk_siblings	../newspaper/extractors.py	/^    def walk_siblings(self, node):$/;"	kind:member	line:865
+xpath_re	../newspaper/parsers.py	/^    def xpath_re(cls, node, expression):$/;"	kind:member	line:28
+zip_safe	../setup.py	/^    zip_safe=False,$/;"	kind:variable	line:57
