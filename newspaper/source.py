@@ -56,7 +56,7 @@ class Source(object):
         """
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
-        self.limit = None
+        self.limit = 5000
         self.config = config or Configuration()
         self.config = utils.extend_config(self.config, kwargs)
 
@@ -83,10 +83,13 @@ class Source(object):
         self.is_parsed = False
         self.is_downloaded = False
 
-    def build(self):
+    def build(self, limit=None):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
+        if limit:
+
+            self.limit = limit
         self.download()
         self.parse()
 
@@ -324,7 +327,7 @@ class Source(object):
         """
         articles = self._generate_articles()
         self.articles = articles
-        log.debug('%d articles generated and cutoff at %d', len(articles), limit)
+        log.debug('%d articles generated and cutoff at %d', len(articles), self.limit)
 
     def download_articles(self, threads=1):
         """Downloads all articles attached to self
