@@ -260,7 +260,8 @@ class Source(object):
             for url in urls:
                 article = Article(url=url, source_url=feed.url, config=self.config)
                 cur_articles.append(article)
-
+                articles_count += 1
+                if articles_count > self.limit: break
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
@@ -295,7 +296,8 @@ class Source(object):
                 _article = Article(
                     url=indiv_url, source_url=category.url, title=indiv_title, config=self.config)
                 cur_articles.append(_article)
-
+                articles_count += 1
+                if articles_count > self.limit: break
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
@@ -319,6 +321,7 @@ class Source(object):
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
+        articles = category_articles
         uniq = {article.url: article for article in articles}
         return list(uniq.values())
 
@@ -329,7 +332,7 @@ class Source(object):
         self.articles = articles
         log.debug('%d articles generated and cutoff at %d', len(articles), self.limit)
 
-    def download_articles(self, threads=1):
+    def download_articles(self, threads=3):
         """Downloads all articles attached to self
         """
         # TODO fix how the article's is_downloaded is not set!
