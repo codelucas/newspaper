@@ -11,7 +11,9 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+
 import copy
+
 import logging
 import re
 import re
@@ -22,6 +24,7 @@ from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
 from . import urls
+
 from .utils import StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)
@@ -53,6 +56,7 @@ bad_domains = ['amazon', 'doubleclick', 'twitter']
 
 
 class ContentExtractor(object):
+
     def __init__(self, config):
         self.config = config
         self.parser = self.config.get_parser()
@@ -96,6 +100,7 @@ class ContentExtractor(object):
             Takes a candidate line of html or text and
             extracts out the name(s) in list form:
             >>> parse_byline('<div>By: <strong>Lucas Ou-Yang</strong>,<strong>Alex Smith</strong></div>')
+
             ['Lucas Ou-Yang', 'Alex Smith']
             """
             # Remove HTML boilerplate
@@ -119,7 +124,9 @@ class ContentExtractor(object):
 
             for token in name_tokens:
                 if token in delimiters:
+
                     if len(curname) > 0:
+
                         _authors.append(' '.join(curname))
                         curname = []
 
@@ -159,6 +166,10 @@ class ContentExtractor(object):
 
         return uniqify_list(authors)
 
+
+
+
+
         # TODO Method 2: Search raw html for a by-line
         # match = re.search('By[\: ].*\\n|From[\: ].*\\n', html)
         # try:
@@ -177,12 +188,15 @@ class ContentExtractor(object):
         1. Pubdate from URL
         2. Pubdate from metadata
         3. Raw regex searches in the HTML + added heuristics
+		#added here for increase result accuracy in specific case
+		4. Pubdate from specific tag like time
         """
 
         def parse_date_str(date_str):
             if date_str:
                 try:
                     return date_parser(date_str)
+
                 except (ValueError, OverflowError, AttributeError):
                     # near all parse failures are due to URL dates without a day
                     # specifier, e.g. /2014/04/
@@ -200,10 +214,16 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'property', 'value': 'article:published_time',
              'content': 'content'},
+			{'attribute': 'property', 'value': 'og:updated_time',
+			'content': 'content'},
             {'attribute': 'name', 'value': 'OriginalPublicationDate',
              'content': 'content'},
             {'attribute': 'itemprop', 'value': 'datePublished',
              'content': 'datetime'},
+			{'attribute': 'class', 'value': 'article-date', 'content': 'content'},
+            {'attribute': 'class', 'value': 'postInfoDate', 'content': 'content'},
+            {'attribute': 'class', 'value': 'time', 'content': 'content'},
+            {'attribute': 'id', 'value': 'date', 'content': 'content'},
             {'attribute': 'property', 'value': 'og:published_time',
              'content': 'content'},
             {'attribute': 'name', 'value': 'article_date_original',
@@ -212,8 +232,12 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'name', 'value': 'sailthru.date',
              'content': 'content'},
+			{'attribute': 'name', 'value': 'eomportal-lastUpdate', 'content': 'content'},
+			{'attribute': 'property', 'value': 'sailthru.date', 'content': 'content'},
             {'attribute': 'name', 'value': 'PublishDate',
              'content': 'content'},
+			{'attribute': 'data-datetime', 'value': 'value', 'content': 'content'},
+            {'attribute': 'class', 'value': 'article-meta', 'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
         ]
@@ -227,9 +251,18 @@ class ContentExtractor(object):
                     meta_tags[0],
                     known_meta_tag['content'])
                 datetime_obj = parse_date_str(date_str)
+				if datetime_obj is None:
+                    date_str = self.parser.getText(meta_tags[0])
+                    datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
 
+        time_tags = self.parser.getElementsByTag(doc,tag='time')
+        if time_tags:
+            date_str = self.parser.getText(time_tags[0])
+            datetime_obj = parse_date_str(date_str)
+            if datetime_obj:
+                return datetime_obj
         return None
 
     def get_title(self, doc):
@@ -333,7 +366,11 @@ class ContentExtractor(object):
         # split title with »
         if not used_delimeter and ' » ' in title_text:
             title_text = self.split_title(title_text, ARROWS_SPLITTER,
+
+
+
                                           title_text_h1)
+
             used_delimeter = True
 
         title = MOTLEY_REPLACEMENT.replaceAll(title_text)
@@ -522,6 +559,7 @@ class ContentExtractor(object):
         return data
 
     def get_canonical_link(self, article_url, doc):
+
         """
         Return the article's canonical URL
 
@@ -636,15 +674,19 @@ class ContentExtractor(object):
                 if self.config.verbose:
                     print('elim category url %s for no domain and path'
                           % p_url)
+					logging.debug('elim category url %s for no domain and path' % p_url)
                 continue
             if path and path.startswith('#'):
                 if self.config.verbose:
                     print('elim category url %s path starts with #' % p_url)
-                continue
+					logging.debug('elim category url %s path starts with #' % p_url)
+                 continue
             if scheme and (scheme != 'http' and scheme != 'https'):
                 if self.config.verbose:
                     print(('elim category url %s for bad scheme, '
                            'not http nor https' % p_url))
+					logging.debug('elim category url %s for bad scheme, '
+                           'not http nor https' % p_url)
                 continue
 
             if domain:
@@ -657,6 +699,8 @@ class ContentExtractor(object):
                         if self.config.verbose:
                             print(('subdomain contains at %s and %s' %
                                    (str(part), str(domain_tld.domain))))
+						logging.debug('subdomain contains at %s and %s' %
+                                   (str(part), str(domain_tld.domain)))
                         subdomain_contains = True
                         break
 
@@ -667,11 +711,15 @@ class ContentExtractor(object):
                     if self.config.verbose:
                         print(('elim category url %s for domain '
                                'mismatch' % p_url))
+						logging.debug('elim category url %s for domain '
+                               'mismatch' % p_url)
                         continue
                 elif child_tld.subdomain in ['m', 'i']:
                     if self.config.verbose:
                         print(('elim category url %s for mobile '
                                'subdomain' % p_url))
+
+
                     continue
                 else:
                     valid_categories.append(scheme + '://' + domain)
@@ -684,12 +732,16 @@ class ContentExtractor(object):
                 if 'index.html' in path_chunks:
                     path_chunks.remove('index.html')
 
+
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
+
                     valid_categories.append(domain + path)
                 else:
                     if self.config.verbose:
                         print(('elim category url %s for >1 path chunks '
                                'or size path chunks' % p_url))
+						logging.debug('elim category url %s for >1 path chunks '
+                               'or size path chunks' % p_url)
         stopwords = [
             'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
             'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
@@ -718,6 +770,8 @@ class ContentExtractor(object):
                     if self.config.verbose:
                         print(('elim category url %s for subdomain '
                                'contain stopword!' % p_url))
+					logging.debug('elim category url %s for subdomain '
+                               'contain stopword!' % p_url)
                     bad = True
                     break
             if not bad:
@@ -1038,7 +1092,13 @@ class ContentExtractor(object):
         or paras with no gusto; add adjacent nodes which look contenty
         """
         node = self.add_siblings(top_node)
+		bad_words = ['abonnez-vous', 'abonne-toi', 'abonne', 'newsletter', 'courrier', 'inscription', 'abonné', 'cordialement', 'adressez-vous', 'adresse-toi']
         for e in self.parser.getChildren(node):
+		    gather_wds = self.parser.getText(e).split(' ')
+            for g_words in gather_wds:
+                if g_words.lower() in bad_words:
+                    self.parser.remove(e)
+
             e_tag = self.parser.getTag(e)
             if e_tag != 'p':
                 if self.is_highlink_density(e):

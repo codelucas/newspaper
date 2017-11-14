@@ -31,7 +31,9 @@ GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
 
 BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
-              'account', 'subscribe', 'donate', 'shop', 'admin']
+              'account', 'subscribe', 'donate', 'shop', 'admin', 'auth_user',
+              'emploi', 'annonces', 'blog', 'courrierdeslecteurs',	'page_newsletters',
+              'adserver', 'clicannonces', 'services', 'contribution', 'boutique', 'espaceclient']
 
 BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
 
@@ -138,6 +140,8 @@ def valid_url(url, verbose=False, test=False):
 
     # 11 chars is shortest valid url length, eg: http://x.co
     if url is None or len(url) < 11:
+
+
         if verbose: print('\t%s rejected because len of url is less than 11' % url)
         return False
 
@@ -145,6 +149,8 @@ def valid_url(url, verbose=False, test=False):
     r2 = ('http://' not in url) and ('https://' not in url)
 
     if r1 or r2:
+
+
         if verbose: print('\t%s rejected because len of url structure' % url)
         return False
 
@@ -167,6 +173,8 @@ def valid_url(url, verbose=False, test=False):
 
         # if the file type is a media type, reject instantly
         if file_type and file_type not in ALLOWED_TYPES:
+
+
             if verbose: print('\t%s rejected due to bad filetype' % url)
             return False
 
@@ -179,6 +187,13 @@ def valid_url(url, verbose=False, test=False):
     if 'index' in path_chunks:
         path_chunks.remove('index')
 
+
+
+
+
+
+
+
     # extract the tld (top level domain)
     tld_dat = tldextract.extract(url)
     subd = tld_dat.subdomain
@@ -187,8 +202,30 @@ def valid_url(url, verbose=False, test=False):
     url_slug = path_chunks[-1] if path_chunks else ''
 
     if tld in BAD_DOMAINS:
-        if verbose: print('%s caught for a bad tld' % url)
+        if verbose:
+			print('%s caught for a bad tld' % url)
+			logging.debug('%s caught for a bad tld' % url)
         return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if len(path_chunks) == 0:
         dash_count, underscore_count = 0, 0
@@ -201,18 +238,25 @@ def valid_url(url, verbose=False, test=False):
 
         if dash_count >= underscore_count:
             if tld not in [x.lower() for x in url_slug.split('-')]:
+
+
                 if verbose: print('%s verified for being a slug' % url)
                 return True
 
         if underscore_count > dash_count:
             if tld not in [x.lower() for x in url_slug.split('_')]:
+
+
                 if verbose: print('%s verified for being a slug' % url)
                 return True
 
-    # There must be at least 2 subpaths
+    # There must be at least 2 subpaths except for zinfos974
     if len(path_chunks) <= 1:
-        if verbose: print('%s caught for path chunks too small' % url)
-        return False
+		if tld == 'zinfos974':
+            pass
+        else:
+			if verbose: print('%s caught for path chunks too small' % url)
+			return False
 
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
@@ -225,6 +269,8 @@ def valid_url(url, verbose=False, test=False):
 
     # if we caught the verified date above, it's an article
     if match_date is not None:
+
+
         if verbose: print('%s verified for date' % url)
         return True
 
