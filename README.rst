@@ -1,6 +1,8 @@
 Newspaper3k: Article scraping & curation
 ========================================
 
+🚩 This **fork** introduces the capability of generating keywords based on a (log-likelihood) comparison with a reference corpus such as the *Contemporary Corpus of American English* or the *British National Corpus*.
+
 .. image:: https://badge.fury.io/py/newspaper3k.svg
     :target: http://badge.fury.io/py/newspaper3k.svg
         :alt: Latest version
