@@ -44,6 +44,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
       id              Indonesian
       vi              Vietnamese
       uk              Ukrainian
+      sw              Swahili
 
 A Glance:
 ---------

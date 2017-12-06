@@ -212,6 +212,7 @@ Features
       zh              Chinese
       id              Indonesian
       vi              Vietnamese
+      sw              Swahili
       tr              Turkish
       el              Greek
       uk              Ukrainian

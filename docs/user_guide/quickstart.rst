@@ -261,3 +261,4 @@ of popular news source urls.. In case you need help choosing a news source!
       sv              Swedish
       zh              Chinese
       uk              Ukrainian
+      sw              Swahili
