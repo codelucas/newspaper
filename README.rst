@@ -203,6 +203,7 @@ Features
       it              Italian
       ko              Korean
       no              Norwegian
+      fa              Persian
       pl              Polish
       pt              Portuguese
       sv              Swedish
