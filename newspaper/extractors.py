@@ -183,7 +183,7 @@ class ContentExtractor(object):
             if date_str:
                 try:
                     return date_parser(date_str)
-                except (ValueError, OverflowError, AttributeError):
+                except (ValueError, OverflowError, AttributeError, TypeError):
                     # near all parse failures are due to URL dates without a day
                     # specifier, e.g. /2014/04/
                     return None
