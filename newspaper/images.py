@@ -13,6 +13,8 @@ import math
 import io
 import traceback
 import urllib.parse
+from urllib.parse import urlparse
+from tldextract import tldextract
 
 import requests
 from PIL import Image, ImageFile
@@ -25,6 +27,8 @@ chunk_size = 1024
 thumbnail_size = 90, 90
 minimal_area = 5000
 
+BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'asset', 'sprite', 'qrcode']
+ALLOWED_TYPES = ['jpg', 'jpeg', 'png']
 
 def image_to_str(image):
     s = io.StringIO()
@@ -165,6 +169,52 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
 def fetch_image_dimension(url, useragent, referer=None, retries=1):
     return fetch_url(url, useragent, referer, retries, dimension=True)
+
+
+def valid_image_url(url):
+
+    url = clean_url(url)
+    if not url.startswith(('http://', 'https://')):
+        return False
+    path = urlparse(url).path
+
+    # input url is not in valid form (scheme, netloc, tld)
+    if not path.startswith('/'):
+        return False
+
+    # the '/' which may exist at the end of the url provides us no information
+    if path.endswith('/'):
+        path = path[:-1]
+
+    # '/story/cnn/blahblah/index.html' --> ['story', 'cnn', 'blahblah', 'index.html']
+    path_chunks = [x for x in path.split('/') if len(x) > 0]
+
+    # siphon out the file type. eg: .html, .htm, .md
+    if len(path_chunks) > 0:
+        file_type = urls.url_to_filetype(url)
+
+        # if the file type is a media type, reject instantly
+        if file_type and file_type not in ALLOWED_TYPES:
+            return False
+
+        last_chunk = path_chunks[-1].split('.')
+        # the file type is not of use to use anymore, remove from url
+        if len(last_chunk) > 1:
+            path_chunks[-1] = last_chunk[-2]
+
+
+    # extract the tld (top level domain)
+    tld_dat = tldextract.extract(url)
+    tld = tld_dat.domain.lower()
+
+    if tld in urls.BAD_DOMAINS:
+        return False
+
+    for d in BAD_URLS:
+        if d in url:
+            return False
+
+    return True
 
 
 class Scraper:
