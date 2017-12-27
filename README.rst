@@ -203,6 +203,7 @@ Features
       it              Italian
       ko              Korean
       no              Norwegian
+      fa              Persian
       pl              Polish
       pt              Portuguese
       sv              Swedish
@@ -212,6 +213,7 @@ Features
       zh              Chinese
       id              Indonesian
       vi              Vietnamese
+      sw              Swahili
       tr              Turkish
       el              Greek
       uk              Ukrainian

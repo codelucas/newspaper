@@ -22,6 +22,7 @@ from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
 from . import urls
+from .images import valid_image_url
 from .utils import StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)
@@ -567,7 +568,7 @@ class ContentExtractor(object):
         urls = [img_tag.get('src')
                 for img_tag in img_tags if img_tag.get('src')]
         img_links = set([urljoin(article_url, url)
-                         for url in urls])
+                         for url in urls if valid_image_url(url)])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
