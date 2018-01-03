@@ -216,7 +216,7 @@ class ArticleTestCase(unittest.TestCase):
         AUTHORS = ['Chien-Ming Wang', 'Dana A. Ford', 'James S.A. Corey',
                    'Tom Watkins']
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
-        LEN_IMGS = 46
+        LEN_IMGS = 40 # Based on page and valid_image_url rules
         META_LANG = 'en'
 
         self.article.parse()

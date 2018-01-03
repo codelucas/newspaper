@@ -27,7 +27,7 @@ chunk_size = 1024
 thumbnail_size = 90, 90
 minimal_area = 5000
 
-BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'asset', 'sprite', 'qrcode']
+BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'sprite', 'qrcode']
 ALLOWED_TYPES = ['jpg', 'jpeg', 'png']
 
 def image_to_str(image):
@@ -189,7 +189,7 @@ def valid_image_url(url):
     # '/story/cnn/blahblah/index.html' --> ['story', 'cnn', 'blahblah', 'index.html']
     path_chunks = [x for x in path.split('/') if len(x) > 0]
 
-    # siphon out the file type. eg: .html, .htm, .md
+    # siphon out the file type. eg: jpeg, png
     if len(path_chunks) > 0:
         file_type = urls.url_to_filetype(url)
 
