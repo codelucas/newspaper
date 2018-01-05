@@ -349,6 +349,21 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>{}</title>'.format(title)
         self.assertEqual(self._get_title(html), title)
 
+    def test_get_publishing_date_from_url(self):
+        html = '<body></body>' # Empy doc since we're only testing for the URL date match.
+        doc = self.parser.fromstring(html)
+        with open(os.path.join(TEST_DIR, 'data/test_urls_dates.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('1', 'url_goes_here') form, '1' means valid,
+            # '0' otherwise
+
+        for label, article_url in test_tuples:
+            has_date = bool(int(label))
+            publish_date = self.extractor.get_publishing_date(article_url, doc)
+            self.assertEqual(has_date, bool(publish_date),
+                'url: %s is %ssupposed to be have detected date' % (article_url, '' if has_date else 'not '))
+
     def _get_canonical_link(self, article_url, html):
         doc = self.parser.fromstring(html)
         return self.extractor.get_canonical_link(article_url, doc)
