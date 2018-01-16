@@ -11,8 +11,8 @@ import lxml.etree
 import lxml.html
 import lxml.html.clean
 import re
-import traceback
-from html.parser import HTMLParser
+from html import unescape
+import string
 
 from bs4 import UnicodeDammit
 from copy import deepcopy
@@ -68,7 +68,7 @@ class Parser(object):
             cls.doc = lxml.html.fromstring(html)
             return cls.doc
         except Exception:
-            traceback.print_exc()
+            log.warn('fromstring() returned an invalid string: %s...', html[:20])
             return
 
     @classmethod
@@ -109,13 +109,18 @@ class Parser(object):
 
     @classmethod
     def getElementsByTag(
-            cls, node, tag=None, attr=None, value=None, childs=False):
-        NS = "http://exslt.org/regular-expressions"
+            cls, node, tag=None, attr=None, value=None, childs=False, use_regex=False) -> list:
+        NS = None
         # selector = tag or '*'
         selector = 'descendant-or-self::%s' % (tag or '*')
         if attr and value:
-            selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
-        elems = node.xpath(selector, namespaces={"re": NS})
+            if use_regex:
+                NS = {"re": "http://exslt.org/regular-expressions"}
+                selector = '%s[re:test(@%s, "%s", "i")]' % (selector, attr, value)
+            else:
+                trans = 'translate(@%s, "%s", "%s")' % (attr, string.ascii_uppercase, string.ascii_lowercase)
+                selector = '%s[contains(%s, "%s")]' % (selector, trans, value.lower())
+        elems = node.xpath(selector, namespaces=NS)
         # remove the root node
         # if we have a selection tag
         if node in elems and (tag or childs):
@@ -163,12 +168,9 @@ class Parser(object):
 
     @classmethod
     def getElementsByTags(cls, node, tags):
-        selector = ','.join(tags)
-        elems = cls.css_select(node, selector)
-        # remove the root node
-        # if we have a selection tag
-        if node in elems:
-            elems.remove(node)
+        selector = 'descendant::*[%s]' % (
+            ' or '.join('self::%s' % tag for tag in tags))
+        elems = node.xpath(selector)
         return elems
 
     @classmethod
@@ -215,28 +217,18 @@ class Parser(object):
 
     @classmethod
     def previousSiblings(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=True)):
-            nodes.append(n)
-        return nodes
+        """
+            returns preceding siblings in reverse order (nearest sibling is first)
+        """
+        return [n for n in node.itersiblings(preceding=True)]
 
     @classmethod
     def previousSibling(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=True)):
-            nodes.append(n)
-            if c == 0:
-                break
-        return nodes[0] if nodes else None
+        return node.getprevious()
 
     @classmethod
     def nextSibling(cls, node):
-        nodes = []
-        for c, n in enumerate(node.itersiblings(preceding=False)):
-            nodes.append(n)
-            if c == 0:
-                break
-        return nodes[0] if nodes else None
+        return node.getnext()
 
     @classmethod
     def isTextNode(cls, node):
@@ -247,7 +239,7 @@ class Parser(object):
         if attr:
             attr = node.attrib.get(attr, None)
         if attr:
-            attr = HTMLParser().unescape(attr)
+            attr = unescape(attr)
         return attr
 
     @classmethod

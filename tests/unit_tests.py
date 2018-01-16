@@ -14,7 +14,7 @@ import concurrent.futures
 TEST_DIR = os.path.abspath(os.path.dirname(__file__))
 PARENT_DIR = os.path.join(TEST_DIR, '..')
 
-# newspaper's unit tests are in their own seperate module, so
+# newspaper's unit tests are in their own separate module, so
 # insert the parent directory manually to gain scope of the
 # core module
 sys.path.insert(0, PARENT_DIR)
@@ -56,7 +56,7 @@ def mock_resource_with(filename, resource_type):
     subfolder = 'text' if resource_type == 'txt' else 'html'
     resource_path = os.path.join(TEST_DIR, "data/%s/%s.%s" %
                                  (subfolder, filename, resource_type))
-    with open(resource_path, 'r') as f:
+    with open(resource_path, 'r', encoding='utf-8') as f:
         return f.read()
 
 
@@ -188,7 +188,7 @@ class ArticleTestCase(unittest.TestCase):
         article = Article(
             '', config=config)
         html = mock_resource_with('google_meta_refresh', 'html')
-        article.download(html=html)
+        article.download(input_html=html)
         article.parse()
         self.assertEqual(article.title, 'Example Domain')
 
@@ -199,7 +199,7 @@ class ArticleTestCase(unittest.TestCase):
         article = Article(
             '', config=config)
         html = mock_resource_with('ap_meta_refresh', 'html')
-        article.download(html=html)
+        article.download(input_html=html)
         article.parse()
         self.assertEqual(article.title, 'News from The Associated Press')
 
@@ -350,6 +350,75 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>{}</title>'.format(title)
         self.assertEqual(self._get_title(html), title)
 
+    def _get_canonical_link(self, article_url, html):
+        doc = self.parser.fromstring(html)
+        return self.extractor.get_canonical_link(article_url, doc)
+
+    def test_get_canonical_link_rel_canonical(self):
+        url = 'http://www.example.com/article.html'
+        html = '<link rel="canonical" href="{}">'.format(url)
+        self.assertEqual(self._get_canonical_link('', html), url)
+
+    def test_get_canonical_link_rel_canonical_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<link rel="canonical" href="article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_canonical_link_og_url_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<meta property="og:url" content="article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_canonical_link_hostname_og_url_absolute_url(self):
+        url = 'http://www.example.com/article.html'
+        html = '<meta property="og:url" content="www.example.com/article.html">'
+        article_url = 'http://www.example.com/article?foo=bar'
+        self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_top_image_from_meta(self):
+        html = '<meta property="og:image" content="https://example.com/meta_img_filename.jpg" />' \
+               '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+        html_empty_og_content = '<meta property="og:image" content="" />' \
+            '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+        html_empty_all = '<meta property="og:image" content="" />' \
+            '<meta name="og:image" />'
+        html_rel_img_src = html_empty_all + '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
+        html_rel_img_src2 = html_empty_all + '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
+        html_rel_icon = html_empty_all + '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
+
+        doc = self.parser.fromstring(html)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_img_filename.jpg'
+        )
+        doc = self.parser.fromstring(html_empty_og_content)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_another_img_filename.jpg'
+        )
+        doc = self.parser.fromstring(html_empty_all)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            ''
+        )
+        doc = self.parser.fromstring(html_rel_img_src)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_image.jpg'
+        )
+        doc = self.parser.fromstring(html_rel_img_src2)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_image2.jpg'
+        )
+        doc = self.parser.fromstring(html_rel_icon)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_rel_icon.ico'
+        )
+
 
 class SourceTestCase(unittest.TestCase):
     @print_test
@@ -450,6 +519,7 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+
     @print_test
     def test_pubdate(self):
         """Checks that irrelevant data in url isn't considered as publishing date"""
@@ -480,7 +550,19 @@ class UrlTestCase(unittest.TestCase):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
-        pass
+        from newspaper.urls import prepare_url
+
+        with open(os.path.join(TEST_DIR, 'data/test_prepare_urls.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('real_url', 'url_path', 'source_url') form
+
+        for real, url, source in test_tuples:
+            try:
+                self.assertEqual(real, prepare_url(url, source))
+            except AssertionError:
+                print('\t\turl: %s + %s is supposed to be %s' % (url, source, real))
+                raise
 
 
 class APITestCase(unittest.TestCase):
@@ -600,6 +682,12 @@ class MultiLanguageTestCase(unittest.TestCase):
         text = mock_resource_with('spanish', 'txt')
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'es'))
+
+
+class TestNewspaperLanguagesApi(unittest.TestCase):
+    @print_test
+    def test_languages_api_call(self):
+        newspaper.languages()
 
 
 if __name__ == '__main__':

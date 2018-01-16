@@ -14,26 +14,25 @@ import logging
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
-                   StopWordsKorean)
+                   StopWordsKorean, StopWordsHindi)
 from .version import __version__
 
 log = logging.getLogger(__name__)
 
 
 class Configuration(object):
-
     def __init__(self):
         """
         Modify any of these Article / Source properties
-        TODO: Have a seperate ArticleConfig and SourceConfig extend this!
+        TODO: Have a separate ArticleConfig and SourceConfig extend this!
         """
         self.MIN_WORD_COUNT = 300  # num of word tokens in text
-        self.MIN_SENT_COUNT = 7    # num of sentence tokens
-        self.MAX_TITLE = 200       # num of chars
-        self.MAX_TEXT = 100000     # num of chars
-        self.MAX_KEYWORDS = 35     # num of strings in list
-        self.MAX_AUTHORS = 10      # num strings in list
-        self.MAX_SUMMARY = 5000    # num of chars
+        self.MIN_SENT_COUNT = 7  # num of sentence tokens
+        self.MAX_TITLE = 200  # num of chars
+        self.MAX_TEXT = 100000  # num of chars
+        self.MAX_KEYWORDS = 35  # num of strings in list
+        self.MAX_AUTHORS = 10  # num strings in list
+        self.MAX_SUMMARY = 5000  # num of chars
         self.MAX_SUMMARY_SENT = 5  # num of sentences
 
         # max number of urls we cache for each news source
@@ -55,7 +54,7 @@ class Configuration(object):
         # You may keep the html of just the main article body
         self.keep_article_html = False
 
-        # Fail for error respones (e.g. 404 page)
+        # Fail for error responses (e.g. 404 page)
         self.http_success_only = True
 
         # English is the fallback
@@ -65,7 +64,9 @@ class Configuration(object):
         self.stopwords_class = StopWords
 
         self.browser_user_agent = 'newspaper/%s' % __version__
+        self.headers = {}
         self.request_timeout = 7
+        self.proxies = {}
         self.number_threads = 10
 
         self.verbose = False  # for debugging
@@ -101,16 +102,22 @@ class Configuration(object):
     language = property(get_language, set_language,
                         del_language, "language prop")
 
-    def get_stopwords_class(self, language):
+    @staticmethod
+    def get_stopwords_class(language):
         if language == 'ko':
             return StopWordsKorean
+        elif language == 'hi':
+            return StopWordsHindi
         elif language == 'zh':
             return StopWordsChinese
-        elif language == 'ar':
+        # Persian and Arabic Share an alphabet
+        # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
+        elif language == 'ar' or language == 'fa':
             return StopWordsArabic
         return StopWords
 
-    def get_parser(self):
+    @staticmethod
+    def get_parser():
         return Parser
 
 

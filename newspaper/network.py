@@ -18,57 +18,76 @@ from .settings import cj
 log = logging.getLogger(__name__)
 
 
-def get_request_kwargs(timeout, useragent):
+FAIL_ENCODING = 'ISO-8859-1'
+
+
+def get_request_kwargs(timeout, useragent, proxies, headers):
     """This Wrapper method exists b/c some values in req_kwargs dict
     are methods which need to be called every time we make a request
     """
     return {
-        'headers': {'User-Agent': useragent},
+        'headers': headers if headers else {'User-Agent': useragent},
         'cookies': cj(),
         'timeout': timeout,
-        'allow_redirects': True
+        'allow_redirects': True,
+        'proxies': proxies
     }
 
 
 def get_html(url, config=None, response=None):
-    """Retrieves the html for either a url or a response object. All html
-    extractions MUST come from this method due to some intricies in the
-    requests module. To get the encoding, requests only uses the HTTP header
-    encoding declaration requests.utils.get_encoding_from_headers() and reverts
-    to ISO-8859-1 if it doesn't find one. This results in incorrect character
-    encoding in a lot of cases.
+    """HTTP response code agnostic
     """
-    FAIL_ENCODING = 'ISO-8859-1'
+    try:
+        return get_html_2XX_only(url, config, response)
+    except requests.exceptions.RequestException as e:
+        log.debug('get_html() error. %s on URL: %s' % (e, url))
+        return ''
+
+
+def get_html_2XX_only(url, config=None, response=None):
+    """Consolidated logic for http requests from newspaper. We handle error cases:
+    - Attempt to find encoding of the html by using HTTP header. Fallback to
+      'ISO-8859-1' if not provided.
+    - Error out if a non 2XX HTTP response code is returned.
+    """
     config = config or Configuration()
     useragent = config.browser_user_agent
     timeout = config.request_timeout
+    proxies = config.proxies
+    headers = config.headers
 
     if response is not None:
-        if response.encoding != FAIL_ENCODING:
-            return response.text
-        return response.content
+        return _get_html_from_response(response)
 
     try:
-        html = None
-
         response = requests.get(
-            url=url, **get_request_kwargs(timeout, useragent))
-
-        if response.encoding != FAIL_ENCODING:
-            html = response.text
-        else:
-            html = response.content
-
-        if config.http_success_only:
-            response.raise_for_status()  # fail if other than "ok" response
-
-        if html is None:
-            html = ''
-
-        return html
+            url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
     except requests.exceptions.RequestException as e:
-        log.debug('%s on %s' % (e, url))
+        log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
         return ''
+
+    html = _get_html_from_response(response)
+
+    if config.http_success_only:
+        # fail if HTTP sends a non 2XX response
+        response.raise_for_status()
+
+    return html
+
+
+def _get_html_from_response(response):
+    if response.encoding != FAIL_ENCODING:
+        # return response as a unicode string
+        html = response.text
+    else:
+        html = response.content
+        if 'charset' not in response.headers.get('content-type'):
+            encodings = requests.utils.get_encodings_from_content(response.text)
+            if len(encodings) > 0:
+                response.encoding = encodings[0]
+                html = response.text
+
+    return html or ''
 
 
 class MRequest(object):
@@ -83,12 +102,14 @@ class MRequest(object):
         config = config or Configuration()
         self.useragent = config.browser_user_agent
         self.timeout = config.request_timeout
+        self.proxies = config.proxies
+        self.headers = config.headers
         self.resp = None
 
     def send(self):
         try:
             self.resp = requests.get(self.url, **get_request_kwargs(
-                                     self.timeout, self.useragent))
+                self.timeout, self.useragent, self.proxies, self.headers))
             if self.config.http_success_only:
                 self.resp.raise_for_status()
         except requests.exceptions.RequestException as e:
@@ -115,28 +136,3 @@ def multithread_request(urls, config=None):
     pool.wait_completion()
     return m_requests
 
-# def async_request(urls, timeout=7):
-#    """receives a list of requests and sends them all
-#    asynchronously at once"""
-#
-#    rs = (grequests.request('GET', url,
-#          **get_request_kwargs(timeout)) for url in urls)
-#    responses = grequests.map(rs, size=10)
-#
-#    return responses
-
-
-# def sync_request(urls_or_url, config=None):
-#    """
-#    Wrapper for a regular request, no asyn nor multithread.
-#    """
-#    # TODO config = default_config if not config else config
-#    useragent = config.browser_user_agent
-#    timeout = config.request_timeout
-#    if isinstance(urls_or_url, list):
-#        resps = [requests.get(url, **get_request_kwargs(timeout, useragent))
-#                                                for url in urls_or_url]
-#        return resps
-#    else:
-#        return requests.get(urls_or_url,
-#                            **get_request_kwargs(timeout, useragent))

@@ -1,12 +1,13 @@
 #!/bin/python2.7
 # -*- coding: utf-8 -*-
 """
-Lucas Ou 2014 -- http://lucasou.com
+Lucas Ou-Yang 2014 -- http://codelucas.com
 """
 
 import sys
 import os
 import codecs
+
 
 try:
     from setuptools import setup
@@ -20,8 +21,17 @@ packages = [
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python3 setup.py sdist upload')  # bdist_wininst
+    os.system('python3 setup.py sdist upload -r pypi')
     sys.exit()
+
+
+# This *must* run early. Please see this API limitation on our users:
+# https://github.com/codelucas/newspaper/issues/155
+if sys.version_info[0] == 2 and sys.argv[-1] not in ['publish', 'upload']:
+    sys.exit('WARNING! You are attempting to install newspaper3k\'s '
+             'python3 repository on python2. PLEASE RUN '
+             '`$ pip3 install newspaper3k` for python3 or '
+             '`$ pip install newspaper` for python2')
 
 
 with open('requirements.txt') as f:
@@ -34,7 +44,7 @@ with codecs.open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='newspaper3k',
-    version='0.1.8',
+    version='0.2.5',
     description='Simplified python article discovery & extraction.',
     long_description=readme,
     author='Lucas Ou-Yang',

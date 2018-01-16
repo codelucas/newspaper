@@ -366,6 +366,8 @@ def print_available_languages():
         'ko': 'Korean',
         'no': 'Norwegian',
         'nb': 'Norwegian (Bokmål)',
+        'fa': 'Persian',
+        'pl': 'Polish',
         'pt': 'Portuguese',
         'sv': 'Swedish',
         'hu': 'Hungarian',
@@ -376,6 +378,10 @@ def print_available_languages():
         'vi': 'Vietnamese',
         'mk': 'Macedonian',
         'tr': 'Turkish',
+        'el': 'Greek',
+        'uk': 'Ukrainian',
+        'hi': 'Hindi',
+        'sw': 'Swahili'
     }
 
     codes = get_available_languages()

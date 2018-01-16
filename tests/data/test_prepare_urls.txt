@@ -1,0 +1,4 @@
+http://example.com/cat/123/ ./123/ http://example.com/cat/
+http://example.com/cat/123/ 123/ http://example.com/cat/
+http://example.com/cat/123/ http://example.com/cat/123/ http://example.com/cat/
+http://example.com/123/ /123/ http://example.com/cat/
