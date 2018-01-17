@@ -78,7 +78,7 @@ A Glance:
 
     >>> import newspaper
 
-    >>> cnn_paper = newspaper.build('http://cnn.com')
+    >>> cnn_paper = newspaper.build('http://edition.cnn.com')
 
     >>> for article in cnn_paper.articles:
     >>>     print(article.url)
