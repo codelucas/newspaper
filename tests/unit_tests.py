@@ -523,7 +523,7 @@ class UrlTestCase(unittest.TestCase):
     @print_test
     def test_pubdate(self):
         """Checks that irrelevant data in url isn't considered as publishing date"""
-        from newspaper.urls import DATE_REGEX
+        from newspaper.urls import STRICT_DATE_REGEX
 
         with open(os.path.join(TEST_DIR, 'data/test_urls_pubdate.txt'), 'r') as f:
             lines = f.readlines()
@@ -533,7 +533,7 @@ class UrlTestCase(unittest.TestCase):
 
             for pubdate, url in test_tuples:
                 is_present = bool(int(pubdate))
-                date_match = re.search(DATE_REGEX, url)
+                date_match = re.search(STRICT_DATE_REGEX, url)
                 try:
                     self.assertEqual(is_present, bool(date_match))
                 except AssertionError:

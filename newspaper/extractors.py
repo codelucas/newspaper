@@ -188,7 +188,7 @@ class ContentExtractor(object):
                     # specifier, e.g. /2014/04/
                     return None
 
-        date_match = re.search(urls.DATE_REGEX, url)
+        date_match = re.search(urls.STRICT_DATE_REGEX, url)
         if date_match:
             date_str = date_match.group(0)
             datetime_obj = parse_date_str(date_str)
