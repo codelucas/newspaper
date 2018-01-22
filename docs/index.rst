@@ -20,7 +20,7 @@ Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed.
     >>> import newspaper
     >>> newspaper.languages()
 
-    Your available langauges are:
+    Your available languages are:
     input code      full name
 
       ar              Arabic

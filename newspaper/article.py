@@ -481,7 +481,7 @@ class Article(object):
         self.summary = summary[:self.config.MAX_SUMMARY]
 
     def set_meta_language(self, meta_lang):
-        """Save langauges in their ISO 2-character form
+        """Save languages in their ISO 2-character form
         """
         if meta_lang and len(meta_lang) >= 2 and \
            meta_lang in get_available_languages():
