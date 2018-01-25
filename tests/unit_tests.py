@@ -496,6 +496,26 @@ class SourceTestCase(unittest.TestCase):
         s.set_categories()
         self.assertCountEqual(saved_urls, s.category_urls())
 
+class ImageTestCase(unittest.TestCase):
+
+    @print_test
+    def test_allows_valid_article_images(self):
+        from newspaper.images import valid_image_url
+
+        with open(os.path.join(TEST_DIR, 'data/test_image_urls.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('1', 'url_goes_here') form, '1' means valid,
+            # '0' otherwise
+
+        for lst, url in test_tuples:
+            truth_val = bool(int(lst))
+            try:
+                self.assertEqual(truth_val, valid_image_url(url))
+            except AssertionError:
+                print('\t\turl: %s is supposed to be %s' % (url, truth_val))
+                raise
+
 
 class UrlTestCase(unittest.TestCase):
     @print_test

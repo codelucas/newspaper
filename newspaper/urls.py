@@ -35,7 +35,7 @@ BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
               'account', 'subscribe', 'donate', 'shop', 'admin']
 
-BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
+BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter', 'googlesyndication', 'facebook', 'scorecardresearch']
 
 
 def remove_args(url, keep_params=(), frags=False):

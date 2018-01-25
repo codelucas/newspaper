@@ -27,8 +27,9 @@ chunk_size = 1024
 thumbnail_size = 90, 90
 minimal_area = 5000
 
-BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'sprite', 'qrcode']
-ALLOWED_TYPES = ['jpg', 'jpeg', 'png']
+BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'sprite', 'qrcode', 'shim', 'btn-']
+BAD_CHUNKS = ['ad', 'ads', 'slick_thumb', 'banners', 'facebook', 'twitter', 'whatsapp', 'linkedin', 'tpwidgets']
+ALLOWED_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'tiff']
 
 def image_to_str(image):
     s = io.StringIO()
@@ -174,26 +175,20 @@ def fetch_image_dimension(url, useragent, referer=None, retries=1):
 def valid_image_url(url):
 
     url = clean_url(url)
-    if not url.startswith(('http://', 'https://')):
-        return False
     path = urlparse(url).path
-
-    # input url is not in valid form (scheme, netloc, tld)
-    if not path.startswith('/'):
-        return False
 
     # the '/' which may exist at the end of the url provides us no information
     if path.endswith('/'):
         path = path[:-1]
 
-    # '/story/cnn/blahblah/index.html' --> ['story', 'cnn', 'blahblah', 'index.html']
-    path_chunks = [x for x in path.split('/') if len(x) > 0]
+    # '/story/cnn/blahblah/photo.png --> ['story', 'cnn', 'blahblah', 'photo.png']
+    path_chunks = [x.lower() for x in path.split('/') if len(x) > 0]
 
     # siphon out the file type. eg: jpeg, png
     if len(path_chunks) > 0:
         file_type = urls.url_to_filetype(url)
 
-        # if the file type is a media type, reject instantly
+        # if the file type is an invalid media type reject instantly but allow extension-less images
         if file_type and file_type not in ALLOWED_TYPES:
             return False
 
@@ -212,6 +207,10 @@ def valid_image_url(url):
 
     for d in BAD_URLS:
         if d in url:
+            return False
+
+    for b in BAD_CHUNKS:
+        if b in path_chunks:
             return False
 
     return True
