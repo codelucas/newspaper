@@ -7,6 +7,7 @@ import os
 import unittest
 import time
 import traceback
+import re
 from collections import defaultdict, OrderedDict
 import concurrent.futures
 
@@ -518,6 +519,32 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+
+    @print_test
+    def test_pubdate(self):
+        """Checks that irrelevant data in url isn't considered as publishing date"""
+        from newspaper.urls import STRICT_DATE_REGEX
+
+        with open(os.path.join(TEST_DIR, 'data/test_urls_pubdate.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('1', 'url_goes_here') form, '1' means publishing date
+            # is present in the url, '0' otherwise
+
+            for pubdate, url in test_tuples:
+                is_present = bool(int(pubdate))
+                date_match = re.search(STRICT_DATE_REGEX, url)
+                try:
+                    self.assertEqual(is_present, bool(date_match))
+                except AssertionError:
+                    if is_present:
+                        print('\t\tpublishing date in %s should be present' % (url))
+                    else:
+                        print('\t\tpublishing date in %s should not be present' % (url))
+                    raise
+
+
+    @unittest.skip("Need to write an actual test")
     @print_test
     def test_prepare_url(self):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it

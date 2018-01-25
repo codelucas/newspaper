@@ -110,7 +110,9 @@ class Configuration(object):
             return StopWordsHindi
         elif language == 'zh':
             return StopWordsChinese
-        elif language == 'ar':
+        # Persian and Arabic Share an alphabet
+        # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
+        elif language == 'ar' or language == 'fa':
             return StopWordsArabic
         return StopWords
 

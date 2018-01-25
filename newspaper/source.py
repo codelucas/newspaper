@@ -217,7 +217,8 @@ class Source(object):
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
-            print('[Source parse ERR]', self.url)
+            if self.config.verbose:
+                print('[Source parse ERR]', self.url)
             return
         self.set_description()
 

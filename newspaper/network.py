@@ -80,8 +80,13 @@ def _get_html_from_response(response):
         # return response as a unicode string
         html = response.text
     else:
-        # don't attempt decode, return response in bytes
         html = response.content
+        if 'charset' not in response.headers.get('content-type'):
+            encodings = requests.utils.get_encodings_from_content(response.text)
+            if len(encodings) > 0:
+                response.encoding = encodings[0]
+                html = response.text
+
     return html or ''
 
 
