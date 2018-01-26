@@ -381,7 +381,8 @@ def print_available_languages():
         'el': 'Greek',
         'uk': 'Ukrainian',
         'hi': 'Hindi',
-        'sw': 'Swahili'
+        'sw': 'Swahili',
+        'bg': 'Bulgarian',
     }
 
     codes = get_available_languages()
