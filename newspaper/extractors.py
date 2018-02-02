@@ -591,7 +591,7 @@ class ContentExtractor(object):
         a_kwargs = {'tag': 'a'}
         a_tags = self.parser.getElementsByTag(doc, **a_kwargs)
 
-        # TODO: this should be refactored! We should have a seperate
+        # TODO: this should be refactored! We should have a separate
         # method which siphones the titles our of a list of <a> tags.
         if titles:
             return [(a.get('href'), a.text) for a in a_tags if a.get('href')]
@@ -836,7 +836,7 @@ class ContentExtractor(object):
         return top_node
 
     def is_boostable(self, node):
-        """Alot of times the first paragraph might be the caption under an image
+        """A lot of times the first paragraph might be the caption under an image
         so we'll want to make sure if we're going to boost a parent node that
         it should be connected to other paragraphs, at least for the first n
         paragraphs so we'll want to make sure that the next sibling is a
