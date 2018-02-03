@@ -17,7 +17,8 @@ import re
 import re
 from collections import defaultdict
 
-from dateutil.parser import parse as date_parser
+from dateutil import parser as date_parser
+from qddate import DateParser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
@@ -229,6 +230,16 @@ class ContentExtractor(object):
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
+
+        # Uses qddate DateParser to find dates in any strings less than 150 chars long
+        dp = DateParser(generate=True)
+        nodes = doc.xpath('//*[string-length(text())<150]')
+        for node in nodes:
+            if node.text is None:
+                continue
+            datetime_obj = dp.parse(node.text)
+            if datetime_obj is not None:
+                return datetime_obj
 
         return None
 
