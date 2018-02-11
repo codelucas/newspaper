@@ -219,6 +219,10 @@ Features
       el              Greek
       uk              Ukrainian
       bg              Bulgarian
+      hr              Croatian
+      ro              Romanian
+      sl              Slovenian
+      sr              Serbian
 
 
 Get it now
