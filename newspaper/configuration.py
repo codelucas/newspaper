@@ -86,7 +86,7 @@ class Configuration(object):
 
     def set_language(self, language):
         """Language setting must be set in this method b/c non-occidental
-        (western) languages require a seperate stopwords class.
+        (western) languages require a separate stopwords class.
         """
         if not language or len(language) != 2:
             raise Exception("Your input language must be a 2 char language code, \
