@@ -383,6 +383,10 @@ def print_available_languages():
         'hi': 'Hindi',
         'sw': 'Swahili',
         'bg': 'Bulgarian',
+        'hr': 'Croatian',
+        'ro': 'Romanian',
+        'sl': 'Slovenian',
+        'sr': 'Serbian',
     }
 
     codes = get_available_languages()
