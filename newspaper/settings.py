@@ -29,7 +29,7 @@ STOPWORDS_DIR = os.path.join(PARENT_DIRECTORY, 'resources/text')
 NLP_STOPWORDS_EN = os.path.join(
     PARENT_DIRECTORY, 'resources/misc/stopwords-nlp-en.txt')
 
-DATA_DIRECTORY = '.newspaper_scraper'
+DATA_DIRECTORY = '/tmp/.newspaper_scraper'
 
 TOP_DIRECTORY = os.path.join(os.path.expanduser("~"), DATA_DIRECTORY)
 if not os.path.exists(TOP_DIRECTORY):
