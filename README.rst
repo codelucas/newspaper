@@ -222,6 +222,7 @@ Features
       ro              Romanian
       sl              Slovenian
       sr              Serbian
+      et              Estonian
 
 
 Get it now

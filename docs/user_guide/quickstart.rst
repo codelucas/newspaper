@@ -268,3 +268,4 @@ of popular news source urls.. In case you need help choosing a news source!
       ro              Romanian
       sl              Slovenian
       sr              Serbian
+      et              Estonian
