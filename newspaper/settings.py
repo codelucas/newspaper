@@ -32,7 +32,13 @@ NLP_STOPWORDS_EN = os.path.join(
 
 DATA_DIRECTORY = '.newspaper_scraper'
 
-TOP_DIRECTORY = os.path.join(tempfile.gettempdir(), DATA_DIRECTORY)
+
+if 'NEWSPAPER_SCRAPER_BASE_DIRECTORY' in os.environ:
+    BASE_DIRECTORY = os.environ['NEWSPAPER_SCRAPER_BASE_DIRECTORY']
+else:
+    BASE_DIRECTORY = tempfile.gettempdir()
+
+TOP_DIRECTORY = os.path.join(BASE_DIRECTORY, DATA_DIRECTORY)
 if not os.path.exists(TOP_DIRECTORY):
     os.mkdir(TOP_DIRECTORY)
 
