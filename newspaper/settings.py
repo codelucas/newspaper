@@ -33,8 +33,8 @@ NLP_STOPWORDS_EN = os.path.join(
 DATA_DIRECTORY = '.newspaper_scraper'
 
 
-if 'NEWSPAPER_SCRAPER_BASE_DIRECTORY' in os.environ:
-    BASE_DIRECTORY = os.environ['NEWSPAPER_SCRAPER_BASE_DIRECTORY']
+if 'LAMBDA_TASK_ROOT' in os.environ:
+    BASE_DIRECTORY = os.environ['LAMBDA_TASK_ROOT']
 else:
     BASE_DIRECTORY = tempfile.gettempdir()
 
