@@ -34,7 +34,9 @@ DATA_DIRECTORY = '.newspaper_scraper'
 
 
 if 'LAMBDA_TASK_ROOT' in os.environ:
-    BASE_DIRECTORY = os.environ['LAMBDA_TASK_ROOT']
+    # https://docs.aws.amazon.com/lambda/latest/dg/limits.html
+    # only /tmp is writeable in lambda
+    BASE_DIRECTORY = "/tmp"
 else:
     BASE_DIRECTORY = tempfile.gettempdir()
 
