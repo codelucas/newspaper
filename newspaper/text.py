@@ -149,8 +149,8 @@ class StopWordsKorean(StopWords):
         c = 0
         for w in candidate_words:
             c += 1
-            for stop_word in self.STOP_WORDS:
-                overlapping_stopwords.append(stop_word)
+            if w in self.STOP_WORDS:
+                overlapping_stopwords.append(w)
 
         ws.set_word_count(c)
         ws.set_stopword_count(len(overlapping_stopwords))
