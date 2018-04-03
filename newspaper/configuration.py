@@ -108,6 +108,8 @@ class Configuration(object):
             return StopWordsKorean
         elif language == 'hi':
             return StopWordsHindi
+        elif language == 'np':
+            return StopWordsNepali
         elif language == 'zh':
             return StopWordsChinese
         # Persian and Arabic Share an alphabet
