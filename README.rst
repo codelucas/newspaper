@@ -107,7 +107,7 @@ A Glance:
     >>> html = requests.get(...).text
     >>> text = fulltext(html)
 
-
+Newspaper can extract and detect languages *seamlessly*.
 Newspaper has *seamless* language extraction and detection.
 If no language is specified, Newspaper will attempt to auto detect a language.
 
