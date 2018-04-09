@@ -15,7 +15,6 @@ from threading import Thread
 
 from .configuration import Configuration
 
-
 class Worker(Thread):
     """
     Thread executing tasks from a given tasks queue.
@@ -105,4 +104,7 @@ class NewsPool(object):
         self.pool = ThreadPool(num_threads, timeout)
 
         for paper in self.papers:
-            self.pool.add_task(paper.download_articles)
+            try:
+                self.pool.add_task(paper.download_articles)
+            except AttributeError:
+                self.pool.add_task(paper.download)
