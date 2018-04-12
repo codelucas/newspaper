@@ -93,7 +93,7 @@ class NewsPool(object):
         if self.pool is None:
             print('Call set(..) with a list of source '
                   'objects before .join(..)')
-            raise
+            raise Exception("self.pool is None!")
         self.pool.wait_completion()
         self.papers = []
         self.pool = None
