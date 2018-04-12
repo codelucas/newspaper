@@ -10,6 +10,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 from urllib.parse import urljoin, urlsplit, urlunsplit
+from collections import deque
 
 from tldextract import tldextract
 
@@ -69,6 +70,7 @@ class Source(object):
         self.categories = []
         self.feeds = []
         self.articles = []
+        self.limit = self.config.limit
 
         self.html = ''
         self.doc = None
@@ -96,7 +98,7 @@ class Source(object):
         self.download_feeds()  # mthread
         # self.parse_feeds()
 
-        self.generate_articles()
+        self.generate_articles(self.limit)
 
     def purge_articles(self, reason, articles):
         """Delete rejected articles, if there is an articles param,
@@ -380,6 +382,25 @@ class Source(object):
 
         self.articles = self.purge_articles('body', self.articles)
         self.is_parsed = True
+
+    def __add__(self, other):
+        articles = deque(self.articles)
+        article_urls = set(self.article_urls())
+
+        if isinstance(other, Source):
+            for other_article in other.articles:
+                if other_article.url in article_urls:
+                    continue
+                articles.appendleft(other_article)
+
+        elif isinstance(other, list) and isinstance(other[0], Article):
+            for other_article in other:
+                if other_article.url in article_urls:
+                    continue
+                articles.appendleft(other_article)
+
+        self.articles = list(articles)
+        return self
 
     def size(self):
         """Number of articles linked to this news source

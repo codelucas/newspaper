@@ -44,12 +44,12 @@ with codecs.open('README.rst', 'r', 'utf-8') as f:
 
 setup(
     name='newspaper3k',
-    version='0.2.6',
+    version='0.2.7',
     description='Simplified python article discovery & extraction.',
     long_description=readme,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='https://github.com/codelucas/newspaper/',
+    url='https://github.com/ttong1013/newspaper/',
     packages=packages,
     include_package_data=True,
     install_requires=required,

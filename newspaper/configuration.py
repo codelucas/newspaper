@@ -39,7 +39,10 @@ class Configuration(object):
         self.MAX_FILE_MEMO = 20000
 
         # Cache and save articles run after run
-        self.memoize_articles = True
+        self.memoize_articles = False
+
+        # Limit of number of articles
+        self.limit = 10000
 
         # Set this to false if you don't care about getting images
         self.fetch_images = True
