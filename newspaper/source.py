@@ -69,6 +69,7 @@ class Source(object):
         self.categories = []
         self.feeds = []
         self.articles = []
+        self.limit = self.config.limit
 
         self.html = ''
         self.doc = None
@@ -96,7 +97,7 @@ class Source(object):
         self.download_feeds()  # mthread
         # self.parse_feeds()
 
-        self.generate_articles()
+        self.generate_articles(self.limit)
 
     def purge_articles(self, reason, articles):
         """Delete rejected articles, if there is an articles param,
