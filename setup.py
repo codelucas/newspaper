@@ -49,7 +49,7 @@ setup(
     long_description=readme,
     author='Lucas Ou-Yang',
     author_email='lucasyangpersonal@gmail.com',
-    url='https://github.com/codelucas/newspaper/',
+    url='https://github.com/ttong1013/newspaper/',
     packages=packages,
     include_package_data=True,
     install_requires=required,

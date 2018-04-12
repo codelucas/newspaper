@@ -10,6 +10,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
 from urllib.parse import urljoin, urlsplit, urlunsplit
+from collections import deque
 
 from tldextract import tldextract
 
@@ -381,6 +382,24 @@ class Source(object):
 
         self.articles = self.purge_articles('body', self.articles)
         self.is_parsed = True
+
+    def __add__(self, other):
+        articles = deque(self.articles)
+        article_urls = set(self.article_urls())
+
+        if isinstance(other, Source):
+            for other_article in other.articles:
+                if other_article.url in article_urls:
+                    continue
+                articles.appendleft(other_article)
+
+        elif isinstance(other, list) and isinstance(other[0], Article):
+            for other_article in other:
+                if other_article.url in article_urls:
+                    continue
+                articles.appendleft(other_article)
+
+        self.articles = list(articles)
 
     def size(self):
         """Number of articles linked to this news source
