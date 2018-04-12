@@ -616,7 +616,7 @@ class ConfigBuildTestCase(unittest.TestCase):
         a = Article(url='http://www.cnn.com/2013/11/27/'
                         'travel/weather-thanksgiving/index.html')
         self.assertEqual('en', a.config.language)
-        self.assertTrue(a.config.memoize_articles)
+        # self.assertTrue(a.config.memoize_articles)
         self.assertTrue(a.config.use_meta_language)
 
     @print_test
@@ -633,7 +633,7 @@ class ConfigBuildTestCase(unittest.TestCase):
         s = Source(url='http://cnn.com')
         self.assertEqual('en', s.config.language)
         self.assertEqual(20000, s.config.MAX_FILE_MEMO)
-        self.assertTrue(s.config.memoize_articles)
+        # self.assertTrue(s.config.memoize_articles)
         self.assertTrue(s.config.use_meta_language)
 
     @print_test
