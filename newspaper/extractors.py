@@ -88,7 +88,7 @@ class ContentExtractor(object):
                 if item.lower() in seen:
                     continue
                 seen[item.lower()] = 1
-                result.append(item.title())
+                result.append(item)
             return result
 
         def parse_byline(search_str):
@@ -127,7 +127,7 @@ class ContentExtractor(object):
                     curname.append(token)
 
             # One last check at end
-            valid_name = (len(curname) >= 2)
+            valid_name = (len(curname) >= 1)
             if valid_name:
                 _authors.append(' '.join(curname))
 
@@ -136,7 +136,7 @@ class ContentExtractor(object):
         # Try 1: Search popular author tags for authors
 
         ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline', 'dc.creator']
+        VALS = ['auth-nm lnk', 'mobile-auth-nm lnk', 'auth-nm no-lnk', 'mobile-auth-nm no-lnk', 'author', 'byline', 'dc.creator', 'publisher flt']
         matches = []
         authors = []
 
@@ -144,7 +144,14 @@ class ContentExtractor(object):
             for val in VALS:
                 # found = doc.xpath('//*[@%s="%s"]' % (attr, val))
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
-                matches.extend(found)
+                if len(matches) < 2:
+                    # print(attr)
+                    matches.extend(found)
+                    # print(len(matches))
+                    # print(matches)
+                    # break
+
+
 
         for match in matches:
             content = ''
@@ -180,10 +187,12 @@ class ContentExtractor(object):
         """
 
         def parse_date_str(date_str):
+            
+            from decimal import InvalidOperation
             if date_str:
                 try:
                     return date_parser(date_str)
-                except (ValueError, OverflowError, AttributeError, TypeError):
+                except (ValueError, OverflowError, AttributeError, TypeError, InvalidOperation):
                     # near all parse failures are due to URL dates without a day
                     # specifier, e.g. /2014/04/
                     return None
@@ -216,6 +225,8 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'itemprop', 'value': 'datePublished',
+              'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -591,7 +602,7 @@ class ContentExtractor(object):
         a_kwargs = {'tag': 'a'}
         a_tags = self.parser.getElementsByTag(doc, **a_kwargs)
 
-        # TODO: this should be refactored! We should have a separate
+        # TODO: this should be refactored! We should have a seperate
         # method which siphones the titles our of a list of <a> tags.
         if titles:
             return [(a.get('href'), a.text) for a in a_tags if a.get('href')]
@@ -836,7 +847,7 @@ class ContentExtractor(object):
         return top_node
 
     def is_boostable(self, node):
-        """A lot of times the first paragraph might be the caption under an image
+        """Alot of times the first paragraph might be the caption under an image
         so we'll want to make sure if we're going to boost a parent node that
         it should be connected to other paragraphs, at least for the first n
         paragraphs so we'll want to make sure that the next sibling is a
