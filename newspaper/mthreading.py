@@ -22,7 +22,7 @@ class ThreadPool:
         self.mutex = Lock()
         self.executor = ThreadPoolExecutor(max_workers=num_threads)
         self.timeout_seconds = timeout_seconds
-        self.futures = {}
+        self.futures = set()
 
     def add_task(self, func, *args, **kargs):
         """
@@ -32,33 +32,24 @@ class ThreadPool:
 
         f.add_done_callback(self._remove_future)
 
-        self.mutex.acquire()
-        try:
-            self.futures[f] = 1
-        finally:
-            self.mutex.release()
+        with self.mutex:
+            self.futures.add(f)
 
         return f
 
     def _remove_future(self, f):
-        self.mutex.acquire()
-        try:
-            self.futures.pop(f, None)
-        finally:
-            self.mutex.release()
+        with self.mutex:
+            self.futures.discard(f)
 
     def wait_completion(self):
         """
         Waits for the completion of every submitted task.
         Note: this will block insertion of new tasks while waiting.
         """
-
-        self.mutex.acquire()
-        try:
+        with self.mutex:
             wait(self.futures, timeout=self.timeout_seconds)
-        finally:
-            self.mutex.release()
-            self.futures = {}
+
+        self.futures = set()
 
 
 
