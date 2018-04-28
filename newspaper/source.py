@@ -19,7 +19,8 @@ from . import utils
 from .article import Article
 from .configuration import Configuration
 from .extractors import ContentExtractor
-from .settings import ANCHOR_DIRECTORY
+# from .settings import ANCHOR_DIRECTORY
+from .lazy_setting import conf
 
 log = logging.getLogger(__name__)
 
@@ -113,7 +114,7 @@ class Source(object):
             articles[:] = [a for a in articles if a.is_valid_body()]
         return articles
 
-    @utils.cache_disk(seconds=(86400 * 1), cache_folder=ANCHOR_DIRECTORY)
+    @utils.cache_disk(seconds=(86400 * 1), cache_folder=conf.settings.ANCHOR_DIRECTORY)
     def _get_category_urls(self, domain):
         """The domain param is **necessary**, see .utils.cache_disk for reasons.
         the boilerplate method is so we can use this decorator right.
@@ -255,7 +256,7 @@ class Source(object):
         """
         articles = []
         for feed in self.feeds:
-            urls = self.extractor.get_urls(feed.rss, regex=True)
+            urls = self.extractor.get_urls(self.url,feed.rss, regex=True)
             cur_articles = []
             before_purge = len(urls)
 
@@ -289,7 +290,8 @@ class Source(object):
         articles = []
         for category in self.categories:
             cur_articles = []
-            url_title_tups = self.extractor.get_urls(category.doc, titles=True)
+            url_title_tups = self.extractor.get_urls(self.url,category.doc, titles=True)
+            
             before_purge = len(url_title_tups)
 
             for tup in url_title_tups:
@@ -314,9 +316,9 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print(('%d->%d->%d for %s' %
+                print(('before_purge:%d->after_purge:%d->after_memo:%d for %s' %
                        (before_purge, after_purge, after_memo, category.url)))
-            log.debug('%d->%d->%d for %s' %
+            log.debug('before_purge:%d->after_purge:%d->after_memo:%d for %s' %
                       (before_purge, after_purge, after_memo, category.url))
         return articles
 

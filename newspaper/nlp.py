@@ -13,7 +13,7 @@ from os import path
 
 from collections import Counter
 
-from . import settings
+from .lazy_setting import conf
 
 ideal = 20.0
 
@@ -29,9 +29,9 @@ def load_stopwords(language):
     # to pass the tests
     # can be changed with the tests
     if language == 'en':
-        stopwordsFile = settings.NLP_STOPWORDS_EN
+        stopwordsFile = conf.settings.NLP_STOPWORDS_EN
     else:
-        stopwordsFile = path.join(settings.STOPWORDS_DIR,\
+        stopwordsFile = path.join(conf.settings.STOPWORDS_DIR,\
                                   'stopwords-{}.txt'.format(language))
     with open(stopwordsFile, 'r', encoding='utf-8') as f:
         stopwords.update(set([w.strip() for w in f.readlines()]))

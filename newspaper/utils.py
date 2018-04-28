@@ -24,7 +24,8 @@ from hashlib import sha1
 
 from bs4 import BeautifulSoup
 
-from . import settings
+# from . import settings
+from .lazy_setting import conf
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -38,13 +39,16 @@ class FileHelper(object):
             path = os.path.join(dirpath, 'resources', filename)
         else:
             path = filename
-        try:
-            f = codecs.open(path, 'r', 'utf-8')
-            content = f.read()
-            f.close()
-            return content
-        except IOError:
-            raise IOError("Couldn't open file %s" % path)
+        if os.path.exists(path):
+            try:
+                f = codecs.open(path, 'r', 'utf-8')
+                content = f.read()
+                f.close()
+                return content
+            except IOError:
+                raise IOError("Couldn't open file %s" % path)
+        else:
+            return ''
 
 
 class ParsingCandidate(object):
@@ -273,7 +277,7 @@ def purge(fn, pattern):
 def clear_memo_cache(source):
     """Clears the memoization cache for this specific news domain
     """
-    d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source.domain))
+    d_pth = os.path.join(conf.settings.MEMO_DIR, domain_to_filename(source.domain))
     if os.path.exists(d_pth):
         os.remove(d_pth)
     else:
@@ -294,7 +298,7 @@ def memoize_articles(source, articles):
 
     memo = {}
     cur_articles = {article.url: article for article in articles}
-    d_pth = os.path.join(settings.MEMO_DIR, domain_to_filename(source_domain))
+    d_pth = os.path.join(conf.settings.MEMO_DIR, domain_to_filename(source_domain))
 
     if os.path.exists(d_pth):
         f = codecs.open(d_pth, 'r', 'utf8')
@@ -333,7 +337,7 @@ def memoize_articles(source, articles):
 def get_useragent():
     """Uses generator to return next useragent in saved file
     """
-    with open(settings.USERAGENTS, 'r') as f:
+    with open(conf.settings.USERAGENTS, 'r') as f:
         agents = f.readlines()
         selection = random.randint(0, len(agents) - 1)
         agent = agents[selection]
@@ -343,7 +347,7 @@ def get_useragent():
 def get_available_languages():
     """Returns a list of available languages and their 2 char input codes
     """
-    stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
+    stopword_files = os.listdir(os.path.join(conf.settings.STOPWORDS_DIR))
     two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2

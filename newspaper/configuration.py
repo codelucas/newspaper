@@ -78,6 +78,8 @@ class Configuration(object):
         # TODO: Actually make this work
         # self.use_cached_categories = True
 
+        self.good_paths = []
+
     def get_language(self):
         return self._language
 

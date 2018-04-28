@@ -13,21 +13,20 @@ import requests
 
 from .configuration import Configuration
 from .mthreading import ThreadPool
-from .settings import cj
+from .lazy_setting import conf,dymatic_import
 
 log = logging.getLogger(__name__)
 
-
 FAIL_ENCODING = 'ISO-8859-1'
-
 
 def get_request_kwargs(timeout, useragent, proxies, headers):
     """This Wrapper method exists b/c some values in req_kwargs dict
     are methods which need to be called every time we make a request
     """
+    cls = dymatic_import(conf.settings.COOKIE_FACTORY)
     return {
         'headers': headers if headers else {'User-Agent': useragent},
-        'cookies': cj(),
+        'cookies': cls(),
         'timeout': timeout,
         'allow_redirects': True,
         'proxies': proxies

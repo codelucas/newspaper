@@ -13,7 +13,8 @@ import feedparser
 
 from .article import Article
 from .configuration import Configuration
-from .settings import POPULAR_URLS, TRENDING_URL
+from .lazy_setting import conf
+# from .lazy_setting.conf import POPULAR_URLS, TRENDING_URL
 from .source import Source
 from .utils import extend_config, print_available_languages
 
@@ -51,7 +52,7 @@ def languages():
 def popular_urls():
     """Returns a list of pre-extracted popular source urls
     """
-    with open(POPULAR_URLS) as f:
+    with open(conf.settings.POPULAR_URLS) as f:
         urls = ['http://' + u.strip() for u in f.readlines()]
         return urls
 
@@ -60,7 +61,7 @@ def hot():
     """Returns a list of hit terms via google trends
     """
     try:
-        listing = feedparser.parse(TRENDING_URL)['entries']
+        listing = feedparser.parse(conf.settings.TRENDING_URL)['entries']
         trends = [item['title'] for item in listing]
         return trends
     except Exception as e:

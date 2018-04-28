@@ -8,13 +8,13 @@ import logging
 import copy
 import os
 import glob
-
+import re
 import requests
-
+import lxml
 from . import images
 from . import network
 from . import nlp
-from . import settings
+from .lazy_setting import conf
 from . import urls
 
 from .cleaners import DocumentCleaner
@@ -24,6 +24,8 @@ from .outputformatters import OutputFormatter
 from .utils import (URLHelper, RawHelper, extend_config,
                     get_available_languages, extract_meta_refresh)
 from .videos.extractors import VideoExtractor
+import langid
+from lxml import etree
 
 log = logging.getLogger(__name__)
 
@@ -143,6 +145,8 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
+        self.is_cjkv = False
+
     def build(self):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
@@ -188,6 +192,7 @@ class Article(object):
         self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
+            log.debug("Article parse failed, return nothing")
             # `parse` call failed, return nothing
             return
 
@@ -206,10 +211,6 @@ class Article(object):
 
         meta_lang = self.extractor.get_meta_lang(self.clean_doc)
         self.set_meta_language(meta_lang)
-
-        if self.config.use_meta_language:
-            self.extractor.update_language(self.meta_lang)
-            output_formatter.update_language(self.meta_lang)
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
         self.set_meta_favicon(meta_favicon)
@@ -231,6 +232,25 @@ class Article(object):
 
         meta_data = self.extractor.get_meta_data(self.clean_doc)
         self.set_meta_data(meta_data)
+        meta_data_str = "".join([str(x) for x in self.meta_data.values()])
+        if meta_data_str:
+            lang,pos = langid.classify(meta_data_str)
+        else:
+            cleaner = lxml.html.clean.Cleaner()
+            cleaner.javascript = True
+            cleaner.style = True
+            cleaner.html = True
+            cleaner.page_structure = False
+            cleaner.meta = False
+            cleaner.safe_attrs_only = False
+            cleaner.links = False
+
+            texts = cleaner.clean_html(self.html)
+            lang,pos = langid.classify(texts)
+        if lang in ["zh","ko","ja","vi"]:
+            self.is_cjkv = True
+        self.extractor.update_language(lang)
+        output_formatter.update_language(lang)
 
         self.publish_date = self.extractor.get_publishing_date(
             self.url,
@@ -238,7 +258,6 @@ class Article(object):
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
-
         self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
@@ -252,7 +271,8 @@ class Article(object):
             self.set_article_html(article_html)
             self.set_text(text)
 
-        self.fetch_images()
+        if self.config.fetch_images:
+            self.fetch_images()
 
         self.is_parsed = True
         self.release_resources()
@@ -286,38 +306,41 @@ class Article(object):
         """Performs a check on the url of this link to determine if article
         is a real news article or not
         """
-        return urls.valid_url(self.url)
+        return urls.valid_url(self.url,verbose = self.config.verbose,good_paths=self.config.good_paths)
 
     def is_valid_body(self):
         """If the article's body text is long enough to meet
         standard article requirements, keep the article
         """
         if not self.is_parsed:
-            raise ArticleException('must parse article before checking \
-                                    if it\'s body is valid!')
+            log.debug('must parse article before checking if it\'s body is valid!')                       
+            return False
+            # raise ArticleException('must parse article before checking \
+            #                         if it\'s body is valid!')
+            # since this calls in a loop,did not expecting error raising
         meta_type = self.extractor.get_meta_type(self.clean_doc)
-        wordcount = self.text.split(' ')
-        sentcount = self.text.split('.')
+        wordcount = len(self.text) if self.is_cjkv else len(self.text.split(' '))
+        sentcount = len(re.split('[.。]', self.text))
 
-        if (meta_type == 'article' and len(wordcount) >
+        if (meta_type == 'article' and wordcount >
                 (self.config.MIN_WORD_COUNT)):
-            log.debug('%s verified for article and wc' % self.url)
+            log.debug('%s verified for article and wc %s' % (self.url,wordcount))
             return True
 
         if not self.is_media_news() and not self.text:
             log.debug('%s caught for no media no text' % self.url)
             return False
 
-        if self.title is None or len(self.title.split(' ')) < 2:
-            log.debug('%s caught for bad title' % self.url)
+        if self.title is None: #or len(self.title.split(' ')) < 2:
+            log.debug('%s caught for bad title %s' % (self.url ,self.title) )
             return False
 
-        if len(wordcount) < self.config.MIN_WORD_COUNT:
-            log.debug('%s caught for word cnt' % self.url)
+        if wordcount < self.config.MIN_WORD_COUNT:
+            log.debug('%s caught for word cnt %s' % (self.url,self.text))
             return False
 
-        if len(sentcount) < self.config.MIN_SENT_COUNT:
-            log.debug('%s caught for sent cnt' % self.url)
+        if sentcount < self.config.MIN_SENT_COUNT:
+            log.debug('%s caught for sent cnt %s' % (self.url,self.text))
             return False
 
         if self.html is None or self.html == '':
@@ -376,7 +399,7 @@ class Article(object):
         initialization to garbage collection
         """
         res_dir_fn = 'article_resources'
-        resource_directory = os.path.join(settings.TOP_DIRECTORY, res_dir_fn)
+        resource_directory = os.path.join(conf.settings.TOP_DIRECTORY, res_dir_fn)
         if not os.path.exists(resource_directory):
             os.mkdir(resource_directory)
         dir_path = os.path.join(resource_directory, '%s_' % self.link_hash)
