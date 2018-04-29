@@ -296,6 +296,8 @@ class Source(object):
 
             for tup in url_title_tups:
                 indiv_url = tup[0]
+                if indiv_url.find("#") is not -1:
+                    continue
                 indiv_title = tup[1]
 
                 _article = Article(
