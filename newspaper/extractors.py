@@ -670,8 +670,6 @@ class ContentExtractor(object):
             scheme = urls.get_scheme(p_url, allow_fragments=False)
             domain = urls.get_domain(p_url, allow_fragments=False)
             path = urls.get_path(p_url, allow_fragments=False)
-            # if path.endswith('/'):
-            #     path = path[:-1]
             if not domain and not path:
                 if self.config.verbose:
                     print('elim category url %s for no domain and path'
