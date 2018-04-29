@@ -637,7 +637,7 @@ class ContentExtractor(object):
         return self._get_urls_only(a_tags,source_url)
 
     def get_urls(self, source_url,doc_or_html, titles=False, regex=False):
-        """`doc_or_html`s html page or doc and returns list of urls, the regex
+        """`doc_or_html`s html page or doc and returns list of absolute urls, the regex
         flag indicates we don't parse via lxml and just search the html.
         """
         if doc_or_html is None:
@@ -670,7 +670,8 @@ class ContentExtractor(object):
             scheme = urls.get_scheme(p_url, allow_fragments=False)
             domain = urls.get_domain(p_url, allow_fragments=False)
             path = urls.get_path(p_url, allow_fragments=False)
-
+            # if path.endswith('/'):
+            #     path = path[:-1]
             if not domain and not path:
                 if self.config.verbose:
                     print('elim category url %s for no domain and path'
@@ -762,27 +763,19 @@ class ContentExtractor(object):
             if not bad:
                 _valid_categories.append(p_url)
 
-        _valid_categories.append('/')  # add the root
-
-        for i, p_url in enumerate(_valid_categories):
-            if p_url.startswith('://'):
-                p_url = 'http' + p_url
-                _valid_categories[i] = p_url
-
-            elif p_url.startswith('//'):
-                p_url = 'http:' + p_url
-                _valid_categories[i] = p_url
-
-            if p_url.endswith('/'):
-                p_url = p_url[:-1]
-                _valid_categories[i] = p_url
-
         _valid_categories = list(set(_valid_categories))
 
-        category_urls = [urls.prepare_url(p_url, source_url)
-                         for p_url in _valid_categories]
-        category_urls = [c for c in category_urls if c is not None]
-        return category_urls
+        source_scheme = urls.get_scheme(source_url, allow_fragments=False)
+
+        pure_domain_and_path = [urls.get_domain(x) + urls.get_path(x) for x in _valid_categories if x is not None]
+
+        # site may mixed up with http and https keep the scheme same as source
+        for i,x in enumerate(_valid_categories):
+            pdap = urls.get_domain(x) + urls.get_path(x)
+            if pure_domain_and_path.count(pdap) > 1 and urls.get_scheme(x) != source_scheme:
+                del _valid_categories[i]
+
+        return _valid_categories
 
     def extract_tags(self, doc):
         if len(list(doc)) == 0:
