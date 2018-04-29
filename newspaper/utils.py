@@ -224,8 +224,8 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
             """Calculate a cache key based on the decorated method signature
             args[1] indicates the domain of the inputs, we hash on domain!
             """
-            key = sha1((str(args[1]) +
-                        str(kwargs)).encode('utf-8')).hexdigest()
+            key = str(args[1]) + "-" + sha1(str(kwargs).encode('utf-8')).hexdigest()
+                       
             filepath = os.path.join(cache_folder, key)
 
             # verify that the cached object exists and is less than
@@ -277,6 +277,11 @@ def purge(fn, pattern):
 def clear_memo_cache(source):
     """Clears the memoization cache for this specific news domain
     """
+    feed_category_cache_dir = conf.settings.ANCHOR_DIRECTORY
+    onlyfiles = [f for f in os.listdir(feed_category_cache_dir) if os.path.isfile(os.path.join(feed_category_cache_dir, f))]
+    for f in onlyfiles:
+        if f.startswith(source.domain):
+            os.remove(os.path.join(feed_category_cache_dir, f))
     d_pth = os.path.join(conf.settings.MEMO_DIR, domain_to_filename(source.domain))
     if os.path.exists(d_pth):
         os.remove(d_pth)
