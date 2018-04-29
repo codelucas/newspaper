@@ -92,7 +92,12 @@ class Settings(object):
 
         # customed settings
         self.SETTINGS_MODULE = settings_module
-        mod = importlib.import_module(settings_module)
+        try:
+            mod = importlib.import_module(settings_module)
+        except ImportError:
+            # keep silence for debug
+            print("Import Error during import settings module!")
+            return
 
         self._explicit_settings = set()
 
