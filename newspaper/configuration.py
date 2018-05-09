@@ -68,6 +68,7 @@ class Configuration(object):
         self.request_timeout = 7
         self.proxies = {}
         self.number_threads = 10
+        self.max_number_threads = 128
 
         self.verbose = False  # for debugging
 
