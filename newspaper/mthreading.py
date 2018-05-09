@@ -92,8 +92,9 @@ class NewsPool(object):
         resets the task.
         """
         if self.pool is None and self.articles is None:
-            print('Call set(..) or set_articles(...) with a list of source '
-                  'objects before .join(..)')
+            print('Call set(..) with a list of source objects '
+                  'or set_articles(...) with a list of article objects '
+                  'before .join(..)')
             raise
         self.pool.wait_completion()
         self.papers = []
