@@ -112,7 +112,7 @@ class NewsPool(object):
     def set_articles(self, article_list):
         self.articles = article_list
         timeout = self.config.thread_timeout_seconds
-        self.pool = ThreadPool(1, timeout)
+        self.pool = ThreadPool(len(articles), timeout)
 
         for article in self.articles:
             self.pool.add_task(article.download)
