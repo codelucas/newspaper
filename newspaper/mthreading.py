@@ -82,6 +82,7 @@ class NewsPool(object):
         u'<html>blahblah ... '
         """
         self.papers = []
+        self.articles = []
         self.pool = None
         self.config = config or Configuration()
 
@@ -90,15 +91,16 @@ class NewsPool(object):
         Runs the mtheading and returns when all threads have joined
         resets the task.
         """
-        if self.pool is None:
-            print('Call set(..) with a list of source '
+        if self.pool is None and self.articles is None:
+            print('Call set_papers(..) or set_articles(...) with a list of source '
                   'objects before .join(..)')
             raise
         self.pool.wait_completion()
         self.papers = []
+        self.articles = []
         self.pool = None
 
-    def set(self, paper_list, threads_per_source=1):
+    def set_papers(self, paper_list, threads_per_source=1):
         self.papers = paper_list
         num_threads = threads_per_source * len(self.papers)
         timeout = self.config.thread_timeout_seconds
@@ -106,3 +108,11 @@ class NewsPool(object):
 
         for paper in self.papers:
             self.pool.add_task(paper.download_articles)
+
+    def set_articles(self, article_list):
+        self.articles = article_list
+        timeout = self.config.thread_timeout_seconds
+        self.pool = ThreadPool(1, timeout)
+
+        for article in self.articles:
+            self.pool.add_task(article.download)
