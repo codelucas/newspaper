@@ -116,4 +116,4 @@ class NewsPool(object):
         self.pool = ThreadPool(num_threads, timeout)
 
         for article in self.articles:
-            self.pool.add_task(article.build, args=(False))
+            self.pool.add_task(article.build, (False))
