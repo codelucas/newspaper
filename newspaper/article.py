@@ -522,7 +522,7 @@ class Article(object):
         """
         if self.download_state == ArticleDownloadState.NOT_STARTED:
             print('You must `download()` an article first!')
-            #raise ArticleException()
+            raise ArticleException()
         elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
             print('Article `download()` failed with %s on URL %s' %
                   (self.download_exception_msg, self.url))
