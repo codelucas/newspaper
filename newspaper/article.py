@@ -143,15 +143,16 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
-    def build(self):
+    def build(self, with_nlp=True):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
         on a source (newspaper) level.
         """
         self.download()
         self.parse()
-        self.nlp()
-
+        if with_nlp:
+            self.nlp()
+    
     def download(self, input_html=None, title=None, recursion_counter=0):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
@@ -521,7 +522,7 @@ class Article(object):
         """
         if self.download_state == ArticleDownloadState.NOT_STARTED:
             print('You must `download()` an article first!')
-            raise ArticleException()
+            #raise ArticleException()
         elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
             print('Article `download()` failed with %s on URL %s' %
                   (self.download_exception_msg, self.url))

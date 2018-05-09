@@ -92,7 +92,7 @@ class NewsPool(object):
         resets the task.
         """
         if self.pool is None and self.articles is None:
-            print('Call set_papers(..) or set_articles(...) with a list of source '
+            print('Call set(..) or set_articles(...) with a list of source '
                   'objects before .join(..)')
             raise
         self.pool.wait_completion()
@@ -100,7 +100,7 @@ class NewsPool(object):
         self.articles = []
         self.pool = None
 
-    def set_papers(self, paper_list, threads_per_source=1):
+    def set(self, paper_list, threads_per_source=1):
         self.papers = paper_list
         num_threads = threads_per_source * len(self.papers)
         timeout = self.config.thread_timeout_seconds
@@ -116,5 +116,4 @@ class NewsPool(object):
         self.pool = ThreadPool(num_threads, timeout)
 
         for article in self.articles:
-            self.pool.add_task(article.download)
-            self.pool.add_task(article.parse)
+            self.pool.add_task(article.build, args=(False))
