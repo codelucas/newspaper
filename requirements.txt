@@ -11,3 +11,5 @@ feedfinder2>=0.0.4
 jieba3k>=0.35.1
 python-dateutil>=2.5.3
 langid>=1.1.6
+Cython>=0.28.2
+nagisa>=0.0.6

@@ -14,7 +14,7 @@ import logging
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
-                   StopWordsKorean, StopWordsHindi)
+                   StopWordsKorean, StopWordsHindi, StopWordsJapanese)
 from .version import __version__
 
 log = logging.getLogger(__name__)
@@ -112,6 +112,8 @@ class Configuration(object):
             return StopWordsHindi
         elif language == 'zh':
             return StopWordsChinese
+        elif language == 'ja':
+            return StopWordsJapanese
         # Persian and Arabic Share an alphabet
         # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
         elif language == 'ar' or language == 'fa':
