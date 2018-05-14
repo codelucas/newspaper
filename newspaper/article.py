@@ -228,10 +228,11 @@ class Article(object):
         self.extractor.update_language(lang)
         output_formatter.update_language(lang)
 
-        title = self.extractor.get_title(self.clean_doc)
+        pure_html = document_cleaner.remove_scripts_styles(self.clean_doc)
+        title = self.extractor.get_title(pure_html)
         self.set_title(title)
 
-        authors = self.extractor.get_authors(self.clean_doc)
+        authors = self.extractor.get_authors(pure_html)
         self.set_authors(authors)
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
@@ -252,9 +253,7 @@ class Article(object):
             self.clean_doc)
         self.set_meta_keywords(meta_keywords)
 
-        self.publish_date = self.extractor.get_publishing_date(
-            self.url,
-            self.clean_doc)
+        self.publish_date = self.extractor.get_publishing_date(self.url,pure_html)
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)

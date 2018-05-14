@@ -25,6 +25,7 @@ from . import urls
 from .utils import StringReplacement, StringSplitter
 from functools import reduce
 import datetime
+from lxml.html import HtmlComment
 
 log = logging.getLogger(__name__)
 
@@ -86,6 +87,8 @@ class ContentExtractor(object):
         """
         if self.language == 'zh':
             for ele in doc.iter():
+                if isinstance(ele,HtmlComment):
+                    continue
                 line = ele.text_content()
                 if line and line.find('作者：') !=-1:
                     lines = line.splitlines()
@@ -94,6 +97,8 @@ class ContentExtractor(object):
                             return re.sub('作者：', '', l.strip()).split("、")
         elif self.language == 'ja':
             for ele in doc.iter():
+                if isinstance(ele,HtmlComment):
+                    continue
                 line = ele.text_content()
                 if line and line.find('執筆者：') !=-1:
                     lines = line.splitlines()
@@ -262,7 +267,7 @@ class ContentExtractor(object):
             match_date = re.search(r'(?<![a-zA-Z_-])([0-9]{4,})[^0-9]([0-1]?[0-9])[^0-9]([0-9]{1,2})[^0-9]*([0-9]{1,2})?[^0-9]([0-9]{1,2})[^0-9]?([0-9]{1,2})?', doc.text_content())
             if match_date:
                 groups = match_date.groups()
-                none_index = groups.index(None)
+                none_index = groups.index(None) if None in groups else len(groups)
                 return datetime.datetime(*list(map(lambda x: int(x) ,groups[0:none_index])))
 
         return None
