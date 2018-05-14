@@ -24,6 +24,7 @@ import langid
 from . import urls
 from .utils import StringReplacement, StringSplitter
 from functools import reduce
+import datetime
 
 log = logging.getLogger(__name__)
 
@@ -258,9 +259,9 @@ class ContentExtractor(object):
                     return datetime_obj
 
         if self.language in ['ja','cn']:
-            match_date = re.search(r'[0-9]{4,}年[0-9]{1,2}月[0-9]{1,2}日', doc.text_content())
+            match_date = re.search(r'([0-9]{4,})年([0-9]{1,2})月([0-9]{1,2})日', doc.text_content())
             if match_date:
-                return match_date.group()
+                return datetime.datetime(*map(lambda x: int(x) ,match_date.groups()))
 
         return None
 
