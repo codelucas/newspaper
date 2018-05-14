@@ -222,7 +222,7 @@ class Article(object):
             cleaner.links = False
 
             texts = cleaner.clean_html(self.html)
-            lang,pos = langid.classify(texts)
+            lang,_ = langid.classify(texts)
         if lang in ["zh","ko","ja","vi"]:
             self.is_cjkv = True
         self.extractor.update_language(lang)

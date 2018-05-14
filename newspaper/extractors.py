@@ -259,9 +259,11 @@ class ContentExtractor(object):
                     return datetime_obj
 
         if self.language in ['ja','zh']:
-            match_date = re.search(r'([0-9]{4,}).([0-9]{1,2}).([0-9]{1,2})[^0-9]*([0-9]{1,2})[^0-9]([0-9]{1,2})[^0-9]?([0-9]{1,2})?', doc.text_content())
+            match_date = re.search(r'(?<![a-zA-Z_-])([0-9]{4,})[^0-9]([0-1]?[0-9])[^0-9]([0-9]{1,2})[^0-9]*([0-9]{1,2})?[^0-9]([0-9]{1,2})[^0-9]?([0-9]{1,2})?', doc.text_content())
             if match_date:
-                return datetime.datetime(*list(map(lambda x: int(x) ,filter(lambda x: x is not None,match_date.groups()) )))
+                groups = match_date.groups()
+                none_index = groups.index(None)
+                return datetime.datetime(*list(map(lambda x: int(x) ,groups[0:none_index])))
 
         return None
 
