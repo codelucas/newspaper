@@ -249,6 +249,10 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'property', 'value': 'aja:published_date',
+             'content': 'content'},# https://news.ameba.jp/
+            {'attribute': 'name', 'value': 'pubdate',
+             'content': 'content'}, # https://www.asahi.com 2018-05-14 16:18:28+09:00
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -264,7 +268,7 @@ class ContentExtractor(object):
                     return datetime_obj
 
         if self.language in ['ja','zh']:
-            match_date = re.search(r'(?<![a-zA-Z_-])([0-9]{4,})[^0-9]([0-1]?[0-9])[^0-9]([0-9]{1,2})[^0-9]*([0-9]{1,2})?[^0-9]([0-9]{1,2})[^0-9]?([0-9]{1,2})?', doc.text_content())
+            match_date = re.search(r'(?<![a-zA-Z_-])([0-9]{4,})[^0-9]\s?([0-9]{1,2})[^0-9]([0-9]{1,2})[^0-9\(]*([0-9]{1,2})?[^0-9\(\s]?([0-9]{1,2})?[^0-9\(\s]?([0-9]{1,2})?', doc.text_content())
             if match_date:
                 groups = match_date.groups()
                 none_index = groups.index(None) if None in groups else len(groups)
