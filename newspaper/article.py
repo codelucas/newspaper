@@ -203,14 +203,36 @@ class Article(object):
         document_cleaner = DocumentCleaner(self.config)
         output_formatter = OutputFormatter(self.config)
 
+        meta_lang = self.extractor.get_meta_lang(self.clean_doc)
+        self.set_meta_language(meta_lang)
+
+        meta_data = self.extractor.get_meta_data(self.clean_doc)
+        self.set_meta_data(meta_data)
+        meta_data_str = "".join([str(x) for x in self.meta_data.values()])
+        if meta_data_str:
+            lang,_ = langid.classify(meta_data_str)
+        else:
+            cleaner = lxml.html.clean.Cleaner()
+            cleaner.javascript = True
+            cleaner.style = True
+            cleaner.html = True
+            cleaner.page_structure = False
+            cleaner.meta = False
+            cleaner.safe_attrs_only = False
+            cleaner.links = False
+
+            texts = cleaner.clean_html(self.html)
+            lang,pos = langid.classify(texts)
+        if lang in ["zh","ko","ja","vi"]:
+            self.is_cjkv = True
+        self.extractor.update_language(lang)
+        output_formatter.update_language(lang)
+
         title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
 
         authors = self.extractor.get_authors(self.clean_doc)
         self.set_authors(authors)
-
-        meta_lang = self.extractor.get_meta_lang(self.clean_doc)
-        self.set_meta_language(meta_lang)
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
         self.set_meta_favicon(meta_favicon)
@@ -229,28 +251,6 @@ class Article(object):
         meta_keywords = self.extractor.get_meta_keywords(
             self.clean_doc)
         self.set_meta_keywords(meta_keywords)
-
-        meta_data = self.extractor.get_meta_data(self.clean_doc)
-        self.set_meta_data(meta_data)
-        meta_data_str = "".join([str(x) for x in self.meta_data.values()])
-        if meta_data_str:
-            lang,pos = langid.classify(meta_data_str)
-        else:
-            cleaner = lxml.html.clean.Cleaner()
-            cleaner.javascript = True
-            cleaner.style = True
-            cleaner.html = True
-            cleaner.page_structure = False
-            cleaner.meta = False
-            cleaner.safe_attrs_only = False
-            cleaner.links = False
-
-            texts = cleaner.clean_html(self.html)
-            lang,pos = langid.classify(texts)
-        if lang in ["zh","ko","ja","vi"]:
-            self.is_cjkv = True
-        self.extractor.update_language(lang)
-        output_formatter.update_language(lang)
 
         self.publish_date = self.extractor.get_publishing_date(
             self.url,

@@ -83,6 +83,23 @@ class ContentExtractor(object):
         """Fetch the authors of the article, return as a list
         Only works for english articles
         """
+        if self.language == 'zh':
+            for ele in doc.iter():
+                line = ele.text_content()
+                if line and line.find('作者：') !=-1:
+                    lines = line.splitlines()
+                    for l in lines:
+                        if l.find('作者：') !=-1:
+                            return re.sub('作者：', '', l.strip()).split("、")
+        elif self.language == 'ja':
+            for ele in doc.iter():
+                line = ele.text_content()
+                if line and line.find('執筆者：') !=-1:
+                    lines = line.splitlines()
+                    for l in lines:
+                        if l.find('執筆者：') !=-1:
+                            return re.sub('執筆者：', '', l.strip()).split("、")
+
         _digits = re.compile('\d')
 
         def contains_digits(d):
@@ -113,7 +130,7 @@ class ContentExtractor(object):
 
             # Remove original By statement
             search_str = re.sub('[bB][yY][\:\s]|[fF]rom[\:\s]', '', search_str)
-
+            
             search_str = search_str.strip()
 
             # Chunk the line by non alphanumeric tokens (few name exceptions)
@@ -239,6 +256,11 @@ class ContentExtractor(object):
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
+
+        if self.language in ['ja','cn']:
+            match_date = re.search(r'[0-9]{4,}年[0-9]{1,2}月[0-9]{1,2}日', doc.text_content())
+            if match_date:
+                return match_date.group()
 
         return None
 
