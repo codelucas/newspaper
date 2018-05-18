@@ -110,7 +110,7 @@ class Configuration(object):
             return StopWordsKorean
         elif language == 'hi':
             return StopWordsHindi
-        elif language == 'zh':
+        elif language == 'zh' or language == 'wuu' or language == 'yue': # iso639-3
             return StopWordsChinese
         elif language == 'ja':
             return StopWordsJapanese
