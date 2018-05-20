@@ -316,7 +316,7 @@ Planning on tweaking our full-text algorithm? Add the ``fulltext`` parameter::
     
 Others unit testing task
 
-    $cd tests && python3 -m unittest unit_tests.UrlTestCase.test_valid_urls
+    $ python3 -m unittest  tests.unit_tests.UrlTestCase.test_valid_urls
 
 
 Demo

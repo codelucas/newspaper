@@ -20,7 +20,9 @@ from collections import defaultdict
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
-import langid
+# import langid
+from whatthelang import WhatTheLang
+wtl = WhatTheLang()
 from . import urls
 from .utils import StringReplacement, StringSplitter
 from functools import reduce
@@ -73,7 +75,8 @@ class ContentExtractor(object):
                 self.config.get_stopwords_class(meta_lang)
 
     def get_language(self,s):
-        lang, _ = langid.classify(s)
+        lang = wtl.predict_lang(s)
+        lang = lang if not lang == "CANT_PREDICT" else None
         return lang or self.language
 
     def get_word_stats(self,text_node):

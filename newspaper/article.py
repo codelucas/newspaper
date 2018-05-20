@@ -24,7 +24,9 @@ from .outputformatters import OutputFormatter
 from .utils import (URLHelper, RawHelper, extend_config,
                     get_available_languages, extract_meta_refresh)
 from .videos.extractors import VideoExtractor
-import langid
+# import langid
+from whatthelang import WhatTheLang
+wtl = WhatTheLang()
 from lxml import etree
 
 log = logging.getLogger(__name__)
@@ -210,7 +212,8 @@ class Article(object):
         self.set_meta_data(meta_data)
         meta_data_str = "".join([str(x) for x in self.meta_data.values()])
         if meta_data_str:
-            lang,_ = langid.classify(meta_data_str)
+            lang = wtl.predict_lang(meta_data_str)
+            lang = lang if not lang == "CANT_PREDICT" else None
         else:
             cleaner = lxml.html.clean.Cleaner()
             cleaner.javascript = True
@@ -222,7 +225,8 @@ class Article(object):
             cleaner.links = False
 
             texts = cleaner.clean_html(self.html)
-            lang,_ = langid.classify(texts)
+            lang = wtl.predict_lang(texts)
+            lang = lang if not lang == "CANT_PREDICT" else None
         if lang in ["zh","ko","ja","vi"]:
             self.is_cjkv = True
         self.extractor.update_language(lang)
