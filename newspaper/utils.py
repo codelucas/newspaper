@@ -387,7 +387,8 @@ def print_available_languages():
         'ro': 'Romanian',
         'sl': 'Slovenian',
         'sr': 'Serbian',
-        'et': 'Estonian'
+        'et': 'Estonian',
+        'ja': 'Japanese'
     }
 
     codes = get_available_languages()
