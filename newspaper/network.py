@@ -59,12 +59,8 @@ def get_html_2XX_only(url, config=None, response=None):
     if response is not None:
         return _get_html_from_response(response)
 
-    try:
-        response = requests.get(
-            url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
-    except requests.exceptions.RequestException as e:
-        log.debug('get_html_2XX_only() error. %s on URL: %s' % (e, url))
-        return ''
+    response = requests.get(
+        url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
 
     html = _get_html_from_response(response)
 

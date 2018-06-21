@@ -520,17 +520,14 @@ class Article(object):
         -> maybe throw ArticleException
         """
         if self.download_state == ArticleDownloadState.NOT_STARTED:
-            print('You must `download()` an article first!')
-            raise ArticleException()
+            raise ArticleException('You must `download()` an article first!')
         elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
-            print('Article `download()` failed with %s on URL %s' %
+            raise ArticleException('Article `download()` failed with %s on URL %s' %
                   (self.download_exception_msg, self.url))
-            raise ArticleException()
 
     def throw_if_not_parsed_verbose(self):
         """Parse `is_parsed` status -> log readable status 
         -> maybe throw ArticleException
         """
         if not self.is_parsed:
-            print('You must `parse()` an article first!')
-            raise ArticleException()
+            raise ArticleException('You must `parse()` an article first!')
