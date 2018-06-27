@@ -51,6 +51,9 @@ class Configuration(object):
         # Don't toggle this variable, done internally
         self.use_meta_language = True
 
+        # If use_meta_language is true but cannot be parsed, try detecting lang from title
+        self.detect_lang_from_title = True
+
         # You may keep the html of just the main article body
         self.keep_article_html = False
 
