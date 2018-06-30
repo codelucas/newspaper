@@ -25,6 +25,7 @@ log = logging.getLogger(__name__)
 
 
 class Category(object):
+
     def __init__(self, url):
         self.url = url
         self.html = None
@@ -32,6 +33,7 @@ class Category(object):
 
 
 class Feed(object):
+
     def __init__(self, url):
         self.url = url
         self.rss = None
@@ -54,7 +56,7 @@ class Source(object):
         """
         if (url is None) or ('://' not in url) or (url[:4] != 'http'):
             raise Exception('Input url is bad!')
-
+        self.limit = 5000
         self.config = config or Configuration()
         self.config = utils.extend_config(self.config, kwargs)
 
@@ -81,10 +83,13 @@ class Source(object):
         self.is_parsed = False
         self.is_downloaded = False
 
-    def build(self):
+    def build(self, limit=None):
         """Encapsulates download and basic parsing with lxml. May be a
         good idea to split this into download() and parse() methods.
         """
+        if limit:
+
+            self.limit = limit
         self.download()
         self.parse()
 
@@ -157,8 +162,7 @@ class Source(object):
             doc = self.config.get_parser().fromstring(_.html)
             _.doc = doc
 
-        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if
-                                          c.doc is not None]
+        common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.doc is not None]
 
         categories_and_common_feed_urls = self.categories + common_feed_urls_as_categories
         urls = self.extractor.get_feed_urls(self.url, categories_and_common_feed_urls)
@@ -185,12 +189,10 @@ class Source(object):
         for index, _ in enumerate(self.categories):
             req = requests[index]
             if req.resp is not None:
-                self.categories[index].html = network.get_html(
-                    req.url, response=req.resp)
+                self.categories[index].html = network.get_html(req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print(('deleting category',
-                           self.categories[index].url, 'due to download err'))
+                    print(('deleting category', self.categories[index].url, 'due to download err'))
         self.categories = [c for c in self.categories if c.html]
 
     def download_feeds(self):
@@ -202,12 +204,10 @@ class Source(object):
         for index, _ in enumerate(self.feeds):
             req = requests[index]
             if req.resp is not None:
-                self.feeds[index].rss = network.get_html(
-                    req.url, response=req.resp)
+                self.feeds[index].rss = network.get_html(req.url, response=req.resp)
             else:
                 if self.config.verbose:
-                    print(('deleting feed',
-                           self.categories[index].url, 'due to download err'))
+                    print(('deleting feed', self.categories[index].url, 'due to download err'))
         self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
@@ -225,8 +225,7 @@ class Source(object):
     def parse_categories(self):
         """Parse out the lxml root in each category
         """
-        log.debug('We are extracting from %d categories' %
-                  len(self.categories))
+        log.debug('We are extracting from %d categories' % len(self.categories))
         for category in self.categories:
             doc = self.config.get_parser().fromstring(category.html)
             category.doc = doc
@@ -246,26 +245,24 @@ class Source(object):
     def parse_feeds(self):
         """Add titles to feeds
         """
-        log.debug('We are parsing %d feeds' %
-                  len(self.feeds))
+        log.debug('We are parsing %d feeds' % len(self.feeds))
         self.feeds = [self._map_title_to_feed(f) for f in self.feeds]
 
     def feeds_to_articles(self):
         """Returns articles given the url of a feed
         """
         articles = []
+        articles_count = 0
         for feed in self.feeds:
             urls = self.extractor.get_urls(feed.rss, regex=True)
             cur_articles = []
             before_purge = len(urls)
 
             for url in urls:
-                article = Article(
-                    url=url,
-                    source_url=feed.url,
-                    config=self.config)
+                article = Article(url=url, source_url=feed.url, config=self.config)
                 cur_articles.append(article)
-
+                articles_count += 1
+                if articles_count > self.limit: break
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
@@ -276,10 +273,10 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print(('%d->%d->%d for %s' %
-                       (before_purge, after_purge, after_memo, feed.url)))
-            log.debug('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, feed.url))
+                print(('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url)))
+            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, feed.url))
+            articles_count += 1
+            if articles_count > self.limit: break
         return articles
 
     def categories_to_articles(self):
@@ -287,6 +284,7 @@ class Source(object):
         the articles out of each url with the url_to_article method
         """
         articles = []
+        articles_count = 0
         for category in self.categories:
             cur_articles = []
             url_title_tups = self.extractor.get_urls(category.doc, titles=True)
@@ -297,13 +295,10 @@ class Source(object):
                 indiv_title = tup[1]
 
                 _article = Article(
-                    url=indiv_url,
-                    source_url=category.url,
-                    title=indiv_title,
-                    config=self.config
-                )
+                    url=indiv_url, source_url=category.url, title=indiv_title, config=self.config)
                 cur_articles.append(_article)
-
+                articles_count += 1
+                if articles_count > self.limit: break
             cur_articles = self.purge_articles('url', cur_articles)
             after_purge = len(cur_articles)
 
@@ -314,10 +309,10 @@ class Source(object):
             articles.extend(cur_articles)
 
             if self.config.verbose:
-                print(('%d->%d->%d for %s' %
-                       (before_purge, after_purge, after_memo, category.url)))
-            log.debug('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, category.url))
+                print(('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url)))
+            log.debug('%d->%d->%d for %s' % (before_purge, after_purge, after_memo, category.url))
+            articles_count += 1
+            if articles_count > self.limit: break
         return articles
 
     def _generate_articles(self):
@@ -327,18 +322,18 @@ class Source(object):
         feed_articles = self.feeds_to_articles()
 
         articles = feed_articles + category_articles
+        articles = category_articles
         uniq = {article.url: article for article in articles}
         return list(uniq.values())
 
-    def generate_articles(self, limit=5000):
+    def generate_articles(self):
         """Saves all current articles of news source, filter out bad urls
         """
         articles = self._generate_articles()
-        self.articles = articles[:limit]
-        log.debug('%d articles generated and cutoff at %d',
-                  len(articles), limit)
+        self.articles = articles
+        log.debug('%d articles generated and cutoff at %d', len(articles), self.limit)
 
-    def download_articles(self, threads=1):
+    def download_articles(self, threads=3):
         """Downloads all articles attached to self
         """
         # TODO fix how the article's is_downloaded is not set!
@@ -355,8 +350,7 @@ class Source(object):
             self.articles = [a for a in self.articles if a.html]
         else:
             if threads > 5:
-                print(('Using 5+ threads on a single source '
-                       'may get you rate limited!'))
+                print(('Using 5+ threads on a single source ' 'may get you rate limited!'))
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
