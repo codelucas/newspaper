@@ -21,11 +21,6 @@ from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
-from extruct.jsonld import JsonLdExtractor
-from extruct.rdfa import RDFaExtractor
-from extruct.w3cmicrodata import MicrodataExtractor
-from extruct.xmldom import XmlDomHTMLParser
-
 from . import urls
 from .utils import StringReplacement, StringSplitter
 
@@ -173,7 +168,7 @@ class ContentExtractor(object):
         #    return [] # Failed to find anything
         # return authors
 
-    def get_publishing_date(self, url, doc):
+    def get_publishing_date(self, url, doc, jsonlddata):
         """3 strategies for publishing date extraction. The strategies
         are descending in accuracy and the next strategy is only
         attempted if a preferred one fails.
@@ -199,12 +194,10 @@ class ContentExtractor(object):
             if datetime_obj:
                 return datetime_obj
 
-        JSONLD_TAGS = [
-            'datePublished'
-        ]
-        jsonlde = JsonLdExtractor()
-        jsonlddata = jsonlde.extract_items(doc)
         if jsonlddata:
+            JSONLD_TAGS = [
+                'datePublished'
+            ]
             for known_meta_tag in JSONLD_TAGS:
                 if known_meta_tag in jsonlddata[0]:
                     return jsonlddata[0][known_meta_tag]

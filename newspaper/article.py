@@ -25,6 +25,8 @@ from .utils import (URLHelper, RawHelper, extend_config,
                     get_available_languages, extract_meta_refresh)
 from .videos.extractors import VideoExtractor
 
+from extruct.jsonld import JsonLdExtractor
+
 log = logging.getLogger(__name__)
 
 
@@ -198,6 +200,10 @@ class Article(object):
         document_cleaner = DocumentCleaner(self.config)
         output_formatter = OutputFormatter(self.config)
 
+        # TODO: also integrate with open graph, microformat, microdata and RDFa
+        jsonlde = JsonLdExtractor()
+        jsonlddata = jsonlde.extract_items(self.clean_doc)
+
         title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
 
@@ -234,7 +240,8 @@ class Article(object):
 
         self.publish_date = self.extractor.get_publishing_date(
             self.url,
-            self.clean_doc)
+            self.clean_doc,
+            jsonlddata)
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
