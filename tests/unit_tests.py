@@ -25,6 +25,7 @@ URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
 from newspaper import Article, fulltext, Source, ArticleException, news_pool
+from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -177,6 +178,8 @@ class ArticleTestCase(unittest.TestCase):
         self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
+        self.assertEqual(self.article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(self.article.download_exception_msg, None)
         self.assertEqual(75406, len(self.article.html))
 
     @print_test
@@ -320,6 +323,26 @@ class ArticleTestCase(unittest.TestCase):
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
         self.assertEqual(SUMMARY, self.article.summary)
         self.assertCountEqual(KEYWORDS, self.article.keywords)
+
+
+class TestDownloadScheme(unittest.TestCase):
+    @print_test
+    def test_download_file_success(self):
+        url = "file://" + os.path.join(HTML_FN, "cnn_article.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(article.download_exception_msg, None)
+        self.assertEqual(75406, len(article.html))
+
+    @print_test
+    def test_download_file_failure(self):
+        url = "file://" + os.path.join(HTML_FN, "does_not_exist.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(0, len(article.html))
+        self.assertEqual(article.download_state, ArticleDownloadState.FAILED_RESPONSE)
+        self.assertEqual(article.download_exception_msg, "No such file or directory")
 
 
 class ContentExtractorTestCase(unittest.TestCase):
