@@ -25,7 +25,7 @@ class DocumentCleaner(object):
             "|cnn_stryspcvbx|^inset$|pagetools|post-attributes"
             "|welcome_form|contentTools2|the_answers"
             "|communitypromo|runaroundLeft|subscribe|vcard|articleheadings"
-            "|date|^print$|popup|author-dropdown|tools|socialtools|byline"
+            "|date(?!line-storybody)|^print$|popup|author-dropdown|tools|socialtools|byline"
             "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
             "|legende|ajoutVideo|timestamp|js_replies"
         )
