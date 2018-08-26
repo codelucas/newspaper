@@ -224,6 +224,7 @@ Features
       sl              Slovenian
       sr              Serbian
       et              Estonian
+      be              Belarusian
 
 
 Get it now
