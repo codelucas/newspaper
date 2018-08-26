@@ -80,6 +80,7 @@ def redirect_back(url, source_domain):
 
 def prepare_url(url, source_url=None):
     """
+    anchor href to absolute url.
     Operations that purify a url, removes arguments,
     redirects, and merges relatives with absolutes.
     """
@@ -99,7 +100,7 @@ def prepare_url(url, source_url=None):
     return proper_url
 
 
-def valid_url(url, verbose=False, test=False):
+def valid_url(url, verbose=False, test=False,good_paths=[]):
     """
     Is this URL a valid news-article url?
 
@@ -229,8 +230,8 @@ def valid_url(url, verbose=False, test=False):
     if match_date is not None:
         if verbose: print('%s verified for date' % url)
         return True
-
-    for GOOD in GOOD_PATHS:
+    combined_good_paths = good_paths + GOOD_PATHS
+    for GOOD in combined_good_paths:
         if GOOD.lower() in [p.lower() for p in path_chunks]:
             if verbose: print('%s verified for good path' % url)
             return True

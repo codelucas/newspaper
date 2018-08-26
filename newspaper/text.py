@@ -10,7 +10,8 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import os
 import re
 import string
-
+import nagisa
+tagger = nagisa.Tagger()
 from .utils import FileHelper
 
 TABSSPACE = re.compile(r'[\s\t]+')
@@ -100,6 +101,15 @@ class StopWords(object):
         ws.set_stop_words(overlapping_stopwords)
         return ws
 
+class StopWordsJapanese(StopWords):
+    """Japanese segmentation
+    """
+    def __init__(self, language='ja'):
+        super(StopWordsJapanese, self).__init__(language='ja')
+
+    def candidate_words(self, stripped_input):
+        words = tagger.tagging(stripped_input)
+        return words.words
 
 class StopWordsChinese(StopWords):
     """Chinese segmentation

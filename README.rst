@@ -312,7 +312,12 @@ Feel free to give our testing suite a shot, everything is mocked!::
 
 Planning on tweaking our full-text algorithm? Add the ``fulltext`` parameter::
 
+    $ python3 tests/unit_tests.py 
     $ python3 tests/unit_tests.py fulltext
+    
+Others unit testing task
+
+    $ python3 -m unittest  tests.unit_tests.UrlTestCase.test_valid_urls
 
 
 Demo

@@ -20,9 +20,14 @@ from collections import defaultdict
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
-
+# import langid
+from whatthelang import WhatTheLang
+wtl = WhatTheLang()
 from . import urls
 from .utils import StringReplacement, StringSplitter
+from functools import reduce
+import datetime
+from lxml.html import HtmlComment
 
 log = logging.getLogger(__name__)
 
@@ -69,10 +74,41 @@ class ContentExtractor(object):
             self.stopwords_class = \
                 self.config.get_stopwords_class(meta_lang)
 
+    def get_language(self,s):
+        lang = wtl.predict_lang(s)
+        lang = lang if not lang == "CANT_PREDICT" else None
+        return lang or self.language
+
+    def get_word_stats(self,text_node):
+        lang = self.get_language(text_node)
+        word_stats = self.stopwords_class(language=lang).get_stopword_count(text_node)
+        return word_stats
+
     def get_authors(self, doc):
         """Fetch the authors of the article, return as a list
         Only works for english articles
         """
+        if self.language == 'zh':
+            for ele in doc.iter():
+                if isinstance(ele,HtmlComment):
+                    continue
+                line = ele.text_content()
+                if line and line.find('作者：') !=-1:
+                    lines = line.splitlines()
+                    for l in lines:
+                        if l.find('作者：') !=-1:
+                            return re.sub('作者：', '', l.strip()).split("、")
+        elif self.language == 'ja':
+            for ele in doc.iter():
+                if isinstance(ele,HtmlComment):
+                    continue
+                line = ele.text_content()
+                if line and line.find('執筆者：') !=-1:
+                    lines = line.splitlines()
+                    for l in lines:
+                        if l.find('執筆者：') !=-1:
+                            return re.sub('執筆者：', '', l.strip()).split("、")
+
         _digits = re.compile('\d')
 
         def contains_digits(d):
@@ -103,7 +139,7 @@ class ContentExtractor(object):
 
             # Remove original By statement
             search_str = re.sub('[bB][yY][\:\s]|[fF]rom[\:\s]', '', search_str)
-
+            
             search_str = search_str.strip()
 
             # Chunk the line by non alphanumeric tokens (few name exceptions)
@@ -216,6 +252,10 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'property', 'value': 'aja:published_date',
+             'content': 'content'},# https://news.ameba.jp/
+            {'attribute': 'name', 'value': 'pubdate',
+             'content': 'content'}, # https://www.asahi.com 2018-05-14 16:18:28+09:00
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
@@ -229,6 +269,13 @@ class ContentExtractor(object):
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
+
+        if self.language in ['ja','zh']:
+            match_date = re.search(r'(?<![a-zA-Z_-])([0-9]{4,})[^0-9]\s?([0-9]{1,2})[^0-9]([0-9]{1,2})[^0-9\(]*([0-9]{1,2})?[^0-9\(\s]?([0-9]{1,2})?[^0-9\(\s]?([0-9]{1,2})?', doc.text_content())
+            if match_date:
+                groups = match_date.groups()
+                none_index = groups.index(None) if None in groups else len(groups)
+                return datetime.datetime(*list(map(lambda x: int(x) ,groups[0:none_index])))
 
         return None
 
@@ -581,7 +628,36 @@ class ContentExtractor(object):
             return urljoin(article_url, node_images[0])
         return ''
 
-    def _get_urls(self, doc, titles):
+    def _get_urls_only(self,a_tags,source_url):
+        tld_dat = tldextract.extract(source_url)
+        tld = tld_dat.domain.lower()
+        res = []
+        for a in a_tags:
+            href = a.get('href')
+            if href:
+                proper_url = urls.prepare_url(href, source_url)
+                url_tld_dat = tldextract.extract(proper_url)
+                url_tld = url_tld_dat.domain.lower()
+                if url_tld == tld:
+                    res.append(proper_url)
+        return res
+
+    def _get_urls_with_title(self,a_tags,source_url):
+        tld_dat = tldextract.extract(source_url)
+        tld = tld_dat.domain.lower()
+        res = []
+        for a in a_tags:
+            href = a.get('href')
+            if href:
+                proper_url = urls.prepare_url(href, source_url)
+                url_tld_dat = tldextract.extract(proper_url)
+                url_tld = url_tld_dat.domain.lower()
+                if url_tld == tld:
+                    t = (proper_url, a.text)
+                    res.append(t)
+        return res
+
+    def _get_urls(self, source_url,doc, titles):
         """Return a list of urls or a list of (url, title_text) tuples
         if specified.
         """
@@ -594,11 +670,11 @@ class ContentExtractor(object):
         # TODO: this should be refactored! We should have a separate
         # method which siphones the titles our of a list of <a> tags.
         if titles:
-            return [(a.get('href'), a.text) for a in a_tags if a.get('href')]
-        return [a.get('href') for a in a_tags if a.get('href')]
+            return self._get_urls_with_title(a_tags,source_url)
+        return self._get_urls_only(a_tags,source_url)
 
-    def get_urls(self, doc_or_html, titles=False, regex=False):
-        """`doc_or_html`s html page or doc and returns list of urls, the regex
+    def get_urls(self, source_url,doc_or_html, titles=False, regex=False):
+        """`doc_or_html`s html page or doc and returns list of absolute urls, the regex
         flag indicates we don't parse via lxml and just search the html.
         """
         if doc_or_html is None:
@@ -617,7 +693,7 @@ class ContentExtractor(object):
             doc = self.parser.fromstring(doc_or_html)
         else:
             doc = doc_or_html
-        return self._get_urls(doc, titles)
+        return self._get_urls(source_url, doc, titles)
 
     def get_category_urls(self, source_url, doc):
         """Inputs source lxml root and source url, extracts domain and
@@ -625,13 +701,12 @@ class ContentExtractor(object):
         the category urls.
         cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
         """
-        page_urls = self.get_urls(doc)
+        page_urls = self.get_urls(source_url,doc)
         valid_categories = []
         for p_url in page_urls:
             scheme = urls.get_scheme(p_url, allow_fragments=False)
             domain = urls.get_domain(p_url, allow_fragments=False)
             path = urls.get_path(p_url, allow_fragments=False)
-
             if not domain and not path:
                 if self.config.verbose:
                     print('elim category url %s for no domain and path'
@@ -723,27 +798,19 @@ class ContentExtractor(object):
             if not bad:
                 _valid_categories.append(p_url)
 
-        _valid_categories.append('/')  # add the root
-
-        for i, p_url in enumerate(_valid_categories):
-            if p_url.startswith('://'):
-                p_url = 'http' + p_url
-                _valid_categories[i] = p_url
-
-            elif p_url.startswith('//'):
-                p_url = 'http:' + p_url
-                _valid_categories[i] = p_url
-
-            if p_url.endswith('/'):
-                p_url = p_url[:-1]
-                _valid_categories[i] = p_url
-
         _valid_categories = list(set(_valid_categories))
 
-        category_urls = [urls.prepare_url(p_url, source_url)
-                         for p_url in _valid_categories]
-        category_urls = [c for c in category_urls if c is not None]
-        return category_urls
+        source_scheme = urls.get_scheme(source_url, allow_fragments=False)
+
+        pure_domain_and_path = [urls.get_domain(x) + urls.get_path(x) for x in _valid_categories if x is not None]
+
+        # site may mixed up with http and https keep the scheme same as source
+        for i,x in enumerate(_valid_categories):
+            pdap = urls.get_domain(x) + urls.get_path(x)
+            if pure_domain_and_path.count(pdap) > 1 and urls.get_scheme(x) != source_scheme:
+                del _valid_categories[i]
+
+        return _valid_categories
 
     def extract_tags(self, doc):
         if len(list(doc)) == 0:
@@ -774,11 +841,15 @@ class ContentExtractor(object):
 
         for node in nodes_to_check:
             text_node = self.parser.getText(node)
-            word_stats = self.stopwords_class(language=self.language). \
-                get_stopword_count(text_node)
-            high_link_density = self.is_highlink_density(node)
-            if word_stats.get_stopword_count() > 2 and not high_link_density:
-                nodes_with_text.append(node)
+            word_stats = None
+            if text_node and not text_node.isnumeric() and len(text_node) > 4 and not reduce(lambda x,y:  x == y and y,text_node):
+                word_stats = self.get_word_stats(text_node)
+                if word_stats:
+                    high_link_density = self.is_highlink_density(node)
+                    if word_stats and word_stats.get_stopword_count() > 2 and not high_link_density:
+                        nodes_with_text.append(node)
+                    elif not high_link_density:
+                        nodes_with_text.append(node)
 
         nodes_number = len(nodes_with_text)
         negative_scoring = 0
@@ -802,9 +873,11 @@ class ContentExtractor(object):
                         boost_score = float(5)
 
             text_node = self.parser.getText(node)
-            word_stats = self.stopwords_class(language=self.language). \
-                get_stopword_count(text_node)
-            upscore = int(word_stats.get_stopword_count() + boost_score)
+            word_stats = self.get_word_stats(text_node)
+            if word_stats:
+                upscore = int(word_stats.get_stopword_count() + boost_score)
+            else:
+                upscore = boost_score
 
             parent_node = self.parser.getParent(node)
             self.update_score(parent_node, upscore)
@@ -855,10 +928,10 @@ class ContentExtractor(object):
                 if steps_away >= max_stepsaway_from_node:
                     return False
                 paragraph_text = self.parser.getText(current_node)
-                word_stats = self.stopwords_class(language=self.language). \
-                    get_stopword_count(paragraph_text)
-                if word_stats.get_stopword_count() > minimum_stopword_count:
-                    return True
+                word_stats = self.get_word_stats(paragraph_text)
+                if word_stats:
+                    if word_stats.get_stopword_count() > minimum_stopword_count:
+                        return True
                 steps_away += 1
         return False
 
@@ -896,10 +969,10 @@ class ContentExtractor(object):
                 for first_paragraph in potential_paragraphs:
                     text = self.parser.getText(first_paragraph)
                     if len(text) > 0:
-                        word_stats = self.stopwords_class(
-                            language=self.language). \
-                            get_stopword_count(text)
-                        paragraph_score = word_stats.get_stopword_count()
+                        paragraph_score = 0
+                        word_stats = self.get_word_stats(text)
+                        if word_stats:
+                            paragraph_score = word_stats.get_stopword_count()
                         sibling_baseline_score = float(.30)
                         high_link_density = self.is_highlink_density(
                             first_paragraph)
@@ -927,10 +1000,9 @@ class ContentExtractor(object):
 
         for node in nodes_to_check:
             text_node = self.parser.getText(node)
-            word_stats = self.stopwords_class(language=self.language). \
-                get_stopword_count(text_node)
+            word_stats = self.get_word_stats(text_node)
             high_link_density = self.is_highlink_density(node)
-            if word_stats.get_stopword_count() > 2 and not high_link_density:
+            if word_stats and word_stats.get_stopword_count() > 2 and not high_link_density:
                 paragraphs_number += 1
                 paragraphs_score += word_stats.get_stopword_count()
 
