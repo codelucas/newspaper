@@ -224,6 +224,7 @@ Features
       sr              Serbian
       et              Estonian
       ja              Japanese
+      be              Belarusian
 
 
 Get it now

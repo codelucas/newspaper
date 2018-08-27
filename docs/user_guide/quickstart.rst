@@ -270,3 +270,4 @@ of popular news source urls.. In case you need help choosing a news source!
       sr              Serbian
       et              Estonian
       ja              Japanese
+      be              Belarusian
