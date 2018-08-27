@@ -683,6 +683,28 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'es'))
 
+    @print_test
+    def test_japanese_fulltext_extract(self):
+        url = 'https://www.nikkei.com/article/DGXMZO31897660Y8A610C1000000/?n_cid=DSTPCS001'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
+
+    @print_test
+    def test_japanese_fulltext_extract2(self):
+        url = 'http://www.afpbb.com/articles/-/3178894'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article2', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese2', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
+
 
 class TestNewspaperLanguagesApi(unittest.TestCase):
     @print_test

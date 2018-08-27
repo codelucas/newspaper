@@ -14,7 +14,7 @@ import logging
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
-                   StopWordsKorean, StopWordsHindi)
+                   StopWordsKorean, StopWordsHindi, StopWordsJapanese)
 from .version import __version__
 
 log = logging.getLogger(__name__)
@@ -114,6 +114,8 @@ class Configuration(object):
         # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
         elif language == 'ar' or language == 'fa':
             return StopWordsArabic
+        elif language == 'ja':
+            return StopWordsJapanese
         return StopWords
 
     @staticmethod

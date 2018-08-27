@@ -223,6 +223,7 @@ Features
       sl              Slovenian
       sr              Serbian
       et              Estonian
+      ja              Japanese
       be              Belarusian
 
 

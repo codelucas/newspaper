@@ -182,3 +182,16 @@ class StopWordsHindi(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
+
+
+class StopWordsJapanese(StopWords):
+    """Japanese segmentation
+    """
+    def __init__(self, language='ja'):
+        super(StopWordsJapanese, self).__init__(language='ja')
+
+    def candidate_words(self, stripped_input):
+        import tinysegmenter
+        segmenter = tinysegmenter.TinySegmenter()
+        tokens = segmenter.tokenize(stripped_input)
+        return tokens
