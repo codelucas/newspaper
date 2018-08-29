@@ -9,50 +9,49 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import queue
-import traceback
-from threading import Thread
+from concurrent.futures import ThreadPoolExecutor, wait
+from threading import Lock
 
 from .configuration import Configuration
 
-
-class Worker(Thread):
-    """
-    Thread executing tasks from a given tasks queue.
-    """
-    def __init__(self, tasks, timeout_seconds):
-        Thread.__init__(self)
-        self.tasks = tasks
-        self.timeout = timeout_seconds
-        self.daemon = True
-        self.start()
-
-    def run(self):
-        while True:
-            try:
-                func, args, kargs = self.tasks.get(timeout=self.timeout)
-            except queue.Empty:
-                # Extra thread allocated, no job, exit gracefully
-                break
-            try:
-                func(*args, **kargs)
-            except Exception:
-                traceback.print_exc()
-
-            self.tasks.task_done()
-
+def perform_download_articles(paper):
+    return paper.download_articles
 
 class ThreadPool:
-    def __init__(self, num_threads, timeout_seconds):
-        self.tasks = queue.Queue(num_threads)
-        for _ in range(num_threads):
-            Worker(self.tasks, timeout_seconds)
+    def __init__(self, num_threads, timeout_seconds=0):
+        self.mutex = Lock()
+        self.executor = ThreadPoolExecutor(max_workers=num_threads)
+        self.timeout_seconds = timeout_seconds
+        self.futures = set()
 
     def add_task(self, func, *args, **kargs):
-        self.tasks.put((func, args, kargs))
+        """
+        Adds the given task, and returns a future for the completion.
+        """
+        f = self.executor.submit(func, *args, **kargs)
+
+        f.add_done_callback(self._remove_future)
+
+        with self.mutex:
+            self.futures.add(f)
+
+        return f
+
+    def _remove_future(self, f):
+        with self.mutex:
+            self.futures.discard(f)
 
     def wait_completion(self):
-        self.tasks.join()
+        """
+        Waits for the completion of every submitted task.
+        Note: this will block insertion of new tasks while waiting.
+        """
+        with self.mutex:
+            wait(self.futures, timeout=self.timeout_seconds)
+
+        self.futures = set()
+
+
 
 
 class NewsPool(object):
@@ -81,28 +80,29 @@ class NewsPool(object):
         >>> cnn_paper.articles[50].html
         u'<html>blahblah ... '
         """
-        self.papers = []
+        self.papers = {}
         self.pool = None
         self.config = config or Configuration()
 
     def join(self):
         """
-        Runs the mtheading and returns when all threads have joined
-        resets the task.
+        Waits for all submitted papers to complete downloading their articles.
         """
         if self.pool is None:
             print('Call set(..) with a list of source '
                   'objects before .join(..)')
             raise
+
+        # Wait for completion of all futures.
         self.pool.wait_completion()
-        self.papers = []
-        self.pool = None
 
-    def set(self, paper_list, threads_per_source=1):
-        self.papers = paper_list
-        num_threads = threads_per_source * len(self.papers)
-        timeout = self.config.thread_timeout_seconds
-        self.pool = ThreadPool(num_threads, timeout)
-
-        for paper in self.papers:
-            self.pool.add_task(paper.download_articles)
+    def set(self, paper_list, num_threads=8, fun=perform_download_articles):
+        """
+        Adds all of the given papers to the NewsPool.
+        They will have their articles downloaded in parallel.
+        Returns a dictionary mapping each future to the newspaper that it is downloading
+        articles for.
+        """
+        self.pool = ThreadPool(num_threads)
+        self.papers = { self.pool.add_task(fun(paper)): paper for paper in paper_list }
+        return self.papers
