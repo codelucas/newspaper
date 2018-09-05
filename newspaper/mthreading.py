@@ -9,12 +9,20 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import logging
 import queue
 import traceback
 
 from threading import Thread
 
 from .configuration import Configuration
+
+log = logging.getLogger(__name__)
+
+
+class ConcurrencyException(Exception):
+    pass
+
 
 class Worker(Thread):
     """
@@ -90,9 +98,8 @@ class NewsPool(object):
         resets the task.
         """
         if self.pool is None:
-            print('Call set(..) with a list of source '
-                  'objects before .join(..)')
-            raise
+            raise ConcurrencyException('Call set(..) with a list of source objects '
+                                       'before calling .join(..)')
         self.pool.wait_completion()
         self.pool = None
 

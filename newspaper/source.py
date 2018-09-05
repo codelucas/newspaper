@@ -38,6 +38,9 @@ class Feed(object):
         # TODO self.dom = None, speed up Feedparser
 
 
+NUM_THREADS_PER_SOURCE_WARN_LIMIT = 5
+
+
 class Source(object):
     """Sources are abstractions of online news vendors like huffpost or cnn.
     domain     =  'www.cnn.com'
@@ -188,9 +191,9 @@ class Source(object):
                 self.categories[index].html = network.get_html(
                     req.url, response=req.resp)
             else:
-                if self.config.verbose:
-                    print(('deleting category',
-                           self.categories[index].url, 'due to download err'))
+                log.warning(('Deleting category %s from source %s due to '
+                             'download error') %
+                             (self.categories[index].url, self.url))
         self.categories = [c for c in self.categories if c.html]
 
     def download_feeds(self):
@@ -205,9 +208,9 @@ class Source(object):
                 self.feeds[index].rss = network.get_html(
                     req.url, response=req.resp)
             else:
-                if self.config.verbose:
-                    print(('deleting feed',
-                           self.categories[index].url, 'due to download err'))
+                log.warning(('Deleting feed %s from source %s due to '
+                             'download error') %
+                             (self.categories[index].url, self.url))
         self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
@@ -217,8 +220,7 @@ class Source(object):
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
-            if self.config.verbose:
-                print('[Source parse ERR]', self.url)
+            log.warning('Source %s parse error.' % self.url)
             return
         self.set_description()
 
@@ -275,9 +277,6 @@ class Source(object):
 
             articles.extend(cur_articles)
 
-            if self.config.verbose:
-                print(('%d->%d->%d for %s' %
-                       (before_purge, after_purge, after_memo, feed.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, feed.url))
         return articles
@@ -313,9 +312,6 @@ class Source(object):
 
             articles.extend(cur_articles)
 
-            if self.config.verbose:
-                print(('%d->%d->%d for %s' %
-                       (before_purge, after_purge, after_memo, category.url)))
             log.debug('%d->%d->%d for %s' %
                       (before_purge, after_purge, after_memo, category.url))
         return articles
@@ -354,9 +350,9 @@ class Source(object):
                     failed_articles.append(self.articles[index])
             self.articles = [a for a in self.articles if a.html]
         else:
-            if threads > 5:
-                print(('Using 5+ threads on a single source '
-                       'may get you rate limited!'))
+            if threads > NUM_THREADS_PER_SOURCE_WARN_LIMIT:
+                log.warning(('Using %s+ threads on a single source '
+                            'may result in rate limiting!') % NUM_THREADS_PER_SOURCE_WARN_LIMIT)
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
@@ -368,9 +364,8 @@ class Source(object):
 
         self.is_downloaded = True
         if len(failed_articles) > 0:
-            if self.config.verbose:
-                print('[ERROR], these article urls failed the download:',
-                      [a.url for a in failed_articles])
+            log.warning('The following article urls failed the download: %s' %
+                        ', '.join([a.url for a in failed_articles]))
 
     def parse_articles(self):
         """Parse all articles, delete if too small
