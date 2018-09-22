@@ -68,6 +68,7 @@ class DocumentCleaner(object):
         doc_to_clean = self.clean_para_spans(doc_to_clean)
         doc_to_clean = self.div_to_para(doc_to_clean, 'div')
         doc_to_clean = self.div_to_para(doc_to_clean, 'span')
+        doc_to_clean = self.div_to_para(doc_to_clean, 'section')
         return doc_to_clean
 
     def clean_body_classes(self, doc):
