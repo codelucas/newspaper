@@ -21,7 +21,10 @@ packages = [
 
 
 if sys.argv[-1] == 'publish':
-    os.system('python3 setup.py sdist upload -r pypi')
+    # PYPI now uses twine for package management.
+    # For this to work you must first `$ pip3 install twine`
+    os.system('python3 setup.py sdist bdist_wheel')
+    os.system('twine upload dist/*')
     sys.exit()
 
 
