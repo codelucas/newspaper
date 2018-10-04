@@ -8,6 +8,7 @@ import logging
 import copy
 import os
 import glob
+from urllib.parse import urlparse
 
 import requests
 
@@ -158,6 +159,23 @@ class Article(object):
         self.parse()
         self.nlp()
 
+    def _parse_scheme_file(self, path):
+        try:
+            with open(path, "r") as fin:
+                return fin.read()
+        except OSError as e:
+            self.download_state = ArticleDownloadState.FAILED_RESPONSE
+            self.download_exception_msg = e.strerror
+            return None
+
+    def _parse_scheme_http(self):
+        try:
+            return network.get_html_2XX_only(self.url, self.config)
+        except requests.exceptions.RequestException as e:
+            self.download_state = ArticleDownloadState.FAILED_RESPONSE
+            self.download_exception_msg = str(e)
+            return None
+
     def download(self, input_html=None, title=None, recursion_counter=0):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
@@ -166,11 +184,12 @@ class Article(object):
         infinite
         """
         if input_html is None:
-            try:
-                html = network.get_html_2XX_only(self.url, self.config)
-            except requests.exceptions.RequestException as e:
-                self.download_state = ArticleDownloadState.FAILED_RESPONSE
-                self.download_exception_msg = str(e)
+            parsed_url = urlparse(self.url)
+            if parsed_url.scheme == "file":
+                html = self._parse_scheme_file(parsed_url.path)
+            else:
+                html = self._parse_scheme_http()
+            if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
                 return
