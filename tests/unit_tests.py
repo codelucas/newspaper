@@ -222,6 +222,7 @@ class ArticleTestCase(unittest.TestCase):
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
+        META_SITE_NAME = 'CNN'
 
         self.article.parse()
         self.article.nlp()
@@ -240,6 +241,7 @@ class ArticleTestCase(unittest.TestCase):
         self.assertEqual(TITLE, self.article.title)
         self.assertEqual(LEN_IMGS, len(self.article.imgs))
         self.assertEqual(META_LANG, self.article.meta_lang)
+        self.assertEqual(META_SITE_NAME, self.article.meta_site_name)
         self.assertEqual('2013-11-27 00:00:00', str(self.article.publish_date))
 
     @print_test

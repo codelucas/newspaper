@@ -125,6 +125,9 @@ class Article(object):
         # Meta favicon field in HTML source
         self.meta_favicon = ""
 
+        # Meta site_name field in HTML source
+        self.meta_site_name = ""
+
         # Meta tags contain a lot of structured data, e.g. OpenGraph
         self.meta_data = {}
 
@@ -238,6 +241,9 @@ class Article(object):
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
         self.set_meta_favicon(meta_favicon)
+
+        meta_site_name = self.extractor.get_meta_site_name(self.clean_doc)
+        self.set_meta_site_name(meta_site_name)
 
         meta_description = \
             self.extractor.get_meta_description(self.clean_doc)
@@ -521,6 +527,9 @@ class Article(object):
 
     def set_meta_favicon(self, meta_favicon):
         self.meta_favicon = meta_favicon
+
+    def set_meta_site_name(self, meta_site_name):
+        self.meta_site_name = meta_site_name
 
     def set_meta_description(self, meta_description):
         self.meta_description = meta_description
