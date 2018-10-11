@@ -817,7 +817,7 @@ class ContentExtractor(object):
             parent_parent_node = self.parser.getParent(parent_node)
             if parent_parent_node is not None:
                 self.update_node_count(parent_parent_node, 1)
-                self.update_score(parent_parent_node, upscore / 2)
+                self.update_score(parent_parent_node, upscore / 1.7)
                 if parent_parent_node not in parent_nodes:
                     parent_nodes.append(parent_parent_node)
             cnt += 1

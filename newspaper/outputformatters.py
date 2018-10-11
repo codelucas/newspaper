@@ -9,6 +9,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from html import unescape
 import logging
+import re
 
 from .text import innerTrim
 
@@ -158,10 +159,24 @@ class OutputFormatter(object):
                     max_depth = e_depth
             return max_depth
 
+        def get_id_strip_digit(node):
+            node_id = node.get('id')
+            if node_id:
+                return re.match('^(.+*)\d*', node_id).group(1)
+
         top_level_nodes = self.parser.getChildren(self.get_top_node())
         if len(top_level_nodes) < 3:
             return
 
+        other = top_level_nodes[:-1]
         last_node = top_level_nodes[-1]
+
+        same_tag = all(node.tag == last_node.tag for node in other)
+        same_class = all(node.get('class') == last_node.get('class') for node in other)
+        similar_id = all(get_id_strip_digit(node) == get_id_strip_digit(last_node) for node in other)
+
+        if same_tag and same_class and similar_id:
+            return
+
         if get_depth(last_node) >= 2:
             self.parser.remove(last_node)
