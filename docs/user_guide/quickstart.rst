@@ -271,3 +271,4 @@ of popular news source urls.. In case you need help choosing a news source!
       et              Estonian
       ja              Japanese
       be              Belarusian
+      lt              Lithuanian
