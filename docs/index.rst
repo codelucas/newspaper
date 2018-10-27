@@ -226,6 +226,7 @@ Features
       et              Estonian
       ja              Japanese
       be              Belarusian
+      lt              Lithuanian
 
 
 Get it now
