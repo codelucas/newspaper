@@ -151,7 +151,7 @@ class ContentExtractor(object):
             if match.tag == 'meta' or match.tag == 'span' or match.tag == 'a':
                 mm = match.xpath('@content')
                 if not mm:
-                    mm=str(match.text_content()).split()
+                    mm = str(match.text_content()).split()
                 if len(mm) > 0:
                     content = mm[0]
             else:
