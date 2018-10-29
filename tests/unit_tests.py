@@ -25,6 +25,7 @@ URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
 from newspaper import Article, fulltext, Source, ArticleException, news_pool
+from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -177,6 +178,8 @@ class ArticleTestCase(unittest.TestCase):
         self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
+        self.assertEqual(self.article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(self.article.download_exception_msg, None)
         self.assertEqual(75406, len(self.article.html))
 
     @print_test
@@ -219,6 +222,7 @@ class ArticleTestCase(unittest.TestCase):
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
+        META_SITE_NAME = 'CNN'
 
         self.article.parse()
         self.article.nlp()
@@ -237,6 +241,7 @@ class ArticleTestCase(unittest.TestCase):
         self.assertEqual(TITLE, self.article.title)
         self.assertEqual(LEN_IMGS, len(self.article.imgs))
         self.assertEqual(META_LANG, self.article.meta_lang)
+        self.assertEqual(META_SITE_NAME, self.article.meta_site_name)
         self.assertEqual('2013-11-27 00:00:00', str(self.article.publish_date))
 
     @print_test
@@ -320,6 +325,26 @@ class ArticleTestCase(unittest.TestCase):
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
         self.assertEqual(SUMMARY, self.article.summary)
         self.assertCountEqual(KEYWORDS, self.article.keywords)
+
+
+class TestDownloadScheme(unittest.TestCase):
+    @print_test
+    def test_download_file_success(self):
+        url = "file://" + os.path.join(HTML_FN, "cnn_article.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(article.download_exception_msg, None)
+        self.assertEqual(75406, len(article.html))
+
+    @print_test
+    def test_download_file_failure(self):
+        url = "file://" + os.path.join(HTML_FN, "does_not_exist.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(0, len(article.html))
+        self.assertEqual(article.download_state, ArticleDownloadState.FAILED_RESPONSE)
+        self.assertEqual(article.download_exception_msg, "No such file or directory")
 
 
 class ContentExtractorTestCase(unittest.TestCase):
@@ -682,6 +707,28 @@ class MultiLanguageTestCase(unittest.TestCase):
         text = mock_resource_with('spanish', 'txt')
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'es'))
+
+    @print_test
+    def test_japanese_fulltext_extract(self):
+        url = 'https://www.nikkei.com/article/DGXMZO31897660Y8A610C1000000/?n_cid=DSTPCS001'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
+
+    @print_test
+    def test_japanese_fulltext_extract2(self):
+        url = 'http://www.afpbb.com/articles/-/3178894'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article2', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese2', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
 
 
 class TestNewspaperLanguagesApi(unittest.TestCase):

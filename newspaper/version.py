@@ -7,5 +7,5 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-version_info = (0, 2, 6)
+version_info = (0, 2, 8)
 __version__ = ".".join(map(str, version_info))
