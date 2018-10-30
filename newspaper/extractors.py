@@ -769,7 +769,6 @@ class ContentExtractor(object):
         return set(tags)
 
     def calculate_best_node(self, doc):
-        top_node = None
         nodes_to_check = self.nodes_to_check(doc)
         starting_boost = float(1.0)
         cnt = 0
@@ -828,17 +827,7 @@ class ContentExtractor(object):
             cnt += 1
             i += 1
 
-        top_node_score = 0
-        for e in parent_nodes:
-            score = self.get_score(e)
-
-            if score > top_node_score:
-                top_node = e
-                top_node_score = score
-
-            if top_node is None:
-                top_node = e
-        return top_node
+        return max(parent_nodes, key=self.get_score, default=None)
 
     def is_boostable(self, node):
         """A lot of times the first paragraph might be the caption under an image
