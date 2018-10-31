@@ -472,6 +472,11 @@ class ContentExtractor(object):
         """
         return self.get_meta_content(doc, 'meta[property="og:type"]')
 
+    def get_meta_site_name(self, doc):
+        """Returns site name of article, open graph protocol
+        """
+        return self.get_meta_content(doc, 'meta[property="og:site_name"]')
+
     def get_meta_description(self, doc):
         """If the article has meta description set in the source, use that
         """

@@ -390,6 +390,7 @@ def print_available_languages():
         'et': 'Estonian',
         'ja': 'Japanese',
         'be': 'Belarusian',
+        'lt': 'Lithuanian',
         'my': 'Burmese'
     }
 

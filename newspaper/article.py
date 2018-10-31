@@ -8,6 +8,7 @@ import logging
 import copy
 import os
 import glob
+from urllib.parse import urlparse
 
 import requests
 
@@ -124,6 +125,9 @@ class Article(object):
         # Meta favicon field in HTML source
         self.meta_favicon = ""
 
+        # Meta site_name field in HTML source
+        self.meta_site_name = ""
+
         # Meta tags contain a lot of structured data, e.g. OpenGraph
         self.meta_data = {}
 
@@ -158,6 +162,23 @@ class Article(object):
         self.parse()
         self.nlp()
 
+    def _parse_scheme_file(self, path):
+        try:
+            with open(path, "r") as fin:
+                return fin.read()
+        except OSError as e:
+            self.download_state = ArticleDownloadState.FAILED_RESPONSE
+            self.download_exception_msg = e.strerror
+            return None
+
+    def _parse_scheme_http(self):
+        try:
+            return network.get_html_2XX_only(self.url, self.config)
+        except requests.exceptions.RequestException as e:
+            self.download_state = ArticleDownloadState.FAILED_RESPONSE
+            self.download_exception_msg = str(e)
+            return None
+
     def download(self, input_html=None, title=None, recursion_counter=0):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
@@ -166,11 +187,12 @@ class Article(object):
         infinite
         """
         if input_html is None:
-            try:
-                html = network.get_html_2XX_only(self.url, self.config)
-            except requests.exceptions.RequestException as e:
-                self.download_state = ArticleDownloadState.FAILED_RESPONSE
-                self.download_exception_msg = str(e)
+            parsed_url = urlparse(self.url)
+            if parsed_url.scheme == "file":
+                html = self._parse_scheme_file(parsed_url.path)
+            else:
+                html = self._parse_scheme_http()
+            if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
                 return
@@ -219,6 +241,9 @@ class Article(object):
 
         meta_favicon = self.extractor.get_favicon(self.clean_doc)
         self.set_meta_favicon(meta_favicon)
+
+        meta_site_name = self.extractor.get_meta_site_name(self.clean_doc)
+        self.set_meta_site_name(meta_site_name)
 
         meta_description = \
             self.extractor.get_meta_description(self.clean_doc)
@@ -502,6 +527,9 @@ class Article(object):
 
     def set_meta_favicon(self, meta_favicon):
         self.meta_favicon = meta_favicon
+
+    def set_meta_site_name(self, meta_site_name):
+        self.meta_site_name = meta_site_name
 
     def set_meta_description(self, meta_description):
         self.meta_description = meta_description
