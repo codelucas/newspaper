@@ -24,7 +24,7 @@ class DocumentCleaner(object):
             "|tags|socialnetworking|socialNetworking|cnnStryHghLght"
             "|cnn_stryspcvbx|^inset$|pagetools|post-attributes"
             "|welcome_form|contentTools2|the_answers"
-            "|communitypromo|runaroundLeft|subscribe|vcard|articleheadings"
+            "|communitypromo|runaroundLeft|subscribe(?!r-hider|-truncate)|vcard|articleheadings"
             "|date(?!line-storybody)|^print$|popup|author-dropdown|tools|socialtools|byline"
             "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
             "|legende|ajoutVideo|timestamp|js_replies"
@@ -127,7 +127,7 @@ class DocumentCleaner(object):
         # class
         naughty_classes = self.parser.xpath_re(doc, self.nauthy_classes_re)
         for node in naughty_classes:
-            if not node.xpath(self.contains_article):
+            if not node.xpath(self.contains_article) and node.get('itemprop') != 'articleBody':
                 self.parser.remove(node)
         # name
         naughty_names = self.parser.xpath_re(doc, self.nauthy_names_re)
