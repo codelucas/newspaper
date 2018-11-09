@@ -216,6 +216,12 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'name', 'value': 'publish-date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'created-date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'modified-date',
+             'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
