@@ -11,3 +11,4 @@ feedfinder2>=0.0.4
 jieba3k>=0.35.1
 python-dateutil>=2.5.3
 extruct>=0.5.0
+tinysegmenter==0.3  # TODO(codelucas): Investigate making this >=0.3

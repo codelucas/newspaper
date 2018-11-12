@@ -7,6 +7,7 @@ import os
 import unittest
 import time
 import traceback
+import re
 from collections import defaultdict, OrderedDict
 import concurrent.futures
 
@@ -24,6 +25,7 @@ URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
 from newspaper import Article, fulltext, Source, ArticleException, news_pool
+from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -55,7 +57,7 @@ def mock_resource_with(filename, resource_type):
     subfolder = 'text' if resource_type == 'txt' else 'html'
     resource_path = os.path.join(TEST_DIR, "data/%s/%s.%s" %
                                  (subfolder, filename, resource_type))
-    with open(resource_path, 'r') as f:
+    with open(resource_path, 'r', encoding='utf-8') as f:
         return f.read()
 
 
@@ -176,6 +178,8 @@ class ArticleTestCase(unittest.TestCase):
         self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
+        self.assertEqual(self.article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(self.article.download_exception_msg, None)
         self.assertEqual(75406, len(self.article.html))
 
     @print_test
@@ -218,6 +222,7 @@ class ArticleTestCase(unittest.TestCase):
         TITLE = 'After storm, forecasters see smooth sailing for Thanksgiving'
         LEN_IMGS = 46
         META_LANG = 'en'
+        META_SITE_NAME = 'CNN'
 
         self.article.parse()
         self.article.nlp()
@@ -236,6 +241,7 @@ class ArticleTestCase(unittest.TestCase):
         self.assertEqual(TITLE, self.article.title)
         self.assertEqual(LEN_IMGS, len(self.article.imgs))
         self.assertEqual(META_LANG, self.article.meta_lang)
+        self.assertEqual(META_SITE_NAME, self.article.meta_site_name)
         self.assertEqual('2013-11-27 00:00:00', str(self.article.publish_date))
 
     @print_test
@@ -321,6 +327,26 @@ class ArticleTestCase(unittest.TestCase):
         self.assertCountEqual(KEYWORDS, self.article.keywords)
 
 
+class TestDownloadScheme(unittest.TestCase):
+    @print_test
+    def test_download_file_success(self):
+        url = "file://" + os.path.join(HTML_FN, "cnn_article.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(article.download_exception_msg, None)
+        self.assertEqual(75406, len(article.html))
+
+    @print_test
+    def test_download_file_failure(self):
+        url = "file://" + os.path.join(HTML_FN, "does_not_exist.html")
+        article = Article(url=url)
+        article.download()
+        self.assertEqual(0, len(article.html))
+        self.assertEqual(article.download_state, ArticleDownloadState.FAILED_RESPONSE)
+        self.assertEqual(article.download_exception_msg, "No such file or directory")
+
+
 class ContentExtractorTestCase(unittest.TestCase):
     """Test specific element extraction cases"""
 
@@ -375,6 +401,49 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<meta property="og:url" content="www.example.com/article.html">'
         article_url = 'http://www.example.com/article?foo=bar'
         self.assertEqual(self._get_canonical_link(article_url, html), url)
+
+    def test_get_top_image_from_meta(self):
+        html = '<meta property="og:image" content="https://example.com/meta_img_filename.jpg" />' \
+               '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+        html_empty_og_content = '<meta property="og:image" content="" />' \
+            '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+        html_empty_all = '<meta property="og:image" content="" />' \
+            '<meta name="og:image" />'
+        html_rel_img_src = html_empty_all + '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
+        html_rel_img_src2 = html_empty_all + '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
+        html_rel_icon = html_empty_all + '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
+
+        doc = self.parser.fromstring(html)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_img_filename.jpg'
+        )
+        doc = self.parser.fromstring(html_empty_og_content)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_another_img_filename.jpg'
+        )
+        doc = self.parser.fromstring(html_empty_all)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            ''
+        )
+        doc = self.parser.fromstring(html_rel_img_src)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_image.jpg'
+        )
+        doc = self.parser.fromstring(html_rel_img_src2)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_image2.jpg'
+        )
+        doc = self.parser.fromstring(html_rel_icon)
+        self.assertEqual(
+            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            'https://example.com/meta_link_rel_icon.ico'
+        )
+
 
 class SourceTestCase(unittest.TestCase):
     @print_test
@@ -475,13 +544,50 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+
+    @print_test
+    def test_pubdate(self):
+        """Checks that irrelevant data in url isn't considered as publishing date"""
+        from newspaper.urls import STRICT_DATE_REGEX
+
+        with open(os.path.join(TEST_DIR, 'data/test_urls_pubdate.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('1', 'url_goes_here') form, '1' means publishing date
+            # is present in the url, '0' otherwise
+
+            for pubdate, url in test_tuples:
+                is_present = bool(int(pubdate))
+                date_match = re.search(STRICT_DATE_REGEX, url)
+                try:
+                    self.assertEqual(is_present, bool(date_match))
+                except AssertionError:
+                    if is_present:
+                        print('\t\tpublishing date in %s should be present' % (url))
+                    else:
+                        print('\t\tpublishing date in %s should not be present' % (url))
+                    raise
+
+
     @unittest.skip("Need to write an actual test")
     @print_test
     def test_prepare_url(self):
         """Normalizes a url, removes arguments, hashtags. If a relative url, it
         merges it with the source domain to make an abs url, etc
         """
-        pass
+        from newspaper.urls import prepare_url
+
+        with open(os.path.join(TEST_DIR, 'data/test_prepare_urls.txt'), 'r') as f:
+            lines = f.readlines()
+            test_tuples = [tuple(l.strip().split(' ')) for l in lines]
+            # tuples are ('real_url', 'url_path', 'source_url') form
+
+        for real, url, source in test_tuples:
+            try:
+                self.assertEqual(real, prepare_url(url, source))
+            except AssertionError:
+                print('\t\turl: %s + %s is supposed to be %s' % (url, source, real))
+                raise
 
 
 class APITestCase(unittest.TestCase):
@@ -601,6 +707,34 @@ class MultiLanguageTestCase(unittest.TestCase):
         text = mock_resource_with('spanish', 'txt')
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'es'))
+
+    @print_test
+    def test_japanese_fulltext_extract(self):
+        url = 'https://www.nikkei.com/article/DGXMZO31897660Y8A610C1000000/?n_cid=DSTPCS001'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
+
+    @print_test
+    def test_japanese_fulltext_extract2(self):
+        url = 'http://www.afpbb.com/articles/-/3178894'
+        article = Article(url=url, language='ja')
+        html = mock_resource_with('japanese_article2', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('japanese2', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'ja'))
+
+
+class TestNewspaperLanguagesApi(unittest.TestCase):
+    @print_test
+    def test_languages_api_call(self):
+        newspaper.languages()
 
 
 if __name__ == '__main__':

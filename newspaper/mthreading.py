@@ -9,11 +9,19 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
+import logging
 import queue
 import traceback
+
 from threading import Thread
 
 from .configuration import Configuration
+
+log = logging.getLogger(__name__)
+
+
+class ConcurrencyException(Exception):
+    pass
 
 
 class Worker(Thread):
@@ -81,7 +89,6 @@ class NewsPool(object):
         >>> cnn_paper.articles[50].html
         u'<html>blahblah ... '
         """
-        self.papers = []
         self.pool = None
         self.config = config or Configuration()
 
@@ -91,18 +98,36 @@ class NewsPool(object):
         resets the task.
         """
         if self.pool is None:
-            print('Call set(..) with a list of source '
-                  'objects before .join(..)')
-            raise
+            raise ConcurrencyException('Call set(..) with a list of source objects '
+                                       'before calling .join(..)')
         self.pool.wait_completion()
-        self.papers = []
         self.pool = None
 
-    def set(self, paper_list, threads_per_source=1):
-        self.papers = paper_list
-        num_threads = threads_per_source * len(self.papers)
+    def set(self, news_list, threads_per_source=1, override_threads=None):
+        """
+        news_list can be a list of `Article`, `Source`, or both.
+
+        If caller wants to decide how many threads to use, they can use
+        `override_threads` which takes precedence over all. Otherwise,
+        this api infers that if the input is all `Source` objects, to
+        allocate one thread per `Source` to not spam the host.
+
+        If both of the above conditions are not true, default to 1 thread.
+        """
+        from .source import Source
+
+        if override_threads is not None:
+            num_threads = override_threads
+        elif all([isinstance(n, Source) for n in news_list]):
+            num_threads = threads_per_source * len(news_list)
+        else:
+            num_threads = 1
+
         timeout = self.config.thread_timeout_seconds
         self.pool = ThreadPool(num_threads, timeout)
 
-        for paper in self.papers:
-            self.pool.add_task(paper.download_articles)
+        for news_object in news_list:
+            if isinstance(news_object, Source):
+                self.pool.add_task(news_object.download_articles)
+            else:
+                self.pool.add_task(news_object.download)

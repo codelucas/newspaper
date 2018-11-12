@@ -87,13 +87,13 @@ class StopWords(object):
             return WordStats()
         ws = WordStats()
         stripped_input = self.remove_punctuation(content)
-        candidate_words = self.candidate_words(stripped_input)
+        candidate_words = self.candidate_words(stripped_input.lower())
         overlapping_stopwords = []
         c = 0
         for w in candidate_words:
             c += 1
-            if w.lower() in self.STOP_WORDS:
-                overlapping_stopwords.append(w.lower())
+            if w in self.STOP_WORDS:
+                overlapping_stopwords.append(w)
 
         ws.set_word_count(c)
         ws.set_stopword_count(len(overlapping_stopwords))
@@ -149,6 +149,32 @@ class StopWordsKorean(StopWords):
         c = 0
         for w in candidate_words:
             c += 1
+            for s in self.STOP_WORDS:
+                if w.endswith(s):
+                    overlapping_stopwords.append(w)
+
+        ws.set_word_count(c)
+        ws.set_stopword_count(len(overlapping_stopwords))
+        ws.set_stop_words(overlapping_stopwords)
+        return ws
+
+
+class StopWordsHindi(StopWords):
+    """Hindi segmentation
+    """
+    def __init__(self, language='hi'):
+        super(StopWordsHindi, self).__init__(language='hi')
+
+    def get_stopword_count(self, content):
+        if not content:
+            return WordStats()
+        ws = WordStats()
+        stripped_input = self.remove_punctuation(content)
+        candidate_words = self.candidate_words(stripped_input)
+        overlapping_stopwords = []
+        c = 0
+        for w in candidate_words:
+            c += 1
             for stop_word in self.STOP_WORDS:
                 overlapping_stopwords.append(stop_word)
 
@@ -156,3 +182,16 @@ class StopWordsKorean(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
+
+
+class StopWordsJapanese(StopWords):
+    """Japanese segmentation
+    """
+    def __init__(self, language='ja'):
+        super(StopWordsJapanese, self).__init__(language='ja')
+
+    def candidate_words(self, stripped_input):
+        import tinysegmenter
+        segmenter = tinysegmenter.TinySegmenter()
+        tokens = segmenter.tokenize(stripped_input)
+        return tokens
