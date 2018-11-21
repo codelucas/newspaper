@@ -71,7 +71,7 @@ class ContentExtractor(object):
             self.stopwords_class = \
                 self.config.get_stopwords_class(meta_lang)
 
-    def get_authors(self, doc):
+    def get_authors(self,html, doc):
         """Fetch the authors of the article, return as a list
         Only works for english articles
         """
