@@ -16,6 +16,8 @@ import logging
 import re
 import re
 from collections import defaultdict
+from bs4 import BeautifulSoup
+import json
 
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
@@ -139,7 +141,17 @@ class ContentExtractor(object):
         VALS = ['author', 'byline', 'dc.creator', 'byl']
         matches = []
         authors = []
-
+        
+        parsedHTML = BeautifulSoup(html,"lxml")
+        scripts = parsedHTML.find_all('script', type='application/ld+json')
+        for script in scripts:
+            try:
+            	data = json.loads(script.text)
+            	if (data['author']['name']):
+                    return(data['author']['name'].split())
+            except:
+                pass
+            
         for attr in ATTRS:
             for val in VALS:
                 # found = doc.xpath('//*[@%s="%s"]' % (attr, val))
