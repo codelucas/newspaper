@@ -57,12 +57,12 @@ def get_html_2XX_only(url, config=None, response=None):
     headers = config.headers
 
     if response is not None:
-        return _get_html_from_response(response)
+        return _get_html_from_response(response, config)
 
     response = requests.get(
         url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
 
-    html = _get_html_from_response(response)
+    html = _get_html_from_response(response, config)
 
     if config.http_success_only:
         # fail if HTTP sends a non 2XX response
@@ -71,7 +71,10 @@ def get_html_2XX_only(url, config=None, response=None):
     return html
 
 
-def _get_html_from_response(response):
+def _get_html_from_response(response, config=None):
+    for disabled_type in config.ignored_content_types_defaults:
+        if disabled_type in response.headers.get('content-type'):
+            return config.ignored_content_types_defaults[disabled_type]
     if response.encoding != FAIL_ENCODING:
         # return response as a unicode string
         html = response.text

@@ -34,6 +34,7 @@ class Configuration(object):
         self.MAX_AUTHORS = 10  # num strings in list
         self.MAX_SUMMARY = 5000  # num of chars
         self.MAX_SUMMARY_SENT = 5  # num of sentences
+        self.EMPTY_PDF = "%PDF-"  # empty PDF constant
 
         # max number of urls we cache for each news source
         self.MAX_FILE_MEMO = 20000
@@ -73,6 +74,10 @@ class Configuration(object):
 
         self.thread_timeout_seconds = 1
 
+        self.ignored_content_types_defaults = {"application/pdf": self.EMPTY_PDF,
+                                               "application/x-pdf": self.EMPTY_PDF,
+                                               "application/x-bzpdf": self.EMPTY_PDF,
+                                               "application/x-gzpdf": self.EMPTY_PDF}
         # Set this to False if you want to recompute the categories
         # *every* time you build a `Source` object
         # TODO: Actually make this work
