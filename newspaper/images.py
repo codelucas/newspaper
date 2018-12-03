@@ -56,7 +56,8 @@ def image_entropy(img):
 
 
 def square_image(img):
-    """If the height of the image is greater than it is width, then a square image is returned. Pieces to cut is based on the entropy pieces
+    """ If the height of the image is greater than its width, then a square image is returned.
+    Pieces to cut is based on the entropy pieces.
     """
     x, y = img.size
     while y > x:
