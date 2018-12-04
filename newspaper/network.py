@@ -72,9 +72,8 @@ def get_html_2XX_only(url, config=None, response=None):
 
 
 def _get_html_from_response(response, config=None):
-    for disabled_type in config.ignored_content_types_defaults:
-        if disabled_type == response.headers.get('content-type'):
-            return config.ignored_content_types_defaults[disabled_type]
+    if response.headers.get('content-type') in config.ignored_content_types_defaults:
+        return config.ignored_content_types_defaults[response.headers.get('content-type')]
     if response.encoding != FAIL_ENCODING:
         # return response as a unicode string
         html = response.text
