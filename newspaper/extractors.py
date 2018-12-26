@@ -146,9 +146,10 @@ class ContentExtractor(object):
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
                 matches.extend(found)
 
+		tags = ['meta','div','section','a']
         for match in matches:
             content = ''
-            if match.tag :
+            if match.tag in tags:
                 mm = match.xpath('@content')
                 if len(mm) > 0:
                     content = mm[0]
