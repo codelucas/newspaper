@@ -146,7 +146,7 @@ class ContentExtractor(object):
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
                 matches.extend(found)
 
-		tags = ['meta','div','section','a']
+        tags = ['meta','div','section','a']
         for match in matches:
             content = ''
             if match.tag in tags:
