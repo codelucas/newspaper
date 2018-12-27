@@ -41,7 +41,7 @@ class DocumentCleaner(object):
         self.google_re = " google "
         self.entries_re = "^[^entry-]more.*$"
         self.facebook_re = "[^-]facebook"
-        self.facebook_braodcasting_re = "facebook-broadcasting"
+        self.facebook_broadcasting_re = "facebook-broadcasting"
         self.twitter_re = "[^-]twitter"
         self.tablines_replacements = ReplaceSequence()\
             .create("\n", "\n\n")\
@@ -63,11 +63,12 @@ class DocumentCleaner(object):
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.entries_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.facebook_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean,
-                                               self.facebook_braodcasting_re)
+                                               self.facebook_broadcasting_re)
         doc_to_clean = self.remove_nodes_regex(doc_to_clean, self.twitter_re)
         doc_to_clean = self.clean_para_spans(doc_to_clean)
         doc_to_clean = self.div_to_para(doc_to_clean, 'div')
         doc_to_clean = self.div_to_para(doc_to_clean, 'span')
+        doc_to_clean = self.div_to_para(doc_to_clean, 'section')
         return doc_to_clean
 
     def clean_body_classes(self, doc):

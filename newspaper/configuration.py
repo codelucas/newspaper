@@ -14,7 +14,7 @@ import logging
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
-                   StopWordsKorean, StopWordsHindi)
+                   StopWordsKorean, StopWordsHindi, StopWordsJapanese)
 from .version import __version__
 
 log = logging.getLogger(__name__)
@@ -72,7 +72,7 @@ class Configuration(object):
         self.verbose = False  # for debugging
 
         self.thread_timeout_seconds = 1
-
+        self.ignored_content_types_defaults = {}
         # Set this to False if you want to recompute the categories
         # *every* time you build a `Source` object
         # TODO: Actually make this work
@@ -114,6 +114,8 @@ class Configuration(object):
         # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
         elif language == 'ar' or language == 'fa':
             return StopWordsArabic
+        elif language == 'ja':
+            return StopWordsJapanese
         return StopWords
 
     @staticmethod

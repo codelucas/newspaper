@@ -25,7 +25,7 @@ DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_]
 STRICT_DATE_REGEX = _STRICT_DATE_REGEX_PREFIX + DATE_REGEX
 
 ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
-                 'xhtml', 'jhtml', 'asp']
+                 'xhtml', 'jhtml', 'asp', 'shtml']
 
 GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
