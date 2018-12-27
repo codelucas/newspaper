@@ -146,7 +146,11 @@ class ContentExtractor(object):
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
                 matches.extend(found)
 
+<<<<<<< HEAD
 		tags = ['meta','div','section','a']
+=======
+        tags = ['meta','div','section','a']
+>>>>>>> 9bf34e81b8e31c7b92a9ff5159819de29849b3f6
         for match in matches:
             content = ''
             if match.tag in tags:
