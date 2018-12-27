@@ -742,21 +742,19 @@ class TestDownloadPdf(unittest.TestCase):
     @print_test
     def test_article_pdf_ignoring(self):
         configuration = Configuration()
-        EMPTY_PDF = "%PDF-"  # empty PDF constant
-        configuration.ignored_content_types_defaults = {"application/pdf": EMPTY_PDF,
-                                               "application/x-pdf": EMPTY_PDF,
-                                               "application/x-bzpdf": EMPTY_PDF,
-                                               "application/x-gzpdf": EMPTY_PDF}
+        empty_pdf = "%PDF-"  # empty PDF constant
+        configuration.ignored_content_types_defaults = {"application/pdf": empty_pdf,
+                                               "application/x-pdf": empty_pdf,
+                                               "application/x-bzpdf": empty_pdf,
+                                               "application/x-gzpdf": empty_pdf}
         a = Article(url='http://www.technik-medien.at/ePaper_Download/'
                         'IoT4Industry+Business_2018-10-31_2018-03.pdf', config=configuration)
         a.download()
-        self.assertEqual('%PDF-', a.html)
+        self.assertEqual(empty_pdf, a.html)
 
     @print_test
     def test_article_pdf_fetching(self):
-        configuration = Configuration()
-        configuration.ignored_content_types_defaults = {}
-        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf', config=configuration)
+        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
         a.download()
         self.assertNotEqual('%PDF-', a.html)
 
