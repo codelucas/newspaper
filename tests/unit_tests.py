@@ -737,6 +737,26 @@ class TestNewspaperLanguagesApi(unittest.TestCase):
         newspaper.languages()
 
 
+class TestDownloadPdf(unittest.TestCase):
+
+    @print_test
+    def test_article_pdf_ignoring(self):
+        empty_pdf = "%PDF-"  # empty PDF constant
+        a = Article(url='http://www.technik-medien.at/ePaper_Download/'
+                        'IoT4Industry+Business_2018-10-31_2018-03.pdf',
+                    ignored_content_types_defaults={"application/pdf": empty_pdf,
+                                                    "application/x-pdf": empty_pdf,
+                                                    "application/x-bzpdf": empty_pdf,
+                                                    "application/x-gzpdf": empty_pdf})
+        a.download()
+        self.assertEqual(empty_pdf, a.html)
+
+    @print_test
+    def test_article_pdf_fetching(self):
+        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
+        a.download()
+        self.assertNotEqual('%PDF-', a.html)
+
 if __name__ == '__main__':
     argv = list(sys.argv)
     if 'fulltext' in argv:
