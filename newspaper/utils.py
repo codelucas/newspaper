@@ -391,7 +391,8 @@ def print_available_languages():
         'cs': 'Czech',
         'ja': 'Japanese',
         'be': 'Belarusian',
-        'lt': 'Lithuanian'
+        'lt': 'Lithuanian',
+        'ca': 'Catalan',
     }
 
     codes = get_available_languages()
