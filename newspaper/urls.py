@@ -9,6 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
+import os
 import re
 
 from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
@@ -248,25 +249,26 @@ def valid_url(url, verbose=False, test=False):
     return False
 
 
-def url_to_filetype(abs_url):
+def url_to_filetype(abs_url, max_len_allowed=5):
     """
-    Input a URL and output the filetype of the file
-    specified by the url. Returns None for no filetype.
+    Extract filetype from file identified by the input URL.
+
+    Returns None for no detected filetype.
+
+    Strips leading dot on the file type.
+
     'http://blahblah/images/car.jpg' -> 'jpg'
     'http://yahoo.com'               -> None
+    'https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz' -> 'xz'
     """
-    path = urlparse(abs_url).path
-    # Eliminate the trailing '/', we are extracting the file
-    if path.endswith('/'):
-        path = path[:-1]
-    path_chunks = [x for x in path.split('/') if len(x) > 0]
-    last_chunk = path_chunks[-1].split('.')  # last chunk == file usually
-    if len(last_chunk) < 2:
+
+    # Eliminate the trailing '/'; we are extracting the file
+    path = urlparse(abs_url).path.rstrip('/')
+    if not path:
         return None
-    file_type = last_chunk[-1]
-    # Assume that file extension is maximum 5 characters long
-    if len(file_type) <= 5 or file_type.lower() in ALLOWED_TYPES:
-        return file_type.lower()
+    _, file_type = os.path.splitext(path.rsplit('/')[-1])
+    if file_type and len(file_type) <= max_len_allowed:
+        return file_type.lower().strip('.')
     return None
 
 

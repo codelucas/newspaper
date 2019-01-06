@@ -544,6 +544,22 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+    @print_test
+    def test_url_to_filetype(self):
+        from newspaper.urls import url_to_filetype
+        with open(os.path.join(TEST_DIR,
+                               'data/test_url_to_filetype.txt'), 'r') as f:
+            for line in f:
+                truth_ext, url = map(str.strip, line.split(','))
+                truth_ext = None if not truth_ext else truth_ext
+                try:
+                    if truth_ext is None:
+                        self.assertIsNone(url_to_filetype(url))
+                    else:
+                        self.assertEqual(truth_ext, url_to_filetype(url))
+                except AssertionError:
+                    print('\t\turl: %s extension should be %s' % (url, truth_ext))
+                    raise
 
     @print_test
     def test_pubdate(self):

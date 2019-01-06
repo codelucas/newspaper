@@ -1,0 +1,12 @@
+jpg,http://blahblah/images/car.jpg
+,http://yahoo.com
+html,https://docs.python.org/3/library/urllib.parse.html#module-urllib.parse
+,https://tools.ietf.org/html/rfc3986
+,https://github.com/dateutil/dateutil/tree/master/dateutil/parser
+html,https://pymotw.com/3/urllib.parse/index.html
+zip,http://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_weekly_CSV.zip
+tgz,https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tgz
+xz,https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz
+pkg,https://www.python.org/ftp/python/3.7.2/python-3.7.2-macosx10.9.pkg
+,https://piratebayproxy.info/
+md,https://raw.githubusercontent.com/barryclark/www.jekyllnow.com/gh-pages/_posts/2014-6-19-Markdown-Style-Guide.md
