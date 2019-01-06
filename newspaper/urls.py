@@ -24,18 +24,18 @@ _STRICT_DATE_REGEX_PREFIX = r'(?<=\W)'
 DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
 STRICT_DATE_REGEX = _STRICT_DATE_REGEX_PREFIX + DATE_REGEX
 
-ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
-                 'xhtml', 'jhtml', 'asp', 'shtml']
+ALLOWED_TYPES = {'html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
+                 'xhtml', 'jhtml', 'asp', 'shtml'}
 
-GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
+GOOD_PATHS = {'story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
-              'v', 'radio', 'press']
+              'v', 'radio', 'press'}
 
-BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
+BAD_CHUNKS = {'careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
-              'account', 'subscribe', 'donate', 'shop', 'admin']
+              'account', 'subscribe', 'donate', 'shop', 'admin'}
 
-BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
+BAD_DOMAINS = {'amazon', 'doubleclick', 'twitter'}
 
 
 def remove_args(url, keep_params=(), frags=False):
@@ -100,7 +100,7 @@ def prepare_url(url, source_url=None):
 
 
 def valid_url(url, verbose=False, test=False):
-    """
+    r"""
     Is this URL a valid news-article url?
 
     Perform a regex check on an absolute url.
@@ -216,12 +216,19 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('%s caught for path chunks too small' % url)
         return False
 
+    lower_chunks = {p.lower() for p in path_chunks}
+
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
-    for b in BAD_CHUNKS:
-        if b in path_chunks or b == subd:
-            if verbose: print('%s caught for bad chunks' % url)
-            return False
+    found_bad = BAD_CHUNKS.intersection(lower_chunks)
+    if found_bad:
+        if verbose:
+            for b in found_bad:
+                print('%s caught for bad chunks' % url)
+        return False
+    if subd in BAD_CHUNKS:
+        if verbose: print('%s caught for bad chunks' % url)
+        return False
 
     match_date = re.search(DATE_REGEX, url)
 
@@ -230,10 +237,12 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('%s verified for date' % url)
         return True
 
-    for GOOD in GOOD_PATHS:
-        if GOOD.lower() in [p.lower() for p in path_chunks]:
-            if verbose: print('%s verified for good path' % url)
-            return True
+    found_good = GOOD_PATHS.intersection(lower_chunks)
+    if found_good:
+        if verbose:
+            for g in found_good:
+                print('%s verified for good path' % url)
+        return True
 
     if verbose: print('%s caught for default false' % url)
     return False
