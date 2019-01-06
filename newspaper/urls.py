@@ -37,6 +37,8 @@ BAD_CHUNKS = {'careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 
 BAD_DOMAINS = {'amazon', 'doubleclick', 'twitter'}
 
+ALLOWED_SCHEMES = {'http', 'https'}
+
 
 def remove_args(url, keep_params=(), frags=False):
     """
@@ -143,14 +145,12 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('\t%s rejected because len of url is less than 11' % url)
         return False
 
-    r1 = ('mailto:' in url)  # TODO not sure if these rules are redundant
-    r2 = ('http://' not in url) and ('https://' not in url)
-
-    if r1 or r2:
-        if verbose: print('\t%s rejected because len of url structure' % url)
+    _parseresult = urlparse(url)
+    if _parseresult.scheme not in ALLOWED_SCHEMES:
+        if verbose: print('\t%s rejected because it lacks normal scheme' % url)
         return False
 
-    path = urlparse(url).path
+    path = _parseresult.path
 
     # input url is not in valid form (scheme, netloc, tld)
     if not path.startswith('/'):
