@@ -87,7 +87,6 @@ def redirect_back(url, source_domain):
 
     query_item = parse_qs(query)
     if query_item.get('url'):
-        # log.debug('caught redirect %s into %s' % (url, query_item['url'][0]))
         return query_item['url'][0]
 
     return url
@@ -108,7 +107,8 @@ def prepare_url(url, source_url=None):
             # proper_url = remove_args(url)
             proper_url = url
     except ValueError as e:
-        log.critical('url %s failed on err %s' % (url, str(e)))
+        # TODO (bsolomon1124): May want to use log.exception() here
+        log.critical('url %s failed on err %s', url, e)
         proper_url = ''
 
     return proper_url

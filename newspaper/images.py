@@ -153,8 +153,8 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
         except requests.exceptions.RequestException as e:
             cur_try += 1
             if cur_try >= retries:
-                log.debug('error while fetching: %s refer: %s' %
-                          (url, referer))
+                log.debug('error while fetching: %s refer: %s',
+                          url, referer)
                 return nothing
         finally:
             if response is not None:
@@ -192,7 +192,7 @@ class Scraper:
             if area > max_area:
                 max_area = area
                 max_url = img_url
-        log.debug('using max img {}'.format(max_url))
+        log.debug('using max img %s', max_url)
         return max_url
 
     def calculate_area(self, img_url, dimension):
@@ -201,7 +201,7 @@ class Scraper:
         area = dimension[0] * dimension[1]
         # Ignore tiny images
         if area < minimal_area:
-            log.debug('ignore little %s' % img_url)
+            log.debug('ignore little %s', img_url)
             return 0
         # PIL won't scale up, so set a min width and
         # maintain the aspect ratio
@@ -210,12 +210,12 @@ class Scraper:
         # Ignore excessively long/wide images
         current_ratio = max(dimension) / min(dimension)
         if current_ratio > self.config.image_dimension_ration:
-            log.debug('ignore dims %s' % img_url)
+            log.debug('ignore dims %s', img_url)
             return 0
         # Penalize images with "sprite" in their name
         lower_case_url = img_url.lower()
         if 'sprite' in lower_case_url or 'logo' in lower_case_url:
-            log.debug('penalizing sprite %s' % img_url)
+            log.debug('penalizing sprite %s', img_url)
             area /= 10
         return area
 

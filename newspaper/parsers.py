@@ -68,7 +68,8 @@ class Parser(object):
             cls.doc = lxml.html.fromstring(html)
             return cls.doc
         except Exception:
-            log.warn('fromstring() returned an invalid string: %s...', html[:20])
+            log.warning('fromstring() returned an invalid string: %s...',
+                        html[:20])
             return
 
     @classmethod

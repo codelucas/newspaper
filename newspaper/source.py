@@ -191,9 +191,11 @@ class Source(object):
                 self.categories[index].html = network.get_html(
                     req.url, response=req.resp)
             else:
-                log.warning(('Deleting category %s from source %s due to '
-                             'download error') %
-                             (self.categories[index].url, self.url))
+                log.warning(
+                    'Deleting category %s from source %s due to download'
+                    ' error.',
+                    self.categories[index].url, self.url
+                )
         self.categories = [c for c in self.categories if c.html]
 
     def download_feeds(self):
@@ -208,9 +210,11 @@ class Source(object):
                 self.feeds[index].rss = network.get_html(
                     req.url, response=req.resp)
             else:
-                log.warning(('Deleting feed %s from source %s due to '
-                             'download error') %
-                             (self.categories[index].url, self.url))
+                log.warning(
+                    'Deleting category %s from source %s due to download'
+                    ' error.',
+                    self.categories[index].url, self.url
+                )
         self.feeds = [f for f in self.feeds if f.rss]
 
     def parse(self):
@@ -220,15 +224,14 @@ class Source(object):
         # TODO: This is a terrible idea, ill try to fix it when i'm more rested
         self.doc = self.config.get_parser().fromstring(self.html)
         if self.doc is None:
-            log.warning('Source %s parse error.' % self.url)
+            log.warning('Source %s parse error.', self.url)
             return
         self.set_description()
 
     def parse_categories(self):
         """Parse out the lxml root in each category
         """
-        log.debug('We are extracting from %d categories' %
-                  len(self.categories))
+        log.debug('We are extracting from %d categories', len(self.categories))
         for category in self.categories:
             doc = self.config.get_parser().fromstring(category.html)
             category.doc = doc
@@ -248,8 +251,7 @@ class Source(object):
     def parse_feeds(self):
         """Add titles to feeds
         """
-        log.debug('We are parsing %d feeds' %
-                  len(self.feeds))
+        log.debug('We are parsing %d feeds', len(self.feeds))
         self.feeds = [self._map_title_to_feed(f) for f in self.feeds]
 
     def feeds_to_articles(self):
@@ -277,8 +279,8 @@ class Source(object):
 
             articles.extend(cur_articles)
 
-            log.debug('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, feed.url))
+            log.debug('%d->%d->%d for %s',
+                      before_purge, after_purge, after_memo, feed.url)
         return articles
 
     def categories_to_articles(self):
@@ -312,8 +314,8 @@ class Source(object):
 
             articles.extend(cur_articles)
 
-            log.debug('%d->%d->%d for %s' %
-                      (before_purge, after_purge, after_memo, category.url))
+            log.debug('%d->%d->%d for %s',
+                      before_purge, after_purge, after_memo, category.url)
         return articles
 
     def _generate_articles(self):
@@ -351,8 +353,11 @@ class Source(object):
             self.articles = [a for a in self.articles if a.html]
         else:
             if threads > NUM_THREADS_PER_SOURCE_WARN_LIMIT:
-                log.warning(('Using %s+ threads on a single source '
-                            'may result in rate limiting!') % NUM_THREADS_PER_SOURCE_WARN_LIMIT)
+                log.warning(
+                    'Using %d+ threads on a single source may result'
+                    ' in rate limiting!',
+                     NUM_THREADS_PER_SOURCE_WARN_LIMIT
+                )
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
@@ -364,8 +369,10 @@ class Source(object):
 
         self.is_downloaded = True
         if len(failed_articles) > 0:
-            log.warning('The following article urls failed the download: %s' %
-                        ', '.join([a.url for a in failed_articles]))
+            log.warning(
+                'The following article urls failed the download: %s',
+                ', '.join([a.url for a in failed_articles])
+            )
 
     def parse_articles(self):
         """Parse all articles, delete if too small
