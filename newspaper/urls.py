@@ -300,8 +300,15 @@ def get_path(abs_url, **kwargs):
 
 def is_abs_url(url):
     """
-    this regex was brought to you by django!
+    Return True if `url` is absolute path and http[s] scheme, False otherwise.
     """
+
+    # Note: This regex was brought to you by Django!
+    # Django's URLValidator has been updated dramatically over time;
+    # see django.core.validators.
+    #
+    # Note also that though "//www.python.org" is, from RFC 3986's
+    # perspective, an absolute URL, it is not valid by this definition.
     regex = re.compile(
         r'^(?:http|ftp)s?://'                                                                 # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
@@ -311,5 +318,4 @@ def is_abs_url(url):
         r'(?::\d+)?'                                                                          # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
-    c_regex = re.compile(regex)
-    return (c_regex.search(url) is not None)
+    return bool(c_regex.search(url))
