@@ -9,7 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import codecs
-import hashlib
+from hashlib import md5, sha1
 import itertools
 import logging
 import os
@@ -20,8 +20,6 @@ import string
 import sys
 import threading
 import time
-
-from hashlib import sha1
 
 from bs4 import BeautifulSoup
 
@@ -65,7 +63,7 @@ class RawHelper(object):
     def get_parsing_candidate(url, raw_html):
         if isinstance(raw_html, str):
             raw_html = raw_html.encode('utf-8', 'replace')
-        link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(raw_html).hexdigest(), time.time())
         return ParsingCandidate(url, link_hash)
 
 
@@ -75,7 +73,7 @@ class URLHelper(object):
         # Replace shebang in urls
         final_url = url_to_crawl.replace('#!', '?_escaped_fragment_=') \
             if '#!' in url_to_crawl else url_to_crawl
-        link_hash = '%s.%s' % (hashlib.md5(final_url).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(final_url).hexdigest(), time.time())
         return ParsingCandidate(final_url, link_hash)
 
 
