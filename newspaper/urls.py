@@ -32,8 +32,8 @@ _STRICT_DATE_REGEX_PREFIX = r'(?<=\W)'
 
 _SEPS = r'([-./_]?)'  # No need to escape leading hyphen, see docs.
 _DAY = r'(3[01]|0[1-9]|[12][0-9])'  # 01 thru 31
-_MONTH = r'(1[0-2]|0[1-9])'  # 01 thru 12
-_YEAR = r'((?:19|20)\d{2})'
+_MONTH = r'(1[0-2]|0[1-9]|[A-Za-z]{3}(?![a-zA-Z]))'  # 01 thru 12 or 3-5 alpha
+_YEAR = r'((?:19|20)\d{2})'  # 4 digit year, 1900 thru 2099
 DATE_REGEX = _YEAR + _SEPS + r'(?:' + _DAY + r'\2' + _MONTH + r'|' + _MONTH + r'(?:\2(3[01]|0[1-9]|[12][0-9]))?' + r')'
 STRICT_DATE_REGEX = _STRICT_DATE_REGEX_PREFIX + DATE_REGEX
 
