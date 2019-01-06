@@ -214,29 +214,46 @@ def to_valid_filename(s):
 
 
 def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
-    """Caching extracting category locations & rss feeds for 5 days
+    """Decorator for caching extracted category locations & RSS feeds.
+
+    Default persistence: 5 days; default cache location is /tmp.
+
+    The caching is done by pickling, hence the result of the decorated
+    function must be picklable; see:
+    https://docs.python.org/3/library/pickle.html#what-can-be-pickled-and-unpickled
     """
     def do_cache(function):
         def inner_function(*args, **kwargs):
-            """Calculate a cache key based on the decorated method signature
-            args[1] indicates the domain of the inputs, we hash on domain!
+            """Calculate a cache key based on the decorated method signature.
+
+            The hash is a SHA1 hash of:
+            - args[1], ie. the domain of the inputs
+            - kwargs (dict)
             """
             key = sha1((str(args[1]) +
-                        str(kwargs)).encode('utf-8')).hexdigest()
+                        str(kwargs)).encode('utf-8')).hexdigest()  # type: str
             filepath = os.path.join(cache_folder, key)
 
-            # verify that the cached object exists and is less than
-            # X seconds old
+            # Verify that the cached object exists and is less than
+            # `seconds` seconds old
             if os.path.exists(filepath):
                 modified = os.path.getmtime(filepath)
                 age_seconds = time.time() - modified
                 if age_seconds < seconds:
-                    return pickle.load(open(filepath, "rb"))
+                    with open(filepath, "rb") as f:
+                        return pickle.load(f)
+            elif not os.path.isdir(cache_folder):
+                # We can't write to nested location if its parent folder
+                # doesn't exist.
+                # TODO: `tempfile` module is probably better practice here,
+                # but would constitute a major change.
+                os.mkdir(cache_folder)
 
-            # call the decorated function...
+            # Call the decorated function & save cached object
             result = function(*args, **kwargs)
             # ... and save the cached object for next time
-            pickle.dump(result, open(filepath, "wb"))
+            with open(filepath, "wb") as f:
+                pickle.dump(result, f)
             return result
         return inner_function
     return do_cache
