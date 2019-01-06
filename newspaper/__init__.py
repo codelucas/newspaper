@@ -27,3 +27,6 @@ except ImportError:
             pass
 
 logging.getLogger(__name__).addHandler(NullHandler())
+
+del logging
+del NullHandler
