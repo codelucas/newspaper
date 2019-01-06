@@ -18,11 +18,23 @@ from tldextract import tldextract
 
 log = logging.getLogger(__name__)
 
-
 MAX_FILE_MEMO = 20000
 
+# Positive lookbehind assertion: date string must be preceded by
+# [^a-zA_Z0-9], any nonword character.  Make sure we aren't picking
+# up portions of gibberish numbers that may look like dates
 _STRICT_DATE_REGEX_PREFIX = r'(?<=\W)'
-DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
+
+# ISO 8601 dates with a bit of flexibility & ambiguity:
+# - YYYYsXXsXX, YYYYsMM
+# - Sep, as denoted `s` above, is optional and may be hyphen, period,
+#   fwd slash, or underscore
+
+_SEPS = r'([-./_]?)'  # No need to escape leading hyphen, see docs.
+_DAY = r'(3[01]|0[1-9]|[12][0-9])'  # 01 thru 31
+_MONTH = r'(1[0-2]|0[1-9])'  # 01 thru 12
+_YEAR = r'((?:19|20)\d{2})'
+DATE_REGEX = _YEAR + _SEPS + r'(?:' + _DAY + r'\2' + _MONTH + r'|' + _MONTH + r'(?:\2(3[01]|0[1-9]|[12][0-9]))?' + r')'
 STRICT_DATE_REGEX = _STRICT_DATE_REGEX_PREFIX + DATE_REGEX
 
 ALLOWED_TYPES = {'html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
@@ -104,37 +116,18 @@ def prepare_url(url, source_url=None):
 
 def valid_url(url, verbose=False, test=False):
     r"""
-    Is this URL a valid news-article url?
+    Is this URL a valid news-article URL?  Judge using a few heuristics.
 
-    Perform a regex check on an absolute url.
-
-    First, perform a few basic checks like making sure the format of the url
-    is right, (scheme, domain, tld).
-
-    Second, make sure that the url isn't some static resource, check the
-    file type.
-
-    Then, search of a YYYY/MM/DD pattern in the url. News sites
-    love to use this pattern, this is a very safe bet.
-
-    Separators can be [\.-/_]. Years can be 2 or 4 digits, must
-    have proper digits 1900-2099. Months and days can be
-    ambiguous 2 digit numbers, one is even optional, some sites are
-    liberal with their formatting also matches snippets of GET
-    queries with keywords inside them. ex: asdf.php?topic_id=blahlbah
-    We permit alphanumeric, _ and -.
-
-    Our next check makes sure that a keyword is within one of the
-    separators in a url (subdomain or early path separator).
-    cnn.com/story/blah-blah-blah would pass due to "story".
-
-    We filter out articles in this stage by aggressively checking to
-    see if any resemblance of the source& domain's name or tld is
-    present within the article title. If it is, that's bad. It must
-    be a company link, like 'cnn is hiring new interns'.
-
-    We also filter out articles with a subdomain or first degree path
-    on a registered bad keyword.
+    1. Check the truthiness of the URL and its minimum length.
+    2. Confirm its scheme is http or https
+    3. Confirm the URL doesn't represent some "file-like" resource
+    4. Search for a loose ISO-8601-like date in the URL.  News sites
+       love to use this pattern; this is a safe bet.  See DATE_REGEX
+       from this module, urls.py.  Separators can be { - . / _ }.  Months
+       and days may be ambiguous, with days optional.
+    5. Check against good and bad domains and chunks of the URL's path,
+       aggressively filtering out (or validating) matches in either
+       direction.
     """
     # If we are testing this method in the testing suite, we actually
     # need to preprocess the url like we do in the article's constructor!
