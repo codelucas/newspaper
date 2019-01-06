@@ -63,7 +63,7 @@ class RawHelper(object):
     def get_parsing_candidate(url, raw_html):
         if isinstance(raw_html, str):
             raw_html = raw_html.encode('utf-8', 'replace')
-        link_hash = '%s.%s' % (md5(raw_html).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(raw_html).hexdigest(), time.monotonic())
         return ParsingCandidate(url, link_hash)
 
 
@@ -73,7 +73,7 @@ class URLHelper(object):
         # Replace shebang in urls
         final_url = url_to_crawl.replace('#!', '?_escaped_fragment_=') \
             if '#!' in url_to_crawl else url_to_crawl
-        link_hash = '%s.%s' % (md5(final_url).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(final_url).hexdigest(), time.monotonic())
         return ParsingCandidate(final_url, link_hash)
 
 
@@ -238,7 +238,7 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
             # `seconds` seconds old
             if os.path.exists(filepath):
                 modified = os.path.getmtime(filepath)
-                age_seconds = time.time() - modified
+                age_seconds = time.monotonic() - modified
                 if age_seconds < seconds:
                     with open(filepath, "rb") as f:
                         return pickle.load(f)
@@ -263,9 +263,9 @@ def print_duration(method):
     """Prints out the runtime duration of a method in seconds
     """
     def timed(*args, **kw):
-        ts = time.time()
+        ts = time.perf_counter()
         result = method(*args, **kw)
-        te = time.time()
+        te = time.perf_counter()
         print('%r %2.2f sec' % (method.__name__, te - ts))
         return result
     return timed

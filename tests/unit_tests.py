@@ -38,10 +38,10 @@ def print_test(method):
     """
 
     def run(*args, **kw):
-        ts = time.time()
+        ts = time.perf_counter()
         print('\ttesting function %r' % method.__name__)
         method(*args, **kw)
-        te = time.time()
+        te = time.perf_counter()
         print('\t[OK] in %r %2.2f sec' % (method.__name__, te - ts))
 
     return run
