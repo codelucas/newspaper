@@ -28,7 +28,6 @@ from newspaper import Article, fulltext, Source, ArticleException, news_pool
 from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
-from newspaper import utils
 
 
 def print_test(method):
@@ -148,25 +147,59 @@ class UtilsTestCase(unittest.TestCase):
 
     @print_test
     def test_is_ascii(self):
+        from newspaper.utils import is_ascii
         ok = ["newspaper3k", "2018-01-01", "\n\t <tab>", b"bytes go here"]
         bad = [
             "عيد-الميلاد-فلسطين-مسيحيون-كنيسة-المهد-المسيح-قداس",
             'ละตุ้มเป๊ะ "ช้างศึก" พ่ายอินเดียยับ 1-4 เปิดหัวเอเชียนคัพ 2019'
         ]
         for word in ok:
-            self.assertTrue(utils.is_ascii(word))
+            self.assertTrue(is_ascii(word))
         for word in bad:
-            self.assertFalse(utils.is_ascii(word))
+            self.assertFalse(is_ascii(word))
 
     @print_test
     def test_get_useragent(self):
         from newspaper.resources.misc.useragents import USER_AGENTS
+        from newspaper.utils import get_useragent
         total = len(USER_AGENTS) * 2
         for _ in range(total):
-            ua = utils.get_useragent()
+            ua = get_useragent()
             self.assertTrue(ua)
             self.assertIsInstance(ua, str)
             self.assertIn(ua, USER_AGENTS)
+
+
+class StopWordsTestCase(unittest.TestCase):
+
+    def setUp(self):
+        from newspaper.text import StopWords
+        self.sent = "I think    we'll \t stop there, no??"
+        self.removed = "I think    well \t stop there no"
+        self.split = ["I", "think", "well", "stop", "there", "no"]
+        self.StopWords = StopWords
+
+    @print_test
+    def test_remove_punctuation(self):
+        self.assertEqual(
+            self.StopWords.remove_punctuation(self.sent),
+            self.removed
+        )
+        self.assertEqual(
+            self.StopWords.remove_punctuation(self.sent.encode('utf-8')),
+            self.removed.encode('utf-8')
+        )
+
+    @print_test
+    def test_candidate_words(self):
+        self.assertEqual(
+            self.StopWords.candidate_words(self.removed),
+            self.split
+        )
+        self.assertEqual(
+            self.StopWords.candidate_words(self.removed.encode('utf-8')),
+            [i.encode('utf-8') for i in self.split]
+        )
 
 
 class ArticleTestCase(unittest.TestCase):
