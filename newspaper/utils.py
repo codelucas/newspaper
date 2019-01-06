@@ -405,11 +405,19 @@ def print_available_languages():
 
 def extend_config(config, config_items):
     """
-    We are handling config value setting like this for a cleaner api.
+    Add additional keyword arguments to a :class`Configuration` instance.
+
+    We are handling config value setting like this for a cleaner API.
+
     Users just need to pass in a named param to this source and we can
     dynamically generate a config object for it.
+
+    :param config: Instance of :class`configuration.Configuration`
+    :param config_items: Kwargs set for config instance
+    :type config_items: dict
     """
-    for key, val in list(config_items.items()):
+
+    for key, val in config_items.items():
         if hasattr(config, key):
             setattr(config, key, val)
 
