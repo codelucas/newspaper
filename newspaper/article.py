@@ -314,10 +314,9 @@ class Article(object):
         return self.top_img is not None and self.top_img != ''
 
     def is_valid_url(self):
-        """Performs a check on the url of this link to determine if article
-        is a real news article or not
-        """
         return urls.valid_url(self.url)
+
+    is_valid_url.__doc__ = urls.valid_url.__doc__
 
     def is_valid_body(self):
         """If the article's body text is long enough to meet

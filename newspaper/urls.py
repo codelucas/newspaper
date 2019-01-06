@@ -123,7 +123,7 @@ def valid_url(url, verbose=False, test=False):
     3. Confirm the URL doesn't represent some "file-like" resource
     4. Search for a loose ISO-8601-like date in the URL.  News sites
        love to use this pattern; this is a safe bet.  See DATE_REGEX
-       from this module, urls.py.  Separators can be { - . / _ }.  Months
+       from the urls.py module.  Separators can be { - . / _ }.  Months
        and days may be ambiguous, with days optional.
     5. Check against good and bad domains and chunks of the URL's path,
        aggressively filtering out (or validating) matches in either
