@@ -28,6 +28,7 @@ from newspaper import Article, fulltext, Source, ArticleException, news_pool
 from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
+from newspaper import utils
 
 
 def print_test(method):
@@ -141,6 +142,31 @@ class ExhaustiveFullTextCase(unittest.TestCase):
               (total_pubdates_failed, len(urls)))
         self.assertGreaterEqual(47, total_pubdates_failed)
         self.assertGreaterEqual(20, total_fulltext_failed)
+
+
+class UtilsTestCase(unittest.TestCase):
+
+    @print_test
+    def test_is_ascii(self):
+        ok = ["newspaper3k", "2018-01-01", "\n\t <tab>", b"bytes go here"]
+        bad = [
+            "عيد-الميلاد-فلسطين-مسيحيون-كنيسة-المهد-المسيح-قداس",
+            'ละตุ้มเป๊ะ "ช้างศึก" พ่ายอินเดียยับ 1-4 เปิดหัวเอเชียนคัพ 2019'
+        ]
+        for word in ok:
+            self.assertTrue(utils.is_ascii(word))
+        for word in bad:
+            self.assertFalse(utils.is_ascii(word))
+
+    @print_test
+    def test_get_useragent(self):
+        from newspaper.resources.misc.useragents import USER_AGENTS
+        total = len(USER_AGENTS) * 2
+        for _ in range(total):
+            ua = utils.get_useragent()
+            self.assertTrue(ua)
+            self.assertIsInstance(ua, str)
+            self.assertIn(ua, USER_AGENTS)
 
 
 class ArticleTestCase(unittest.TestCase):

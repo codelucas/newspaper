@@ -10,6 +10,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import codecs
 import hashlib
+import itertools
 import logging
 import os
 import pickle
@@ -25,6 +26,11 @@ from hashlib import sha1
 from bs4 import BeautifulSoup
 
 from . import settings
+
+from .resources.misc.useragents import USER_AGENTS
+
+_USER_AGENTS = itertools.cycle(USER_AGENTS)
+
 
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
@@ -168,17 +174,14 @@ def filename_to_domain(filename):
 
 
 def is_ascii(word):
-    """True if a word is only ascii chars
+    """True if a word is only ASCII chars.
+
+    `word` may be bytes or str.
     """
-    def onlyascii(char):
-        if ord(char) > 127:
-            return ''
-        else:
-            return char
-    for c in word:
-        if not onlyascii(c):
-            return False
-    return True
+    if isinstance(word, bytes):
+        # Bytes can only contain ASCII literal characters
+        return True
+    return all(ord(i) < 128 for i in word)
 
 
 def extract_meta_refresh(html):
@@ -330,14 +333,15 @@ def memoize_articles(source, articles):
     return list(cur_articles.values())
 
 
-def get_useragent():
-    """Uses generator to return next useragent in saved file
+def get_useragent(_next=_USER_AGENTS.__next__):
+    """Pull the next mocked User-Agent string string from the cycler.
+
+    >>> make_random_useragent()
+    'Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/5.0)'
     """
-    with open(settings.USERAGENTS, 'r') as f:
-        agents = f.readlines()
-        selection = random.randint(0, len(agents) - 1)
-        agent = agents[selection]
-        return agent.strip()
+
+    # NOTE: iteration is not threadsafe, but we should be okay here.
+    return _next()
 
 
 def get_available_languages():
