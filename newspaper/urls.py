@@ -265,30 +265,31 @@ def url_to_filetype(abs_url, max_len_allowed=5):
     return None
 
 
-def get_domain(abs_url, **kwargs):
-    """
-    returns a url's domain, this method exists to
-    encapsulate all url code into this file
+# These methods exist to encapsulate all URL-related code into one file.
+
+
+def get_domain(abs_url, _parse=urlparse, **kwargs):
+    """Extract network location part (host) via urllib.parse.
     """
     if abs_url is None:
         return None
-    return urlparse(abs_url, **kwargs).netloc
+    return _parse(abs_url, **kwargs).netloc
 
 
-def get_scheme(abs_url, **kwargs):
-    """
-    """
-    if abs_url is None:
-        return None
-    return urlparse(abs_url, **kwargs).scheme
-
-
-def get_path(abs_url, **kwargs):
-    """
+def get_scheme(abs_url, _parse=urlparse, **kwargs):
+    """Extract URL scheme specifier via urllib.parse.
     """
     if abs_url is None:
         return None
-    return urlparse(abs_url, **kwargs).path
+    return _parse(abs_url, **kwargs).scheme
+
+
+def get_path(abs_url, _parse=urlparse, **kwargs):
+    """Extract hierarchical URL path via urllib.parse.
+    """
+    if abs_url is None:
+        return None
+    return _parse(abs_url, **kwargs).path
 
 
 def is_abs_url(url):

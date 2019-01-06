@@ -22,7 +22,13 @@ from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
 from . import urls
-from .utils import StringReplacement, StringSplitter
+from .utils import StringReplacement, StringSplitter, sentinel
+
+try:
+    # Should be a dict of 'alias': 'UTC+HH:MM'
+    from .resources.misc.tzs import tzinfos as TZINFOS  # type: dict
+except (ImportError, ModuleNotFoundError):
+    TZINFOS = None
 
 log = logging.getLogger(__name__)
 
@@ -43,13 +49,28 @@ A_HREF_TAG_SELECTOR = ("a[href*='/tag/'], a[href*='/tags/'], "
                        "a[href*='/topic/'], a[href*='?keyword=']")
 RE_LANG = r'^[A-Za-z]{2}$'
 
-good_paths = ['story', 'article', 'feature', 'featured', 'slides',
-              'slideshow', 'gallery', 'news', 'video', 'media',
-              'v', 'radio', 'press']
-bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
-              'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
-              'account', 'subscribe', 'donate', 'shop', 'admin']
-bad_domains = ['amazon', 'doubleclick', 'twitter']
+DEFAULT_PUBLISH_DATE_TAGS = [
+    {'attribute': 'property', 'value': 'rnews:datePublished',
+     'content': 'content'},
+    {'attribute': 'property', 'value': 'article:published_time',
+     'content': 'content'},
+    {'attribute': 'name', 'value': 'OriginalPublicationDate',
+     'content': 'content'},
+    {'attribute': 'itemprop', 'value': 'datePublished',
+     'content': 'datetime'},
+    {'attribute': 'property', 'value': 'og:published_time',
+     'content': 'content'},
+    {'attribute': 'name', 'value': 'article_date_original',
+     'content': 'content'},
+    {'attribute': 'name', 'value': 'publication_date',
+     'content': 'content'},
+    {'attribute': 'name', 'value': 'sailthru.date',
+     'content': 'content'},
+    {'attribute': 'name', 'value': 'PublishDate',
+     'content': 'content'},
+    {'attribute': 'pubdate', 'value': 'pubdate',
+     'content': 'datetime'},
+]
 
 
 class ContentExtractor(object):
@@ -70,26 +91,30 @@ class ContentExtractor(object):
                 self.config.get_stopwords_class(meta_lang)
 
     def get_authors(self, doc):
-        """Fetch the authors of the article, return as a list
-        Only works for english articles
-        """
-        _digits = re.compile('\d')
+        """Fetch the authors of the article as a list.
 
-        def contains_digits(d):
+        Only works for English articles.
+        """
+        _digits = re.compile(r'\d')
+
+        def contains_digits(d, _digits=_digits):
             return bool(_digits.search(d))
 
         def uniqify_list(lst):
-            """Remove duplicates from provided list but maintain original order.
-              Derived from http://www.peterbe.com/plog/uniqifiers-benchmark
+            """Remove duplicates from input list, maintaining original order.
             """
-            seen = {}
+            seen = set()
+            add = seen.add  # Bind method to var outside of loop
             result = []
-            for item in lst:
-                if item.lower() in seen:
+
+            for litem, item in zip(map(str.lower, lst), lst):
+                if litem in seen:
                     continue
-                seen[item.lower()] = 1
-                result.append(item.title())
+                else:
+                    add(litem)
+                    result.append(item)
             return result
+
 
         def parse_byline(search_str):
             """
@@ -98,24 +123,29 @@ class ContentExtractor(object):
             >>> parse_byline('<div>By: <strong>Lucas Ou-Yang</strong>,<strong>Alex Smith</strong></div>')
             ['Lucas Ou-Yang', 'Alex Smith']
             """
-            # Remove HTML boilerplate
-            search_str = re.sub('<[^<]+?>', '', search_str)
+            # Remove HTML boilerplate tags
+            search_str = re.sub(r'<[^<]+?>', '', search_str)
 
             # Remove original By statement
-            search_str = re.sub('[bB][yY][\:\s]|[fF]rom[\:\s]', '', search_str)
+            search_str = re.sub(
+                pattern=r'(?:by|from)[:\s]',
+                repl='',
+                string=search_str,
+                flags=re.I
+            )
 
             search_str = search_str.strip()
 
             # Chunk the line by non alphanumeric tokens (few name exceptions)
             # >>> re.split("[^\w\'\-\.]", "Tyler G. Jones, Lucas Ou, Dean O'Brian and Ronald")
             # ['Tyler', 'G.', 'Jones', '', 'Lucas', 'Ou', '', 'Dean', "O'Brian", 'and', 'Ronald']
-            name_tokens = re.split("[^\w\'\-\.]", search_str)
+            name_tokens = re.split(r"[^\w'\-.]", search_str)
             name_tokens = [s.strip() for s in name_tokens]
 
             _authors = []
             # List of first, last name tokens
             curname = []
-            delimiters = ['and', ',', '']
+            delimiters = {'and', ',', ''}
 
             for token in name_tokens:
                 if token in delimiters:
@@ -169,20 +199,27 @@ class ContentExtractor(object):
         #    return [] # Failed to find anything
         # return authors
 
-    def get_publishing_date(self, url, doc):
-        """3 strategies for publishing date extraction. The strategies
-        are descending in accuracy and the next strategy is only
-        attempted if a preferred one fails.
+    def get_publishing_date(self, url, doc, publish_date_tags=None,
+                            tzinfos=sentinel):
+        """Attempt to extract publish date via 3 prioritized strategies.
+
+        The strategies are descending in accuracy and the next strategy
+        is only attempted if a previous one fails.
 
         1. Pubdate from URL
         2. Pubdate from metadata
         3. Raw regex searches in the HTML + added heuristics
         """
 
-        def parse_date_str(date_str):
+        # We use `sentinel` to allow "None to mean None"
+
+        def parse_date_str(date_str, tzinfos):
+
             if date_str:
+                if tzinfos is sentinel:
+                    tzinfos = TZINFOS
                 try:
-                    return date_parser(date_str)
+                    return date_parser(date_str, tzinfos=tzinfos)
                 except (ValueError, OverflowError, AttributeError, TypeError):
                     # near all parse failures are due to URL dates without a day
                     # specifier, e.g. /2014/04/
@@ -191,33 +228,14 @@ class ContentExtractor(object):
         date_match = re.search(urls.STRICT_DATE_REGEX, url)
         if date_match:
             date_str = date_match.group(0)
-            datetime_obj = parse_date_str(date_str)
+            datetime_obj = parse_date_str(date_str, tzinfos=tzinfos)
             if datetime_obj:
                 return datetime_obj
 
-        PUBLISH_DATE_TAGS = [
-            {'attribute': 'property', 'value': 'rnews:datePublished',
-             'content': 'content'},
-            {'attribute': 'property', 'value': 'article:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'OriginalPublicationDate',
-             'content': 'content'},
-            {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
-            {'attribute': 'property', 'value': 'og:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'article_date_original',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'publication_date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'sailthru.date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'PublishDate',
-             'content': 'content'},
-            {'attribute': 'pubdate', 'value': 'pubdate',
-             'content': 'datetime'},
-        ]
-        for known_meta_tag in PUBLISH_DATE_TAGS:
+        if publish_date_tags is None:
+            publish_date_tags = DEFAULT_PUBLISH_DATE_TAGS
+
+        for known_meta_tag in publish_date_tags:
             meta_tags = self.parser.getElementsByTag(
                 doc,
                 attr=known_meta_tag['attribute'],
@@ -549,7 +567,7 @@ class ContentExtractor(object):
                 # clearly example.com is the hostname
                 parsed_article_url = urlparse(article_url)
                 strip_hostname_in_meta_path = re. \
-                    match(".*{}(?=/)/(.*)".
+                    match(r".*{}(?=/)/(.*)".
                           format(parsed_article_url.hostname),
                           parsed_meta_url.path)
                 try:
@@ -611,12 +629,19 @@ class ContentExtractor(object):
             return []
         # If we are extracting from raw text
         if regex:
-            doc_or_html = re.sub('<[^<]+?>', ' ', str(doc_or_html))
-            doc_or_html = re.findall(
-                'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|'
-                '(?:%[0-9a-fA-F][0-9a-fA-F]))+', doc_or_html)
-            doc_or_html = [i.strip() for i in doc_or_html]
+
+            # Remove tags - <tag> or </tag>
+            doc_or_html = re.sub(r'<[^<]+?>', ' ', str(doc_or_html))
+
+            # Find http or https URLS
+            url_re = (
+                r"https?://"
+                r"[-a-zA-Z0-9+&@#/%?=~_|$!:,.;]*"
+                r"[a-zA-Z0-9+&@#/%=~_|$]"
+            )
+            doc_or_html = re.findall(url_re, doc_or_html)
             return doc_or_html or []
+
         # If the doc_or_html is html, parse it into a root
         if isinstance(doc_or_html, str):
             doc = self.parser.fromstring(doc_or_html)
@@ -630,24 +655,29 @@ class ContentExtractor(object):
         the category urls.
         cnn.com --> [cnn.com/latest, world.cnn.com, cnn.com/asia]
         """
+
+        verbose = self.config.verbose
+
         page_urls = self.get_urls(doc)
         valid_categories = []
+
         for p_url in page_urls:
+
             scheme = urls.get_scheme(p_url, allow_fragments=False)
             domain = urls.get_domain(p_url, allow_fragments=False)
             path = urls.get_path(p_url, allow_fragments=False)
 
             if not domain and not path:
-                if self.config.verbose:
+                if verbose:
                     print('elim category url %s for no domain and path'
                           % p_url)
                 continue
             if path and path.startswith('#'):
-                if self.config.verbose:
+                if verbose:
                     print('elim category url %s path starts with #' % p_url)
                 continue
-            if scheme and (scheme != 'http' and scheme != 'https'):
-                if self.config.verbose:
+            if scheme and scheme not in urls.ALLOWED_SCHEMES:
+                if verbose:
                     print(('elim category url %s for bad scheme, '
                            'not http nor https' % p_url))
                 continue
@@ -669,12 +699,12 @@ class ContentExtractor(object):
                 # espn.com, but espn.go.com is probably related to espn.com
                 if not subdomain_contains and \
                         (child_tld.domain != domain_tld.domain):
-                    if self.config.verbose:
+                    if verbose:
                         print(('elim category url %s for domain '
                                'mismatch' % p_url))
                         continue
                 elif child_tld.subdomain in ['m', 'i']:
-                    if self.config.verbose:
+                    if verbose:
                         print(('elim category url %s for mobile '
                                'subdomain' % p_url))
                     continue
@@ -692,7 +722,7 @@ class ContentExtractor(object):
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
                     valid_categories.append(domain + path)
                 else:
-                    if self.config.verbose:
+                    if verbose:
                         print(('elim category url %s for >1 path chunks '
                                'or size path chunks' % p_url))
         stopwords = [
@@ -720,7 +750,7 @@ class ContentExtractor(object):
             bad = False
             for badword in stopwords:
                 if badword.lower() in conjunction.lower():
-                    if self.config.verbose:
+                    if verbose:
                         print(('elim category url %s for subdomain '
                                'contain stopword!' % p_url))
                     bad = True
@@ -743,10 +773,10 @@ class ContentExtractor(object):
                 p_url = p_url[:-1]
                 _valid_categories[i] = p_url
 
-        _valid_categories = list(set(_valid_categories))
+        _valid_categories = set(_valid_categories)
 
-        category_urls = [urls.prepare_url(p_url, source_url)
-                         for p_url in _valid_categories]
+        category_urls = (urls.prepare_url(p_url, source_url)
+                         for p_url in _valid_categories)
         category_urls = [c for c in category_urls if c is not None]
         return category_urls
 

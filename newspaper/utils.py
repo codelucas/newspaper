@@ -33,6 +33,8 @@ _USER_AGENTS = itertools.cycle(USER_AGENTS)
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
+sentinel = object()  #  Unique singleton that is not None
+
 
 class FileHelper(object):
     @staticmethod
