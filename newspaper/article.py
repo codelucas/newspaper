@@ -210,6 +210,12 @@ class Article(object):
         self.set_title(title)
 
     def parse(self):
+        try:
+            self._parse()
+        finally:
+            self.release_resources()
+
+    def _parse(self):
         self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
@@ -286,7 +292,6 @@ class Article(object):
         self.fetch_images()
 
         self.is_parsed = True
-        self.release_resources()
 
     def fetch_images(self):
         if self.clean_doc is not None:
