@@ -213,7 +213,11 @@ class Article(object):
         try:
             self._parse()
         finally:
-            self.release_resources()
+            if hasattr(self, 'link_hash'):
+                try:
+                    self.release_resources()
+                except:  # noqa
+                    pass
 
     def _parse(self):
         self.throw_if_not_downloaded_verbose()
