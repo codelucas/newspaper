@@ -195,3 +195,15 @@ class StopWordsJapanese(StopWords):
         segmenter = tinysegmenter.TinySegmenter()
         tokens = segmenter.tokenize(stripped_input)
         return tokens
+
+
+class StopWordsThai(StopWords):
+    """Thai segmentation
+    """
+    def __init__(self, language='th'):
+        super(StopWordsThai, self).__init__(language='th')
+
+    def candidate_words(self, stripped_input):
+        import pythainlp
+        tokens = pythainlp.word_tokenize(stripped_input)
+        return tokens
