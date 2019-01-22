@@ -347,6 +347,7 @@ def get_available_languages():
     two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
+    two_dig_codes.sort()
     return two_dig_codes
 
 
