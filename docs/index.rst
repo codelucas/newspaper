@@ -194,39 +194,43 @@ Features
     input code      full name
 
       ar              Arabic
-      ru              Russian
-      nl              Dutch
+      be              Belarusian
+      bg              Bulgarian
+      da              Danish
       de              German
+      el              Greek
       en              English
       es              Spanish
+      et              Estonian
+      fa              Persian
+      fi              Finnish
       fr              French
       he              Hebrew
+      hi              Hindi
+      hr              Croatian
+      hu              Hungarian
+      id              Indonesian
       it              Italian
+      ja              Japanese
       ko              Korean
+      lt              Lithuanian
+      mk              Macedonian
+      nb              Norwegian (Bokmål)
+      nl              Dutch
       no              Norwegian
-      fa              Persian
       pl              Polish
       pt              Portuguese
-      sv              Swedish
-      hu              Hungarian
-      fi              Finnish
-      da              Danish
-      zh              Chinese
-      id              Indonesian
-      vi              Vietnamese
-      sw              Swahili
-      tr              Turkish
-      el              Greek
-      uk              Ukrainian
-      bg              Bulgarian
-      hr              Croatian
       ro              Romanian
+      ru              Russian
       sl              Slovenian
       sr              Serbian
-      et              Estonian
-      ja              Japanese
-      be              Belarusian
-      lt              Lithuanian
+      sv              Swedish
+      sw              Swahili
+      th              Thai
+      tr              Turkish
+      uk              Ukrainian
+      vi              Vietnamese
+      zh              Chinese
 
 
 Get it now
