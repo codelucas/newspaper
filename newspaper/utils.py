@@ -388,7 +388,7 @@ def print_available_languages():
         'sl': 'Slovenian',
         'sr': 'Serbian',
         'et': 'Estonian',
-        'np': 'Nepali'
+        'np': 'Nepali',
         'ja': 'Japanese',
         'be': 'Belarusian',
         'lt': 'Lithuanian'
