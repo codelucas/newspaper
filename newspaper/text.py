@@ -182,29 +182,3 @@ class StopWordsHindi(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
-
-
-class StopWordsNepali(StopWords):
-    """Nepali segmentation
-    """
-    def __init__(self, language='np'):
-        super(StopWordsNepali, self).__init__(language='np')
-
-    def get_stopword_count(self, content):
-        if not content:
-            return WordStats()
-        ws = WordStats()
-        stripped_input = self.remove_punctuation(content)
-        candidate_words = self.candidate_words(stripped_input)
-        overlapping_stopwords = []
-        c = 0
-        for w in candidate_words:
-            c += 1
-            for s in self.STOP_WORDS:
-                if w.endswith(s):
-                    overlapping_stopwords.append(w)
-
-        ws.set_word_count(c)
-        ws.set_stopword_count(len(overlapping_stopwords))
-        ws.set_stop_words(overlapping_stopwords)
-        return ws
