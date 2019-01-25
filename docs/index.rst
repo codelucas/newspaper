@@ -225,7 +225,9 @@ Features
       sr              Serbian
       et              Estonian
       np              Nepali
-
+      ja              Japanese
+      be              Belarusian
+      lt              Lithuanian
 
 Get it now
 ----------

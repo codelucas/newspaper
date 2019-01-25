@@ -136,7 +136,7 @@ class ContentExtractor(object):
         # Try 1: Search popular author tags for authors
 
         ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline', 'dc.creator']
+        VALS = ['author', 'byline', 'dc.creator', 'byl']
         matches = []
         authors = []
 
@@ -153,7 +153,7 @@ class ContentExtractor(object):
                 if len(mm) > 0:
                     content = mm[0]
             else:
-                content = match.text or ''
+                content = match.text_content() or ''
             if len(content) > 0:
                 authors.extend(parse_byline(content))
 
@@ -471,6 +471,11 @@ class ContentExtractor(object):
         """Returns meta type of article, open graph protocol
         """
         return self.get_meta_content(doc, 'meta[property="og:type"]')
+
+    def get_meta_site_name(self, doc):
+        """Returns site name of article, open graph protocol
+        """
+        return self.get_meta_content(doc, 'meta[property="og:site_name"]')
 
     def get_meta_description(self, doc):
         """If the article has meta description set in the source, use that

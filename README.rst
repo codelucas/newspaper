@@ -108,7 +108,7 @@ A Glance:
     >>> text = fulltext(html)
 
 
-Newspaper has *seamless* language extraction and detection.
+Newspaper can extract and detect languages *seamlessly*.
 If no language is specified, Newspaper will attempt to auto detect a language.
 
 .. code-block:: pycon
@@ -224,6 +224,9 @@ Features
       sr              Serbian
       et              Estonian
       np              Nepali
+      ja              Japanese
+      be              Belarusian
+      lt              Lithuanian
 
 Get it now
 ----------

@@ -183,9 +183,20 @@ class StopWordsHindi(StopWords):
         ws.set_stop_words(overlapping_stopwords)
         return ws
 
-
 class StopWordsNepali(StopWords):
     """Nepali segmentation
     """
     def __init__(self, language='np'):
         super(StopWordsNepali, self).__init__(language=language)
+
+class StopWordsJapanese(StopWords):
+    """Japanese segmentation
+    """
+    def __init__(self, language='ja'):
+        super(StopWordsJapanese, self).__init__(language='ja')
+
+    def candidate_words(self, stripped_input):
+        import tinysegmenter
+        segmenter = tinysegmenter.TinySegmenter()
+        tokens = segmenter.tokenize(stripped_input)
+        return tokens

@@ -141,8 +141,11 @@ class OutputFormatter(object):
     def remove_trailing_media_div(self):
         """Punish the *last top level* node in the top_node if it's
         DOM depth is too deep. Many media non-content links are
-        eliminated: "related", "loading gallery", etc
+        eliminated: "related", "loading gallery", etc. It skips removal if
+        last top level node's class is one of NON_MEDIA_CLASSES.
         """
+
+        NON_MEDIA_CLASSES = ('zn-body__read-all', )
 
         def get_depth(node, depth=1):
             """Computes depth of an lxml element via BFS, this would be
@@ -163,5 +166,10 @@ class OutputFormatter(object):
             return
 
         last_node = top_level_nodes[-1]
+
+        last_node_class = self.parser.getAttribute(last_node, 'class')
+        if last_node_class in NON_MEDIA_CLASSES:
+            return
+
         if get_depth(last_node) >= 2:
             self.parser.remove(last_node)
