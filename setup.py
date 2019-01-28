@@ -63,4 +63,8 @@ setup(
         'Natural Language :: English',
         'Intended Audience :: Developers',
     ],
+    entry_points='''
+        [console_scripts]
+        newspaper=newspaper.cli:parse
+    ''',
 )
