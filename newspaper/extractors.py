@@ -51,7 +51,6 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'account', 'subscribe', 'donate', 'shop', 'admin']
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
-
 class ContentExtractor(object):
     def __init__(self, config):
         self.config = config
@@ -169,7 +168,7 @@ class ContentExtractor(object):
         #    return [] # Failed to find anything
         # return authors
 
-    def get_publishing_date(self, url, doc):
+    def get_publishing_date(self, url, doc, jsonlddata):
         """3 strategies for publishing date extraction. The strategies
         are descending in accuracy and the next strategy is only
         attempted if a preferred one fails.
@@ -194,6 +193,14 @@ class ContentExtractor(object):
             datetime_obj = parse_date_str(date_str)
             if datetime_obj:
                 return datetime_obj
+
+        if jsonlddata:
+            JSONLD_TAGS = [
+                'datePublished'
+            ]
+            for known_meta_tag in JSONLD_TAGS:
+                if known_meta_tag in jsonlddata[0]:
+                    return jsonlddata[0][known_meta_tag]
 
         PUBLISH_DATE_TAGS = [
             {'attribute': 'property', 'value': 'rnews:datePublished',
