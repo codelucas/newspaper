@@ -298,13 +298,14 @@ Support Newspaper3K financially
 -------------------------------
 
 Help support me via Patreon so I can dedicate more of my time towards Newspaper3K! I plan
-on adding things like advanced machine learned based techniques for the news intelligence
-domain and improve article identification. We can perhaps have lofty long-term goals
-such as tackling the fake news problem. `View our Patreon support page here`_
+on adding things like advanced machine learned based techniques for news, image, and full-text
+extraction. We even have lofty long-term goals such as tackling the fake news problem!
+`View our Patreon support page here`_
 
-This service is already used around the world by startups, top news organizations (CNN, NYT, etc),
-graduate school researchers, and, of course, hackers like you :) Perhaps one day we can even tackle
-the fake news problem and be at the forefront of that. Your support goes a long way, thank you.
+*This service is already used around the world* by startups, top news organizations (CNN, NYT, etc),
+graduate school researchers, and, of course, hackers like you :) Perhaps one day we can even tackle and be
+at the forefront of the news intelligence domain; tackling new problems such as fake news, nlp, author
+credibility. Your support goes a long way, thank you.
 
 Development
 -----------
