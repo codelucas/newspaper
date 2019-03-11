@@ -193,8 +193,8 @@ class Article(object):
             else:
                 html = self._parse_scheme_http()
             if html is None:
-                log.debug('Download failed on URL %s because of %s' %
-                          (self.url, self.download_exception_msg))
+                log.debug('Download failed on URL %s because of %s',
+                          self.url, self.download_exception_msg)
                 return
         else:
             html = input_html
@@ -210,6 +210,16 @@ class Article(object):
         self.set_title(title)
 
     def parse(self):
+        try:
+            self._parse()
+        finally:
+            if hasattr(self, 'link_hash'):
+                try:
+                    self.release_resources()
+                except:  # noqa
+                    pass
+
+    def _parse(self):
         self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
@@ -286,7 +296,6 @@ class Article(object):
         self.fetch_images()
 
         self.is_parsed = True
-        self.release_resources()
 
     def fetch_images(self):
         if self.clean_doc is not None:
@@ -314,10 +323,9 @@ class Article(object):
         return self.top_img is not None and self.top_img != ''
 
     def is_valid_url(self):
-        """Performs a check on the url of this link to determine if article
-        is a real news article or not
-        """
         return urls.valid_url(self.url)
+
+    is_valid_url.__doc__ = urls.valid_url.__doc__
 
     def is_valid_body(self):
         """If the article's body text is long enough to meet
@@ -332,30 +340,30 @@ class Article(object):
 
         if (meta_type == 'article' and len(wordcount) >
                 (self.config.MIN_WORD_COUNT)):
-            log.debug('%s verified for article and wc' % self.url)
+            log.debug('%s verified for article and wc', self.url)
             return True
 
         if not self.is_media_news() and not self.text:
-            log.debug('%s caught for no media no text' % self.url)
+            log.debug('%s caught for no media no text', self.url)
             return False
 
         if self.title is None or len(self.title.split(' ')) < 2:
-            log.debug('%s caught for bad title' % self.url)
+            log.debug('%s caught for bad title', self.url)
             return False
 
         if len(wordcount) < self.config.MIN_WORD_COUNT:
-            log.debug('%s caught for word cnt' % self.url)
+            log.debug('%s caught for word cnt', self.url)
             return False
 
         if len(sentcount) < self.config.MIN_SENT_COUNT:
-            log.debug('%s caught for sent cnt' % self.url)
+            log.debug('%s caught for sent cnt', self.url)
             return False
 
         if self.html is None or self.html == '':
-            log.debug('%s caught for no html' % self.url)
+            log.debug('%s caught for no html', self.url)
             return False
 
-        log.debug('%s verified for default true' % self.url)
+        log.debug('%s verified for default true', self.url)
         return True
 
     def is_media_news(self):
@@ -431,17 +439,18 @@ class Article(object):
             s = images.Scraper(self)
             self.set_top_img(s.largest_image_url())
         except TypeError as e:
+            # TODO (bsolomon1124): May want to use log.exception() here
             if "Can't convert 'NoneType' object to str implicitly" in e.args[0]:
-                log.debug('No pictures found. Top image not set, %s' % e)
+                log.debug('No pictures found. Top image not set, %s', e)
             elif 'timed out' in e.args[0]:
-                log.debug('Download of picture timed out. Top image not set, %s' % e)
+                log.debug('Download of picture timed out. Top image not set, %s', e)
             else:
                 log.critical('TypeError other than None type error. '
                              'Cannot set top image using the Reddit '
-                             'algorithm. Possible error with PIL., %s' % e)
+                             'algorithm. Possible error with PIL., %s', e)
         except Exception as e:
             log.critical('Other error with setting top image using the '
-                         'Reddit algorithm. Possible error with PIL, %s' % e)
+                         'Reddit algorithm. Possible error with PIL, %s', e)
 
     def set_title(self, input_title):
         if input_title:

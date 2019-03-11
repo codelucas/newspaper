@@ -9,7 +9,8 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import codecs
-import hashlib
+from hashlib import md5, sha1
+import itertools
 import logging
 import os
 import pickle
@@ -20,14 +21,19 @@ import sys
 import threading
 import time
 
-from hashlib import sha1
-
 from bs4 import BeautifulSoup
 
 from . import settings
 
+from .resources.misc.useragents import USER_AGENTS
+
+_USER_AGENTS = itertools.cycle(USER_AGENTS)
+
+
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
+
+sentinel = object()  #  Unique singleton that is not None
 
 
 class FileHelper(object):
@@ -59,7 +65,7 @@ class RawHelper(object):
     def get_parsing_candidate(url, raw_html):
         if isinstance(raw_html, str):
             raw_html = raw_html.encode('utf-8', 'replace')
-        link_hash = '%s.%s' % (hashlib.md5(raw_html).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(raw_html).hexdigest(), time.monotonic())
         return ParsingCandidate(url, link_hash)
 
 
@@ -69,7 +75,7 @@ class URLHelper(object):
         # Replace shebang in urls
         final_url = url_to_crawl.replace('#!', '?_escaped_fragment_=') \
             if '#!' in url_to_crawl else url_to_crawl
-        link_hash = '%s.%s' % (hashlib.md5(final_url).hexdigest(), time.time())
+        link_hash = '%s.%s' % (md5(final_url).hexdigest(), time.monotonic())
         return ParsingCandidate(final_url, link_hash)
 
 
@@ -168,17 +174,14 @@ def filename_to_domain(filename):
 
 
 def is_ascii(word):
-    """True if a word is only ascii chars
+    """True if a word is only ASCII chars.
+
+    `word` may be bytes or str.
     """
-    def onlyascii(char):
-        if ord(char) > 127:
-            return ''
-        else:
-            return char
-    for c in word:
-        if not onlyascii(c):
-            return False
-    return True
+    if isinstance(word, bytes):
+        # Bytes can only contain ASCII literal characters
+        return True
+    return all(ord(i) < 128 for i in word)
 
 
 def extract_meta_refresh(html):
@@ -213,29 +216,46 @@ def to_valid_filename(s):
 
 
 def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
-    """Caching extracting category locations & rss feeds for 5 days
+    """Decorator for caching extracted category locations & RSS feeds.
+
+    Default persistence: 5 days; default cache location is /tmp.
+
+    The caching is done by pickling, hence the result of the decorated
+    function must be picklable; see:
+    https://docs.python.org/3/library/pickle.html#what-can-be-pickled-and-unpickled
     """
     def do_cache(function):
         def inner_function(*args, **kwargs):
-            """Calculate a cache key based on the decorated method signature
-            args[1] indicates the domain of the inputs, we hash on domain!
+            """Calculate a cache key based on the decorated method signature.
+
+            The hash is a SHA1 hash of:
+            - args[1], ie. the domain of the inputs
+            - kwargs (dict)
             """
             key = sha1((str(args[1]) +
-                        str(kwargs)).encode('utf-8')).hexdigest()
+                        str(kwargs)).encode('utf-8')).hexdigest()  # type: str
             filepath = os.path.join(cache_folder, key)
 
-            # verify that the cached object exists and is less than
-            # X seconds old
+            # Verify that the cached object exists and is less than
+            # `seconds` seconds old
             if os.path.exists(filepath):
                 modified = os.path.getmtime(filepath)
-                age_seconds = time.time() - modified
+                age_seconds = time.monotonic() - modified
                 if age_seconds < seconds:
-                    return pickle.load(open(filepath, "rb"))
+                    with open(filepath, "rb") as f:
+                        return pickle.load(f)
+            elif not os.path.isdir(cache_folder):
+                # We can't write to nested location if its parent folder
+                # doesn't exist.
+                # TODO: `tempfile` module is probably better practice here,
+                # but would constitute a major change.
+                os.mkdir(cache_folder)
 
-            # call the decorated function...
+            # Call the decorated function & save cached object
             result = function(*args, **kwargs)
             # ... and save the cached object for next time
-            pickle.dump(result, open(filepath, "wb"))
+            with open(filepath, "wb") as f:
+                pickle.dump(result, f)
             return result
         return inner_function
     return do_cache
@@ -245,9 +265,9 @@ def print_duration(method):
     """Prints out the runtime duration of a method in seconds
     """
     def timed(*args, **kw):
-        ts = time.time()
+        ts = time.perf_counter()
         result = method(*args, **kw)
-        te = time.time()
+        te = time.perf_counter()
         print('%r %2.2f sec' % (method.__name__, te - ts))
         return result
     return timed
@@ -330,14 +350,15 @@ def memoize_articles(source, articles):
     return list(cur_articles.values())
 
 
-def get_useragent():
-    """Uses generator to return next useragent in saved file
+def get_useragent(_next=_USER_AGENTS.__next__):
+    """Pull the next mocked User-Agent string string from the cycler.
+
+    >>> make_random_useragent()
+    'Mozilla/4.0 (compatible; MSIE 10.0; Windows NT 6.1; Trident/5.0)'
     """
-    with open(settings.USERAGENTS, 'r') as f:
-        agents = f.readlines()
-        selection = random.randint(0, len(agents) - 1)
-        agent = agents[selection]
-        return agent.strip()
+
+    # NOTE: iteration is not threadsafe, but we should be okay here.
+    return _next()
 
 
 def get_available_languages():
@@ -403,11 +424,19 @@ def print_available_languages():
 
 def extend_config(config, config_items):
     """
-    We are handling config value setting like this for a cleaner api.
+    Add additional keyword arguments to a :class`Configuration` instance.
+
+    We are handling config value setting like this for a cleaner API.
+
     Users just need to pass in a named param to this source and we can
     dynamically generate a config object for it.
+
+    :param config: Instance of :class`configuration.Configuration`
+    :param config_items: Kwargs set for config instance
+    :type config_items: dict
     """
-    for key, val in list(config_items.items()):
+
+    for key, val in config_items.items():
         if hasattr(config, key):
             setattr(config, key, val)
 

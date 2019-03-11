@@ -37,10 +37,10 @@ def print_test(method):
     """
 
     def run(*args, **kw):
-        ts = time.time()
+        ts = time.perf_counter()
         print('\ttesting function %r' % method.__name__)
         method(*args, **kw)
-        te = time.time()
+        te = time.perf_counter()
         print('\t[OK] in %r %2.2f sec' % (method.__name__, te - ts))
 
     return run
@@ -141,6 +141,65 @@ class ExhaustiveFullTextCase(unittest.TestCase):
               (total_pubdates_failed, len(urls)))
         self.assertGreaterEqual(47, total_pubdates_failed)
         self.assertGreaterEqual(20, total_fulltext_failed)
+
+
+class UtilsTestCase(unittest.TestCase):
+
+    @print_test
+    def test_is_ascii(self):
+        from newspaper.utils import is_ascii
+        ok = ["newspaper3k", "2018-01-01", "\n\t <tab>", b"bytes go here"]
+        bad = [
+            "عيد-الميلاد-فلسطين-مسيحيون-كنيسة-المهد-المسيح-قداس",
+            'ละตุ้มเป๊ะ "ช้างศึก" พ่ายอินเดียยับ 1-4 เปิดหัวเอเชียนคัพ 2019'
+        ]
+        for word in ok:
+            self.assertTrue(is_ascii(word))
+        for word in bad:
+            self.assertFalse(is_ascii(word))
+
+    @print_test
+    def test_get_useragent(self):
+        from newspaper.resources.misc.useragents import USER_AGENTS
+        from newspaper.utils import get_useragent
+        total = len(USER_AGENTS) * 2
+        for _ in range(total):
+            ua = get_useragent()
+            self.assertTrue(ua)
+            self.assertIsInstance(ua, str)
+            self.assertIn(ua, USER_AGENTS)
+
+
+class StopWordsTestCase(unittest.TestCase):
+
+    def setUp(self):
+        from newspaper.text import StopWords
+        self.sent = "I think    we'll \t stop there, no??"
+        self.removed = "I think    well \t stop there no"
+        self.split = ["I", "think", "well", "stop", "there", "no"]
+        self.StopWords = StopWords
+
+    @print_test
+    def test_remove_punctuation(self):
+        self.assertEqual(
+            self.StopWords.remove_punctuation(self.sent),
+            self.removed
+        )
+        self.assertEqual(
+            self.StopWords.remove_punctuation(self.sent.encode('utf-8')),
+            self.removed.encode('utf-8')
+        )
+
+    @print_test
+    def test_candidate_words(self):
+        self.assertEqual(
+            self.StopWords.candidate_words(self.removed),
+            self.split
+        )
+        self.assertEqual(
+            self.StopWords.candidate_words(self.removed.encode('utf-8')),
+            [i.encode('utf-8') for i in self.split]
+        )
 
 
 class ArticleTestCase(unittest.TestCase):
@@ -544,6 +603,22 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
+    @print_test
+    def test_url_to_filetype(self):
+        from newspaper.urls import url_to_filetype
+        with open(os.path.join(TEST_DIR,
+                               'data/test_url_to_filetype.txt'), 'r') as f:
+            for line in f:
+                truth_ext, url = map(str.strip, line.split(','))
+                truth_ext = None if not truth_ext else truth_ext
+                try:
+                    if truth_ext is None:
+                        self.assertIsNone(url_to_filetype(url))
+                    else:
+                        self.assertEqual(truth_ext, url_to_filetype(url))
+                except AssertionError:
+                    print('\t\turl: %s extension should be %s' % (url, truth_ext))
+                    raise
 
     @print_test
     def test_pubdate(self):

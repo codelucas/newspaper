@@ -40,7 +40,7 @@ def get_html(url, config=None, response=None):
     try:
         return get_html_2XX_only(url, config, response)
     except requests.exceptions.RequestException as e:
-        log.debug('get_html() error. %s on URL: %s' % (e, url))
+        log.debug('get_html() error. %s on URL: %s', e, url)
         return ''
 
 
@@ -111,7 +111,7 @@ class MRequest(object):
             if self.config.http_success_only:
                 self.resp.raise_for_status()
         except requests.exceptions.RequestException as e:
-            log.critical('[REQUEST FAILED] ' + str(e))
+            log.critical('[REQUEST FAILED] %s', e)
 
 
 def multithread_request(urls, config=None):

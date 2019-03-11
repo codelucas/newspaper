@@ -9,6 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
+import os
 import re
 
 from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
@@ -17,25 +18,39 @@ from tldextract import tldextract
 
 log = logging.getLogger(__name__)
 
-
 MAX_FILE_MEMO = 20000
 
+# Positive lookbehind assertion: date string must be preceded by
+# [^a-zA_Z0-9], any nonword character.  Make sure we aren't picking
+# up portions of gibberish numbers that may look like dates
 _STRICT_DATE_REGEX_PREFIX = r'(?<=\W)'
-DATE_REGEX = r'([\./\-_]{0,1}(19|20)\d{2})[\./\-_]{0,1}(([0-3]{0,1}[0-9][\./\-_])|(\w{3,5}[\./\-_]))([0-3]{0,1}[0-9][\./\-]{0,1})?'
+
+# ISO 8601 dates with a bit of flexibility & ambiguity:
+# - YYYYsXXsXX, YYYYsMM
+# - Sep, as denoted `s` above, is optional and may be hyphen, period,
+#   fwd slash, or underscore
+
+_SEPS = r'([-./_]?)'  # No need to escape leading hyphen, see docs.
+_DAY = r'(3[01]|0[1-9]|[12][0-9])'  # 01 thru 31
+_MONTH = r'(1[0-2]|0[1-9]|[A-Za-z]{3}(?![a-zA-Z]))'  # 01 thru 12 or 3-5 alpha
+_YEAR = r'((?:19|20)\d{2})'  # 4 digit year, 1900 thru 2099
+DATE_REGEX = _YEAR + _SEPS + r'(?:' + _DAY + r'\2' + _MONTH + r'|' + _MONTH + r'(?:\2(3[01]|0[1-9]|[12][0-9]))?' + r')'
 STRICT_DATE_REGEX = _STRICT_DATE_REGEX_PREFIX + DATE_REGEX
 
-ALLOWED_TYPES = ['html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
-                 'xhtml', 'jhtml', 'asp', 'shtml']
+ALLOWED_TYPES = {'html', 'htm', 'md', 'rst', 'aspx', 'jsp', 'rhtml', 'cgi',
+                 'xhtml', 'jhtml', 'asp', 'shtml'}
 
-GOOD_PATHS = ['story', 'article', 'feature', 'featured', 'slides',
+GOOD_PATHS = {'story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
-              'v', 'radio', 'press']
+              'v', 'radio', 'press'}
 
-BAD_CHUNKS = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
+BAD_CHUNKS = {'careers', 'contact', 'about', 'faq', 'terms', 'privacy',
               'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
-              'account', 'subscribe', 'donate', 'shop', 'admin']
+              'account', 'subscribe', 'donate', 'shop', 'admin'}
 
-BAD_DOMAINS = ['amazon', 'doubleclick', 'twitter']
+BAD_DOMAINS = {'amazon', 'doubleclick', 'twitter'}
+
+ALLOWED_SCHEMES = {'http', 'https'}
 
 
 def remove_args(url, keep_params=(), frags=False):
@@ -72,7 +87,6 @@ def redirect_back(url, source_domain):
 
     query_item = parse_qs(query)
     if query_item.get('url'):
-        # log.debug('caught redirect %s into %s' % (url, query_item['url'][0]))
         return query_item['url'][0]
 
     return url
@@ -93,45 +107,27 @@ def prepare_url(url, source_url=None):
             # proper_url = remove_args(url)
             proper_url = url
     except ValueError as e:
-        log.critical('url %s failed on err %s' % (url, str(e)))
+        # TODO (bsolomon1124): May want to use log.exception() here
+        log.critical('url %s failed on err %s', url, e)
         proper_url = ''
 
     return proper_url
 
 
 def valid_url(url, verbose=False, test=False):
-    """
-    Is this URL a valid news-article url?
+    r"""
+    Is this URL a valid news-article URL?  Judge using a few heuristics.
 
-    Perform a regex check on an absolute url.
-
-    First, perform a few basic checks like making sure the format of the url
-    is right, (scheme, domain, tld).
-
-    Second, make sure that the url isn't some static resource, check the
-    file type.
-
-    Then, search of a YYYY/MM/DD pattern in the url. News sites
-    love to use this pattern, this is a very safe bet.
-
-    Separators can be [\.-/_]. Years can be 2 or 4 digits, must
-    have proper digits 1900-2099. Months and days can be
-    ambiguous 2 digit numbers, one is even optional, some sites are
-    liberal with their formatting also matches snippets of GET
-    queries with keywords inside them. ex: asdf.php?topic_id=blahlbah
-    We permit alphanumeric, _ and -.
-
-    Our next check makes sure that a keyword is within one of the
-    separators in a url (subdomain or early path separator).
-    cnn.com/story/blah-blah-blah would pass due to "story".
-
-    We filter out articles in this stage by aggressively checking to
-    see if any resemblance of the source& domain's name or tld is
-    present within the article title. If it is, that's bad. It must
-    be a company link, like 'cnn is hiring new interns'.
-
-    We also filter out articles with a subdomain or first degree path
-    on a registered bad keyword.
+    1. Check the truthiness of the URL and its minimum length.
+    2. Confirm its scheme is http or https
+    3. Confirm the URL doesn't represent some "file-like" resource
+    4. Search for a loose ISO-8601-like date in the URL.  News sites
+       love to use this pattern; this is a safe bet.  See DATE_REGEX
+       from the urls.py module.  Separators can be { - . / _ }.  Months
+       and days may be ambiguous, with days optional.
+    5. Check against good and bad domains and chunks of the URL's path,
+       aggressively filtering out (or validating) matches in either
+       direction.
     """
     # If we are testing this method in the testing suite, we actually
     # need to preprocess the url like we do in the article's constructor!
@@ -143,14 +139,12 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('\t%s rejected because len of url is less than 11' % url)
         return False
 
-    r1 = ('mailto:' in url)  # TODO not sure if these rules are redundant
-    r2 = ('http://' not in url) and ('https://' not in url)
-
-    if r1 or r2:
-        if verbose: print('\t%s rejected because len of url structure' % url)
+    _parseresult = urlparse(url)
+    if _parseresult.scheme not in ALLOWED_SCHEMES:
+        if verbose: print('\t%s rejected because it lacks normal scheme' % url)
         return False
 
-    path = urlparse(url).path
+    path = _parseresult.path
 
     # input url is not in valid form (scheme, netloc, tld)
     if not path.startswith('/'):
@@ -216,12 +210,19 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('%s caught for path chunks too small' % url)
         return False
 
+    lower_chunks = {p.lower() for p in path_chunks}
+
     # Check for subdomain & path red flags
     # Eg: http://cnn.com/careers.html or careers.cnn.com --> BAD
-    for b in BAD_CHUNKS:
-        if b in path_chunks or b == subd:
-            if verbose: print('%s caught for bad chunks' % url)
-            return False
+    found_bad = BAD_CHUNKS.intersection(lower_chunks)
+    if found_bad:
+        if verbose:
+            for b in found_bad:
+                print('%s caught for bad chunks' % url)
+        return False
+    if subd in BAD_CHUNKS:
+        if verbose: print('%s caught for bad chunks' % url)
+        return False
 
     match_date = re.search(DATE_REGEX, url)
 
@@ -230,67 +231,78 @@ def valid_url(url, verbose=False, test=False):
         if verbose: print('%s verified for date' % url)
         return True
 
-    for GOOD in GOOD_PATHS:
-        if GOOD.lower() in [p.lower() for p in path_chunks]:
-            if verbose: print('%s verified for good path' % url)
-            return True
+    found_good = GOOD_PATHS.intersection(lower_chunks)
+    if found_good:
+        if verbose:
+            for g in found_good:
+                print('%s verified for good path' % url)
+        return True
 
     if verbose: print('%s caught for default false' % url)
     return False
 
 
-def url_to_filetype(abs_url):
+def url_to_filetype(abs_url, max_len_allowed=5):
     """
-    Input a URL and output the filetype of the file
-    specified by the url. Returns None for no filetype.
+    Extract filetype from file identified by the input URL.
+
+    Returns None for no detected filetype.
+
+    Strips leading dot on the file type.
+
     'http://blahblah/images/car.jpg' -> 'jpg'
     'http://yahoo.com'               -> None
+    'https://www.python.org/ftp/python/3.7.2/Python-3.7.2.tar.xz' -> 'xz'
     """
-    path = urlparse(abs_url).path
-    # Eliminate the trailing '/', we are extracting the file
-    if path.endswith('/'):
-        path = path[:-1]
-    path_chunks = [x for x in path.split('/') if len(x) > 0]
-    last_chunk = path_chunks[-1].split('.')  # last chunk == file usually
-    if len(last_chunk) < 2:
+
+    # Eliminate the trailing '/'; we are extracting the file
+    path = urlparse(abs_url).path.rstrip('/')
+    if not path:
         return None
-    file_type = last_chunk[-1]
-    # Assume that file extension is maximum 5 characters long
-    if len(file_type) <= 5 or file_type.lower() in ALLOWED_TYPES:
-        return file_type.lower()
+    _, file_type = os.path.splitext(path.rsplit('/')[-1])
+    if file_type and len(file_type) <= max_len_allowed:
+        return file_type.lower().strip('.')
     return None
 
 
-def get_domain(abs_url, **kwargs):
-    """
-    returns a url's domain, this method exists to
-    encapsulate all url code into this file
+# These methods exist to encapsulate all URL-related code into one file.
+
+
+def get_domain(abs_url, _parse=urlparse, **kwargs):
+    """Extract network location part (host) via urllib.parse.
     """
     if abs_url is None:
         return None
-    return urlparse(abs_url, **kwargs).netloc
+    return _parse(abs_url, **kwargs).netloc
 
 
-def get_scheme(abs_url, **kwargs):
-    """
-    """
-    if abs_url is None:
-        return None
-    return urlparse(abs_url, **kwargs).scheme
-
-
-def get_path(abs_url, **kwargs):
-    """
+def get_scheme(abs_url, _parse=urlparse, **kwargs):
+    """Extract URL scheme specifier via urllib.parse.
     """
     if abs_url is None:
         return None
-    return urlparse(abs_url, **kwargs).path
+    return _parse(abs_url, **kwargs).scheme
+
+
+def get_path(abs_url, _parse=urlparse, **kwargs):
+    """Extract hierarchical URL path via urllib.parse.
+    """
+    if abs_url is None:
+        return None
+    return _parse(abs_url, **kwargs).path
 
 
 def is_abs_url(url):
     """
-    this regex was brought to you by django!
+    Return True if `url` is absolute path and http[s] scheme, False otherwise.
     """
+
+    # Note: This regex was brought to you by Django!
+    # Django's URLValidator has been updated dramatically over time;
+    # see django.core.validators.
+    #
+    # Note also that though "//www.python.org" is, from RFC 3986's
+    # perspective, an absolute URL, it is not valid by this definition.
     regex = re.compile(
         r'^(?:http|ftp)s?://'                                                                 # http:// or https://
         r'(?:(?:[A-Z0-9](?:[A-Z0-9-]{0,61}[A-Z0-9])?\.)+(?:[A-Z]{2,6}\.?|[A-Z0-9-]{2,}\.?)|'  # domain...
@@ -300,5 +312,4 @@ def is_abs_url(url):
         r'(?::\d+)?'                                                                          # optional port
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
 
-    c_regex = re.compile(regex)
-    return (c_regex.search(url) is not None)
+    return bool(c_regex.search(url))

@@ -68,19 +68,37 @@ class StopWords(object):
                 set(FileHelper.loadResourceFile(path).splitlines())
         self.STOP_WORDS = self._cached_stop_words[language]
 
-    def remove_punctuation(self, content):
-        # code taken form
-        # http://stackoverflow.com/questions/265960/best-way-to-strip-punctuation-from-a-string-in-python
-        content_is_unicode = isinstance(content, str)
-        if content_is_unicode:
-            content = content.encode('utf-8')
-        trans_table = {ord(c): None for c in string.punctuation}
-        stripped_input = content.decode('utf-8').translate(trans_table)
+    @staticmethod
+    def remove_punctuation(content):
+        r"""Remove punctuation from input.
 
-        return stripped_input
+        Punctuation includes: !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~
 
-    def candidate_words(self, stripped_input):
-        return stripped_input.split(' ')
+        Input may be bytes or str.  Return value will be of same type.
+        """
+        if isinstance(content, str):
+            table = {ord(c): None for c in string.punctuation}
+            return content.translate(table)
+        elif isinstance(content, bytes):
+            # bytes.translate wants bytes object of length 256
+            # and may use `delete` arg
+            table = bytes.maketrans(b'', b'')
+            return content.translate(table, string.punctuation.encode('utf-8'))
+        else:
+            raise TypeError("Only str or bytes accepted")
+
+    @staticmethod
+    def candidate_words(stripped_input):
+        """Parse candidate words by splitting input on whitespace.
+
+        Input may be bytes or str.  Return value will be of same type.
+        """
+        if isinstance(stripped_input, str):
+            return re.split(r'\s+', stripped_input)
+        elif isinstance(stripped_input, bytes):
+            return re.split(rb'\s+', stripped_input)
+        else:
+            raise TypeError("Only str or bytes accepted")
 
     def get_stopword_count(self, content):
         if not content:

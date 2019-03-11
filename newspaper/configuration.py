@@ -21,55 +21,90 @@ log = logging.getLogger(__name__)
 
 
 class Configuration(object):
-    def __init__(self):
+    def __init__(
+        self,
+        MIN_WORD_COUNT=300,
+        MIN_SENT_COUNT=7,
+        MAX_TITLE=200,
+        MAX_TEXT=100000,
+        MAX_KEYWORDS=35,
+        MAX_AUTHORS=10,
+        MAX_SUMMARY=5000,
+        MAX_SUMMARY_SENT=5,
+        MAX_FILE_MEMO=20000,
+        memoize_articles=True,
+        fetch_images=True,
+        image_dimension_ration=16/9.0,
+        follow_meta_refresh=False,
+        keep_article_html=False,
+        http_success_only=True,
+        language='en',
+        browser_user_agent='newspaper/{}'.format(__version__),
+        headers=None,
+        request_timeout=7,
+        proxies=None,
+        number_threads=10,
+        verbose=False
+    ):
+        """Initalize a custom configuration.
+
+        :param MIN_WORD_COUNT: Number of word tokens in text
+        :param MIN_SENT_COUNT: Number of sentence tokens
+        :param MAX_TITLE: Number of chars
+        :param MAX_TEXT: Number of chars
+        :param MAX_KEYWORDS: Number of strings in list
+        :param MAX_AUTHORS: Number strings in list
+        :param MAX_SUMMARY:  Number of chars
+        :param MAX_SUMMARY_SENT: Number of sentences
+        :param MAX_FILE_MEMO: Max number of URLS we cache for each news source
+        :param memoize_articles: Whether to cache and save articles run after run
+        :param fetch_images: Set this to False if you don't care about getting images
+        :param image_dimension_ration:
+        :param follow_meta_refresh: Follow meta refresh redirect when downloading
+        :param keep_article_html: Keep the HTML of just the main article body
+        :param http_success_only: Raise for non-200 responses (e.g. 404 page), using request's :function:`raise_for_status`
+        :param language: Language, default English ('en')
+        :param browser_user_agent: User-Agent string, default 'newspaper/{__version__}'
+        :param headers: Headers to send with GET requests
+        :param request_timeout: Total request timeout
+        :param proxies: Proxy to use in GET requests
+        :param number_threads: Number of threads used with multithreaded requests
+        :param verbose: Set to True for increased verbosity in debugging
         """
-        Modify any of these Article / Source properties
-        TODO: Have a separate ArticleConfig and SourceConfig extend this!
-        """
-        self.MIN_WORD_COUNT = 300  # num of word tokens in text
-        self.MIN_SENT_COUNT = 7  # num of sentence tokens
-        self.MAX_TITLE = 200  # num of chars
-        self.MAX_TEXT = 100000  # num of chars
-        self.MAX_KEYWORDS = 35  # num of strings in list
-        self.MAX_AUTHORS = 10  # num strings in list
-        self.MAX_SUMMARY = 5000  # num of chars
-        self.MAX_SUMMARY_SENT = 5  # num of sentences
 
-        # max number of urls we cache for each news source
-        self.MAX_FILE_MEMO = 20000
+        # TODO: Have a separate ArticleConfig and SourceConfig extend this!
 
-        # Cache and save articles run after run
-        self.memoize_articles = True
+        self.MIN_WORD_COUNT = MIN_WORD_COUNT
+        self.MIN_SENT_COUNT = MIN_SENT_COUNT
+        self.MAX_TITLE = MAX_TITLE
+        self.MAX_TEXT = MAX_TEXT
+        self.MAX_KEYWORDS = MAX_KEYWORDS
+        self.MAX_AUTHORS = MAX_AUTHORS
+        self.MAX_SUMMARY = MAX_SUMMARY
+        self.MAX_SUMMARY_SENT = MAX_SUMMARY_SENT
+        self.MAX_FILE_MEMO = MAX_FILE_MEMO
 
-        # Set this to false if you don't care about getting images
-        self.fetch_images = True
-        self.image_dimension_ration = 16 / 9.0
+        self.memoize_articles = memoize_articles
+        self.fetch_images = fetch_images
+        self.image_dimension_ration = image_dimension_ration
+        self.follow_meta_refresh = follow_meta_refresh
+        self.keep_article_html = keep_article_html
+        self.http_success_only = http_success_only
 
-        # Follow meta refresh redirect when downloading
-        self.follow_meta_refresh = False
+        self.browser_user_agent = browser_user_agent
+        self.headers = headers or {}
+        self.request_timeout = request_timeout
+        self.proxies = proxies or {}
+        self.number_threads = number_threads
+        self.verbose = verbose
+
+        self._language = language
 
         # Don't toggle this variable, done internally
         self.use_meta_language = True
 
-        # You may keep the html of just the main article body
-        self.keep_article_html = False
-
-        # Fail for error responses (e.g. 404 page)
-        self.http_success_only = True
-
-        # English is the fallback
-        self._language = 'en'
-
         # Unique stopword classes for oriental languages, don't toggle
         self.stopwords_class = StopWords
-
-        self.browser_user_agent = 'newspaper/%s' % __version__
-        self.headers = {}
-        self.request_timeout = 7
-        self.proxies = {}
-        self.number_threads = 10
-
-        self.verbose = False  # for debugging
 
         self.thread_timeout_seconds = 1
         self.ignored_content_types_defaults = {}
@@ -104,19 +139,18 @@ class Configuration(object):
 
     @staticmethod
     def get_stopwords_class(language):
-        if language == 'ko':
-            return StopWordsKorean
-        elif language == 'hi':
-            return StopWordsHindi
-        elif language == 'zh':
-            return StopWordsChinese
-        # Persian and Arabic Share an alphabet
-        # There is a persian parser https://github.com/sobhe/hazm, but nltk is likely sufficient
-        elif language == 'ar' or language == 'fa':
-            return StopWordsArabic
-        elif language == 'ja':
-            return StopWordsJapanese
-        return StopWords
+        sw = {
+            'ko': StopWordsKorean,
+            'hi': StopWordsHindi,
+            'zh': StopWordsChinese,
+            # Persian and Arabic Share an alphabet
+            # There is a persian parser https://github.com/sobhe/hazm,
+            # but nltk is likely sufficient.
+            'ar': StopWordsArabic,
+            'fa': StopWordsArabic,
+            'ja': StopWordsJapanese
+        }
+        return sw.get(language, StopWords)
 
     @staticmethod
     def get_parser():
