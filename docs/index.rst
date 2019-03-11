@@ -227,6 +227,7 @@ Features
       ja              Japanese
       be              Belarusian
       lt              Lithuanian
+      sk              Slovak
 
 
 Get it now
