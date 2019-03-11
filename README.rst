@@ -294,6 +294,18 @@ NOTE: You will still most likely need to install the following libraries via you
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
+Support Newspaper3K financially
+-------------------------------
+
+Help support me via Patreon so I can dedicate more of my time towards Newspaper3K! I plan
+on adding things like advanced machine learned based techniques for the news intelligence
+domain and improve article identification. We can perhaps have lofty long-term goals
+such as tackling the fake news problem. `View our Patreon support page here`_
+
+This service is already used around the world by startups, top news organizations (CNN, NYT, etc),
+graduate school researchers, and, of course, hackers like you :) Perhaps one day we can even tackle
+the fake news problem and be at the forefront of that. Your support goes a long way, thank you.
+
 Development
 -----------
 
@@ -321,6 +333,7 @@ Demo
 ----
 
 View a working online demo here: http://newspaper-demo.herokuapp.com
+
 This is another working online demo: http://newspaper.chinazt.cc/
 
 LICENSE
@@ -340,6 +353,8 @@ to talk about the future of this library and news extraction in general!
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
+.. _`View our Patreon support page here`: https://www.patreon.com/codelucas
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.io/en/latest/
 .. _`The Documentation`: https://newspaper.readthedocs.io
