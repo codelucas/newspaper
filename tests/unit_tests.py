@@ -730,6 +730,17 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'ja'))
 
+    @print_test
+    def test_thai_fulltext_extract(self):
+        url = 'https://prachatai.com/journal/2019/01/80642'
+        article = Article(url=url, language='th')
+        html = mock_resource_with('thai_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('thai', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'th'))
+
 
 class TestNewspaperLanguagesApi(unittest.TestCase):
     @print_test

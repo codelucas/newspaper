@@ -347,6 +347,7 @@ def get_available_languages():
     two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
     for d in two_dig_codes:
         assert len(d) == 2
+    two_dig_codes.sort()
     return two_dig_codes
 
 
@@ -355,42 +356,43 @@ def print_available_languages():
     """
     language_dict = {
         'ar': 'Arabic',
-        'ru': 'Russian',
-        'nl': 'Dutch',
+        'be': 'Belarusian',
+        'bg': 'Bulgarian',
+        'da': 'Danish',
         'de': 'German',
+        'el': 'Greek',
         'en': 'English',
         'es': 'Spanish',
+        'et': 'Estonian',
+        'fa': 'Persian',
+        'fi': 'Finnish',
         'fr': 'French',
         'he': 'Hebrew',
+        'hi': 'Hindi',
+        'hr': 'Croatian',
+        'hu': 'Hungarian',
+        'id': 'Indonesian',
         'it': 'Italian',
+        'ja': 'Japanese',
         'ko': 'Korean',
-        'no': 'Norwegian',
+        'lt': 'Lithuanian',
+        'mk': 'Macedonian',
         'nb': 'Norwegian (Bokmål)',
-        'fa': 'Persian',
+        'nl': 'Dutch',
+        'no': 'Norwegian',
         'pl': 'Polish',
         'pt': 'Portuguese',
-        'sv': 'Swedish',
-        'hu': 'Hungarian',
-        'fi': 'Finnish',
-        'da': 'Danish',
-        'zh': 'Chinese',
-        'id': 'Indonesian',
-        'vi': 'Vietnamese',
-        'mk': 'Macedonian',
-        'tr': 'Turkish',
-        'el': 'Greek',
-        'uk': 'Ukrainian',
-        'hi': 'Hindi',
-        'sw': 'Swahili',
-        'bg': 'Bulgarian',
-        'hr': 'Croatian',
         'ro': 'Romanian',
+        'ru': 'Russian',
         'sl': 'Slovenian',
         'sr': 'Serbian',
-        'et': 'Estonian',
-        'ja': 'Japanese',
-        'be': 'Belarusian',
-        'lt': 'Lithuanian'
+        'sv': 'Swedish',
+        'sw': 'Swahili',
+        'th': 'Thai',
+        'tr': 'Turkish',
+        'uk': 'Ukrainian',
+        'vi': 'Vietnamese',
+        'zh': 'Chinese',
     }
 
     codes = get_available_languages()
