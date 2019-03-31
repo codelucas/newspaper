@@ -193,8 +193,12 @@ class Article(object):
             parsed_url = urlparse(self.url)
             if parsed_url.scheme == "file":
                 html = self._parse_scheme_file(parsed_url.path)
+                # Hard code to text/html for now
+                mime_type = "text/html"
             else:
-                html = self._parse_scheme_http()
+                result = self._parse_scheme_http()
+                html = result.html
+                mime_type = result.mime_type
             if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
@@ -204,12 +208,12 @@ class Article(object):
             # For now, just add a literal MIME type if html is set
             mime_type = "text/html"
 
-
         if self.config.follow_meta_refresh:
             meta_refresh_url = extract_meta_refresh(html)
             if meta_refresh_url and recursion_counter < 1:
                 return self.download(
                     input_html=network.get_html(meta_refresh_url).html,
+                    mime_type=mime_type,
                     recursion_counter=recursion_counter + 1)
 
         self.set_html(html)
