@@ -304,8 +304,8 @@ Consulting
 *This service is already used around the world* by startups, top news organizations (CNN, NYT, etc),
 graduate school researchers, and, of course, hackers like you :) If you or your company are interested
 in more advanced features like: increased NLP and scraping accuracy, mis-information, fake news, author
-credibility, boosted coverage and accuracy for your use case, and etc; feel free to contact me for
-consulting.
+credibility, boosted coverage and accuracy for your use case, and etc; feel free to `email & contact me`_
+for consulting.
 
 Development
 -----------
