@@ -307,6 +307,16 @@ in more advanced features like: increased NLP and scraping accuracy, mis-informa
 credibility, boosted coverage and accuracy for your use case, and etc; feel free to `email & contact me`_
 for consulting.
 
+Donations
+---------
+
+Your donations are greatly appreciated! They will free me up to work on this project more,
+to take on things like: adding new features, bug-fix support, addressing concerns with the library.
+
+- My PayPal link: `https://www.paypal.me/codelucas`_
+- My `Venmo`_ handle: @Lucas-Ou-Yang
+
+
 Development
 -----------
 
@@ -354,6 +364,9 @@ to talk about the future of this library and news extraction in general!
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
+.. _`https://www.paypal.me/codelucas`: https://www.paypal.me/codelucas
+.. _`Venmo`: https://www.venmo.com/Lucas-Ou-Yang
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.io/en/latest/
 .. _`The Documentation`: https://newspaper.readthedocs.io
