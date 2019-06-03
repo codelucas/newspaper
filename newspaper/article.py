@@ -82,6 +82,9 @@ class Article(object):
         # All image urls in this article
         self.imgs = self.images = []
 
+        # Base64 images (test)
+        self.imgs64 = []
+
         # All videos in this article: youtube, vimeo, etc
         self.movies = []
 
@@ -298,6 +301,11 @@ class Article(object):
             if self.meta_img:
                 imgs.add(self.meta_img)
             self.set_imgs(imgs)
+
+            imgs64 = self.extractor.get_base64_img_urls(self.url, self.clean_doc)
+            if self.meta_img:
+                imgs64.add(self.meta_img)
+            self.imgs64 = imgs64
 
         if self.clean_top_node is not None and not self.has_top_image():
             first_img = self.extractor.get_first_img_url(

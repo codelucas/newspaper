@@ -577,6 +577,17 @@ class ContentExtractor(object):
                          for url in urls])
         return img_links
 
+    def get_base64_img_urls(self, article_url, doc):
+        """Return all of the images on an html page, in base64
+        """
+        img_kwargs = {'tag': 'img'}
+        img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
+        urls = [img_tag.get('data-src')
+                for img_tag in img_tags if img_tag.get('data-src')]
+        img_links = set([urljoin(article_url, url)
+                         for url in urls])
+        return img_links
+
     def get_first_img_url(self, article_url, top_node):
         """Retrieves the first image in the 'top_node'
         The top node is essentially the HTML markdown where the main
