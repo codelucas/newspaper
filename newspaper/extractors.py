@@ -584,6 +584,7 @@ class ContentExtractor(object):
             for tag in ('src', 'data-src'):
                 url = img_tag.get(tag)
                 if url:
+                    url = urljoin(article_url, url)
                     if urlparse(url).scheme in ('http', 'https'):
                         img_links.add(url)
 
