@@ -731,6 +731,17 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, fulltext(article.html, 'ja'))
 
     @print_test
+    def test_thai_fulltext_extract(self):
+        url = 'https://prachatai.com/journal/2019/01/80642'
+        article = Article(url=url, language='th')
+        html = mock_resource_with('thai_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('thai', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'th'))
+
+    @print_test
     def test_burmese_fulltext_extract(self):
         url = 'https://www.bbc.com/burmese/burma-45989453'
         article = Article(url=url, language='my')
@@ -747,6 +758,26 @@ class TestNewspaperLanguagesApi(unittest.TestCase):
     def test_languages_api_call(self):
         newspaper.languages()
 
+
+class TestDownloadPdf(unittest.TestCase):
+
+    @print_test
+    def test_article_pdf_ignoring(self):
+        empty_pdf = "%PDF-"  # empty PDF constant
+        a = Article(url='http://www.technik-medien.at/ePaper_Download/'
+                        'IoT4Industry+Business_2018-10-31_2018-03.pdf',
+                    ignored_content_types_defaults={"application/pdf": empty_pdf,
+                                                    "application/x-pdf": empty_pdf,
+                                                    "application/x-bzpdf": empty_pdf,
+                                                    "application/x-gzpdf": empty_pdf})
+        a.download()
+        self.assertEqual(empty_pdf, a.html)
+
+    @print_test
+    def test_article_pdf_fetching(self):
+        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
+        a.download()
+        self.assertNotEqual('%PDF-', a.html)
 
 if __name__ == '__main__':
     argv = list(sys.argv)

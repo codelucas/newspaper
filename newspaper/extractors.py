@@ -153,7 +153,7 @@ class ContentExtractor(object):
                 if len(mm) > 0:
                     content = mm[0]
             else:
-                content = match.text or ''
+                content = match.text_content() or ''
             if len(content) > 0:
                 authors.extend(parse_byline(content))
 
@@ -216,6 +216,8 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'name', 'value': 'publish_date',
+             'content': 'content'},
         ]
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(

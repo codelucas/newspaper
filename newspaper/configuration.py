@@ -14,7 +14,7 @@ import logging
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
-                   StopWordsKorean, StopWordsHindi, StopWordsJapanese,
+                   StopWordsKorean, StopWordsHindi, StopWordsJapanese, StopWordsThai,
                    StopWordsBurmese)
 from .version import __version__
 
@@ -73,7 +73,7 @@ class Configuration(object):
         self.verbose = False  # for debugging
 
         self.thread_timeout_seconds = 1
-
+        self.ignored_content_types_defaults = {}
         # Set this to False if you want to recompute the categories
         # *every* time you build a `Source` object
         # TODO: Actually make this work
@@ -117,6 +117,8 @@ class Configuration(object):
             return StopWordsArabic
         elif language == 'ja':
             return StopWordsJapanese
+        elif language == 'th':
+            return StopWordsThai
         elif language == 'my':
             return StopWordsBurmese
         return StopWords

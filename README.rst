@@ -193,39 +193,43 @@ Features
     input code      full name
 
       ar              Arabic
-      ru              Russian
-      nl              Dutch
+      be              Belarusian
+      bg              Bulgarian
+      da              Danish
       de              German
+      el              Greek
       en              English
       es              Spanish
+      et              Estonian
+      fa              Persian
+      fi              Finnish
       fr              French
       he              Hebrew
+      hi              Hindi
+      hr              Croatian
+      hu              Hungarian
+      id              Indonesian
       it              Italian
+      ja              Japanese
       ko              Korean
+      lt              Lithuanian
+      mk              Macedonian
+      nb              Norwegian (Bokmål)
+      nl              Dutch
       no              Norwegian
-      fa              Persian
       pl              Polish
       pt              Portuguese
-      sv              Swedish
-      hu              Hungarian
-      fi              Finnish
-      da              Danish
-      zh              Chinese
-      id              Indonesian
-      vi              Vietnamese
-      sw              Swahili
-      tr              Turkish
-      el              Greek
-      uk              Ukrainian
-      bg              Bulgarian
-      hr              Croatian
       ro              Romanian
+      ru              Russian
       sl              Slovenian
       sr              Serbian
-      et              Estonian
-      ja              Japanese
-      be              Belarusian
-      lt              Lithuanian
+      sv              Swedish
+      sw              Swahili
+      th              Thai
+      tr              Turkish
+      uk              Ukrainian
+      vi              Vietnamese
+      zh              Chinese
 
 
 Get it now
@@ -294,6 +298,25 @@ NOTE: You will still most likely need to install the following libraries via you
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
+Consulting
+----------
+
+*This service is already used around the world* by startups, top news organizations (CNN, NYT, etc),
+graduate school researchers, and, of course, hackers like you :) If you or your company are interested
+in more advanced features like: increased NLP and scraping accuracy, mis-information, fake news, author
+credibility, boosted coverage and accuracy for your use case, and etc; feel free to `email & contact me`_
+for consulting.
+
+Donations
+---------
+
+Your donations are greatly appreciated! They will free me up to work on this project more,
+to take on things like: adding new features, bug-fix support, addressing concerns with the library.
+
+- My PayPal link: `https://www.paypal.me/codelucas`_
+- My `Venmo`_ handle: @Lucas-Ou-Yang
+
+
 Development
 -----------
 
@@ -321,6 +344,7 @@ Demo
 ----
 
 View a working online demo here: http://newspaper-demo.herokuapp.com
+
 This is another working online demo: http://newspaper.chinazt.cc/
 
 LICENSE
@@ -340,6 +364,9 @@ to talk about the future of this library and news extraction in general!
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
 .. _`here`: https://github.com/codelucas/newspaper/blob/master/GOOSE-LICENSE.txt
+
+.. _`https://www.paypal.me/codelucas`: https://www.paypal.me/codelucas
+.. _`Venmo`: https://www.venmo.com/Lucas-Ou-Yang
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.io/en/latest/
 .. _`The Documentation`: https://newspaper.readthedocs.io

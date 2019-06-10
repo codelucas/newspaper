@@ -148,6 +148,25 @@ Initializing an ``Article`` by itself.
 
 Note the similar ``language=`` named paramater above. All the config parameters as described for ``Source`` objects also apply for ``Article`` objects! **Source and Article objects have a very similar api**.
 
+Initializing an ``Article`` with the particular content-type ignoring.
+
+There is option to skip loading of articles with particular content-type,
+that can be useful if it is not desired to have delays because of long PDF resources.
+The default html value for the particular content type can be provided and then used in order to define the actual content-type of the article
+
+.. code-block:: pycon
+
+    >>> from newspaper import Article
+    >>> pdf_defaults = {"application/pdf": "%PDF-",
+                      "application/x-pdf": "%PDF-",
+                      "application/x-bzpdf": "%PDF-",
+                      "application/x-gzpdf": "%PDF-"}
+    >>> pdf_article = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf',
+                                            ignored_content_types_defaults=pdf_defaults)
+    >>> pdf_article.download()
+    >>> print(pdf_article.html)
+    %PDF-
+
 There are endless possibilities on how we can manipulate and build articles.
 
 Downloading an Article
