@@ -568,11 +568,6 @@ class ContentExtractor(object):
 
     def get_img_urls(self, article_url, doc):
         """Return all of the images on an html page, lxml root.
-
-        Updated from the original version in order to return
-        more images, for instance, the case of progressive image
-        loading in news from sites like g1.globo.com
-
         """
 
         img_kwargs = {'tag': 'img'}
