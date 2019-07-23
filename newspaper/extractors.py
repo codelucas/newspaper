@@ -567,14 +567,22 @@ class ContentExtractor(object):
         return meta_url
 
     def get_img_urls(self, article_url, doc):
-        """Return all of the images on an html page, lxml root
+        """Return all of the images on an html page, lxml root.
         """
+
         img_kwargs = {'tag': 'img'}
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
-        urls = [img_tag.get('src')
-                for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urljoin(article_url, url)
-                         for url in urls])
+
+        img_links = set()
+
+        for img_tag in img_tags:
+            for tag in ('src', 'data-src'):
+                url = img_tag.get(tag)
+                if url:
+                    url = urljoin(article_url, url)
+                    if urlparse(url).scheme in ('http', 'https'):
+                        img_links.add(url)
+
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
