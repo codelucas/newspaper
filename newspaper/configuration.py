@@ -56,6 +56,9 @@ class Configuration(object):
 
         # Fail for error responses (e.g. 404 page)
         self.http_success_only = True
+        
+        # Enable host spanning
+        self.span_hosts = False
 
         # English is the fallback
         self._language = 'en'
