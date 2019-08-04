@@ -74,7 +74,6 @@ class URLHelper(object):
 
     @staticmethod
     def same_domain(a, b):
-        
         if a == b:
             return True
         asub = "" if a.subdomain == "www" else a.subdomain
