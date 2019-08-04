@@ -41,7 +41,7 @@ def get_html(url, config=None, response=None):
         return get_html_2XX_only(url, config, response)
     except requests.exceptions.RequestException as e:
         log.debug('get_html() error. %s on URL: %s' % (e, url))
-        return ['', url]
+        return ('', url)
 
 
 def get_html_2XX_only(url, config=None, response=None):
