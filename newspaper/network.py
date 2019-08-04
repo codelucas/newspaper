@@ -57,7 +57,7 @@ def get_html_2XX_only(url, config=None, response=None):
     headers = config.headers
 
     if response is not None:
-        return _get_html_from_response(response, config)
+        return (_get_html_from_response(response, config), url)
 
     response = requests.get(
         url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
@@ -68,7 +68,7 @@ def get_html_2XX_only(url, config=None, response=None):
         # fail if HTTP sends a non 2XX response
         response.raise_for_status()
 
-    return html
+    return (html, response.url)
 
 
 def _get_html_from_response(response, config):
