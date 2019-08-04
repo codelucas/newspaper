@@ -661,7 +661,8 @@ class ContentExtractor(object):
                 subdomain_contains = False
                 if not URLHelper.same_domain(child_tld, domain_tld):
                     if not self.config.span_hosts:
-                        print ("subdomain dismatch:", child_tld.subdomain, domain_tld.subdomain)
+                        if self.config.verbose:
+                            print ("domain dismatch:", child_tld, domain_tld)
                         continue
 
                 for part in child_subdomain_parts:
