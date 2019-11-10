@@ -71,7 +71,7 @@ def get_html_2XX_only(url, config=None, response=None):
     # Check to see if the Content-Type header exists
     mime_type = None
     if 'content-type' in response.headers:
-        mime_type = response.headers['content-type']
+        mime_type = response.headers.get('content-type').split(';')[0]
 
     # return html
     return ArticleResponseWrapper(html, mime_type)

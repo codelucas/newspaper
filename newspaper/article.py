@@ -194,7 +194,7 @@ class Article(object):
             if parsed_url.scheme == "file":
                 html = self._parse_scheme_file(parsed_url.path)
                 # Hard code to text/html for now
-                mime_type = "text/html"
+                mime_type = None
             else:
                 result = self._parse_scheme_http()
                 html = result.html
