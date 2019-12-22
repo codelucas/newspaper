@@ -125,7 +125,10 @@ class Source(object):
         return self.extractor.get_category_urls(self.url, self.doc)
 
     def set_categories(self):
-        urls = self._get_category_urls(self.domain)
+        if self.config.memoize_articles:
+            urls = self._get_category_urls(self.domain)
+        else:
+            urls = self.extractor.get_category_urls(self.url, self.doc)
         self.categories = [Category(url=url) for url in urls]
 
     def set_feeds(self):
