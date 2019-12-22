@@ -123,8 +123,10 @@ class Source(object):
         We are caching categories for 1 day.
         """
         return self.extractor.get_category_urls(self.url, self.doc)
-
+    
     def set_categories(self):
+        # changed code:
+        # only use the private cached function if memoize_articles is False
         if self.config.memoize_articles:
             urls = self._get_category_urls(self.domain)
         else:
