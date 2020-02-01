@@ -84,12 +84,6 @@ https://github.com/LIAAD/yake
     [('police', 0.02171325705124914), ('sophia richter', 0.02178687039012946),
     ('police chief roberto', 0.022941575782713476),...]
 
-    >>> article.keywords
-    ['New Years', 'resolution', ...]
-
-    >>> article.summary
-    'The study shows that 93% of people ...'
-
 
 .. code-block:: pycon
 
