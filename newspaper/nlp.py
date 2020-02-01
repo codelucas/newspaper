@@ -7,11 +7,10 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import re
 import math
-from os import path
-
+import re
 from collections import Counter
+from os import path
 
 from . import settings
 
@@ -20,11 +19,11 @@ ideal = 20.0
 stopwords = set()
 
 def load_stopwords(language):
-    """ 
+    """
     Loads language-specific stopwords for keyword selection
     """
     global stopwords
-    
+
     # stopwords for nlp in English are not the regular stopwords
     # to pass the tests
     # can be changed with the tests
@@ -35,8 +34,8 @@ def load_stopwords(language):
                                   'stopwords-{}.txt'.format(language))
     with open(stopwordsFile, 'r', encoding='utf-8') as f:
         stopwords.update(set([w.strip() for w in f.readlines()]))
-        
-        
+
+
 def summarize(url='', title='', text='', max_sents=5):
     if not text or not title or max_sents <= 0:
         return []
@@ -116,13 +115,13 @@ def split_words(text):
         return None
 
 
-def keywords(text):
-    """Get the top 10 keywords and their frequency scores ignores blacklisted
+def keywords(text, count=10):
+    """Get the top `count` keywords and their frequency scores ignores blacklisted
     words in stopwords, counts the number of occurrences of each word, and
     sorts them in reverse natural order (so descending) by number of
     occurrences.
     """
-    NUM_KEYWORDS = 10
+    NUM_KEYWORDS = count
     text = split_words(text)
     # of words before removing blacklist words
     if text:

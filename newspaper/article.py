@@ -4,26 +4,21 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import logging
 import copy
-import os
 import glob
+import logging
+import os
 from urllib.parse import urlparse
 
 import requests
 
-from . import images
-from . import network
-from . import nlp
-from . import settings
-from . import urls
-
+from . import images, network, nlp, settings, urls
 from .cleaners import DocumentCleaner
 from .configuration import Configuration
 from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
-from .utils import (URLHelper, RawHelper, extend_config,
-                    get_available_languages, extract_meta_refresh)
+from .utils import (RawHelper, URLHelper, extend_config, extract_meta_refresh,
+                    get_available_languages)
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
@@ -375,9 +370,11 @@ class Article(object):
         self.throw_if_not_downloaded_verbose()
         self.throw_if_not_parsed_verbose()
 
+        keyword_count = self.config.KEYWORD_COUNT
+
         nlp.load_stopwords(self.config.get_language())
-        text_keyws = list(nlp.keywords(self.text).keys())
-        title_keyws = list(nlp.keywords(self.title).keys())
+        text_keyws = list(nlp.keywords(self.text, keyword_count).keys())
+        title_keyws = list(nlp.keywords(self.title, keyword_count).keys())
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
 
