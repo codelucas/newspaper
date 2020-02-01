@@ -74,6 +74,23 @@ A Glance:
     >>> article.summary
     'The study shows that 93% of people ...'
 
+
+Keyword extraction with yake (Yet Another keyword extractor)
+https://github.com/LIAAD/yake
+
+.. code-block:: pycon
+
+    >>> article.yake()
+    [('police', 0.02171325705124914), ('sophia richter', 0.02178687039012946),
+    ('police chief roberto', 0.022941575782713476),...]
+
+    >>> article.keywords
+    ['New Years', 'resolution', ...]
+
+    >>> article.summary
+    'The study shows that 93% of people ...'
+
+
 .. code-block:: pycon
 
     >>> import newspaper
