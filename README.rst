@@ -75,16 +75,24 @@ A Glance:
     'The study shows that 93% of people ...'
 
 
-Keyword extraction with yake (Yet Another keyword extractor)
-https://github.com/LIAAD/yake
+Keyword extraction with YAKE! (Yet Another keyword extractor)
+To learn more about YAKE! please check the official repository (https://github.com/LIAAD/yake).
 
 .. code-block:: pycon
 
+    >>> article = Article(url)
+    >>> article.download()
+    >>> article.parse()
+
+    YAKE! With default parameters
     >>> article.yake()
     [('police', 0.02171325705124914), ('sophia richter', 0.02178687039012946),
     ('police chief roberto', 0.022941575782713476),...]
 
-
+    YAKE! with custom parameters.
+    >>> article.yake(lan="en", n=3, dedupLim=0.9, dedupFunc='seqm', windowsSize=1, top=20, features=None)
+    [('police', 0.02171325705124914), ('sophia richter', 0.02178687039012946),
+    ('police chief roberto', 0.022941575782713476),...]
 .. code-block:: pycon
 
     >>> import newspaper
