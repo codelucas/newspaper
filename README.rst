@@ -79,6 +79,7 @@ Keyword extraction with YAKE! (Yet Another keyword extractor)
 To learn more about YAKE! please check the official repository (https://github.com/LIAAD/yake).
 
 .. code-block:: pycon
+
     >>> url = 'http://www.cnn.com/2013/11/27/justice/tucson-arizona-captive-girls/'
     >>> article = Article(url)
     >>> article.download()
