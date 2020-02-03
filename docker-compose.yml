@@ -1,0 +1,10 @@
+# Compose file for development
+version: '3.2'
+
+services:
+  newspaper-keeeb:
+    build: .
+    container_name: newspaper_keeeb
+    hostname: newspaper_keeeb
+    volumes:
+      - .:/home/newspaper/app
