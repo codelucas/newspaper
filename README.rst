@@ -94,6 +94,9 @@ To learn more about YAKE! please check the official repository (https://github.c
     >>> article.yake(lan="en", n=3, dedupLim=0.9, dedupFunc='seqm', windowsSize=1, top=20, features=None)
     [('police', 0.02171325705124914), ('sophia richter', 0.02178687039012946),
     ('police chief roberto', 0.022941575782713476),...]
+    
+    note: The lower the score, the more relevant the keyword is.
+    
 .. code-block:: pycon
 
     >>> import newspaper
