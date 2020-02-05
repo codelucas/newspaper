@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+from newspaper.urls import get_domain
+from newspaper.configuration import Configuration
+from newspaper.article import ArticleDownloadState
+from newspaper import Article, fulltext, Source, ArticleException, news_pool
+import newspaper
 """
 All unit tests for the newspaper library should be contained in this file.
 """
@@ -22,12 +27,6 @@ sys.path.insert(0, PARENT_DIR)
 TEXT_FN = os.path.join(TEST_DIR, 'data', 'text')
 HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
 URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
-
-import newspaper
-from newspaper import Article, fulltext, Source, ArticleException, news_pool
-from newspaper.article import ArticleDownloadState
-from newspaper.configuration import Configuration
-from newspaper.urls import get_domain
 
 
 def print_test(method):
@@ -178,7 +177,8 @@ class ArticleTestCase(unittest.TestCase):
         self.setup_stage('download')
         html = mock_resource_with('cnn_article', 'html')
         self.article.download(html)
-        self.assertEqual(self.article.download_state, ArticleDownloadState.SUCCESS)
+        self.assertEqual(self.article.download_state,
+                         ArticleDownloadState.SUCCESS)
         self.assertEqual(self.article.download_exception_msg, None)
         self.assertEqual(75406, len(self.article.html))
 
@@ -293,11 +293,11 @@ class ArticleTestCase(unittest.TestCase):
         self.assertTrue(all([len(d) > 0 for d in dict_values]))
 
         # there are exactly 5 top-level "og:type" type keys
-        is_dict = lambda v: isinstance(v, dict)
+        def is_dict(v): return isinstance(v, dict)
         self.assertEqual(5, len([i for i in meta.values() if is_dict(i)]))
 
         # there are exactly 12 top-level "pubdate" type keys
-        is_string = lambda v: isinstance(v, str)
+        def is_string(v): return isinstance(v, str)
         self.assertEqual(12, len([i for i in meta.values() if is_string(i)]))
 
     @print_test
@@ -343,8 +343,10 @@ class TestDownloadScheme(unittest.TestCase):
         article = Article(url=url)
         article.download()
         self.assertEqual(0, len(article.html))
-        self.assertEqual(article.download_state, ArticleDownloadState.FAILED_RESPONSE)
-        self.assertEqual(article.download_exception_msg, "No such file or directory")
+        self.assertEqual(article.download_state,
+                         ArticleDownloadState.FAILED_RESPONSE)
+        self.assertEqual(article.download_exception_msg,
+                         "No such file or directory")
 
 
 class ContentExtractorTestCase(unittest.TestCase):
@@ -409,38 +411,47 @@ class ContentExtractorTestCase(unittest.TestCase):
             '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
         html_empty_all = '<meta property="og:image" content="" />' \
             '<meta name="og:image" />'
-        html_rel_img_src = html_empty_all + '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
-        html_rel_img_src2 = html_empty_all + '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
-        html_rel_icon = html_empty_all + '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
+        html_rel_img_src = html_empty_all + \
+            '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
+        html_rel_img_src2 = html_empty_all + \
+            '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
+        html_rel_icon = html_empty_all + \
+            '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
 
         doc = self.parser.fromstring(html)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_img_filename.jpg'
         )
         doc = self.parser.fromstring(html_empty_og_content)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_another_img_filename.jpg'
         )
         doc = self.parser.fromstring(html_empty_all)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             ''
         )
         doc = self.parser.fromstring(html_rel_img_src)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_link_image.jpg'
         )
         doc = self.parser.fromstring(html_rel_img_src2)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_link_image2.jpg'
         )
         doc = self.parser.fromstring(html_rel_icon)
         self.assertEqual(
-            self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
+            self.extractor.get_meta_img_url(
+                'http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_link_rel_icon.ico'
         )
 
@@ -544,7 +555,6 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
-
     @print_test
     def test_pubdate(self):
         """Checks that irrelevant data in url isn't considered as publishing date"""
@@ -565,9 +575,9 @@ class UrlTestCase(unittest.TestCase):
                     if is_present:
                         print('\t\tpublishing date in %s should be present' % (url))
                     else:
-                        print('\t\tpublishing date in %s should not be present' % (url))
+                        print(
+                            '\t\tpublishing date in %s should not be present' % (url))
                     raise
-
 
     @unittest.skip("Need to write an actual test")
     @print_test
@@ -586,7 +596,8 @@ class UrlTestCase(unittest.TestCase):
             try:
                 self.assertEqual(real, prepare_url(url, source))
             except AssertionError:
-                print('\t\turl: %s + %s is supposed to be %s' % (url, source, real))
+                print('\t\turl: %s + %s is supposed to be %s' %
+                      (url, source, real))
                 raise
 
 
@@ -764,13 +775,16 @@ class TestDownloadPdf(unittest.TestCase):
 
     @print_test
     def test_article_pdf_fetching(self):
-        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
+        a = Article(
+            url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
         a.download()
         self.assertNotEqual('%PDF-', a.html)
+
 
 if __name__ == '__main__':
     argv = list(sys.argv)
     if 'fulltext' in argv:
-        argv.remove('fulltext')  # remove it here, so it doesn't pass to unittest
+        # remove it here, so it doesn't pass to unittest
+        argv.remove('fulltext')
 
     unittest.main(verbosity=0, argv=argv)

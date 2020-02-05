@@ -363,6 +363,7 @@ def print_available_languages():
         'el': 'Greek',
         'en': 'English',
         'es': 'Spanish',
+        'ca': 'Catalan',
         'et': 'Estonian',
         'fa': 'Persian',
         'fi': 'Finnish',
