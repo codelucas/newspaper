@@ -135,8 +135,10 @@ class ContentExtractor(object):
 
         # Try 1: Search popular author tags for authors
 
-        ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline', 'dc.creator', 'byl']
+        ATTRS = ['property', 'name', 'rel', 'itemprop', 'class', 'id']
+        VALS = ['article:author', 'article:author_name', 'parsely-author',
+                'sailthru.author', 'citation_author', 'author', 'byline',
+                'dc.creator', 'byl']
         matches = []
         authors = []
 
@@ -146,10 +148,13 @@ class ContentExtractor(object):
                 found = self.parser.getElementsByTag(doc, attr=attr, value=val)
                 matches.extend(found)
 
+        TAGS = ['meta', 'div', 'iframe', 'a', 'span', 'section']
         for match in matches:
             content = ''
-            if match.tag == 'meta':
+            if match.tag in TAGS:
                 mm = match.xpath('@content')
+                if not mm:
+                    mm = str(match.text_content()).split()
                 if len(mm) > 0:
                     content = mm[0]
             else:
@@ -227,7 +232,8 @@ class ContentExtractor(object):
             if meta_tags:
                 date_str = self.parser.getAttribute(
                     meta_tags[0],
-                    known_meta_tag['content'])
+                    known_meta_tag['content'])\
+                    or self.parser.getText(meta_tags[0])
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
@@ -282,8 +288,8 @@ class ContentExtractor(object):
 
         # title from og:title
         title_text_fb = (
-        self.get_meta_content(doc, 'meta[property="og:title"]') or
-        self.get_meta_content(doc, 'meta[name="og:title"]') or '')
+            self.get_meta_content(doc, 'meta[property="og:title"]') or
+            self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -452,15 +458,18 @@ class ContentExtractor(object):
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
-            elems = self.parser.getElementsByTag(doc, use_regex=True, **link_img_src_kwargs)
+            elems = self.parser.getElementsByTag(
+                doc, use_regex=True, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
 
             if not try_two:
                 try_three = self.get_meta_content(doc, 'meta[name="og:image"]')
 
                 if not try_three:
-                    link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
-                    elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
+                    link_icon_kwargs = {'tag': 'link',
+                                        'attr': 'rel', 'value': 'icon'}
+                    elems = self.parser.getElementsByTag(
+                        doc, **link_icon_kwargs)
                     try_four = elems[0].get('href') if elems else None
 
         top_meta_image = try_one or try_two or try_three or try_four
@@ -567,14 +576,23 @@ class ContentExtractor(object):
         return meta_url
 
     def get_img_urls(self, article_url, doc):
-        """Return all of the images on an html page, lxml root
+        """Return all of the images on an html page, lxml root.
         """
         img_kwargs = {'tag': 'img'}
         img_tags = self.parser.getElementsByTag(doc, **img_kwargs)
-        urls = [img_tag.get('src')
-                for img_tag in img_tags if img_tag.get('src')]
-        img_links = set([urljoin(article_url, url)
-                         for url in urls])
+        # urls = [img_tag.get('src')
+        #         for img_tag in img_tags if img_tag.get('src')]
+        # img_links = set([urljoin(article_url, url)
+        #                  for url in urls])
+        img_links = set()
+
+        for img_tag in img_tags:
+            for tag in ('src', 'data-src'):
+                url = img_tag.get(tag)
+                if url:
+                    url = urljoin(article_url, url)
+                    img_links.add(url)
+
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -887,7 +905,7 @@ class ContentExtractor(object):
         """Adds any siblings that may have a decent score to this node
         """
         if current_sibling.tag == 'p' and \
-                        len(self.parser.getText(current_sibling)) > 0:
+                len(self.parser.getText(current_sibling)) > 0:
             e0 = current_sibling
             if e0.tail:
                 e0 = copy.deepcopy(e0)
