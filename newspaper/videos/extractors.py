@@ -2,12 +2,14 @@
 from .videos import Video
 
 VIDEOS_TAGS = ['iframe', 'embed', 'object', 'video']
-VIDEO_PROVIDERS = ['youtube', 'vimeo', 'dailymotion', 'kewego']
+VIDEO_PROVIDERS = ['youtube', 'vimeo', 'youtu.be',
+                   'dailymotion', 'kewego',  'twitch']
 
 
 class VideoExtractor(object):
     """Extracts a list of video from Article top node
     """
+
     def __init__(self, config, top_node):
         self.config = config
         self.parser = self.config.get_parser()
