@@ -192,6 +192,8 @@ class Article(object):
                 html = self._parse_scheme_file(parsed_url.path)
             else:
                 html = self._parse_scheme_http()
+                if parsed_url.path.endswith('.pdf'):
+                    self.set_text(html)
             if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))

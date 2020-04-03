@@ -11,9 +11,11 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 import requests
 
+
 from .configuration import Configuration
 from .mthreading import ThreadPool
 from .settings import cj
+from newspaper.pdf.pdf import PdfFileReader
 
 log = logging.getLogger(__name__)
 
@@ -75,8 +77,18 @@ def _get_html_from_response(response, config):
     if response.headers.get('content-type') in config.ignored_content_types_defaults:
         return config.ignored_content_types_defaults[response.headers.get('content-type')]
     if response.encoding != FAIL_ENCODING:
-        # return response as a unicode string
-        html = response.text
+        if response.url.endswith('.pdf') and response.text.startswith('%PDF-'):
+            html = ""
+            pdfReader = PdfFileReader(response.content)
+            # pdfReader = PdfFileReader("/Users/alan_cooper/Downloads/Seige_of_Vicksburg_Sample_OCR.pdf")
+            for page in range(pdfReader.getNumPages()):
+                # creating rotated page object
+                pageObj = pdfReader.getPage(page)
+                html += pageObj.extractText()
+
+        else:
+            # return response as a unicode string
+            html = response.text
     else:
         html = response.content
         if 'charset' not in response.headers.get('content-type'):
@@ -84,7 +96,7 @@ def _get_html_from_response(response, config):
             if len(encodings) > 0:
                 response.encoding = encodings[0]
                 html = response.text
-
+    html = html.replace('\n', ' ')
     return html or ''
 
 
