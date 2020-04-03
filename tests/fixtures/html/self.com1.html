@@ -1,0 +1,1694 @@
+<!doctype html>
+<!--[if IEMobile 7 ]> <html lang="en-US" prefix="og: http://ogp.me/ns#"class="no-js iem7" ng-app="cnapp"> <![endif]-->
+<!--[if lt IE 7 ]> <html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js ie6" ng-app="cnapp"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js ie7" ng-app="cnapp"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js ie8" ng-app="cnapp"> <![endif]-->
+<!--[if (gte IE 9)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en-US" prefix="og: http://ogp.me/ns#" class="no-js" ng-app="cnapp"><!--<![endif]-->
+	<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VQUFVlRbGwcDUFVbAQc="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+				<title>Headbands 101: Taylor Swift Taught a Master Class on the Subject - SELF</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+		<link rel="pingback" href="http://www.self.com/xmlrpc.php">
+  		<link rel="shortcut icon" href="http://www.self.com/wp-content/themes/self-1.0.0/favicon.ico" />
+  		<link href="http://www.self.com/wp-content/themes/self-1.0.0/apple-touch-icon.png" rel="apple-touch-icon" />
+		<link href="http://www.self.com/wp-content/themes/self-1.0.0/apple-touch-icon-76x76.png" rel="apple-touch-icon" sizes="76x76" />
+		<link href="http://www.self.com/wp-content/themes/self-1.0.0/apple-touch-icon-120x120.png" rel="apple-touch-icon" sizes="120x120" />
+		<link href="http://www.self.com/wp-content/themes/self-1.0.0/apple-touch-icon-152x152.png" rel="apple-touch-icon" sizes="152x152" />
+		<!-- wordpress head functions -->
+		<script type="text/javascript">
+		  (function(d) {
+		    var config = {
+		      kitId: 'ajr8vbi',
+		      scriptTimeout: 3000
+		    },
+		    h=d.documentElement,t=setTimeout(function(){h.className=h.className.replace(/\bwf-loading\b/g,"")+" wf-inactive";},config.scriptTimeout),tk=d.createElement("script"),f=false,s=d.getElementsByTagName("script")[0],a;h.className+=" wf-loading";tk.src='//use.typekit.net/'+config.kitId+'.js';tk.async=true;tk.onload=tk.onreadystatechange=function(){a=this.readyState;if(f||a&&a!="complete"&&a!="loaded")return;f=true;clearTimeout(t);try{Typekit.load(config)}catch(e){}};s.parentNode.insertBefore(tk,s)
+		  })(document);
+		</script>
+		<link rel="dns-prefetch" href="http://result.self.com" /><link rel="dns-prefetch" href="http://event.self.com" /><link rel="dns-prefetch" href="//stats2.self.com" /><link rel="dns-prefetch" href="//sstats.self.com" /><meta name='parsely-page' id='parsely-page' content='{"title":"Headbands 101: Taylor Swift Taught a Master Class on the Subject","link":"http:\/\/www.self.com\/flash\/beauty-blog\/2014\/12\/taylor-swift-headband\/","image_url":"http:\/\/www.self.com\/wp-content\/uploads\/2014\/12\/Taylor-Swift-lead-150x150.jpg","type":"post","post_id":"1109661","pub_date":"2014-12-29T16:29:25Z","section":"Beauty","author":"Shannon Farrell","tags":["hair","headbands","taylor swift"]}' />
+<!-- This site is optimized with the Yoast WordPress SEO plugin v1.6.1 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="Taylor Swift just schooled us on wearing sparkly hair accessories."/>
+<meta name="keywords" content="Hair, headbands, Taylor Swift"/>
+<link rel="canonical" href="http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Headbands 101: Taylor Swift Taught a Master Class on the Subject - SELF" />
+<meta property="og:description" content="Taylor Swift just schooled us on wearing sparkly hair accessories." />
+<meta property="og:url" content="http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/" />
+<meta property="og:site_name" content="SELF" />
+<meta property="article:tag" content="Hair" />
+<meta property="article:tag" content="headbands" />
+<meta property="article:tag" content="Taylor Swift" />
+<meta property="article:section" content="Beauty" />
+<meta property="og:image" content="http://www.self.com/wp-content/uploads/2014/12/Taylor-Swift-lead.jpg" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@SELFmagazine"/>
+<meta name="twitter:domain" content="SELF"/>
+<meta name="twitter:creator" content="@SELFmagazine"/>
+<!-- / Yoast WordPress SEO plugin. -->
+
+<link rel='stylesheet' id='cn-livefyre-css-css'  href='http://www.self.com/wp-content/mu-plugins/cn-wordpress/commenting/livefyre.css?ver=1418757287' type='text/css' media='screen' />
+<link rel='stylesheet' id='solr-autocomplete-style-css'  href='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/search/solr-autocomplete.css?ver=1418757287' type='text/css' media='screen' />
+<link rel='stylesheet' id='bootstrap-css'  href='http://www.self.com/wp-content/themes/self-1.0.0/library/css/bootstrap.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='bootstrap-responsive-css'  href='http://www.self.com/wp-content/themes/self-1.0.0/library/css/responsive.css?ver=1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='self-maincss-css'  href='http://www.self.com/wp-content/themes/self-1.0.0/styles/css/screen.min.css?ver=1418757287' type='text/css' media='all' />
+<link rel='stylesheet' id='self-maincss2-css'  href='http://www.self.com/wp-content/themes/self-1.0.0/styles/css/screen2.min.css?ver=1418757287' type='text/css' media='all' />
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js?ver=1.9.1'></script>
+<script type='text/javascript' src='http://zor.livefyre.com/wjs/v3.0/javascripts/livefyre.js?ver=4.0.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WP_VARS = {"THEME_URI":"http:\/\/www.self.com\/wp-content\/themes\/self-1.0.0","ajaxurl":"http:\/\/www.self.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-common/cn.js?ver=1418757287'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var CNLIVEFYRE = {"authDelegate":"authDelegate","lfCookieName":"lt","userCookieName":"amg_user","logoutCookies":"'lt','amg_user','at','amg_user_identity','amg_user_partner','amg_user_record','fyre-livecount'","URL_SECURE":"https:\/\/secure.self.com","NETWORK":"self.fyre.co"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/commenting/auth/cn.livefyre.wp.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-common/popups/1.1.0/cn.popups-1.1.0.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-common/cn.mobile.js?ver=1418757287'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var deviceviews = {"mobileMax":"600","tabletMax":"850"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/js/jquery.devices.js?ver=1418757287'></script>
+<script type='text/javascript' src='//assets.adobedtm.com/6372cf21ef88ee60bc2977a4898dcb5c7945a212/satelliteLib-d6c9102bea3bcf221995fbc8ffb9c324d4dc86f7.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://result.self.com/js/eventTracker.js'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var s_account = "conde-self";
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-stats/s_code.js?ver=1418757287'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var platformEnvironment = "production";
+var sitehost = "http:\/\/www.self.com";
+var omniture_init = [];
+CN.omniture = CN.omniture || {};CN.omniture.conf = {"s_account":"conde-self","server":"stats2.self.com","secureServer":"sstats.self.com","internalFilters":"javascript:,self.com,advancemags.com"};;
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-stats/omniture.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-ads/cn.dart.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-ads/cn.ad.aam.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-ads/cn.ad.refresh.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-ads/cn.ad.proximic.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/config/cn-fe-ads/cn.ad.polar.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-ecom/cn.ecom.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-ecom/ecomfw.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/js/cn-fe-ecom/promotheus/promotheus.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.lazyloadxt.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/scripts/js/grid-view.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.lazyloadxt.srcset.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/bootstrap.min.js?ver=1.2'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/scripts/js/script-master-min.js?ver=1.2'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/modernizr.full.min.js?ver=1.2'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery-ui.min.js?ver=1.8.18'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.jcarousel.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.jpanelmenu.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.marquee.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.pause.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.addtobox.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/newsletterhandler.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/package-widget.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/self-scroll.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/jquery.ui.touch-punch.min.js?ver=1.0'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/moment-1.7.2.min.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<link rel='shortlink' href='http://www.self.com/?p=1109661' />
+<style type="text/css">.social_bookmarking_module ul { margin: 0; padding: 0;}.social_bookmarking_module li { margin: 0; padding: 0; display: inline-block; vertical-align: middle; margin-right: 3px; height: 20px; padding: 7px 0; width: 85px;}.social_bookmarking_module li * { margin:0;padding:0;border:0;}</style>            <script type="text/javascript">
+                jQuery(document).ready(function($) {
+                    if ( typeof jQuery.suggest != 'undefined' ) {
+                        jQuery("#s").suggest("?method=autocomplete",{});
+                        jQuery("#qrybox").suggest("?method=autocomplete",{});
+                    }
+                });
+            </script>
+            	<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+            <!-- COMSCORE -->
+	        <script type="text/javascript">
+	        //<!--
+	        	var _comscore = _comscore || [];
+	  			_comscore.push({ c1: "2", c2: "6035094", c4: "http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/"});
+	  			(function() {var s = document.createElement("script"), el =document.getElementsByTagName("script")[0]; s.async = true;
+	    		s.src = (document.location.protocol == "https:" ?"https://sb" : "http://b") +".scorecardresearch.com/beacon.js";
+				el.parentNode.insertBefore(s, el);})();
+	  			function slideChangeTrackingFn() {
+	  		         jQuery.ajax({
+	  		         type : 'GET',
+	  		         url : '/pv.xml',
+	  		         success : function(data) {
+	  		                 try {
+	  		                         COMSCORE.beacon({c1:"2", c2: "6035094"});
+	  		                         CN.debug.info("Comscore Non-Conventional(slideshow) Page view triggered.");
+	  		                     } catch(e) {
+	  		                         CN.debug.error('COMSCORE beacon call for slideshow page view failed' + e.message);
+	  		                     }
+	  		                 },
+	  		                 error : function(xhr, textStatus) {
+	  		                         CN.debug.error('page view xml load failed for slideshow, probably 404: ' + textStatus);
+	  		                     }
+	  		                 });
+	  		   }
+	  		//-->
+			</script>
+	            <script type="text/javascript" class="site_init">
+            //<!--
+                CN.site.init({
+                    code:             'SLF',
+                    title:            'SELF',
+                    name:             'self',
+                    alias:            'Self.com',
+                    domain:           'Self.com',
+                    tld:              'self.com',
+                    baseUrl:          'http://www.self.com',
+                    mobilecompatible: 'true',
+                    httpStatusCode:    200,
+            eventServer: 'http://event.self.com',
+eventTrackingUrl: 'http://result.self.com',
+eventTrackingEnv: 'PROD',
+userServiceUrl: 'http://user-service.condenast.com',
+userServiceKey: 'MxRTphJbXVyy9NLl+pkI6PNIU6w=',
+ecomUrl: 'https://subscribe.self.com/api/circ/xml/Transaction',
+litereg: 'true',
+socialRes: 'http://www.self.com/services/livefyre/userToken',
+                    env: 'PROD'  // Put something consistent last so we don't have a trailing comma (appease IE)
+                });
+
+                CN.isMobile = jQuery.devices.mobile();
+                CN.isTablet = jQuery.devices.tablet();
+                CN.checkDeviceView = jQuery.devices.checkDeviceView;
+            //-->
+            </script>
+                            <!-- AD INIT: CN.dart.init version 2 -->
+                <script type="text/javascript">
+                //<!--
+                    CN.dartKwsArray = [ "shannon_farrell","beauty_blog","hair","headbands","taylor_swift","flash","2014","12","taylor_swift_headband" ];
+
+                                    if ( typeof polarkws != "undefined" ) {
+                        CN.dartKwsArray.push( polarkws );
+                    }
+                
+                
+                    CN.dart.init({
+                        adUnits: {
+                            unit1: CN.isMobile ? 'self.mobile.dart' : 'self.dart',
+                            unit2: 'looks',
+                            unit3: 'beauty-blog',
+                            unit4: ''
+                        },
+                        kws: CN.dartKwsArray,
+                        contentType: 'Blog',
+                                            charmap : {' ' : '+', '-' : '_'}
+                    });
+                                //-->
+                    </script>
+                            <script type="text/javascript">
+            //<!--
+                CN.popups = CN.popups || {};
+                CN.popups.init();
+                CN.popups.setCookieLife(72);
+                CN.popups.setExiting(true, {
+                    path: '/exit-pop/',
+                    width: 460,
+                    height: 295,
+                }).excludeExitPath( '/wp-admin', '/wp-login.php' ).excludeExitDomain( "self.com","www.self.com","origin.www.self.com","mprod.self.com","origin.mprod.self.com" );
+
+                        // Set exiting popup options
+                CN.popups.setArriving(false).setATGLayer(true);
+                    //-->
+            </script>
+            	</head>
+	 <body class="single single-blog postid-1109661 shannon_farrell  flash beauty-blog 2014 12 taylor-swift-headband" ng-controller="PageCtrl">
+	            <!--Global Mbox-->
+            <div class="mboxDefault"></div>
+            <script type="text/javascript">
+            //<!--
+                // metaKeyWords is used by the pageads call for CM
+                metaKeyWords='default';
+                if ( ( typeof mboxCreate != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                    // create the mbox
+                    mboxCreate( "slf_ed_global",
+                        "entity.brand=self",
+                        "entity.id=1109661",
+                        "entity.name=Headbands 101: Taylor Swift Taught a Master Class on the Subject",
+                        "entity.categoryId=",
+                        "entity.contentType=blog",
+                        "entity.siteSection=looks",
+                        "entity.message=",
+                        "entity.pageUrl=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/",
+                        "entity.thumbnailUrl=http://www.self.com/wp-content/uploads/2014/12/Taylor-Swift-lead-150x150.jpg",
+                        "entity.inventory=1",
+                        "entity.value=1",
+                        "mboxPageValue=1"
+                        );
+                }
+            //-->
+            </script>
+            <!--end global mbox code-->
+            <time datetime="2014-12-29T11:29:25+00:00" ></time>            <div class="lightreg-forms {{modalContext}}" ng-controller="LightRegCtrl">
+                <div id="modal-frame" modal-window="modal-window" class="ng-cloak" backdrop="true">
+                    <div ng-view></div>
+                </div>
+            </div>
+                        <!-- CM: page-ads.js -->
+            <script type="text/javascript">
+            //<!--
+                var _ghearst_vars = (function() {
+                    var commonParams = 'ad_category_prefix=flash'
+                                        + '&amp;browser_path=%2Fflash%2Fbeauty-blog%2F2014%2F12%2Ftaylor-swift-headband%2F'
+                                        + '&amp;cat_prefixes=%2Cflash%2Cbeauty-blog%2C2014%2C12%2Ctaylor-swift-headband%2C'
+                                        + '&amp;site_prefix=self'
+                                        + '&amp;subdomain=www'
+                                        + '&amp;url_name=';
+
+            
+                    var deviceParams = (function() {
+                                                if ( ( navigator.userAgent.match(/iPad/i) !== null ) && ( CN.cookie.get('ipadTakeover') !== 'true' ) ) {
+                                return 'AMS_SLF_GLOBAL_HEADER%2CAMS_SLF_GLOBAL_HEADERCALLOUT%2CAMS_SLF_GLOBAL_HEADERLEFT%2CAMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER%2CAMS_SLF_GLOBAL_RIGHTRAILNAV%2CAMS_SLF_GLOBAL_CONTENTRIVER%2CAMS_SLF_GLOBAL_SITEFOOTER%2CAMS_SLF_MOBILE_GLOBAL_FOOTER%2CAMS_SLF_MOBILE_GLOBAL_NAVBAR%2CAMS_SLF_POPUP_FLOATINGAD%2CAMS_SLF_TABLET_GLOBAL_FOOTER%2CAMS_SLF_MOBILE_GLOBAL_CONTENTRIVER%2CAMS_SLF_LITEREG_SUBSCRIBE%2CAMS_SLF_GLOBAL_IPAD_TAKEOVER';
+                            } else {
+                                return 'AMS_SLF_GLOBAL_HEADER%2CAMS_SLF_GLOBAL_HEADERCALLOUT%2CAMS_SLF_GLOBAL_HEADERLEFT%2CAMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER%2CAMS_SLF_GLOBAL_RIGHTRAILNAV%2CAMS_SLF_GLOBAL_CONTENTRIVER%2CAMS_SLF_GLOBAL_SITEFOOTER%2CAMS_SLF_MOBILE_GLOBAL_FOOTER%2CAMS_SLF_MOBILE_GLOBAL_NAVBAR%2CAMS_SLF_POPUP_FLOATINGAD%2CAMS_SLF_TABLET_GLOBAL_FOOTER%2CAMS_SLF_MOBILE_GLOBAL_CONTENTRIVER%2CAMS_SLF_LITEREG_SUBSCRIBE';
+                            }
+                                                })();
+
+            
+                    return {
+                        'ams_ads_script_src' : 'https://subscribe.self.com/ams/page-ads.js?'
+                                                + commonParams + ''
+                                                + '&amp;keywords=' + metaKeyWords + ''
+                                                + '&amp;position_list=' + deviceParams + ''
+                    };
+                })();
+
+                if (!window.$h) {window.$h = {}}
+                (function(){
+                    if (!$h.util) {
+                        $h.util = {
+                            buildScriptTag: function(src){
+                                if (!!src){ document.write('<scr' + 'ipt src="'+src+'" type="text/javascript"></scr' + 'ipt>');}
+                            }
+                        }
+                    }
+                    $h.util.buildScriptTag(_ghearst_vars.ams_ads_script_src)
+                })();
+            //-->
+            </script>
+            	<div id="floatingAd"><div id="floatingAd_header" class="visible-desktop visible-tablet"><a href="#">Close</a></div><div id="floatingAd_content" class="visible-desktop visible-tablet"><div id="AMS_SLF_POPUP_FLOATINGAD" class="ecom-placement visible-desktop visible-tablet"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank"><img border="0" src="http://www.self.com/wp-content/themes/self-1.0.0/images/ecom/floating_ad.jpg"/></a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_POPUP_FLOATINGAD != 'undefined' ) {
+  jQuery( "#AMS_SLF_POPUP_FLOATINGAD" ).html( pageAds.AMS_SLF_POPUP_FLOATINGAD.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+} else { CN.debug.info( "AMS_SLF_POPUP_FLOATINGAD not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div></div></div>	<header role="banner">
+			<div id="inner-header" class="clearfix">
+				<div class="row-fluid">
+					<div class="span12 pagination-centered">
+													<div id="masthead-banner-ad" class="masthead-ad visible-desktop visible-tablet">
+							   <div class="masthead-ad-inner">
+								   <div class="displayAds"><div class="advertisement"><div id="header728x90_frame" class="displayAd displayAd728x90Js" data-cb-ad-id="header728x90_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( ! CN.isMobile && CN.dart ) {
+ CN.dart.call( "header", { sz: "728x90", kws: [ "" ], collapse: true } );
+} 
+}</script></div></div>							   </div>
+						   	</div>
+												<div class="masthead-ad-mobile visible-phone">
+							<div class="header-mobile-ad"><div class="advertisement"><div id="header320x50_frame" class="displayAd displayAd320x50Js" data-cb-ad-id="header320x50_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( CN.isMobile && CN.dart ) {
+ CN.dart.call( "header", { sz: ( "320x50" ), kws: [ "top" ], collapse: true } );
+} 
+}</script></div></div>						 </div>
+					</div>
+				</div>
+				<div class="self-mobile-menu-wrap">
+						<a class="self-logo-mobile self-logo" href = "http://www.self.com"></a>
+					<div class="visible-phone visible_only_phone self-mobile-search-box">
+						<div class = "search_img_phone">
+						</div>
+						<form class="navbar-search pull-right" role="search" method="get" id="searchform" action="/search/">
+							<div class="search_form_go">
+								<form role="search" method="get" id="searchform" action="http://www.self.com/" >
+		<label class="screen-reader-text" for="s">Search for:</label>
+		<input type="submit" id="searchsubmit" value="" autocomplete="off"/>
+		<input type="text" value="" name="s" id="s" class="global-search-input" placeholder="Search SELF" autocomplete="off" />
+		<div class="autosuggest" style="display:none"></div>
+		</form>								<div class = "search_close_phone">
+									<div class="search_arrow_phone"></div>
+									<div class="search_close_icon ximg"></div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="navbar">
+					<div class="navbar-inner">
+						<div class="container-fluid nav-container">
+							<!---Main Navigation -->
+							<nav role="navigation">
+	<a class="btn btn-navbar visible-phone" data-toggle="collapse" data-target=".nav-collapse">
+		<span class="mobile-nav-tab-icon"></span>
+	</a>
+	<div class="nav-collapse collapse">
+		<div class="menu-main-nav-menu-container">
+			<!-- Login for mobile starts -->
+			<div class="span3 login_holder pagination-centered visible-phone">
+				<div class="x-is-logged-in">
+					<span class="login_span_hold mobile_login_span">
+						<div id="login_x_phone"><a href = "#"></a></div>
+						<span class="grey">Welcome back </span>
+						<span class="profile_box">
+							<span class="username">
+								<span id="arrowhtml5"></span>
+								<span class="user-detail"></span>
+							</span>
+							<div class="profile_drop">
+								<span><a class="grey" href="https://secure.self.com/user/update?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/">Edit Profile</a></span>
+								<span id="logout_right"><a class="grey" href="https://secure.self.com/user/logout?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/" title="Logout" >Logout</a></span>
+							</div>
+						</span>
+					</span>
+				</div>
+				<div class="x-not-logged-in">
+					<span class="login_span_hold mobile_login_span">
+						<div id="login_x_phone"><a href = "#"></a></div>
+						<a href="https://secure.self.com/user/login?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/">Login
+							<span id="login_plus"> +</span>
+						</a>
+					</span>
+				</div>
+			</div>
+			<!-- Login for mobile ends -->
+
+<ul id="menu-main-nav-menu" class="nav-menu">
+	<li class="subscribe_dtox">
+		<span class="visible-desktop visible-tablet">
+			<span class="visible-desktop visible-tablet subscribe_rollover">
+				<div id="AMS_SLF_GLOBAL_HEADERLEFT" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank">Subscribe</a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_HEADERLEFT != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_HEADERLEFT" ).html( pageAds.AMS_SLF_GLOBAL_HEADERLEFT.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_GLOBAL_HEADERLEFT" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_HEADERLEFT not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>			</span>
+		</span>
+		<div id="rolloverAd" class="rolloverAd">
+			<div id="rolloverAd_header" class="rolloverAd_header">
+				<a href="#">Close</a>
+			</div>
+			<div id="rolloverAd_content" class="rolloverAd_content">
+				<div id="AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER" class="ecom-placement"><!-- no failsafe for AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER -->            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER" ).html( pageAds.AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_HEADERLEFT_ROLLOVER not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>			</div>
+		</div>
+	</li>
+	
+				<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://www.self.com/body/">Body</a>						<ul class="sub-menu ">
+							<div class="submenu-section-text pull-left">
+							<li><a href="http://www.self.com/body/celebrity/">Celebrity</a></li><li><a href="http://www.self.com/body/fitness/">Fitness</a></li><li><a href="http://www.self.com/body/workouts/">Workouts</a></li><li><a href="http://www.self.com/body/food/">Food</a></li><li><a href="http://www.self.com/body/recipes/">Recipes</a></li>							</div>
+							<div class="submenu-section-image pull-left">
+								<div class="navimagedisplay">
+								<a href="/body/celebrity/2014/12/jennifer-lopez-owning-the-year"><img src="http://www.self.com/wp-content/uploads/2014/12/jennifer-lopez-bar-1240x1240-150x150.jpg"></a><a class="img-definition" href="/body/celebrity/2014/12/jennifer-lopez-owning-the-year">Jennifer Lopez: Our January Cover Girl</a>								</div>
+							</div>
+						</ul>
+									</li>
+								<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://www.self.com/looks/">Looks</a>						<ul class="sub-menu ">
+							<div class="submenu-section-text pull-left">
+							<li><a href="http://www.self.com/looks/fashion/">Fashion</a></li><li><a href="/looks/fashion/2014/12/fitxfashion/">Fit x Fashion</a></li><li><a href="http://www.self.com/looks/beauty/">Beauty</a></li><li><a href="http://www.self.com/looks/hair/">Hair</a></li><li><a href="http://www.self.com/looks/makeup/">Makeup</a></li><li><a href="http://www.self.com/looks/skin/">Skin</a></li>							</div>
+							<div class="submenu-section-image pull-left">
+								<div class="navimagedisplay">
+								<a href="/looks/fashion/2014/12/model-anne-v-utility-chic-fashion"><img src="http://www.self.com/wp-content/uploads/2014/12/model-anne-v-utility-chic-rocky-road-1240x1240-150x150.jpg"></a><a class="img-definition" href="/looks/fashion/2014/12/model-anne-v-utility-chic-fashion">Top Model Anne V Takes Utility-Chic Style to the Top</a>								</div>
+							</div>
+						</ul>
+									</li>
+								<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://www.self.com/life/">Life</a>						<ul class="sub-menu ">
+							<div class="submenu-section-text pull-left">
+							<li><a href="http://www.self.com/life/health/">Health</a></li><li><a href="http://www.self.com/life/sex/">Sex</a></li><li><a href="http://www.self.com/life/relationships/">Relationships</a></li><li><a href="http://www.self.com/life/travel/">Travel</a></li><li><a href="http://www.self.com/life/work/">Work</a></li>							</div>
+							<div class="submenu-section-image pull-left">
+								<div class="navimagedisplay">
+								<a href="/life/health/2014-womens-cancer-handbook"><img src="http://www.self.com/wp-content/uploads/2014/09/women-versus-cancer-150x150.jpg"></a><a class="img-definition" href="/life/health/2014-womens-cancer-handbook">Women Versus Cancer</a>								</div>
+							</div>
+						</ul>
+									</li>
+								<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://www.self.com/flash/">Flash</a>				</li>
+								<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://video.self.com/">Video</a>				</li>
+								<li class="subscribe_dtox">
+					<span class="visible-phone disp-sub-men" id="plus_minus_img" ></span>
+					<a href="http://www.self.com/tools/">Tools</a>						<ul class="sub-menu tools">
+							<div class="submenu-section-text pull-left">
+							<li><a href="/program/detox/">Drop 10 Detox</a></li><li><a href="http://www.self.com/prize/">Win Prizes!</a></li><li><a href="http://www.selfworkoutfinder.com/">SELF Workout Finder</a></li><li><a href="http://nutritiondata.self.com/">Nutrition Data</a></li><li><a href="http://selfcurated.self.com/">Promotions</a></li>							</div>
+							<div class="submenu-section-image pull-left">
+								<div class="navimagedisplay">
+								<a href=""><img src="http://www.self.com/wp-content/uploads/2014/12/time-makeover-time-journals-150x150.jpg"></a>								</div>
+							</div>
+						</ul>
+									</li>
+								<li class="drop-ten-flx-img subscribe_dtox real_dtox">
+					<span class="visible-desktop">
+					<a href="/program/time-makeover"><img src="http://www.self.com/wp-content/uploads/2014/12/time-makeover-menu-nav-new.jpg" /></a>					</span>
+					<span class="visible-tablet drop_2x_img_rez">
+					<a href="/program/time-makeover"><img src="http://www.self.com/wp-content/uploads/2014/12/time-makeover-menu-nav-new.jpg" /></a>					</span>
+				</li>
+
+
+				<li>
+					<div class="search_img visible-desktop visible-tablet">
+						<img width="45px" height="34px" src="http://www.self.com/wp-content/themes/self-1.0.0/images/search.png" />
+					</div>
+				</li>
+				<!-- New code starts here -->
+				<li class="subscribe_dtox real_dtox ">
+					<span class="visible-phone">
+					<a href="/program/time-makeover"><img id="drop_10_mob" src="http://www.self.com/wp-content/uploads/2014/12/time-makeover-logo-480x42.jpg" /></a>					</span>
+				</li>
+				<li class="subscribe_dtox cm-mobile real_dtox visible-phone">
+					<span id="AMS_SLF_MOBILE_GLOBAL_NAVBAR" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafeMobile" target="_blank">Subscribe</a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_MOBILE_GLOBAL_NAVBAR != 'undefined' ) {
+  jQuery( "#AMS_SLF_MOBILE_GLOBAL_NAVBAR" ).html( pageAds.AMS_SLF_MOBILE_GLOBAL_NAVBAR.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_MOBILE_GLOBAL_NAVBAR" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_MOBILE_GLOBAL_NAVBAR not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </span>				</li>
+				<!-- New code ends here -->
+			</ul>
+			<form class="navbar-search pull-right" role="search" method="get" id="searchform" action="/search/">
+				<div><form role="search" method="get" id="searchform" action="http://www.self.com/" >
+		<label class="screen-reader-text" for="s">Search for:</label>
+		<input type="submit" id="searchsubmit" value="" autocomplete="off"/>
+		<input type="text" value="" name="s" id="s" class="global-search-input" placeholder="Search SELF" autocomplete="off" />
+		<div class="autosuggest" style="display:none"></div>
+		</form></div>
+			</form>
+			<div class="search_close">
+				<div class="search_arrow"></div>
+				<div class="search_close_icon ximg"></div>
+			</div>
+		</div>
+	</div>
+</nav>
+						</div> <!-- end .nav-container -->
+					</div> <!-- end .navbar-inner -->
+				</div> <!-- end .navbar -->
+
+			</div> 
+			<!-- end #inner-header -->
+			<div class="container-fluid logo-holder visible-desktop visible-tablet">
+				<div class="row-fluid">
+					<div class="span3 login_holder pagination-centered visible-desktop visible-tablet">
+						<div class="is-logged-in">
+							<span class="login_span_hold">
+								<img width="27px" height="22px" src="http://www.self.com/wp-content/themes/self-1.0.0/images/login-yellow.png">
+								<span class="grey">Welcome back</span>
+								<span class="profile_box">
+									<span class="username">
+										<img width="9px" height="8px" src="http://www.self.com/wp-content/themes/self-1.0.0/images/login-arrow.png">
+										<span class="user-detail"></span>
+									</span>
+									<div class="profile_drop">
+										<span>
+											<a class="grey" href="https://secure.self.com/user/update?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/">Edit Profile</a>
+										</span>
+										<hr>
+										<span>
+											<a class="grey" href="https://secure.self.com/user/logout?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/" title="Logout">Logout</a>
+										</span>
+									</div>
+								</span>
+								<hr class="login_in">
+								<a class="promotions_header_in" href="http://selfcurated.self.com">Promotions</a>
+							</span>
+						</div>
+						<div class="not-logged-in">
+							<span class="login_span_hold">
+								<span class="login-icon-slf"></span>
+								<span class="login-box-text">
+									<a class="login-in-slf" href="https://secure.self.com/user/login?returnto=http://www.self.com/flash/beauty-blog/2014/12/taylor-swift-headband/">Login</a>
+									<a class="promotions_header_out" href="http://selfcurated.self.com">Promotions</a>
+								</span>
+							</span>
+						</div>
+					</div>
+					<div class="span6 logo pagination-centered visible-desktop visible-tablet">
+						<a class="self-logo" href = "http://www.self.com"></a>
+					</div>
+											<div class="span3">
+							<div class="subscribe-box visible-desktop visible-tablet">
+								<div class="visible-desktop visible-tablet">
+									<div id="AMS_SLF_GLOBAL_HEADERCALLOUT" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank"><img src="http://www.self.com/wp-content/themes/self-1.0.0/images/ecom/SLF_failsafe_header_callout.jpg" alt="Subscribe to Self" border="0" /></a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_HEADERCALLOUT != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_HEADERCALLOUT" ).html( pageAds.AMS_SLF_GLOBAL_HEADERCALLOUT.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_GLOBAL_HEADERCALLOUT" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_HEADERCALLOUT not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>								</div>
+
+								<div class="visible-desktop visible-tablet">
+									<div id="AMS_SLF_GLOBAL_HEADER" class="ecom-placement"><div id="subs-cover"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank">Subscribe</a></div>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_HEADER != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_HEADER" ).html( pageAds.AMS_SLF_GLOBAL_HEADER.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_GLOBAL_HEADER" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_HEADER not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>								</div>
+							</div>
+						</div>
+									</div>
+			</div>
+	</header> <!-- end header -->
+<!-- Push Down Ad -->
+	<div id="pushDown-banner-ad" class="pushDown-ad visible-desktop visible-tablet">
+		<div class="pushDown-ad-inner">
+			<div class="displayAds"><div class="advertisement"><div id="pushdown970x418_frame" class="displayAd displayAd970x418Js" data-cb-ad-id="pushdown970x418_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( ! CN.isMobile && CN.dart ) {
+ CN.dart.call( "pushdown", { sz: "970x418", kws: [ "top" ], collapse: true } );
+} 
+}</script></div></div>		</div>
+	</div>	<div class="container-fluid blog-post blog" id="wrapper">
+    <!--category main block start -->
+    <div id="content" class="clearfix row-fluid">
+        <div class="span12 toprail hidden-phone">
+            <!--top rail section -->
+            <div class="row-fluid">
+      
+						<div class="wrapper_top span2">
+							<div class="toprail_wrp_img">
+								<a href="http://www.self.com/body/fitness/2014/01/essential-stretches-slideshow/"><img width="172" height="104" src="http://www.self.com/wp-content/uploads/2013/12/essential-stretches-00-fiss431-172x104-1419954957.jpg" class="attachment-recipe-toprail-section-image wp-post-image" alt="essential-stretches-00-fiss431.jpg" /></a>
+							</div>
+							<div class="img_head">
+								<span>
+									<a href="http://www.self.com/body/fitness/2014/01/essential-stretches-slideshow/">
+										Best Stretches For Flexibility									 </a>
+								</span>
+							</div>
+						</div>         				
+						      
+						<div class="wrapper_top span2">
+							<div class="toprail_wrp_img">
+								<a href="http://www.self.com/body/food/2014/12/cozy-vegetarian-winter-soups-slideshow/"><img width="172" height="104" src="http://www.self.com/wp-content/uploads/2014/12/WinterSoups-HalfBakedHarvest-172x104.jpg" class="attachment-recipe-toprail-section-image wp-post-image" alt="WinterSoups-HalfBakedHarvest" /></a>
+							</div>
+							<div class="img_head">
+								<span>
+									<a href="http://www.self.com/body/food/2014/12/cozy-vegetarian-winter-soups-slideshow/">
+										Cozy Vegetarian Winter Soups									 </a>
+								</span>
+							</div>
+						</div>         				
+						      
+						<div class="wrapper_top span2">
+							<div class="toprail_wrp_img">
+								<a href="http://www.self.com/program/time-makeover/"><img width="172" height="104" src="http://www.self.com/wp-content/uploads/2014/12/time-makeover-broken-clock-172x104.jpg" class="attachment-recipe-toprail-section-image wp-post-image" alt="time-makeover-broken-clock" /></a>
+							</div>
+							<div class="img_head">
+								<span>
+									<a href="http://www.self.com/program/time-makeover/">
+										21-Day Time Makeover									 </a>
+								</span>
+							</div>
+						</div>         				
+						      
+						<div class="wrapper_top span2">
+							<div class="toprail_wrp_img">
+								<a href="http://www.self.com/body/workouts/2010/06/yoga-for-abs-workout-slideshow/"><img width="172" height="104" src="http://www.self.com/wp-content/uploads/2010/06/40YogaForAbs-172x104-1419955026.jpg" class="attachment-recipe-toprail-section-image wp-post-image" alt="40YogaForAbs" /></a>
+							</div>
+							<div class="img_head">
+								<span>
+									<a href="http://www.self.com/body/workouts/2010/06/yoga-for-abs-workout-slideshow/">
+										Yoga For Your Abs									 </a>
+								</span>
+							</div>
+						</div>         				
+						      
+						<div class="wrapper_top span2">
+							<div class="toprail_wrp_img">
+								<a href="http://www.self.com/body/workouts/2014/11/tone-6-power-moves-mind-body/"><img width="172" height="104" src="http://www.self.com/wp-content/uploads/2014/11/tone-up-power-moves-mind-body-linda-celeste-sims-1068-172x104-1419955069.jpg" class="attachment-recipe-toprail-section-image wp-post-image" alt="tone-up-power-moves-mind-body-linda-celeste-sims-1068" /></a>
+							</div>
+							<div class="img_head">
+								<span>
+									<a href="http://www.self.com/body/workouts/2014/11/tone-6-power-moves-mind-body/">
+										Tone Up With 6 Power Moves									 </a>
+								</span>
+							</div>
+						</div>         				
+												
+</div>        </div>
+
+        <div class="row-fluid float-sidebar-container">
+            <div class="span8 center_well_tab">
+                <div class="center_well"><!-- center-well start-->
+                    <div class="tabbed-features" id="position2"><!-- tabbed-features start -->
+                        <div class="flash-logo">
+                            <a href= "/flash/">
+                                <div class="flash_logo_img_png">
+                                    <span class="flash-title-logo">
+                                        FLASH
+                                    </span>
+                                    <span class="flash-tag-line">
+                                        WHAT'S NEW NOW
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                        <div id="blog-post"> <!-- blog-post start-->
+                                                        <div id="blog-post-section"><!--blog section start -->
+                                <div class="blog_post_header">
+                                    <div class="graphic-logo">
+                                        <div class="graphic-logo-bg">
+                                            <div class="visible-desktop visible-tablet">
+                                                <div class="displayAd200x60Js"><div class="advertisement"><div id="slideshow_top200x60_frame" class="displayAd displayAd200x60Js" data-cb-ad-id="slideshow_top200x60_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( ! CN.isMobile && CN.dart ) {
+ CN.dart.call( "slideshow_top", { sz: "200x60", kws: [ "top" ], collapse: true } );
+} 
+}</script></div></div>                                            </div>
+
+                                            <div class="visible-phone">
+                                                <div class="mobile-ad"><div class="advertisement"><div id="mobile-program-presented-ad88x31_frame" class="displayAd displayAd88x31Js" data-cb-ad-id="mobile-program-presented-ad88x31_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( CN.isMobile && CN.dart ) {
+ CN.dart.call( "mobile-program-presented-ad", { sz: ( "88x31" ), kws: [ "top" ], collapse: true } );
+} 
+}</script></div></div>                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="blog-date">
+                                        <div class="published">
+                                            <div id="year">2014</div>
+                                            <div id="month">Dec 29</div>
+                                            <div id="time">11:29 AM</div>
+                                        </div>
+                                        <div id="dotscopy"></div>
+                                                                                <div id="blogSection">
+                                            <a href= "/flash/beauty-blog/">
+                                                Beauty                                            </a>
+                                        </div>
+                                        												 <div class="by_author_cls"> By <a href = '/author/sfarrell/'><span class="pink_aut_color">Shannon Farrell</span></a></div>
+                                 
+												                                          </div>
+
+                                    <div class="blog-article"><h1>Headbands 101: Taylor Swift Taught a Master Class on the Subject</h1></div>
+
+                                    <div class="social_share_data hidden-phone">
+								        <div class="social-toolbar">
+                                            <div class="share-this share-this-sticky">
+                                                <ul class="share-links">
+                                                                                                        <li class="fb share"> <a href="#"  class="share fb addthis_button_facebook" ><span></span></a> </li>
+                                                                                                        <li class="tw share"> <a href="#" addthis:url="http://on.self.com/1teldmd
+" addthis:title="Headbands 101: Taylor Swift Taught a Master Class on the Subject via @SELFmagazine" class="share tw addthis_button_twitter" ><span></span></a> </li>
+                                                                                                        <li class="gp share"> <a href="#" class="share gp addthis_button_google" ><span></span></a> </li>
+                                                                                                        <li class="pn share"> <a href="#" class="share pn addthis_button_pinterest" ><span></span></a> </li>
+                                                                                                        <li class="em share"> <a href="#"  addthis:url="" addthis:title="" class="share em addthis_button_mailto" ><span></span></a> </li>
+                                                                                                        <li class="print share"> <a href="#" addthis:url="" addthis:title="" class="share print self_print" ><span></span></a> </li>
+                                                                                                        <li class="tally"> <a href="#" class="share tally addthis_counter" ><span></span></a> </li>
+                                                                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="blog-content pinterest-images">
+                                    <p><a href="http://www.self.com/wp-content/uploads/2014/12/Taylor-Swift-lead.jpg"><img class="alignnone size-full wp-image-1109721" src="http://www.self.com/wp-content/themes/self-1.0.0/images/1x1.trans.gif" data-src="http://www.self.com/wp-content/uploads/2014/12/Taylor-Swift-lead.jpg" data-lazy-loaded="true" alt="Taylor-Swift-lead" width="600" height="400" /></a></p>
+<p>Blair Waldorf who? The headband has come a long way from its schoolgirl reputation, thanks to the recent efforts of the always-stylish Taylor Swift. When she recently stepped out in NYC wearing a sparkly hair accessory, she demonstrated three must-know rules to follow when pulling off the accessory:</p><p><strong>Keep Your Hair&#8217;s Movement:</strong> Unless you&#8217;re fighting with grown-out bangs, refrain from pulling your headband straight back. Instead, keep your hair&#8217;s natural movement by placing your style on top of the hair, not under and behind the ears.</p>
+<p><strong>Go Easy on Styling:</strong> The simplest way to keep the accessory from looking stuffy is to skip elaborate updos and ringlet curls. Keep the hair more natural and use the headband to add structure.</p>
+<p><strong>Make It the Focal Point:</strong> With a piece of bling like Taylor&#8217;s, keep the rest of the beauty look soft. Although she wore fuchsia lipstick, the singer opted for a matte variety to tone-down the vivid hue.</p>
+<p><strong>RELATED:</strong></p>
+<ul>
+<li><a href="http://www.self.com/flash/beauty-blog/2014/12/dry-hair-split-ends-fix-hair-oil-weleda/">The Game-Changing Oil for Dry Hair and Split Ends</a></li>
+<li><a href="http://www.self.com/flash/beauty-blog/2014/12/five-travel-sized-hair-dryers-stand-test/">Five Travel-Sized Hair Dryers That Stand Up To The Test</a></li>
+<li><a href="http://www.self.com/flash/beauty-blog/2014/12/wavy-bob-styling-tips/">Here&#8217;s More Proof That the Wavy Bob Is 2015&#8217;s &#8220;It&#8221; Cut</a></li>
+</ul>
+<p><span style="font-size: 11px;">Image Credit: <em>Getty</em></span></p>
+                                    <div class="blog-key">
+										KEYWORDS: <span class="keyword"><a href='http://www.self.com/tag/hair/'>Hair</a>,<a href='http://www.self.com/tag/headbands/'>headbands</a>,<a href='http://www.self.com/tag/taylor-swift/'>Taylor Swift</a></span></div>
+                                    <div class="social_share_data hidden-phone">
+								        <div class="social-toolbar">
+                                            <div class="share-this share-this-sticky">
+                                                <ul class="share-links">
+                                                                                                        <li class="fb share"> <a href="#"  class="share fb addthis_button_facebook" ><span></span></a> </li>
+                                                                                                        <li class="tw share"> <a href="#" addthis:url="http://on.self.com/1teldmd
+" addthis:title="Headbands 101: Taylor Swift Taught a Master Class on the Subject via @SELFmagazine" class="share tw addthis_button_twitter" ><span></span></a> </li>
+                                                                                                        <li class="gp share"> <a href="#" class="share gp addthis_button_google" ><span></span></a> </li>
+                                                                                                        <li class="pn share"> <a href="#" class="share pn addthis_button_pinterest" ><span></span></a> </li>
+                                                                                                        <li class="em share"> <a href="#"  addthis:url="" addthis:title="" class="share em addthis_button_mailto" ><span></span></a> </li>
+                                                                                                        <li class="print share"> <a href="#" addthis:url="" addthis:title="" class="share print self_print" ><span></span></a> </li>
+                                                                                                        <li class="tally"> <a href="#" class="share tally addthis_counter" ><span></span></a> </li>
+                                                                                                    </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="x-see-more">SEE MORE </div>
+                                <div class="x-see-less">SEE LESS </div>
+                            </div><!--blog section end -->
+                            <div class="blognav blognav_tab">
+                                <span class="blog-prev">
+                                                                            <a class="blog_navi" rel="next" href="http://www.self.com/flash/celebrity-blog/2014/12/jennifer-lawrence-cheers-for-louisville-cardinals/" title="Jennifer Lawrence Has the Right Spirit">
+                                            OLDER
+                                        </a>
+                                                                    </span>
+                                <span class="blog-nex">
+                                                                        <a class="blog_navi" rel="next" href="http://www.self.com/flash/nutrition/2014/12/move-kale-theres-new-leafy-green-look/" title="Move Over Kale, There’s a New Leafy Green to Look Out For">
+                                        NEWER
+                                    </a>
+                                                                    </span>
+                            </div>
+                                <div class="pagination-wrap">
+                                                                        <div class="oldpost-box">
+                                         <a rel="next" href="http://www.self.com/flash/celebrity-blog/2014/12/jennifer-lawrence-cheers-for-louisville-cardinals/" title="Jennifer Lawrence Has the Right Spirit">
+                                            <div class="blog_navi">
+                                               <div class="blog_navi_title">Jennifer Lawrence Has the Right Spirit</div>
+                                            </div>
+                                        </a>
+                                                                            </div>
+                                    <div class="newpost-box">
+                                                                                    <a rel="next" href="http://www.self.com/flash/nutrition/2014/12/move-kale-theres-new-leafy-green-look/" title="Move Over Kale, There’s a New Leafy Green to Look Out For">
+                                                <div class="blog_navi">
+                                                    <div class="blog_navi_title">Move Over Kale, There’s a New Leafy Green to Look Out For</div>
+                                                </div>
+                                            </a>
+                                                                            </div>
+                                </div>
+                            
+                            
+							<div id="zergnet-widget" class="visible-desktop visible-tablet">
+										<div class="zergent-title">What We're Reading</div>
+<div id="zergnet-widget-22270"></div>
+
+<script language="javascript" type="text/javascript">
+(function() {
+var zergnet = document.createElement('script');
+zergnet.type = 'text/javascript'; zergnet.async = true;
+zergnet.src = 'http://www.zergnet.com/zerg.js?id=22270';
+var znscr = document.getElementsByTagName('script')[0];
+znscr.parentNode.insertBefore(zergnet, znscr);
+})();
+</script>	
+							</div>
+                            <div class="sticky_bar visible-phone">
+                                    <div class = "social_sticky">
+                                        <img src="http://www.self.com/wp-content/themes/self-1.0.0/images/sticky_social.png"  />
+                                </div>
+                            </div>
+                            <div class = "visible-phone">
+                            	<div class="share-this sticky_social_icons share-this-sticky">
+                                    <ul class="share-links">
+                                                                                <li class="fb share"> <a href="#"  class="share fb addthis_button_facebook" ><span></span></a> </li>
+                                                                                <li class="tw share"> <a href="#" addthis:url="http://on.self.com/1teldmd
+" addthis:title="Headbands 101: Taylor Swift Taught a Master Class on the Subject via @SELFmagazine" class="share tw addthis_button_twitter" ><span></span></a> </li>
+                                                                                <li class="gp share"> <a href="#" class="share gp addthis_button_google" ><span></span></a> </li>
+                                                                                <li class="pn share"> <a href="#" class="share pn addthis_button_pinterest" ><span></span></a> </li>
+                                                                                <li class="em share"> <a href="#"  addthis:url="" addthis:title="" class="share em addthis_button_mailto" ><span></span></a> </li>
+                                        										<li class="print"><a href = "javascript:void(0);">&nbsp;</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="comments-container col1">
+                                <div class = "visible-phone show_hide_comments">
+                                    <span class = "hide_com"> Hide comments <img src = "http://www.self.com/wp-content/themes/self-1.0.0/images/show_hide_comments_up.png" /></span>
+                                    <span class = "show_com"> Show comments <img src = "http://www.self.com/wp-content/themes/self-1.0.0/images/show_hide_comments_down.png" /></span>
+                                </div>
+                                <div id="comments"><div class="loader">Loading Comments...</div></div>                            </div>
+                                                    </div> <!--blog post end -->
+                                            </div> <!-- tabbed-features end -->
+                </div><!-- center-well end -->
+            </div>
+            <div class="row-fluid follow_us_tab visible-phone">
+                <div class="row-fluid" class="follow_self">
+                    <img src="http://www.self.com/wp-content/themes/self-1.0.0/images/follow_self_text.png" />
+                </div>
+                <div class="social_icons">
+                    <ul>
+                        <li class="social-facebook">
+                            <a href="https://facebook.com/selfmagazine" title="Facebook" target="_blank">Facebook</a>
+                         </li>
+                        <li class="social-twitter">
+                            <a href="http://twitter.com/selfmagazine" title="Twitter" target="_blank">Twitter</a>
+                        </li>
+                        <li class="social-pinterest">
+                           <a href="http://pinterest.com/selfmagazine/" title="Pinterest" target="_blank" >Pinterest</a>
+                        </li>
+                        <li class="social-gplus">
+                           <a href="https://plus.google.com/app/basic/+selfmagazine/posts" title="Gplus" target="_blank">Gplus</a>
+                           </li>
+                        <li class="social-instragram">
+                           <a href="http://instagram.com/selfmagazine" title="Instragram" target="_blank">Instragram</a>
+                        </li>
+                           <li class="clear">
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+       <div class="centre_well_sb_1">
+                <div id="sidebar1" class="fluid-sidebar sidebar pull-right" role="complementary">
+    <div>
+		<div class="row-fluid">
+				<!-- Package page extra content in sidebar start -->
+												<!-- Package page extra content in sidebar end -->
+				<div id="box-ad-sidebar" class="visible-desktop visible-tablet">
+						<span class="advt-slug">Advertisement</span>
+						<div class="box-ad-inner">
+							<div class="displayAd300x250Js"><div class="advertisement"><div id="homepage_rightrail_top300x250_frame" class="displayAd displayAd300x250Js" data-cb-ad-id="homepage_rightrail_top300x250_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( ! CN.isMobile && CN.dart ) {
+ CN.dart.call( "homepage_rightrail_top", { sz: "300x250", kws: [ "top" ], collapse: true } );
+} 
+}</script></div></div>						</div>
+				</div>
+								<div class="text">
+			
+			       					<div id="whats-new-now">
+						<div class="whats-new-title">
+							<h3 class="whats-new-flash">
+								Flash
+							</h3>
+							<span class="whats-new-tag">What's New Now </span>
+						</div>
+						<div class="whats-new-list">
+							<ul>
+																<li><a href="http://www.self.com/flash/fitness-blog/2015/01/workout-music-power-playlist-2015/">Your Power Playlist For A Killer Workout</a>
+									<span>15 hours ago</span>
+								</li>
+																<li><a href="http://www.self.com/flash/news/2015/01/white-castle-unveils-new-veggie-slider/">White Castle Unveils a New Veggie Slider</a>
+									<span>15 hours ago</span>
+								</li>
+																<li><a href="http://www.self.com/flash/sex-and-relationships/2015/01/5-resolutions-make-couple-tips-sticking/">5 Resolutions to Make as a Couple (And Tips for Sticking to Them)</a>
+									<span>18 hours ago</span>
+								</li>
+															</ul>
+						</div>
+						<a href="/flash" class="whats-new-more">More Blog Posts</a>
+					</div>
+				    				</div>
+
+				</div>
+        </div>
+        <!--flash section end -->
+						<div class="row-fluid">
+					<div class="visible-phone pagination-centered">
+						<div class="displayAd300x51Js"><div class="advertisement"><div id="homepage_rightrail_top320x51_frame" class="displayAd displayAd320x51Js" data-cb-ad-id="homepage_rightrail_top320x51_frame"></div><script type="text/javascript">if ( typeof CN !== "undefined" ) {
+if ( CN.isMobile && CN.dart ) {
+ CN.dart.call( "homepage_rightrail_top", { sz: ( "320x51" ), kws: [ "bottom" ], collapse: true } );
+} 
+}</script></div></div>					</div>
+				</div>
+		    </div>
+        </div>
+        <div class="centre_well_sb_2">
+                <div id="sidebar2" class="fluid-sidebar sidebar span4" role="complementary">
+    <div class="row-fluid follow_us_tab dotter_head ">
+        <div class="row-fluid" class="follow_self">
+                <div class="dotted_header">Follow Self</div>
+        </div>
+        <div class="social_icons">
+            <ul>
+                <li class="social-facebook">
+                    <a href="https://facebook.com/selfmagazine" title="Facebook" target="_blank">Facebook</a>
+                </li>
+                <li class="social-twitter">
+                    <a href="http://twitter.com/selfmagazine" title="Twitter" target="_blank">Twitter</a>
+                </li>
+                <li class="social-pinterest">
+                    <a href="http://pinterest.com/selfmagazine" title="Pinterest" target="_blank" >Pinterest</a>
+                </li>
+                <li class="social-gplus visible-phone">
+                    <a href="https://plus.google.com/app/basic/+selfmagazine/posts" title="Gplus" target="_blank">Gplus</a>
+                </li>
+                <li class="social-gplus hidden-phone">
+                    <a href="https://plus.google.com/+selfmagazine/posts" title="Gplus" target="_blank">Gplus</a>
+                </li>
+                <li class="social-instragram">
+                    <a href="http://instagram.com/selfmagazine" title="Instragram" target="_blank">Instragram</a>
+                </li>
+                <li class="clear">
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="rightrail-nav">
+        <div class="row-fluid visible-desktop visible-tablet">
+            <div id="AMS_SLF_GLOBAL_RIGHTRAILNAV" class="ecom-placement"><div class="self-cm">Self</div><ul class="yrail-subs-nav"><li id="snav1"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank" title="Give a Subscription to Self magazine as a Gift">Subscribe</a></li><li id="snav2"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafeGift" target="_blank" title="Give a Subscription to Self magazine as a Gift">Gift</a></li><li id="snav3"><a href="https://w1.buysub.com/servlet/CSGateway?cds_mag_code=SLF" target="_blank" title="Renew your Subscription to Self magazine">Renew</a></li><li id="snav4"><a href="https://w1.buysub.com/servlet/CSGateway?cds_mag_code=SLF" target="_blank" title="Subscription Questions and Answers for Self magazine">Questions</a></li></ul>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_RIGHTRAILNAV != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_RIGHTRAILNAV" ).html( pageAds.AMS_SLF_GLOBAL_RIGHTRAILNAV.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_GLOBAL_RIGHTRAILNAV" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_RIGHTRAILNAV not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>        </div>
+    </div>
+    <div class="row-fluid x-most-popular ">
+        <div class ="most_pop dotter_head">
+            <div class="dotted_header">Most Popular</div>
+            <div class="most-views"><ol><li class="most_pop_odd"><a href="/flash/beauty-blog/2014/12/wavy-bob-styling-tips/"><div class="most-image-warpper"><img width="100" height="100" src="http://www.self.com/wp-content/themes/self-1.0.0/images/1x1.trans.gif" class="attachment-most-popular-img wp-post-image" alt="Elizabeth-Olsen-cut" enablelazyload="true" data-src="http://www.self.com/wp-content/uploads/2014/12/Elizabeth-Olsen-cut-100x100.png" /></div></a><a class="link_most_views" href="/flash/beauty-blog/2014/12/wavy-bob-styling-tips/">Here&#8217;s More Proof That the Wavy Bob Is 2015&#8217;s &#8220;It&#8221; Cut</a></li><li class="most_pop_even"><a href="/flash/nutrition/2014/07/pharmacist-approved-hangover-cure/"><div class="most-image-warpper"><img width="100" height="100" src="http://www.self.com/wp-content/themes/self-1.0.0/images/1x1.trans.gif" class="attachment-most-popular-img wp-post-image" alt="hangover-cure-7" enablelazyload="true" data-src="http://www.self.com/wp-content/uploads/2014/06/hangover-cure-7-100x100.jpg" /></div></a><a class="link_most_views" href="/flash/nutrition/2014/07/pharmacist-approved-hangover-cure/">A Pharmacist-Approved Hangover Cure (*Bookmark This!)</a></li><li class="most_pop_odd"><a href="/body/food/2010/03/20-superfoods-slideshow/"><div class="most-image-warpper"><div class='most-slide-icon'></div><img width="100" height="100" src="http://www.self.com/wp-content/themes/self-1.0.0/images/1x1.trans.gif" class="attachment-most-popular-img wp-post-image" alt="20-Slimming-Superfoods-300x300" enablelazyload="true" data-src="http://www.self.com/wp-content/uploads/2010/03/20-Slimming-Superfoods-300x300.jpg" /></div></a><a class="link_most_views" href="/body/food/2010/03/20-superfoods-slideshow/">20 Superfoods for Weight Loss</a></li><li class="most_pop_even"><a href="/body/workouts/2012/06/butt-workout-slideshow-2/"><div class="most-image-warpper"><div class='most-slide-icon'></div><img width="100" height="100" src="http://www.self.com/wp-content/themes/self-1.0.0/images/1x1.trans.gif" class="attachment-most-popular-img wp-post-image" alt="3MovesResizeButt" enablelazyload="true" data-src="http://www.self.com/wp-content/uploads/2012/06/3MovesResizeButt-100x100-1416005859.jpg" /></div></a><a class="link_most_views" href="/body/workouts/2012/06/butt-workout-slideshow-2/">6 Moves to Resize Your Butt and Thighs</a></li></ol></div>        </div>
+    </div>
+        <div class="newsletter_mobile_hold visible-phone">
+        <div id="newsletterr" class="row-fluid newsletterr">
+            <div class="inner_news">
+                Get More from Self! sign up for our Newsletter
+                <div class="newsletter newsletter-widget">
+                    <form name="newslettersForm" action="https://secure.self.com/services/newsletters/demographics" method="post">
+                        <input type="hidden" name="nr" value="widget">
+                        <p>
+                            <input class="newsletter-email" name="email" type="email" required="" name="ne" placeholder="Enter your email address">
+                        </p>
+                        <p>
+                            <input class="newsletter-submit" type="submit" value="Submit">
+                        </p>
+
+                        <div class="newsletter-img"></div>
+                         <div class="newsletter-privacy">
+                            Will be used in accordance with our <a href="http://www.condenast.com/privacy-policy" target="_blank"> Privacy Policy.</a>
+                        </div>
+                        <ul class="expand">
+                            <li>
+                                <input id="newsletter.159" name="newsletterAndVersions" value="newsletter.159" type="checkbox">
+                                <div>SELF Monthly News & Tips</div>
+                                <input type="hidden" name="handler.newsletter" value="handler.newsletter.159.">
+                                <input type="hidden" name="handler.newsletter.159.newsletterId" value="159">
+                                <input type="hidden" name="handler.newsletter.159.isRequired" value="true">
+                            </li>
+                            <li>
+                                <input id="newsletter.160" name="newsletterAndVersions" value="newsletter.160" type="checkbox">
+                                <div>Recipe of the Week</div>
+                                <input type="hidden" name="handler.newsletter" value="handler.newsletter.160.">
+                                <input type="hidden" name="handler.newsletter.160.newsletterId" value="160">
+                                <input type="hidden" name="handler.newsletter.160.isRequired" value="true">
+                            </li>
+                            <li>
+                                <input id="newsletter.347" name="newsletterAndVersions" value="newsletter.347" type="checkbox">
+                                <div>Get-Fit Move of the Week</div>
+                                <input type="hidden" name="handler.newsletter" value="handler.newsletter.347.">
+                                <input type="hidden" name="handler.newsletter.347.newsletterId" value="347">
+                                <input type="hidden" name="handler.newsletter.347.isRequired" value="true">
+                            </li>
+                            <li>
+                                <input id="newsletter.394" name="newsletterAndVersions" value="newsletter.394" type="checkbox">
+                                <div>Beauty Quick Tip</div>
+                                <input type="hidden" name="handler.newsletter" value="handler.newsletter.394.">
+                                <input type="hidden" name="handler.newsletter.394.newsletterId" value="394">
+                                <input type="hidden" name="handler.newsletter.394.isRequired" value="true">
+                            </li>
+                            <li>
+                                <input id="newsletter.5011" name="newsletterAndVersions" value="newsletter.5011" type="checkbox">
+                                <div>Healthy SELF</div>
+                                <input type="hidden" name="handler.newsletter" value="handler.newsletter.5011.">
+                                <input type="hidden" name="handler.newsletter.5011.newsletterId" value="5011">
+                                <input type="hidden" name="handler.newsletter.5011.isRequired" value="true">
+                            </li>
+                        </ul>
+                        <input type="hidden" name="toolkit.application" value="newsletter">
+                        <input type="hidden" name="toolkit.applicationId" value="">
+                        <input type="hidden" name="formName" value="shortForm">
+                        <input type="hidden" name="partnerCode" value="">
+                        <input type="hidden" name="sourceCode" value="">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+       
+   
+</div>        </div>
+    </div>
+
+		
+	<div class="bottom_rail_tab hidden-phone">
+		<div class="rowfluid">
+			<div class="more-self dotter_head">
+				<div class = "dotted_header">More On Self</div>
+			</div>
+	
+			<div class = "container-fluid blog-index more_on_self_bot blog">
+				<!-- more on self start -->
+											<div class="more-on-self">
+					<a href="http://www.self.com/flash/beauty-blog/2014/04/beauty-emma-watson-polish-free-pedicure/"><img width="172" height="172" src="http://www.self.com/wp-content/uploads/2014/04/emma-watson-shoes-thumb-172x172.jpg" class="attachment-related-image wp-post-image" alt="emma-watson-shoes-thumb.jpg" /></a>					<div class="desc"><a href="http://www.self.com/flash/beauty-blog/2014/04/beauty-emma-watson-polish-free-pedicure/">Emma Watson Shows Us How a Super-Nude Pe</a></div>
+				</div>
+								<div class="more-on-self">
+					<a href="http://www.self.com/flash/health-blog/2014/05/fda-regulates-indoor-tanning-beds/"><img width="172" height="172" src="http://www.self.com/wp-content/uploads/2014/05/fda-regulates-tanning-beds-172x172.jpg" class="attachment-related-image wp-post-image" alt="fda-regulates-tanning-beds" /></a>					<div class="desc"><a href="http://www.self.com/flash/health-blog/2014/05/fda-regulates-indoor-tanning-beds/">FDA Puts the Smackdown on Indoor Tanning</a></div>
+				</div>
+								<div class="more-on-self">
+					<a href="http://www.self.com/flash/celebrity-blog/2014/05/celebrity-hilary-duff-workout-rise-movement/"><img width="172" height="172" src="http://www.self.com/wp-content/uploads/2014/05/hilary-duff-workout-rise-movement-172x172.jpg" class="attachment-related-image wp-post-image" alt="hilary-duff-workout-rise-movement" /></a>					<div class="desc"><a href="http://www.self.com/flash/celebrity-blog/2014/05/celebrity-hilary-duff-workout-rise-movement/">Hilary Duff Is a Powerhouse</a></div>
+				</div>
+								<div class="more-on-self">
+					<a href="http://www.self.com/flash/fitness-blog/2014/04/fitness-weight-loss-workouts/"><img width="172" height="172" src="http://www.self.com/wp-content/uploads/2014/04/Weight-Loss-Main1-172x172.jpg" class="attachment-related-image wp-post-image" alt="Weight-Loss-Main.jpg" /></a>					<div class="desc"><a href="http://www.self.com/flash/fitness-blog/2014/04/fitness-weight-loss-workouts/">How Many Days a Week Should You Exercise</a></div>
+				</div>
+								<div class="more-on-self">
+					<a href="http://www.self.com/flash/diet-blog/2011/08/6-high-fat-foods-that-are-good/"><img width="172" height="172" src="http://www.self.com/wp-content/uploads/2011/08/68HighFatFoodsAvocado-172x172.jpg" class="attachment-related-image wp-post-image" alt="68HighFatFoodsAvocado" /></a>					<div class="desc"><a href="http://www.self.com/flash/diet-blog/2011/08/6-high-fat-foods-that-are-good/">6 High-Fat Foods That Are Good for You</a></div>
+				</div>
+							</div>
+		</div>
+	</div>
+</div>
+<!-- Footer is commented, as of now it is not needed for mobile version. -->
+</div> <!-- end #container -->
+<footer>
+    
+	<div class="footer">
+		<div class="container narrow row-fluid footer-container3 clearfix">
+		    				<div class="span12 pagination-centered visible-desktop visible-tablet follow_footer dotter_head">
+					<div class="dotted_header">Follow self</div>
+				</div>
+								<!-- New Follow self starts here -->
+				<div class="new_follow_str visible-tablet">
+					<div class="social_icons">
+						<ul>
+							<li class="social-facebook">
+								<a href="https://facebook.com/selfmagazine/" title="Facebook" target="_blank">Facebook</a>
+							</li>
+							<li class="social-twitter">
+								<a href="http://twitter.com/selfmagazine/" title="Twitter" target="_blank">Twitter</a>
+							</li>
+							<li class="social-pinterest">
+								<a href="http://pinterest.com/selfmagazine/" title="Pinterest" target="_blank" >Pinterest</a>
+							</li>
+							<li class="social-gplus">
+								<a href="https://plus.google.com/+selfmagazine/posts/" title="Gplus" target="_blank">Gplus</a>
+							</li>
+							<li class="social-instragram">
+								<a href="http://instagram.com/selfmagazine/" title="Instragram" target="_blank">Instragram</a>
+							</li>
+							<li class="clear"></li>
+						</ul>
+					</div>
+				</div>
+				<!-- New Follow self ends here -->
+								<div class="container-fluid pagination-centered">
+
+					<div class="row-fluid social_holder ">
+
+						<div class="span4">
+							<h4 class="visible-desktop visible-tablet">ON INSTAGRAM</h4>
+							<h4 class="visible-phone">LATEST ON INSTAGRAM</h4>
+						    <div id="footer-instagram-widget" class="instagram">
+								<div>
+    <a class="profile-link" href="http://instagram.com/selfmagazine/">instagram.com/selfmagazine/</a>
+
+    <ul class="instagram_images">
+        <li>
+            <a href="http://instagram.com/p/xX9gl8q4SH/">
+                <img src="http://scontent-a.cdninstagram.com/hphotos-xpf1/t51.2885-15/10549892_1519240318336769_672335686_a.jpg"
+                    width="306"
+                    height="306"
+                    alt="#NOTEtoSELF cute pants make yoga class way more fun. And PS they&#039;re from @underarmour!'" />
+            </a>
+            <div class="instagram_time">January 03, 2015</div>
+            <div class="instagram_caption">#NOTEtoSELF cute pants make yoga class way more fun. And PS they&#039;re from @underarmour!</div>
+            <ul class="instagram_counts">
+                <li>
+                    <div class="instagram_likes">1505</div>
+                    <div class="instagram_likes_title">Likes</div>
+                </li>
+                <li>
+                    <div class="instagram_comments">24</div>
+                    <div class="instagram_comments_title">Comments</div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <ul class="instagram_stats">
+        <li>
+            <div class="instagram_count">1297</div>
+            <div class="instagram_count_title">Photos</div>
+        </li>
+        <li>
+            <div class="instagram_count">377</div>
+            <div class="instagram_count_title">Following</div>
+        </li>
+        <li>
+            <div class="instagram_count">119266</div>
+            <div class="instagram_count_title">Followers</div>
+        </li>
+    </ul>
+
+</div>
+								<p id="instagran_postedon">
+									<a class="visible-phone instagram_phone" rel="external" href="http://instagram.com/selfmagazine/">
+										
+									</a>
+								</p>
+							</div>
+							<div class="visible-phone follow_text_linkinst">
+								<a rel="external" href="http://instagram.com/selfmagazine/">
+									<p class="follow_text_linkcol">Follow Us on Instagram</p>
+								</a>
+							</div>
+						</div>
+						<div class="span4">
+							<h4 class="visible-desktop visible-tablet">ON TWITTER</h4>
+							<h4 class="visible-phone">LATEST ON TWITTER</h4>
+							<div class="widget CN_WidgetsTwitterFeed"><div class="twitter-widget">
+            <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">The gear that will help you set a new PR <a class="external-link" href="http://t.co/qjTEhGv1l1" title="http://on.self.com/1Bh4PIc">on.self.com/1Bh4PIc</a> <a class="external-link" href="http://t.co/QxQwOuyHlI" title="http://twitter.com/SELFmagazine/status/551343232613773312/photo/1">pic.twitter.com/QxQwOuyHlI</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551343232613773312">about 2 mins ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551343232613773312" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551343232613773312" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551343232613773312" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                        <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">A common flu misperception debunked <a class="external-link" href="http://t.co/fH1lhHw8kI" title="http://on.self.com/1BgUJXC">on.self.com/1BgUJXC</a> <a class="external-link" href="http://t.co/V66ny7T9mp" title="http://twitter.com/SELFmagazine/status/551328123912871936/photo/1">pic.twitter.com/V66ny7T9mp</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551328123912871936">about 1 hour ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551328123912871936" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551328123912871936" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551328123912871936" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                        <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">In 2015 you’ll be seeing a lot more matcha in your food <a class="external-link" href="http://t.co/SIQQktTAA3" title="http://on.self.com/1vG76pU">on.self.com/1vG76pU</a> <a class="external-link" href="http://t.co/4S6N1Fk5ZR" title="http://twitter.com/SELFmagazine/status/551320584630452224/photo/1">pic.twitter.com/4S6N1Fk5ZR</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551320584630452224">about 2 hours ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551320584630452224" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551320584630452224" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551320584630452224" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                        <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">New year, new workout playlist. Here's the music that will help you crush your get fit goal <a class="external-link" href="http://t.co/az1iKKPobp" title="http://on.self.com/178VxTA">on.self.com/178VxTA</a> <a class="external-link" href="http://t.co/z8ABTE54u5" title="http://twitter.com/SELFmagazine/status/551313046488875008/photo/1">pic.twitter.com/z8ABTE54u5</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551313046488875008">about 2 hours ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551313046488875008" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551313046488875008" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551313046488875008" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                        <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">Why we support a good steak dinner <a class="external-link" href="http://t.co/gA20gy8SnF" title="http://on.self.com/1K8Veay">on.self.com/1K8Veay</a> <a class="external-link" href="http://t.co/zGzK5f6q2B" title="http://twitter.com/SELFmagazine/status/551305488097243138/photo/1">pic.twitter.com/zGzK5f6q2B</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551305488097243138">about 3 hours ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551305488097243138" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551305488097243138" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551305488097243138" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                        <div class="twitter_user">
+                <div class="twitter_user_icon"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en"><img src="http://pbs.twimg.com/profile_images/544692766140141569/cXHxMv1e_normal.jpeg" alt="SELF Magazine" /></a></div>
+                <div class="twitter_user_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">SELF Magazine</a></div>
+                <div class="twitter_screen_name"><a class="user-mention" href="https://twitter.com/intent/user?user_id=23798922" title="SELF Magazine" lang="en">@SELFmagazine</a></div>
+            </div>
+
+            <p class="tweet_content">We're talking next-level abs and arms <a class="external-link" href="http://t.co/b6YQWo136V" title="http://on.self.com/1BroO59">on.self.com/1BroO59</a> <a class="external-link" href="http://t.co/jOvzkZFil8" title="http://twitter.com/SELFmagazine/status/551297924538175488/photo/1">pic.twitter.com/jOvzkZFil8</a></p>
+
+            <div class="tweet_meta">
+                <a href="https://twitter.com/twitterapi/status/551297924538175488">about 3 hours ago</a> &middot; 
+                <span class="tweet_intents"><a class="tweet-intent-reply" href="https://twitter.com/intent/tweet?in_reply_to=551297924538175488" title="reply" lang="en">reply</a> &middot; <a class="tweet-intent-retweet" href="https://twitter.com/intent/retweet?tweet_id=551297924538175488" title="retweet" lang="en">retweet</a> &middot; <a class="tweet-intent-favorite" href="https://twitter.com/intent/favorite?tweet_id=551297924538175488" title="favorite" lang="en">favorite</a></span>
+                            </div>
+                <div class="follow-button">
+        <a href="http://twitter.com/SELFmagazine" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en"></a>
+        <a href="http://twitter.com/SELFmagazine" class="twitter-follow-button" data-show-count="false" data-show-screen-name="true" data-lang="en"></a>
+    </div>
+</div>
+</div>
+							<a class="visible-phone twitter_phone" rel="external" href="https://twitter.com/SELFmagazine/">
+								<p class="follow_text_linkcol">Follow Us on Twitter</p>
+							</a>
+							<a class="visible-phone twitter_phone" rel="external" href="https://twitter.com/SELFmagazine/"></a>
+						</div>
+						<div class="span4">
+							<div id="follow-us" class="visible-desktop visible-tablet">
+									<div id="on-pinterest" class="last">
+										<h3>On Pinterest</h3>
+
+											<div class="widget CN_WidgetsPinterest"><div class="mod pinterest-mod">
+				<a data-pin-do="embedUser" href="http://www.pinterest.com/selfmagazine/" data-pin-scale-height="300" data-pin-board-width="300"></a>
+				</div></div>									</div>
+									<a class="visible-phone twitter_phone" rel="external" href="http://pinterest.com/selfmagazine/"><p class="follow_text_linkcol">Follow Us on Pinterest</p></a>
+							</div>
+
+						</div>
+						<div class="new_so_hold span12">
+							<div class="span4">
+								<a class="instagram-link bottom_fol_link " rel="external" href="http://instagram.com/selfmagazine/">Follow Us on Instagram</a>
+							</div>
+							<div class="span4">
+								<a class="bottom_fol_link twitter-link " rel="external" href="https://twitter.com/SELFmagazine/">Follow Us on Twitter</a>
+							</div>
+							<div class="span4">
+								<a class="bottom_fol_link pinterest-link " rel="external" href="http://pinterest.com/selfmagazine/">Follow Us on Pinterest</a>
+							</div>
+					</div>
+					</div>
+				</div>
+								<div class="container narrow row-fluid footer-container1 clearfix">
+					<div class="container-fluid">
+						<div class="span12 footer_70">
+							<div id="subscribe-today">
+								<div id="subscribe-today-inner">
+									<div class="visible-desktop tablet-display-hidden-ecom">
+										<div id="AMS_SLF_GLOBAL_SITEFOOTER" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank"><img src="http://www.self.com/wp-content/themes/self-1.0.0/images/ecom/SLF_failsafe_sitefooter.jpg" alt="Subscribe to Self" border="0" /></a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_GLOBAL_SITEFOOTER != 'undefined' ) {
+  jQuery( "#AMS_SLF_GLOBAL_SITEFOOTER" ).html( pageAds.AMS_SLF_GLOBAL_SITEFOOTER.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_GLOBAL_SITEFOOTER" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_GLOBAL_SITEFOOTER not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>									</div>
+									<div class="visible-tablet tablet-display-ecom">
+										<div id="AMS_SLF_TABLET_GLOBAL_FOOTER" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafe" target="_blank"><img src="http://www.self.com/wp-content/themes/self-1.0.0/images/ecom/SLF_failsafe_sitefooter.jpg" alt="Subscribe to Self" border="0" /></a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_TABLET_GLOBAL_FOOTER != 'undefined' ) {
+  jQuery( "#AMS_SLF_TABLET_GLOBAL_FOOTER" ).html( pageAds.AMS_SLF_TABLET_GLOBAL_FOOTER.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_TABLET_GLOBAL_FOOTER" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_TABLET_GLOBAL_FOOTER not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>									</div>
+									<div class="visible-phone">
+										<div id="AMS_SLF_MOBILE_GLOBAL_FOOTER" class="ecom-placement"><a href="https://w1.buysub.com/loc/SLF/ATGFailsafeMobile" target="_blank"><img src="http://www.self.com/wp-content/themes/self-1.0.0/images/ecom/SLF_MOBFooter_320x525_v1.jpg" alt="Subscribe to Self" border="0" /></a>            <script type="text/javascript">
+            //<!--
+                if ( ( typeof pageAds != 'undefined') && ( CN.url.params( 'nojoy' ) != 1 ) ) {
+                                    (function(){
+                    if ( typeof pageAds.AMS_SLF_MOBILE_GLOBAL_FOOTER != 'undefined' ) {
+  jQuery( "#AMS_SLF_MOBILE_GLOBAL_FOOTER" ).html( pageAds.AMS_SLF_MOBILE_GLOBAL_FOOTER.replace( /document.write\(.*\)/gi, "/* filtered by amg-magnet:document.write(...) */" ) );
+  jQuery( "#AMS_SLF_MOBILE_GLOBAL_FOOTER" ).css( { visibility: 'visible' } );
+} else { CN.debug.info( "AMS_SLF_MOBILE_GLOBAL_FOOTER not in pageAds."); }
+                    })();
+                                }
+            //-->
+            </script>
+            </div>									</div>
+								</div><!-- /#subscribe-today-inner -->
+							 </div><!-- /#subscribe-today -->
+						</div>
+					</div>
+				</div>
+		    			<div class="container narrow row-fluid footer-container2 clearfix">
+				<div class="container-fluid visible-desktop visible-tablet">
+					<div class="span12">
+						<div class="footer-features">
+							<ul class="links">
+										<li>
+											<a href="https://w1.buysub.com/servlet/CSGateway?cds_mag_code=SLF">Subscription Services</a>
+										</li>
+										<li><a href="/contact/contactus/">Contact Self</a></li>
+										<li><a href="http://www.condenast.com/reprints-permissions/">Reprints/Permissions</a></li>
+										<li><a href="https://secure.self.com/services/newsletters/demographics/">Newsletter Signup</a></li>
+										<li><a href="/rss-feeds/">RSS Feeds</a></li>
+										<li><a href="/sitemap/">Site Map</a></li>
+									</ul>
+						</div>
+					</div>
+					<div class="span11 pagination-centered">
+						 <span class="country-wide">Self.com Worldwide</span>
+						<div class="footer-country-features">
+							<ul class="country-links">
+								<li class="footer-last-feature"><a href="http://self.com.cn/">China</a></li>
+							</ul>
+						</div>
+						<div id="footer_div_border"></div>
+					</div>
+				</div>
+				<div class="container-fluid footer_bottom visible-desktop visible-tablet">
+					<div class="span3">
+						<div class="footer-logo">
+							<a href="#"><h3>Cond&#233; Nast Digital</h3></a>
+						</div>
+					 </div>
+					<div class="visible-tablet"><br></div>
+					<div class="span4">
+						 <div class="footer-sister-sites sister_sites_tablet">
+						 	<div class="global-footer-sister-sites">
+			                    <h3>Visit our sister sites</h3>
+			                       <ul id="sites-list">
+			                            <li><a target="_blank" href="http://www.allure.com">Allure</a></li>
+			                            <li><a target="_blank" href="http://www.architecturaldigest.com">Architectural Digest</a></li>
+			                            <li><a target="_blank" href="http://www.bonappetit.com">Bon App&eacute;tit</a></li>
+			                            <li><a target="_blank" href="http://www.brides.com">Brides</a></li>
+			                            <li><a target="_blank" href="http://www.concierge.com/cntraveler">Cond&eacute; Nast Traveler</a></li>
+			                            <li><a target="_blank" href="http://www.concierge.com">Concierge</a></li>
+			                            <li><a target="_blank" href="http://www.details.com">Details</a></li>
+			                            <li><a target="_blank" href="http://www.epicurious.com">Epicurious</a></li>
+			                            <li><a target="_blank" href="http://www.glamour.com">Glamour</a></li>
+			                            <li><a target="_blank" href="http://www.golfdigest.com">Golf Digest</a></li>
+			                            <li><a target="_blank" href="http://www.golfworld.com">Golf World</a></li>
+			                            <li><a target="_blank" href="http://www.gq.com">GQ</a></li>
+			                            <li><a target="_blank" href="http://www.hotelchatter.com">Hotel Chatter</a></li>
+			                            <li><a target="_blank" href="http://www.jaunted.com">Jaunted</a></li>
+			                            <li><a target="_blank" href="http://www.luckymag.com">Lucky</a></li>
+			                            <li><a target="_blank" href="http://www.nutritiondata.com">NutritionData</a></li>
+			                            <li><a target="_blank" href="http://www.reddit.com">Reddit</a></li>
+			                            <li><a target="_blank" href="http://www.self.com">Self</a></li>
+			                            <li><a target="_blank" href="http://www.style.com">Style</a></li>
+			                            <li><a target="_blank" href="http://www.teenvogue.com">Teen Vogue</a></li>
+			                            <li><a target="_blank" href="http://www.newyorker.com">The New Yorker</a></li>
+			                            <li><a target="_blank" href="http://www.thescene.com">The Scene</a></li>
+			                            <li><a target="_blank" href="http://www.vanityfair.com">Vanity Fair</a></li>
+			                            <li><a target="_blank" href="http://www.vegaschatter.com">Vegas Chatter</a></li>
+			                            <li><a target="_blank" href="http://www.vogue.com">Vogue</a></li>
+			                            <li><a target="_blank" href="http://www.wmagazine.com">W</a></li>
+			                            <li><a target="_blank" href="http://www.wired.com">Wired</a></li>
+			                       </ul>
+				                </div>
+						</div>
+					</div>
+					<div class="span5 footer_dylinks_tablet">
+							  <ul class="footer-dylinks">
+								<li><a href="http://www.condenaststore.com/">Cond&#233; Nast Store</a></li>
+								<li><a href="http://www.condenast.com/careers/">Careers</a></li>
+								<li class="footer-last-feature"><a href="http://www.condenast.com/brands/sel/">Self Media Kit</a></li>
+							</ul>
+					</div>
+					<div class="offset2">
+						&nbsp;
+					</div>
+				</div>
+				<div class="container-fluid">
+					<div class="span12">
+						 <div class="footer-copyright">
+							<p>&copy; &nbsp;2015 Cond&#233; Nast. All rights reserved
+								<span class="visible-desktop visible-tablet"><br></span>Use of this site constitutes acceptance of our
+								<a href="http://www.condenast.com/privacy-policy/">User Agreement</a> (effective 1/2/2014) and
+								<a href="http://www.condenast.com/privacy-policy#privacypolicy" >Privacy Policy</a> (effective 1/2/2014).
+								<span class="visible-desktop visible-tablet"><br></span>
+								<a href="http://www.condenast.com/privacy-policy#privacypolicy-california">Your California Privacy Rights</a>
+								<span class="visible-desktop visible-tablet"><br></span>The material on this site may not be reproduced, distributed, transmitted, cached or otherwise used, except with the prior written permission of Cond&#233; Nast.
+								<span class="visible-desktop visible-tablet"><br></span>
+								<a href="http://www.condenast.com/privacy-policy#privacypolicy-optout">Ad Choices
+									<img id="ad_choices_pad" src="http://www.self.com/wp-content/themes/self-1.0.0/images/ad_choices_footer.jpg"/>
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!-- end inner footer -->
+</footer><!-- end footer -->
+<div style="display: none">
+    <div id="PolarAdDiv300x345_frame"></div>
+    <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "300x345", kws: [ "" ] } );
+    </script>
+  
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv300x346_frame"></div>
+    <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "300x346", kws: [ "" ] } );
+    </script>
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv300x347_frame"></div>
+     <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "300x347", kws: [ "" ] } );
+    </script>
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv172x104_frame"></div>
+    <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "172x104", kws: [ "" ] } );
+    </script>
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv625x208_frame"></div>
+     <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "625x208", kws: [ "" ] } );
+    </script>
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv620x90_frame"></div>
+    <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "620x90", kws: [ "" ] } );
+    </script>
+</div>
+<div style="display: none">
+    <div id="PolarAdDiv270x60_frame"></div>
+    <script type="text/javascript">
+ 		CN.dart.call( "PolarAdDiv", { sz: "270x60", kws: [ "" ] } );
+    </script>
+</div>
+            <script type="text/javascript">
+            //<!--
+                CN.config.set({
+                    title        : document.title,
+                                    isiFrame     : true
+                });
+            //-->
+            </script>
+            	        <!-- COMSCORE noscript -->
+	        <noscript>
+				<img src="http://b.scorecardresearch.com/p?c1=2&amp;c2=6035094&amp;c4=http%3A%2F%2Fwww.self.com%2Fflash%2Fbeauty-blog%2F2014%2F12%2Ftaylor-swift-headband%2F" />
+			</noscript>
+	<script type="text/javascript">var lf_config = [{"collectionMeta":"eyJ0eXAiOiJqd3QiLCJhbGciOiJIUzI1NiJ9.eyJ0aXRsZSI6IkhlYWRiYW5kcyAxMDE6IFRheWxvciBTd2lmdCBUYXVnaHQgYSBNYXN0ZXIgQ2xhc3Mgb24gdGhlIFN1YmplY3QiLCJ1cmwiOiJodHRwOlwvXC93d3cuc2VsZi5jb21cL2ZsYXNoXC9iZWF1dHktYmxvZ1wvMjAxNFwvMTJcL3RheWxvci1zd2lmdC1oZWFkYmFuZFwvIiwidGFncyI6WyJIYWlyIiwiaGVhZGJhbmRzIiwiVGF5bG9yIFN3aWZ0Il0sImNoZWNrc3VtIjoiNDMxNmExOWY2OTZjNjVlYjMwMzk3MjhiMDFiYmRjMWMiLCJhcnRpY2xlSWQiOjExMDk2NjF9.IAaGEEVj3k7obDzDOyCRYccqppNiWtVrecdcRSUWaPc","checksum":"4316a19f696c65eb3039728b01bbdc1c","siteId":"320167","articleId":1109661,"delegate":"authDelegate","strings":"","disableAvatars":"true","el":"comments"}];CN.livefyre.main.loadLivefyre(lf_config);</script><script type="text/javascript" data-lf-domain="self.fyre.co" id="ncomments_js" src="http://zor.livefyre.com/wjs/v1.0/javascripts/CommentCount.js"></script>
+            <!-- LF DEBUG
+            site-id: 320167
+            article-id: 1109661
+            post-type: blog
+            comments-open: true
+            is-single: true
+            display-posts: true
+            display-pages: true
+            -->
+                            <!-- START Parse.ly Include: Standard -->
+                <div id="parsely-root" style="display: none">
+                  <div id="parsely-cfg" data-parsely-site="self.com"></div>
+                </div>
+                <script>
+                (function(s, p, d) {
+                  var h=d.location.protocol, i=p+"-"+s,
+                      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+                      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+                      :"static."+p+".com";
+                  if (e) return;
+                  e = d.createElement(s); e.id = i; e.async = true;
+                  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+                })("script", "parsely", document);
+                </script>
+                        <script type="text/javascript">
+        //<!--
+        var native_ad_unit2="looks";
+        var native_ad_unit3="beauty-blog";
+         //-->
+        </script>
+     	<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.widget.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.mouse.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.resizable.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.draggable.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.button.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.position.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/ui/jquery.ui.dialog.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/angular/angular.min.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/angular/angular-resource.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/bootstrap/bootstrap-modal.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/app/cnapp.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/js/controllers.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/js/directives.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/litereg/js/services.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/mu-plugins/cn-wordpress/lib/search/solr-autocomplete.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/jquery/jquery.color.min.js?ver=2.1.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/features.min.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/scripts/js/self.min.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/solr_autocomplete.js?ver=1418757287'></script>
+<script type='text/javascript' src='http://www.self.com/wp-includes/js/comment-reply.min.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/plugins/self-recipe-finder/js/recipefinder.js?ver=4.0.1'></script>
+<script type='text/javascript' src='//s7.addthis.com/js/300/addthis_widget.js?ver=1.0.0#pubid=ra-53ab177b0c1e6183'></script>
+<script type='text/javascript' src='http://www.self.com/wp-content/themes/self-1.0.0/library/js/mediavoice-nativeAds.js?ver=1.0'></script>
+            <script type="text/javascript" class="omniture_block">
+            //<!--
+                CN.stats.omniture.init();
+                CN.stats.omniture.setStatus( CN.site.httpStatusCode );
+
+            CN.stats.omniture.setMobileView( ( CN.isMobile ) ? "Mobile" : "Non-Mobile" );
+
+                if ( CN.cookie.get('amg_user_partner') != '' ) {
+                    CN.stats.omniture.setCustomProp( "52", CN.cookie.get('amg_user_partner') );
+                }
+
+                CN.stats.omniture.setContentType( "Blog" );
+
+                if ( CN.stats.omniture.setReferrer !== undefined && document.referrer.match( CN.site.tld ) ) {
+                    var referrer = document.referrer;
+                    referrer=referrer.split("?")[0];
+                    CN.stats.omniture.setReferrer( referrer );
+                }
+
+                            if ( CN.stats.omniture.setKeywords !== undefined ) {
+                    CN.stats.omniture.setKeywords( "beauty-blog|hair|headbands|taylor-swift" );
+                }
+
+            CN.stats.omniture.setAuthorName( "Shannon Farrell" );
+CN.stats.omniture.setContentId( "1109661" );
+                // Run page tracking (also calls .init() again )
+                if ( CN.preventAutoTrack != true ) {
+                    CN.stats.omniture.doPageTracking();
+                }
+            //-->
+            </script>
+            <noscript>
+                <a href="http://www.omniture.com" title="Web Analytics">
+                    <img src="http://condenast.112.2o7.net/b/ss/conde-self/1/H.15.1--NS/0" height="1" width="1" border="0" alt="" />
+                </a>
+            </noscript>
+                    <script type="text/javascript">
+        //<!--
+
+                var async_body = document.getElementsByTagName('body')[0];
+        var facebookdiv = async_body.appendChild(document.createElement('div'));
+            facebookdiv.id = 'fb-root';
+            (function(d){
+                var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+                js = d.createElement('script'); js.id = id; js.async = true;
+                js.src = "//connect.facebook.net/en_US/all.js";
+                d.getElementsByTagName('head')[0].appendChild(js);
+            }(document));
+            /* Facebook */
+            window.fbAsyncInit = function() {
+                FB.init({
+            appId: 169640983205651,                    channelURL : "http://www.self.com/wp-content/mu-plugins/cn-wordpress/social/facebook.html", // Channel File
+                    status     : false, // check login status
+                    cookie     : true, // enable cookies to allow the server to access the session
+                    oauth      : true, // enable OAuth 2.0
+                    xfbml      : true  // parse XFBML
+                });
+            };
+        (function(d){
+var f = d.getElementsByTagName('SCRIPT')[0];
+var pinterest = d.createElement('SCRIPT');
+pinterest.type = 'text/javascript';
+pinterest.async = true;
+pinterest.src = '//assets.pinterest.com/js/pinit.js';
+f.parentNode.insertBefore(pinterest, f);
+}(document));
+        //-->
+        </script>
+                <div id="eventListHolder" style="display:none;"></div>
+        <script type="text/javascript">
+        // <!--
+            (function(){
+                var ns= window.CN || window.CNP;
+                ns.site = ns.site || {};
+                ns.site.eventTrackingList = new EventList( "eventListHolder" );
+                ns.site.eventTrackingList.setBaseUrl( "http://event.self.com/" );
+
+                ns.site.eventTrackingEvent = new EventObject( "SLF", "most_viewed" );
+
+                        ns.site.eventTrackingEvent.setContentId( "1109661" );
+                ns.site.eventTrackingEvent.setContentType( "blog" );
+
+                        ns.site.eventTrackingEvent.setProperty( "imgurl", "http://www.self.com/wp-content/uploads/2014/12/Taylor-Swift-lead.jpg" );
+        
+        
+                ns.site.eventTrackingEvent.setEnvironment( "PROD" );
+                ns.site.eventTrackingEvent.setFullUrl( "/flash/beauty-blog/2014/12/taylor-swift-headband/" );
+                ns.site.eventTrackingEvent.setContentTitle( "Headbands 101: Taylor Swift Taught a Master Class on the Subject" );
+
+                var fullContentURL = "/flash/beauty-blog/2014/12/taylor-swift-headband/";
+                var isAbsoluteURL = fullContentURL.substring(0,8);
+                var allowedTracking = 0;
+
+                if ( ( isAbsoluteURL.indexOf( 'http' ) == -1 && isAbsoluteURL.indexOf( 'https' ) == -1) || allowedTracking == 1 ) {
+                    ns.site.eventTrackingList.addEvent( ns.site.eventTrackingEvent );
+                    ns.site.eventTrackingList.writeImageTags();
+
+                    CN.debug.info('ETF most_viewed Tracked');
+                }
+
+            }())
+
+            function generateId(url) {
+                var urlRegexp;
+                if (url.indexOf("https:") === 0) {
+                    urlRegexp = /https:\/\/[^\/]*\/([^?#]*).*/i;
+                } else {
+                    urlRegexp = /http:\/\/[^\/]*\/([^?#]*).*/i;
+                }
+                url.match(urlRegexp);
+                return RegExp.$1;
+            }
+        // -->
+        </script>
+        
+            <script type="text/javascript">
+            //<!--
+                if ( CN.url.params( 'nojoy' ) != 1 ) {
+                    _satellite.pageBottom();
+                }
+            //-->
+            </script>
+            
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-1.newrelic.com","licenseKey":"2907deeb56","applicationID":"4344966","transactionName":"YlIEZhNSXxEAABYNW1sYJ1EVWl4MThALClNZUktQDVxW","queueTime":0,"applicationTime":1658,"atts":"ThUHEFtITB8=","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-476.min.js"}</script></body>
+</html>
+ <!-- End main -->

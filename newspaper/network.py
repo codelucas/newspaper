@@ -85,7 +85,7 @@ def _get_html_from_response(response, config):
                 # creating rotated page object
                 pageObj = pdfReader.getPage(page)
                 html += pageObj.extractText()
-
+            html = html.replace('\n', ' ')
         else:
             # return response as a unicode string
             html = response.text
@@ -96,7 +96,6 @@ def _get_html_from_response(response, config):
             if len(encodings) > 0:
                 response.encoding = encodings[0]
                 html = response.text
-    html = html.replace('\n', ' ')
     return html or ''
 
 

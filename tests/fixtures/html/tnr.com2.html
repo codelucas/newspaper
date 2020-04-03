@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Standard Meta -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" /><script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"UgQAVVVQGwEHV1RTBAU="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+
+  <!-- Site Properities -->
+  <title>Global Warming Threshold: What 2 Degrees Celsius (3.6 F) Looks Like | The New Republic</title>
+
+  
+  <!-- Mobile Properities -->
+  <link rel="apple-touch-icon" sizes="57x57" href="/sites/all/themes/tnr/assets/images/apple/apple-icon-57x57.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="/sites/all/themes/tnr/assets/images/apple/apple-icon-72x72.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="/sites/all/themes/tnr/assets/images/apple/apple-icon-114x114.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="/sites/all/themes/tnr/assets/images/apple/apple-icon-144x144.png" />
+
+  <meta name="apple-mobile-web-app-title" content="New Republic">
+  <meta name="google-site-verification" content="yjAiUZ-nXs91TSe9Er7xAnQBp2C8V2gg-mpTF7aZh20" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Social Properities -->
+  <meta property="twitter:account_id" content="82689705" />
+  <meta property="fb:app_id" content="219642118178156" />
+  <meta property="fb:admins" content="100001770781440" />
+  <meta property="fb:admins" content="19000185" />
+  <meta property="fb:admins" content="2400669" />
+  <meta property="fb:admins" content="600931" />
+  <meta property="fb:admins" content="5" />
+  <link href="https://plus.google.com/+thenewrepublic/" rel="publisher" />
+
+  <meta name="parsely-page" content='{"title":"This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point","link":"http:\/\/www.newrepublic.com\/article\/120578\/global-warming-threshold-what-2-degrees-celsius-36-f-looks","section":"Environment","pub_date":"2014-12-21T20:00:00-05:00","post_id":"120578","author":"Rebecca Leber","type":"post","tags":["Environment","Politics","QED","Climate","Climate Change","Environment"]}' />
+  <link rel="canonical" href="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks" />
+<meta property="og:image" content="http://www.newrepublic.com/sites/default/files/the-road.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1250" />
+<meta property="og:image:height" content="517" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="twitter:description" content="What does a 3.6-degree increase in global temperatures really mean?" />
+<meta property="sailthru.rubric" content="Environment" />
+<meta name="keywords" content="Environment, Politics, QED, Climate, Climate Change, Environment" />
+<link rel="alternate" type="application/rss+xml" title="The New Republic" href="http://www.newrepublic.com/rss.xml" />
+<link rel="shortcut icon" href="http://www.newrepublic.com/sites/default/files/newrepublic-icon.ico" type="image/vnd.microsoft.icon" />
+<meta name="sailthru.articleID" content="120578" />
+<meta name="parsely-metadata" content='{"thumb_image":"http:\/\/www.newrepublic.com\/sites\/default\/files\/styles\/homepage_bottom_feature\/public\/the-road.jpg?itok=sc5At3oT"}' /><link rel="alternate" type="application/rss+xml" title="The New Republic | The Plank" href="http://www.newrepublic.com/plank-rss.xml" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image:src" content="http://www.newrepublic.com/sites/default/files/styles/large/public/the-road.jpg?itok=oP92Hibm" />
+<meta property="author" content="Rebecca Leber" />
+<meta name="twitter:creator" content="@rebleber" />
+<meta property="article:section" content="Politics" />
+<meta property="article:published_time" content="2014-12-21T20:00:00-05:00" />
+<meta property="dcterms.creator" content="Rebecca Leber" />
+<meta property="sailthru.date" content="2014-12-21 20:00:00" />
+<meta name="twitter:site" content="@tnr" />
+<meta name="twitter:title" content="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point" />
+<meta property="sailthru.author" content="Rebecca Leber" />
+<meta property="article:tag" content="Environment" />
+<meta name="description" content="What does a 3.6-degree increase in global temperatures really mean?" />
+<meta name="generator" content="Drupal 7 (http://drupal.org)" />
+<meta property="og:site_name" content="The New Republic" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks" />
+<meta property="og:title" content="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point" />
+<meta property="og:description" content="What does a 3.6-degree increase in global temperatures really mean?" />
+<meta name="dcterms.date" content="2014-12-21T20:00-05:00" />
+<meta name="dcterms.type" content="Text" />
+<meta name="dcterms.format" content="text/html" />
+<meta name="dcterms.identifier" content="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks" />
+<meta name="dcterms.language" content="und" />
+  <link type="text/css" rel="stylesheet" href="http://www.newrepublic.com/sites/default/files/css/css_4hPmAO_Nvj6jiRjsl7yjW6iGzgIXcDYAzsF_zjCZPRU.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.newrepublic.com/sites/default/files/css/css_DYhPx8mcOUU8H1Vo19uAAZ2AwdTpk52dNSDIhaPFou0.css" media="all" />
+<link type="text/css" rel="stylesheet" href="http://www.newrepublic.com/sites/default/files/css/css_m16U8G5TUJP-3AqUH142AI_xaLdA6OZzARxwbg_MIVY.css" media="all" />
+<link rel="stylesheet" type="text/css" href="/sites/all/themes/tnr/build/devices/print.css" media="print">
+  <!-- Reset JS before Page Load !-->
+<script src="/sites/all/themes/tnr/javascript/reset.js"></script>
+  <!-- Google Analytics -->
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  var pluginUrl =
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-10465183-1']);
+  _gaq.push(['_setDomainName', 'newrepublic.com']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<!-- comScore -->
+<script>
+var _comscore = _comscore || [];
+_comscore.push({ c1: "2", c2: "15230262" });
+(function() {
+var s = document.createElement("script"), el = document.getElementsByTagName("script")[0]; s.async = true;
+s.src = (document.location.protocol == "https:" ? "https://sb" : "http://b") + ".scorecardresearch.com/beacon.js";
+el.parentNode.insertBefore(s, el);
+})();
+</script>  
+<!-- Google Ads -->
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+
+// pusher
+window.googletag     = window.googletag || {}
+window.googletag.cmd = window.googletag.cmd || [];
+
+// loader
+(function() {
+  var
+    gads   = document.createElement('script'),
+    useSSL = 'https:' == document.location.protocol,
+    node
+  ;
+  gads.async = true;
+  gads.type  = 'text/javascript';
+  gads.src   = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+  node       = document.getElementsByTagName('script')[0];
+  node.parentNode.insertBefore(gads, node);
+})();
+//--><!]]>
+</script>
+
+<style>
+.leaderboard.advertisement {
+  width:728px;
+  height:90px;
+}
+</style>
+
+<!-- Google Ad Leaderboards -->
+<script type="text/javascript">
+// push ads available on all pages onready without jquery (not available till end of page)
+document.onreadystatechange = function () {
+  var
+    state = document.readyState
+  ;
+  if (state === 'interactive' && window.site !== undefined) {
+    site.utilities.load.ads([
+      {
+        name  : '/25738720/Web-LB0',
+        id    : 'leaderboard-ad',
+        sizes : [
+          [728, 90]
+        ]
+      },
+      {
+        name  : '/25738720/Mobile-LB1',
+        id    : 'mobile-leaderboard-ad',
+        sizes : [
+          [320, 50]
+        ]
+      }
+    ]);
+  }
+};
+</script>
+
+</head>
+<body id="article" >
+    <!-- Header !-->
+
+
+  <div class="ui page navigation container">
+
+    <div class="leaderboard advertisement" id="leaderboard-ad"></div>
+<div class="mobile advertisement" id="mobile-leaderboard-ad"></div>    <div class="ui relaxed fitted grid">
+      <div class="left column">
+                <h2>New Republic</h2>
+                <span itemscope itemtype="http://schema.org/Organization">
+          <a class="logo ui image" itemprop="url" href="/" >
+            <img itemprop="logo" src="/sites/all/themes/tnr/assets/images/logo-100-slim.png">
+          </a>
+        </span>
+        <div class="ui compact basic large mobile button">
+          <i class="list layout icon"></i> Menu
+        </div>
+        <nav class="ui divided horizontal category list">
+          <a href="/tags/politics" class="item">Politics</a>
+          <a href="/tags/culture" class="item">Culture</a>
+          <a href="/current-issue" class="item">Magazine</a>
+        </nav>
+        <nav class="ui horizontal sub category list">
+          <a href="/latest" class="item">The Latest</a>
+          <a href="/qed" class="item">Q.E.D.</a>
+          <a href="/tags/books" class="item">Books</a>
+          <a href="/climate" class="item">Climate</a>
+<!--           <a href="/project/next-republic" class="sponsored item">
+            Next Republic
+            <i class="triangle down icon"></i>
+          </a>
+ -->        </nav>
+        <div class="ui sponsored wide popup">
+          <div class="ui four column fitted grid">
+            <div class="column">
+              <a href="/project/next-republic">
+                <img class="ui image" src="/sites/all/themes/tnr/assets/images/suisse/next-republic-navcallout.jpg" alt="Next Republic">
+              </a>
+            </div>
+              <div class="column">
+    <div class="ui headline">
+      <h3 class="ui rubric header">
+        <a href="/tags/identity" class="title">Identity</a>      </h3>
+      <a class="ui image" href="/article/120570/new-republic-exploring-identity-survey-results">
+                <img src="http://www.newrepublic.com/sites/default/files/styles/latest/public/identity_cover-04.png?itok=0_GecQoo" />
+              </a>
+      <h3 class="ui header">
+        <a href="/article/120570/new-republic-exploring-identity-survey-results">
+          How Do Our Readers Think About Personal Identity?        </a>
+        <div class="sub header">
+                  </div>
+      </h3>
+      <div class="author">
+        <a href="/authors/new-republic">The New Republic</a>      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui headline">
+      <h3 class="ui rubric header">
+        <a href="/tags/identity" class="title">Identity</a>      </h3>
+      <a class="ui image" href="/article/120362/new-photobook-epilogue-explores-bulimia-its-aftermath">
+                <img src="http://www.newrepublic.com/sites/default/files/styles/latest/public/epiloguebetterlede.jpg?itok=qvcPAxaJ" />
+              </a>
+      <h3 class="ui header">
+        <a href="/article/120362/new-photobook-epilogue-explores-bulimia-its-aftermath">
+          What It's Like to Lose a Daughter to an Eating Disorder        </a>
+        <div class="sub header">
+                  </div>
+      </h3>
+      <div class="author">
+        <a href="/authors/molly-mirhashem">Molly Mirhashem</a>      </div>
+    </div>
+  </div>
+  <div class="column">
+    <div class="ui headline">
+      <h3 class="ui rubric header">
+        <a href="/tags/identity" class="title">Identity</a>      </h3>
+      <a class="ui image" href="/article/120419/lilting-better-depiction-asian-americans-tv-and-movies">
+                <img src="http://www.newrepublic.com/sites/default/files/styles/latest/public/7f1498792129ca24a1c9897d2f89a2a8.jpg?itok=7UQFlp9n" />
+              </a>
+      <h3 class="ui header">
+        <a href="/article/120419/lilting-better-depiction-asian-americans-tv-and-movies">
+          Finally a Movie That Captures What It's Like to Be Asian American        </a>
+        <div class="sub header">
+                  </div>
+      </h3>
+      <div class="author">
+        <a href="/authors/elaine-teng">Elaine Teng</a>      </div>
+    </div>
+  </div>
+          </div>
+        </div>
+      </div>
+      <div class="right column">
+              <div class="ui right floated red subscribe buttons">
+          <div class="ui dropdown button">
+            <a target="_blank" href="/subscription/self/header">Subscribe Now</a>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              <a class="item" href="/subscription/self/dropdown">Order a Subscription</a>
+              <a class="item" href="/subscription/gift/header">Give a Gift</a>
+              <a class="item" href="/subscription/international/header">International Orders</a>
+              <a class="item" href="/subscription/canada/header">Canadian Orders</a>
+              <a class="item" href="/subscription/digital/header">Digital Subscription</a>
+            </div>
+          </div>
+        </div>
+        <div class="ui small secondary user menu">
+          <a class="login item">Sign In</a><div class="ui login popup"><form class="ui form" action="/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks?destination=node/120578" method="post" id="user-login-form" accept-charset="UTF-8"><div><div class="field"><div class="form-item form-type-textfield form-item-name">
+  <label for="edit-name--2">E-mail Address </label>
+ <span class="field-prefix"><a href="/subscription/self/header" data-content="User accounts are for The New Republic subscribers only. Click here to gain full access to the site." data-title="Get Complete Access" tabindex="5" class="create">Subscribe for Access</a><div class="ui left icon input"><i class="mail icon"></i></span> <input tabindex="1" autocomplete="email" data-validate="username" type="text" id="edit-name--2" name="name" value="" maxlength="60" class="form-text" /> <span class="field-suffix"></div></span>
+</div>
+</div><div class="field"><div class="form-item form-type-password form-item-pass">
+  <label for="edit-pass--2">Password </label>
+ <span class="field-prefix"><a class="forgot" tabindex="6" href="/customer-service">Forgot Your Password?</a><div class="ui left icon input"><i class="lock icon"></i></span> <input tabindex="2" data-validate="password" type="password" id="edit-pass--2" name="pass" maxlength="128" class="form-text" /> <span class="field-suffix"></div></span>
+</div>
+</div><div class="ui inline field"><div class="ui checkbox"><div class="form-item form-type-checkbox form-item-remember-me">
+ <input tabindex="3" type="checkbox" id="edit-remember-me--2" name="remember_me" value="1" checked="checked" class="form-checkbox" />  <label class="option" for="edit-remember-me--2">Remember me on this computer </label>
+
+</div>
+</div></div><input type="hidden" name="form_build_id" value="form-eKbnwfn82smP36WcsF4HV19pYZyrdp_L7ArbvhAJUME" />
+<input type="hidden" name="form_id" value="user_login_block" />
+<div class="form-actions form-wrapper" id="edit-actions--2"><input tabindex="4" class="ui submit button form-submit" type="submit" id="edit-submit--2" name="op" value="Sign In" /></div></div></form></div>        </div>
+              <div class="ui search">
+          <div class="ui small icon input">
+            <input class="prompt" type="text" name="q" autocomplete="off" placeholder="Search...">
+            <i class="search icon"></i>
+          </div>
+          <div class="results"></div>
+        </div>
+      </div>
+    </div>
+    <div class="ui fluid inverted vertical logged-out mobile menu">
+      <a class="item" href="/page/account-information">Sign In</a>
+      <a class="item" href="/subscription/self/header">Subscribe</a>
+      <div class="header item">Sections</div>
+      <a href="/latest" class="item">The Latest</a>
+      <a href="/qed" class="item">QED</a>
+      <a href="/tags/politics" class="item">Politics</a>
+      <a href="/tags/culture" class="item">Culture</a>
+      <a href="/climate" class="item">Climate</a>
+      <a href="/current-issue" class="item">The Magazine</a>
+      <!-- <a href="/tags/future-work" class="item">Next Republic</a> -->
+    </div>
+  </div>
+
+<div class="page body">
+    <script type="text/javascript">
+site.page.config = {
+  enablePaywall: false,
+  adInterval : 30,
+    ads        : [
+    {
+      name  : '/25738720/Web-LR1',
+      id    : 'rail-ad',
+      sizes : [
+        [300, 250],
+        [300, 600],
+        [300, 1050]
+      ]
+    },
+    {
+      name  : '/25738720/Web-LR2',
+      id    : 'sticky-rail-ad',
+      sizes : [
+        [300, 250],
+        [300, 600]
+      ]
+    },
+    {
+      name  : '/25738720/Web-LR3',
+      id    : 'extra-rail-ad',
+      sizes : [
+        [300, 250]
+      ]
+    },
+    {
+      name  : '/25738720/Web-SR1',
+      id    : 'house-small-rectangle',
+      sizes : [
+        [300, 100]
+      ]
+    },
+    {
+      name  : '/25738720/Web-Teads1',
+      id    : 'ad-teads',
+      sizes : [
+        [1, 1]
+      ]
+    },
+    {
+      name  : '/25738720/Web-C-80x80',
+      id    : 'house-left-rail',
+      sizes : [
+        [80, 80]
+      ]
+    },
+    {
+      name  : '/25738720/Mobile-WS1',
+      id    : 'tablet-sticky-rail-ad',
+      sizes : [
+        [160, 600]
+      ]
+    },
+    {
+      name  : '/25738720/Mobile-LR1',
+      id    : 'mobile-article-bottom-ad',
+      sizes : [
+        [300, 250],
+        [300, 600]
+      ]
+    }
+  ]
+  };
+</script>
+
+<div class="ui page content container">
+    <div class="story image"
+    data-image="http://www.newrepublic.com/sites/default/files/the-road.jpg"
+      >
+    <div class="ui active flipping loader">
+      <div class="shape"></div>
+    </div>
+      </div>
+  <img src="http://www.newrepublic.com/sites/default/files/styles/static_cover_img_500/public/the-road.jpg?itok=NsXCRwMf" class="ui fluid inline image" alt="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point">
+  
+  <div class="article container" itemscope itemtype="http://schema.org/Article">
+
+    <div class="header">
+      <div class="story title">
+                  <a href="/tags/environment" itemprop="articleSection" class="category">Environment</a>                <h5 class="date" itemprop="datePublished"><span property="dc:date dc:created" content="2014-12-21T20:00:00-05:00" datatype="xsd:dateTime">December 21, 2014</span></h5>
+        <h1 class="title">
+          <span class="headline" itemprop="name">This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point</span>
+                  </h1>
+      </div>
+    </div>
+    <div class="content">
+      <div class="story">
+        <div class="inline tools">
+          <div class="share module">
+            <div class="twitter slim"
+              data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+              data-text="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point"
+              data-title="Tweet">
+            </div>
+            <div class="facebook slim"
+              data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+              data-text="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point"
+              data-title="Share">
+            </div>
+          </div>
+        </div>
+        <div class="tracking">
+          <div class="body text">
+                        <h5 class="ui author dividing header">
+              By <a href="/authors/rebecca-leber" itemprop="author" rel="author">Rebecca Leber</a> <span class="twitter"><i class="twitter icon"></i> <a href="https://twitter.com/rebleber" target="_blank">@rebleber</a></span>                          </h5>
+                        
+                                    <div class="body" itemprop="articleBody" >
+              <p class="p1"><span class="dropcap">T</span>he de facto assumption of climate change policy is that the world must limit the increase in global temperatures to 3.6 degrees Fahrenheit (2 degrees Celsius) above pre-Industrial levels, or risk hitting a tipping point where the impact becomes irreversible. The figure dates back to 1975, when economist William Nordhaus suggested that more than 3.6 degrees of warming would “take the climate outside of the range of observations which have been made over the last several hundred thousand years.” By the 1990s, 3.6 degrees gained traction in the scientific community and then in politics, when the European Council argued in 1996 that 3.6 degrees should be the United Nations’ red line for global warming. It wasn’t until four years ago, at a climate conference in Cancun, Mexico, that countries finally committed to “hold the increase in global average temperatures below” 3.6 degrees.</p><p class="p1">Despite being almost 40 years old, this temperature threshold remains <a href="http://www.nytimes.com/2014/12/16/science/earth/is-a-two-degree-limit-on-global-warming-off-target.html?_r=0">controversial</a><span class="em">&mdash;</span>and for good reason. One: It's rather arbitrary. Two: It's unrealistic. To stay within 3.6 degrees, global carbon pollution would have to begin coming down in the <a href="http://www.climatecentral.org/news/world-carbon-emissions-gap-18353">next decade</a>, according to the United Nations Environmental Program Emissions Gap Report. The world would have to reach zero net greenhouse gas emissions before the end of the century.</p><p class="p1">In other words, we're nowhere near where we need to be to stay under this target. Pollution continues to rise, and global temperatures are already locked in for warming that puts the planet two-thirds of the way there, currently around <a href="http://www.nytimes.com/2014/08/27/science/earth/greenhouse-gas-emissions-are-growing-and-growing-more-dangerous-draft-of-un-report-says.html?_r=0">1.5 degrees</a> above pre-industrial level temperatures, counting the pollution we've emitted and will continue to emit in the short-term to medium-term.</p><p class="p1">As it becomes clear that international talks will fall short of meeting this target, some are calling to abandon it altogether. </p><p class="p1">A paper in <a href="http://www.nature.com/news/climate-policy-ditch-the-2-c-warming-goal-1.16018"><em>Nature</em></a><em> </em>in October argued that we should instead measure various "vital signs,” like looking at extreme events around the planet. Negotiators at the December climate talks in Lima, Peru, have recognized that the proposed cuts mean accepting warming anywhere <a href="http://www.nytimes.com/2014/12/01/world/climate-talks.html">between 4 and 10 degrees</a>. While many point out that 3.6 degrees is unrealistically low, <a href="http://www.nytimes.com/2014/12/16/science/earth/is-a-two-degree-limit-on-global-warming-off-target.html?_r=0">scientists are meeting to reconsider</a> whether this target is already too high. </p><p class="p1">NASA Goddard Institute for Space Studies climatologist Gavin Schmidt likened the 3.6 threshold to a speed limit: Going over the speed limit doesn't ensure disaster, but it certainly raises the risk of it. “It means the faster you’re going around that curve, the more dangerous it is going to be,” he said. “What any one person might judge as a level that can be adapted to is going to be very dependent on where they’re coming from, what their culture is, how resilient they are, and how much money they have to adapt."</p><p class="p1"> </p><p class="p1"><span class="dropcap">L</span>et's say we resign ourselves to a future reality where global temperatures are twice the current target. This future is not all that unlikely, since “present emission trends put the world plausibly on a path toward” 7.2 degrees Fahrenheit (4°C) warming by the end of the century, according to a 2014 report from the <a href="http://www-wds.worldbank.org/external/default/WDSContentServer/WDSP/IB/2012/12/20/000356161_20121220072749/Rendered/PDF/NonAsciiFileName0.pdf">World Bank</a>.</p><p class="p1">At that level, what might the planet look like? </p><p><div class="pull-right"><div><a href="http://wp.newrepublic.com/wp-content/uploads/2014/12/Back-Bay-0-feet.gif" class="lightbox"><img src="http://wp.newrepublic.com/wp-content/uploads/2014/12/Back-Bay-0-feet.gif" height="415" width="624" /></a></div><div class="caption"><div class="credit">Mashable</div><div class="caption-text">A visualization of sea level rise in Boston.</div></div></div></p><p><div class="pull-right"><div><a href="http://wp.newrepublic.com/wp-content/uploads/2014/12/Statue-of-Liberty-0-feet.gif" class="lightbox"><img src="http://wp.newrepublic.com/wp-content/uploads/2014/12/Statue-of-Liberty-0-feet.gif" height="409" width="624" /></a></div><div class="caption"><div class="credit">Mashable</div><div class="caption-text">A visualization of sea level rise in New York.</div></div></div></p><p class="p1">In starker language than what scientists normally use, the report described the impacts at 7.2 degrees as "devastating," stating, "given that uncertainty remains about the full nature and scale of impacts, there is also no certainty that adaptation to a 4°C world is possible. This world means "communities, cities and countries would experience severe disruptions, damage, and dislocation, with many of these risks spread unequally." </p><p class="p1">Scientists believe that 3.6 degrees is roughly the temperature at which the expansive ice sheets in Greenland and West Antarctica become unstable and melt at an unstoppable rate. If the West Antarctic ice sheet melted entirely, it would raise sea levels by more than 10 feet. If Greenland’s ice sheet melted away, add another 23 feet. It's still a matter of contention how many centuries this would take, but a number of studies this year show these ice sheets melting at an alarming rate. <a href="http://www.washingtonpost.com/blogs/wonkblog/wp/2014/12/15/scientists-are-worried-greenland-might-melt-even-faster-than-expected/?tid=pm_business_pop">In the last month, four studies </a>show these ice sheets may be more unstable than previous models, which would mean current projections of sea level rise, of up to <a href="nca2014.globalchange.gov/report/our-changing-climate/sea-level-rise">4 feet</a> by the century's end, are too conservative. One of these analyses, from NASA and the University of California at Irvine, shows that western Antarctica lost water that's equivalent to the weight of <a href="http://news.uci.edu/press-releases/west-antarctic-melt-rate-has-tripled-uc-irvine-nasa/">Mt. Everest</a> every two years for the past 21 years. </p><p class="p1">This would change the world map as we know it. Some <a href="http://www.climatecentral.org/news/u.s.-with-10-feet-of-sea-level-rise-17428">12.3 million</a> people live on U.S. land that would go underwater if the sea rises by 10 feet. <a href="http://sealevel.climatecentral.org/">Climate Central</a> shows who in the U.S. would be affected:</p><p><iframe src="http://sealevel.climatecentral.org/surgingseas/widget/" width="480" height="435"></iframe></p><p class="p1">Uncontrolled climate change would also fuel greater extremes across the world. We’re already experiencing hotter average temperatures; the first 11 months of 2014 means this year is on track to be the hottest year recorded. Those effects grow even worse in a world that's 7.2 degrees warmer than pre-industrial times. The coolest months in tropical regions are likely to be "substantially warmer than the warmest months in the 20th century," according to the World Bank. The summer months in the Mediterranean, North Africa, and the Middle East will exceed today's heat extremes. Parts of Africa, the Middle East, and South Asia will face devastating droughts as temperatures rise. Food production <a href="http://www.huffingtonpost.com/2014/12/18/climate-change-food-production_n_6349164.html">will plummet</a> and water supplies will be drained, even as the world population rises. No doubt, the frequency and severity of human conflict will rise right along with it.</p>
+                            <div id="ad-teads"></div>
+              
+              
+              
+              
+              
+            </div>
+          </div>
+          <div class="apostrophe"></div>
+          <div class="variable advertisement" id="mobile-article-bottom-ad"></div>
+          <div class="taboola">
+            <div class="ui active flipping loader">
+              <div class="shape"></div>
+              Loading Related Articles...
+            </div>
+            <div id="taboola-main"></div>
+            <div id="taboola-text"></div>
+          </div>
+
+                    <div class="inline category">
+            <a href="/tags/politics"><img typeof="foaf:Image" src="/sites/all/themes/tnr/assets/images/tags/tnr-politics-187x80.gif" alt="Politics" /></a>          </div>
+          
+                    <div class="ui basic vertical inline tag segment">
+            <h4 class="ui header">More articles tagged as</h4>
+            <div class="ui labels">
+              <a href="/tags/environment" class="ui label">Environment</a><a href="/tags/politics" class="ui label">politics</a><a href="/tags/qed" class="ui label">qed</a><a href="/tags/climate" class="ui label">climate</a><a href="/tags/climate-change" class="ui label">climate change</a><a href="/tags/environment" class="ui label">environment</a>            </div>
+          </div>
+          
+          <div class="inline recirculation">
+            <div id="bottomCenter" class="recirculation module">
+  <div class="ui two item tabular top attached menu">
+        <a class="active item" data-tab="related">Related</a>
+        <a class="item" data-tab="trending">Trending</a>
+      </div>
+    <div class="ui active bottom attached piled tab segment" data-tab="related">
+    <div class="filter">More Articles in <a Href="/tags/environment" Itemprop="articleSection" Class="category">Environment</a></div>
+    <div class="ui relaxed bulleted list">
+            <div href="/article/120654/pope-francis-will-make-climate-change-2015-cause" class="article item">
+  <a href="/article/120654/pope-francis-will-make-climate-change-2015-cause">
+    Pope Francis Has Declared War on Climate Deniers  </a>
+</div>
+<div href="/article/120628/environmental-wish-list-obama-2015" class="article item">
+  <a href="/article/120628/environmental-wish-list-obama-2015">
+    Obama Made Environmentalists Very Happy This Year. Here's What He Needs to Do to Keep It That Way in 2015.  </a>
+</div>
+<div href="/article/120616/first-epa-regulation-coal-ash-weak-environmentalists-say" class="article item">
+  <a href="/article/120616/first-epa-regulation-coal-ash-weak-environmentalists-say">
+    EPA Just Saved Utilities a Lot of Money With Weak Coal Ash Regulation  </a>
+</div>
+<div href="/article/120592/cuomo-listens-scientists-new-york-state-fracking-ban" class="article item">
+  <a href="/article/120592/cuomo-listens-scientists-new-york-state-fracking-ban">
+    Andrew "I'm Not a Scientist" Cuomo Listens to Scientists on Fracking  </a>
+</div>
+<div href="/article/120560/cop20-climate-conference-concludes-weaker-text" class="article item">
+  <a href="/article/120560/cop20-climate-conference-concludes-weaker-text">
+    The Watered-Down Climate Deal Won't Be Enough to Stop Global Warming  </a>
+</div>
+    </div>
+  </div>
+    <div class="ui bottom attached piled tab segment" data-tab="trending">
+    <div class="filter">Popular Articles
+      <div class="inline ui dropdown">
+          <span class="text">Now</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="active item" data-value="now">Now</div>
+            <div class="item" data-value="week">This Week</div>
+            <div class="item" data-value="month">This Month</div>
+        </div>
+      </div>
+    </div>
+    <div class="ui relaxed ordered list">
+            <div href="/article/120681/how-math-explains-saturns-rings" class="article item">
+  <a href="/article/120681/how-math-explains-saturns-rings">
+    The Solar System Is Slowly Re-Arranging Itself  </a>
+</div>
+<div href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism" class="article item">
+  <a href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism">
+    Male Nerds Think They're Victims Because They Have No Clue What Female Nerds Go Through  </a>
+</div>
+<div href="/article/120178/problem-international-development-and-plan-fix-it" class="article item">
+  <a href="/article/120178/problem-international-development-and-plan-fix-it">
+    Stop Trying to Save the World  </a>
+</div>
+<div href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu" class="article item">
+  <a href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu">
+    Oregon's Players Should Be Celebrated, Not Punished for Chanting "No Means No!"  </a>
+</div>
+<div href="/article/120667/television-2014-figured-out-what-sex-women" class="article item">
+  <a href="/article/120667/television-2014-figured-out-what-sex-women">
+    At Last, Television Shows Have Figured Out What Sex Is Like for Women  </a>
+</div>
+    </div>
+  </div>
+  </div>          </div>
+        </div>
+
+        <div class="left article rail">
+          
+          <div class="ui sticky">
+            <div class="share module">
+  <div class="social">
+    <div class="vertical facebook"
+      data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+      data-text="At Last, Television Shows Have Figured Out What Sex Is Like for Women"
+      data-title="Share">
+    </div>
+    <div class="vertical twitter"
+      data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+      data-text="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point"
+      data-title="Tweet"></div>
+  </div>
+</div>            <div id="house-left-rail" style="margin-bottom:40px;"></div>
+            <div class="tools module">
+  <div class="ui vertical icon menu">
+    <div class="link email item" data-position="right center"  data-content="E-mail this article">
+      <i class="mail icon"></i>
+    </div>
+    <div class="link save ui dropdown item" data-position="right center"  data-content="Save for Later">
+      <i class="bookmark icon"></i>
+      <div class="vertical menu">
+        <div class="header item">
+          Choose Service
+        </div>
+        <a class="item" target="_blank" href="http://www.instapaper.com/hello2?url=http%3A%2F%2Fwww.newrepublic.com%2Farticle%2F120578%2Fglobal-warming-threshold-what-2-degrees-celsius-36-f-looks&amp;title=This+Is+What+Our+Hellish+World+Will+Look+Like+After+We+Hit+the+Global+Warming+Tipping+Point&amp;description=What+does+a+3.6-degree+increase+in+global+temperatures+really+mean%3F">
+          Save to Instapaper
+        </a>
+        <a class="item" target="_blank" href="http://readability.com/save?url=http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks">
+          Save to Readability
+        </a>
+        <div class="item">
+          <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">
+          !function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");
+          </script>
+        </div>
+      </div>
+    </div>
+    <div class="ui font dropdown link item" data-position="right center" data-content="Font Size">
+      <i class="font icon"></i>
+      <div class="menu">
+        <div class="small item" data-value="1/1.8">Small</div>
+        <div class="active medium item" data-value="">Medium</div>
+        <div class="large item" data-value="1.4/1.6">Large</div>
+        <div class="x-large item" data-value="1.5/1.65">Extra Large</div>
+      </div>
+    </div>
+    <div class="link print item" data-position="right center" data-content="Print">
+      <i class="print icon"></i>
+    </div>
+  </div>
+</div>
+          </div>
+        </div>
+
+        <div class="right article rail">
+
+<!-- Ad LR1 -->
+                      <div class="variable advertisement module" id="rail-ad"></div>          
+<!-- Recirc Top -->
+                      <div class="project trending recirculation module">
+  <a href="/qed" class="ui image" >
+    <img src="/sites/all/themes/tnr/assets/images/qed/qed-header-1400x190.jpg">
+  </a>
+  <div class="ui headlines">
+        <div class="article headline">
+    <div class="image">
+    <a href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu"><img src="/sites/default/files/styles/static_cover_img_500/public/454405788.jpg"></a>
+  </div>
+    <h4 class="header">
+    <a href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu">
+      Oregon's Players Should Be Celebrated, Not Punished for Chanting "No Means No!"    </a>
+  </h4>
+</div>
+<div class="article headline">
+    <div class="image">
+    <a href="/article/120672/2015-predictions-economy-politics-tech-and-sports"><img src="/sites/default/files/styles/static_cover_img_500/public/458990902.jpg"></a>
+  </div>
+    <h4 class="header">
+    <a href="/article/120672/2015-predictions-economy-politics-tech-and-sports">
+      11 Predictions for 2015 That Are Bolder Than Vox's    </a>
+  </h4>
+</div>
+<div class="article headline">
+    <div class="image">
+    <a href="/article/120664/economist-list-influential-economists-excludes-janet-yellen"><img src="/sites/default/files/styles/static_cover_img_500/public/485096223_0.jpg"></a>
+  </div>
+    <h4 class="header">
+    <a href="/article/120664/economist-list-influential-economists-excludes-janet-yellen">
+      The Economist's "Most Influential Economists of 2014" Includes Zero Women. Not Even Janet Yellen    </a>
+  </h4>
+</div>
+<div class="ui active flipping loader">
+  <div class="shape"></div>
+  Loading
+</div>    <div class="ui active flipping loader">
+      <div class="shape"></div>
+      Loading
+    </div>
+  </div>
+</div>          
+<!-- Marginalia / House spots -->
+          <!-- Email Newsletter -->
+                                          <div class="newsletter module">
+  <p>Sign up for our newsletter to get the latest news from QED</p>
+  <form class="ui form" method="post" action="http://link.newrepublic.com/s/TNR">
+    <input type="hidden" name="list[Master List]" value="1" />
+    <input type="hidden" name="vars[marketing]" value="TRUE" />
+    <input type="hidden" name="vars[source]" value="qed_article" />
+    <input type="hidden" name="vars[qed]" value="TRUE" />
+    <div class="field">
+      <div class="ui fluid left labeled icon input">
+        <input type="text" name="email" placeholder="Enter e-mail" data-validate="email"  />
+        <i class="mail icon"></i>
+      </div>
+    </div>
+    <div class="ui blue submit button" type="submit">Sign Up</div>
+    <div class="ui success message">
+      <i class="checkmark icon"></i>
+      Signed up!
+    </div>
+  </form>
+</div>                          <!-- Temp LR spot -->
+                          <div class="variable advertisement module" id="extra-rail-ad"></div>
+                      
+<!-- Regular Right Rail -->
+          
+  <!-- House ad -->
+                          <div class="variable advertisement module" id="house-small-rectangle"></div>            
+  <!-- Sticky Spot -->
+            <div class="ui sticky">
+              <div class="share module">
+  <div class="social">
+    <div class="inline facebook"
+      data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+      data-text="The Economist's "Most Influential Economists of 2014" Includes Zero Women. Not Even Janet Yellen"
+      data-title="Share">
+    </div>
+    <div class="inline twitter"
+      data-url="http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks"
+      data-text="This Is What Our Hellish World Will Look Like After We Hit the Global Warming Tipping Point"
+      data-title="Tweet"></div>
+  </div>
+</div>              <div class="variable advertisement module">
+  <div id="sticky-rail-ad"></div>
+  <div id="tablet-sticky-rail-ad"></div>
+</div>
+              <div class="ui clearing section expand divider"></div>
+              <div class="ui fluid expand button">
+                <i class="list layout icon"></i> Article Tools
+              </div>
+            </div>
+
+<!-- Enhanced Right Rail -->
+                  </div><!-- end right rail -->
+
+                            <div class="comments">
+            <div class="ui active flipping loader">
+              <div class="shape"></div>
+              Loading Comments
+            </div>
+            <div id="livefyre-comments"></div>
+            <div class="right rail">
+              <div class="ui sticky">
+                <div id="bottomRight" class="recirculation module">
+  <div class="ui small two item secondary pointing menu">
+    <a class="active blue item" data-tab="trending">Trending</a>
+        <a class="item" data-tab="related">Related</a>
+          </div>
+  <div class="ui active bottom attached stacked secondary tab segment" data-tab="trending">
+    <div class="filter">Popular Articles
+      <div class="inline ui dropdown">
+          <span class="text">Now</span>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            <div class="active item" data-value="now">Now</div>
+            <div class="item" data-value="week">This Week</div>
+            <div class="item" data-value="month">This Month</div>
+        </div>
+      </div>
+    </div>
+    <div class="ui relaxed ordered list">
+      <div href="/article/120681/how-math-explains-saturns-rings" class="article item">
+  <a href="/article/120681/how-math-explains-saturns-rings">
+    The Solar System Is Slowly Re-Arranging Itself  </a>
+</div>
+<div href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism" class="article item">
+  <a href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism">
+    Male Nerds Think They're Victims Because They Have No Clue What Female Nerds Go Through  </a>
+</div>
+<div href="/article/120178/problem-international-development-and-plan-fix-it" class="article item">
+  <a href="/article/120178/problem-international-development-and-plan-fix-it">
+    Stop Trying to Save the World  </a>
+</div>
+<div href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu" class="article item">
+  <a href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu">
+    Oregon's Players Should Be Celebrated, Not Punished for Chanting "No Means No!"  </a>
+</div>
+<div href="/article/120667/television-2014-figured-out-what-sex-women" class="article item">
+  <a href="/article/120667/television-2014-figured-out-what-sex-women">
+    At Last, Television Shows Have Figured Out What Sex Is Like for Women  </a>
+</div>
+    </div>
+  </div>
+    <div class="ui bottom attached stacked secondary tab segment" data-tab="related">
+    <div class="filter">More Articles in <a Href="/tags/environment" Itemprop="articleSection" Class="category">Environment</a></div>
+    <div class="ui relaxed bulleted list">
+      <div href="/article/120681/how-math-explains-saturns-rings" class="article item">
+  <a href="/article/120681/how-math-explains-saturns-rings">
+    The Solar System Is Slowly Re-Arranging Itself  </a>
+</div>
+<div href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism" class="article item">
+  <a href="/article/120653/nerd-entitlement-lets-men-ignore-racism-and-sexism">
+    Male Nerds Think They're Victims Because They Have No Clue What Female Nerds Go Through  </a>
+</div>
+<div href="/article/120178/problem-international-development-and-plan-fix-it" class="article item">
+  <a href="/article/120178/problem-international-development-and-plan-fix-it">
+    Stop Trying to Save the World  </a>
+</div>
+<div href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu" class="article item">
+  <a href="/article/120683/oregon-football-players-chant-no-means-no-after-beating-fsu">
+    Oregon's Players Should Be Celebrated, Not Punished for Chanting "No Means No!"  </a>
+</div>
+<div href="/article/120667/television-2014-figured-out-what-sex-women" class="article item">
+  <a href="/article/120667/television-2014-figured-out-what-sex-women">
+    At Last, Television Shows Have Figured Out What Sex Is Like for Women  </a>
+</div>
+    </div>
+  </div>
+    </div>              </div>
+            </div>
+          </div>
+                    </div>
+    </div>
+  </div>
+</div>
+
+<div class="ui very thin inverted vertical icon mobile sidebar tools module menu">
+  <div class="email link item" title="E-mail Story">
+    <i class="mail icon"></i>
+  </div>
+  <div class="link save ui dropdown item" data-position="right center"  data-content="Save for Later">
+    <i class="bookmark icon"></i>
+    <div class="vertical menu">
+      <div class="header item">
+        Choose Service
+      </div>
+      <a class="item" target="_blank" href="http://www.instapaper.com/hello2?url=http%3A%2F%2Fwww.newrepublic.com%2Farticle%2F120578%2Fglobal-warming-threshold-what-2-degrees-celsius-36-f-looks&amp;title=This+Is+What+Our+Hellish+World+Will+Look+Like+After+We+Hit+the+Global+Warming+Tipping+Point&amp;description=What+does+a+3.6-degree+increase+in+global+temperatures+really+mean%3F">
+        Save to Instapaper
+      </a>
+      <a class="item" target="_blank" href="http://readability.com/save?url=http://www.newrepublic.com/article/120578/global-warming-threshold-what-2-degrees-celsius-36-f-looks">
+        Save to Readability
+      </a>
+      <!--div class="item">
+        <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+        <script type="text/javascript">
+        !function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");
+        </script>
+      </div!-->
+    </div>
+  </div>
+  <div class="ui font dropdown link item" title="Font Size"><i class="font icon"></i>
+    <div class="menu">
+      <div class="small item" data-value="1/1.8">Small</div>
+      <div class="active medium item" data-value="">Medium</div>
+      <div class="large item" data-value="1.4/1.6">Large</div>
+      <div class="x-large item" data-value="1.5/1.65">Extra Large</div>
+    </div>
+  </div>
+  <div class="print link item" title="Print"><i class="print icon"></i></div>>
+</div><div class="ui email modal">
+  <i class="close icon"></i>
+  <div class="header">
+    <img src="/sites/all/themes/tnr/assets/images/logo-white.png" class="ui small left floated image">
+    Share by e-mail
+  </div>
+  <div class="content">
+    <form class="ui form">
+      <input type="hidden" name="form_id" value="tnr_article_email_form">
+      <input type="hidden" name="form_build_id" value="C0TiPBjRiAk7oNExiJBIGIDSkPkN6OZUqHyzjCo5cGY">
+      <input type="hidden" name="js" value="true">
+      <div class="required field">
+        <label>Friend's e-mails (separated by comma)</label>
+        <div class="ui input">
+          <input type="email" name="email_to">
+        </div>
+      </div>
+      <div class="ui divider"></div>
+      <div class="two required fields">
+        <div class="field">
+          <label>Your name</label>
+          <div class="ui input">
+            <input type="text" name="sender_name">
+          </div>
+        </div>
+        <div class="field">
+          <label>Your e-mail</label>
+          <div class="ui input">
+            <input type="email" name="sender_email">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="ui checkbox">
+          <input type="checkbox" id="send_copy" name="send_copy" checked>
+          <label for="send_copy">Send yourself a copy</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Personal message</label>
+        <textarea name="opt_msg"></textarea>
+      </div>
+    </form>
+  </div>
+  <div class="actions">
+    <div class="ui cancel button">Cancel</div>
+    <div class="ui right green labeled icon approve button">
+      <i class="mail icon"></i>
+      Send E-mail
+    </div>
+  </div>
+</div></div>
+<!-- Without the following, metatags are not rendered properly -->
+
+<div class="ui page footer container">
+  <div class="ui relaxed stackable fitted grid">
+    <div class="sixteen wide mobile only center aligned column">
+      <div class="ui horizontal inverted icon divider">
+        <i class="circular inverted sitemap icon"></i>
+      </div>
+      <h5 class="ui inverted header">Sections</h5>
+      <div class="ui relaxed inverted fitted selection list">
+        <a href="/latest" class="item">The Latest</a>
+        <a href="/tags/politics" class="item">Politics</a>
+        <a href="/tags/culture" class="item">Culture</a>
+        <a href="/current-issue" class="item">The Magazine</a>
+      </div>
+      <select name="section" class="sections">
+        <option value="">More</option>
+        <optgroup label="Categories">
+          <option value="/tags/books/">Books</option>
+          <option value="/tags/economy/">Economy</option>
+          <option value="/tags/film/">Film</option>
+          <option value="/tags/plank/">The Plank</option>
+          <option value="/tags/politics/">Politics</option>
+          <option value="/tags/technology/">Technology</option>
+          <option value="/tags/world/">World</option>
+        </optgroup>
+        <optgroup label="New Republic">
+          <option value="/current-issue">Current Issue</option>
+          <option value="/page/about-new-republic">About</option>
+          <option value="/page/advertise-new-republic">Advertise</option>
+          <option value="/page/contact-us">Contact Us</option>
+          <option value="/page/jobs-and-internships">Jobs &amp; Internships</option>
+          <option value="/page/privacy-policy" rel="nofollow">Privacy Policy</option>
+          <option value="/tags/home-news">Home News</option>
+          <option value="/tags/events">Events</option>
+          <option value="/ebsco">Archives</option>
+          <option value="/page/rss-feeds">RSS</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="ten wide sitemap column">
+      <div class="ui horizontal inverted icon divider">
+        <i class="circular inverted sitemap icon"></i>
+      </div>
+      <div class="ui three column grid">
+        <div class="column">
+          <h5 class="ui inverted header">Sections</h5>
+          <div class="ui small relaxed inverted fitted selection list">
+            <a class="item" href="/tags/books/">Books</a>
+            <a class="item" href="/tags/economy/">Economy</a>
+            <a class="item" href="/tags/film/">Film</a>
+            <a class="item" href="/tags/plank/">The Plank</a>
+            <a class="item" href="/tags/politics/">Politics</a>
+            <a class="item" href="/tags/technology/">Technology</a>
+            <a class="item" href="/tags/world/">World</a>
+            <a class="item" href="/tags/events/">Events</a>
+          </div>
+        </div>
+        <div class="column">
+          <h5 class="ui inverted header">The Magazine</h5>
+          <div class="ui small relaxed inverted fitted selection list">
+            <a class="item" href="/latest">Our Latest</a>
+            <a class="item" href="/current-issue">Current Issue</a>
+          </div>
+          <h5 class="ui inverted header">Subscriptions</h5>
+          <div class="ui small relaxed inverted fitted selection list">
+            <a class="item" href="/subscription/self/footer/textlink">Order a Subscription</a>
+            <a class="item" href="/subscription/gift/footer/textlink">Give a Gift</a>
+            <a class="item" href="/page/subscriber-services">Subscriber Services</a>
+            <a class="item" href="/ebsco">Archives</a>
+            <a class="item" href="/page/frequently-asked-questions">FAQ</a>
+          </div>
+        </div>
+        <div class="column">
+          <h5 class="ui inverted header">The New Republic</h5>
+          <div class="ui small relaxed inverted fitted selection list">
+            <a class="item" href="/page/about-new-republic">About</a>
+            <a class="item" href="/page/advertise-new-republic">Advertise</a>
+            <a class="item" href="/newsletter">Newsletter</a>
+            <a class="item" href="/page/contact-us">Contact Us</a>
+            <a class="item" href="/page/jobs-and-internships">Jobs &amp; Internships</a>
+            <a class="item" href="/page/privacy-policy" rel="nofollow">Privacy Policy</a>
+            <a class="item" href="/tags/home-news">Home News</a>
+            <a class="item" href="/page/rss-feeds">RSS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="six wide signup column">
+      <div class="ui horizontal inverted icon divider">
+        <i class="circular inverted bullhorn icon"></i>
+      </div>
+      <h4 class="ui red header">Sign Up For The New Republic Daily</h4>
+      <p>Sign up now to get your dose of politics, culture, and big ideas with our free daily newsletter.</p>
+      <form class="ui form" method="post" action="http://link.newrepublic.com/s/TNR">
+  <input type="hidden" name="list[Master List]" value="1" />
+  <input type="hidden" name="vars[marketing]" value="TRUE" />
+  <input type="hidden" name="vars[source]" value="daily_footer" />
+  <input type="hidden" name="vars[tnr_daily]" value="TRUE" />
+  <div class="field">
+    <div class="ui fluid left labeled icon input">
+      <input type="text" name="email" placeholder="Enter e-mail" data-validate="email"  />
+      <i class="mail icon"></i>
+    </div>
+  </div>
+  <div class="ui blue submit button" type="submit">Sign Up</div>
+  <div class="ui success message">
+    <i class="checkmark icon"></i>
+    Signed up!
+  </div>
+</form>    </div>
+    <div class="six wide promo column">
+      <div class="ui horizontal inverted icon divider">
+        <i class="circular inverted bullhorn icon"></i>
+      </div>
+      <h4 class="ui header">
+        <a href="/subscription/self/footer/callout">Subscribe Now</a>
+      </h4>
+      <h5 class="ui inverted header">
+        Get The New Republic for <b>$19.97/year</b>
+      </h5>
+       <a class="ui left floated image" href="/subscription/self/footer/callout">
+        <img typeof="foaf:Image" src="http://www.newrepublic.com/sites/default/files/styles/curr_issue_cover_footer/public/u184683/112414_cover.online_1.jpg?itok=Zntgn1W1" alt="" />      </a>
+      <div class="ui small inverted fitted selection list" style="margin-left:0;">
+        <a class="item" href="/subscription/self/footer/callout">
+          <i class="book icon"></i>
+          Subscribe Now
+        </a>
+        <a class="item" href="/subscription/gift/footer">
+          <i class="gift icon"></i>
+          Give a Gift
+        </a>
+        <a class="item" href="/subscription/international/footer">
+          <i class="globe icon"></i>
+          International Orders
+        </a>
+        <a class="item" href="/subscription/digital/footer">
+          <i class="tablet icon" ></i>
+          Digital Subscription
+        </a>
+      </div>
+    </div>
+  </div>
+  <a class="ui centered small logo image" href="/">
+    <img src="/sites/all/themes/tnr/assets/images/logo-white.png">
+  </a>
+  <div class="social">
+    <div class="slim twitter sharrre"
+      data-user="tnr"
+      data-url="http://www.newrepublic.com"
+      data-title="Follow"
+    ></div>
+    <div class="slim facebook sharrre"
+      data-url="http://www.facebook.com/thenewrepublic"
+      data-title="Like">
+    </div>
+    <div class="slim google sharrre"
+      data-url="http://www.newrepublic.com"
+      data-title="Plus">
+    </div>
+  </div>
+  <div class="ui mini centered divided inverted horizontal copyright link list">
+    <div class="item">
+      Copyright 2015 &copy; The New Republic.
+      All Rights Reserved.
+    </div>
+  </div>
+</div>    <div class="ui modal" id="overlay"></div>  <div class="script">
+  <!--[if lt IE 9]>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <![endif]-->
+  <!--[if (gte IE 9) | (!IE)]><!-->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+  <!--<![endif]-->
+<script type="text/javascript" src="http://www.newrepublic.com/sites/default/files/js/js_tq-YeSrxS9vDNXNLJO-YjsX7QjVFN_b0h0E0DkK1KMg.js"></script>
+
+  <!-- Site Config !-->
+  <script src="/sites/all/themes/tnr/dist/minified/ui/definitions/globals/site.min.js"></script>
+
+  <!-- Site Overlay !-->
+  <script type="text/javascript">
+  $.extend(true, site.config, $.parseJSON('{"loggedIn":false,"node":{"id":"120578"},"overlay":{"force_display_nodes":[],"targeted_overlay_nodes":[],"tnr_overlay_nodes":[],"tnr_paywall_nodes":[],"visit_times_targeted":["1"],"visit_times_general":["1"],"visit_times_paywall":false},"staging":false,"subsection":false,"tag":{"ids":["17538","65822","64037","60770","17586"]},"topTerm":"Politics"}'));
+  // global debug settings
+  $.site('disable debug');
+    $.site('disable console');
+    </script>
+
+  <script type="text/javascript" src="http://www.newrepublic.com/sites/default/files/js/js_cX6tqpnqP3l8xEES-NOI5DPE2M9lID6OBoo9fVy6FjM.js"></script>
+
+</div>  <div class="tracking">
+
+  <!-- Google Remarketing -->
+  <script type="text/javascript">
+  /* <![CDATA[ */
+  var
+    google_conversion_id = 993343767,
+    google_conversion_label = 'gzoeCIDN0QMQkLP42wM',
+    google_custom_params = window.google_tag_params,
+    google_remarketing_only = true
+  ;
+  /* ]]> */
+  </script>
+  <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
+
+  <!-- Quantcast Script -->
+  <script type="text/javascript">
+  _qoptions={
+    qacct : 'p-abwxcJNao5fsc'
+  };
+  </script>
+  <script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script>
+
+  <!-- Parse.ly -->
+  <div id="parsely-root" style="display: none">
+    <div id="parsely-cfg" data-parsely-site="tnr.com"></div>
+  </div>
+  <script>
+  (function(s, p, d) {
+    var h=d.location.protocol, i=p+"-"+s,
+        e=d.getElementById(i), r=d.getElementById(p+"-root"),
+        u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+        :"static."+p+".com";
+    if (e) return;
+    e = d.createElement(s); e.id = i; e.async = true;
+    e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  })("script", "parsely", document);
+  </script>
+ 
+    <!-- START horizon sailthru -->
+  <script type="text/javascript">
+    (function() {
+      function loadHorizon() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = location.protocol + '//ak.sail-horizon.com/horizon/v1.js';
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+      }
+      loadHorizon();
+      var oldOnLoad = window.onload;
+      window.onload = function() {
+        if (typeof oldOnLoad === 'function') {
+          oldOnLoad();
+        }
+        Sailthru.setup({
+          domain: 'horizon.newrepublic.com'
+        });
+      };
+    })();
+  </script>
+  
+  <!-- Nielsen Online SiteCensus V6.0 -->
+  <script type="text/javascript">
+    (function () {
+      var image = new Image(1, 1);
+      image.onerror = image.onload = function () {
+        image.onerror = image.onload = null;
+      };
+      image.src = ["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-106312h&cg=0&cc=1&si=", escape(window.location.href), "&rp=", escape(document.referrer), "&ts=compact&rnd=", (new Date()).getTime()].join('');
+    })();
+  </script>
+
+  <!-- AdRoll -->
+  <script type="text/javascript">
+  adroll_adv_id = "SIJVU24MGJE47PAYLLPPOJ";
+  adroll_pix_id = "6WNJ733UAJGY3LIFHE43PT";
+  (function () {
+  var oldonload = window.onload;
+  window.onload = function(){
+     __adroll_loaded=true;
+     var scr = document.createElement("script");
+     var host = (("https:" == document.location.protocol) ? "https://s.adroll.com" : "http://a.adroll.com");
+     scr.setAttribute('async', 'true');
+     scr.type = "text/javascript";
+     scr.src = host + "/j/roundtrip.js";
+     ((document.getElementsByTagName('head') || [null])[0] ||
+      document.getElementsByTagName('script')[0].parentNode).appendChild(scr);
+     if(oldonload){oldonload()}};
+  }());
+  </script>
+
+  <!-- ChartBeat -->
+  <script type="text/javascript">
+  var _sf_async_config={uid:34517,domain:"tnr.com"};
+  _sf_async_config.useCanonical = true;
+  (function(){
+    function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement('script');
+    e.setAttribute('language', 'javascript');
+    e.setAttribute('type', 'text/javascript');
+    e.setAttribute('src',
+       (("https:" == document.location.protocol) ? "https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/" : "http://static.chartbeat.com/") +
+       "js/chartbeat.js");
+    document.body.appendChild(e);
+    }
+    var oldonload = window.onload;
+    window.onload = (typeof window.onload != 'function') ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+  })();
+  </script>
+
+
+  <div class="pixels">
+    <!-- Collective Media pixel -->
+    <img src="http://b.collective-media.net/seg/cm/l1dd" width="1" height="1" />
+    <noscript>
+      <!-- Quantcast Pixel -->
+      <img src="http://pixel.quantserve.com/pixel/p-abwxcJNao5fsc.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/>
+      <!-- Google Re-marketing Pixel -->
+      <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/993343767/?value=0&amp;label=gzoeCIDN0QMQkLP42wM&amp;guid=ON&amp;script=0"/>
+      <!-- Neilsen Census Pixel -->
+      <img src="//secure-us.imrworldwide.com/cgi-bin/m?ci=us-106312h&amp;cg=0&amp;cc=1&amp;ts=noscript"
+      width="1" height="1" alt="" />
+      <!-- ComScore -->
+      <img src="http://b.scorecardresearch.com/p?c1=2&c2=15230262&cv=2.0&cj=1" />
+    </noscript>
+  </div>
+</div><script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-2.newrelic.com","licenseKey":"71240f55fe","applicationID":"2735134","transactionName":"YFRUZkcECEcHV0ZaXFkeY0BcSkldCFBXSx1HWUY=","queueTime":0,"applicationTime":8,"ttGuid":"","agentToken":"","atts":"TBNXEA8eG0k=","errorBeacon":"bam.nr-data.net","agent":"js-agent.newrelic.com\/nr-476.min.js"}</script></body>
+</html>

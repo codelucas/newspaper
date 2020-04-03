@@ -1,0 +1,17 @@
+A street vendor in India uses a light powered by refurbished battery cells.
+
+Many of the estimated 50 million lithium-ion laptop batteries discarded every year could provide electricity storage sufficient to light homes in poor countries, researchers at IBM say.
+
+In work being aired this week at a conference in San Jose, researchers at IBM Research India in Bangalore found that at least 70 percent of all discarded batteries have enough life left to power an LED light at least four hours a day for a year.
+
+While it’s possible to combine LED lights with solar panels and rechargeable batteries (see “Innovators Under 35: Evans Wadongo”), using discarded batteries could make the approach far cheaper.
+
+“The most costly component in these systems is often the battery,” says Vikas Chandan, a research scientist at the lab’s Smarter Energy Group, who led the project. “In this case, the most expensive part of your storage solution is coming from trash.”
+
+The IBM group, working with a hardware R&D firm called RadioStudio, tore open discarded laptop battery packaging and extracted individual storage units called cells, tested those individually to pick out the good ones, and recombined them to form refurbished battery packs. Then, after adding charging dongles as well as circuitry to prevent overheating, they gave them to five users in Bangalore who lived in slums or operated sidewalk carts.
+
+Three months later, the users said the battery packs had worked well; the main request was for rat-resistant wires and brighter bulbs, says Mohit Jain, a research engineer with the group. A revised setup is now being tested.
+
+Around 50 million laptop and desktop computers are discarded in the United States every year, according to the Environmental Protection Agency. Meanwhile, in India alone, about 400 million people lack grid-connected electricity.
+
+IBM is not considering this as a business but says the technology could be offered free to poor countries.

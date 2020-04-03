@@ -19,11 +19,11 @@ import string
 import sys
 import threading
 import time
+import requests
 
+from selenium import webdriver
 from hashlib import sha1
-
 from bs4 import BeautifulSoup
-
 from . import settings
 
 log = logging.getLogger(__name__)
@@ -414,3 +414,25 @@ def extend_config(config, config_items):
             setattr(config, key, val)
 
     return config
+
+# https://testdriven.io/blog/building-a-concurrent-web-scraper-with-python-and-selenium/
+def get_driver():
+    # initialize options
+    options = webdriver.ChromeOptions()
+    # pass in headless argument to options
+    options.add_argument('--headless')
+    # initialize driver
+    driver = webdriver.Chrome(options=options)
+    return driver
+
+
+def get_load_time(url):
+    # set headers
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'
+    }
+    # make get request to article_url
+    response = requests.get(url, headers=headers, stream=True, timeout=10.000)
+    # get page load time
+    load_time = response.elapsed.total_seconds()
+    return load_time

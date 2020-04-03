@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:fb="http://ogp.me/ns/fb#">
+  <head>
+    <meta charset="utf-8">
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-5.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"4ec8355b97","applicationID":"1724038","transactionName":"IV1XRhdaClUERx5RWg9XFlEKWxJcD0E=","queueTime":6,"applicationTime":13,"agent":"js-agent.newrelic.com/nr-476.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VgcHU19QGwIHVlVSBAk="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+	  <link href="http://assets.coolhunting.com/favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+    <link rel="alternate" type="application/atom+xml" title="Cool Hunting Feed" href="/index.xml">
+  	<link rel="alternate" type="application/rss+xml" title="Cool Hunting Video Feed" href="/video.xml" />
+  	<!-- Readability -->
+  	<meta name="readability-verification" content="p8MbXtLkREX38PgVPtWahNdFLEds5pMpqzhJZknB"/>
+  	<!-- Bitly -->
+  	<meta name="bitly-verification" content="db0141396021"/>
+  	<!-- Apple Touch icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" href="assets/static/img/apple-touch-icon.png"/>
+    <!-- Google Site Verification -->
+  	<meta name="google-site-verification" content="Waos19ANYx3F0roI72xcAf396vfVT5LDCjxlLP0xoZA" />
+  	<!-- Windows 8 tile -->
+  	<meta name="application-name" content="COOL HUNTING"/>
+  	<meta name="msapplication-TileColor" content="#000000"/>
+  	<meta name="msapplication-TileImage" content="2a8e47ea-827d-44a7-bbd9-95323dcfaf75.png"/>
+    <!-- Viewport -->
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- Title -->
+  	<title>Monastero Santa Rosa Hotel and Spa on the Amalfi Coast - Cool Hunting</title>
+
+  	<link rel="canonical" href="http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"/>
+
+  	 <meta name="description" content="A former convent converted into a lavish 20-room resort, this Italian sanctuary is blessed with heavenly views"/>
+<meta name="keywords" content="Hotels,Italy,Spas,Travel,Amalfi Coast,Historic,Pools,Resorts"/>
+
+	
+    <!-- FOR FACEBOOK SHARING -->
+	<meta property="og:title" content="Monastero Santa Rosa Hotel and Spa on the Amalfi Coast"/> 
+	<meta property="og:type" content="article"/> 
+	<meta property="og:image" content="http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-thumb21.jpg"/>
+	<meta property="og:description" content="A former convent converted into a lavish 20-room resort, this Italian sanctuary is blessed with heavenly views"/>
+	<meta property="og:url" content="http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"/> 
+	<meta property="og:site_name" content="Cool Hunting"/> 
+	<meta property="fb:admins" content="22701891"/> 
+
+<!-- FOR TWITTER CARDS -->
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:url" content="http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast">
+	<meta name="twitter:title" content="Monastero Santa Rosa Hotel and Spa on the Amalfi Coast">
+	<meta name="twitter:description" content="A former convent converted into a lavish 20-room resort, this Italian sanctuary is blessed with heavenly views">
+	<meta name="twitter:image" content="http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-thumb21.jpg">
+	<meta name="twitter:site" content="@coolhunting">
+
+<!-- FOR PARSE.LY -->	
+	<script type="application/ld+json">
+	  {
+	    "@context": "http://schema.org/",
+	    "@type": "NewsArticle",
+	    "headline": "Monastero Santa Rosa Hotel and Spa on the Amalfi Coast",
+	    "url": "http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast",
+	    "thumbnailUrl": "http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-thumb21.jpg",
+	    "dateCreated": "2014-12-04T10:00:43-05:00",
+	    "articleSection": "look",
+	    "creator": "CH Contributor",
+	    "keywords": ["Hotels", "Italy", "Spas", "Travel", "Amalfi Coast", "Historic", "Pools", "Resorts"]
+	  }
+	</script>
+
+
+	
+    <link href="http://assets.coolhunting.com/assets/redesign-dbefc94fab90d1a84174ee30516ea946.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://f.vimeocdn.com/js_opt/froogaloop2.min.js?bfeb60ee"></script>
+    <script src="http://assets.coolhunting.com/assets/redesign-3c87aee25e635d95e279f92d2e6132a1.js" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+	
+    <script type='text/javascript'>
+      var googletag = googletag || {};
+      googletag.cmd = googletag.cmd || [];
+      (function() {
+      var gads = document.createElement('script');
+      gads.async = true;
+      gads.type = 'text/javascript';
+      var useSSL = 'https:' == document.location.protocol;
+      gads.src = (useSSL ? 'https:' : 'http:') + 
+      '//www.googletagservices.com/tag/js/gpt.js';
+      var node = document.getElementsByTagName('script')[0];
+      node.parentNode.insertBefore(gads, node);
+      })();
+    </script>
+
+  	<!-- Google Analytics with Adwords Support (place before /head) -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      
+      //ga('create', 'UA-889923-5', 'auto');
+      //ga('send', 'pageview');
+	
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-889923-5']);
+      _gaq.push(['_setDomainName', 'coolhunting.com']);
+      _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+	  
+	  function recordOutboundLink(link, category, action) {
+	    try {
+	      _gaq.push(['_trackEvent', category , action ]);
+	    }catch(err){}
+	  }
+    </script>
+
+	<script type='text/javascript'>
+    var gptAdSlots = [];
+    googletag.cmd.push(function() {
+      
+      //responsive mapping
+      var homeMapping = googletag.sizeMapping().addSize([1320, 0], [[300, 250], [970, 250]]).addSize([0,0], [300, 250]).build();
+      var lookMapping = googletag.sizeMapping().addSize([1320, 0], [[300, 250], [728, 90], [970, 66], [970, 250]]).addSize([1085,0], [[300, 250], [728, 90]]).addSize([0,0], [300, 250]).build();
+      var stickyArticleMapping = googletag.sizeMapping().addSize([1277, 0], [300, 250]).addSize([0,0], []).build();
+      var responsiveArticleMapping = googletag.sizeMapping().addSize([1277, 0], []).addSize([0,0], [[300, 250], [300, 600]]).build();
+      var relatedArticleMapping = googletag.sizeMapping().addSize([964, 0], [[300, 250], [300, 600]]).addSize([0,0], []).build();
+	  
+        gptAdSlots['article-sticky'] = googletag.defineSlot('/33464461/coolhunting/category/travel/sticky-300', [300, 250], 'div-gpt-ad-article-sticky-travel').defineSizeMapping(stickyArticleMapping).addService(googletag.pubads());
+gptAdSlots['article-responsive'] = googletag.defineSlot('/33464461/coolhunting/responsive-300', [[300, 250], [300, 600]], 'div-gpt-ad-article-responsive-travel').defineSizeMapping(responsiveArticleMapping).addService(googletag.pubads());
+gptAdSlots['article-inline'] = googletag.defineSlot('/33464461/coolhunting/category/travel/inline-300', [[300, 250], [300, 600]], 'div-gpt-ad-article-inline-travel').addService(googletag.pubads());
+gptAdSlots['article-widget'] = googletag.defineSlot('/33464461/coolhunting/category/travel/widget-1x1', [1, 1], 'div-gpt-ad-article-widget-travel').addService(googletag.pubads());
+
+
+		googletag.pubads().enableSingleRequest();
+		googletag.pubads().disableInitialLoad();
+		googletag.pubads().collapseEmptyDivs();
+		googletag.enableServices();
+
+		googletag.pubads().setTargeting("CHKeyword", ["Hotels", "Italy", "Spas", "Travel", "Amalfi Coast", "Historic", "Pools", "Resorts", "travel", "monastero_santa_rosa_hotel_spa_on_the_almafi_coast"]); 
+
+		});
+	</script>
+	
+  </head>
+  <body>
+	<div id="ad_pixels" style="display:none"></div>
+    
+<script>
+  $( document ).ready(function() {
+    _gaq.push(['_trackEvent', 'Story - Dedicated', 'Load', '/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast']);
+  });
+  	$("body").addClass("article slideshow");
+</script>
+
+<div class="sidebar content">
+  <div class="close-button"></div>
+  <div class="nav " id="desktop-nav-landing">
+  <div class="header dark"><div class="logo hide-slash"></div></div>
+  <div class="sections single-click">
+    <a href="/" class="section " id="nav-cover" section="cover">
+      Today
+      <div class="icon today"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/read" class="section " id="nav-read" section="read">
+      Read
+      <div class="icon read"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/look" class="section " id="nav-look" section="look">
+      Look
+      <div class="icon look"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/travel" class="section " id="nav-travel" section="travel">
+      Travel
+      <div class="icon travel"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/buy" class="section " id="nav-buy" section="buy">
+      Buy
+      <div class="icon buy"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/listen" class="section " id="nav-listen" section="listen">
+      Listen
+      <div class="icon listen"></div>
+      <div class="chip"></div>
+    </a>
+    <a href="/link" class="section " id="nav-link" section="link">
+      Link
+      <div class="icon link"></div>
+      <div class="chip"></div>
+    </a>
+  </div>
+  <div class="subscribe-social-btns sidebar-nav">
+    <a class="social-btn facebook" target="_blank" href="https://www.facebook.com/coolhunting"></a>
+    <a class="social-btn twitter" target="_blank" href="http://twitter.com/coolhunting"></a>
+    <a class="social-btn instagram" target="_blank" href="http://instagram.com/coolhunting"></a>
+    <a class="social-btn vimeo" target="_blank" href="http://vimeo.com/coolhunting"></a>
+    <a class="social-btn pinterest" target="_blank" href="http://www.pinterest.com/coolhunting"></a>
+    <a class="social-btn google-plus" target="_blank" href="https://plus.google.com/+coolhunting"></a>
+    <a class="social-btn youtube" target="_blank" href="https://www.youtube.com/user/coolhunting"></a>
+    <a class="social-btn rss" target="_blank" href="http://feeds.coolhunting.com/ch"></a>
+  </div>
+</div>
+
+  <div class="sidebar-footer">
+    <a href="/user"><div class="login"></div></a>
+  </div>
+  <div class="topbar">
+    <div class="section search" id="nav-search" section="search">
+        <div class="chip"></div>
+    </div>
+  </div>
+</div>
+<div class="article" id="article">
+	<div class="hero slideshow">
+  <div class="slides">
+    	<div class="slide current" style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal13.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal9.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal10.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal11.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal6.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal7.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal8.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal3.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal5.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal2.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+    	<div class="slide " style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_monastero-amalfi-gal4.jpg)">
+      <div class='courtesy'> <strong></strong></div>
+    </div>
+  </div>
+  <div class="prev"></div>
+  <div class="next"></div>
+</div>
+  
+  <div class="browse for-hero">
+		<a href="/design/chv-icon-derelict" class="prev"><div class="icon"></div><div class="label"><span>Cool Hunting Video: Icon Derelict</span></div></a>
+	<a href="/travel" class="section look"><div class="icon"></div><div class="label">All Articles</div></a>
+		<a href="/design/its-nice-that-2014-annual" class="next"><div class="label"><span>2014 It&#x27;s Nice That Annual</span></div><div class="icon"></div></a>
+  </div>
+  
+  <div class="browse dark">
+    <a href="/design/chv-icon-derelict" class="prev"><div class="icon"></div><div class="label"><span>Cool Hunting Video: Icon Derelict</span></div></a>
+  <a href="/travel" class="section look"><div class="icon"></div><div class="label">All Articles</div></a>
+    <a href="/design/its-nice-that-2014-annual" class="next"><div class="label"><span>2014 It&#x27;s Nice That Annual</span></div><div class="icon"></div></a>
+  </div>
+  
+  <div class="contents">
+    <div class="social-bar">
+      <a class="like"></a>
+      <a class="facebook"
+href="https://www.facebook.com/sharer/sharer.php?u=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"
+onclick="window.open(this.href, 'Share on Facebook','left=20,top=20,width=500,height=280,toolbar=0,resizable=0'); return false;"></a>
+<a class="twitter"
+href="http://twitter.com/share?text=Enjoy @MonasteroSRosa\'s unmatched combination of idyllic luxury and historic charm at this convent-turned-resort&url=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"
+onclick="window.open(this.href, 'Share on Twitter','left=20,top=20,width=500,height=280toolbar=1,resizable=0'); return false;"></a>
+<a class="gplus" href="https://plus.google.com/share?url=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+<a class="pinterest"
+href="https://pinterest.com/pin/create/bookmarklet/?http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast&description=Monastero Santa Rosa Hotel and Spa on the Amalfi Coast&media=http://assets.coolhunting.com/coolhunting/2014/12/feature_monastero-amalfi-thumb21.jpg"
+onclick="window.open(this.href, 'Share on Pinterest','left=20,top=20,width=500,height=280toolbar=1,resizable=0'); return false;"></a>
+    </div>
+    <div class="leftbar">
+      <div class="info ">
+        <div class="category" onclick="window.location='/category/travel';return false;">TRAVEL</div>
+        <div class="title">Monastero Santa Rosa Hotel and Spa on the Amalfi Coast</div>
+      </div>
+      <div class="subtitle">A former convent converted into a lavish 20-room resort, this Italian sanctuary is blessed with heavenly views</div>
+      <div class="author" onclick="window.location='/author/ch-contributor';return false;">
+        <div class="name">by <b>CH Contributor</b></div>
+        <div class="date">on 04 December 2014</div>
+      </div>
+      <div class="tags">
+			   <a href="/tag/Hotels" class="tag">HOTELS</a>
+			   <a href="/tag/Italy" class="tag">ITALY</a>
+			   <a href="/tag/Spas" class="tag">SPAS</a>
+			   <a href="/tag/Travel" class="tag">TRAVEL</a>
+			   <a href="/tag/Amalfi Coast" class="tag">AMALFI COAST</a>
+			   <a href="/tag/Historic" class="tag">HISTORIC</a>
+			   <a href="/tag/Pools" class="tag">POOLS</a>
+			   <a href="/tag/Resorts" class="tag">RESORTS</a>
+      </div>
+
+      <div class="ad">
+        <div id="div-gpt-ad-article-sticky-travel" style="width:300px;">
+          <script>
+            googletag.cmd.push(function() {
+              googletag.display('div-gpt-ad-article-sticky-travel');
+              googletag.pubads().refresh([gptAdSlots['article-sticky']]);
+            });
+			BASENAME = "monastero-santa-rosa-hotel-spa-on-the-almafi-coast";
+          </script>
+        </div>
+      </div>
+
+    </div>
+    <div class="main">
+      <div class="text">
+	  	
+	  	    <img src="http://assets.coolhunting.com/coolhunting/mt_asset_cache/2014/12/monastero-amalfi-1.jpg" width="1200" height="800" alt="monastero-amalfi-1.jpg" class="center" />
+
+<p>by <a href="http://kellybadal.com/" onClick="recordOutboundLink(this, 'Linkout', 'http://kellybadal.com/'); return true;" target="_blank">Kelly Phillips Badal</a></p>
+
+<p>Vacationing in a former convent may sound a bit austere—that is, until you experience <a href="http://monasterosantarosa.com/" onClick="recordOutboundLink(this, 'Linkout', 'http://monasterosantarosa.com/'); return true;" target="_blank">Monastero Santa Rosa</a> on Italy’s famous Amalfi Coast. This monastery-turned-hotel offers all the peaceful seclusion the sisters enjoyed, with none of the personal sacrifices. And though the popular coastline is studded with hotels, this distinctive destination—with its unmatched combination of five-star luxuries, natural beauty and centuries of character—is a serious standout.</p>
+
+<img src="http://assets.coolhunting.com/coolhunting/mt_asset_cache/2014/12/monastero-amalfi-2.jpg" width="1200" height="800" alt="monastero-amalfi-2.jpg" class="center" />
+
+<p>Getting there might have you pressing your palms together in supplication. The main route through the craggy Amalfi coastline is Strada Statale 163—also known as "the road of 1,000 bends." The ancient Roman-built drive is full of hairpin twists and turns, careening over steep precipices past sun-bleached villages and lemon groves for 50 miles, and is just barely wide enough for two cars to pass at some points. About 18 miles in sits Monastero Santa Rosa, perched on a cliff above the small fishing village of Conca dei Marini. The venue's American owner Bianca Sharma spotted the nunnery’s ruins from a boat in 1999 and promptly bought the property. After a lengthy decade-long restoration, it opened as a luxury hotel for the 2012 season.</p>
+
+<img src="http://assets.coolhunting.com/coolhunting/mt_asset_cache/2014/12/monastero-amalfi-3.jpg" width="1200" height="800" alt="monastero-amalfi-3.jpg" class="center" />
+
+<p>Much of the convent’s original 17th century architecture remains intact, thanks to Sharma’s careful conservation. Inside, reconfigured spaces pay thoughtful homage to the hotel’s heritage. Nuns' quarters are cleverly combined into 20 unique rooms, some with private terraces or multiple levels. One of the largest is located in what was the sisters’ refectory. All feature fine Italian linens, an array of tasteful period furniture, and deep soaking tubs made from fine Jerusalem stone, in addition to everyday contemporary amenities like minibars, television, and WiFi. Some of the rooms have vaulted ceilings, private alfresco dining areas, and seafront balconies; others have housed famous names like Prince Albert and Princess Charlene of Monaco. The guest rooms exude comfort, and every conceivable wish is quickly taken care of by the attentive staff.</p>
+
+<p>The tasteful restoration continues into Monastero Santa Rosa’s massive 750-foot state-of-the-art spa. Cavernous treatment rooms are carved from spaces once devoted to silent prayers, while the spa’s centerpiece, a vaulted tepidarium (warm relaxation room), is where the sisters made wine. There’s also a sauna, steam room, hydrotherapy pool, whirlpool footbaths, ice fountain and even programmable showers.</p>
+
+<img src="http://assets.coolhunting.com/coolhunting/mt_asset_cache/2014/12/monastero-amalfi-5.jpg" width="1200" height="800" alt="monastero-amalfi-5.jpg" class="center" />
+
+<p>The real star of Monastero Santa Rosa is the knockout coastal view, and there’s a countless number of magical places for taking it in. From the convent’s highest point, an airy sunset terrace, guests can gaze as far as the buzzy nearby towns of Amalfi or Positano. There’s the cascade of tiered, expertly manicured semi-tropical gardens, beset with ocean-facing sun loungers, daybeds and cabanas. There’s the breezy dining terrace of the hotel Ristorante, where guests can enjoy the scenery while tasting exclusively sourced extra virgin olive oil produced right in Conca dei Marini. The most breathtaking spot is floating within the curved cliff’s edge infinity pool while surveying the Gulf of Salerno some 660-feet below.</p>
+
+<img alt="" src="http://assets.coolhunting.com/coolhunting/mt_asset_cache/2014/12/monastero-amalfi-20.jpg" width="1200" height="897" class="center" />
+
+<p>After whiling away the hours on these sacred grounds, be sure to unburden your soul at the large antique wooden confessional resting in the main hallway. It cheekily invites guests “make a confession” by way of a written feedback for the hotel.</p>
+
+<p><a href="http://monasterosantarosa.com/" onClick="recordOutboundLink(this, 'Linkout', 'http://monasterosantarosa.com/'); return true;" target="_blank">Monastero Santa Rosa</a> is located in the town of Conca dei Marini on Italy’s Amalfi Coast. Nightly room and suite rates range from $500 to $2,400. The resort will open for the 2015 season on 17 April.</p>
+
+<p><em>See more photos in the <a href="http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast.php#more">gallery</a>, images by <a href="http://tbadal.com/" onClick="recordOutboundLink(this, 'Linkout', 'http://tbadal.com/'); return true;" target="_blank">Tanveer Badal</a></em></p>
+	  	  
+		<script>$( ".entry-item" ).hide();</script>
+      </div>
+    </div>
+    <div class="social-bar mobile">
+      <a class="like"></a>
+      <a class="facebook"
+href="https://www.facebook.com/sharer/sharer.php?u=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"
+onclick="window.open(this.href, 'Share on Facebook','left=20,top=20,width=500,height=280,toolbar=0,resizable=0'); return false;"></a>
+<a class="twitter"
+href="http://twitter.com/share?text=Enjoy @MonasteroSRosa\'s unmatched combination of idyllic luxury and historic charm at this convent-turned-resort&url=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast"
+onclick="window.open(this.href, 'Share on Twitter','left=20,top=20,width=500,height=280toolbar=1,resizable=0'); return false;"></a>
+<a class="gplus" href="https://plus.google.com/share?url=http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast" onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+<a class="pinterest"
+href="https://pinterest.com/pin/create/bookmarklet/?http://www.coolhunting.com/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast&description=Monastero Santa Rosa Hotel and Spa on the Amalfi Coast&media=http://assets.coolhunting.com/coolhunting/2014/12/feature_monastero-amalfi-thumb21.jpg"
+onclick="window.open(this.href, 'Share on Pinterest','left=20,top=20,width=500,height=280toolbar=1,resizable=0'); return false;"></a>
+    </div>
+    <div class="tags mobile">
+		<a href="/tag/Hotels" class="tag">HOTELS</a>
+		<a href="/tag/Italy" class="tag">ITALY</a>
+		<a href="/tag/Spas" class="tag">SPAS</a>
+		<a href="/tag/Travel" class="tag">TRAVEL</a>
+		<a href="/tag/Amalfi Coast" class="tag">AMALFI COAST</a>
+		<a href="/tag/Historic" class="tag">HISTORIC</a>
+		<a href="/tag/Pools" class="tag">POOLS</a>
+		<a href="/tag/Resorts" class="tag">RESORTS</a>
+    </div>
+    <div class="ad">
+        <div id="div-gpt-ad-article-responsive-travel" style="width:300px;margin:0 auto;padding: 0 0 11px 0;">
+          <script>
+            googletag.cmd.push(function() {
+              googletag.display('div-gpt-ad-article-responsive-travel');
+              googletag.pubads().refresh([gptAdSlots['article-responsive']]);
+            });
+          </script>
+        </div>
+      </div>
+    
+    <div id="div-gpt-ad-article-widget-travel" class="full-page-interstitial">
+      <script>
+        googletag.cmd.push(function() {
+          googletag.display('div-gpt-ad-article-widget-travel');
+          googletag.pubads().refresh([gptAdSlots['article-widget']]);
+        });
+      </script>
+    </div>
+
+    <div class="features four-column-row related" id="infinite_content">
+        <a href="/travel/whistler-resort-highlights">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2011/02/14/large_whistler-thumb.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">A Week at Whistler: Resort Highlights</div>
+            <div class="subtitle">Four tips on where to eat, sleep and get pampered in North America&#x27;s largest mountain resort</div>
+            <div class="author" onclick="window.location='/author/josh-rubin';return false;">by Josh Rubin</div>
+            <div class="description fit">Recently spending a week at Whistler Blackcomb (my annual snowboarding destination), I stuck to some of my favorite gear and places but also used the trip as an opportunity to try some new things. This first story, in a series of three, focuses on...</div>
+          </div>
+        </a>
+        <a href="/travel/miami-sweepstak">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2010/03/25/large_miami-jetsetter-palm.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Jetsetter x Cool Hunting Miami Sweepstakes Deadline</div>
+            <div class="subtitle">Our curated getaway to Miami ends tomorrow!</div>
+            <div class="author" onclick="window.location='/author/evan-orensten';return false;">by Evan Orensten</div>
+            <div class="description fit">
+
+The CH-curated Miami getaway ends soon! This all-expenses-paid trip, created with Jetsetter, includes private museum tours, and three nights at the Viceroy Hotel. To enter, visit Jetsetter and sign up for their emails announcing exclusive travel...</div>
+          </div>
+        </a>
+        <a href="/travel/ch-x-jetsetter">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2010/03/26/large_viceeroy_thumb.png);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">CH x Jetsetter: Miami Getaway Sweepstakes</div>
+            <div class="subtitle">Win a trip to Miami curated by Cool Hunting!</div>
+            <div class="author" onclick="window.location='/author/evan-orensten';return false;">by Evan Orensten</div>
+            <div class="description fit">We love Miami and joined forces with Jetsetter to provide a lucky reader (and guest) with the opportunity to experience it in style&amp;#8212;with visits to galleries and museums, checking out great shops, and eating at some of our favorite restaurants...</div>
+          </div>
+        </a>
+        <a href="/travel/amangiri-resort">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2013/01/31/large_amangiri-thumb.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Amangiri</div>
+            <div class="subtitle">Aman Resorts&#x27; alien escape in the Utah desert</div>
+            <div class="author" onclick="window.location='/author/josh-rubin';return false;">by Josh Rubin</div>
+            <div class="description fit">
+
+
+Forget interstellar travel&amp;#8212;there&#x27;s a transcendent resort currently taking bookings here on earth, and it&#x27;s called  Amangiri. Located just over the Arizona border in Canyon Point, UT, the hotel sprawls amongst imposing bluffs with sweeping...</div>
+          </div>
+        </a>
+        <a class="ad-slot">
+          <div class="feature ad">
+            <div id="div-gpt-ad-article-inline-travel" style="width:300px;">
+                <script>
+                  googletag.cmd.push(function() {
+                    googletag.display('div-gpt-ad-article-inline-travel');
+                    googletag.pubads().refresh([gptAdSlots['article-inline']]);
+                  });
+                </script>
+              </div>
+          </div>
+        </a>
+        <a href="/travel/paws-up-resort-montana">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/06/large_PawsUpMontana-thumb.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Wilderness Meets Luxury at Montana&#x27;s Paws Up</div>
+            <div class="subtitle">Perfect for outdoor rookies, this family ranch-turned-resort offers up adventure with deluxe facilities</div>
+            <div class="author" onclick="window.location='/author/adrienne-so';return false;">by Adrienne So</div>
+            <div class="description fit">
+
+Located on 37,000 acres of a breathtakingly beautiful mountain valley outside of Missoula, Montana, the Resort at Paws Up combines rough-and-tumble Western attractions like whitewater rafting, rappelling and hiking with luxurious comfort. The aesthetic...</div>
+          </div>
+         </a>
+        <a href="/travel/pedras-salgadas-spa-and-nature-resort-portugal">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_PedrasSalgadasSpa-NatureResort-hero.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Pedras Salgadas Spa &amp; Nature Resort, Portugal</div>
+            <div class="subtitle">Treehouse accommodation and mineral-rich thermal springs at this eco-minded destination</div>
+            <div class="author" onclick="window.location='/author/ch-contributor';return false;">by CH Contributor</div>
+            <div class="description fit">by Ross Belfer
+
+
+
+As much as one can plan ahead, living in the moment is certainly a fulfilling way to travel. After several days spent in Portugal&#x27;s bustling second city of Porto, we felt in need of a tranquil getaway wherein a calming atmosphere...</div>
+          </div>
+        </a>
+        <a href="/travel/the-royal-mansour">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2012/04/23/large_The-Royal-Mansour-Thumb.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">The Royal Mansour</div>
+            <div class="subtitle">Beauty and decadent service at Marrakech’s palatial property</div>
+            <div class="author" onclick="window.location='/author/ariston-anderson';return false;">by Ariston Anderson</div>
+            <div class="description fit">
+
+
+
+
+Anyone who books a luxury hotel surely wants the service to adhere to the old adage about being treated like a king, but Marrakech&#x27;s decadent Royal Mansour palace&amp;#8212;originally intended to serve actual nobility&amp;#8212;truly delivers such an...</div>
+          </div>
+        </a>
+        <a href="/travel/parrot-cay">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2010/06/large_Three-Bedroom-Villa-Exterior-1.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Parrot Cay</div>
+            <div class="subtitle">Private Island luxury, service and relaxation epitomized in Turks and Caicos</div>
+            <div class="author" onclick="window.location='/author/josh-rubin';return false;">by Josh Rubin</div>
+            <div class="description fit">
+
+Part of the north Caribbean archipelago of the Turks and Caicos, Parrot Cay was once a refuge for a notorious duo of female pirates, Anne Bonny and Mary Reid. Nearly 300 years later, tranquility prevails over the private island, covering 1,000 acres...</div>
+          </div>
+        </a>
+        <a href="/travel/word-of-mouth-florence-food-drink">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_florence-wom-hero.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Word of Mouth Florence: Food + Drink</div>
+            <div class="subtitle">A quick guide to some of the time-honored specialists making the Tuscan capital a must-visit culinary destination</div>
+            <div class="author" onclick="window.location='/author/karen-day';return false;">by Karen Day</div>
+            <div class="description fit">
+There&#x27;s no shortage of tips for Italy&#x27;s wildly popular Tuscan capital, but with so many tourist offerings pumping through the historic town of Florence, it&#x27;s easy to end up eating a subpar pizza near the steps of the illustrious Duomo. Venturing into...</div>
+          </div>
+        </a>
+        <a href="/travel/boscolo-exedra">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/assets/images/large_boscoloexedra4.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Boscolo Exedra Milano Hotel</div>
+            <div class="subtitle"></div>
+            <div class="author" onclick="window.location='/author/ch-contributor';return false;">by CH Contributor</div>
+            <div class="description fit">by Paolo Ferrarini of Future Concept Lab
+
+Despite Milan&amp;#39;s de facto world design capital status, the city lacks design hotels. Boscolo Exedra, a new hotel opening very soon, will fill the gap. The former bank, after one year and &amp;euro;150 million...</div>
+          </div>
+        </a>
+        <a href="/travel/tokyo-high-low">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/2014/12/large_tokyo-hero.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Tokyo High Low</div>
+            <div class="subtitle">We put Amex Platinum to the test in the sky and on the ground in the future&#x27;s city
+</div>
+            <div class="author" onclick="window.location='/author/josh-rubin';return false;">by Josh Rubin</div>
+            <div class="description fit">When my plans to get from Beijing to Tokyo required a last-minute change, American Express Platinum Travel was able to confirm a seat on a new flight just hours before departure, even though they didn’t handle my original booking. And when I checked...</div>
+          </div>
+        </a>
+        <a href="/travel/barracuda-by-fa">
+          <div class="read feature">
+            <div class="image" style="background-image:url(http://assets.coolhunting.com/coolhunting/travel/assets/images/large_barracudabed.jpg);"><div class="like"></div></div>
+            <div class="collections">
+              <div class="topic" onclick="window.location='/collection';return false;">TRAVEL</div>
+            </div>
+            <div class="title">Barracuda Yacht Charter by Fatboy Slim</div>
+            <div class="subtitle"></div>
+            <div class="author" onclick="window.location='/author/ch-contributor';return false;">by CH Contributor</div>
+            <div class="description fit">
+by Juliet Kinsman
+If you thought boutique-hotel chic need be restricted to terra firma, you haven&amp;#39;t heard of what Fatboy Slim (aka Norman Cook) and friends have been up to. Having got his paws on a classic wooden yacht, Cook&amp;#39;s boat-loving...</div>
+          </div>
+        </a>
+    </div>
+    <a class="load-more" id="load-more" href="">
+      <div>Load More...</div>
+    </a>
+  </div>
+  
+  <div class="header for-content dark">
+    <div class="menu-button"></div>
+    <div class="logo"></div>
+  </div>
+
+  <div class="header for-hero">
+    <div class="menu-button"></div>
+    <div class="logo"></div>
+  </div>
+
+</div>
+<div class="mobile header dark" style="display:none">
+  <div class="menu-button"></div>
+  COOL<br/>HUNTING
+  <div class="browse dark mobile">
+    <a href="/design/chv-icon-derelict" class="prev"><div class="icon"></div><div class="label"><span>Cool Hunting Video: Icon Derelict</span></div></a>
+  <a href="/travel" class="section look"><div class="icon"></div><div class="label">All Articles</div></a>
+    <a href="/design/its-nice-that-2014-annual" class="next"><div class="label"><span>2014 It&#x27;s Nice That Annual</span></div><div class="icon"></div></a>
+  </div>
+</div>
+
+
+
+
+<script>
+$(".facebook").click(function() {
+	_gaq.push(['_trackEvent', 'Share', 'Facebook', '/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast']);
+});
+$(".twitter").click(function() {
+	_gaq.push(['_trackEvent', 'Share', 'Twitter', '/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast']);
+});
+$(".gplus").click(function() {
+	_gaq.push(['_trackEvent', 'Share', 'Google Plus', '/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast']);
+});
+$(".pinterest").click(function() {
+	_gaq.push(['_trackEvent', 'Share', 'Pinterest', '/travel/monastero-santa-rosa-hotel-spa-on-the-almafi-coast']);
+});
+</script>
+	  <div class="section dark hidden" id="search">
+  <div class="search-bar">
+    <div class="icon"></div>
+    <input id="search-input" type="text" placeholder="Start typing" />
+    <div id="search-clear" class="clear"></div>
+    <div id="search-close" class="close"></div>
+  </div>
+  <div class="search scrollable">
+    <div class="no-results">
+	<div class="info">
+		<h1>No matches for your search</h1>
+		<p>Unfortunately, we don't have any articles that match your search. Try again or explore some of these links:</p>
+	</div>
+</div>
+
+
+    <div class="search-links">
+  <div class="more">
+    <div class="more-title">
+      <div>CATEGORIES</div>
+    </div>
+    <div class="sections">
+      <a href="/search?search=Design">Design</a>
+      <a href="/search?search=Tech">Tech</a>
+      <a href="/search?search=Culture">Culture</a>
+      <a href="/search?search=Travel">Travel</a>
+      <a href="/search?search=Style">Style</a>
+      <a href="/search?search=Food+Drink">Food + Drink</a>
+    </div>
+  </div>
+  <div class="more">
+    <div class="more-title">
+      <div>FEATURES</div>
+    </div>
+    <div class="sections">
+      <a href="/search?search=Word+of+Mouth">Word of Mouth</a>
+      <a href="/search?search=Interviews">Interviews</a>
+      <a href="/search?search=Studio+Visits">Studio Visits</a>
+      <a href="/search?search=Off+Piste">Off Piste</a>
+      <a href="/search?search=Scene+by+All">Scene by All</a>
+      <a href="/search?search=Song+of+the+Car">Song of the Car</a>
+      <a href="/search?search=Cool+Hunting+Video">Cool Hunting Video</a>
+    </div>
+  </div>
+  <div class="more">
+    <div class="more-title">
+      <div>PEOPLE</div>
+    </div>
+    <div class="sections">
+      <a href="/search?search=Artists">Artists</a>
+      <a href="/search?search=Illustrators">Illustrators</a>
+      <a href="/search?search=Graphic+Designers">Graphic Designers</a>
+      <a href="/search?search=Product+Designers">Product Designers</a>
+      <a href="/search?search=Fashion+Designers">Fashion Designers</a>
+      <a href="/search?search=Architects">Architects</a>
+      <a href="/search?search=Scientists">Scientists</a>
+      <a href="/search?search=Makers">Makers</a>
+      <a href="/search?search=Entrepreneurs">Entrepreneurs</a>
+      <a href="/search?search=Inventors">Inventors</a>
+    </div>
+  </div>
+  <div class="more">
+    <div class="more-title">
+      <div>THINGS</div>
+    </div>
+    <div class="sections">
+      <a href="/search?search=Cars">Cars</a>
+      <a href="/search?search=Watches">Watches</a>
+      <a href="/search?search=Bags">Bags</a>
+      <a href="/search?search=Bicycles">Bicycles</a>
+      <a href="/search?search=Motorcycles">Motorcycles</a>
+      <a href="/search?search=Cameras">Cameras</a>
+      <a href="/search?search=Jewelry">Jewelry</a>
+      <a href="/search?search=Gadgets">Gadgets</a>
+      <a href="/search?search=Snacks">Snacks</a>
+      <a href="/search?search=Websites">Websites</a>
+    </div>
+  </div>
+  <div class="more">
+    <div class="more-title">
+      <div>TOPICS</div>
+    </div>
+    <div class="sections">
+      <a href="/search?search=Sustainability">Sustainability</a>
+      <a href="/search?search=Collecting">Collecting</a>
+      <a href="/search?search=Invention">Invention</a>
+    </div>
+  </div>
+</div>
+    <div class="search-results">
+
+	  <div class="filter">
+        <div class="query" id="search-details"></div>
+        <div class="category-filter">
+          <!-- classes: null(nothing), disabled, active -->
+			<div class="search-filter icon" id="search-read"></div>
+			<div class="search-filter icon" id="search-look"></div>
+			<div class="search-filter icon" id="search-travel"></div>
+			<div class="search-filter icon" id="search-buy"></div>
+			<div class="search-filter icon" id="search-link"></div>
+			<div class="search-filter icon" id="search-listen"></div>
+		</div>
+        <div class="all-filter">Show All</div>
+        <div class="time-filter-relevance">Show Best Matches</div>
+      </div>
+      <div class="scrollable">
+        <div class="results four-column-row" id="infinite_search"></div>
+  	    <a class="load-more" id="load-more-search" href="#">
+  	        <div>Load More...</div>
+  	    </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <script type="text/javascript">
+      ch.init();
+    </script>
+    <script>
+      window.ad_section = 'travel';
+    </script>
+    <!-- CHARTBEAT -->
+<script>
+var _sf_async_config={};
+/** CONFIGURATION START **/
+_sf_async_config.uid = 22766;
+_sf_async_config.domain = "coolhunting.com"; /** CHANGE THIS **/
+/** CONFIGURATION END **/
+(function(){
+  function loadChartbeat() {
+    window._sf_endpt=(new Date()).getTime();
+    var e = document.createElement("script");
+    e.setAttribute("language", "javascript");
+    e.setAttribute("type", "text/javascript");
+    e.setAttribute('src', '//static.chartbeat.com/js/chartbeat.js');
+    document.body.appendChild(e);
+  }
+  var oldonload = window.onload;
+  window.onload = (typeof window.onload != "function") ?
+     loadChartbeat : function() { oldonload(); loadChartbeat(); };
+})();
+</script>
+
+
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+<div id="parsely-cfg" data-parsely-site="coolhunting.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+var h=d.location.protocol, i=p+"-"+s,
+e=d.getElementById(i), r=d.getElementById(p+"-root"),
+u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+:"static."+p+".com";
+if (e) return;
+e = d.createElement(s); e.id = i; e.async = true;
+e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include -->
+
+
+
+<!-- Quantcast Tag -->
+<script>
+var _qevents = _qevents || [];
+
+(function() {
+var elem = document.createElement('script');
+elem.src = (document.location.protocol == "https:" ? "https://secure" : "http://edge") + ".quantserve.com/quant.js";
+elem.async = true;
+elem.type = "text/javascript";
+var scpt = document.getElementsByTagName('script')[0];
+scpt.parentNode.insertBefore(elem, scpt);
+})();
+
+_qevents.push({
+qacct:"p-e2TbO07-5R-JE"
+});
+</script>
+
+<noscript>
+<div style="display:none;">
+<img src="//pixel.quantserve.com/pixel/p-e2TbO07-5R-JE.gif" border="0" height="1" width="1" alt="Quantcast"/>
+</div>
+</noscript>
+<!-- End Quantcast tag -->
+
+
+<!-- Google Analytics Events -->
+<script>
+$(".menu-button").click(function() {
+	_gaq.push(["_trackEvent", "Navigation", "Hamburger Menu", "Desktop"]);
+});
+$("#desktop-nav div#nav-cover, #desktop-nav-landing div#nav-cover").click(function() {
+	_gaq.push(['_trackEvent', "Navigation", "Today Home", "Desktop"]);
+});
+$("#phone-nav div#nav-cover, #phone-nav-landing div#nav-cover").click(function() {
+	_gaq.push(['_trackEvent', "Navigation", "Today Home", "Mobile"]);
+});
+$("#tablet-nav div#nav-cover, #tablet-nav-landing div#nav-cover").click(function() {
+	_gaq.push(['_trackEvent', "Navigation", "Today Home", "Tablet"]);
+});
+
+  $("#desktop-nav div#nav-read, #desktop-nav-landing div#nav-read").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-read a, #desktop-nav-landing div#nav-read a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-read, #phone-nav-landing div#nav-read").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-read a, #phone-nav-landing div#nav-read a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-read, #tablet-nav-landing div#nav-read").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-read a, #tablet-nav-landing div#nav-read a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Read Landing", "Tablet"]);
+  });
+  $("#desktop-nav div#nav-look, #desktop-nav-landing div#nav-look").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-look a, #desktop-nav-landing div#nav-look a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-look, #phone-nav-landing div#nav-look").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-look a, #phone-nav-landing div#nav-look a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-look, #tablet-nav-landing div#nav-look").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-look a, #tablet-nav-landing div#nav-look a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Look Landing", "Tablet"]);
+  });
+  $("#desktop-nav div#nav-travel, #desktop-nav-landing div#nav-travel").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-travel a, #desktop-nav-landing div#nav-travel a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-travel, #phone-nav-landing div#nav-travel").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-travel a, #phone-nav-landing div#nav-travel a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-travel, #tablet-nav-landing div#nav-travel").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-travel a, #tablet-nav-landing div#nav-travel a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Travel Landing", "Tablet"]);
+  });
+  $("#desktop-nav div#nav-buy, #desktop-nav-landing div#nav-buy").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-buy a, #desktop-nav-landing div#nav-buy a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-buy, #phone-nav-landing div#nav-buy").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-buy a, #phone-nav-landing div#nav-buy a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-buy, #tablet-nav-landing div#nav-buy").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-buy a, #tablet-nav-landing div#nav-buy a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Buy Landing", "Tablet"]);
+  });
+  $("#desktop-nav div#nav-listen, #desktop-nav-landing div#nav-listen").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-listen a, #desktop-nav-landing div#nav-listen a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-listen, #phone-nav-landing div#nav-listen").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-listen a, #phone-nav-landing div#nav-listen a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-listen, #tablet-nav-landing div#nav-listen").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-listen a, #tablet-nav-landing div#nav-listen a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Listen Landing", "Tablet"]);
+  });
+  $("#desktop-nav div#nav-link, #desktop-nav-landing div#nav-link").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Home", "Desktop"]);
+	 //alert("desktop nav clicked!");
+  });
+  $("#desktop-nav div#nav-link a, #desktop-nav-landing div#nav-link a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Landing", "Desktop"]);
+  });
+  $("#phone-nav div#nav-link, #phone-nav-landing div#nav-link").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Home", "Mobile"]);
+	 //alert("mobile nav clicked!");
+  });
+  $("#phone-nav div#nav-link a, #phone-nav-landing div#nav-link a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Landing", "Mobile"]);
+  });
+  $("#tablet-nav div#nav-link, #tablet-nav-landing div#nav-link").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Home", "Tablet"]);
+	 //alert("tablet nav clicked!");
+  });
+  $("#tablet-nav div#nav-link a, #tablet-nav-landing div#nav-link a").click(function() {
+  	_gaq.push(['_trackEvent', "Navigation", "Link Landing", "Tablet"]);
+  });
+
+  $("#read-design-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Design', 'Desktop']);
+  });
+  $("#read-tech-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Tech', 'Desktop']);
+  });
+  $("#read-style-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Style', 'Desktop']);
+  });
+  $("#read-culture-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Culture', 'Desktop']);
+  });
+  $("#read-food-drink-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Food-drink', 'Desktop']);
+  });
+  $("#read-travel-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Read - Travel', 'Desktop']);
+  });
+
+  $("#look-design-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Design', 'Desktop']);
+  });
+  $("#look-tech-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Tech', 'Desktop']);
+  });
+  $("#look-style-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Style', 'Desktop']);
+  });
+  $("#look-culture-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Culture', 'Desktop']);
+  });
+  $("#look-food-drink-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Food-drink', 'Desktop']);
+  });
+  $("#look-travel-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Travel', 'Desktop']);
+  });
+  $("#look-ch-video-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Ch-video', 'Desktop']);
+  });
+  $("#look-rough-cuts-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Rough-cuts', 'Desktop']);
+  });
+  $("#look-capsule-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Capsule', 'Desktop']);
+  });
+  $("#look-slideshow-filter").click(function() {
+  	_gaq.push(['_trackEvent', 'Filter', 'Look - Slideshow', 'Desktop']);
+  });
+
+</script>
+<!-- End Google Analytics tag -->
+  </body>
+</html>

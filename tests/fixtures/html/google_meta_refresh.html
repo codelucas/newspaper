@@ -1,0 +1,19 @@
+<script>window.googleJavaScriptRedirect = 1</script>
+<script>var n = {
+    navigateTo: function (b, a, d) {
+        if (b != a && b.google) {
+            if (b.google.r) {
+                b.google.r = 0;
+                b.location.href = d;
+                a.location.replace("about:blank");
+            }
+        } else {
+            a.location.replace(d);
+        }
+    }
+};
+n.navigateTo(window.parent, window, "http://sfbay.craigslist.org/eby/cto/5617800926.html");
+</script>
+<noscript>
+    <META http-equiv="refresh" content="0;URL='http://example.com'">
+</noscript>

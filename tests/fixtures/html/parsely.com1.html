@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en-US" class="no-js ie ie6 lte7 lte8 lte9"><![endif]-->
+<!--[if IE 7 ]><html lang="en-US" class="no-js ie ie7 lte7 lte8 lte9"><![endif]-->
+<!--[if IE 8 ]><html lang="en-US" class="no-js ie ie8 lte8 lte9"><![endif]-->
+<!--[if IE 9 ]><html lang="en-US" class="no-js ie ie9 lte9"><![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en-US" class="no-js"><!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.5, minimum-scale=0.5">
+        <title>Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app by Parse.ly</title>
+        <link rel="profile" href="http://gmpg.org/xfn/11" />
+        <link rel="stylesheet" type="text/css" media="all" href="http://blog.parsely.com/wp-content/themes/svbtle/style.css" />
+        <link rel="pingback" href="http://blog.parsely.com/xmlrpc.php" />
+        <link rel="shortcut icon" href="http://blog.parsely.com/wp-content/themes/svbtle/images/favicon.ico" />
+        <link rel="stylesheet" href="/wp-content/themes/svbtle/icon.css" />
+        <!--[if lt IE 9]>
+            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+            <![endif]-->
+        
+        <style type='text/css'>
+					.no-break br {
+						display: none !important;
+					}
+			</style><style type='text/css'>@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext);p.ecae-button { font-family: 'Open Sans', Helvetica, Arial, sans-serif; }</style><link rel="alternate" type="application/rss+xml" title="Parse.ly &raquo; Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app Comments Feed" href="http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/feed/" />
+<link rel='stylesheet' id='fullcalendar-css'  href='http://blog.parsely.com/wp-content/plugins/wp-calendar/css/fullcalendar.css?ver=4.0.1' type='text/css' media='all' />
+<link rel='stylesheet' id='ecae-buttonskin-none-css'  href='http://blog.parsely.com/wp-content/plugins/easy-custom-auto-excerpt/buttons/ecae-buttonskin-none.css?ver=2.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='ecae-frontend-css-css'  href='http://blog.parsely.com/wp-content/plugins/easy-custom-auto-excerpt/assets/style-frontend.css?ver=2.1.0' type='text/css' media='all' />
+<link rel='stylesheet' id='jetpack_css-css'  href='http://blog.parsely.com/wp-content/plugins/jetpack/css/jetpack.css?ver=3.2.1' type='text/css' media='all' />
+<!-- This site uses the Yoast Google Analytics plugin v5.1.2 - Universal disabled - https://yoast.com/wordpress/plugins/google-analytics/ -->
+<script type="text/javascript">
+
+	var _gaq = _gaq || [];
+	_gaq.push(['_setAccount', 'UA-5989141-8']);
+	_gaq.push(['_gat._forceSSL']);
+	_gaq.push(['_trackPageview']);
+
+	(function () {
+		var ga = document.createElement('script');
+		ga.type = 'text/javascript';
+		ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(ga, s);
+	})();
+
+</script>
+<!-- / Yoast Google Analytics -->
+<script type='text/javascript' src='http://blog.parsely.com/wp-includes/js/jquery/jquery.js?ver=1.11.1'></script>
+<script type='text/javascript' src='http://blog.parsely.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPCalendar = {"ajaxUrl":"http:\/\/blog.parsely.com\/wp-admin\/admin-ajax.php"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://blog.parsely.com/wp-content/plugins/wp-calendar/js/fullcalendar.min.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://blog.parsely.com/wp-content/plugins/jetpack/modules/related-posts/related-posts.js?ver=20140611'></script>
+<script type='text/javascript' src='http://cdn.embedly.com/widgets/platform.js?ver=4.0.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.parsely.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.parsely.com/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Mark Luckie: How Media Companies Should be Using Twitter' href='http://blog.parsely.com/post/1522/mark-luckie-how-media-companies-should-be-using-twitter/' />
+<link rel='next' title='Jay Kreps on Logs: A review of &#8220;I ♥ Logs&#8221;' href='http://blog.parsely.com/post/1550/kreps-logs/' />
+<meta name="generator" content="WordPress 4.0.1" />
+<link rel='canonical' href='http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/' />
+<link rel='shortlink' href='http://wp.me/p4O3RN-oP' />
+<script charset="utf-8" type="text/javascript">var switchTo5x=true;</script><script charset="utf-8" type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script><script charset="utf-8" type="text/javascript">stLight.options({publisher:"73823332-efb5-41e4-b60d-6041cf06d2a3" , doNotCopy: true, hashAddressBar: false, doNotHash: true});var st_type='wordpress3.6.1';</script><!-- BEGIN wp-parsely Plugin Version 1.7 -->
+<meta name='wp-parsely_version' id='wp-parsely_version' content='1.7' />
+   <script type="application/ld+json">
+   {"@context":"http:\/\/schema.org","@type":"NewsArticle","headline":"Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app","url":"http:\/\/blog.parsely.com\/post\/1539\/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app\/","thumbnailUrl":"","articleId":"1539","dateCreated":"2014-12-11T19:03:39Z","articleSection":"Analytics That Matter","creator":["Parse.ly"],"keywords":["dark social","direct traffic","facebook","mobile app","referrals"]}   </script>
+<!-- END wp-parsely Plugin Version 1.7 -->
+
+<!-- Jetpack Open Graph Tags -->
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Facebook and Publishers: A fix for direct traffic from Facebook&#039;s mobile app" />
+<meta property="og:url" content="http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/" />
+<meta property="og:description" content="Yesterday, Facebook announced a number of new tools for publishers, as part of their on-going relationship to encourage a high volume of quality content that will keep us scrolling through our news..." />
+<meta property="article:published_time" content="2014-12-11T19:03:39+00:00" />
+<meta property="article:modified_time" content="2014-12-11T22:54:08+00:00" />
+<meta property="article:author" content="http://blog.parsely.com/post/author/admin/" />
+<meta property="og:site_name" content="Parse.ly" />
+<meta property="og:image" content="http://blog.parsely.com/wp-content/uploads/2014/12/facebook-ref-final-2.png" />
+<meta name="twitter:site" content="@jetpack" />
+<meta name="twitter:image" content="http://blog.parsely.com/wp-content/uploads/2014/12/facebook-ref-final-2.png?w=240" />
+<meta name="twitter:card" content="summary" />
+
+        <!-- Typekit -->
+        <script type="text/javascript" src="//use.typekit.net/zsy7rjo.js"></script>
+        <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+        <script language="javascript" type="text/javascript">
+          jQuery(document).ready(function() {
+              jQuery('#hide_arrow').click(function() {
+                  jQuery('#responsive_hideable').slideUp();
+                  jQuery('#hide_arrow').hide();
+                  jQuery('#show_arrow').show();
+              });
+              jQuery('#show_arrow').click(function() {
+                  jQuery('#responsive_hideable').slideDown();
+                  jQuery('#show_arrow').hide();
+                  jQuery('#hide_arrow').show();
+                  console.log("click show");
+              });
+          });
+          </script>
+    </head>
+    <body class="single single-post postid-1539 single-format-standard">
+
+        <header id="sidebar">
+            <ul id="drop_menu">
+                <li><figure class="logo medium">
+                        <a href="http://blog.parsely.com/"><img class="parsely_logo" src="/wp-content/themes/svbtle/images/logo-2x.png" /></a>
+                    </figure></li>
+                <li><div id="show_arrow"></div></li>
+                <li><div id="hide_arrow"></div></li>
+            </ul>
+              <h3>Helping newsrooms<br />see their audience clearly</h3>
+            <div id="responsive_hideable">
+                <ul id="user_nav">
+                    <div class="textwidget description">A blog about the intersection of digital media and analytics, from Parse.ly. We deliver fresh insights to the web's best publishers.</div>
+
+                    <li class="social-listing">
+                        <a target="_blank" href="http://Parse.ly"><span class="icon-parsely"></span></a>
+                        <a target="_blank" href="https://blog.parsely.com/?feed=rss"><span class="icon-rss"></span></a>
+                        <a target="_blank" href="https://twitter.com/Parsely"><span class="icon-twitter"></span></a>
+                        <a target="_blank" href="https://github.com/parsely/"><span class="icon-github"></span></a>
+                        <a target="_blank" href="https://www.facebook.com/parselydash"><span class="icon-facebook"></span></a>
+                        <a target="_blank" href="https://www.linkedin.com/company/parsely-inc."><span class="icon-linkedin"></span></a>
+                    </li>
+
+                    <hr />
+
+                    			<div class="textwidget">
+<p class="nav_title">NOTABLE EVENTS</p>
+</div>
+		<span class="hidden">Notable Events</span>			<div class="textwidget"><hr />
+
+<p class="nav_title">POST CATEGORIES</p></div>
+		<div class="menu-categories-container"><ul id="menu-categories" class="menu"><li id="menu-item-923" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-923"><a href="http://blog.parsely.com/post/category/journalism-today/" onclick="_gaq.push(['_trackEvent', 'outbound-widget-int', 'http://blog.parsely.com/post/category/journalism-today/', 'Journalism Today']);" >Journalism Today</a></li>
+<li id="menu-item-1033" class="menu-item menu-item-type-taxonomy menu-item-object-category current-post-ancestor current-menu-parent current-post-parent menu-item-1033"><a href="http://blog.parsely.com/post/category/analytics-that-matter/" onclick="_gaq.push(['_trackEvent', 'outbound-widget-int', 'http://blog.parsely.com/post/category/analytics-that-matter/', 'Analytics That Matter']);" >Analytics That Matter</a></li>
+<li id="menu-item-1060" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1060"><a href="http://blog.parsely.com/post/category/parse-ly-tech/" onclick="_gaq.push(['_trackEvent', 'outbound-widget-int', 'http://blog.parsely.com/post/category/parse-ly-tech/', 'Parse.ly Tech']);" >Parse.ly Tech</a></li>
+<li id="menu-item-1061" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1061"><a href="http://blog.parsely.com/post/category/tips-and-tricks-using-parse-ly/" onclick="_gaq.push(['_trackEvent', 'outbound-widget-int', 'http://blog.parsely.com/post/category/tips-and-tricks-using-parse-ly/', 'Tips and Tricks Using Parse.ly']);" >Tips and Tricks Using Parse.ly</a></li>
+<li id="menu-item-1062" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1062"><a href="http://blog.parsely.com/post/category/parse-ly-culture/" onclick="_gaq.push(['_trackEvent', 'outbound-widget-int', 'http://blog.parsely.com/post/category/parse-ly-culture/', 'Parse.ly Culture']);" >Parse.ly Culture</a></li>
+</ul></div><form role="search" method="get" id="searchform" class="searchform" action="http://blog.parsely.com/">
+				<div>
+					<label class="screen-reader-text" for="s">Search for:</label>
+					<input type="text" value="" name="s" id="s" />
+					<input type="submit" id="searchsubmit" value="Search" />
+				</div>
+			</form>                                    </ul>
+            </div>
+        </header>
+
+        <section id="river" role="main">
+
+            
+<header id="begin">
+    <div class="header_row">
+        <div class="header_inline"><a href="http://www.parsely.com/tour/?utm_source=parsely-blog&utm_medium=header&utm_campaign=blog">Product Tour</a></div>
+        <div class="header_inline"><a href="http://www.parsely.com/about/?utm_source=parsely-blog&utm_medium=header&utm_campaign=blog">About</a></div>
+        <div class="header_inline"><a href="http://parsely.com/authority/?utm_source=parsely-blog&utm_medium=header&utm_campaign=blog">Media Research</a></div>
+        <div class="header_inline"><a href="http://press.parsely.com/coverage">Press</a></div>
+        <div class="header_inline"><a href="http://www.parsely.com/trial/?utm_source=parsely-blog&utm_medium=header&utm_campaign=blog">Try Parse.ly</a></div>
+    </div>
+</header>
+
+
+
+
+<article id="1539" class="post">
+
+    <h2 class="entry-title">	<a href="http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/" class="no-link" title="Permalink to Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app" rel="bookmark">Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app</a>
+
+</h2>
+
+        <div class="entry-content">
+        <p>Yesterday, <a href="http://media.fb.com/2014/12/10/new-tools-and-insights-for-publishers-2/" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'http://media.fb.com/2014/12/10/new-tools-and-insights-for-publishers-2/', 'Facebook announced']);" >Facebook announced</a> a number of new tools for publishers, as part of their on-going relationship to encourage a high volume of quality content that will keep us scrolling through our newsfeeds.</p>
+<p>At the bottom was a short mention:</p>
+<blockquote><p><em>We also recently fixed a bug that caused many third-party analytics tools to undercount the percentage of their organic traffic from Facebook. In the past, referrer data was missing from some of our outbound mobile clicks. This issue has been resolved for iOS, with a fix for Android coming soon. Publishers may see an increase in iOS mobile traffic from Facebook and a decrease in undefined sources or direct traffic.</em></p></blockquote>
+<p>ICYMI &#8211; this is a fix for direct traffic (sometimes called “dark social”) for traffic coming through the mobile app that sometimes dropped the referral information.</p>
+<h2><b>Here’s a little background:</b></h2>
+<p>Anyone who has looked at analytics, has seen “direct” as a traffic source. There tends to be a fair amount of confusion around this section, as it encompasses anything that analytics can’t track.</p>
+<p>Traditionally, publishers assumed direct traffic was people bookmarking their home page or typing in the address directly in the search bar. However, since Parse.ly looks at analytics by a post-by-post basis, we can’t make that assumption, as most people are not typing in new article post URLs “directly” into their browser.</p>
+<p>Sources for this traffic include:</p>
+<ul>
+<li>Email/IMs</li>
+<li>Copying and pasting a link</li>
+<li>Switching from a https:// site to an http:// site</li>
+<li>Chat apps (Whats App, etc.)</li>
+</ul>
+<p>In 2012, Alexis Madrigal wrote a story about these sources, terming them “<a href="http://www.theatlantic.com/technology/archive/2012/10/dark-social-we-have-the-whole-history-of-the-web-wrong/263523/" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'http://www.theatlantic.com/technology/archive/2012/10/dark-social-we-have-the-whole-history-of-the-web-wrong/263523/', 'dark social']);" >dark social</a>”. (This post is worth re-reading for some fun facts like &#8220;Only about four percent of total traffic is on mobile at all.&#8221;) In summary, he supposed that since these were links that were being shared from person-to-person, this kind of traffic should still be thought of as social sharing.</p>
+<p>Parse.ly’s CTO, Andrew Montalenti, <a href="https://www.journalism.co.uk/news/-dark-social-and-other-mysterious-analytics/s2/a554142/" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'https://www.journalism.co.uk/news/-dark-social-and-other-mysterious-analytics/s2/a554142/', 'explained some other areas that “dark” traffic can come from']);" >explained some other areas that “dark” traffic can come from</a> &#8211; he points out that it’s not all social; some traffic might also be explained by search and sites that block their referral information from being passed through or programs used by people protecting their browsing (especially in the wake of Snowden/NSA revelations).</p>
+<p>Though many of those sources will probably continue to be &#8220;dark&#8221;, a lot of us in the analytics community realized a while ago that Facebook was sending some of this direct traffic. The Guardian’s Ophan architect, <a href="https://twitter.com/tackers" onclick="_gaq.push(['_trackEvent', 'outbound-article', 'https://twitter.com/tackers', 'Graham Tackley']);" >Graham Tackley</a>, showed off charts at ONA this year on how The Guardian saw its direct traffic spike in association with Facebook spikes.</p>
+<p>We saw a similar pattern, and called up Facebook a few months ago. As the massive social network makes a concerted effort to work with publishers, they were concerned at the differences we saw compared to their own data, and we shared some of our aggregate data with them as they worked to fix the referral issue.</p>
+<h2>What to expect from the fix:</h2>
+<p>The announcement above acknowledged the first fix, and we’ll continue to monitor the impact that this is making in our system.</p>
+<p>What does this mean for your traffic? We checked the amount of traffic that currently comes into posts as direct (aka &#8220;dark social&#8221;) but is actually Facebook by looking at the user agents and found in one sample that 11% of total traffic coming was from Facebook. (And yes &#8211; that means that almost 50% of all external traffic referrers in this sample came from Facebook, wow.)</p>
+<p><a href="http://blog.parsely.com/wp-content/uploads/2014/12/facebook-ref-final-2.png" onclick="_gaq.push(['_trackEvent', 'outbound-article-int', 'http://blog.parsely.com/wp-content/uploads/2014/12/facebook-ref-final-2.png', '']);" ><img class="aligncenter wp-image-1545" src="http://blog.parsely.com/wp-content/uploads/2014/12/facebook-ref-final-2.png" alt="facebook-ref-final-2" width="600" height="280" /></a></p>
+<p>Our analysis also checked out how much of that dark traffic came in from Android vs. iOS. We’ll be keeping track of this for the next few weeks, and we expect to see those numbers go down as the app fixes roll out and people update their apps.</p>
+<p>We know that people have a lot of questions about this, and we’re happy to provide additional information or answer questions about it &#8211; let us know in a comment, or shoot us a note.</p>
+<p>&nbsp;</p>
+<span class='st_facebook_large' st_title='Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app' st_url='http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/'></span><span st_via='Parsely' st_username='Parsely' class='st_twitter_large' st_title='Facebook and Publishers: A fix for direct traffic from Facebook&#8217;s mobile app' st_url='http://blog.parsely.com/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/'></span>
+<div id='jp-relatedposts' class='jp-relatedposts' >
+	<h3 class="jp-relatedposts-headline"><em>Related</em></h3>
+</div>     <p class="attribution_left">Parse.ly, December 11, 2014</p>
+    </div>
+    <!-- .entry-summary -->
+    </article><!-- #post-## -->
+
+
+
+
+					<div class="comments">			<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/post/1539/facebook-and-publishers-a-fix-for-direct-traffic-from-facebook-mobiles-app/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://blog.parsely.com/wp-comments-post.php" method="post" id="commentform" class="comment-form">
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='1539' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="a6ecae111e" /></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_comments" id="subscribe_comments" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-label" for="subscribe_comments">Notify me of follow-up comments by email.</label></p><p class="comment-subscription-form"><input type="checkbox" name="subscribe_blog" id="subscribe_blog" value="subscribe" style="width: auto; -moz-appearance: checkbox; -webkit-appearance: checkbox;" /> <label class="subscribe-label" id="subscribe-blog-label" for="subscribe_blog">Notify me of new posts by email.</label></p><p style="display: none;"><input type="hidden" id="ak_js" name="ak_js" value="225"/></p>					</form>
+							</div><!-- #respond -->
+			</div>
+<nav class="pagination">
+  <span class="prev">
+    <a href="http://blog.parsely.com/" class="back_to_blog">←&nbsp;&nbsp;&nbsp;read more</a>
+  </span>
+</nav>
+
+</section><!-- #main -->
+
+<script data-cfasync="false" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+	function getKudos() {
+	    var e = new Array;
+	    return $("aside.kudo").each(function(t) {
+	        article = $(this).closest("article").attr("id"),
+	        e.push(article)
+	    }),
+	    $.post("http://blog.parsely.com/wp-admin/admin-ajax.php", {
+	        kudosList: e,
+					action:'my_special_action'
+	    },
+	    function(e) {
+	        $.each(e,
+	        function(e, t) {
+	            var n = $("#" + t.external_id).find("span.num"),
+	            r = n.text().replace(/,/g, ""),
+	            i = t.kudos;
+	            isNaN(r) && (r = 0),
+	            isNaN(i) && (i = 9e6),
+	            i - r >= 0 && (i = i.toString(), i = i.replace(/\B(?=(\d{3})+(?!\d))/g, ","), n.html(i))
+	        })
+	    }),
+	    !0
+	}
+	function setViewport() {
+	    $(window).width() < 900 && $("html,body").animate({
+	        scrollLeft: 180
+	    },
+	    800)
+	}
+	function startCode() {
+	    $("code").addClass("prettyprint"),
+	    $.getScript("http://blog.parsely.com/wp-content/themes/svbtle/js/prettify.js").done(function(e, t) {
+	        var n = "http://blog.parsely.com/wp-content/themes/svbtle/css/prettify.css";
+	        $.get(n,
+	        function(e) {
+	            $('<style type="text/css"></style>').html(e).appendTo("head")
+	        }),
+	        prettyPrint();
+	    })
+	} (function(e, t) {
+	    var n;
+	    e.rails = n = {
+	        linkClickSelector: "a[data-confirm], a[data-method], a[data-remote], a[data-disable-with]",
+	        inputChangeSelector: "select[data-remote], input[data-remote], textarea[data-remote]",
+	        formSubmitSelector: "form",
+	        formInputClickSelector: "form input[type=submit], form input[type=image], form button[type=submit], form button:not(button[type])",
+	        disableSelector: "input[data-disable-with], button[data-disable-with], textarea[data-disable-with]",
+	        enableSelector: "input[data-disable-with]:disabled, button[data-disable-with]:disabled, textarea[data-disable-with]:disabled",
+	        requiredInputSelector: "input[name][required]:not([disabled]),textarea[name][required]:not([disabled])",
+	        fileInputSelector: "input:file",
+	        linkDisableSelector: "a[data-disable-with]",
+	        CSRFProtection: function(t) {
+	            var n = e('meta[name="csrf-token"]').attr("content");
+	            n && t.setRequestHeader("X-CSRF-Token", n)
+	        },
+	        fire: function(t, n, r) {
+	            var i = e.Event(n);
+	            return t.trigger(i, r),
+	            i.result !== !1
+	        },
+	        confirm: function(e) {
+	            return confirm(e)
+	        },
+	        ajax: function(t) {
+	            return e.ajax(t)
+	        },
+	        href: function(e) {
+	            return e.attr("href")
+	        },
+	        handleRemote: function(r) {
+	            var i,
+	            s,
+	            o,
+	            u,
+	            a,
+	            f;
+	            if (n.fire(r, "ajax:before")) {
+	                u = r.data("cross-domain") || null,
+	                a = r.data("type") || e.ajaxSettings && e.ajaxSettings.dataType;
+	                if (r.is("form")) {
+	                    i = r.attr("method"),
+	                    s = r.attr("action"),
+	                    o = r.serializeArray();
+	                    var l = r.data("ujs:submit-button");
+	                    l && (o.push(l), r.data("ujs:submit-button", null))
+	                } else r.is(n.inputChangeSelector) ? (i = r.data("method"), s = r.data("url"), o = r.serialize(), r.data("params") && (o = o + "&" + r.data("params"))) : (i = r.data("method"), s = n.href(r), o = r.data("params") || null);
+	                return f = {
+	                    type: i || "GET",
+	                    data: o,
+	                    dataType: a,
+	                    crossDomain: u,
+	                    beforeSend: function(e, i) {
+	                        return i.dataType === t && e.setRequestHeader("accept", "*/*;q=0.5, " + i.accepts.script),
+	                        n.fire(r, "ajax:beforeSend", [e, i])
+	                    },
+	                    success: function(e, t, n) {
+	                        r.trigger("ajax:success", [e, t, n])
+	                    },
+	                    complete: function(e, t) {
+	                        r.trigger("ajax:complete", [e, t])
+	                    },
+	                    error: function(e, t, n) {
+	                        r.trigger("ajax:error", [e, t, n])
+	                    }
+	                },
+	                s && (f.url = s),
+	                n.ajax(f)
+	            }
+	            return ! 1
+	        },
+	        handleMethod: function(r) {
+	            var i = n.href(r),
+	            s = r.data("method"),
+	            o = r.attr("target"),
+	            u = e("meta[name=csrf-token]").attr("content"),
+	            a = e("meta[name=csrf-param]").attr("content"),
+	            f = e('<form method="post" action="' + i + '"></form>'),
+	            l = '<input name="_method" value="' + s + '" type="hidden" />';
+	            a !== t && u !== t && (l += '<input name="' + a + '" value="' + u + '" type="hidden" />'),
+	            o && f.attr("target", o),
+	            f.hide().append(l).appendTo("body"),
+	            f.submit()
+	        },
+	        disableFormElements: function(t) {
+	            t.find(n.disableSelector).each(function() {
+	                var t = e(this),
+	                n = t.is("button") ? "html": "val";
+	                t.data("ujs:enable-with", t[n]()),
+	                t[n](t.data("disable-with")),
+	                t.prop("disabled", !0)
+	            })
+	        },
+	        enableFormElements: function(t) {
+	            t.find(n.enableSelector).each(function() {
+	                var t = e(this),
+	                n = t.is("button") ? "html": "val";
+	                t.data("ujs:enable-with") && t[n](t.data("ujs:enable-with")),
+	                t.prop("disabled", !1)
+	            })
+	        },
+	        allowAction: function(e) {
+	            var t = e.data("confirm"),
+	            r = !1,
+	            i;
+	            return t ? (n.fire(e, "confirm") && (r = n.confirm(t), i = n.fire(e, "confirm:complete", [r])), r && i) : !0
+	        },
+	        blankInputs: function(t, n, r) {
+	            var i = e(),
+	            s,
+	            o = n || "input,textarea";
+	            return t.find(o).each(function() {
+	                s = e(this);
+	                if (r ? s.val() : !s.val()) i = i.add(s)
+	            }),
+	            i.length ? i: !1
+	        },
+	        nonBlankInputs: function(e, t) {
+	            return n.blankInputs(e, t, !0)
+	        },
+	        stopEverything: function(t) {
+	            return e(t.target).trigger("ujs:everythingStopped"),
+	            t.stopImmediatePropagation(),
+	            !1
+	        },
+	        callFormSubmitBindings: function(n, r) {
+	            var i = n.data("events"),
+	            s = !0;
+	            return i !== t && i.submit !== t && e.each(i.submit,
+	            function(e, t) {
+	                if (typeof t.handler == "function") return s = t.handler(r)
+	            }),
+	            s
+	        },
+	        disableElement: function(e) {
+	            e.data("ujs:enable-with", e.html()),
+	            e.html(e.data("disable-with")),
+	            e.bind("click.railsDisable",
+	            function(e) {
+	                return n.stopEverything(e)
+	            })
+	        },
+	        enableElement: function(e) {
+	            e.data("ujs:enable-with") !== t && (e.html(e.data("ujs:enable-with")), e.data("ujs:enable-with", !1)),
+	            e.unbind("click.railsDisable")
+	        }
+	    },
+	    e.ajaxPrefilter(function(e, t, r) {
+	        e.crossDomain //|| n.CSRFProtection(r)
+	    }),
+	    e(document).delegate(n.linkDisableSelector, "ajax:complete",
+	    function() {
+	        n.enableElement(e(this))
+	    }),
+	    e(document).delegate(n.linkClickSelector, "click.rails",
+	    function(r) {
+	        var i = e(this),
+	        s = i.data("method"),
+	        o = i.data("params");
+	        if (!n.allowAction(i)) return n.stopEverything(r);
+	        i.is(n.linkDisableSelector) && n.disableElement(i);
+	        if (i.data("remote") !== t) return (r.metaKey || r.ctrlKey) && (!s || s === "GET") && !o ? !0: (n.handleRemote(i) === !1 && n.enableElement(i), !1);
+	        if (i.data("method")) return n.handleMethod(i),
+	        !1
+	    }),
+	    e(document).delegate(n.inputChangeSelector, "change.rails",
+	    function(t) {
+	        var r = e(this);
+	        return n.allowAction(r) ? (n.handleRemote(r), !1) : n.stopEverything(t)
+	    }),
+	    e(document).delegate(n.formSubmitSelector, "submit.rails",
+	    function(r) {
+	        var i = e(this),
+	        s = i.data("remote") !== t,
+	        o = n.blankInputs(i, n.requiredInputSelector),
+	        u = n.nonBlankInputs(i, n.fileInputSelector);
+	        if (!n.allowAction(i)) return n.stopEverything(r);
+	        if (o && i.attr("novalidate") == t && n.fire(i, "ajax:aborted:required", [o])) return n.stopEverything(r);
+	        if (s) return u ? n.fire(i, "ajax:aborted:file", [u]) : !e.support.submitBubbles && e().jquery < "1.7" && n.callFormSubmitBindings(i, r) === !1 ? n.stopEverything(r) : (n.handleRemote(i), !1);
+	        setTimeout(function() {
+	            n.disableFormElements(i)
+	        },
+	        13)
+	    }),
+	    e(document).delegate(n.formInputClickSelector, "click.rails",
+	    function(t) {
+	        var r = e(this);
+	        if (!n.allowAction(r)) return n.stopEverything(t);
+	        var i = r.attr("name"),
+	        s = i ? {
+	            name: i,
+	            value: r.val()
+	        }: null;
+	        r.closest("form").data("ujs:submit-button", s)
+	    }),
+	    e(document).delegate(n.formSubmitSelector, "ajax:beforeSend.rails",
+	    function(t) {
+	        this == t.target && n.disableFormElements(e(this))
+	    }),
+	    e(document).delegate(n.formSubmitSelector, "ajax:complete.rails",
+	    function(t) {
+	        this == t.target && n.enableFormElements(e(this))
+	    })
+	})(jQuery),	
+	function(e) {
+	    function t() {
+	        if (o.jStorage) try {
+	            s = l("" + o.jStorage)
+	        } catch(e) {
+	            o.jStorage = "{}"
+	        } else o.jStorage = "{}";
+	        a = o.jStorage ? ("" + o.jStorage).length: 0
+	    }
+	    function n() {
+	        try {
+	            o.jStorage = f(s),
+	            u && (u.setAttribute("jStorage", o.jStorage), u.save("jStorage")),
+	            a = o.jStorage ? ("" + o.jStorage).length: 0
+	        } catch(e) {}
+	    }
+	    function r(e) {
+	        if (!e || "string" != typeof e && "number" != typeof e) throw new TypeError("Key name must be string or numeric");
+	        if ("__jstorage_meta" == e) throw new TypeError("Reserved key name");
+	        return ! 0
+	    }
+	    function i() {
+	        var e,
+	        t,
+	        r,
+	        o = Infinity,
+	        u = !1;
+	        clearTimeout(h);
+	        if (s.__jstorage_meta && "object" == typeof s.__jstorage_meta.TTL) {
+	            e = +(new Date),
+	            r = s.__jstorage_meta.TTL;
+	            for (t in r) r.hasOwnProperty(t) && (r[t] <= e ? (delete r[t], delete s[t], u = !0) : r[t] < o && (o = r[t]));
+	            Infinity != o && (h = setTimeout(i, o - e)),
+	            u && n()
+	        }
+	    }
+	    if (!e || !e.toJSON && !Object.toJSON && !window.JSON) throw Error("jQuery, MooTools or Prototype needs to be loaded before jStorage!");
+	    var s = {},
+	    o = {
+	        jStorage: "{}"
+	    },
+	    u = null,
+	    a = 0,
+	    f = e.toJSON || Object.toJSON || window.JSON && (JSON.encode || JSON.stringify),
+	    l = e.evalJSON || window.JSON && (JSON.decode || JSON.parse) ||
+	    function(e) {
+	        return ("" + e).evalJSON()
+	    },
+	    c = !1,
+	    h,
+	    p = {
+	        isXML: function(e) {
+	            return (e = (e ? e.ownerDocument || e: 0).documentElement) ? "HTML" !== e.nodeName: !1
+	        },
+	        encode: function(e) {
+	            if (!this.isXML(e)) return ! 1;
+	            try {
+	                return (new XMLSerializer).serializeToString(e)
+	            } catch(t) {
+	                try {
+	                    return e.xml
+	                } catch(n) {}
+	            }
+	            return ! 1
+	        },
+	        decode: function(e) {
+	            var t = "DOMParser" in window && (new DOMParser).parseFromString || window.ActiveXObject &&
+	            function(e) {
+	                var t = new ActiveXObject("Microsoft.XMLDOM");
+	                return t.async = "false",
+	                t.loadXML(e),
+	                t
+	            };
+	            return t ? (e = t.call("DOMParser" in window && new DOMParser || window, e, "text/xml"), this.isXML(e) ? e: !1) : !1
+	        }
+	    };
+	    e.jStorage = {
+	        version: "0.1.7.0",
+	        set: function(e, t, i) {
+	            return r(e),
+	            i = i || {},
+	            p.isXML(t) ? t = {
+	                _is_xml: !0,
+	                xml: p.encode(t)
+	            }: "function" == typeof t ? t = null: t && "object" == typeof t && (t = l(f(t))),
+	            s[e] = t,
+	            isNaN(i.TTL) ? n() : this.setTTL(e, i.TTL),
+	            t
+	        },
+	        get: function(e, t) {
+	            return r(e),
+	            e in s ? s[e] && "object" == typeof s[e] && s[e]._is_xml && s[e]._is_xml ? p.decode(s[e].xml) : s[e] : "undefined" == typeof t ? null: t
+	        },
+	        deleteKey: function(e) {
+	            return r(e),
+	            e in s ? (delete s[e], s.__jstorage_meta && "object" == typeof s.__jstorage_meta.TTL && e in s.__jstorage_meta.TTL && delete s.__jstorage_meta.TTL[e], n(), !0) : !1
+	        },
+	        setTTL: function(e, t) {
+	            var o = +(new Date);
+	            return r(e),
+	            t = Number(t) || 0,
+	            e in s ? (s.__jstorage_meta || (s.__jstorage_meta = {}), s.__jstorage_meta.TTL || (s.__jstorage_meta.TTL = {}), 0 < t ? s.__jstorage_meta.TTL[e] = o + t: delete s.__jstorage_meta.TTL[e], n(), i(), !0) : !1
+	        },
+	        flush: function() {
+	            return s = {},
+	            n(),
+	            !0
+	        },
+	        storageObj: function() {
+	            function e() {}
+	            return e.prototype = s,
+	            new e
+	        },
+	        index: function() {
+	            var e = [],
+	            t;
+	            for (t in s) s.hasOwnProperty(t) && "__jstorage_meta" != t && e.push(t);
+	            return e
+	        },
+	        storageSize: function() {
+	            return a
+	        },
+	        currentBackend: function() {
+	            return c
+	        },
+	        storageAvailable: function() {
+	            return !! c
+	        },
+	        reInit: function() {
+	            var e;
+	            if (u && u.addBehavior) {
+	                e = document.createElement("link"),
+	                u.parentNode.replaceChild(e, u),
+	                u = e,
+	                u.style.behavior = "url(#default#userData)",
+	                document.getElementsByTagName("head")[0].appendChild(u),
+	                u.load("jStorage"),
+	                e = "{}";
+	                try {
+	                    e = u.getAttribute("jStorage")
+	                } catch(n) {}
+	                o.jStorage = e,
+	                c = "userDataBehavior"
+	            }
+	            t()
+	        }
+	    },
+	    function() {
+	        var e = !1;
+	        if ("localStorage" in window) try {
+	            window.localStorage.setItem("_tmptest", "tmpval"),
+	            e = !0,
+	            window.localStorage.removeItem("_tmptest")
+	        } catch(n) {}
+	        if (e) try {
+	            window.localStorage && (o = window.localStorage, c = "localStorage")
+	        } catch(r) {} else if ("globalStorage" in window) try {
+	            window.globalStorage && (o = window.globalStorage[window.location.hostname], c = "globalStorage")
+	        } catch(s) {} else {
+	            if (u = document.createElement("link"), !u.addBehavior) {
+	                u = null;
+	                return
+	            }
+	            u.style.behavior = "url(#default#userData)",
+	            document.getElementsByTagName("head")[0].appendChild(u),
+	            u.load("jStorage"),
+	            e = "{}";
+	            try {
+	                e = u.getAttribute("jStorage")
+	            } catch(a) {}
+	            o.jStorage = e,
+	            c = "userDataBehavior"
+	        }
+	        t(),
+	        i()
+	    } ()
+	} (window.$ || window.jQuery),
+	$(function() {
+	    function n(t) {
+	        t.addClass("active"),
+	        t.children(".counter").children("span.txt").html("Don&rsquo;t move"),
+	        t.children(".counter").children("span.num").hide(),
+	        e = setTimeout(function() {
+	            clearTimeout(e),
+	            s(t)
+	        },
+	        1e3)
+	    }
+	    function r(t) {
+	        clearTimeout(e),
+	        t.children(".counter").children("span.txt").html("Kudos"),
+	        t.children(".counter").children("span.num").show(),
+	        t.removeClass("active")
+	    }
+	    function i(e) {
+	        var t = e.closest("article").attr("id");
+					$.post("http://blog.parsely.com/wp-admin/admin-ajax.php", {
+	            article: t, action:'remove_kudos'
+	        },
+	        function() {
+	            $.jStorage.set(t, !1)
+	        });
+	        var n = parseInt(e.find("span.num").text().replace(/,/g, "")) - 1;
+	        e.find("span.num").text(n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
+	        e.children(".counter").children("span.txt").html("Kudos"),
+	        e.children(".counter").children("span.num").show(),
+	        e.removeClass("complete deletable"),
+	        e.addClass("kudoable")
+	    }
+	    function s(e) {
+	        var t = e.closest("article").attr("id");
+	        $.post("http://blog.parsely.com/wp-admin/admin-ajax.php", {
+	            article: t,
+							action:'my_special_action',
+	        },
+	        function() {
+	            $.jStorage.set(t, !0)
+	        });
+	        var n = parseInt(e.find("span.num").text().replace(/,/g, "")) + 1;
+	        e.find("span.num").text(n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")),
+	        e.children(".counter").children("span.txt").html("Kudos"),
+	        e.children(".counter").children("span.num").show(),
+	        e.addClass("complete"),
+	        e.removeClass("kudoable active")
+	    }
+	    var e,
+	    t;
+	    getKudos(),
+	    setViewport(),
+	    $("code, pre").length > 0 && startCode(),
+	    $("a.kudobject").live({
+	        click: function(e) {
+	            return e.preventDefault(),
+	            !1
+	        },
+	        mouseenter: function() {
+	            kudo = $(this).parent(),
+	            kudo.is(".kudoable") && n(kudo)
+	        },
+	        mouseleave: function() {
+	            clearTimeout(e),
+	            kudo = $(this).parent(),
+	            r(kudo),
+	            kudo.is(".complete") && kudo.addClass("deletable")
+	        }
+	    }),
+	    $("a.kudobject").live("touchstart",
+	    function(e) {
+	        kudo = $(this).parent(),
+	        kudo.is(".kudoable") && n(kudo),
+	        e.preventDefault()
+	    }),
+	    $("a.kudobject").live("touchend",
+	    function(t) {
+	        clearTimeout(e),
+	        kudo = $(this).parent(),
+	        r(kudo),
+	        kudo.is(".complete") && kudo.addClass("deletable"),
+	        t.preventDefault()
+	    }),
+	    $("aside.deletable a.kudobject").live("click",
+	    function(e) {
+	        return kudo = $(this).parent(),
+	        i(kudo),
+	        e.preventDefault(),
+	        !1
+	    }),
+	    $("aside.deletable a.kudobject").live("touchend",
+	    function(e) {
+	        return kudo = $(this).parent(),
+	        i(kudo),
+	        e.preventDefault(),
+	        !1
+	    }),
+	    $("aside.kudo").each(function(e) {
+	        var t = $(this).closest("article").attr("id"),
+	        n = $.jStorage.get(t);
+	        n && $(this).removeClass("kudoable").addClass("complete deletable")
+	    }),
+	    $("#svbtle_dropdown").mouseenter(function() {
+	        clearTimeout(t),
+	        $("#dropdown").show()
+	    }).mouseleave(function() {
+	        t = setTimeout("$('#dropdown').hide();", 800)
+	    }),
+	    $("#svbtle_dropdown").mouseenter(function() {
+	        clearTimeout(t),
+	        $("#dropdown").show()
+	    }).mouseleave(function() {
+	        t = setTimeout("$('#dropdown').hide();", 800)
+	    })
+	}),	$("input.pane_input, textarea.pane_input").bind("focus", function() {
+			    $("li.text_field").removeClass("active"), $(this).parent("li.text_field").addClass("active")
+			}), $("input.pane_input, textarea.pane_input").bind("blur", function() {
+			    $("li.text_field").removeClass("active"), $("li.text_field").first().addClass("active")
+			});
+</script>
+
+<!-- Marketo Insightera-->
+<script type='text/javascript'>
+    window.AIConfig = {};
+    window.AIConfig.accountId='parsely';
+    var protocol = (('https:' == document.location.protocol) ? 'https:' : 'http:');
+    var tag = document.createElement('script');
+    tag.src = protocol+'//cloud4.insightera.com/gw1/djs';
+    tag.type = 'text/javascript';
+    tag.async = true;
+    var head = document.getElementsByTagName('head')[0] || document.documentElement;
+    head.insertBefore( tag, head.firstChild );
+</script>
+<!-- Marketo Insightera end -->
+
+<!-- Marketo Munchkin -->
+<script type="text/javascript">
+    (function() {
+        var didInit = false;
+        function initMunchkin() {
+            if(didInit === false) {
+                didInit = true;
+                Munchkin.init('314-EBB-255');
+            }
+        }
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//munchkin.marketo.net/munchkin.js';
+        s.onreadystatechange = function() {
+            if (this.readyState == 'complete' || this.readyState == 'loaded') {
+                initMunchkin();
+            }
+        };
+        s.onload = initMunchkin;
+        document.getElementsByTagName('head')[0].appendChild(s);
+    })();
+</script>
+<!-- Marketo Munchkin end -->
+		
+		
+<!-- START Parse.ly Include: Standard -->
+<div id="parsely-root" style="display: none">
+  <div id="parsely-cfg" data-parsely-site="blog.parsely.com"></div>
+</div>
+<script>
+(function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+      e=d.getElementById(i), r=d.getElementById(p+"-root"),
+      u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+      :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+})("script", "parsely", document);
+</script>
+<!-- END Parse.ly Include: Standard -->
+	<div style="display:none">
+	</div>
+<script type='text/javascript' src='http://blog.parsely.com/wp-content/plugins/akismet/_inc/form.js?ver=3.0.3'></script>
+<link rel='stylesheet' id='embedly_font_end-css'  href='http://blog.parsely.com/wp-content/plugins/embedly/css/embedly-frontend.css?ver=4.0.1' type='text/css' media='all' />
+<script type='text/javascript' src='http://blog.parsely.com/wp-includes/js/jquery/ui/jquery.ui.core.min.js?ver=1.10.4'></script>
+<script type='text/javascript' src='http://blog.parsely.com/wp-includes/js/comment-reply.min.js?ver=4.0.1'></script>
+<script type='text/javascript' src='http://s0.wp.com/wp-content/js/devicepx-jetpack.js?ver=201501'></script>
+<script type='text/javascript' src='http://s.gravatar.com/js/gprofiles.js?ver=2015Janaa'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var WPGroHo = {"my_hash":""};
+/* ]]> */
+</script>
+<script type='text/javascript' src='http://blog.parsely.com/wp-content/plugins/jetpack/modules/wpgroho.js?ver=4.0.1'></script>
+
+	<script src="http://stats.wp.com/e-201501.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	st_go({v:'ext',j:'1:3.2.1',blog:'71036611',post:'1539',tz:'0'});
+	var load_cmc = function(){linktracker_init(71036611,1539,2);};
+	if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+	else load_cmc();
+	</script>	</body>
+</html>

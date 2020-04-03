@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'>
+<script type="text/javascript">window.NREUM||(NREUM={});NREUM.info={"beacon":"beacon-4.newrelic.com","errorBeacon":"bam.nr-data.net","licenseKey":"ef71ff2500","applicationID":"1865757","transactionName":"e1hZQBdeCVtdRB9RF0xeVFgAQkpEUFlH","queueTime":5,"applicationTime":120,"ttGuid":"","agentToken":null,"agent":"js-agent.newrelic.com/nr-476.min.js"}</script>
+<script type="text/javascript">(window.NREUM||(NREUM={})).loader_config={xpid:"VwAGV1RSGwIIUlRVAgY="};window.NREUM||(NREUM={}),__nr_require=function(t,e,n){function r(n){if(!e[n]){var o=e[n]={exports:{}};t[n][0].call(o.exports,function(e){var o=t[n][1][e];return r(o?o:e)},o,o.exports)}return e[n].exports}if("function"==typeof __nr_require)return __nr_require;for(var o=0;o<n.length;o++)r(n[o]);return r}({QJf3ax:[function(t,e){function n(t){function e(e,n,a){t&&t(e,n,a),a||(a={});for(var c=s(e),f=c.length,u=i(a,o,r),d=0;f>d;d++)c[d].apply(u,n);return u}function a(t,e){f[t]=s(t).concat(e)}function s(t){return f[t]||[]}function c(){return n(e)}var f={};return{on:a,emit:e,create:c,listeners:s,_events:f}}function r(){return{}}var o="nr@context",i=t("gos");e.exports=n()},{gos:"7eSDFh"}],ee:[function(t,e){e.exports=t("QJf3ax")},{}],3:[function(t){function e(t,e,n,i,s){try{c?c-=1:r("err",[s||new UncaughtException(t,e,n)])}catch(f){try{r("ierr",[f,(new Date).getTime(),!0])}catch(u){}}return"function"==typeof a?a.apply(this,o(arguments)):!1}function UncaughtException(t,e,n){this.message=t||"Uncaught error with no additional information",this.sourceURL=e,this.line=n}function n(t){r("err",[t,(new Date).getTime()])}var r=t("handle"),o=t(5),i=t("ee"),a=window.onerror,s=!1,c=0;t("loader").features.err=!0,window.onerror=e,NREUM.noticeError=n;try{throw new Error}catch(f){"stack"in f&&(t(1),t(4),"addEventListener"in window&&t(2),window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&t(3),s=!0)}i.on("fn-start",function(){s&&(c+=1)}),i.on("fn-err",function(t,e,r){s&&(this.thrown=!0,n(r))}),i.on("fn-end",function(){s&&!this.thrown&&c>0&&(c-=1)}),i.on("internal-error",function(t){r("ierr",[t,(new Date).getTime(),!0])})},{1:8,2:5,3:9,4:7,5:20,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],4:[function(t){function e(){}if(window.performance&&window.performance.timing&&window.performance.getEntriesByType){var n=t("ee"),r=t("handle"),o=t(2);t("loader").features.stn=!0,t(1),n.on("fn-start",function(t){var e=t[0];e instanceof Event&&(this.bstStart=Date.now())}),n.on("fn-end",function(t,e){var n=t[0];n instanceof Event&&r("bst",[n,e,this.bstStart,Date.now()])}),o.on("fn-start",function(t,e,n){this.bstStart=Date.now(),this.bstType=n}),o.on("fn-end",function(t,e){r("bstTimer",[e,this.bstStart,Date.now(),this.bstType])}),n.on("pushState-start",function(){this.time=Date.now(),this.startPath=location.pathname+location.hash}),n.on("pushState-end",function(){r("bstHist",[location.pathname+location.hash,this.startPath,this.time])}),"addEventListener"in window.performance&&(window.performance.addEventListener("webkitresourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.webkitClearResourceTimings()},!1),window.performance.addEventListener("resourcetimingbufferfull",function(){r("bstResource",[window.performance.getEntriesByType("resource")]),window.performance.clearResourceTimings()},!1)),document.addEventListener("scroll",e,!1),document.addEventListener("keypress",e,!1),document.addEventListener("click",e,!1)}},{1:6,2:8,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],5:[function(t,e){function n(t){i.inPlace(t,["addEventListener","removeEventListener"],"-",r)}function r(t){return t[1]}var o=(t(1),t("ee").create()),i=t(2)(o),a=t("gos");if(e.exports=o,n(window),"getPrototypeOf"in Object){for(var s=document;s&&!s.hasOwnProperty("addEventListener");)s=Object.getPrototypeOf(s);s&&n(s);for(var c=XMLHttpRequest.prototype;c&&!c.hasOwnProperty("addEventListener");)c=Object.getPrototypeOf(c);c&&n(c)}else XMLHttpRequest.prototype.hasOwnProperty("addEventListener")&&n(XMLHttpRequest.prototype);o.on("addEventListener-start",function(t){if(t[1]){var e=t[1];"function"==typeof e?this.wrapped=t[1]=a(e,"nr@wrapped",function(){return i(e,"fn-",null,e.name||"anonymous")}):"function"==typeof e.handleEvent&&i.inPlace(e,["handleEvent"],"fn-")}}),o.on("removeEventListener-start",function(t){var e=this.wrapped;e&&(t[1]=e)})},{1:20,2:21,ee:"QJf3ax",gos:"7eSDFh"}],6:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window.history,["pushState"],"-")},{1:21,2:20,ee:"QJf3ax"}],7:[function(t,e){var n=(t(2),t("ee").create()),r=t(1)(n);e.exports=n,r.inPlace(window,["requestAnimationFrame","mozRequestAnimationFrame","webkitRequestAnimationFrame","msRequestAnimationFrame"],"raf-"),n.on("raf-start",function(t){t[0]=r(t[0],"fn-")})},{1:21,2:20,ee:"QJf3ax"}],8:[function(t,e){function n(t,e,n){var r=t[0];"string"==typeof r&&(r=new Function(r)),t[0]=o(r,"fn-",null,n)}var r=(t(2),t("ee").create()),o=t(1)(r);e.exports=r,o.inPlace(window,["setTimeout","setInterval","setImmediate"],"setTimer-"),r.on("setTimer-start",n)},{1:21,2:20,ee:"QJf3ax"}],9:[function(t,e){function n(){c.inPlace(this,d,"fn-")}function r(t,e){c.inPlace(e,["onreadystatechange"],"fn-")}function o(t,e){return e}var i=t("ee").create(),a=t(1),s=t(2),c=s(i),f=s(a),u=window.XMLHttpRequest,d=["onload","onerror","onabort","onloadstart","onloadend","onprogress","ontimeout"];e.exports=i,window.XMLHttpRequest=function(t){var e=new u(t);try{i.emit("new-xhr",[],e),f.inPlace(e,["addEventListener","removeEventListener"],"-",function(t,e){return e}),e.addEventListener("readystatechange",n,!1)}catch(r){try{i.emit("internal-error",[r])}catch(o){}}return e},window.XMLHttpRequest.prototype=u.prototype,c.inPlace(XMLHttpRequest.prototype,["open","send"],"-xhr-",o),i.on("send-xhr-start",r),i.on("open-xhr-start",r)},{1:5,2:21,ee:"QJf3ax"}],10:[function(t){function e(t){if("string"==typeof t&&t.length)return t.length;if("object"!=typeof t)return void 0;if("undefined"!=typeof ArrayBuffer&&t instanceof ArrayBuffer&&t.byteLength)return t.byteLength;if("undefined"!=typeof Blob&&t instanceof Blob&&t.size)return t.size;if("undefined"!=typeof FormData&&t instanceof FormData)return void 0;try{return JSON.stringify(t).length}catch(e){return void 0}}function n(t){var n=this.params,r=this.metrics;if(!this.ended){this.ended=!0;for(var i=0;c>i;i++)t.removeEventListener(s[i],this.listener,!1);if(!n.aborted){if(r.duration=(new Date).getTime()-this.startTime,4===t.readyState){n.status=t.status;var a=t.responseType,f="arraybuffer"===a||"blob"===a||"json"===a?t.response:t.responseText,u=e(f);if(u&&(r.rxSize=u),this.sameOrigin){var d=t.getResponseHeader("X-NewRelic-App-Data");d&&(n.cat=d.split(", ").pop())}}else n.status=0;r.cbTime=this.cbTime,o("xhr",[n,r,this.startTime])}}}function r(t,e){var n=i(e),r=t.params;r.host=n.hostname+":"+n.port,r.pathname=n.pathname,t.sameOrigin=n.sameOrigin}if(window.XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.addEventListener&&!/CriOS/.test(navigator.userAgent)){t("loader").features.xhr=!0;var o=t("handle"),i=t(2),a=t("ee"),s=["load","error","abort","timeout"],c=s.length,f=t(1);t(4),t(3),a.on("new-xhr",function(){this.totalCbs=0,this.called=0,this.cbTime=0,this.end=n,this.ended=!1,this.xhrGuids={}}),a.on("open-xhr-start",function(t){this.params={method:t[0]},r(this,t[1]),this.metrics={}}),a.on("open-xhr-end",function(t,e){"loader_config"in NREUM&&"xpid"in NREUM.loader_config&&this.sameOrigin&&e.setRequestHeader("X-NewRelic-ID",NREUM.loader_config.xpid)}),a.on("send-xhr-start",function(t,n){var r=this.metrics,o=t[0],i=this;if(r&&o){var f=e(o);f&&(r.txSize=f)}this.startTime=(new Date).getTime(),this.listener=function(t){try{"abort"===t.type&&(i.params.aborted=!0),("load"!==t.type||i.called===i.totalCbs&&(i.onloadCalled||"function"!=typeof n.onload))&&i.end(n)}catch(e){try{a.emit("internal-error",[e])}catch(r){}}};for(var u=0;c>u;u++)n.addEventListener(s[u],this.listener,!1)}),a.on("xhr-cb-time",function(t,e,n){this.cbTime+=t,e?this.onloadCalled=!0:this.called+=1,this.called!==this.totalCbs||!this.onloadCalled&&"function"==typeof n.onload||this.end(n)}),a.on("xhr-load-added",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&!this.xhrGuids[n]&&(this.xhrGuids[n]=!0,this.totalCbs+=1)}),a.on("xhr-load-removed",function(t,e){var n=""+f(t)+!!e;this.xhrGuids&&this.xhrGuids[n]&&(delete this.xhrGuids[n],this.totalCbs-=1)}),a.on("addEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-added",[t[1],t[2]],e)}),a.on("removeEventListener-end",function(t,e){e instanceof XMLHttpRequest&&"load"===t[0]&&a.emit("xhr-load-removed",[t[1],t[2]],e)}),a.on("fn-start",function(t,e,n){e instanceof XMLHttpRequest&&("onload"===n&&(this.onload=!0),("load"===(t[0]&&t[0].type)||this.onload)&&(this.xhrCbStart=(new Date).getTime()))}),a.on("fn-end",function(t,e){this.xhrCbStart&&a.emit("xhr-cb-time",[(new Date).getTime()-this.xhrCbStart,this.onload,e],e)})}},{1:"XL7HBI",2:11,3:9,4:5,ee:"QJf3ax",handle:"D5DuLP",loader:"G9z0Bl"}],11:[function(t,e){e.exports=function(t){var e=document.createElement("a"),n=window.location,r={};e.href=t,r.port=e.port;var o=e.href.split("://");return!r.port&&o[1]&&(r.port=o[1].split("/")[0].split(":")[1]),r.port&&"0"!==r.port||(r.port="https"===o[0]?"443":"80"),r.hostname=e.hostname||n.hostname,r.pathname=e.pathname,"/"!==r.pathname.charAt(0)&&(r.pathname="/"+r.pathname),r.sameOrigin=!e.hostname||e.hostname===document.domain&&e.port===n.port&&e.protocol===n.protocol,r}},{}],gos:[function(t,e){e.exports=t("7eSDFh")},{}],"7eSDFh":[function(t,e){function n(t,e,n){if(r.call(t,e))return t[e];var o=n();if(Object.defineProperty&&Object.keys)try{return Object.defineProperty(t,e,{value:o,writable:!0,enumerable:!1}),o}catch(i){}return t[e]=o,o}var r=Object.prototype.hasOwnProperty;e.exports=n},{}],D5DuLP:[function(t,e){function n(t,e,n){return r.listeners(t).length?r.emit(t,e,n):(o[t]||(o[t]=[]),void o[t].push(e))}var r=t("ee").create(),o={};e.exports=n,n.ee=r,r.q=o},{ee:"QJf3ax"}],handle:[function(t,e){e.exports=t("D5DuLP")},{}],XL7HBI:[function(t,e){function n(t){var e=typeof t;return!t||"object"!==e&&"function"!==e?-1:t===window?0:i(t,o,function(){return r++})}var r=1,o="nr@id",i=t("gos");e.exports=n},{gos:"7eSDFh"}],id:[function(t,e){e.exports=t("XL7HBI")},{}],loader:[function(t,e){e.exports=t("G9z0Bl")},{}],G9z0Bl:[function(t,e){function n(){var t=p.info=NREUM.info;if(t&&t.agent&&t.licenseKey&&t.applicationID&&c&&c.body){p.proto="https"===d.split(":")[0]||t.sslForHttp?"https://":"http://",a("mark",["onload",i()]);var e=c.createElement("script");e.src=p.proto+t.agent,c.body.appendChild(e)}}function r(){"complete"===c.readyState&&o()}function o(){a("mark",["domContent",i()])}function i(){return(new Date).getTime()}var a=t("handle"),s=window,c=s.document,f="addEventListener",u="attachEvent",d=(""+location).split("?")[0],p=e.exports={offset:i(),origin:d,features:{}};c[f]?(c[f]("DOMContentLoaded",o,!1),s[f]("load",n,!1)):(c[u]("onreadystatechange",r),s[u]("onload",n)),a("mark",["firstbyte",i()])},{handle:"D5DuLP"}],20:[function(t,e){function n(t,e,n){e||(e=0),"undefined"==typeof n&&(n=t?t.length:0);for(var r=-1,o=n-e||0,i=Array(0>o?0:o);++r<o;)i[r]=t[e+r];return i}e.exports=n},{}],21:[function(t,e){function n(t){return!(t&&"function"==typeof t&&t.apply&&!t[i])}var r=t("ee"),o=t(1),i="nr@wrapper",a=Object.prototype.hasOwnProperty;e.exports=function(t){function e(t,e,r,a){function nrWrapper(){var n,i,s,f;try{i=this,n=o(arguments),s=r&&r(n,i)||{}}catch(d){u([d,"",[n,i,a],s])}c(e+"start",[n,i,a],s);try{return f=t.apply(i,n)}catch(p){throw c(e+"err",[n,i,p],s),p}finally{c(e+"end",[n,i,f],s)}}return n(t)?t:(e||(e=""),nrWrapper[i]=!0,f(t,nrWrapper),nrWrapper)}function s(t,r,o,i){o||(o="");var a,s,c,f="-"===o.charAt(0);for(c=0;c<r.length;c++)s=r[c],a=t[s],n(a)||(t[s]=e(a,f?s+o:o,i,s,t))}function c(e,n,r){try{t.emit(e,n,r)}catch(o){u([o,e,n,r])}}function f(t,e){if(Object.defineProperty&&Object.keys)try{var n=Object.keys(t);return n.forEach(function(n){Object.defineProperty(e,n,{get:function(){return t[n]},set:function(e){return t[n]=e,e}})}),e}catch(r){u([r])}for(var o in t)a.call(t,o)&&(e[o]=t[o]);return e}function u(e){try{t.emit("internal-error",e)}catch(n){}}return t||(t=r),e.inPlace=s,e.flag=i,e}},{1:20,ee:"QJf3ax"}]},{},["G9z0Bl",3,10,4]);</script>
+<meta content='iivVZJBLxzSBdse8fFugr6fbJu-DbSB1dhl_fs48KNQ' name='google-site-verification'>
+<meta content='TPM' property='og:site_name'>
+<meta content='12330256' property='fb:admins'>
+<meta content='da088b457e7d0e91a9f692968f1043c1' name='p:domain_verify'>
+
+
+<title>The Small Miracle You Haven't Heard About Amid the Carnage in Syria</title>
+<script src="//use.typekit.net/fwj1wkm.js" type="text/javascript"></script>
+<script>
+  try{Typekit.load();}catch(e){}
+</script>
+
+<script>
+  // chartbeat
+  var _sf_startpt=(new Date()).getTime();
+  var _sf_async_config = {};
+</script>
+<script>
+  // nielsen
+  (function() {
+  var d;
+  d = new Image(1, 1);
+  d.onerror = d.onload = function() {
+  return d.onerror = d.onload = null;
+  };
+  d.src = ["//secure-us.imrworldwide.com/cgi-bin/m?ci=us-805825h&cg=0&cc=1&si=", escape(window.location.href), "&rp=", escape(document.referrer), "&ts=compact&rnd=", (new Date()).getTime()].join('');
+  }).call(this);
+</script>
+<script>
+  // google analytics
+  var _gaq=_gaq||[];(function(){_gaq.push(["_setAccount","UA-927537-1"]);_gaq.push(["_setDomainName",".talkingpointsmemo.com"]);_gaq.push(["_setAllowHash",false]);_gaq.push(["_trackPageview"]);_gaq.push(["_trackEvent","Units","Skyboxes","pageview"]);var b=document.createElement("script"),a=document.getElementsByTagName("script")[0];b.type="text/javascript";b.async=true;b.src=("https:"===document.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";a.parentNode.insertBefore(b,a)}());
+</script>
+<script>
+  // heap analytics
+  var heap=heap||[];heap.load=function(a){window._heapid=a;var b=document.createElement("script");b.type="text/javascript",b.async=!0,b.src=("https:"===document.location.protocol?"https:":"http:")+"//cdn.heapanalytics.com/js/heap.js";var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c);var d=function(a){return function(){heap.push([a].concat(Array.prototype.slice.call(arguments,0)))}},e=["identify","track"];for(var f=0;f<e.length;f++)heap[e[f]]=d(e[f])};
+  heap.load("8675309");
+</script>
+<script>
+  (function() {
+    var userInfo = null;
+    if (userInfo)
+      heap.identify(userInfo);
+  })();
+</script>
+
+<link href="//douyfz3utcehi.cloudfront.net/assets/application-8a6eb18c286607742c749394562afef1.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="//douyfz3utcehi.cloudfront.net/assets/tpm-8809488519d40c56be08e41e5a2af75c.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" media="screen" rel="stylesheet" type="text/css" />
+<link href="//fonts.googleapis.com/css?family=Lobster" media="screen" rel="stylesheet" type="text/css" />
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="7Rkesx9ims9Vx4tkP1LS8zelRPkzsoiqkByU0tS2KBs=" name="csrf-token" />
+<script>
+!function(){function n(n){return JSON.parse(n)}function o(n,o){return Object.prototype.hasOwnProperty.call(n,o)}var t,e=[],r={};t={_config:r,init:function(n){var o=window.jQuery;if(o){if(e){for(;e.length;){var t=e.shift();o(t)}e=null}n&&o(n)}else e.push(n)},get:function(n){return r[n]},set:function(n,o){r[n]=o},app:function(){return"pivot"},hostname:function(n){n||(n=t.app());var e=t.get("app_hosts");if(o(e,n))return e[n];throw"unknown hostname for app "+n},url:function(n){var o=t.hostname(n.app),e=n.protocol||window.location.protocol;return e+"//"+o},messageHandler:function(e,r){function i(n,t){var e=p[n]||[];return p[n]=e,e.push(t),o(u,n)&&t(u[n],n),!0}function a(n){if(n.origin===e){var o=n.data,t=s(o,n),r=p[t.name]||[];u[t.name]=t.value,r.forEach(function(n){n(t.value,t.name)})}}if("object"==typeof e&&(r=e,e=null),r=r||{},!e){if(!r.app)throw"no origin specified";e=t.url(r.app)}var p={},u={},s=r.parse||n;return window.addEventListener("message",a),i},postMessage:function(n,o,e){var r=t.url({app:o}),i=JSON.stringify(e);n.postMessage(i,r)}},t.set("app_hosts",{pivot:"talkingpointsmemo.com",discourse:"forums.talkingpointsmemo.com"}),window.TPM=window.TPM||t}();
+</script>
+<script>
+  (function() {
+    var data = {},
+        has = Object.hasOwnProperty,
+        keys = Object.keys,
+        copy = function(object){ return JSON.parse(JSON.stringify(object)); };
+    window.preloadStore = {
+      get: function(key) { if (has.call(data, key)) { return copy(data[key]); } },
+      set: function(key, value) { return data[key] = value; },
+      keys: function() { return keys.call(data); },
+      data: function() { return copy(data); }
+    };
+  }).call(this);
+</script>
+<script>
+    preloadStore.set("adUnits", [{"name":"leader_top","width":728,"height":90,"path":"/1025406/TPM_728x90_Top","targeting":{},"special":null,"size":[728,90]},{"name":"special_footer","width":600,"height":250,"path":"/1025406/TPM_SpecialFooter","targeting":{},"special":null,"size":[600,250]},{"name":"rect_right_one","width":300,"height":250,"path":"/1025406/TPM_300xFlex_1","targeting":{},"special":null,"size":[300,250]},{"name":"rect_right_two","width":300,"height":250,"path":"/1025406/TPM_300xFlex_2","targeting":{},"special":null,"size":[300,250]},{"name":"rect_right_three","width":300,"height":250,"path":"/1025406/TPM_300xFlex_5","targeting":{},"special":null,"size":[300,250]},{"name":"rect_left_one","width":300,"height":250,"path":"/1025406/TPM_300xFlex_3","targeting":{},"special":null,"size":[300,250]},{"name":"rect_left_two","width":300,"height":250,"path":"/1025406/TPM_300xFlex_4","targeting":{},"special":null,"size":[300,250]},{"name":"rect_left_three","width":300,"height":250,"path":"/1025406/TPM_300xFlex_5","targeting":{},"special":null,"size":[300,250]},{"name":"leader_btm","width":728,"height":90,"path":"/1025406/TPM_728x90_Bottom","targeting":{},"special":null,"size":[728,90]},{"name":"contentad","width":640,"height":300,"path":"/1025406/TPM_640xFlex_1","targeting":{},"special":null,"size":[640,300]},{"name":"outbrain","width":640,"height":250,"path":"/1025406/TPM_640xFlex_2","targeting":{},"special":null,"size":[640,250]},{"name":"modal","width":1,"height":1,"path":"/1025406/Modal_1x1","targeting":{},"special":null,"size":[1,1]},{"name":"test_modal","width":1,"height":1,"path":"/1025406/Modal_1x1_TEST","targeting":{},"special":null,"size":[1,1]},{"name":"newsmax","width":300,"height":440,"path":"/1025406/Newsmax","targeting":{},"special":null,"size":[300,440]}]);
+    preloadStore.set("adTargeting", {"membership":["anonymous"],"section":["ts"],"index":["false"],"issues":["labor"],"test":["false"],"ad_partner":[],"sponsor":[]});
+</script>
+<script>
+  /*!
+   * jQuery Cookie Plugin v1.4.0
+   * https://github.com/carhartl/jquery-cookie
+   *
+   * Copyright 2013 Klaus Hartl
+   * Released under the MIT license
+   */
+  var TPM=TPM||{};(function(e){if(typeof define==="function"&&define.amd){define(["jquery"],e)}else{e(TPM)}})(function(e){function h(e){return g.raw?e:encodeURIComponent(e)}function p(e){return g.raw?e:decodeURIComponent(e)}function d(e){return h(g.json?JSON.stringify(e):String(e))}function v(e){if(e.indexOf('"')===0){e=e.slice(1,-1).replace(/\\"/g,'"').replace(/\\\\/g,"\\")}try{e=decodeURIComponent(e.replace(t," "));return g.json?JSON.parse(e):e}catch(n){}}function m(e,t){var n=g.raw?e:v(e);return f(t)?t(n):n}var t=/\+/g;var n=Array.prototype,r=Object.prototype,i=n.forEach,s=r.hasOwnProperty,o=r.toString,u=n.slice;var a=function(e,t){return s.call(e,t)};var f=function(e){return o.call(e)=="[object Function]"};var l=function(e,t,n){if(e==null)return;if(i&&e.forEach===i){e.forEach(t,n)}else if(e.length===+e.length){for(var r=0,s=e.length;r<s;r++){if(t.call(n,e[r],r,e)===breaker)return}}else{for(var o in e){if(a(e,o)){if(t.call(n,e[o],o,e)===breaker)return}}}};var c=function(e){l(u.call(arguments,1),function(t){if(t){for(var n in t){e[n]=t[n]}}});return e};var g=e.cookie=function(e,t,n){if(t!==undefined&&!f(t)){n=c({},g.defaults,n);if(typeof n.expires==="number"){var r=n.expires,i=n.expires=new Date;i.setDate(i.getDate()+r)}return document.cookie=[h(e),"=",d(t),n.expires?"; expires="+n.expires.toUTCString():"",n.path?"; path="+n.path:"",n.domain?"; domain="+n.domain:"",n.secure?"; secure":""].join("")}var s=e?undefined:{};var o=document.cookie?document.cookie.split("; "):[];for(var u=0,a=o.length;u<a;u++){var l=o[u].split("=");var v=p(l.shift());var y=l.join("=");if(e&&e===v){s=m(y,t);break}if(!e&&(y=m(y))!==undefined){s[v]=y}}return s};g.defaults={};e.removeCookie=function(t,n){if(e.cookie(t)===undefined){return false}e.cookie(t,"",c({},n,{expires:-1}));return!e.cookie(t)}})
+</script>
+<script>
+  (function() {
+  var useSSL = 'https:' == document.location.protocol;
+  var src = (useSSL ? 'https:' : 'http:') +
+  '//www.googletagservices.com/tag/js/gpt.js';
+  document.write('<scr' + 'ipt src="' + src + '"></scr' + 'ipt>');
+  })();
+</script>
+<script>
+function setGACustomVar(t){var e="Monthly Frequency",o=window._gaq;o&&(o.push(["_setCustomVar",4,e,t,1]),o.push(["_trackEvent",e,t,"",0,!0]))}function setDFPCustomTarget(t,e){t.frequency=e,preloadStore.set("adTargeting",t),googletag.pubads().setTargeting("frequency",e)}!function(){var t,e,o,a;TPM.cookie.json=!0,t=new Date,e=TPM.cookie("_tpm_profile")||{},o=preloadStore.get("adTargeting")||{};var n,s;n=[t.getUTCFullYear(),t.getMonth()+1,t.getDate()].join("-"),s=e.pageViews,s&&s.date===n?s.count+=1:s={date:n,count:1},e.pageViews=s,s.count>=5&&(a="high",setDFPCustomTarget(o,a));var r,u;r=[t.getUTCFullYear(),t.getMonth()+1].join("-"),u=e.monthlyPageViews,u&&u.month===r?u.count+=1:u={month:r,count:1},e.monthlyPageViews=u,u.count>=90?(a="monthly90",setDFPCustomTarget(o,a),setGACustomVar(a)):u.count>=60?(a="monthly60",setDFPCustomTarget(o,a),setGACustomVar(a)):u.count>=30&&(a="monthly30",setDFPCustomTarget(o,a),setGACustomVar(a)),TPM.cookie("_tpm_profile",e,{expires:365,path:"/"}),TPM.cookie.json=!1}.call(this);
+</script>
+<script>
+googletag.pubads().setTargeting('membership', ["anonymous"]);
+googletag.pubads().setTargeting('section', ["ts"]);
+googletag.pubads().setTargeting('index', ["false"]);
+googletag.pubads().setTargeting('issues', ["labor"]);
+googletag.pubads().setTargeting('test', ["false"]);
+googletag.pubads().setTargeting('ad_partner', []);
+googletag.pubads().setTargeting('sponsor', []);
+googletag.defineSlot('/1025406/TPM_160x600_InArticle_1', [160, 600], 'div-gpt-in_article').addService(googletag.pubads());
+googletag.defineSlot('/1025406/TPM_Skin_Flex_1x1', [1, 1], 'div-gpt-skin').addService(googletag.pubads());
+googletag.defineSlot('/1025406/TPM_970x90', [970, 90], 'div-gpt-dropdown').addService(googletag.pubads());
+googletag.pubads().enableSyncRendering();
+googletag.enableServices();
+</script>
+
+<link href='/assets/mobile/apple-touch-icon-144x144-precomposed.png' rel='apple-touch-icon' sizes='144x144'>
+<link href='/assets/mobile/apple-touch-icon-120x120-precomposed.png' rel='apple-touch-icon' sizes='120x120'>
+<link href='/assets/mobile/apple-touch-icon-114x114-precomposed.png' rel='apple-touch-icon' sizes='114x114'>
+<link href='/assets/mobile/apple-touch-icon-72x72-precomposed.png' rel='apple-touch-icon' sizes='72x72'>
+<link href='/assets/mobile/apple-touch-icon-precomposed.png' rel='apple-touch-icon'>
+
+<script>
+    preloadStore.set("videoWall", {"color":"black","video":{"mp4":"https://dawm7kda6y2v0.cloudfront.net/videos/video_walls/knick-08-14.mp4","webm":"https://dawm7kda6y2v0.cloudfront.net/videos/video_walls/knick-08-14.webm"},"previewVideo":{"mp4":"https://dawm7kda6y2v0.cloudfront.net/videos/video_walls/knick-08-14-preview.mp4","webm":"https://dawm7kda6y2v0.cloudfront.net/videos/video_walls/knick-08-14-preview.webm"},"skin":{"width":1456,"height":850,"url":"https://dawm7kda6y2v0.cloudfront.net/images/site-skins/knick-08-14.jpg"},"overlayURL":"//douyfz3utcehi.cloudfront.net/assets/play-overlay-52118dd611f2e3c017add74ee0d3b2dd.png"});
+</script>
+
+<link href="/feed/all" rel="alternate" title="ATOM" type="application/atom+xml" />
+<meta content='{}' name='parsely-metadata'>
+<meta content='{"title":"The Small Miracle You Haven&#x0027;t Heard About Amid the Carnage in Syria","link":"http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement","image_url":"http://img.talkingpointsmemo.com/image/upload/v1421193565/srsfsec46zegtlibvz1k.jpg","type":"post","section":"ts","author":"Malcolm Harris","pub_date":"2015-01-14T14:40:00Z","post_id":"232010","tags":[]}' name='parsely-page'>
+<meta content='Talking Points Memo' property='og:site_name'>
+<meta content='It’s a familiar scene: Young people in a makeshift press center sitting around laptops talking about the best way to post a video. Facebook first, or their own news page? Skype isn’t working. When a TV station calls her cell, one woman shushes the room with a waved hand. Behind the camera is Zanyar Omrani, a friendly journalist smuggled in and given permission to record. They could be activists anywhere in the world, except the walls are lined with AK-47s and outside everything is rubble.' property='og:description'>
+<meta content='http://a1.img.talkingpointsmemo.com/image/upload/c_fill,fl_keep_iptc,g_faces,h_365,w_652/srsfsec46zegtlibvz1k.jpg' property='og:image'>
+<meta content="The Small Miracle You Haven't Heard About Amid the Carnage in Syria" property='og:title'>
+<meta content='article' property='og:type'>
+<meta content='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' property='og:url'>
+
+
+<!--[if lt IE 9 ]>
+<script src='//html5shiv.googlecode.com/svn/trunk/html5.js'></script>
+<![endif]-->
+</head>
+<body class='bd-article bd-article-ts  bd-not-prime user-not-signed-in' id='bd-article:232010' lang='en'>
+<script>
+  // facebook
+  (function(){
+    window.fbAsyncInit=function(){return FB.init({appId:"101800829865996",channelUrl:window.location.toString().replace(/^https?:(\/\/[^\/]*).*$/,"$1/channel.php"),status:true,cookie:true,xfbml:true})};(function(c,e){var b,a;if(c.getElementById(e)){return}a=c.getElementsByTagName("script")[0];b=c.createElement("script");b.id=e;b.async=true;b.src="//connect.facebook.net/en_US/all.js";return a.parentNode.insertBefore(b,a)})(document,"facebook-jssdk");
+  })();
+  // comscore
+  (function(){
+  var el,s;window._comscore||(window._comscore=[]);_comscore.push({c1:"2",c2:"9899188"});s=document.createElement("script");el=document.getElementsByTagName("script")[0];s.async=true;s.src=(document.location.protocol==="https:"?"https://sb":"http://b")+".scorecardresearch.com/beacon.js";el.parentNode.insertBefore(s,el);
+  })();
+  // quantcast
+  (function(){
+  var a,b;window._qevents||(window._qevents=[]);a=document.createElement("script");b=document.getElementsByTagName("script")[0];a.src=(document.location.protocol==="https:"?"https://secure":"http://edge")+".quantserve.com/quant.js";a.async=!0;a.type="text/javascript";b.parentNode.insertBefore(a,b);
+  })();
+</script>
+
+<div id='div-gpt-skin' data-cb-ad-id='skin'>
+<script type='text/javascript'>
+googletag.display('div-gpt-skin');
+</script>
+</div>
+
+<div class="ad-slot no-disclaimer ad-modal"  style="min-width: 1px; min-height: 1px;" >
+  <script type="text/x-ad-slot" data-unit='modal' data-targeting='{}'></script>
+</div>
+
+<div id='takeover'></div>
+<div id='fb-root'></div>
+<div id='container'>
+<header class='site-header' id='header'>
+<div class='row' id='logo-row'>
+<div class='pull-left'>
+<a href='http://talkingpointsmemo.com/' id='logo'>
+<img alt='TPM' src='//douyfz3utcehi.cloudfront.net/assets/hplogo-cd23d0b78ce9b45cd9ac74543d644055.jpg'>
+</a>
+<a class='tips-link' href='mailto:talk@talkingpointsmemo.com'>
+Send Comments &amp; News Tips
+</a>
+</div>
+<div class='pull-left'>
+<div class="ad-slot no-disclaimer "  style="min-width: 728px; min-height: 90px;" >
+  <script type="text/x-ad-slot" data-unit='leader_top' data-targeting='{}'></script>
+</div>
+
+</div>
+<div class='pull-right nav-drop-downs'>
+<div class='prime dropdown'>
+<a class='prime-dropdown' data-toggle='dropdown' href='#'>
+<img src='//douyfz3utcehi.cloudfront.net/assets/primedropdown-b4061d2f5fcc5f1658ead27a70b596cc.png'>
+</a>
+<ul class='dropdown-menu'>
+<li>
+<a href='/prime/account/new'>Join Prime</a>
+</li>
+<li class='prime-nav-item' id='prime-nav-bookmarks'>
+<a href="#" id="nav-a-bookmarks">Bookmarks
+<span id='nav-bookmark-count'>
+&#9733;
+</span>
+</a></li>
+<li class='prime-nav-item prime' id='prime-nav-new-for-you'>
+<a href="#" id="nav-a-new-for-you">New To You
+</a></li>
+<li class='prime-nav-item'>
+<a href='/longform'>Longform</a>
+</li>
+<li class='prime-nav-item'>
+<a href="/prime/account/new#forums" id="nav-a-forums">The Hive</a>
+</li>
+</ul>
+</div>
+<div class='sign-in'>
+<div class='dropdown sign-in-dropdown'>
+<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="sign-in-link">Sign In</a>
+<div class='dropdown-menu pd sign-in-dropdown'>
+<form accept-charset="UTF-8" action="/users/sign_in" class="simple_form user-form" data-validate="true" id="new_user" method="post" novalidate="novalidate"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="authenticity_token" type="hidden" value="7Rkesx9ims9Vx4tkP1LS8zelRPkzsoiqkByU0tS2KBs=" /></div><div class='inputs' id='login-inputs'>
+<div class="control-group string optional user_login"><div class="controls"><input autofocus="autofocus" class="string optional" id="user_login" name="user[login]" placeholder="Username or Email" size="50" type="text" /></div></div>
+<div class="control-group password optional user_password"><div class="controls"><input class="password optional" id="user_password" name="user[password]" placeholder="Password" size="50" type="password" /></div></div>
+<div class='control-group clearfix'>
+<div class='links'>
+<a href="/users/password/new">Forgot password?</a>
+<a href="/users/sign_up">Sign Up</a>
+</div>
+<div class='sign-in-button'>
+<input class="btn btn btn-primary btn-sign-in" name="commit" type="submit" value="Sign In" />
+</div>
+</div>
+</div>
+</form>
+
+<script>//<![CDATA[
+if(window.ClientSideValidations===undefined)window.ClientSideValidations={};window.ClientSideValidations.disabled_validators=[];window.ClientSideValidations.number_format={"separator":".","delimiter":","};if(window.ClientSideValidations.patterns===undefined)window.ClientSideValidations.patterns = {};window.ClientSideValidations.patterns.numericality=/^(-|\+)?(?:\d+|\d{1,3}(?:\,\d{3})+)(?:\.\d*)?$/;if(window.ClientSideValidations.remote_validators_prefix===undefined)window.ClientSideValidations.remote_validators_prefix='';if(window.ClientSideValidations.forms===undefined)window.ClientSideValidations.forms={};window.ClientSideValidations.forms['new_user'] = {"type":"SimpleForm::FormBuilder","error_class":"help-inline","error_tag":"span","wrapper_error_class":"error","wrapper_tag":"div","wrapper_class":"control-group","wrapper":"bootstrap","validators":{"user[password]":{"length":[{"messages":{"minimum":"is too short (minimum is 6 characters)","maximum":"is too long (maximum is 128 characters)"},"allow_blank":true,"minimum":6,"maximum":128}]}}};
+//]]></script>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+<nav class='main-nav'>
+<div class='sections dropdown'>
+<a data-toggle='dropdown' href='#'>
+<i class='fa fa-bars'></i>
+Sections
+</a>
+<ul class='dropdown-menu'>
+<li><a href="/news" class="nav-news-all">All News</a></li>
+<li><a href="/livewire">Livewire</a></li>
+<li><a href="/edblog">Editor&#x27;s Blog</a></li>
+<li><a href="/dc" class="nav-news-tpmdc">TPM DC</a></li>
+<li><a href="/cafe">TPM Cafe</a></li>
+<li><a href="/ts">The Slice</a></li>
+<li><a href="/muckraker" class="nav-news-muckraker">Muckraker</a></li>
+<li><a href="/world-news">World News</a></li>
+<li><a href="/longform" class="nav-news-idealab">Longform</a></li>
+<li><a href="/fivepoints" class="nav-news-fivepoints">5 Points</a></li>
+<li><a href="/idealab" class="nav-news-idealab">Idealab</a></li>
+<li><a href="http://polltracker.talkingpointsmemo.com/">Poll Tracker</a></li>
+<li><a href="http://store.talkingpointsmemo.com/">Store</a></li>
+</ul>
+</div>
+<div class='since'>
+Published Since 2000
+</div>
+<div class='search dropdown'>
+<a data-toggle='dropdown' href='#'>
+<i class='fa fa-search'></i>
+</a>
+<div class='dropdown-menu'>
+<form accept-charset="UTF-8" action="/search" id="cse-search-box" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<input class='search-query' id='search' name='q' placeholder='Search...' type='search'>
+<input name='cx' type='hidden' value='partner-pub-7451232131633930:5915231553'>
+<input name='cof' type='hidden' value='FORID:10'>
+<input name='ie' type='hidden' value='UTF-8'>
+</form>
+
+<script src="//www.google.com/coop/cse/brand?form=cse-search-box&amp;lang=en" type="text/javascript"></script>
+
+</div>
+</div>
+</nav>
+<div class='row-fluid' id='prime-nav-row'>
+<div class='span12'>
+<div id='prime-subnav-bookmarks'>
+<div class='prime-subnav'>
+<div class='pd'>
+<div class='prime-gate modal bookmarks' style='position: relative; top: auto; left: auto; right: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;'>
+<div class='modal-header'>
+<h2>
+Sorry, this feature is only available to TPM Prime members
+</h2>
+</div>
+<div class='modal-body'>
+<div class='tc'>
+<a href="/prime/account/new#bookmarks" class="btn btn-primary btn-large">Subscribe To Prime</a>
+<br>
+<br>
+Already have an account?
+<a href="/users/sign_in">Sign In</a>
+</div>
+</div>
+<div class='modal-footer tl'>
+<strong>Save articles to read later</strong> <br>In a hurry? <em>Bookmarks</em> allow you to save an article to read later at your convenience. There isn't a limit, either, so you can store your favorites, too.
+<a href="/prime/account/new#bookmarks">More Info &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+<div id='prime-subnav-new-for-you'>
+<div class='prime-subnav'>
+<div class='pd'>
+<div class='prime-gate modal nfy' style='position: relative; top: auto; left: auto; right: auto; margin: 0 auto 20px; z-index: 1; max-width: 100%;'>
+<div class='modal-header'>
+<h2>
+Sorry, this feature is only available to TPM Prime members
+</h2>
+</div>
+<div class='modal-body'>
+<div class='tc'>
+<a href="/prime/account/new#new-for-you" class="btn btn-primary btn-large">Subscribe To Prime</a>
+<br>
+<br>
+Already have an account?
+<a href="/users/sign_in">Sign In</a>
+</div>
+</div>
+<div class='modal-footer tl'>
+<strong>Dont ever miss an article again.</strong> <br><em>New To You</em> shows you everything posted since your last visit in a simple, scrollable list.
+<a href="/prime/account/new#new-for-you">More Info &rarr;</a>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</div>
+</header>
+
+<div class='container' id='body'>
+<div style='margin-bottom: 20px'>
+<div id='div-gpt-dropdown' data-cb-ad-id='dropdown'>
+<script type='text/javascript'>
+googletag.display('div-gpt-dropdown');
+</script>
+</div>
+
+</div>
+<div id='article-content'>
+<div class='ts-section-header'>
+<a href='/ts'>
+<img alt='The Slice' src='//douyfz3utcehi.cloudfront.net/assets/slicearticlelogo-2aa7547f92f1ffbb3a3989e4007c62da.png'>
+</a>
+<div class='tagline'>stories that cut to the quick</div>
+</div>
+<div class='row'>
+<div class='top-social-buttons clearfix'>
+<div class='other-sites clearfix'>
+<a class='social-button facebook-share facebook-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria">
+<i class='fa fa-facebook'></i>
+<span class='button-text'>
+Share
+</span>
+</a>
+
+<a class='social-button tweet twitter-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria @TPM">
+<i class='fa fa-twitter'></i>
+<span class='button-text'>
+Tweet
+</span>
+</a>
+
+<a class='social-button pin-it pinterest-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank'>
+<i class='fa fa-pinterest'></i>
+<span class='button-text'>
+Pin-it
+</span>
+</a>
+
+</div>
+<div class='our-services clearfix'>
+<a class='social-button bookmark disabled' data-toggle='modal' href='#bookmark-modal'>
+<i class='fa fa-bookmark'></i>
+<span class='button-text'>
+Bookmark
+</span>
+</a>
+
+<a class='social-button comments comments-icon' href='javascript:void(0);'>
+<i class='fa fa-comment'></i>
+<span class='button-text'>
+Comment
+</span>
+</a>
+
+</div>
+</div>
+<div class='main-article-image-container'>
+<img alt="The Small Miracle You Haven't Heard About Amid the Carnage in Syria" class="article-image" height="560" src="http://a1.img.talkingpointsmemo.com/image/upload/c_fill,g_faces,h_560,w_1005/srsfsec46zegtlibvz1k" width="1005" />
+<div class='image-credit'>
+
+</div>
+</div>
+<article class='main'>
+<header>
+<h1>The Small Miracle You Haven't Heard About Amid the Carnage in Syria</h1>
+</header>
+<section class='byline'>
+<span class="byline-tag is-right-padded">By</span><span class="byline-content is-right-padded">Malcolm Harris</span>
+<span class='byline-divider'>
+|
+</span>
+<span class='published-at'>January 14, 2015</span>
+<div class='page-counts'>
+<div class='fb-like article-like-button' data-action='like' data-layout='button_count'></div>
+</div>
+</section>
+<section class='story clearfix'>
+<div class='side-social-buttons'>
+<a class='facebook icon facebook-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria">
+<i class='fa fa-facebook'></i>
+</a>
+<a class='twitter icon twitter-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria @TPM">
+<i class='fa fa-twitter'></i>
+</a>
+<a class='tumblr icon tumblr-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria">
+<i class='fa fa-tumblr'></i>
+</a>
+<a class='pinterest icon pinterest-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank'>
+<i class='fa fa-pinterest'></i>
+</a>
+<a class='reddit icon reddit-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria">
+<i class='fa fa-reddit-square'></i>
+</a>
+<a class='email icon' href="mailto:?subject=The Small Miracle You Haven't Heard About Amid the Carnage in Syria&amp;body=Check out this article on TPM: http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement">
+<i class='fa fa-envelope'></i>
+</a>
+<a class='comments icon comments-icon' href='javascript:void(0);'>
+<i class='fa fa-comment'></i>
+</a>
+</div>
+
+<div class='pull-left in-article-ad'>
+
+</div>
+<div class='story-teaser'>
+<p>It’s a familiar scene: Young people in a makeshift press center sitting around laptops talking about the best way to post a video. Facebook first, or their own news page? Skype isn’t working. When a TV station calls her cell, one woman shushes the room with a waved hand. Behind the <a href="https://www.facebook.com/video.php?v=499287636876773">camera</a> is Zanyar Omrani, a friendly journalist smuggled in and given permission to record. They could be activists anywhere in the world, except the walls are lined with AK-47s and outside everything is rubble.</p>
+</div>
+<div class='story-body'>
+<div class='pull-right ml'>
+<div class="ad-slot "  style="min-width: 300px; min-height: 250px;" >
+  <script type="text/x-ad-slot" data-unit='rect_right_one' data-targeting='{}'></script>
+</div>
+
+</div>
+<p>In the beginning of October, Islamic State forces surrounded and besieged the Kurdish town of Kobane in northern Syria at the border with Turkey. IS had swept through Iraq quickly, picking up American tanks and mortars abandoned by the fleeing Iraqi army along the way. Observers feared a humanitarian disaster akin to the IS massacre of ethnic Yazidis on Mount Sinjar in August. The Pentagon <a href="https://www.youtube.com/watch?v=5WZrS3t-e5I">insisted</a> that, with no ground troops to fight, Kobane could not be saved. Turkish tanks sat at the border, waiting for an IS victory and a possible ground invasion.</p>
+
+<p>Months after it was supposed to fall, Kobane still stands, and IS has been forced back. The story of the town’s resistance is an epic tale of determination and self-defense, and it’s one U.S. officials would rather not discuss. When the Pentagon claimed there were no ground troops in Kobane, they weren’t exactly telling the truth. In 2012, Syrian forces withdrew from three northern areas, leaving their administration and defense to the Kurdish Freedom Movement. Now the three territories hold more than four million people, half of them refugees from the Syrian civil war or the Islamic State’s advance, and many of them armed and organized. Kobane is one of the three territories that together constitute the autonomous region of Rojava, and it endures today because of the fiercely egalitarian society the people have built, the kind idealized by many leftists around the world.</p>
+
+<p>Most Americans, even the ones who pay close attention to national involvement in the Middle East, have little to no idea about what has been happening in Kobane. The Pentagon has been less than forthcoming with support for these enemies of our enemies; their fighters are still on the State Department <a href="http:///h">list of foreign terrorist organizations</a>. The American media has more or less ignored the political project in Rojava; they’ve been more comfortable painting Kurds as desperate fighters fending off the Islamic State. Besides, there are a lot of acronyms and complicated political affiliations to sort through. But while America isn’t watching, something incredible is happening. At the geographical nexus of so many of the world’s conflicts, a new post-national project is emerging.</p>
+
+<p><img src="http://a5.img.talkingpointsmemo.com/image/upload/w_652/afrzgegbik128tjoin3r.jpg"></p>
+
+<p>First, a little history and some acronyms. Because of our invasion of Iraq, when Americans think of Kurds, we tend to think of the Kurdistan Regional Government (KRG) that controls the oil-rich northern part of the country. It’s a moderate, stable region, and if there were victors of the American invasion, the KRG probably tops the list. Their president, Massoud Barzani, recently <a href="http://time.com/time-person-of-the-year-runner-up-massoud-barzani/">finished</a> high on <i>Time</i>’s Person Of The Year list. But the KRG and their peshmerga fighters don’t control Rojava. The governing party there is the Democratic Union Party (PYD), a Syrian affiliate of the Kurdish Worker’s Party (PKK), which is a Marxist political organization founded in Ankara in 1978 that took up arms against Turkey for Kurdish independence.<br class="kix-line-break"><br class="kix-line-break">The PKK’s operations underwent a shift after founder and leader Abdullah Öcalan was captured by Turkey in 1999. The group had established an operations base in the Qandil Mountains at the Iran-Iraq border, but with the Soviet Union dissolved and old sources of support drying up, the Marxist-Leninist revolutionaries were stuck at a historical crossroads. They unilaterally put down their guns, then picked them up again five years later. In 2005, his death sentence reduced to life in prison, Öcalan made a surprising announcement: He renounced nationalism. The PKK and its affiliates followed suit, dropping the fight for a seat at the UN and adopting a unique political ideology called democratic confederalism. When the Syrian government withdrew from what would be Rojava in 2012, they did not declare independence despite controlling the territory. Just when the world’s largest stateless group finally seems poised to join the modern nation state system, when the dream of a Kurdistan (if not a united one) in northern Iraq is nearly at hand, the PKK has abandoned its foundational agenda. What happened? The simplest answer is they thought of a better idea.
+<br class="kix-line-break">Despite being Turkey’s most notorious prisoner, Öcalan has kept in communication with his comrades (that’s what they call each other) through his writing, some of which has been translated for a western audience that has so far yet to appear. In a <a href="http://www.freeocalan.org/wp-content/uploads/2012/09/Ocalan-Democratic-Confederalism.pdf">pamphlet</a> on democratic confederalism, Öcalan laid out the premise for his unexpected turn: 
+</p><blockquote>So far, with a view to issues of ethnicity and nationhood like the Kurdish question, which have their roots deep in history and at the foundations of society, there seemed to be only one viable solution: the creation of a nation-state, which was the paradigm of the capitalist modernity at that time. We did not believe, however, that any ready-made political blueprints would be able to sustainably improve the situation of the people in the Middle East. Had it not been nationalism and nation-states which had created so many problems in the Middle East?</blockquote>
+
+<p>The Kurdish freedom struggle, he explains, had always been about “liberating the society and democratizing it” and resisting “the global domination of the modern capitalist system.” Inspired by decolonization struggles throughout the global south, the PKK’s founders followed their model, attempting a Maoist guerrilla war strategy to establish their own nation. They were always a little behind the times; by the PKK’s founding in 1978, the Cold War period of national liberation had drawn to a close. Even if, against all odds, they were to win, the most likely outcome would be a Cuba-style trade embargo enforced by Turkey. The organization needed a new vision, and democratic confederalism was Öcalan’s answer.</p>
+
+<p></p><div class="pq-left" style="margin-left:-82px;border-color: #000000">At the geographical nexus of so many of the world’s conflicts, a new post-national project is emerging.</div>
+
+<p>So what is democratic confederalism? Öcalan calls it “a non-state political administration” or a “democracy without a state.” Instead of centralizing political power in a government, confederalism views society holistically, as an association of associations of intrinsically social people. It aspires to flatten the divisions the state places between public, productive and domestic life, linking together sewing cooperatives, neighborhood communes, refugee assistance groups, schools and self-defense forces in a common framework. The higher levels of organization exist to facilitate the grassroots, and decisions flow from the bottom to the top. It’s designed to work without, beneath, between and against nation-states, depending on the situation. Like the Islamic State, democratic confederalism does not recognize borders except as obstacles to overcome. “It is flexible, multi-cultural, anti-monopolistic, and consensus-oriented,” Öcalan writes. “Ecology and feminism are central pillars.”</p><div class="ml pull-right">
+<div class="ad-slot " style="min-width: 300px; min-height: 250px;">
+  <script type="text/x-ad-slot" data-unit="rect_right_two" data-targeting="{}"></script>
+</div>
+</div>
+
+<p>This sounds like the hippie rhetoric of an Occupy Wall Street press release, not the ideological program of an armed group holding territory in wartorn northern Syria. Many of us think of the Middle East as one of the most repressive and authoritarian regions, and what’s happening here is the polar opposite. Stereotypes about the Middle East being nationalist, even xenophobic,  have left Americans unprepared to hear about an inclusive, egalitarian platform from someone named “Abdullah.” </p>
+
+<p>The one aspect of Rojava’s struggle that has captivated the western media— from <a href="http://www.breitbart.com/national-security/2014/10/13/female-kurdish-fighter-mayassa-abdo-leads-fights-against-isis-in-kobane/">Breitbart.com</a> to <a href="http://www.marieclaire.com/culture/news/a6643/these-are-the-women-battling-isis/"><i>Elle</i></a>—are the Women’s Protection Units (YPJ), the female-only wing of Rojava’s army. The bands of women study political theory, sing, dance, eat and fight the Islamic State to the death for territory. Always intrigued by young women toting big guns, English-language publications have removed these fighters from their political context in order to make IS look barbaric by comparison. But even as these articles throw around terms like “hero,” they have still managed to undersell the YPJ’s accomplishments.</p>
+
+<p><img src="http://a5.img.talkingpointsmemo.com/image/upload/w_652/rfjaquxyikt222bllkfo.jpg"></p>
+
+<p>Democratic confederalism takes a hard line on the role of women in society. While Americans may like the picture of sexy young women smiling while they kill IS soldiers, their official program verges on what Reddit might call “misandry.”</p>
+
+<p>“The fundamental question is why man is so jealous, dominant and villainous where woman is concerned,” Öcalan <a href="http://www.pkkonline.com/en/index.php?sys=article&amp;artID=230">writes</a>, “why he continues to play the rapist.” He calls for a “total divorce” from “the five-thousand-years-old culture of male domination,” including but not limited to capitalism, the state, the nuclear family, prisons and the constructed gender binary. Part of the practical application of this theory includes the formation of women-only organizations like the YPJ, which operate alongside rather than beneath gender-integrated associations like the People’s Protection Units (YPG). Decision-making in Rojava at all levels requires a quota of 40 percent women, and every municipality is led by a male-female team. Hardly the stagnant, patriarchal image Americans assign to Middle Eastern communities. </p>
+
+<p>It’s an idealistic agenda, and an audacious one, especially given the Kurds’ precarious geo-political position. But democratic confederalism is a resourceful strategy, a way to marshall and combine all of a society’s resources without unaffordable inefficiencies like profit and patriarchal domination. Does it work? In late 2011, a group of German activists traveled into the PKK-controlled area of eastern Turkey to see how, six years after Öcalan’s call, democratic confederalism was progressing in the shadow of the state. They <a href="http://new-compass.net/publications/democratic-autonomy-north-kurdistan">interviewed</a> members of many organizations, from pickle-producers and teachers to political and military leaders, and what they found was the embryo of a new society. Localities have “peace committees” to resolve disputes without the threat of jail. Women’s councils enforce social isolation for spousal abuse. In the city of Gewer, the children’s council designed the playground. To break cycles of inter-family revenge, legal committees seek a peaceful and consensual solution “even in cases of murder.”</p>
+
+<p>Although IS hasn’t been completely cleared from Kobane, it now seems clear the YPG and YPJ will win, if only by the smallest margin. Without the egalitarian social framework, there’s little doubt the town would have been lost, as American officials expected. Instead, the defense of Kobane was a lesson in the geopolitical importance of democracy beyond the state. In the wake of America’s Occupy moment, many on the left have been looking for a vision of horizontalism that lasts longer than a pop-up sneaker store. Rojava shows us it’s possible.</p>
+
+<p><i>Malcolm Harris is an editor at The New Inquiry and a writer based in Brooklyn.</i></p>
+</div>
+</section>
+<footer class='article-footer'>
+<div class='row-fluid'>
+</div>
+<div class='bottom-social-buttons clearfix'>
+<div class='like-container'>
+Like us on Facebook
+<div class='fb-like article-like-button' data-action='like' data-href='https://www.facebook.com/talkingpointsmemo' data-layout='button_count'></div>
+</div>
+<div class='other-sites clearfix'>
+<a class='social-button comments comments-icon' href='javascript:void(0);'>
+<i class='fa fa-comment'></i>
+<span class='button-text'>
+Comment
+</span>
+</a>
+
+<a class='social-button facebook-share facebook-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria">
+<i class='fa fa-facebook'></i>
+<span class='button-text'>
+Share
+</span>
+</a>
+
+<a class='social-button tweet twitter-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank' title="The Small Miracle You Haven't Heard About Amid the Carnage in Syria @TPM">
+<i class='fa fa-twitter'></i>
+<span class='button-text'>
+Tweet
+</span>
+</a>
+
+<a class='social-button pin-it pinterest-widget-link' href='http://talkingpointsmemo.com/ts/why-is-america-ignoring-kurdish-freedom-movement' target='blank'>
+<i class='fa fa-pinterest'></i>
+<span class='button-text'>
+Pin-it
+</span>
+</a>
+
+</div>
+</div>
+
+<div id='article-footer-sponsors'></div>
+
+<aside data-id='232010' id='comments'></aside>
+
+<div id='readmore-thumbnails'></div>
+
+</footer>
+</article>
+</div>
+<div aria-hidden='true' class='modal hide fade' id='bookmark-modal' role='dialog' tabindex='-1'>
+<div class='modal-header tl'>
+<button aria-hidden='true' class='close' data-dismiss='modal' type='button'>×</button>
+<h2>
+Bookmarking is a TPM Prime feature
+</h2>
+</div>
+<div class='modal-body'>
+<div class='tc'>
+<a href="/users/sign_in" class="btn btn-primary btn-large">Subscribe To Prime</a>
+<br>
+<br>
+Already have an account?
+<a href="/users/sign_in">Sign In</a>
+</div>
+</div>
+<div class='modal-footer tl'>
+<strong>Save articles to read later</strong> <br>In a hurry? <em>Bookmarks</em> allow you to save an article to read later at your convenience. There isn't a limit, either, so you can store your favorites, too.
+<a href="/prime/account/new">More Info &rarr;</a>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+<div class='row' style='width:728px;margin:auto'>
+<div class='span9 offset1' style='padding-top: 1em;margin:auto'>
+<div class="ad-slot no-disclaimer "  style="min-width: 728px; min-height: 90px;" >
+  <script type="text/x-ad-slot" data-unit='leader_btm' data-targeting='{}'></script>
+</div>
+
+</div>
+</div>
+<footer class='container page-footer' id='footer'>
+<div class='site-social-icons clearfix'>
+<a class='pull-left' href='http://facebook.com/talkingpointsmemo' target='_blank'>
+<i class='fa fa-facebook'></i>
+</a>
+<a class='pull-right' href='http://twitter.com/tpm' target='_blank'>
+<i class='fa fa-twitter'></i>
+</a>
+</div>
+<div class='navbar clearfix footer-links'>
+<div class='navbar-inner pull-left'>
+<ul class='nav'>
+<li>
+<a href='/'>Home</a>
+</li>
+<li>
+<a href='/about'>About TPM</a>
+</li>
+<li>
+<a href='/terms-of-use'>Terms Of Use</a>
+</li>
+<li>
+<a href='/privacy'>Privacy Policy</a>
+</li>
+<li>
+<a href='/jobs'>Jobs & Internships</a>
+</li>
+</ul>
+</div>
+<a class='footer-home' href='/'>
+<img alt='Home' src='//douyfz3utcehi.cloudfront.net/assets/mastheadlogo-fe52087b46bdcb7c8105de33746a2be0.jpg'>
+</a>
+<div class='navbar-inner pull-right'>
+<ul class='nav'>
+<li>
+<a href='/press'>Press</a>
+</li>
+<li>
+<a href='/faq'>FAQ</a>
+</li>
+<li>
+<a href='/press-releases'>Press Releases</a>
+</li>
+<li>
+<a href='http://status.talkingpointsmemo.com/'>Check Site Status</a>
+</li>
+<li>
+<a href='/advertise'>Advertise</a>
+</li>
+<li>
+<a href='/contact-us'>Contact Us</a>
+</li>
+</ul>
+</div>
+</div>
+<section class='masthead'>
+<div class='row'>
+<div class='left-column'>
+<div class='span2'>
+<dl>
+<dt>Editor & Publisher</dt>
+<dd><a href="/profile/josh-m">Josh Marshall</a></dd>
+</dl>
+<dl>
+<dt>Managing Editor</dt>
+<dd><a href="/profile/david-kurtz">David Kurtz</a></dd>
+</dl>
+<dl>
+<dt>Associate Editor</dt>
+<dd><a href="/profile/nickmartin">Nick Martin</a></dd>
+</dl>
+<dl>
+<dt>Features Editor</dt>
+<dd><a href="/profile/nona">Nona Willis Aronowitz</a></dd>
+</dl>
+</div>
+<div class='span2'>
+<dl>
+<dt>Reporters</dt>
+<dd><a href="/profile/sahil">Sahil Kapur</a></dd><dd><a href="/profile/dylanlscott13">Dylan Scott</a></dd><dd><a href="/profile/danielstrauss">Daniel Strauss</a></dd><dd><a href="/profile/catherine">Catherine Thompson</a></dd>
+</dl>
+</div>
+<div class='span2'>
+<dl>
+<dt>Newswriters</dt>
+<dd><a href="/profile/caitlinmacneal">Caitlin Mac Neal</a></dd><dd><a href="/profile/brendanjames">Brendan James</a></dd><dd><a href="/profile/ahiza-garcia">Ahiza Garcia</a></dd><dd><a href="/profile/tracywalsh">Tracy Walsh</a></dd>
+</dl>
+</div>
+</div>
+<div class='right-column'>
+<div class='span2'>
+<dl>
+<dt>General Manager & General Counsel</dt>
+<dd><a href="/profile/millet">Millet Israeli</a></dd>
+</dl>
+<dl>
+<dt>VP, Ad & Creative Solutions</dt>
+<dd><a href="/profile/amandatpm">Amanda Hale</a></dd>
+</dl>
+<dl>
+<dt>Manager of Creative Solutions</dt>
+<dd><a href="/profile/derick">Derick Dirmaier</a></dd>
+</dl>
+</div>
+<div class='span2'>
+<dl>
+<dt>Deputy Publisher & VP of Operations</dt>
+<dd><a href="/profile/tpmjoe">Joe Ragazzo</a></dd>
+</dl>
+<dl>
+<dt>Engagement Editor</dt>
+<dd><a href="/profile/alanalevinson">Alana Levinson</a></dd>
+</dl>
+<dl>
+<dt>Publishing Fellow</dt>
+<dd><a href="/profile/gayatrisuren">Gayatri Surendranathan</a></dd>
+</dl>
+</div>
+<div class='span2'>
+<dl>
+<dt>Director of Technology</dt>
+<dd><a href="/profile/woz">Matthew Wozniak</a></dd>
+</dl>
+<dl>
+<dt>Developers</dt>
+<dd><a href="/profile/ericxu">Eric Xu</a></dd><dd><a href="/profile/toml">Tom Lewandowski</a></dd>
+</dl>
+<dl>
+<dt>Design Fellow</dt>
+<dd><a href="/profile/cfrapech">Christine Frapech</a></dd>
+</dl>
+</div>
+</div>
+</div>
+
+</section>
+<div class='copyright'>
+&copy; 2015 TPM Media LLC. All Rights Reserved.
+</div>
+</footer>
+
+<div data-article-type='ts' data-id='232010' id='readmore-arrows'></div>
+
+
+<script src="//code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="//douyfz3utcehi.cloudfront.net/assets/application-1b202c74a7e852169cfa04c2ce6f0832.js" type="text/javascript"></script>
+<script>
+  TPM.articleID = "232010";
+</script>
+
+<script>
+  $(function() {
+    if ($('body').hasClass('user-not-signed-in')) {
+      $('#comment-signin-msg').show();
+    }
+  });
+</script>
+
+<script>
+  // quantcast
+  (function(){
+  window._qevents.push({qacct:"p-e4jyI3LvAd-Dc"});
+  })();
+  // chartbeat
+  (function(){
+  var e,t;_sf_async_config.uid=986,_sf_async_config.domain="talkingpointsmemo.com";_sf_async_config.useCanonical=!0,e=function(){var e;return window._sf_endpt=(new Date).getTime(),e=document.createElement("script"),e.setAttribute("language","javascript"),e.setAttribute("type","text/javascript"),e.setAttribute("src",("https:"===document.location.protocol?"https://a248.e.akamai.net/chartbeat.download.akamai.com/102508/":"http://static.chartbeat.com/")+"js/chartbeat_pub.js"),document.body.appendChild(e)},t=window.onload,window.onload=typeof window.onload!="function"?e:function(){return t(),e()}
+  })();
+  
+  var _cbq = window._cbq || [];
+  _cbq.push(['_acct', '']);
+  _sf_async_config.zone="[:ts]";
+</script>
+<!-- START Parse.ly Include: Standard -->
+<div id='parsely-root' style='display: none;'>
+<div data-parsely-site='talkingpointsmemo.com' id='parsely-cfg'></div>
+</div>
+<script>
+  (function(s, p, d) {
+  var h=d.location.protocol, i=p+"-"+s,
+  e=d.getElementById(i), r=d.getElementById(p+"-root"),
+  u=h==="https:"?"d1z2jf7jlzjs58.cloudfront.net"
+  :"static."+p+".com";
+  if (e) return;
+  e = d.createElement(s); e.id = i; e.async = true;
+  e.src = h+"//"+u+"/p.js"; r.appendChild(e);
+  })("script", "parsely", document);
+</script>
+
+<script async="async" charset="utf-8" src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+Long before the 2014 midterm elections, the next potential candidates for president began scoping out their 2016 prospects with visits to the early nominating states of Iowa, New Hampshire and South Carolina.
+
+U.S. News is on the case, unveiling a set of graphs detailing the visits by the long slate of candidates to the first three primary states since January of 2013.
+
+The goal is to provide a useful tool in tracking who has gone where and how often, with updates to the charts every week or so. Dropping into these places is the first indication of a politician's likelihood to run for president.
+
+A special credit to data reporter Lindsey Cook and Andrew Soergel who put together the numbers and assembled the charts.
+
+We hope this is a useful tool for political junkies and the media at large. To the campaigns themselves, if our count doesn't match up with your own, we'd like to hear from you. Amendments to the charts will be part of the tracking process as some visits are more publicized than others. Email dcatanese@usnews.com.
+
+The first chart demonstrates total trips by presidential candidates to the first three nominating states of Iowa, New Hampshire and South Carolina. In this overall category, it's GOP Sen. Ted Cruz, R-Texas, who leads the pack.
+
+The second chart shows trips to the first-in-the-nation caucus state of Iowa, where Republican Gov. Rick Perry has completed the most visits of any aspirant. On the Democratic side, it's Maryland Gov. Martin O'Malley.
+
+On to New Hampshire, where it's neighboring Vermont Sen. Bernie Sanders who has logged the most visits, according to our totals.
+
+Finally, in South Carolina, it's GOP Sen. Rand Paul, R-Ky., who has dropped in most frequently to the Palmetto State.
+
+There are more charts and maps on Github. All charts include embed codes so that anyone can easily use our charts on their own websites. Data for these charts are current through Monday, Nov. 3.
+
+The Presidential Tracker was created for U.S. News by Lindsey Cook, Andrew Soergel and Dave Catanese using information sourced from www.p2016.org.
+
