@@ -771,6 +771,7 @@ class TestDownloadPdf(unittest.TestCase):
         article.nlp()
         article.keywords
 
+
 if __name__ == '__main__':
     argv = list(sys.argv)
     if 'fulltext' in argv:
