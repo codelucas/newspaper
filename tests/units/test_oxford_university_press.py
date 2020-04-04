@@ -9,13 +9,11 @@ from newspaper.oxford_university_press import OxfordUniversityPress
 #
 # This site doesn’t like and want scraping. This gives you the same dreaded error 54, connection reset by the peer.
 from newspaper.utils import get_driver
-
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 # noinspection PyUnresolvedReferences
 def test_oxford_university_press():
-    from selenium import webdriver
-    from selenium.webdriver.common.keys import Keys
-
     browser = get_driver()
 
     # browser.get('http://www.google.com')

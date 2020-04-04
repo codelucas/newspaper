@@ -43,3 +43,16 @@ def test_article_cn():
     assert len(article.keywords)
     assert len(article.text)
     assert len(article.html)
+
+def test_robots_deny_scraping():
+    url = "https://academic.oup.com/jrs/article-abstract/24/1/23/1595471"
+    webpage = Sources(url, language='en')
+    article = webpage.get_article()
+    assert len(article.title)
+    assert isinstance(article.publish_date, datetime.datetime)
+    # assert len(article.authors)
+    assert len(article.summary)
+    assert len(article.keywords)
+    assert len(article.text)
+    assert len(article.html)
+

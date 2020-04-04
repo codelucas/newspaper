@@ -16,6 +16,8 @@ from .configuration import Configuration
 from .mthreading import ThreadPool
 from .settings import cj
 from newspaper.pdf.pdf import PdfFileReader
+# This site doesn’t like and want scraping. This gives you the same dreaded error 54, connection reset by the peer.
+from newspaper.utils import get_driver
 
 log = logging.getLogger(__name__)
 
@@ -58,19 +60,25 @@ def get_html_2XX_only(url, config=None, response=None):
     proxies = config.proxies
     headers = config.headers
 
-    if response is not None:
-        return _get_html_from_response(response, config)
+    try:
+        if response is not None:
+            return _get_html_from_response(response, config)
 
-    response = requests.get(
-        url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
+        response = requests.get(
+            url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
 
-    html = _get_html_from_response(response, config)
+        html = _get_html_from_response(response, config)
 
-    if config.http_success_only:
-        # fail if HTTP sends a non 2XX response
-        response.raise_for_status()
+        if config.http_success_only:
+            # fail if HTTP sends a non 2XX response
+            response.raise_for_status()
 
-    return html
+        return html
+    except requests.exceptions.RequestException as ex:
+        # https://stackoverflow.com/questions/16511337/correct-way-to-try-except-using-python-requests-module
+        browser = get_driver()
+        browser.get(url)
+        return browser.page_source
 
 
 def _get_html_from_response(response, config):
