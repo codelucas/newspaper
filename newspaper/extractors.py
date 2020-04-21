@@ -52,6 +52,29 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
 
+# Publish date tags are always searched for in <meta> tags with one
+# of the below attributes in the format
+# <meta [attr]="[value]" [content]="...content..." />, e.g.
+# for the first item in this list:
+#    <meta property="rnews:datePublished" content="2018-04-18 09:42:00" />
+PUBLISH_DATE_TAGS = [
+    {'attr': 'property', 'value': 'rnews:datePublished',
+     'content': 'content'},
+    {'attr': 'property', 'value': 'article:published_time',
+     'content': 'content'},
+    {'attr': 'name', 'value': 'OriginalPublicationDate',
+     'content': 'content'},
+    {'attr': 'itemprop', 'value': 'datePublished', 'content': 'datetime'},
+    {'attr': 'property', 'value': 'og:published_time', 'content': 'content'},
+    {'attr': 'name', 'value': 'article_date_original', 'content': 'content'},
+    {'attr': 'name', 'value': 'publication_date', 'content': 'content'},
+    {'attr': 'name', 'value': 'sailthru.date', 'content': 'content'},
+    {'attr': 'name', 'value': 'PublishDate', 'content': 'content'},
+    {'attr': 'pubdate', 'value': 'pubdate', 'content': 'datetime'},
+    {'attr': 'name', 'value': 'publish_date', 'content': 'content'},
+]
+
+
 class ContentExtractor(object):
     def __init__(self, config):
         self.config = config
@@ -195,39 +218,12 @@ class ContentExtractor(object):
             if datetime_obj:
                 return datetime_obj
 
-        PUBLISH_DATE_TAGS = [
-            {'attribute': 'property', 'value': 'rnews:datePublished',
-             'content': 'content'},
-            {'attribute': 'property', 'value': 'article:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'OriginalPublicationDate',
-             'content': 'content'},
-            {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
-            {'attribute': 'property', 'value': 'og:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'article_date_original',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'publication_date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'sailthru.date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'PublishDate',
-             'content': 'content'},
-            {'attribute': 'pubdate', 'value': 'pubdate',
-             'content': 'datetime'},
-            {'attribute': 'name', 'value': 'publish_date',
-             'content': 'content'},
-        ]
-        for known_meta_tag in PUBLISH_DATE_TAGS:
+        for meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
-                doc,
-                attr=known_meta_tag['attribute'],
-                value=known_meta_tag['value'])
+                    doc, **{k: meta_tag[k] for k in ('attr', 'value')})
             if meta_tags:
                 date_str = self.parser.getAttribute(
-                    meta_tags[0],
-                    known_meta_tag['content'])
+                    meta_tags[0], meta_tag['content'])
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
