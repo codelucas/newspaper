@@ -52,6 +52,22 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
 
+CATEGORY_STOPWORDS = [
+    'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
+    'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
+    'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon',
+    'youtube', 'vimeo', 'store', 'mail', 'preferences', 'maps',
+    'password', 'imgur', 'flickr', 'search', 'subscription', 'itunes',
+    'siteindex', 'events', 'stop', 'jobs', 'careers', 'newsletter',
+    'subscribe', 'academy', 'shopping', 'purchase', 'site-map',
+    'shop', 'donate', 'newsletter', 'product', 'advert', 'info',
+    'tickets', 'coupons', 'forum', 'board', 'archive', 'browse',
+    'howto', 'how to', 'faq', 'terms', 'charts', 'services',
+    'contact', 'plus', 'admin', 'login', 'signup', 'register',
+    'developer', 'proxy'
+]
+
+
 # Publish date tags are always searched for in <meta> tags with one
 # of the below attributes in the format
 # <meta [attr]="[value]" [content]="...content..." />, e.g.
@@ -705,19 +721,6 @@ class ContentExtractor(object):
                     if self.config.verbose:
                         print(('elim category url %s for >1 path chunks '
                                'or size path chunks' % p_url))
-        stopwords = [
-            'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
-            'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
-            'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon',
-            'youtube', 'vimeo', 'store', 'mail', 'preferences', 'maps',
-            'password', 'imgur', 'flickr', 'search', 'subscription', 'itunes',
-            'siteindex', 'events', 'stop', 'jobs', 'careers', 'newsletter',
-            'subscribe', 'academy', 'shopping', 'purchase', 'site-map',
-            'shop', 'donate', 'newsletter', 'product', 'advert', 'info',
-            'tickets', 'coupons', 'forum', 'board', 'archive', 'browse',
-            'howto', 'how to', 'faq', 'terms', 'charts', 'services',
-            'contact', 'plus', 'admin', 'login', 'signup', 'register',
-            'developer', 'proxy']
 
         _valid_categories = []
 
@@ -728,7 +731,7 @@ class ContentExtractor(object):
             subdomain = tldextract.extract(p_url).subdomain
             conjunction = path + ' ' + subdomain
             bad = False
-            for badword in stopwords:
+            for badword in CATEGORY_STOPWORDS:
                 if badword.lower() in conjunction.lower():
                     if self.config.verbose:
                         print(('elim category url %s for subdomain '
