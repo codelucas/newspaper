@@ -75,6 +75,17 @@ PUBLISH_DATE_TAGS = [
 ]
 
 
+# This lists the tags and their associated attributes to search
+# for the article language; typically this is in one or two places
+# but you can add others to this list.  The format is similar to
+# PUBLISH_DATE_TAGS but the tag name can also be specified.
+LANG_TAGS= [
+    {'tag': 'meta', 'attr': 'http-equiv', 'value': 'content-language',
+     'content': 'content'},
+    {'tag': 'meta', 'attr': 'name', 'value': 'lang', 'content': 'content'}
+]
+
+
 class ContentExtractor(object):
     def __init__(self, config):
         self.config = config
@@ -412,11 +423,12 @@ class ContentExtractor(object):
                  'value': 'content-language'},
                 {'tag': 'meta', 'attr': 'name', 'value': 'lang'}
             ]
-            for item in items:
-                meta = self.parser.getElementsByTag(doc, **item)
+            for lang_tag in LANG_TAGS:
+                meta = self.parser.getElementsByTag(doc,
+                        **{k: lang_tag[k] for k in ('attr', 'value')})
                 if meta:
                     attr = self.parser.getAttribute(
-                        meta[0], attr='content')
+                        meta[0], attr=lang_tag['content'])
                     break
         if attr:
             value = attr[:2]
