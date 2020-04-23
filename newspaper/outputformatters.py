@@ -50,14 +50,14 @@ class OutputFormatter(object):
         if self.config.keep_article_html:
             html = self.convert_to_html()
 
-        # self.links_to_text()
         self.add_newline_to_br()
         self.add_newline_to_li()
         self.replace_with_text()
         self.remove_empty_tags()
         self.remove_trailing_media_div()
-        text = self.convert_to_text()
         links = self.convert_to_links()
+        self.links_to_text()
+        text = self.convert_to_text()
         # print(self.parser.nodeToString(self.get_top_node()))
         return (text, html, links)
 
@@ -79,16 +79,10 @@ class OutputFormatter(object):
 
     def convert_to_links(self):
         links = []
-        for i, node in enumerate(list(self.get_top_node())):
-            try:
-                print(i)
-                for x in node.iter():
-                    if x.tag == 'a':
-                        links += [dict(x.items())["href"]]
-                txt = self.parser.getText(node)
-            except ValueError as err:  # lxml error
-                log.info('%s ignoring lxml node error: %s', __title__, err)
-                txt = None
+        for node in list(self.get_top_node()):
+            for x in node.iter():
+                if x.tag == 'a':
+                    links += [dict(x.items())["href"]]
 
         return links
 
