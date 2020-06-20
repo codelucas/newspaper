@@ -298,14 +298,9 @@ NOTE: You will still most likely need to install the following libraries via you
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
-Consulting
-----------
 
-*This service is already used around the world* by startups, top news organizations (CNN, NYT, etc),
-graduate school researchers, and, of course, hackers like you :) If you or your company are interested
-in more advanced features like: increased NLP and scraping accuracy, mis-information, fake news, author
-credibility, boosted coverage and accuracy for your use case, and etc; feel free to `email & contact me`_
-for consulting.
+.. image:: https://lh3.googleusercontent.com/7qtWmNNg3NDOf1pIuCaWbUJ2TtnMgVveXs-nkf4Ikoq0iIZcu9fevPpykFTCP8M8adnUVvPqBqyqGvmgAfA_tB-r7Q1U8ERIvPi3Xjds_lzdLBUcNO609bfbOibU0oIBHuv82f07lTB-SVzfctkG4w0Vnjw89QLMWjadnBnOu7mH0mZ6P3zNXPdLClTcvRKGI3K2F0ZATNMO2UfewcHpR8jI75066IItlFBS6NUUl0BRiUaFUCKOBqR79DULKZm5JFSx2-n73fPzpYRWwViHHDaA9GDKy55pBqq-JhpKwdlg6MUtHMWTh1XmYRCum5XEzzauB3j8qkqsizi-q3oaXCOH7kgrdm0misoV83eqa9CrC8lC83-2qb3hYgPzVmnTeX2VEnwwu8A6zwpvIn-VzufvOONa9OXK08UKMshtlR3Xy8toNujqa4hdq2JXsh_ux6NhgvwJ38OG_pIADzw0PR6rGLLi1_HZ97vE2e54oIz-GqU154ZZojEQ4Jqbf2uCjK3F83pfOC4EHnuJgI59lmhx14Guz8Br4KWYfrOMG37KZwFC-xxLSI-bzNs6eAtaB-JqryYENV8lDOX9wrCfTh0VByZNOW8SyZyAOfMB5HhdwNOotn35KHrrfKIgV_Se0gvJlI9s16BVufwBUFv7fnLZ_DfMx3j_Vn-OCJcZUTqc6Iew4Eu0iBmFvEsgYQs7E8Yz=w3360-h1832-ft
+    :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
 
 Donations
 ---------
