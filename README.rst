@@ -302,15 +302,6 @@ NOTE: You will still most likely need to install the following libraries via you
 .. image:: https://images.gitads.io/newspaper
     :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
 
-Donations
----------
-
-Your donations are greatly appreciated! They will free me up to work on this project more,
-to take on things like: adding new features, bug-fix support, addressing concerns with the library.
-
-- My PayPal link: `https://www.paypal.me/codelucas`_
-- My `Venmo`_ handle: @Lucas-Ou-Yang
-
 
 Development
 -----------
@@ -341,6 +332,15 @@ Demo
 View a working online demo here: http://newspaper-demo.herokuapp.com
 
 This is another working online demo: http://newspaper.chinazt.cc/
+
+Donations
+---------
+
+Your donations are greatly appreciated! They will free me up to work on this project more,
+to take on things like: adding new features, bug-fix support, addressing concerns with the library.
+
+- My PayPal link: `https://www.paypal.me/codelucas`_
+- My `Venmo`_ handle: @Lucas-Ou-Yang
 
 LICENSE
 -------
