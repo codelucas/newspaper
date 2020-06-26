@@ -753,8 +753,7 @@ class TestDownloadPdf(unittest.TestCase):
     @print_test
     def test_article_pdf_ignoring(self):
         empty_pdf = "%PDF-"  # empty PDF constant
-        a = Article(url='http://www.technik-medien.at/ePaper_Download/'
-                        'IoT4Industry+Business_2018-10-31_2018-03.pdf',
+        a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf',
                     ignored_content_types_defaults={"application/pdf": empty_pdf,
                                                     "application/x-pdf": empty_pdf,
                                                     "application/x-bzpdf": empty_pdf,
