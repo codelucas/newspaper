@@ -298,6 +298,9 @@ NOTE: You will still most likely need to install the following libraries via you
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
+Your support
+------------
+You can support the project easily by checking out our sponsor page. It takes only one click:
 
 .. image:: https://images.gitads.io/newspaper
     :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
