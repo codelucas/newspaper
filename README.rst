@@ -368,7 +368,7 @@ to talk about the future of this library and news extraction in general!
 .. _`Venmo`: https://www.venmo.com/Lucas-Ou-Yang
 
 .. _`Quickstart guide`: https://newspaper.readthedocs.io/en/latest/
-.. _`The Documentation`: https://newspaper.readthedocs.io
+.. _`The Docs`: https://newspaper.readthedocs.io
 .. _`lxml`: http://lxml.de/
 .. _`requests`: https://github.com/kennethreitz/requests
 .. _`Parse.ly`: http://parse.ly
