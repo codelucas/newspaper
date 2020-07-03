@@ -300,7 +300,7 @@ NOTE: You will still most likely need to install the following libraries via you
 
 Your support
 ------------
-You can support the project easily by checking out our sponsor page. It takes only one click:
+You can support the project by checking out our sponsor. `It takes only one click`_
 
 .. image:: https://images.gitads.io/newspaper
     :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
@@ -371,3 +371,4 @@ to talk about the future of this library and news extraction in general!
 .. _`lxml`: http://lxml.de/
 .. _`requests`: https://github.com/kennethreitz/requests
 .. _`Parse.ly`: http://parse.ly
+.. _`It takes only one click`: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
