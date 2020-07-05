@@ -1,3 +1,8 @@
+Newspaper is being sponsored by the following tool; please help to support us by taking a look!
+
+.. image:: https://images.gitads.io/newspaper
+    :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
+
 Newspaper3k: Article scraping & curation
 ========================================
 
@@ -301,10 +306,6 @@ NOTE: You will still most likely need to install the following libraries via you
     $ pip3 install newspaper3k
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
-
-
-.. image:: https://images.gitads.io/newspaper
-    :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
 
 
 Development
