@@ -1,7 +1,7 @@
-Newspaper is being sponsored by the following tool; please help to support us by taking a look!
+Newspaper is being sponsored by the following tool; please help to support us by taking a look and signing up for a free trial.
 
 .. image:: https://images.gitads.io/newspaper
-    :target: https://tracking.gitads.io/?campaign=gitads&repo=newspaper&redirect=gitads.io
+    :target: https://tracking.gitads.io/?repo=newspaper
 
 Newspaper3k: Article scraping & curation
 ========================================
