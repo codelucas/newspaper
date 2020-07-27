@@ -105,6 +105,9 @@ class Article(object):
         # Summary generated from the article's body txt
         self.summary = ''
 
+        # sentence scores
+        self.sent_ranks = None
+
         # This article's unchanged and raw HTML
         self.html = ''
 
@@ -386,6 +389,8 @@ class Article(object):
         summary_sents = nlp.summarize(title=self.title, text=self.text, max_sents=max_sents)
         summary = '\n'.join(summary_sents)
         self.set_summary(summary)
+
+        self.sent_ranks = nlp.score_sentences(title=self.title, text=self.text)
 
     def get_parse_candidate(self):
         """A parse candidate is a wrapper object holding a link hash of this

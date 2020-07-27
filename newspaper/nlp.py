@@ -54,6 +54,17 @@ def summarize(url='', title='', text='', max_sents=5):
     return [summary[1] for summary in summaries]
 
 
+def score_sentences(title='', text=''):
+    if not text or not title:
+        return []
+
+    sentences = split_sentences(text)
+    keys = keywords(text)
+    title_words = split_words(title)
+
+    return score(sentences, title_words, keys)
+
+
 def score(sentences, titleWords, keywords):
     """Score sentences based on different features
     """
