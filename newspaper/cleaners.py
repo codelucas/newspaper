@@ -55,6 +55,7 @@ class DocumentCleaner(object):
         doc_to_clean = self.clean_body_classes(doc_to_clean)
         doc_to_clean = self.clean_article_tags(doc_to_clean)
         doc_to_clean = self.clean_em_tags(doc_to_clean)
+        doc_to_clean = self.remove_embedded_cards(doc_to_clean)
         doc_to_clean = self.remove_drop_caps(doc_to_clean)
         doc_to_clean = self.remove_scripts_styles(doc_to_clean)
         doc_to_clean = self.clean_bad_tags(doc_to_clean)
@@ -134,6 +135,14 @@ class DocumentCleaner(object):
         for node in naughty_names:
             if not node.xpath(self.contains_article):
                 self.parser.remove(node)
+        return doc
+
+    def remove_embedded_cards(self, doc):
+        list= ["twitter-tweet", "instagram-media"]
+        for value in list:
+            elements = self.parser.getElementsByAttr(doc, 'class', value)
+            for element in elements:
+                self.parser.drop_tree(element)
         return doc
 
     def remove_nodes_regex(self, doc, pattern):
