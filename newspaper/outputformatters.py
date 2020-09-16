@@ -83,7 +83,6 @@ class OutputFormatter(object):
             for x in node.iter():
                 if x.tag == 'a':
                     links += [dict(x.items())["href"]]
-
         return links
 
     def convert_to_html(self):
