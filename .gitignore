@@ -4,6 +4,8 @@
 .idea
 .pypirc
 
+.mypy_cache
+
 # C extensions
 *.so
 
