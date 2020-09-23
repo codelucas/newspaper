@@ -469,7 +469,8 @@ class Article(object):
 
     def set_meta_img(self, src_url):
         self.meta_img = src_url
-        self.set_top_img_no_check(src_url)
+        if images.valid_image_url(src_url):
+            self.set_top_img_no_check(src_url)
 
     def set_top_img(self, src_url):
         if src_url is not None:

@@ -13,6 +13,8 @@ import math
 import io
 import traceback
 import urllib.parse
+from urllib.parse import urlparse
+from tldextract import tldextract
 
 import requests
 from PIL import Image, ImageFile
@@ -25,6 +27,9 @@ chunk_size = 1024
 thumbnail_size = 90, 90
 minimal_area = 5000
 
+BAD_URLS = ['logo', 'icon', 'banner', 'ribbon', 'sprite', 'qrcode', 'shim', 'btn-']
+BAD_CHUNKS = ['ad', 'ads', 'slick_thumb', 'banners', 'facebook', 'twitter', 'whatsapp', 'linkedin', 'tpwidgets']
+ALLOWED_TYPES = ['jpg', 'jpeg', 'png', 'webp', 'tiff']
 
 def image_to_str(image):
     s = io.StringIO()
@@ -165,6 +170,50 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
 
 def fetch_image_dimension(url, useragent, referer=None, retries=1):
     return fetch_url(url, useragent, referer, retries, dimension=True)
+
+
+def valid_image_url(url):
+
+    url = clean_url(url)
+    path = urlparse(url).path
+
+    # the '/' which may exist at the end of the url provides us no information
+    if path.endswith('/'):
+        path = path[:-1]
+
+    # '/story/cnn/blahblah/photo.png --> ['story', 'cnn', 'blahblah', 'photo.png']
+    path_chunks = [x.lower() for x in path.split('/') if len(x) > 0]
+
+    # siphon out the file type. eg: jpeg, png
+    if len(path_chunks) > 0:
+        file_type = urls.url_to_filetype(url)
+
+        # if the file type is an invalid media type reject instantly but allow extension-less images
+        if file_type and file_type not in ALLOWED_TYPES:
+            return False
+
+        last_chunk = path_chunks[-1].split('.')
+        # the file type is not of use to use anymore, remove from url
+        if len(last_chunk) > 1:
+            path_chunks[-1] = last_chunk[-2]
+
+
+    # extract the tld (top level domain)
+    tld_dat = tldextract.extract(url)
+    tld = tld_dat.domain.lower()
+
+    if tld in urls.BAD_DOMAINS:
+        return False
+
+    for d in BAD_URLS:
+        if d in url:
+            return False
+
+    for b in BAD_CHUNKS:
+        if b in path_chunks:
+            return False
+
+    return True
 
 
 class Scraper:
