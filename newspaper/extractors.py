@@ -504,7 +504,15 @@ class ContentExtractor(object):
                 value = int(value)
 
             if ':' not in key:
-                data[key] = value
+                if key in data and type(data[key]) is not list:
+                    tmp = list()
+                    tmp.append(data[key])
+                    tmp.append(value)
+                    data[key] = tmp
+                elif key in data and type(data[key]) is list:
+                    data[key].append(value)
+                else:
+                    data[key] = value
                 continue
 
             key = key.split(':')
