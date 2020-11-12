@@ -199,6 +199,7 @@ Features
       ar              Arabic
       be              Belarusian
       bg              Bulgarian
+      cs              Czech
       da              Danish
       de              German
       el              Greek
