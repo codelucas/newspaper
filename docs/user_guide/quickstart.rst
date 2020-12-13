@@ -121,7 +121,7 @@ Extracting Source brand & description
     >>> print(cnn_paper.brand)
     u'cnn'
 
-    >>> print(cnn_paper.description)
+    >>> print(cnn_paper.meta_description)
     u'CNN.com delivers the latest breaking news and information on the latest...'
 
 News Articles
