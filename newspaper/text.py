@@ -210,7 +210,7 @@ class StopWordsThai(StopWords):
 
 
 class StopWordsBengali(StopWords):
-    """Thai segmentation
+    """Bengali segmentation
     """
     def __init__(self, language='bn'):
         super(StopWordsBengali, self).__init__(language='bn')
