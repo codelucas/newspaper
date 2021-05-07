@@ -18,9 +18,10 @@ log = logging.getLogger(__name__)
 
 class OutputFormatter(object):
 
-    def __init__(self, config):
+    def __init__(self, config, extractor):
         self.top_node = None
         self.config = config
+        self.extractor = extractor
         self.parser = self.config.get_parser()
         self.language = config.language
         self.stopwords_class = config.stopwords_class
@@ -38,7 +39,7 @@ class OutputFormatter(object):
     def get_top_node(self):
         return self.top_node
 
-    def get_formatted(self, top_node):
+    def get_formatted(self, top_node, extra_nodes=[]):
         """Returns the body text of an article, and also the body article
         html if specified. Returns in (text, html) form
         """
@@ -56,12 +57,23 @@ class OutputFormatter(object):
         self.replace_with_text()
         self.remove_empty_tags()
         self.remove_trailing_media_div()
-        text = self.convert_to_text()
+        text = self.convert_to_text(extra_nodes)
         # print(self.parser.nodeToString(self.get_top_node()))
         return (text, html)
 
-    def convert_to_text(self):
+    def convert_to_text(self, extra_nodes):
+        # The current list of texts to be used for a final combined, joined text
         txts = []
+
+        # A small method to update the txts list
+        def _update_text_list(txt):
+            if txt:
+                txt = unescape(txt)
+                txt_lis = innerTrim(txt).split(r'\n')
+                txt_lis = [n.strip(' ') for n in txt_lis]
+                txts.extend(txt_lis)
+
+        # Obtain the text based on top_node
         for node in list(self.get_top_node()):
             try:
                 txt = self.parser.getText(node)
@@ -69,11 +81,18 @@ class OutputFormatter(object):
                 log.info('%s ignoring lxml node error: %s', __title__, err)
                 txt = None
 
-            if txt:
-                txt = unescape(txt)
-                txt_lis = innerTrim(txt).split(r'\n')
-                txt_lis = [n.strip(' ') for n in txt_lis]
-                txts.extend(txt_lis)
+            _update_text_list(txt)
+
+        # Given the text based on top_node, check if we've missed any text
+        candidate_text = '\n\n'.join(txts)
+        # For each additional node we have...
+        for extra in extra_nodes:
+            # if its text is not in the final text and it does not have a high link density...
+            if extra.text not in candidate_text and not self.extractor.is_highlink_density(extra):
+                # Parse any hyperlinks and include in final text
+                self.parser.stripTags(extra, 'a')
+                _update_text_list(extra.text)
+        # Return final string based on txts list
         return '\n\n'.join(txts)
 
     def convert_to_html(self):

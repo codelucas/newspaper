@@ -82,12 +82,12 @@ def fulltext(html, language='en'):
 
     extractor = ContentExtractor(config)
     document_cleaner = DocumentCleaner(config)
-    output_formatter = OutputFormatter(config)
+    output_formatter = OutputFormatter(config, extractor)
 
     doc = config.get_parser().fromstring(html)
     doc = document_cleaner.clean(doc)
 
-    top_node = extractor.calculate_best_node(doc)
+    top_node, extra_nodes = extractor.calculate_best_node(doc)
     top_node = extractor.post_cleanup(top_node)
-    text, article_html = output_formatter.get_formatted(top_node)
+    text, article_html = output_formatter.get_formatted(top_node, extra_nodes)
     return text

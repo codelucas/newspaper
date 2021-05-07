@@ -224,7 +224,7 @@ class Article(object):
         self.link_hash = parse_candidate.link_hash  # MD5
 
         document_cleaner = DocumentCleaner(self.config)
-        output_formatter = OutputFormatter(self.config)
+        output_formatter = OutputFormatter(self.config, self.extractor)
 
         title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
@@ -270,7 +270,7 @@ class Article(object):
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
 
-        self.top_node = self.extractor.calculate_best_node(self.doc)
+        self.top_node, extra_nodes = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
@@ -278,8 +278,7 @@ class Article(object):
             self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
 
-            text, article_html = output_formatter.get_formatted(
-                self.top_node)
+            text, article_html = output_formatter.get_formatted(self.top_node, extra_nodes)
             self.set_article_html(article_html)
             self.set_text(text)
 
