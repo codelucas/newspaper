@@ -57,11 +57,11 @@ class OutputFormatter(object):
         self.replace_with_text()
         self.remove_empty_tags()
         self.remove_trailing_media_div()
-        text = self.convert_to_text(extra_nodes)
+        text, html = self.convert_to_text(extra_nodes, html)
         # print(self.parser.nodeToString(self.get_top_node()))
         return (text, html)
 
-    def convert_to_text(self, extra_nodes):
+    def convert_to_text(self, extra_nodes, html_to_update):
         # The current list of texts to be used for a final combined, joined text
         txts = []
 
@@ -88,15 +88,21 @@ class OutputFormatter(object):
         # For each additional node we have...
         for extra in extra_nodes:
             # if its text is not in the final text and it does not have a high link density...
-            if extra.text not in candidate_text and not self.extractor.is_highlink_density(extra):
+            if extra.text is not None and extra.text in candidate_text \
+                    and not self.extractor.is_highlink_density(extra):
                 # Parse any hyperlinks and include in final text
                 self.parser.stripTags(extra, 'a')
                 _update_text_list(extra.text)
+                # Given this node is added to the text, add its contents to the html if it should be updated
+                if self.config.keep_article_html:
+                    html_to_update += self.convert_to_html(extra)
         # Return final string based on txts list
-        return '\n\n'.join(txts)
+        return '\n\n'.join(txts), html_to_update
 
-    def convert_to_html(self):
-        cleaned_node = self.parser.clean_article_html(self.get_top_node())
+    def convert_to_html(self, node=None):
+        if node is None:
+            node = self.get_top_node()
+        cleaned_node = self.parser.clean_article_html(node)
         return self.parser.nodeToString(cleaned_node)
 
     def add_newline_to_br(self):
