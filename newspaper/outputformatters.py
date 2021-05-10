@@ -88,7 +88,7 @@ class OutputFormatter(object):
         # For each additional node we have...
         for extra in extra_nodes:
             # if its text is not in the final text and it does not have a high link density...
-            if extra.text is not None and extra.text in candidate_text \
+            if extra.text is not None and extra.text not in candidate_text \
                     and not self.extractor.is_highlink_density(extra):
                 # Parse any hyperlinks and include in final text
                 self.parser.stripTags(extra, 'a')
