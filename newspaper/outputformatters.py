@@ -7,9 +7,10 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-from html import unescape
 import logging
+import re
 
+from html import unescape
 from .text import innerTrim
 
 
@@ -34,6 +35,71 @@ def _update_text_list(txts, to_add, index=None):
     else:
         # Else add the list's elements to the end of txts
         txts.extend(to_add)
+
+
+def insert_missing_html(html_idx, text_found, pre_parsed_html, parsed_html, node_text, html_to_update):
+    """A method that updates html by checking if pre_parsed_html (or parsed_html) which represents node_text should be
+    inserted into html_to_update. The method then returns the updated html and a new html-index being the position
+    in html_to_update after the insertion."""
+    # Begin by assuming we need to update the html with the given pre_parsed_html
+    update_html = True
+    # If the pre-parsed html already exists in the html...
+    if pre_parsed_html in html_to_update:
+        # then update the html-index to be its position in the html and flag we do not need to update the html
+        html_idx = html_to_update.index(pre_parsed_html)
+        update_html = False
+    # If the parsed html for this node already exists in the html...
+    elif parsed_html in html_to_update:
+        # then update the html-index to be its position in the html and continue loop to avoid increment
+        html_idx = html_to_update.index(parsed_html) + len(parsed_html)
+        logging.warning('Text in article html \'' + node_text[:10] + '...\' is missing hyperlink(s).')
+        return html_to_update, html_idx
+    # Else if the html is not there but its text was found previously when updating the article text...
+    elif text_found:
+        # attempt to find a variation of the text within the html
+        # Make a copy of the text and flag all spaces in between the words to be '.*' (any characters)
+        text_copy = innerTrim(node_text[:])
+        # Replace any characters that might trigger errors (html tags may be in between word and .; double hyphen can
+        # cause matching issues)
+        text_copy = text_copy.replace('—', ' ').replace('.', '')
+        text_copy_r = text_copy.replace(' ', '.*')
+        # Search for this combination of words (the node's text) in the html (re.S to consider \n)
+        html_match = re.search(text_copy_r, html_to_update, re.S)
+        # If we found a match...
+        if html_match:
+            # Obtain the start of this match
+            match_start = html_match.span()[0]
+            # Search for the first opening tag after the last word in node_text. Not guaranteed to acknowledge
+            # embedded html tags within the found html representing node_text but can ensure the sentence will
+            # not be split (e.g. in case of an anchor tag representing a hyperlink in the middle of a sentence).
+            words = text_copy.split()  # Obtain the words of the node's text
+            # The starting position to search where the last word was found from where the match began (i.e.) not
+            # within the whole string.
+            # Add match_start to get index based off of html_to_update and not in relation to the substring
+            # Return index value as is if we can't find the end of node_text's sentence in existing html
+            try:
+                start_search = html_to_update[match_start:].index(words.pop()) + match_start
+            except ValueError:
+                logging.warning('Could not locate position of text \'' + node_text[:10]
+                                + '...\' in article html; output html may be out of order.')
+                return html_to_update, html_idx
+            open_tag_match = re.search(r'<[^/\n].*>', html_to_update[start_search:], re.S)
+            # If an open tag was found, update html-index to to be its position in html_to_update
+            if open_tag_match:
+                html_idx = open_tag_match.span()[0] + start_search
+            # If no more open tags occur after this node's text in the html, make html-index point to the
+            # end of html_to_update so future nodes are added in order after this node_text
+            else:
+                html_idx = len(html_to_update)
+            # Return index as is because we do not need to update html and do not want html_idx to increment
+            return html_to_update, html_idx
+    # If we are updating the html
+    if update_html:
+        # Tidy up this node's html before inserting before and after the specified html-index
+        pre_parsed_html = innerTrim(pre_parsed_html) + '\n'
+        html_to_update = html_to_update[:html_idx] + pre_parsed_html + html_to_update[html_idx:]
+    # Increment html_idx by the length of characters for this node's html
+    return html_to_update, html_idx + len(pre_parsed_html)
 
 
 class OutputFormatter(object):
@@ -98,8 +164,8 @@ class OutputFormatter(object):
     def add_missing_text(self, txts, extra_nodes, html_to_update):
         """A method to return (text, html) given the current text and html so far (txts list and html_to_update).
         The method uses extra_nodes to consider any text that needs to be added before returning final text and html."""
-        # Keep track of the current index we are on
-        current_idx = 0
+        # Keep track of the current index we are on for the text and html
+        current_idx, html_idx = 0, 0
         # For each additional node we have...
         for extra in extra_nodes:
             # Ignore non-text nodes or nodes with a high link density
@@ -110,8 +176,13 @@ class OutputFormatter(object):
             txt_count = len(stripped_txts)
             # Check the text is not already within the final txts list
             match = set(stripped_txts).intersection(txts)
-            # If it is already in the txts list, update current_idx to be where the node's text is + 1
-            if len(match):
+            node_found = bool(len(match))
+            # In regards to the html, convert to html and then parse any hyperlinks
+            pre_parsed_html = self.convert_to_html(extra)
+            self.parser.stripTags(extra, 'a')
+            parsed_html = self.convert_to_html(extra)
+            # If the text is already in the txts list, update current_idx to be where the node's text is + 1
+            if node_found:
                 # In case of multiple entries for this node's text, gather all indices of the text in txts and
                 # find the max (latest) entry
                 found_idxs = []
@@ -120,14 +191,13 @@ class OutputFormatter(object):
                 current_idx = max(found_idxs) + 1
             # If the current node's text has not been added to the final txts list
             else:
-                # Parse any hyperlinks and include in final text
-                self.parser.stripTags(extra, 'a')
                 _update_text_list(txts, _prepare_txt(extra.text), index=current_idx)
-                # Given this node is added to the text, add its contents to the html if it should be updated
-                if self.config.keep_article_html:
-                    html_to_update += self.convert_to_html(extra)
                 # Update current_idx to be incremented by how many entries were added to txts
                 current_idx += txt_count
+            # Update the html if it should be updated
+            if self.config.keep_article_html:
+                html_to_update, html_idx = insert_missing_html(html_idx, node_found, pre_parsed_html,
+                                                               parsed_html, extra.text, html_to_update)
         # Return final string based on txts list
         return '\n\n'.join(txts), html_to_update
 
