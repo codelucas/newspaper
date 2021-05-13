@@ -16,6 +16,26 @@ from .text import innerTrim
 log = logging.getLogger(__name__)
 
 
+# A small method to prepare a given string so it can be added to string list
+def _prepare_txt(txt):
+    if txt:
+        txt = unescape(txt)
+        txt_lis = innerTrim(txt).split(r'\n')
+        txt_lis = [n.strip(' ') for n in txt_lis]
+        return txt_lis
+    return []
+
+
+# A small method to update a txts list with a given string list
+def _update_text_list(txts, to_add, index=None):
+    if index is not None:
+        # If we are given an index, insert the list's elements at the specified index
+        txts[index:0] = to_add
+    else:
+        # Else add the list's elements to the end of txts
+        txts.extend(to_add)
+
+
 class OutputFormatter(object):
 
     def __init__(self, config, extractor):
@@ -64,15 +84,6 @@ class OutputFormatter(object):
     def convert_to_text(self, extra_nodes, html_to_update):
         # The current list of texts to be used for a final combined, joined text
         txts = []
-
-        # A small method to update the txts list
-        def _update_text_list(txt):
-            if txt:
-                txt = unescape(txt)
-                txt_lis = innerTrim(txt).split(r'\n')
-                txt_lis = [n.strip(' ') for n in txt_lis]
-                txts.extend(txt_lis)
-
         # Obtain the text based on top_node
         for node in list(self.get_top_node()):
             try:
@@ -80,22 +91,43 @@ class OutputFormatter(object):
             except ValueError as err:  # lxml error
                 log.info('%s ignoring lxml node error: %s', __title__, err)
                 txt = None
+            _update_text_list(txts, _prepare_txt(txt))
+        # Factor in any missing text before returning final result
+        return self.add_missing_text(txts, extra_nodes, html_to_update)
 
-            _update_text_list(txt)
-
-        # Given the text based on top_node, check if we've missed any text
-        candidate_text = '\n\n'.join(txts)
+    def add_missing_text(self, txts, extra_nodes, html_to_update):
+        """A method to return (text, html) given the current text and html so far (txts list and html_to_update).
+        The method uses extra_nodes to consider any text that needs to be added before returning final text and html."""
+        # Keep track of the current index we are on
+        current_idx = 0
         # For each additional node we have...
         for extra in extra_nodes:
-            # if its text is not in the final text and it does not have a high link density...
-            if extra.text is not None and extra.text not in candidate_text \
-                    and not self.extractor.is_highlink_density(extra):
+            # Ignore non-text nodes or nodes with a high link density
+            if extra.text is None or self.extractor.is_highlink_density(extra):
+                continue
+            # Prepare the node's text if it were to be added; count the length of the list to be added
+            stripped_txts = _prepare_txt(extra.text)
+            txt_count = len(stripped_txts)
+            # Check the text is not already within the final txts list
+            match = set(stripped_txts).intersection(txts)
+            # If it is already in the txts list, update current_idx to be where the node's text is + 1
+            if len(match):
+                # In case of multiple entries for this node's text, gather all indices of the text in txts and
+                # find the max (latest) entry
+                found_idxs = []
+                for m in match:
+                    found_idxs.append(txts.index(m))
+                current_idx = max(found_idxs) + 1
+            # If the current node's text has not been added to the final txts list
+            else:
                 # Parse any hyperlinks and include in final text
                 self.parser.stripTags(extra, 'a')
-                _update_text_list(extra.text)
+                _update_text_list(txts, _prepare_txt(extra.text), index=current_idx)
                 # Given this node is added to the text, add its contents to the html if it should be updated
                 if self.config.keep_article_html:
                     html_to_update += self.convert_to_html(extra)
+                # Update current_idx to be incremented by how many entries were added to txts
+                current_idx += txt_count
         # Return final string based on txts list
         return '\n\n'.join(txts), html_to_update
 
