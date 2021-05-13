@@ -683,8 +683,14 @@ class MultiLanguageTestCase(unittest.TestCase):
             self.assertEqual(expected, tested)
         except AssertionError as e:
             # If this failed, check the expected text is contained in the generated text we are testing
-            # Warn the user this test case hasn't passed as expected but the main article text is covered
-            if expected in tested:
+            expected_split = expected.split('\n\n')
+            tested_split = tested.split('\n\n')
+            # Every sentence that's in both the expected text and generated text
+            matches = set(expected_split).intersection(tested_split)
+            # For the expected text to be included in the generated text, all its elements must be in the intersection
+            # with the generated text
+            if len(matches) == len(expected_split):
+                # Warn the user this test case hasn't passed as expected but the main article text is covered
                 warnings.warn('Expected text and parsed article text do not match. Expected text is still covered '
                               '(i.e. is within) parsed article text. Original error: ' + str(e))
             else:  # else raise the original AssertionError as this test case should fail
