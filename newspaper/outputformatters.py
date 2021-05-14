@@ -56,15 +56,22 @@ def insert_missing_html(html_idx, text_found, pre_parsed_html, parsed_html, node
         return html_to_update, html_idx
     # Else if the html is not there but its text was found previously when updating the article text...
     elif text_found:
+        # Message to warn with in case of regex search errors or no results
+        warning_msg = 'Could not locate position of text \'' + node_text[:10] \
+                      + '...\' in article html; output html may be out of order.'
         # attempt to find a variation of the text within the html
         # Make a copy of the text and flag all spaces in between the words to be '.*' (any characters)
         text_copy = innerTrim(node_text[:])
         # Replace any characters that might trigger errors (html tags may be in between word and .; double hyphen can
         # cause matching issues)
-        text_copy = text_copy.replace('—', ' ').replace('.', '')
-        text_copy_r = text_copy.replace(' ', '.*')
-        # Search for this combination of words (the node's text) in the html (re.S to consider \n)
-        html_match = re.search(text_copy_r, html_to_update, re.S)
+        text_copy = text_copy.replace('—', ' ').replace('.', '').replace('\\', '\\\\')
+        text_copy_r = text_copy.replace(' ', '.*?')
+        try:
+            # Search for this combination of words (the node's text) in the html (re.S to consider \n)
+            html_match = re.search(text_copy_r, html_to_update, re.S)
+        except re.error as e:
+            logging.warning('Error encountered: ' + str(e) + '\n' + warning_msg)
+            return html_to_update, html_idx
         # If we found a match...
         if html_match:
             # Obtain the start of this match
@@ -80,8 +87,7 @@ def insert_missing_html(html_idx, text_found, pre_parsed_html, parsed_html, node
             try:
                 start_search = html_to_update[match_start:].index(words.pop()) + match_start
             except ValueError:
-                logging.warning('Could not locate position of text \'' + node_text[:10]
-                                + '...\' in article html; output html may be out of order.')
+                logging.warning(warning_msg)
                 return html_to_update, html_idx
             open_tag_match = re.search(r'<[^/\n].*>', html_to_update[start_search:], re.S)
             # If an open tag was found, update html-index to to be its position in html_to_update
