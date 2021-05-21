@@ -8,9 +8,10 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-import re
 
+from copy import deepcopy
 from html import unescape
+from lxml import etree
 from .text import innerTrim
 
 
@@ -35,77 +36,6 @@ def _update_text_list(txts, to_add, index=None):
     else:
         # Else add the list's elements to the end of txts
         txts.extend(to_add)
-
-
-def insert_missing_html(html_idx, text_found, pre_parsed_html, parsed_html, node_text, html_to_update):
-    """A method that updates html by checking if pre_parsed_html (or parsed_html) which represents node_text should be
-    inserted into html_to_update. The method then returns the updated html and a new html-index being the position
-    in html_to_update after the insertion."""
-    # Begin by assuming we need to update the html with the given pre_parsed_html
-    update_html = True
-    # If the pre-parsed html already exists in the html...
-    if pre_parsed_html in html_to_update:
-        # then update the html-index to be its position in the html and flag we do not need to update the html
-        html_idx = html_to_update.index(pre_parsed_html)
-        update_html = False
-    # If the parsed html for this node already exists in the html...
-    elif parsed_html in html_to_update:
-        # then update the html-index to be its position in the html and continue loop to avoid increment
-        html_idx = html_to_update.index(parsed_html) + len(parsed_html)
-        logging.warning('Text in article html \'' + node_text[:10] + '...\' is missing hyperlink(s).')
-        return html_to_update, html_idx
-    # Else if the html is not there but its text was found previously when updating the article text...
-    elif text_found:
-        # Message to warn with in case of regex search errors or no results
-        warning_msg = 'Could not locate position of text \'' + node_text[:10] \
-                      + '...\' in article html; output html may be out of order.'
-        # attempt to find a variation of the text within the html
-        # Make a copy of the text and flag all spaces in between the words to be '.*' (any characters)
-        text_copy = innerTrim(node_text[:])
-        # Replace any characters that might trigger errors (html tags may be in between word and .; double hyphen can
-        # cause matching issues)
-        text_copy = text_copy.replace('—', ' ').replace('.', '').replace('\\', '\\\\')
-        text_copy_r = text_copy.replace(' ', '.*?')
-        try:
-            # Search for this combination of words (the node's text) in the html (re.S to consider \n)
-            html_match = re.search(text_copy_r, html_to_update, re.S)
-        except re.error as e:
-            logging.warning('Error encountered: ' + str(e) + '\n' + warning_msg)
-            return html_to_update, html_idx
-        # If we found a match...
-        if html_match:
-            # Obtain the start of this match
-            match_start = html_match.span()[0]
-            # Search for the first opening tag after the last word in node_text. Not guaranteed to acknowledge
-            # embedded html tags within the found html representing node_text but can ensure the sentence will
-            # not be split (e.g. in case of an anchor tag representing a hyperlink in the middle of a sentence).
-            words = text_copy.split()  # Obtain the words of the node's text
-            # The starting position to search where the last word was found from where the match began (i.e.) not
-            # within the whole string.
-            # Add match_start to get index based off of html_to_update and not in relation to the substring
-            # Return index value as is if we can't find the end of node_text's sentence in existing html
-            try:
-                start_search = html_to_update[match_start:].index(words.pop()) + match_start
-            except ValueError:
-                logging.warning(warning_msg)
-                return html_to_update, html_idx
-            open_tag_match = re.search(r'<[^/\n].*>', html_to_update[start_search:], re.S)
-            # If an open tag was found, update html-index to to be its position in html_to_update
-            if open_tag_match:
-                html_idx = open_tag_match.span()[0] + start_search
-            # If no more open tags occur after this node's text in the html, make html-index point to the
-            # end of html_to_update so future nodes are added in order after this node_text
-            else:
-                html_idx = len(html_to_update)
-            # Return index as is because we do not need to update html and do not want html_idx to increment
-            return html_to_update, html_idx
-    # If we are updating the html
-    if update_html:
-        # Tidy up this node's html before inserting before and after the specified html-index
-        pre_parsed_html = innerTrim(pre_parsed_html) + '\n'
-        html_to_update = html_to_update[:html_idx] + pre_parsed_html + html_to_update[html_idx:]
-    # Increment html_idx by the length of characters for this node's html
-    return html_to_update, html_idx + len(pre_parsed_html)
 
 
 class OutputFormatter(object):
@@ -136,21 +66,17 @@ class OutputFormatter(object):
         html if specified. Returns in (text, html) form
         """
         self.top_node = top_node
-        html, text = '', ''
 
         self.remove_negativescores_nodes()
-
-        if self.config.keep_article_html:
-            html = self.convert_to_html()
-
+        # Take a copy of top_node before editing it further
+        top_node_copy = deepcopy(self.top_node)
         self.links_to_text()
         self.add_newline_to_br()
         self.add_newline_to_li()
         self.replace_with_text()
         self.remove_empty_tags()
         self.remove_trailing_media_div()
-        text, html = self.convert_to_text(extra_nodes, html)
-        # print(self.parser.nodeToString(self.get_top_node()))
+        text, html = self.convert_to_text(extra_nodes, top_node_copy)
         return (text, html)
 
     def convert_to_text(self, extra_nodes, html_to_update):
@@ -183,10 +109,9 @@ class OutputFormatter(object):
             # Check the text is not already within the final txts list
             match = set(stripped_txts).intersection(txts)
             node_found = bool(len(match))
-            # In regards to the html, convert to html and then parse any hyperlinks
-            pre_parsed_html = self.convert_to_html(extra)
+            # In regards to the html, take a copy of this node before parsing any hyperlinks
+            extra_pre_parsed = deepcopy(extra)
             self.parser.stripTags(extra, 'a')
-            parsed_html = self.convert_to_html(extra)
             # If the text is already in the txts list, update current_idx to be where the node's text is + 1
             if node_found:
                 # In case of multiple entries for this node's text, gather all indices of the text in txts and
@@ -202,10 +127,71 @@ class OutputFormatter(object):
                 current_idx += txt_count
             # Update the html if it should be updated
             if self.config.keep_article_html:
-                html_to_update, html_idx = insert_missing_html(html_idx, node_found, pre_parsed_html,
-                                                               parsed_html, extra.text, html_to_update)
-        # Return final string based on txts list
-        return '\n\n'.join(txts), html_to_update
+                html_idx, html_to_update = self.insert_missing_html(extra_pre_parsed, html_to_update, html_idx,
+                                                                    node_found, stripped_txts[0])
+        # Return final string based on txts list and html string
+        return '\n\n'.join(txts), self.convert_to_html(html_to_update)
+
+    def insert_missing_html(self, node_pre_parsed, html_to_update, html_idx, text_found, node_text):
+        """A method that updates html by checking if node_text should be inserted into html_to_update. The method then
+        returns the updated html and a new html-index being the position in html_to_update after the insertion."""
+        # Message to warn with in case of search errors or no results
+        truncated = '\'' + node_text[:30] + '...\''
+        warning_msg = 'Could not determine position of element with text ' + truncated \
+                      + ' Duplicates may occur in article html.'
+        # Matching element(s) given node_text
+        found_html = None
+        try:
+            # Do a starts-with search in case a sentence has been split
+            found_html = html_to_update.xpath('//*[starts-with(text(), $nodetext)]', nodetext=node_text)
+        except etree.XPathEvalError:
+            logging.warning(warning_msg + ' Error searching for text.')
+        # If we found a match
+        if found_html:
+            # Report if multiple matches found
+            if len(found_html) > 1:
+                logging.warning('Multiple matches for ' + truncated + ' in html, article html may be disordered.')
+            # Flag to check if we found the match's position in html_to_update
+            pos_found = False
+            # The current node we are checking whilst finding the position
+            current_node = found_html[0]
+            # Whilst we haven't found the position and we still have a current_node to check
+            while not pos_found and current_node is not None:
+                try:
+                    # Attempt to find its position in relation to the rest of the html and return found index + 1
+                    html_idx = html_to_update.index(current_node)
+                    return html_idx + 1, html_to_update
+                except ValueError:
+                    # If the element is not found, try the current node's parent
+                    parent = current_node.getparent()
+                    # If we have exhausted the search via parent nodes, exit loop
+                    if current_node == parent:
+                        break
+                    # Set current node to be its parent to continue the search
+                    current_node = parent
+            # Warn if node_text is found in the html but we couldn't find the element's position
+            logging.warning(
+                warning_msg + ' Could not trace element with this text or parent element after xpath match.')
+        # No matches with the xpath search
+        else:
+            # Attempt to search for the html elements from position html_idx and onwards based on text
+            for search_idx, search_elem in enumerate(html_to_update[html_idx:]):
+                # If we found the element this way, exit loop and return the updated html_idx
+                if search_elem.text and innerTrim(search_elem.text) in node_text:
+                    return html_idx + search_idx + 1, html_to_update
+                # Whilst we are on this node, check its descendants; cannot use
+                # self.parser.childNodesWithText() as this creates nodes with text and duplicates text in final html
+                search_elem_children = self.parser.childNodes(search_elem)
+                # Do same text check for each child and return updated html_idx if there's a match
+                for search_elem_child in search_elem_children:
+                    if search_elem_child.text and innerTrim(search_elem_child.text) in node_text:
+                        return html_idx + search_idx + 1, html_to_update
+            # Warn if text originally included node_text because it would have been expected to appear in the final html
+            if text_found:
+                logging.warning(warning_msg + ' Article text originally included this text.')
+        # If we haven't returned an updated html_idx, then update html with element and return both index and html
+        html_to_update.insert(html_idx, node_pre_parsed)
+        return html_idx + 1, html_to_update
 
     def convert_to_html(self, node=None):
         if node is None:
