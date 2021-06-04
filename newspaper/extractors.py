@@ -38,16 +38,21 @@ ARROWS_SPLITTER = StringSplitter(" » ")
 COLON_SPLITTER = StringSplitter(":")
 SPACE_SPLITTER = StringSplitter(' ')
 NO_STRINGS = set()
-A_REL_TAG_SELECTOR = "a[rel=tag]"
+
+A_REL_TAG_SELECTOR = "a[rel=tag], li[class~='css-1og0r8'] a span, a p[class~='css-m9s1mv'], div[class~='c-article-regular__tags-item']"
 A_HREF_TAG_SELECTOR = ("a[href*='/tag/'], a[href*='/tags/'], "
                        "a[href*='/topic/'], a[href*='?keyword=']")
 RE_LANG = r'^[A-Za-z]{2}$'
+
+xpaths_to_remove = ['//*[@id="main"]/div[2]/div[2]/div[1]/div[2]',
+                    '//*[@id="main"]/div[2]/div[2]/div[1]/figure/div[2]/figcaption' #e24
+                    ]
 
 good_paths = ['story', 'article', 'feature', 'featured', 'slides',
               'slideshow', 'gallery', 'news', 'video', 'media',
               'v', 'radio', 'press']
 bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
-              'advert', 'preferences', 'feedback', 'info', 'browse', 'howto',
+              'advert', 'preferences', 'feedback', 'info', 'browse', 'howto'
               'account', 'subscribe', 'donate', 'shop', 'admin']
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
@@ -1044,6 +1049,11 @@ class ContentExtractor(object):
         """Remove any divs that looks like non-content, clusters of links,
         or paras with no gusto; add adjacent nodes which look contenty
         """
+        for xpt in xpaths_to_remove:
+            nodes_to_remove = top_node.xpath(xpt)
+            for node in nodes_to_remove:
+                node.getparent().remove(node)
+
         node = self.add_siblings(top_node)
         for e in self.parser.getChildren(node):
             e_tag = self.parser.getTag(e)
