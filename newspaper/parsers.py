@@ -212,6 +212,9 @@ class Parser(object):
 
     @classmethod
     def getText(cls, node):
+        # Remove style nodes
+        for tag in node.xpath('//style'):
+            tag.getparent().remove(tag)
         txts = [i for i in node.itertext()]
         return text.innerTrim(' '.join(txts).strip())
 
