@@ -1,8 +1,3 @@
-Newspaper is being sponsored by the following tool; please help to support us by taking a look and signing up for a free trial.
-
-.. image:: https://images.gitads.io/newspaper
-    :target: https://tracking.gitads.io/?repo=newspaper
-
 Newspaper3k: Article scraping & curation
 ========================================
 
@@ -307,6 +302,14 @@ NOTE: You will still most likely need to install the following libraries via you
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
 
+Donations
+---------
+
+Your donations are greatly appreciated! They will free me up to work on this project more,
+to take on things like: adding new features, bug-fix support, addressing concerns with the library.
+
+- My PayPal link: `https://www.paypal.me/codelucas`_
+- My `Venmo`_ handle: @Lucas-Ou-Yang
 
 Development
 -----------
@@ -337,15 +340,6 @@ Demo
 View a working online demo here: http://newspaper-demo.herokuapp.com
 
 This is another working online demo: http://newspaper.chinazt.cc/
-
-Donations
----------
-
-Your donations are greatly appreciated! They will free me up to work on this project more,
-to take on things like: adding new features, bug-fix support, addressing concerns with the library.
-
-- My PayPal link: `https://www.paypal.me/codelucas`_
-- My `Venmo`_ handle: @Lucas-Ou-Yang
 
 LICENSE
 -------
