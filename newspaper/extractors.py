@@ -248,8 +248,10 @@ class ContentExtractor(object):
         # EconomicTimes India
 
         title_element = self.parser.getElementsByTag(doc, tag='time')
-        title_text = self.parser.getText(title_element[0])
-        return search_first_date(title_text)[1]
+        if  title_element and len(title_element) > 0:
+            print(title_element)
+            title_text = self.parser.getText(title_element[0])
+            return search_first_date(title_text)[1]
 
         return None
 
