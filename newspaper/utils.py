@@ -14,7 +14,7 @@ import logging
 import os
 import pickle
 import random
-import re
+import re2 as re
 import string
 import sys
 import threading

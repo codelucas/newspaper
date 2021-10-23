@@ -7,7 +7,7 @@ __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
-import re
+import re2 as re
 import math
 from os import path
 

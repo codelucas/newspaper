@@ -8,7 +8,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import os
-import re
+import re2 as re
 import string
 
 from .utils import FileHelper

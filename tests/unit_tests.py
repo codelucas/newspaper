@@ -7,7 +7,7 @@ import os
 import unittest
 import time
 import traceback
-import re
+import re2 as re
 from collections import defaultdict, OrderedDict
 import concurrent.futures
 

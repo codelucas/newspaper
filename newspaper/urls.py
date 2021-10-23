@@ -9,7 +9,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
-import re
+import re2 as re
 
 from urllib.parse import parse_qs, urljoin, urlparse, urlsplit, urlunsplit
 

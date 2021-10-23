@@ -10,7 +10,7 @@ import logging
 import lxml.etree
 import lxml.html
 import lxml.html.clean
-import re
+import re2 as re
 from html import unescape
 import string
 
