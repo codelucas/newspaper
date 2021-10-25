@@ -1014,13 +1014,16 @@ class ContentExtractor(object):
         on like paragraphs and tables
         """
         nodes_to_check = []
-        for tag in ['p', 'pre', 'td', 'ol', 'ul']:
-            items = self.parser.getElementsByTag(doc, tag=tag)
-            nodes_to_check += items
-        for tag in ['section']:
-            items = self.parser.getElementsByTag(doc, tag=tag)
-            if len(items) > 1:
-                nodes_to_check = items
+        articles = self.parser.getElementsByTag(doc, tag='article')
+        if len(articles) > 0:
+            # Specific heuristic for Medium articles
+            sections = self.parser.getElementsByTag(articles[0], tag='section')
+            if len(sections) > 1:
+                nodes_to_check = sections
+        if len(nodes_to_check) == 0:
+            for tag in ['p', 'pre', 'td', 'ol', 'ul']:
+                items = self.parser.getElementsByTag(doc, tag=tag)
+                nodes_to_check += items
         return nodes_to_check
 
     def is_table_and_no_para_exist(self, e):
