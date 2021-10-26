@@ -1015,7 +1015,7 @@ class ContentExtractor(object):
         """
         nodes_to_check = []
         articles = self.parser.getElementsByTag(doc, tag='article')
-        if len(articles) > 0:
+        if len(articles) > 0 and self.get_meta_site_name(doc) == 'Medium':
             # Specific heuristic for Medium articles
             sections = self.parser.getElementsByTag(articles[0], tag='section')
             if len(sections) > 1:
