@@ -271,6 +271,8 @@ class Article(object):
             self.clean_doc)
 
         self.top_node = self.extractor.calculate_best_node(self.doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.calculate_best_node(self.clean_doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
