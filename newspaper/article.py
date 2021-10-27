@@ -273,6 +273,14 @@ class Article(object):
         self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is None:
             self.top_node = self.extractor.calculate_best_node(self.clean_doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.parser.getElementById(self.doc, 'content')
+        if self.top_node is None:
+            for tag in ['article', 'main']:
+                nodes = self.extractor.parser.getElementsByTag(self.doc, tag=tag)
+                if len(nodes) > 0:
+                    self.top_node = nodes[0]
+                    break
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
