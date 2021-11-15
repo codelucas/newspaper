@@ -249,9 +249,11 @@ class ContentExtractor(object):
 
         title_element = self.parser.getElementsByTag(doc, tag='time')
         if  title_element and len(title_element) > 0:
-            print(title_element)
             title_text = self.parser.getText(title_element[0])
-            return search_first_date(title_text)[1]
+            sfd = search_first_date(title_text)
+            if sfd:
+                sfd = sfd[-1]
+            return sfd
 
         return None
 
