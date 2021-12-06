@@ -21,13 +21,14 @@ jobs:
       - run: flake8 . --count --exit-zero --max-complexity=10 --max-line-length=88
                       --show-source --statistics
       - run: isort --check-only --profile black . || true
-      - run: pip install -r requirements.txt || pip install --editable . || true
+      - run: pip install -r requirements.txt
       - run: mkdir --parents --verbose .mypy_cache
       - run: mypy --ignore-missing-imports --install-types --non-interactive . || true
       - run: python download_corpora.py
       - run: pytest tests/unit_tests.py
       - run: python tests/benchmarks.py || true
-      - run: pytest . || true
+      - run: pytest .
+      - run: pip install pygments
       - run: pytest --doctest-modules . || true
       - run: shopt -s globstar && pyupgrade --py36-plus **/*.py || true
       - run: safety check
