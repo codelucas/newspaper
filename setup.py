@@ -1,4 +1,4 @@
-#!/bin/python2.7
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 Lucas Ou-Yang 2014 -- http://codelucas.com
