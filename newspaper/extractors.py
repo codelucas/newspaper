@@ -225,7 +225,9 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'name', 'value': 'modified-date',
              'content': 'content'},
-             
+ 
+            {'attribute': 'name', 'value': 'Last-Modified',
+             'content': 'content'},
             {'attribute': 'name', 'value': 'publish_date',
              'content': 'content'},
         ]
