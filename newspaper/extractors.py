@@ -14,7 +14,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import copy
 import logging
 import re
-import re
+import json
 from collections import defaultdict
 
 from dateutil.parser import parse as date_parser
@@ -170,13 +170,14 @@ class ContentExtractor(object):
         # return authors
 
     def get_publishing_date(self, url, doc):
-        """3 strategies for publishing date extraction. The strategies
+        """4 strategies for publishing date extraction. The strategies
         are descending in accuracy and the next strategy is only
         attempted if a preferred one fails.
 
         1. Pubdate from URL
-        2. Pubdate from metadata
-        3. Raw regex searches in the HTML + added heuristics
+        2. Yoast SEO WebPage graph informations
+        3. Pubdate from metadata
+        4. Raw regex searches in the HTML + added heuristics
         """
 
         def parse_date_str(date_str):
@@ -194,6 +195,19 @@ class ContentExtractor(object):
             datetime_obj = parse_date_str(date_str)
             if datetime_obj:
                 return datetime_obj
+
+        yoast_seo = self.parser.getElementsByTag(doc, attr='class', value='yoast-schema-graph')
+
+        if len(yoast_seo) > 0:
+            yoast_seo_parsed = json.loads(yoast_seo[0].text)
+            webpage_graph = list(
+                filter(lambda g: g.get("@type", None) == "WebPage", yoast_seo_parsed.get("@graph", [])))
+            if len(webpage_graph) > 0:
+                webpage_graph = webpage_graph[0]
+
+                date_published = webpage_graph.get("datePublished", None)
+                if date_published is not None:
+                    return parse_date_str(date_published)
 
         PUBLISH_DATE_TAGS = [
             {'attribute': 'property', 'value': 'rnews:datePublished',
@@ -448,7 +462,7 @@ class ContentExtractor(object):
         """Returns the 'top img' as specified by the website
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
-        try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
+        try_one = self.get_meta_content(doc, 'meta[property="og:image"]') or self.get_meta_content(doc, 'meta[name="twitter:image"]')
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
