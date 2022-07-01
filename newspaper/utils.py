@@ -343,11 +343,12 @@ def get_useragent():
 def get_available_languages():
     """Returns a list of available languages and their 2 char input codes
     """
-    stopword_files = os.listdir(os.path.join(settings.STOPWORDS_DIR))
-    two_dig_codes = [f.split('-')[1].split('.')[0] for f in stopword_files]
-    for d in two_dig_codes:
-        assert len(d) == 2
-    two_dig_codes.sort()
+    two_dig_codes = []
+    with os.scandir(settings.STOPWORDS_DIR) as stopwords_files:
+        for x in stopwords_files:
+            d = stopwords_files.__next__().name.split('-')[1].split('.')[0]
+            assert len(d) == 2
+            two_dig_codes.append(d)
     return two_dig_codes
 
 
