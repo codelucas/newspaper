@@ -57,6 +57,9 @@ class Configuration(object):
         # Fail for error responses (e.g. 404 page)
         self.http_success_only = True
 
+        # Allow redirects (enabled by default)
+        self.allow_redirects = True
+
         # English is the fallback
         self._language = 'en'
 
