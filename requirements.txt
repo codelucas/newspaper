@@ -9,6 +9,6 @@ Pillow>=3.3.0
 pythainlp>=1.7.2
 python-dateutil>=2.5.3
 PyYAML>=3.11
-requests>=2.10.0
+requests>=2.20
 tinysegmenter==0.3  # TODO(codelucas): Investigate making this >=0.3
 tldextract>=2.0.1
