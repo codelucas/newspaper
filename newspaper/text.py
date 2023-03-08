@@ -207,3 +207,17 @@ class StopWordsThai(StopWords):
         import pythainlp
         tokens = pythainlp.word_tokenize(stripped_input)
         return tokens
+
+class StopWordsTamil(StopWords):
+    """Thai segmentation"""
+
+    def __init__(self, language="ta"):
+        super(StopWordsThai, self).__init__(language="ta")
+
+    def candidate_words(self, stripped_input):
+        from inltk.inltk import setup
+        from inltk.inltk import tokenize
+
+        setup("ta")
+        tokens = tokenize(stripped_input, "ta")
+        return tokens
