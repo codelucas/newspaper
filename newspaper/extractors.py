@@ -473,7 +473,7 @@ class ContentExtractor(object):
         return ''
 
     def image_is_ignored(self, image):
-        return len([True for x in self.config.ignored_images_suffix_list if image and self.match_image(x, os.path.basename(image))]) > 0
+        return any([True for x in self.config.ignored_images_suffix_list if image and image != '' and self.match_image(x, os.path.basename(image))])
 
     def match_image(self, pattern, image):
         return re.search(pattern, image) is not None
@@ -584,6 +584,7 @@ class ContentExtractor(object):
                 for img_tag in img_tags if img_tag.get('src')]
         img_links = set([urljoin(article_url, url)
                          for url in urls])
+        img_links = [x for x in img_links if not self.image_is_ignored(x)]
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
