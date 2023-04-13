@@ -13,6 +13,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import copy
 import logging
+import os.path
 import re
 import re
 from collections import defaultdict
@@ -449,25 +450,33 @@ class ContentExtractor(object):
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
+        try_one = None if self.image_is_ignored(try_one) else try_one
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
             elems = self.parser.getElementsByTag(doc, use_regex=True, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
-
+            try_two = None if self.image_is_ignored(try_two) else try_two
             if not try_two:
                 try_three = self.get_meta_content(doc, 'meta[name="og:image"]')
-
+                try_three = None if self.image_is_ignored(try_three) else try_three
                 if not try_three:
                     link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
                     elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
                     try_four = elems[0].get('href') if elems else None
+                    try_four = None if self.image_is_ignored(try_four) else try_four
 
         top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
             return urljoin(article_url, top_meta_image)
         return ''
+
+    def image_is_ignored(self, image):
+        return len([True for x in self.config.ignored_images_suffix_list if image and self.match_image(x, os.path.basename(image))]) > 0
+
+    def match_image(self, pattern, image):
+        return re.search(pattern, image) is not None
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol

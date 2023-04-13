@@ -60,6 +60,7 @@ class Configuration(object):
         # Allow redirects (enabled by default)
         self.allow_redirects = True
 
+        self.ignored_images_suffix_list = []
         # English is the fallback
         self._language = 'en'
 
