@@ -584,7 +584,7 @@ class ContentExtractor(object):
                 for img_tag in img_tags if img_tag.get('src')]
         img_links = set([urljoin(article_url, url)
                          for url in urls])
-        img_links = [x for x in img_links if not self.image_is_ignored(x)]
+        img_links = set([x for x in img_links if not self.image_is_ignored(x)])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
