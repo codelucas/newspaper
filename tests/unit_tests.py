@@ -24,7 +24,7 @@ HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
 URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
-from newspaper import Article, fulltext, Source, ArticleException, news_pool
+from newspaper import Article, Config, fulltext, Source, ArticleException, news_pool
 from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
@@ -406,9 +406,9 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<meta property="og:image" content="https://example.com/meta_img_filename.jpg" />' \
                '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
         html_empty_og_content = '<meta property="og:image" content="" />' \
-            '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+                                '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
         html_empty_all = '<meta property="og:image" content="" />' \
-            '<meta name="og:image" />'
+                         '<meta name="og:image" />'
         html_rel_img_src = html_empty_all + '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
         html_rel_img_src2 = html_empty_all + '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
         html_rel_icon = html_empty_all + '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
@@ -544,7 +544,6 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
-
     @print_test
     def test_pubdate(self):
         """Checks that irrelevant data in url isn't considered as publishing date"""
@@ -567,7 +566,6 @@ class UrlTestCase(unittest.TestCase):
                     else:
                         print('\t\tpublishing date in %s should not be present' % (url))
                     raise
-
 
     @unittest.skip("Need to write an actual test")
     @print_test
@@ -635,9 +633,9 @@ class ConfigBuildTestCase(unittest.TestCase):
     NOTE: No need to mock responses as we are just initializing the
     objects, not actually calling download(..)
     """
+
     @print_test
     def test_article_default_params(self):
-
         a = Article(url='http://www.cnn.com/2013/11/27/'
                         'travel/weather-thanksgiving/index.html')
         self.assertEqual('en', a.config.language)
@@ -766,6 +764,19 @@ class TestDownloadPdf(unittest.TestCase):
         a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
         a.download()
         self.assertNotEqual('%PDF-', a.html)
+
+
+class TestIgnoreImages(unittest.TestCase):
+
+    @print_test
+    def test_config_ignore_images(self):
+        config = Config()
+        config.ignored_images_suffix_list = ['think.png', '(.*)\.ico']
+        a = Article('https://www.reillywood.com/blog/why-nu/', config=config)
+        a.download()
+        a.parse()
+        self.assertEqual('https://d33wubrfki0l68.cloudfront.net/77d3013f91800257b3ca2adfb995ae24e49fff4e/b3086/img/main/headshot.jpg', a.top_img)
+
 
 if __name__ == '__main__':
     argv = list(sys.argv)
