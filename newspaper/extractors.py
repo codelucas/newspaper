@@ -681,18 +681,29 @@ class ContentExtractor(object):
                                'subdomain' % p_url))
                     continue
                 else:
-                    valid_categories.append(scheme + '://' + domain)
-                    # TODO account for case where category is in form
-                    # http://subdomain.domain.tld/category/ <-- still legal!
+                    if subdomain_contains:
+                        valid_categories.append(scheme + '://' + domain)
+                        # TODO account for case where category is in form
+                        # http://subdomain.domain.tld/category/ <-- still legal!
+                    else:
+                        # support for urls like
+                        # http://domain.tld/category/[category]
+                        path_chunks = [x for x in path.split('/') if len(x) > 0]
+                        path_chunks = [x for x in path_chunks if x not in set(['index.html', 'category'])]
+                        path_chunks = [x for x in path_chunks if not x.isnumeric()]
+
+                        if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
+                            valid_categories.append('//' + domain + path)
             else:
                 # we want a path with just one subdir
                 # cnn.com/world and cnn.com/world/ are both valid_categories
+                # carbon-pulse.com/category/international/ is a valid_categories
                 path_chunks = [x for x in path.split('/') if len(x) > 0]
-                if 'index.html' in path_chunks:
-                    path_chunks.remove('index.html')
+                path_chunks = [x for x in path_chunks if x not in set(['index.html', 'category'])]
+                path_chunks = [x for x in path_chunks if not x.isnumeric()]
 
                 if len(path_chunks) == 1 and len(path_chunks[0]) < 14:
-                    valid_categories.append(domain + path)
+                    valid_categories.append(path)
                 else:
                     if self.config.verbose:
                         print(('elim category url %s for >1 path chunks '
