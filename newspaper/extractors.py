@@ -711,6 +711,7 @@ class ContentExtractor(object):
             'contact', 'plus', 'admin', 'login', 'signup', 'register',
             'developer', 'proxy', 'what-we-offer', 'staff']
 
+        valid_categories = list(set(valid_categories))
         _valid_categories = []
 
         # TODO Stop spamming urlparse and tldextract calls...
