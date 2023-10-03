@@ -759,8 +759,7 @@ class ContentExtractor(object):
 
         _valid_categories = list(set(_valid_categories))
 
-        category_urls = [urls.prepare_url(p_url, source_url)
-                         for p_url in _valid_categories]
+        category_urls = [urls.prepare_url(p_url, source_url) for p_url in _valid_categories]
         category_urls = [c for c in category_urls if c is not None]
         return category_urls
 
