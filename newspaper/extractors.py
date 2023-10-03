@@ -709,7 +709,7 @@ class ContentExtractor(object):
             'tickets', 'coupons', 'forum', 'board', 'archive', 'browse',
             'howto', 'how to', 'faq', 'terms', 'charts', 'services',
             'contact', 'plus', 'admin', 'login', 'signup', 'register',
-            'developer', 'proxy']
+            'developer', 'proxy', 'what-we-offer', 'staff']
 
         _valid_categories = []
 
