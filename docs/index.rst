@@ -231,7 +231,7 @@ Features
       uk              Ukrainian
       vi              Vietnamese
       zh              Chinese
-
+      Ta              Tamil
 
 Get it now
 ----------

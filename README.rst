@@ -234,6 +234,7 @@ Features
       uk              Ukrainian
       vi              Vietnamese
       zh              Chinese
+      ta              Tamil
 
 
 Get it now
