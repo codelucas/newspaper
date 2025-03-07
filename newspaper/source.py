@@ -177,7 +177,7 @@ class Source(object):
     def download(self):
         """Downloads html of source
         """
-        self.html = network.get_html(self.url, self.config)
+        self.html = network.get_html(self.url, self.config).html
 
     def download_categories(self):
         """Download all category html, can use mthreading
