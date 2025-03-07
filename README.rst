@@ -163,9 +163,18 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽
     车网_新浪汽车_新浪网
 
-Support our library
--------------------
-`It takes only one click`_
+
+
+Enjoy Newspaper3k? You'll also love BrightData
+----------------------------------------------
+`Click here to see BrightData`_, the premier company offering the internet's most trusted web data. 
+They have AI-powered web scrapers and datasets you may find useful.
+
+.. image:: https://github.com/user-attachments/assets/ca540b8b-7888-49d2-89df-2c07760f6d9f
+        :target: https://get.brightdata.com/hm89s0nowetp
+        :alt: Bright Data's Scraping Browser Product
+
+.. _`Click here to see BrightData`: https://get.brightdata.com/hm89s0nowetp
 
 Docs
 ----
