@@ -47,7 +47,7 @@ class DocumentCleaner(object):
             .create("\n", "\n\n")\
             .append("\t")\
             .append("^\\s+$")
-        self.contains_article = './/article|.//*[@id="article"]|.//*[@itemprop="articleBody"]'
+        self.contains_article = './/article|.//*[@id="article"]|.//*[contains(@itemprop,"articleBody")]'
 
     def clean(self, doc_to_clean):
         """Remove chunks of the DOM as specified
