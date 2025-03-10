@@ -54,6 +54,10 @@ class Configuration(object):
         # You may keep the html of just the main article body
         self.keep_article_html = False
 
+        # You may keep the format of the author 
+        # name so it would not be titlecased
+        self.keep_authors_format = False
+
         # Fail for error responses (e.g. 404 page)
         self.http_success_only = True
 
