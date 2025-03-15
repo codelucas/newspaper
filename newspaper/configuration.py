@@ -13,7 +13,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 import logging
 
 from .parsers import Parser
-from .text import (StopWords, StopWordsArabic, StopWordsChinese,
+from .text import (StopWords, StopWordsArabic, StopWordsBengali, StopWordsChinese,
                    StopWordsKorean, StopWordsHindi, StopWordsJapanese, StopWordsThai)
 from .version import __version__
 
@@ -116,6 +116,8 @@ class Configuration(object):
             return StopWordsArabic
         elif language == 'ja':
             return StopWordsJapanese
+        elif language == 'bn':
+            return StopWordsBengali
         elif language == 'th':
             return StopWordsThai
         return StopWords
