@@ -203,7 +203,7 @@ class ContentExtractor(object):
             {'attribute': 'name', 'value': 'OriginalPublicationDate',
              'content': 'content'},
             {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
+             'content': 'content'},
             {'attribute': 'property', 'value': 'og:published_time',
              'content': 'content'},
             {'attribute': 'name', 'value': 'article_date_original',
