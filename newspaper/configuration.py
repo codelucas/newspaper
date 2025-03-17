@@ -5,6 +5,8 @@ as settings.py but dynamic and changing for whatever parent object
 holds them. For example, pass in a config object to an Article
 object, Source object, or even network methods, and it just works.
 """
+from newspaper.text import StopWordsNepali
+
 __title__ = 'newspaper'
 __author__ = 'Lucas Ou-Yang'
 __license__ = 'MIT'
@@ -108,6 +110,8 @@ class Configuration(object):
             return StopWordsKorean
         elif language == 'hi':
             return StopWordsHindi
+        elif language == 'np':
+            return StopWordsNepali
         elif language == 'zh':
             return StopWordsChinese
         # Persian and Arabic Share an alphabet

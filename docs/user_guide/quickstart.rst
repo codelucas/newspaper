@@ -288,6 +288,7 @@ of popular news source urls.. In case you need help choosing a news source!
       sl              Slovenian
       sr              Serbian
       et              Estonian
+      np              Nepali
       ja              Japanese
       be              Belarusian
       lt              Lithuanian
