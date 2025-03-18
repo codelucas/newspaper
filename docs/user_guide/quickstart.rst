@@ -146,7 +146,7 @@ Initializing an ``Article`` by itself.
     >>> first_article = Article(url="http://www.lemonde.fr/...", language='fr')
 
 
-Note the similar ``language=`` named paramater above. All the config parameters as described for ``Source`` objects also apply for ``Article`` objects! **Source and Article objects have a very similar api**.
+Note the similar ``language=`` named parameter above. All the config parameters as described for ``Source`` objects also apply for ``Article`` objects! **Source and Article objects have a very similar api**.
 
 Initializing an ``Article`` with the particular content-type ignoring.
 
