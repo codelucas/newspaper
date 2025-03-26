@@ -565,3 +565,9 @@ class Article(object):
         """
         if not self.is_parsed:
             raise ArticleException('You must `parse()` an article first!')
+
+    def yake(self, lan="en", n=3, dedupLim=0.9, dedupFunc='seqm', windowsSize=1, top=20, features=None):
+        import yake
+        kw_extractor = yake.KeywordExtractor(lan, n, dedupLim, dedupFunc, windowsSize,top, features)
+        keywords = kw_extractor.extract_keywords(self.text)
+        return keywords
