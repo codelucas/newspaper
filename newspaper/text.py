@@ -207,3 +207,20 @@ class StopWordsThai(StopWords):
         import pythainlp
         tokens = pythainlp.word_tokenize(stripped_input)
         return tokens
+
+      
+class StopWordsBurmese(StopWords):
+    """Burmese segmentation
+    """
+    # regexp from https://github.com/swanhtet1992/ReSegment
+    regexp = re.compile(r'(?:(?<!္)([က-ဪဿ၊-၏]|[၀-၉]+|[^က-၏]+)(?![ှျ]?[့္်]))')
+
+    def __init__(self, language='my'):
+        super(StopWordsBurmese, self).__init__(language='my')
+
+    def remove_punctuation(self, content):
+        return content
+
+    def candidate_words(self, stripped_input):
+        words = self.regexp.sub(r'𝕊\1', stripped_input).strip('𝕊').split('𝕊')
+        return words
