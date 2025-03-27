@@ -240,6 +240,15 @@ before calling ``nlp()``.
     Traceback (...
     ArticleException: You must parse an article before you try to..
 
+You can define an external text file as a reference corpus for keyword detection (via. log-likelihood).
+
+.. code-block:: pycon
+
+    >>> first_article.nlp(reference_corpus='reference.txt')
+
+    >>> print(first_article.keywords_reference_corpus)
+    [u'music', u'Tucson', ... ]
+
 
 ``nlp()`` is expensive, as is ``parse()``, make sure you actually need them before calling them on
 all of your articles! In some cases, if you just need urls, even ``download()`` is not necessary.

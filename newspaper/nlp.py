@@ -11,7 +11,8 @@ import re
 import math
 from os import path
 
-from collections import Counter
+from collections import Counter, OrderedDict
+from operator import itemgetter
 
 from . import settings
 
@@ -148,6 +149,64 @@ def keywords(text):
         return dict(keywords)
     else:
         return dict()
+
+
+def log_likelihood(length_target, length_reference, frequency_target, frequency_reference, significance_test=True):
+    """Get the log-likelihood scores of all words in the target corpus. By default, only signficant (95th percentile) 
+    results are returned. Based on Paul Raysons's log-likelihood and effect size calculator 
+    (http://ucrel.lancs.ac.uk/llwizard.html)."""
+
+    log_likelihood_scores = []
+
+    for word, frequency in frequency_target.items():
+        f_target = frequency_target[word]
+        try:
+            f_reference = frequency_reference[word]
+        except KeyError:
+            f_reference = 0
+
+        expected_1 = length_target * (f_target + f_reference) / (length_target + length_reference)
+        expected_2 = length_reference * (f_target + f_reference) / (length_target + length_reference)
+
+        try:
+            ll = 2 * (f_target * math.log((f_target / expected_1)) + (f_reference * math.log(f_reference / expected_2)))
+        except ValueError:
+            ll = 0
+
+        if significance_test:
+            # 95th percentile
+            if ll > 3.84:
+                log_likelihood_scores.append([word, ll])
+        else:
+            log_likelihood_scores.append([word, ll])
+
+    return log_likelihood_scores
+
+
+def keywords_reference_corpus(text, reference_corpus, use_stopwords=True):
+    """Get the top 10 keywords based on a comparison with a reference corpus. 
+    By default, stopwords are ignored."""
+
+    NUM_KEYWORDS = 10
+    with open(reference_corpus, 'r') as file:
+        reference_corpus = file.read()
+
+    text = split_words(text)
+
+    if use_stopwords:
+        text = [x for x in text if x not in stopwords]
+
+    frequency_target = dict(Counter(text))
+    length_target = len(text)
+    frequency_reference = dict(Counter(split_words(reference_corpus)))
+    length_reference = len(split_words(reference_corpus))
+
+    log_likelihood_scores = log_likelihood(length_target, length_reference, frequency_target, frequency_reference)
+
+    keywords = sorted(log_likelihood_scores, key=itemgetter(1), reverse=True)[:NUM_KEYWORDS]
+    keywords = {word: ll for (word, ll) in keywords}
+
+    return dict(keywords)
 
 
 def split_sentences(text):
