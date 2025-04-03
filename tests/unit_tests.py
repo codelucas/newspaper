@@ -741,6 +741,17 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'th'))
 
+    @print_test
+    def test_bengali_fulltext_extract(self):
+        url = 'https://www.prothomalo.com/economy/article/1632310'
+        article = Article(url=url, language='bn')
+        html = mock_resource_with('bengali_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('bengali', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'bn'))
+
 
 class TestNewspaperLanguagesApi(unittest.TestCase):
     @print_test
