@@ -52,6 +52,56 @@ bad_chunks = ['careers', 'contact', 'about', 'faq', 'terms', 'privacy',
 bad_domains = ['amazon', 'doubleclick', 'twitter']
 
 
+CATEGORY_STOPWORDS = [
+    'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
+    'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
+    'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon',
+    'youtube', 'vimeo', 'store', 'mail', 'preferences', 'maps',
+    'password', 'imgur', 'flickr', 'search', 'subscription', 'itunes',
+    'siteindex', 'events', 'stop', 'jobs', 'careers', 'newsletter',
+    'subscribe', 'academy', 'shopping', 'purchase', 'site-map',
+    'shop', 'donate', 'newsletter', 'product', 'advert', 'info',
+    'tickets', 'coupons', 'forum', 'board', 'archive', 'browse',
+    'howto', 'how to', 'faq', 'terms', 'charts', 'services',
+    'contact', 'plus', 'admin', 'login', 'signup', 'register',
+    'developer', 'proxy'
+]
+
+
+# Publish date tags are always searched for in <meta> tags with one
+# of the below attributes in the format
+# <meta [attr]="[value]" [content]="...content..." />, e.g.
+# for the first item in this list:
+#    <meta property="rnews:datePublished" content="2018-04-18 09:42:00" />
+PUBLISH_DATE_TAGS = [
+    {'attr': 'property', 'value': 'rnews:datePublished',
+     'content': 'content'},
+    {'attr': 'property', 'value': 'article:published_time',
+     'content': 'content'},
+    {'attr': 'name', 'value': 'OriginalPublicationDate',
+     'content': 'content'},
+    {'attr': 'itemprop', 'value': 'datePublished', 'content': 'datetime'},
+    {'attr': 'property', 'value': 'og:published_time', 'content': 'content'},
+    {'attr': 'name', 'value': 'article_date_original', 'content': 'content'},
+    {'attr': 'name', 'value': 'publication_date', 'content': 'content'},
+    {'attr': 'name', 'value': 'sailthru.date', 'content': 'content'},
+    {'attr': 'name', 'value': 'PublishDate', 'content': 'content'},
+    {'attr': 'pubdate', 'value': 'pubdate', 'content': 'datetime'},
+    {'attr': 'name', 'value': 'publish_date', 'content': 'content'},
+]
+
+
+# This lists the tags and their associated attributes to search
+# for the article language; typically this is in one or two places
+# but you can add others to this list.  The format is similar to
+# PUBLISH_DATE_TAGS but the tag name can also be specified.
+LANG_TAGS= [
+    {'tag': 'meta', 'attr': 'http-equiv', 'value': 'content-language',
+     'content': 'content'},
+    {'tag': 'meta', 'attr': 'name', 'value': 'lang', 'content': 'content'}
+]
+
+
 class ContentExtractor(object):
     def __init__(self, config):
         self.config = config
@@ -195,39 +245,12 @@ class ContentExtractor(object):
             if datetime_obj:
                 return datetime_obj
 
-        PUBLISH_DATE_TAGS = [
-            {'attribute': 'property', 'value': 'rnews:datePublished',
-             'content': 'content'},
-            {'attribute': 'property', 'value': 'article:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'OriginalPublicationDate',
-             'content': 'content'},
-            {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
-            {'attribute': 'property', 'value': 'og:published_time',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'article_date_original',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'publication_date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'sailthru.date',
-             'content': 'content'},
-            {'attribute': 'name', 'value': 'PublishDate',
-             'content': 'content'},
-            {'attribute': 'pubdate', 'value': 'pubdate',
-             'content': 'datetime'},
-            {'attribute': 'name', 'value': 'publish_date',
-             'content': 'content'},
-        ]
-        for known_meta_tag in PUBLISH_DATE_TAGS:
+        for meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
-                doc,
-                attr=known_meta_tag['attribute'],
-                value=known_meta_tag['value'])
+                    doc, **{k: meta_tag[k] for k in ('attr', 'value')})
             if meta_tags:
                 date_str = self.parser.getAttribute(
-                    meta_tags[0],
-                    known_meta_tag['content'])
+                    meta_tags[0], meta_tag['content'])
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
@@ -416,11 +439,12 @@ class ContentExtractor(object):
                  'value': 'content-language'},
                 {'tag': 'meta', 'attr': 'name', 'value': 'lang'}
             ]
-            for item in items:
-                meta = self.parser.getElementsByTag(doc, **item)
+            for lang_tag in LANG_TAGS:
+                meta = self.parser.getElementsByTag(doc,
+                        **{k: lang_tag[k] for k in ('attr', 'value')})
                 if meta:
                     attr = self.parser.getAttribute(
-                        meta[0], attr='content')
+                        meta[0], attr=lang_tag['content'])
                     break
         if attr:
             value = attr[:2]
@@ -697,19 +721,6 @@ class ContentExtractor(object):
                     if self.config.verbose:
                         print(('elim category url %s for >1 path chunks '
                                'or size path chunks' % p_url))
-        stopwords = [
-            'about', 'help', 'privacy', 'legal', 'feedback', 'sitemap',
-            'profile', 'account', 'mobile', 'sitemap', 'facebook', 'myspace',
-            'twitter', 'linkedin', 'bebo', 'friendster', 'stumbleupon',
-            'youtube', 'vimeo', 'store', 'mail', 'preferences', 'maps',
-            'password', 'imgur', 'flickr', 'search', 'subscription', 'itunes',
-            'siteindex', 'events', 'stop', 'jobs', 'careers', 'newsletter',
-            'subscribe', 'academy', 'shopping', 'purchase', 'site-map',
-            'shop', 'donate', 'newsletter', 'product', 'advert', 'info',
-            'tickets', 'coupons', 'forum', 'board', 'archive', 'browse',
-            'howto', 'how to', 'faq', 'terms', 'charts', 'services',
-            'contact', 'plus', 'admin', 'login', 'signup', 'register',
-            'developer', 'proxy']
 
         _valid_categories = []
 
@@ -720,7 +731,7 @@ class ContentExtractor(object):
             subdomain = tldextract.extract(p_url).subdomain
             conjunction = path + ' ' + subdomain
             bad = False
-            for badword in stopwords:
+            for badword in CATEGORY_STOPWORDS:
                 if badword.lower() in conjunction.lower():
                     if self.config.verbose:
                         print(('elim category url %s for subdomain '
