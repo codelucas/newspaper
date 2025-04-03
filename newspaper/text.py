@@ -196,7 +196,18 @@ class StopWordsJapanese(StopWords):
         tokens = segmenter.tokenize(stripped_input)
         return tokens
 
+class StopWordsTelugu(StopWords):
+    """Telugu segmentation
+    """
+    def __init__(self, language='te'):
+        super(StopWordsJapanese, self).__init__(language='te')
 
+    def candidate_words(self, stripped_input):
+        import tinysegmenter
+        segmenter = tinysegmenter.TinySegmenter()
+        tokens = segmenter.tokenize(stripped_input)
+        return tokens
+    
 class StopWordsThai(StopWords):
     """Thai segmentation
     """

@@ -388,6 +388,7 @@ def print_available_languages():
         'sr': 'Serbian',
         'sv': 'Swedish',
         'sw': 'Swahili',
+        'te': 'Telugu',
         'th': 'Thai',
         'tr': 'Turkish',
         'uk': 'Ukrainian',
