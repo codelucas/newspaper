@@ -213,18 +213,21 @@ class Article(object):
         self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
-        self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
             # `parse` call failed, return nothing
             return
 
+        document_cleaner = DocumentCleaner(self.config)
+        output_formatter = OutputFormatter(self.config)
+
+        self.clean_doc = copy.deepcopy(self.doc)
+        # Before any computations on the body, clean DOM object
+        self.clean_doc = document_cleaner.clean(self.clean_doc)
+
         # TODO: Fix this, sync in our fix_url() method
         parse_candidate = self.get_parse_candidate()
         self.link_hash = parse_candidate.link_hash  # MD5
-
-        document_cleaner = DocumentCleaner(self.config)
-        output_formatter = OutputFormatter(self.config)
 
         title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
@@ -267,16 +270,23 @@ class Article(object):
             self.url,
             self.clean_doc)
 
-        # Before any computations on the body, clean DOM object
-        self.doc = document_cleaner.clean(self.doc)
-
         self.top_node = self.extractor.calculate_best_node(self.doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.calculate_best_node(self.clean_doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.parser.getElementById(self.doc, 'content')
+        if self.top_node is None:
+            for tag in ['article', 'main']:
+                nodes = self.extractor.parser.getElementsByTag(self.doc, tag=tag)
+                if len(nodes) > 0:
+                    self.top_node = nodes[0]
+                    break
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
 
-            self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
+            self.clean_top_node = self.extractor.post_cleanup(self.clean_top_node)
 
             text, article_html = output_formatter.get_formatted(
                 self.top_node)
