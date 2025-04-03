@@ -12,3 +12,4 @@ PyYAML>=3.11
 requests>=2.10.0
 tinysegmenter==0.3  # TODO(codelucas): Investigate making this >=0.3
 tldextract>=2.0.1
+python-crfsuite==0.9.7
