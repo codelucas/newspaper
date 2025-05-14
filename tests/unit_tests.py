@@ -24,7 +24,7 @@ HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
 URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
-from newspaper import Article, Config, fulltext, Source, ArticleException, news_pool
+from newspaper import Article, Config, fulltext, Source, ArticleException, news_pool, images
 from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
@@ -776,6 +776,18 @@ class TestIgnoreImages(unittest.TestCase):
         a.download()
         a.parse()
         self.assertEqual('https://d33wubrfki0l68.cloudfront.net/77d3013f91800257b3ca2adfb995ae24e49fff4e/b3086/img/main/headshot.jpg', a.top_img)
+
+
+class TestGetImageDimensionFallback(unittest.TestCase):
+
+    @print_test
+    def test_get_image_dimension_fallback(self):
+        config = Config()
+        config.image_dimension_ration = 32 / 9
+        a = Article('https://appwrite.io/blog/post/add-figma-oauth2-appwrite', config=config)
+        s = images.Scraper(a)
+        sr = s.satisfies_requirements('https://appwrite.io/images/blog/add-figma-oauth2-appwrite/cover.png')
+        self.assertTrue(sr)
 
 
 if __name__ == '__main__':
