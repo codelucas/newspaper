@@ -50,15 +50,16 @@ class OutputFormatter(object):
         if self.config.keep_article_html:
             html = self.convert_to_html()
 
-        self.links_to_text()
         self.add_newline_to_br()
         self.add_newline_to_li()
         self.replace_with_text()
         self.remove_empty_tags()
         self.remove_trailing_media_div()
+        links = self.convert_to_links()
+        self.links_to_text()
         text = self.convert_to_text()
         # print(self.parser.nodeToString(self.get_top_node()))
-        return (text, html)
+        return (text, html, links)
 
     def convert_to_text(self):
         txts = []
@@ -75,6 +76,14 @@ class OutputFormatter(object):
                 txt_lis = [n.strip(' ') for n in txt_lis]
                 txts.extend(txt_lis)
         return '\n\n'.join(txts)
+
+    def convert_to_links(self):
+        links = []
+        for node in list(self.get_top_node()):
+            for x in node.iter():
+                if x.tag == 'a':
+                    links += [dict(x.items())["href"]]
+        return links
 
     def convert_to_html(self):
         cleaned_node = self.parser.clean_article_html(self.get_top_node())
