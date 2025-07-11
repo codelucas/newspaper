@@ -244,17 +244,22 @@ Features
       zh              Chinese
 
 
-BrightData offers top quality web scraping with little effort!
---------------------------------------------------------------
-`Click here to see BrightData`_, the premier company offering the internet's most trusted web data. 
-They have AI-powered web scrapers and datasets you may find useful.
+BrightData: Scrape Any Website, at Scale, Without Getting Blocked
+-----------------------------------------------------------------
+👉 `Get instant access to BrightData’s AI-powered web scraping tools and datasets.`_
+
+* ✅ AI-powered scraping browser
+* ✅ 72M+ rotating IPs
+* ✅ Zero bans, faster extraction
+* `👉 Get access now.`_
 
 .. image:: https://github.com/user-attachments/assets/ca540b8b-7888-49d2-89df-2c07760f6d9f
         :target: https://get.brightdata.com/hm89s0nowetp
         :alt: Bright Data's Scraping Browser Product
 
-.. _`Click here to see BrightData`: https://get.brightdata.com/hm89s0nowetp
+.. _`Get instant access to BrightData’s AI-powered web scraping tools and datasets.`: https://get.brightdata.com/hm89s0nowetp
 
+.. _`👉 Get access now.`: https://get.brightdata.com/hm89s0nowetp
 
 Get it now
 ----------
