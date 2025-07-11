@@ -166,14 +166,14 @@ If you are certain that an *entire* news source is in one language, **go ahead a
 
 Enjoy Newspaper3k? 
 ------------------
-`Click here to see SerpAPI`_, scrape search engines easily with SerpAPI - Search API. 
-They scrape Google Search, Google News, Google Maps, and more!
+`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_. 
+Scrape Google Search, Google News, Google Maps, and more!
 
 .. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
         :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
-        :alt: Scrape search engines easily with SerpAPI - Search API. 
+        :alt: Scrape search engines easily with SerpApi - Search API. 
 
-.. _`Click here to see SerpAPI`: https://serpapi.com?utm_source=newspaper3k_github
+.. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
 Docs
 ----
