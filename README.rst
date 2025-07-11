@@ -164,17 +164,16 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     车网_新浪汽车_新浪网
 
 
+Enjoy Newspaper3k? 
+------------------
+`Click here to see SerpAPI`_, scrape search engines easily with SerpAPI - Search API. 
+They scrape Google Search, Google News, Google Maps, and more!
 
-Enjoy Newspaper3k? You'll also love BrightData
-----------------------------------------------
-`Click here to see BrightData`_, the premier company offering the internet's most trusted web data. 
-They have AI-powered web scrapers and datasets you may find useful.
+.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
+        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
+        :alt: Scrape search engines easily with SerpAPI - Search API. 
 
-.. image:: https://github.com/user-attachments/assets/ca540b8b-7888-49d2-89df-2c07760f6d9f
-        :target: https://get.brightdata.com/hm89s0nowetp
-        :alt: Bright Data's Scraping Browser Product
-
-.. _`Click here to see BrightData`: https://get.brightdata.com/hm89s0nowetp
+.. _`Click here to see SerpAPI`: https://serpapi.com?utm_source=newspaper3k_github
 
 Docs
 ----
@@ -245,6 +244,18 @@ Features
       zh              Chinese
 
 
+BrightData offers top quality web scraping with little effort!
+--------------------------------------------------------------
+`Click here to see BrightData`_, the premier company offering the internet's most trusted web data. 
+They have AI-powered web scrapers and datasets you may find useful.
+
+.. image:: https://github.com/user-attachments/assets/ca540b8b-7888-49d2-89df-2c07760f6d9f
+        :target: https://get.brightdata.com/hm89s0nowetp
+        :alt: Bright Data's Scraping Browser Product
+
+.. _`Click here to see BrightData`: https://get.brightdata.com/hm89s0nowetp
+
+
 Get it now
 ----------
 
@@ -310,15 +321,6 @@ NOTE: You will still most likely need to install the following libraries via you
     $ pip3 install newspaper3k
 
     $ curl https://raw.githubusercontent.com/codelucas/newspaper/master/download_corpora.py | python3
-
-Donations
----------
-
-Your donations are greatly appreciated! They will free me up to work on this project more,
-to take on things like: adding new features, bug-fix support, addressing concerns with the library.
-
-- My PayPal link: `https://www.paypal.me/codelucas`_
-- My `Venmo`_ handle: @Lucas-Ou-Yang
 
 Development
 -----------
