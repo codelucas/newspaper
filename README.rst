@@ -175,6 +175,18 @@ Scrape Google Search, Google News, Google Maps, and more!
 
 .. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
+Interested in proxies?
+----------------------
+
+`Click here to explore BestProxy`_, your go-to solution for premium residential proxies. BestProxy's proxies ensure smooth browsing, fast speeds, and total anonymity. `Get Started`_ today and experience the difference!
+
+.. image:: https://github.com/user-attachments/assets/1c6ef38c-f0c0-4db0-aad2-3ed9d6adf0b5
+        :target: https://bestproxy.com/?keyword=b2vgzl0r
+        :alt: Experience BestProxy, smooth browsing, fast speeds, and total anonymity.
+
+.. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
+.. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
+
 Docs
 ----
 
