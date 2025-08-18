@@ -367,8 +367,6 @@ Demo
 
 View a working online demo here: http://newspaper-demo.herokuapp.com
 
-This is another working online demo: http://newspaper.chinazt.cc/
-
 LICENSE
 -------
 
