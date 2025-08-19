@@ -254,7 +254,7 @@ Features
       uk              Ukrainian
       vi              Vietnamese
       zh              Chinese
-
+      np              Nepali
 
 BrightData: Scrape Any Website, at Scale, Without Getting Blocked
 -----------------------------------------------------------------

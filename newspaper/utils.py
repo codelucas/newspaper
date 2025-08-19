@@ -393,6 +393,7 @@ def print_available_languages():
         'uk': 'Ukrainian',
         'vi': 'Vietnamese',
         'zh': 'Chinese',
+        'np': 'Nepali',
     }
 
     codes = get_available_languages()
