@@ -153,6 +153,9 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
+        # The final URL after redirects and meta refresh
+        self.final_url = None
+
     def build(self):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
@@ -173,7 +176,9 @@ class Article(object):
 
     def _parse_scheme_http(self):
         try:
-            return network.get_html_2XX_only(self.url, self.config)
+            html, final_url = network.get_html_2XX_only(self.url, self.config, return_final_url=True)
+            self.final_url = final_url
+            return html
         except requests.exceptions.RequestException as e:
             self.download_state = ArticleDownloadState.FAILED_RESPONSE
             self.download_exception_msg = str(e)
@@ -190,18 +195,27 @@ class Article(object):
             parsed_url = urlparse(self.url)
             if parsed_url.scheme == "file":
                 html = self._parse_scheme_file(parsed_url.path)
+                # For file scheme, the final URL is the same as the initial URL
+                if self.final_url is None:
+                    self.final_url = self.url
             else:
                 html = self._parse_scheme_http()
+                # final_url is already set in _parse_scheme_http
             if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
                 return
         else:
             html = input_html
+            # If HTML is provided directly and final_url not set, use the current URL
+            if self.final_url is None:
+                self.final_url = self.url
 
         if self.config.follow_meta_refresh:
             meta_refresh_url = extract_meta_refresh(html)
             if meta_refresh_url and recursion_counter < 1:
+                # Update final_url to the meta refresh URL
+                self.final_url = meta_refresh_url
                 return self.download(
                     input_html=network.get_html(meta_refresh_url),
                     recursion_counter=recursion_counter + 1)
