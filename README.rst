@@ -255,24 +255,6 @@ Features
       vi              Vietnamese
       zh              Chinese
 
-
-BrightData: Scrape Any Website, at Scale, Without Getting Blocked
------------------------------------------------------------------
-👉 `Get instant access to BrightData’s AI-powered web scraping tools and datasets.`_
-
-* ✅ AI-powered scraping browser
-* ✅ 72M+ rotating IPs
-* ✅ Zero bans, faster extraction
-* `👉 Get access now.`_
-
-.. image:: https://github.com/user-attachments/assets/ca540b8b-7888-49d2-89df-2c07760f6d9f
-        :target: https://get.brightdata.com/hm89s0nowetp
-        :alt: Bright Data's Scraping Browser Product
-
-.. _`Get instant access to BrightData’s AI-powered web scraping tools and datasets.`: https://get.brightdata.com/hm89s0nowetp
-
-.. _`👉 Get access now.`: https://get.brightdata.com/hm89s0nowetp
-
 Get it now
 ----------
 
