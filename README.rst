@@ -133,6 +133,40 @@ If no language is specified, Newspaper will attempt to auto detect a language.
     港特首梁振英就住宅违建事件道歉
 
 
+Proxy Usage
+===========
+Newspaper3K supports proxies. Here is an example using `Thordata Proxies`_, a reliable proxy service suitable for AI and global web scraping scenarios.
+
+.. code-block:: pycon
+
+    from newspaper import Article
+    from newspaper import Configuration
+    
+    # Configure ThorData proxy
+    config = Configuration()
+    config.proxies = {
+        'https': 'https://td-customer-USERNAME:PASSWORD@t.pr.thordata.net:9999'
+    }
+
+    # Download and parse an article through the proxy
+    article = Article('https://www.nytimes.com/2024/01/15/technology/ai-trends.html', config=config)
+    article.download()
+    article.parse()
+    print(f"Title: {article.title}")
+
+`Click here to get a free trial of ThorData`_
+
+.. image:: https://github.com/user-attachments/assets/27c4288e-4507-4100-9127-ae2960af287a
+        :target: https://affiliate.thordata.com/tzc4taw66x3b
+        :alt: ThorData proxies
+
+.. _`Thordata Proxies`: https://affiliate.thordata.com/tzc4taw66x3b
+.. _`Click here to get a free trial of ThorData`: https://affiliate.thordata.com/tzc4taw66x3b
+
+
+Multi-lingual
+=============
+
 If you are certain that an *entire* news source is in one language, **go ahead and use the same api :)**
 
 .. code-block:: pycon
@@ -164,8 +198,23 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     车网_新浪汽车_新浪网
 
 
-Enjoy Newspaper3k? 
-------------------
+Interested in proxies?
+======================
+
+Stay private, fast, and fully in control
+----------------------------------------
+`Click here to explore BestProxy`_, your go-to solution for premium residential proxies. BestProxy's proxies ensure smooth browsing, fast speeds, and total anonymity. `Get Started`_ today and experience the difference!
+
+.. image:: https://github.com/user-attachments/assets/1c6ef38c-f0c0-4db0-aad2-3ed9d6adf0b5
+        :target: https://bestproxy.com/?keyword=b2vgzl0r
+        :alt: Experience BestProxy, smooth browsing, fast speeds, and total anonymity.
+
+.. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
+.. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
+
+
+Unlock the Web — the Smart Way
+------------------------------
 `Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_. 
 Scrape Google Search, Google News, Google Maps, and more!
 
@@ -175,17 +224,6 @@ Scrape Google Search, Google News, Google Maps, and more!
 
 .. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
-Interested in proxies?
-----------------------
-
-`Click here to explore BestProxy`_, your go-to solution for premium residential proxies. BestProxy's proxies ensure smooth browsing, fast speeds, and total anonymity. `Get Started`_ today and experience the difference!
-
-.. image:: https://github.com/user-attachments/assets/1c6ef38c-f0c0-4db0-aad2-3ed9d6adf0b5
-        :target: https://bestproxy.com/?keyword=b2vgzl0r
-        :alt: Experience BestProxy, smooth browsing, fast speeds, and total anonymity.
-
-.. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
-.. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
 
 Docs
 ----
