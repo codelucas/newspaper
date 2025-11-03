@@ -133,6 +133,16 @@ If no language is specified, Newspaper will attempt to auto detect a language.
     港特首梁振英就住宅违建事件道歉
 
 
+Newspaper works better with proxies
+===================================
+Click here to try `RapidProxy`_, your all-in-one proxy solution. Enjoy unlimited, never-expiring traffic, fast and stable connections, and full anonymity. Start your free test today and experience hassle-free, reliable proxy services worldwide!
+
+.. image:: https://github.com/user-attachments/assets/719da34a-a0d1-4ee0-81fb-c626d7163616
+        :target: https://www.rapidproxy.io/?ref=gitnew
+        :alt: Experience RapidProxy, your all-in-one proxy solution. Enjoy unlimited, never-expiring traffic, fast and stable connections.
+
+.. _`RapidProxy`: https://www.rapidproxy.io/?ref=gitnew
+
 Proxy Usage
 ===========
 Newspaper3K supports proxies. Here is an example using `Thordata Proxies`_, a reliable proxy service suitable for AI and global web scraping scenarios.
@@ -196,33 +206,6 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     >>> print(article.title)
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽
     车网_新浪汽车_新浪网
-
-
-Interested in proxies?
-======================
-
-Stay private, fast, and fully in control
-----------------------------------------
-`Click here to explore BestProxy`_, your go-to solution for premium residential proxies. BestProxy's proxies ensure smooth browsing, fast speeds, and total anonymity. `Get Started`_ today and experience the difference!
-
-.. image:: https://github.com/user-attachments/assets/1c6ef38c-f0c0-4db0-aad2-3ed9d6adf0b5
-        :target: https://bestproxy.com/?keyword=b2vgzl0r
-        :alt: Experience BestProxy, smooth browsing, fast speeds, and total anonymity.
-
-.. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
-.. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
-
-
-Unlock the Web — the Smart Way
-------------------------------
-`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_. 
-Scrape Google Search, Google News, Google Maps, and more!
-
-.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
-        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
-        :alt: Scrape search engines easily with SerpApi - Search API. 
-
-.. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
 
 Docs
@@ -381,13 +364,39 @@ Planning on tweaking our full-text algorithm? Add the ``fulltext`` parameter::
 
     $ python3 tests/unit_tests.py fulltext
 
-
 Demo
 ----
 
 View a working online demo here: http://newspaper-demo.herokuapp.com
 
 This is another working online demo: http://newspaper.chinazt.cc/
+
+
+Interested in proxies?
+======================
+
+Stay private, fast, and fully in control
+----------------------------------------
+`Click here to explore BestProxy`_, your go-to solution for premium residential proxies. BestProxy's proxies ensure smooth browsing, fast speeds, and total anonymity. `Get Started`_ today and experience the difference!
+
+.. image:: https://github.com/user-attachments/assets/1c6ef38c-f0c0-4db0-aad2-3ed9d6adf0b5
+        :target: https://bestproxy.com/?keyword=b2vgzl0r
+        :alt: Experience BestProxy, smooth browsing, fast speeds, and total anonymity.
+
+.. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
+.. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
+
+
+Unlock the Web — the Smart Way
+------------------------------
+`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_. 
+Scrape Google Search, Google News, Google Maps, and more!
+
+.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
+        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
+        :alt: Scrape search engines easily with SerpApi - Search API. 
+
+.. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
 LICENSE
 -------
