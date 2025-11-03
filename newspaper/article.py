@@ -111,6 +111,9 @@ class Article(object):
         # The HTML of this article's main node (most important part)
         self.article_html = ''
 
+        # List of links found in article
+        self.links = []
+
         # Keep state for downloads and parsing
         self.is_parsed = False
         self.download_state = ArticleDownloadState.NOT_STARTED
@@ -278,10 +281,11 @@ class Article(object):
             self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
 
-            text, article_html = output_formatter.get_formatted(
+            text, article_html, links = output_formatter.get_formatted(
                 self.top_node)
             self.set_article_html(article_html)
             self.set_text(text)
+            self.set_links(links)
 
         self.fetch_images()
 
@@ -451,6 +455,10 @@ class Article(object):
         text = text[:self.config.MAX_TEXT]
         if text:
             self.text = text
+
+    def set_links(self, links):
+        if links:
+            self.links = links
 
     def set_html(self, html):
         """Encode HTML before setting it
