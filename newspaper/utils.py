@@ -376,6 +376,7 @@ def print_available_languages():
         'ja': 'Japanese',
         'ko': 'Korean',
         'lt': 'Lithuanian',
+        'lv': 'Latvian',
         'mk': 'Macedonian',
         'nb': 'Norwegian (Bokmål)',
         'nl': 'Dutch',
