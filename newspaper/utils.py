@@ -141,7 +141,7 @@ def timelimit(timeout):
                         self.error = sys.exc_info()
             c = Dispatch()
             c.join(timeout)
-            if c.isAlive():
+            if c.is_alive():
                 raise TimeoutError()
             if c.error:
                 raise c.error[0](c.error[1])
