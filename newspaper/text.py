@@ -207,3 +207,16 @@ class StopWordsThai(StopWords):
         import pythainlp
         tokens = pythainlp.word_tokenize(stripped_input)
         return tokens
+
+
+class StopWordsBengali(StopWords):
+    """Bengali segmentation
+    """
+    def __init__(self, language='bn'):
+        super(StopWordsBengali, self).__init__(language='bn')
+
+    def candidate_words(self, stripped_input):
+        from cltk.tokenize.sentence import TokenizeSentence
+        tokenizer = TokenizeSentence('bengali')
+        tokens = tokenizer.tokenize(stripped_input)
+        return tokens
