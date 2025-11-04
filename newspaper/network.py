@@ -68,7 +68,13 @@ def get_html_2XX_only(url, config=None, response=None):
         # fail if HTTP sends a non 2XX response
         response.raise_for_status()
 
-    return html
+    # Check to see if the Content-Type header exists
+    mime_type = None
+    if 'content-type' in response.headers:
+        mime_type = response.headers.get('content-type').split(';')[0]
+
+    # return html
+    return ArticleResponseWrapper(html, mime_type)
 
 
 def _get_html_from_response(response, config):
@@ -112,6 +118,17 @@ class MRequest(object):
                 self.resp.raise_for_status()
         except requests.exceptions.RequestException as e:
             log.critical('[REQUEST FAILED] ' + str(e))
+
+class ArticleResponseWrapper(object):
+    """Wrapper for returning html and mime type from the various
+    download methods. This should be treated as a simple DTO and
+    not used directly, as the values will be populated on the
+    Article itself.
+    """
+    def __init__(self, html, mime_type):
+        self.html = html
+        self.mime_type = mime_type
+
 
 
 def multithread_request(urls, config=None):
