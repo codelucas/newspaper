@@ -767,6 +767,18 @@ class TestDownloadPdf(unittest.TestCase):
         a.download()
         self.assertNotEqual('%PDF-', a.html)
 
+class SyntheticPageTestCase(unittest.TestCase):
+
+    @print_test
+    def test_add_siblings_order(self):
+        article = Article(url='http://example.com/')
+        html = mock_resource_with('synthetic_para_order', 'html')
+        article.download(input_html=html)
+        article.parse()
+        text = mock_resource_with('synthetic_para_order', 'txt')
+        self.assertEqual(text, article.text)
+
+
 if __name__ == '__main__':
     argv = list(sys.argv)
     if 'fulltext' in argv:

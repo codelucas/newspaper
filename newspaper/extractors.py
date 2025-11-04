@@ -878,8 +878,8 @@ class ContentExtractor(object):
         for current_node in results:
             ps = self.get_siblings_content(
                 current_node, baseline_score_siblings_para)
-            for p in ps:
-                top_node.insert(0, p)
+            for index, p in enumerate(ps):
+                top_node.insert(index, p)
         return top_node
 
     def get_siblings_content(
