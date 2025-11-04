@@ -256,6 +256,7 @@ Features
       id              Indonesian
       it              Italian
       ja              Japanese
+      ka              Georgian
       ko              Korean
       lt              Lithuanian
       mk              Macedonian
