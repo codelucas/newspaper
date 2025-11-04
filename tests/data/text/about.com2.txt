@@ -52,7 +52,7 @@ The use of "targeted therapies" - that is medications that target particular gen
 
 Tarceva (erlotonib) has been approved for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva)
 
-Tarceva (erlotonib) for people whose tumor has an EGFR mutation (note: there are different types of EGFR mutations and not all of them are equally responsive to Tarceva) Xalkori (crizotonib) was approved by the FDA in 2011 for people whose tumor has an ALK4-EML gene rearrangement
+Xalkori (crizotonib) was approved by the FDA in 2011 for people whose tumor has an ALK4-EML gene rearrangement
 
 Other medications are being studied in clinical trials, including targeted therapies for those whose tumor becomes resistant to Tarceva or Xalkori..
 
