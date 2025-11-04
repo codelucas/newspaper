@@ -275,6 +275,7 @@ Features
       uk              Ukrainian
       vi              Vietnamese
       zh              Chinese
+      bn              Bengali
 
 Get it now
 ----------
