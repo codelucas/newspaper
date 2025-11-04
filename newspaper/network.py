@@ -60,7 +60,7 @@ def get_html_2XX_only(url, config=None, response=None):
         return _get_html_from_response(response, config)
 
     response = requests.get(
-        url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
+        url=url, verify=False, **get_request_kwargs(timeout, useragent, proxies, headers))
 
     html = _get_html_from_response(response, config)
 
