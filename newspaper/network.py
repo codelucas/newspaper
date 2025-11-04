@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 FAIL_ENCODING = 'ISO-8859-1'
 
 
-def get_request_kwargs(timeout, useragent, proxies, headers):
+def get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects):
     """This Wrapper method exists b/c some values in req_kwargs dict
     are methods which need to be called every time we make a request
     """
@@ -29,7 +29,7 @@ def get_request_kwargs(timeout, useragent, proxies, headers):
         'headers': headers if headers else {'User-Agent': useragent},
         'cookies': cj(),
         'timeout': timeout,
-        'allow_redirects': True,
+        'allow_redirects': allow_redirects,
         'proxies': proxies
     }
 
@@ -44,7 +44,7 @@ def get_html(url, config=None, response=None):
         return ''
 
 
-def get_html_2XX_only(url, config=None, response=None):
+def get_html_2XX_only(url, config=None, response=None, return_final_url=False):
     """Consolidated logic for http requests from newspaper. We handle error cases:
     - Attempt to find encoding of the html by using HTTP header. Fallback to
       'ISO-8859-1' if not provided.
@@ -55,19 +55,26 @@ def get_html_2XX_only(url, config=None, response=None):
     timeout = config.request_timeout
     proxies = config.proxies
     headers = config.headers
+    allow_redirects = config.allow_redirects
 
     if response is not None:
-        return _get_html_from_response(response, config)
+        html = _get_html_from_response(response, config)
+        if return_final_url:
+            return html, getattr(response, 'url', url)
+        return html
 
     response = requests.get(
-        url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
+        url=url, **get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects))
 
     html = _get_html_from_response(response, config)
+    final_url = response.url
 
     if config.http_success_only:
         # fail if HTTP sends a non 2XX response
         response.raise_for_status()
 
+    if return_final_url:
+        return html, final_url
     return html
 
 
@@ -107,7 +114,7 @@ class MRequest(object):
     def send(self):
         try:
             self.resp = requests.get(self.url, **get_request_kwargs(
-                self.timeout, self.useragent, self.proxies, self.headers))
+                self.timeout, self.useragent, self.proxies, self.headers, self.config.allow_redirects))
             if self.config.http_success_only:
                 self.resp.raise_for_status()
         except requests.exceptions.RequestException as e:
