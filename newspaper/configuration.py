@@ -72,6 +72,7 @@ class Configuration(object):
         self.request_timeout = 7
         self.proxies = {}
         self.number_threads = 10
+        self.verify_ssl_cert = True
 
         self.verbose = False  # for debugging
 
