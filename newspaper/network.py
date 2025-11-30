@@ -21,7 +21,7 @@ log = logging.getLogger(__name__)
 FAIL_ENCODING = 'ISO-8859-1'
 
 
-def get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects):
+def get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects, verify_ssl_cert):
     """This Wrapper method exists b/c some values in req_kwargs dict
     are methods which need to be called every time we make a request
     """
@@ -30,7 +30,8 @@ def get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects):
         'cookies': cj(),
         'timeout': timeout,
         'allow_redirects': allow_redirects,
-        'proxies': proxies
+        'proxies': proxies,
+        'verify': verify_ssl_cert,
     }
 
 
@@ -55,6 +56,7 @@ def get_html_2XX_only(url, config=None, response=None, return_final_url=False):
     timeout = config.request_timeout
     proxies = config.proxies
     headers = config.headers
+    verify_ssl_cert = config.verify_ssl_cert
     allow_redirects = config.allow_redirects
 
     if response is not None:
@@ -64,7 +66,7 @@ def get_html_2XX_only(url, config=None, response=None, return_final_url=False):
         return html
 
     response = requests.get(
-        url=url, **get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects))
+        url=url, **get_request_kwargs(timeout, useragent, proxies, headers, allow_redirects, verify_ssl_cert))
 
     html = _get_html_from_response(response, config)
     final_url = response.url
