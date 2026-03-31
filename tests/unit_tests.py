@@ -375,6 +375,10 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>{}</title>'.format(title)
         self.assertEqual(self._get_title(html), title)
 
+    def test_get_title_fallback_to_og_title_when_title_missing(self):
+        html = '<meta property="og:title" content="Fallback title from og">'
+        self.assertEqual(self._get_title(html), 'Fallback title from og')
+
     def _get_canonical_link(self, article_url, html):
         doc = self.parser.fromstring(html)
         return self.extractor.get_canonical_link(article_url, doc)

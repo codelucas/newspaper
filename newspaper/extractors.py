@@ -254,12 +254,19 @@ class ContentExtractor(object):
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
-        # no title found
-        if title_element is None or len(title_element) == 0:
-            return title
+        title_text_fb = (
+            self.get_meta_content(doc, 'meta[property="og:title"]') or
+            self.get_meta_content(doc, 'meta[name="og:title"]') or ''
+        )
 
-        # title elem found
-        title_text = self.parser.getText(title_element[0])
+        # no title found, fallback to og:title
+        if title_element is None or len(title_element) == 0:
+            title_text = title_text_fb
+            if not title_text:
+                return title
+        else:
+            # title elem found
+            title_text = self.parser.getText(title_element[0])
         used_delimeter = False
 
         # title from h1
@@ -280,11 +287,6 @@ class ContentExtractor(object):
                 title_text_h1 = ''
             # clean double spaces
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
-
-        # title from og:title
-        title_text_fb = (
-        self.get_meta_content(doc, 'meta[property="og:title"]') or
-        self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
