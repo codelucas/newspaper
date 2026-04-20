@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-__title__ = 'newspaper'
-__author__ = 'Lucas Ou-Yang'
-__license__ = 'MIT'
-__copyright__ = 'Copyright 2014, Lucas Ou-Yang'
+__title__ = "newspaper"
+__author__ = "Lucas Ou-Yang"
+__license__ = "MIT"
+__copyright__ = "Copyright 2014, Lucas Ou-Yang"
 
 import logging
 import copy
@@ -22,8 +22,13 @@ from .cleaners import DocumentCleaner
 from .configuration import Configuration
 from .extractors import ContentExtractor
 from .outputformatters import OutputFormatter
-from .utils import (URLHelper, RawHelper, extend_config,
-                    get_available_languages, extract_meta_refresh)
+from .utils import (
+    URLHelper,
+    RawHelper,
+    extend_config,
+    get_available_languages,
+    extract_meta_refresh,
+)
 from .videos.extractors import VideoExtractor
 
 log = logging.getLogger(__name__)
@@ -40,31 +45,35 @@ class ArticleException(Exception):
 
 
 class Article(object):
-    """Article objects abstract an online news article page
-    """
-    def __init__(self, url, title='', source_url='', config=None, **kwargs):
+    """Article objects abstract an online news article page"""
+
+    def __init__(
+        self, url, title="", source_url="", use_playwright=False, config=None, **kwargs
+    ):
         """The **kwargs argument may be filled with config values, which
         is added into the config object
         """
-        if isinstance(title, Configuration) or \
-                isinstance(source_url, Configuration):
+        if isinstance(title, Configuration) or isinstance(source_url, Configuration):
             raise ArticleException(
-                'Configuration object being passed incorrectly as title or '
-                'source_url! Please verify `Article`s __init__() fn.')
+                "Configuration object being passed incorrectly as title or "
+                "source_url! Please verify `Article`s __init__() fn."
+            )
 
         self.config = config or Configuration()
         self.config = extend_config(self.config, kwargs)
 
+        self.use_playwright = use_playwright
+
         self.extractor = ContentExtractor(self.config)
 
-        if source_url == '':
+        if source_url == "":
             scheme = urls.get_scheme(url)
             if scheme is None:
-                scheme = 'http'
-            source_url = scheme + '://' + urls.get_domain(url)
+                scheme = "http"
+            source_url = scheme + "://" + urls.get_domain(url)
 
-        if source_url is None or source_url == '':
-            raise ArticleException('input url bad format')
+        if source_url is None or source_url == "":
+            raise ArticleException("input url bad format")
 
         # URL to the main page of the news source which owns this article
         self.source_url = source_url
@@ -74,10 +83,10 @@ class Article(object):
         self.title = title
 
         # URL of the "best image" to represent this article
-        self.top_img = self.top_image = ''
+        self.top_img = self.top_image = ""
 
         # stores image provided by metadata
-        self.meta_img = ''
+        self.meta_img = ""
 
         # All image urls in this article
         self.imgs = self.images = []
@@ -86,7 +95,7 @@ class Article(object):
         self.movies = []
 
         # Body text from this article
-        self.text = ''
+        self.text = ""
 
         # `keywords` are extracted via nlp() from the body text
         self.keywords = []
@@ -100,16 +109,16 @@ class Article(object):
         # List of authors who have published the article, via parse()
         self.authors = []
 
-        self.publish_date = ''
+        self.publish_date = ""
 
         # Summary generated from the article's body txt
-        self.summary = ''
+        self.summary = ""
 
         # This article's unchanged and raw HTML
-        self.html = ''
+        self.html = ""
 
         # The HTML of this article's main node (most important part)
-        self.article_html = ''
+        self.article_html = ""
 
         # Keep state for downloads and parsing
         self.is_parsed = False
@@ -173,6 +182,8 @@ class Article(object):
 
     def _parse_scheme_http(self):
         try:
+            if self.use_playwright:
+                return network.playwright_html(self.url)
             return network.get_html_2XX_only(self.url, self.config)
         except requests.exceptions.RequestException as e:
             self.download_state = ArticleDownloadState.FAILED_RESPONSE
@@ -193,8 +204,10 @@ class Article(object):
             else:
                 html = self._parse_scheme_http()
             if html is None:
-                log.debug('Download failed on URL %s because of %s' %
-                          (self.url, self.download_exception_msg))
+                log.debug(
+                    "Download failed on URL %s because of %s"
+                    % (self.url, self.download_exception_msg)
+                )
                 return
         else:
             html = input_html
@@ -204,7 +217,8 @@ class Article(object):
             if meta_refresh_url and recursion_counter < 1:
                 return self.download(
                     input_html=network.get_html(meta_refresh_url),
-                    recursion_counter=recursion_counter + 1)
+                    recursion_counter=recursion_counter + 1,
+                )
 
         self.set_html(html)
         self.set_title(title)
@@ -245,27 +259,22 @@ class Article(object):
         meta_site_name = self.extractor.get_meta_site_name(self.clean_doc)
         self.set_meta_site_name(meta_site_name)
 
-        meta_description = \
-            self.extractor.get_meta_description(self.clean_doc)
+        meta_description = self.extractor.get_meta_description(self.clean_doc)
         self.set_meta_description(meta_description)
 
-        canonical_link = self.extractor.get_canonical_link(
-            self.url, self.clean_doc)
+        canonical_link = self.extractor.get_canonical_link(self.url, self.clean_doc)
         self.set_canonical_link(canonical_link)
 
         tags = self.extractor.extract_tags(self.clean_doc)
         self.set_tags(tags)
 
-        meta_keywords = self.extractor.get_meta_keywords(
-            self.clean_doc)
+        meta_keywords = self.extractor.get_meta_keywords(self.clean_doc)
         self.set_meta_keywords(meta_keywords)
 
         meta_data = self.extractor.get_meta_data(self.clean_doc)
         self.set_meta_data(meta_data)
 
-        self.publish_date = self.extractor.get_publishing_date(
-            self.url,
-            self.clean_doc)
+        self.publish_date = self.extractor.get_publishing_date(self.url, self.clean_doc)
 
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
@@ -278,8 +287,7 @@ class Article(object):
             self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
 
-            text, article_html = output_formatter.get_formatted(
-                self.top_node)
+            text, article_html = output_formatter.get_formatted(self.top_node)
             self.set_article_html(article_html)
             self.set_text(text)
 
@@ -290,8 +298,7 @@ class Article(object):
 
     def fetch_images(self):
         if self.clean_doc is not None:
-            meta_img_url = self.extractor.get_meta_img_url(
-                self.url, self.clean_doc)
+            meta_img_url = self.extractor.get_meta_img_url(self.url, self.clean_doc)
             self.set_meta_img(meta_img_url)
 
             imgs = self.extractor.get_img_urls(self.url, self.clean_doc)
@@ -300,8 +307,7 @@ class Article(object):
             self.set_imgs(imgs)
 
         if self.clean_top_node is not None and not self.has_top_image():
-            first_img = self.extractor.get_first_img_url(
-                self.url, self.clean_top_node)
+            first_img = self.extractor.get_first_img_url(self.url, self.clean_top_node)
             if self.config.fetch_images:
                 self.set_top_img(first_img)
             else:
@@ -311,7 +317,7 @@ class Article(object):
             self.set_reddit_top_img()
 
     def has_top_image(self):
-        return self.top_img is not None and self.top_img != ''
+        return self.top_img is not None and self.top_img != ""
 
     def is_valid_url(self):
         """Performs a check on the url of this link to determine if article
@@ -324,54 +330,61 @@ class Article(object):
         standard article requirements, keep the article
         """
         if not self.is_parsed:
-            raise ArticleException('must parse article before checking \
-                                    if it\'s body is valid!')
+            raise ArticleException(
+                "must parse article before checking \
+                                    if it's body is valid!"
+            )
         meta_type = self.extractor.get_meta_type(self.clean_doc)
-        wordcount = self.text.split(' ')
-        sentcount = self.text.split('.')
+        wordcount = self.text.split(" ")
+        sentcount = self.text.split(".")
 
-        if (meta_type == 'article' and len(wordcount) >
-                (self.config.MIN_WORD_COUNT)):
-            log.debug('%s verified for article and wc' % self.url)
+        if meta_type == "article" and len(wordcount) > (self.config.MIN_WORD_COUNT):
+            log.debug("%s verified for article and wc" % self.url)
             return True
 
         if not self.is_media_news() and not self.text:
-            log.debug('%s caught for no media no text' % self.url)
+            log.debug("%s caught for no media no text" % self.url)
             return False
 
-        if self.title is None or len(self.title.split(' ')) < 2:
-            log.debug('%s caught for bad title' % self.url)
+        if self.title is None or len(self.title.split(" ")) < 2:
+            log.debug("%s caught for bad title" % self.url)
             return False
 
         if len(wordcount) < self.config.MIN_WORD_COUNT:
-            log.debug('%s caught for word cnt' % self.url)
+            log.debug("%s caught for word cnt" % self.url)
             return False
 
         if len(sentcount) < self.config.MIN_SENT_COUNT:
-            log.debug('%s caught for sent cnt' % self.url)
+            log.debug("%s caught for sent cnt" % self.url)
             return False
 
-        if self.html is None or self.html == '':
-            log.debug('%s caught for no html' % self.url)
+        if self.html is None or self.html == "":
+            log.debug("%s caught for no html" % self.url)
             return False
 
-        log.debug('%s verified for default true' % self.url)
+        log.debug("%s verified for default true" % self.url)
         return True
 
     def is_media_news(self):
         """If the article is related heavily to media:
         gallery, video, big pictures, etc
         """
-        safe_urls = ['/video', '/slide', '/gallery', '/powerpoint',
-                     '/fashion', '/glamour', '/cloth']
+        safe_urls = [
+            "/video",
+            "/slide",
+            "/gallery",
+            "/powerpoint",
+            "/fashion",
+            "/glamour",
+            "/cloth",
+        ]
         for s in safe_urls:
             if s in self.url:
                 return True
         return False
 
     def nlp(self):
-        """Keyword extraction wrapper
-        """
+        """Keyword extraction wrapper"""
         self.throw_if_not_downloaded_verbose()
         self.throw_if_not_parsed_verbose()
 
@@ -383,8 +396,10 @@ class Article(object):
 
         max_sents = self.config.MAX_SUMMARY_SENT
 
-        summary_sents = nlp.summarize(title=self.title, text=self.text, max_sents=max_sents)
-        summary = '\n'.join(summary_sents)
+        summary_sents = nlp.summarize(
+            title=self.title, text=self.text, max_sents=max_sents
+        )
+        summary = "\n".join(summary_sents)
         self.set_summary(summary)
 
     def get_parse_candidate(self):
@@ -396,8 +411,7 @@ class Article(object):
         return URLHelper.get_parsing_candidate(self.url)
 
     def build_resource_path(self):
-        """Must be called after computing HTML/final URL
-        """
+        """Must be called after computing HTML/final URL"""
         res_path = self.get_resource_path()
         if not os.path.exists(res_path):
             os.mkdir(res_path)
@@ -406,11 +420,11 @@ class Article(object):
         """Every article object has a special directory to store data in from
         initialization to garbage collection
         """
-        res_dir_fn = 'article_resources'
+        res_dir_fn = "article_resources"
         resource_directory = os.path.join(settings.TOP_DIRECTORY, res_dir_fn)
         if not os.path.exists(resource_directory):
             os.mkdir(resource_directory)
-        dir_path = os.path.join(resource_directory, '%s_' % self.link_hash)
+        dir_path = os.path.join(resource_directory, "%s_" % self.link_hash)
         return dir_path
 
     def release_resources(self):
@@ -432,29 +446,32 @@ class Article(object):
             self.set_top_img(s.largest_image_url())
         except TypeError as e:
             if "Can't convert 'NoneType' object to str implicitly" in e.args[0]:
-                log.debug('No pictures found. Top image not set, %s' % e)
-            elif 'timed out' in e.args[0]:
-                log.debug('Download of picture timed out. Top image not set, %s' % e)
+                log.debug("No pictures found. Top image not set, %s" % e)
+            elif "timed out" in e.args[0]:
+                log.debug("Download of picture timed out. Top image not set, %s" % e)
             else:
-                log.critical('TypeError other than None type error. '
-                             'Cannot set top image using the Reddit '
-                             'algorithm. Possible error with PIL., %s' % e)
+                log.critical(
+                    "TypeError other than None type error. "
+                    "Cannot set top image using the Reddit "
+                    "algorithm. Possible error with PIL., %s" % e
+                )
         except Exception as e:
-            log.critical('Other error with setting top image using the '
-                         'Reddit algorithm. Possible error with PIL, %s' % e)
+            log.critical(
+                "Other error with setting top image using the "
+                "Reddit algorithm. Possible error with PIL, %s" % e
+            )
 
     def set_title(self, input_title):
         if input_title:
-            self.title = input_title[:self.config.MAX_TITLE]
+            self.title = input_title[: self.config.MAX_TITLE]
 
     def set_text(self, text):
-        text = text[:self.config.MAX_TEXT]
+        text = text[: self.config.MAX_TEXT]
         if text:
             self.text = text
 
     def set_html(self, html):
-        """Encode HTML before setting it
-        """
+        """Encode HTML before setting it"""
         if html:
             if isinstance(html, bytes):
                 html = self.config.get_parser().get_unicode_html(html)
@@ -462,8 +479,7 @@ class Article(object):
             self.download_state = ArticleDownloadState.SUCCESS
 
     def set_article_html(self, article_html):
-        """Sets the HTML of just the article's `top_node`
-        """
+        """Sets the HTML of just the article's `top_node`"""
         if article_html:
             self.article_html = article_html
 
@@ -492,38 +508,33 @@ class Article(object):
         self.imgs = imgs
 
     def set_keywords(self, keywords):
-        """Keys are stored in list format
-        """
+        """Keys are stored in list format"""
         if not isinstance(keywords, list):
             raise Exception("Keyword input must be list!")
         if keywords:
-            self.keywords = keywords[:self.config.MAX_KEYWORDS]
+            self.keywords = keywords[: self.config.MAX_KEYWORDS]
 
     def set_authors(self, authors):
-        """Authors are in ["firstName lastName", "firstName lastName"] format
-        """
+        """Authors are in ["firstName lastName", "firstName lastName"] format"""
         if not isinstance(authors, list):
             raise Exception("authors input must be list!")
         if authors:
-            self.authors = authors[:self.config.MAX_AUTHORS]
+            self.authors = authors[: self.config.MAX_AUTHORS]
 
     def set_summary(self, summary):
         """Summary here refers to a paragraph of text from the
         title text and body text
         """
-        self.summary = summary[:self.config.MAX_SUMMARY]
+        self.summary = summary[: self.config.MAX_SUMMARY]
 
     def set_meta_language(self, meta_lang):
-        """Save langauges in their ISO 2-character form
-        """
-        if meta_lang and len(meta_lang) >= 2 and \
-           meta_lang in get_available_languages():
+        """Save langauges in their ISO 2-character form"""
+        if meta_lang and len(meta_lang) >= 2 and meta_lang in get_available_languages():
             self.meta_lang = meta_lang[:2]
 
     def set_meta_keywords(self, meta_keywords):
-        """Store the keys in list form
-        """
-        self.meta_keywords = [k.strip() for k in meta_keywords.split(',')]
+        """Store the keys in list form"""
+        self.meta_keywords = [k.strip() for k in meta_keywords.split(",")]
 
     def set_meta_favicon(self, meta_favicon):
         self.meta_favicon = meta_favicon
@@ -544,8 +555,7 @@ class Article(object):
         self.tags = tags
 
     def set_movies(self, movie_objects):
-        """Trim video objects into just urls
-        """
+        """Trim video objects into just urls"""
         movie_urls = [o.src for o in movie_objects if o and o.src]
         self.movies = movie_urls
 
@@ -554,14 +564,16 @@ class Article(object):
         -> maybe throw ArticleException
         """
         if self.download_state == ArticleDownloadState.NOT_STARTED:
-            raise ArticleException('You must `download()` an article first!')
+            raise ArticleException("You must `download()` an article first!")
         elif self.download_state == ArticleDownloadState.FAILED_RESPONSE:
-            raise ArticleException('Article `download()` failed with %s on URL %s' %
-                  (self.download_exception_msg, self.url))
+            raise ArticleException(
+                "Article `download()` failed with %s on URL %s"
+                % (self.download_exception_msg, self.url)
+            )
 
     def throw_if_not_parsed_verbose(self):
         """Parse `is_parsed` status -> log readable status
         -> maybe throw ArticleException
         """
         if not self.is_parsed:
-            raise ArticleException('You must `parse()` an article first!')
+            raise ArticleException("You must `parse()` an article first!")
