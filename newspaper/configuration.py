@@ -73,6 +73,8 @@ class Configuration(object):
 
         self.thread_timeout_seconds = 1
         self.ignored_content_types_defaults = {}
+
+        self.additional_remove_nodes_re = None
         # Set this to False if you want to recompute the categories
         # *every* time you build a `Source` object
         # TODO: Actually make this work
