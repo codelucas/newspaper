@@ -83,6 +83,37 @@ def clean_url(url):
     return url
 
 
+def get_full_image_dimensions(image_url):
+    """Fallback in case PIL can't open the streamed image
+    """
+    try:
+        response = requests.get(image_url) # No stream=True needed
+        response.raise_for_status() # Raise an exception for bad status codes
+
+        # Use io.BytesIO to treat the response content (bytes) as a file
+        image_bytes = io.BytesIO(response.content)
+
+        # Open the image directly from the bytes stream
+        img = Image.open(image_bytes)
+
+        sz = img.size
+
+        # It's good practice to close the image when done
+        img.close()
+
+        return sz
+
+    except requests.exceptions.RequestException as e:
+        log.warning(f"Method 2 (Direct): Error fetching the image via requests: {e}")
+        return None
+    except FileNotFoundError:
+        log.warning("Method 2 (Direct): Error: io.BytesIO did not behave as expected (treated as file not found).")
+        return None
+    except Exception as e:
+        log.warning(f"Method 2 (Direct): An unexpected error occurred while opening image: {e}")
+        return None
+
+
 def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
     cur_try = 0
     nothing = None if dimension else (None, None)
@@ -143,7 +174,9 @@ def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
                 if dimension and p.image:
                     return p.image.size
                 elif dimension:
-                    return nothing
+                    # we did read the image, but it failed to parse for some reason
+                    # try to download it in one go
+                    return get_full_image_dimensions(url)
             elif dimension:
                 # expected an image, but didn't get one
                 return nothing
