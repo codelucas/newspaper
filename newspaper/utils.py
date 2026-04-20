@@ -72,6 +72,13 @@ class URLHelper(object):
         link_hash = '%s.%s' % (hashlib.md5(final_url).hexdigest(), time.time())
         return ParsingCandidate(final_url, link_hash)
 
+    @staticmethod
+    def same_domain(a, b):
+        if a == b:
+            return True
+        asub = "" if a.subdomain == "www" else a.subdomain
+        bsub = "" if b.subdomain == "www" else b.subdomain
+        return asub == bsub and a.domain == b.domain and a.suffix == b.suffix
 
 class StringSplitter(object):
     def __init__(self, pattern):
