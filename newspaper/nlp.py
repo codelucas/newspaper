@@ -116,13 +116,12 @@ def split_words(text):
         return None
 
 
-def keywords(text):
+def keywords(text, num_keywords=10):
     """Get the top 10 keywords and their frequency scores ignores blacklisted
     words in stopwords, counts the number of occurrences of each word, and
     sorts them in reverse natural order (so descending) by number of
     occurrences.
     """
-    NUM_KEYWORDS = 10
     text = split_words(text)
     # of words before removing blacklist words
     if text:
@@ -135,7 +134,7 @@ def keywords(text):
             else:
                 freq[word] = 1
 
-        min_size = min(NUM_KEYWORDS, len(freq))
+        min_size = min(num_keywords, len(freq))
         keywords = sorted(freq.items(),
                           key=lambda x: (x[1], x[0]),
                           reverse=True)
