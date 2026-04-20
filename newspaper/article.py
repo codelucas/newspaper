@@ -12,6 +12,7 @@ from urllib.parse import urlparse
 
 import requests
 
+from googletrans import Translator
 from . import images
 from . import network
 from . import nlp
@@ -368,6 +369,12 @@ class Article(object):
             if s in self.url:
                 return True
         return False
+      
+     def translater(self,dest = 'en'):
+        self.dest = dest
+        translator = Translator()
+        result = translator.translate(self.text,self.dest)
+        return result.text
 
     def nlp(self):
         """Keyword extraction wrapper
