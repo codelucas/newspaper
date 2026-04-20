@@ -214,6 +214,7 @@ Features
 
       ar              Arabic
       be              Belarusian
+      bn              Bengali
       bg              Bulgarian
       da              Danish
       de              German
