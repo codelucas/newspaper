@@ -157,7 +157,7 @@ def split_sentences(text):
     tokenizer = nltk.data.load('tokenizers/punkt/english.pickle')
 
     sentences = tokenizer.tokenize(text)
-    sentences = [x.replace('\n', '') for x in sentences if len(x) > 10]
+    sentences = [re.sub('[\n ]+', ' ', x) for x in sentences if len(x) > 10]
     return sentences
 
 
