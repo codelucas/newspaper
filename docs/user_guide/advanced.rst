@@ -202,6 +202,8 @@ Here is a full list of the configuration options:
 
 ``keep_article_html``, default False, "set to True if you want to preserve html of body text"
 
+``keep_authors_format``, default False, "set to True if you want to preserve format of author name (would not be converted to Title Case format)"
+
 ``http_success_only``, default True, "set to False to capture non 2XX responses as well"
 
 ``MIN_WORD_COUNT``, default 300, "num of word tokens in article text"
