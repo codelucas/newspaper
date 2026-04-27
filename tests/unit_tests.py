@@ -245,6 +245,12 @@ class ArticleTestCase(unittest.TestCase):
         self.assertEqual('2013-11-27 00:00:00', str(self.article.publish_date))
 
     @print_test
+    def test_clean_top_node_exists_in_clean_doc(self):
+        self.setup_stage('parse')
+        self.article.parse()
+        self.assertTrue(self.article.clean_doc.getroottree().getpath(self.article.clean_top_node))
+
+    @print_test
     def test_meta_type_extraction(self):
         self.setup_stage('meta')
         meta_type = self.article.extractor.get_meta_type(
