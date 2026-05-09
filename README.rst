@@ -15,22 +15,6 @@ Newspaper3k: Article scraping & curation
 
 .. raw:: html
 
-   <hr>
-   <p><b>From the author of newspaper:</b> <a href="https://ceointerviews.ai" target="_blank" rel="noopener noreferrer">CEOInterviews</a> — the world's largest verified database of executive interviews. 20,000+ CEOs, 1M+ quotes, and full transcripts. Every quote is AI + human verified to the original primary source, so your research tools never hallucinate a CEO soundbite again.</p>
-   <table>
-     <tr>
-       <th align="center">❌ Other generic news APIs</th>
-       <th align="center">✅ CEOInterviews</th>
-     </tr>
-     <tr>
-       <td align="center"><img src="https://ceointerviews.ai/static/images/examples/example_elon_failed_2.png" width="300" height="200" alt="Unverified, misattributed Elon Musk quote"></td>
-       <td align="center"><img src="https://ceointerviews.ai/static/images/examples/example_elon_verified.png" width="300" height="200" alt="CEOInterviews AI + human verified primary source"></td>
-     </tr>
-   </table>
-   <p><i>Ask "What has Elon Musk said about tariffs?" — you get speaker-authenticated transcripts with source URLs, not SEO-spam blog paraphrases.</i></p>
-   <p>👉 <a href="https://ceointerviews.ai" target="_blank" rel="noopener noreferrer"><b>Explore CEOInterviews and grab a REST API key at ceointerviews.ai</b></a> &nbsp;—&nbsp; an MCP server is also available for Claude / Cursor / ChatGPT agents (<a href="https://mcp.ceointerviews.ai" target="_blank" rel="noopener noreferrer">link</a>).</p>
-   <hr>
-
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
     "Newspaper is an amazing python library for extracting & curating articles."
