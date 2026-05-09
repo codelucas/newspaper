@@ -182,7 +182,9 @@ class ContentExtractor(object):
         def parse_date_str(date_str):
             if date_str:
                 try:
-                    return date_parser(date_str)
+                    # define dictionary for timezones not part of dateutil's defaults
+                    tzinfo = {"ET" : "EST"}
+                    return date_parser(date_str, tzinfos = tzinfo, fuzzy = True)
                 except (ValueError, OverflowError, AttributeError, TypeError):
                     # near all parse failures are due to URL dates without a day
                     # specifier, e.g. /2014/04/
@@ -231,6 +233,32 @@ class ContentExtractor(object):
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
+
+        # search article body for the publication date:
+
+        # attributes and values determined from scouring "most popular news
+        # websites in the U.S." @ https://www.kadaza.com/news
+        # nbcnews.com uses _3OViwiRtR_PFko9i8o9Mov as a class name for their dates
+        ATTRS = ['class', 'id'] 
+        VALS = ['date', 'timestamp', 'time', '_3OViwiRtR_PFko9i8o9Mov', 'ra-date-published']
+        matches = []
+
+        for attr in ATTRS:
+            for val in VALS:
+                found = self.parser.getElementsByTag(doc, attr=attr, value=val)
+                matches.extend(found)
+
+        for match in matches:
+            content = ''
+            if match.tag == 'meta':
+                mm = match.xpath('@content')
+                if len(mm) > 0:
+                    content = mm[0]
+            else:
+                content = match.text or ''
+            datetime_object = parse_date_str(content)
+            if datetime_object:
+                return datetime_object
 
         return None
 
