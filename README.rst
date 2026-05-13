@@ -167,6 +167,50 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     车网_新浪汽车_新浪网
 
 
+Scraping at scale: avoiding IP blocks
+=====================================
+
+Once you move past scraping a handful of articles, you'll hit the same wall every news scraper hits: 403s, captchas, rate limits, and silent shadow bans. Your code is fine — your IP is the problem. The fix is rotating residential proxies.
+
+I personally route my own newspaper3k pipelines through `Swiftproxy`_ — 80M+ residential IPs across 195+ countries, a 99.89% success rate, non-expiring traffic, and a free trial so you can pressure-test it before paying. Plugging it into newspaper3k takes about four lines:
+
+.. code-block:: python
+
+    from newspaper import Article, Config
+
+    config = Config()
+    config.proxies = {
+        'http':  'http://USERNAME:PASSWORD@gate.swiftproxy.net:7777',
+        'https': 'http://USERNAME:PASSWORD@gate.swiftproxy.net:7777',
+    }
+    # a real browser UA helps too
+    config.browser_user_agent = (
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) '
+        'AppleWebKit/537.36 (KHTML, like Gecko) '
+        'Chrome/124.0.0.0 Safari/537.36'
+    )
+    config.request_timeout = 20
+
+    article = Article('https://example.com/some-news-story', config=config)
+    article.download()
+    article.parse()
+    print(article.title)
+
+The same ``config`` object works with ``newspaper.build()`` — every article fetched by the source will rotate through residential IPs automatically:
+
+.. code-block:: python
+
+    import newspaper
+    paper = newspaper.build('http://cnn.com', config=config, memoize_articles=False)
+    for article in paper.articles:
+        article.download()
+        article.parse()
+
+Grab credentials and a free trial at `swiftproxy.net <https://www.swiftproxy.net/?ref=codelucas>`_. Use code ``PROXY90`` for 10% off your first plan.
+
+.. _`Swiftproxy`: https://www.swiftproxy.net/?ref=codelucas
+
+
 Docs
 ----
 
@@ -333,6 +377,16 @@ This is another working online demo: http://newspaper.chinazt.cc/
 
 Interested in proxies?
 ======================
+Power your scraping and automation at real-world scale
+------------------------------------------------------
+`Click here to try Swiftproxy`_ — built for developers running scraping, automation, and data collection workflows at scale. Access 80M+ residential IPs from $0.7/GB, fast ISP proxies from $6/IP, global coverage across 195+ countries, non-expiring traffic, and a 99.89% success rate. Free trial available — use code ``PROXY90`` for 10% off.
+
+.. image:: https://github.com/user-attachments/assets/913f1fd6-20e9-4f37-89b7-ba6b0bd0724a
+        :target: https://www.swiftproxy.net/?ref=codelucas
+        :alt: Swiftproxy — residential and ISP proxies built for scrapers and developers.
+
+.. _`Click here to try Swiftproxy`: https://www.swiftproxy.net/?ref=codelucas
+
 
 Skip the scraping headaches — get proxies that actually work
 ------------------------------------------------------------
