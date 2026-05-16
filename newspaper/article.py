@@ -91,6 +91,9 @@ class Article(object):
         # `keywords` are extracted via nlp() from the body text
         self.keywords = []
 
+        # `keywords_reference_corpus` are extracted via nlp() from the body text
+        self.keywords_reference_corpus = ['No reference corpus defined']
+
         # `meta_keywords` are extracted via parse() from <meta> tags
         self.meta_keywords = []
 
@@ -369,7 +372,7 @@ class Article(object):
                 return True
         return False
 
-    def nlp(self):
+    def nlp(self, reference_corpus=False):
         """Keyword extraction wrapper
         """
         self.throw_if_not_downloaded_verbose()
@@ -380,6 +383,12 @@ class Article(object):
         title_keyws = list(nlp.keywords(self.title).keys())
         keyws = list(set(title_keyws + text_keyws))
         self.set_keywords(keyws)
+
+        if reference_corpus:
+            title_keyws_rc = list(nlp.keywords_reference_corpus(self.title, reference_corpus).keys())
+            text_keyws_rc = list(nlp.keywords_reference_corpus(self.text, reference_corpus).keys())
+            keyws_rc = list(set(title_keyws_rc + text_keyws_rc))
+            self.set_keywords_reference_corpus(keyws_rc, reference_corpus)
 
         max_sents = self.config.MAX_SUMMARY_SENT
 
@@ -498,6 +507,14 @@ class Article(object):
             raise Exception("Keyword input must be list!")
         if keywords:
             self.keywords = keywords[:self.config.MAX_KEYWORDS]
+
+    def set_keywords_reference_corpus(self, keywords, reference_corpus):
+        """Keys are stored in list format
+        """
+        if not isinstance(keywords, list):
+            raise Exception("Keyword input must be list!")
+        if keywords:
+            self.keywords_reference_corpus = keywords[:self.config.MAX_KEYWORDS]
 
     def set_authors(self, authors):
         """Authors are in ["firstName lastName", "firstName lastName"] format
