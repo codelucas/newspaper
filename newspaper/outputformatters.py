@@ -20,6 +20,7 @@ class OutputFormatter(object):
 
     def __init__(self, config):
         self.top_node = None
+        self.top_node_article_html = None
         self.config = config
         self.parser = self.config.get_parser()
         self.language = config.language
@@ -37,6 +38,9 @@ class OutputFormatter(object):
 
     def get_top_node(self):
         return self.top_node
+
+    def get_top_node_article_html(self):
+        return self.top_node_article_html
 
     def get_formatted(self, top_node):
         """Returns the body text of an article, and also the body article
@@ -77,8 +81,8 @@ class OutputFormatter(object):
         return '\n\n'.join(txts)
 
     def convert_to_html(self):
-        cleaned_node = self.parser.clean_article_html(self.get_top_node())
-        return self.parser.nodeToString(cleaned_node)
+        self.top_node_article_html = self.parser.clean_article_html(self.get_top_node())
+        return self.parser.nodeToString(self.top_node_article_html)
 
     def add_newline_to_br(self):
         for e in self.parser.getElementsByTag(self.top_node, tag='br'):
