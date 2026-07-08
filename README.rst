@@ -13,8 +13,6 @@ Newspaper3k: Article scraping & curation
         :target: https://coveralls.io/github/codelucas/newspaper
         :alt: Coverage status
 
-.. raw:: html
-
 Inspired by `requests`_ for its simplicity and powered by `lxml`_ for its speed:
 
     "Newspaper is an amazing python library for extracting & curating articles."
@@ -165,6 +163,38 @@ If you are certain that an *entire* news source is in one language, **go ahead a
     >>> print(article.title)
     两年双免0手续0利率 科鲁兹掀背金融轻松购_武汉车市_武汉汽
     车网_新浪汽车_新浪网
+
+
+Scraping by topic: where do the URLs come from?
+===============================================
+
+``newspaper.build()`` is perfect when you know *which sites* to crawl. But the other question I get constantly is: "I want every article about **X**, across all publications — where do I get the URLs?" The answer is to search Google News for your keyword first, then feed the result links straight into newspaper for extraction.
+
+The easiest way to query Google News programmatically is the `Google News API`_ from `SerpApi - Search API`_ (they also cover Google Search, Google Maps, and more). The two libraries snap together in a few lines:
+
+.. code-block:: python
+
+    # pip3 install google-search-results
+    from serpapi import GoogleSearch
+    from newspaper import Article
+
+    search = GoogleSearch({
+        "engine": "google_news",
+        "q": "electric vehicles",
+        "api_key": "YOUR_SERPAPI_KEY",  # free plan at serpapi.com
+    })
+
+    for result in search.get_dict()["news_results"]:
+        article = Article(result["link"])
+        article.download()
+        article.parse()
+        article.nlp()
+        print(article.title, "--", article.summary[:120])
+
+This pattern of SerpApi for *discovery*, newspaper3k for *extraction*, is how most production news-monitoring pipelines are built, and it sidesteps writing a crawler for every source you care about.
+
+.. _`SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
+.. _`Google News API`: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
 
 
 Scraping at scale: avoiding IP blocks
@@ -375,8 +405,21 @@ View a working online demo here: http://newspaper-demo.herokuapp.com
 This is another working online demo: http://newspaper.chinazt.cc/
 
 
-Interested in proxies?
-======================
+Interested in scraping APIs & proxies?
+======================================
+
+Unlock the Web — the Smart Way
+------------------------------
+`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_.
+Scrape Google Search, Google News, Google Maps, and more!
+
+.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
+        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
+        :alt: Scrape search engines easily with SerpApi - Search API.
+
+.. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
+
+
 Power your scraping and automation at real-world scale
 ------------------------------------------------------
 `Click here to try Swiftproxy`_ — built for developers running scraping, automation, and data collection workflows at scale. Access 80M+ residential IPs from $0.7/GB, fast ISP proxies from $6/IP, global coverage across 195+ countries, non-expiring traffic, and a 99.89% success rate. Free trial available — use code ``PROXY90`` for 10% off.
@@ -408,18 +451,6 @@ Stay private, fast, and fully in control
 
 .. _`Click here to explore BestProxy`: https://bestproxy.com/?keyword=b2vgzl0r
 .. _`Get Started`: https://bestproxy.com/?keyword=b2vgzl0r
-
-
-Unlock the Web — the Smart Way
-------------------------------
-`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`_. 
-Scrape Google Search, Google News, Google Maps, and more!
-
-.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
-        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
-        :alt: Scrape search engines easily with SerpApi - Search API. 
-
-.. _`Click here to see SerpApi, scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_github
 
 LICENSE
 -------

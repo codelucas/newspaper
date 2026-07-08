@@ -352,6 +352,21 @@ Newspaper uses a lot of `python-goose's`_ parsing code. View their license `here
 Please feel free to `email & contact me`_ if you run into issues or just would like
 to talk about the future of this library and news extraction in general!
 
+Sponsored by SerpApi
+--------------------
+
+`Scrape search engines easily with SerpApi - Search API`_.
+Scrape Google Search, Google News, Google Maps, and more! Their `Google News API`_
+pairs perfectly with newspaper: use it to discover article URLs by keyword, then
+extract them with ``Article``.
+
+.. image:: https://github.com/user-attachments/assets/9a80eeb4-72a8-43f1-9413-93c7a47b2bf6
+        :target: https://serpapi.com/google-news-api?utm_source=newspaper3k_docs
+        :alt: Scrape search engines easily with SerpApi - Search API.
+
+.. _`Scrape search engines easily with SerpApi - Search API`: https://serpapi.com?utm_source=newspaper3k_docs
+.. _`Google News API`: https://serpapi.com/google-news-api?utm_source=newspaper3k_docs
+
 .. _`Lucas Ou-Yang`: http://codelucas.com
 .. _`email & contact me`: mailto:lucasyangpersonal@gmail.com
 .. _`python-goose's`: https://github.com/grangier/python-goose
