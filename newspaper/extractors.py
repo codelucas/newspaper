@@ -235,6 +235,24 @@ class ContentExtractor(object):
 
         return None
 
+    def _choose_title_candidate(self, candidates, og_title):
+        """Pick the best <title> when a document has more than one.
+
+        Prefer a candidate whose filtered text contains the og:title (the
+        descriptive article title), otherwise fall back to the longest
+        candidate. This avoids picking bare site names (e.g. Medium's second
+        <title>Medium</title>).
+        """
+        if len(candidates) == 1:
+            return candidates[0]
+        filter_regex = re.compile(r'[^\u4e00-\u9fa5a-zA-Z0-9\ ]')
+        og_filtered = filter_regex.sub('', og_title or '').lower().strip()
+        if og_filtered:
+            for candidate in candidates:
+                if og_filtered in filter_regex.sub('', candidate).lower():
+                    return candidate
+        return max(candidates, key=len)
+
     def get_title(self, doc):
         """Fetch the article title and analyze it
 
@@ -265,8 +283,20 @@ class ContentExtractor(object):
             if not title_text:
                 return title
         else:
-            # title elem found
-            title_text = self.parser.getText(title_element[0])
+            # some sites (e.g. Medium) emit multiple <title> tags, one of which
+            # is a bare site name ("Medium"). Blindly taking the first element
+            # can yield the useless site name, so pick the best candidate:
+            # prefer the one matching og:title, otherwise the longest text.
+            title_candidates = [self.parser.getText(el).strip()
+                                for el in title_element]
+            title_candidates = [c for c in title_candidates if c]
+            if not title_candidates:
+                title_text = title_text_fb
+                if not title_text:
+                    return title
+            else:
+                title_text = self._choose_title_candidate(title_candidates,
+                                                          title_text_fb)
         used_delimeter = False
 
         # title from h1
