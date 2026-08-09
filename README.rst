@@ -197,6 +197,52 @@ This pattern of SerpApi for *discovery*, newspaper3k for *extraction*, is how mo
 .. _`Google News API`: https://serpapi.com/google-news-api?utm_source=newspaper3k_github
 
 
+When ``download()`` returns a wall instead of an article
+========================================================
+
+A fair number of publishers now render their body copy client-side or sit behind an anti-bot check, so ``article.download()`` comes back holding a challenge page and ``article.text`` ends up empty. Two things fix the large majority of those cases: make the request from a residential IP, and let something else execute the page's JavaScript before newspaper parses it.
+
+`Novada`_ covers both, and neither changes how you use the library. Their residential pool is just the normal ``config.proxies`` route:
+
+.. code-block:: python
+
+    from newspaper import Article, Config
+
+    config = Config()
+    config.proxies = {
+        'http':  'http://USERNAME-zone-res:PASSWORD@super.novada.pro:7777',
+        'https': 'http://USERNAME-zone-res:PASSWORD@super.novada.pro:7777',
+    }
+
+    article = Article('https://example.com/some-news-story', config=config)
+    article.download()
+    article.parse()
+
+For the JS-heavy or aggressively protected sources, their Web Unblocker hands back rendered HTML, which you pass to ``download(input_html=...)``. Newspaper never makes the request itself, so everything downstream — parsing, ``nlp()``, images, dates — is unchanged:
+
+.. code-block:: python
+
+    import requests
+    from newspaper import Article
+
+    url = 'https://example.com/some-news-story'
+
+    html = requests.post(
+        'https://webunlocker.novada.com/request',
+        headers={'Authorization': 'Bearer YOUR_NOVADA_KEY'},
+        data={'target_url': url, 'response_format': 'html', 'js_render': 'True'},
+    ).text
+
+    article = Article(url)
+    article.download(input_html=html)
+    article.parse()
+    print(article.title, article.publish_date, len(article.text))
+
+If all you want is the body text, ``newspaper.fulltext(html)`` takes the same HTML. Novada's pool is 100M+ residential IPs across 195+ countries, and the $15 free trial spans every product, so it costs nothing to find out whether a source that keeps failing on you is genuinely unreachable or just picky about who's asking.
+
+.. _`Novada`: https://www.novada.com/?github-newspaper
+
+
 Scraping at scale: avoiding IP blocks
 =====================================
 
@@ -407,6 +453,17 @@ This is another working online demo: http://newspaper.chinazt.cc/
 
 Interested in scraping APIs & proxies?
 ======================================
+
+The all-in-one solution for global data scraping
+-------------------------------------------------
+`Click here to get started with Novada`_ — real residential proxies and scraping solutions that give reliable access to news pages at scale. 100M+ residential IPs across 195+ countries with a 99.99% success rate, plus Web Unblocker, Scraper API, and Browser API for when you'd rather be handed clean HTML or JSON than fight a captcha. Fewer blocks, and output that drops straight into your article extraction pipeline. Start with a $15 free trial across all products.
+
+.. image:: https://github.com/user-attachments/assets/16a62312-f077-42ed-a042-2906074435ce
+        :target: https://www.novada.com/?github-newspaper
+        :alt: Novada — real residential proxies and scraping solutions for global data collection.
+
+.. _`Click here to get started with Novada`: https://www.novada.com/?github-newspaper
+
 
 Unlock the Web — the Smart Way
 ------------------------------
