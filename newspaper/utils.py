@@ -358,6 +358,7 @@ def print_available_languages():
         'ar': 'Arabic',
         'be': 'Belarusian',
         'bg': 'Bulgarian',
+        'cs': 'Czech',
         'da': 'Danish',
         'de': 'German',
         'el': 'Greek',
