@@ -206,6 +206,8 @@ class ContentExtractor(object):
              'content': 'datetime'},
             {'attribute': 'property', 'value': 'og:published_time',
              'content': 'content'},
+            {'attribute': 'property', 'value': 'og:regDate',
+             'content': 'content'},
             {'attribute': 'name', 'value': 'article_date_original',
              'content': 'content'},
             {'attribute': 'name', 'value': 'publication_date',
