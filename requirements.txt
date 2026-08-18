@@ -4,11 +4,11 @@ feedfinder2>=0.0.4
 feedparser>=5.2.1
 jieba3k>=0.35.1
 lxml>=3.6.0
-nltk>=3.2.1
-Pillow>=3.3.0
+nltk>=3.6.6
+Pillow>=10.0.1
 pythainlp>=1.7.2
 python-dateutil>=2.5.3
 PyYAML>=3.11
 requests>=2.10.0
-tinysegmenter==0.3  # TODO(codelucas): Investigate making this >=0.3
+tinysegmenter>=0.4
 tldextract>=2.0.1
