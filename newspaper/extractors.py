@@ -13,6 +13,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import copy
 import logging
+import os.path
 import re
 import re
 from collections import defaultdict
@@ -234,6 +235,24 @@ class ContentExtractor(object):
 
         return None
 
+    def _choose_title_candidate(self, candidates, og_title):
+        """Pick the best <title> when a document has more than one.
+
+        Prefer a candidate whose filtered text contains the og:title (the
+        descriptive article title), otherwise fall back to the longest
+        candidate. This avoids picking bare site names (e.g. Medium's second
+        <title>Medium</title>).
+        """
+        if len(candidates) == 1:
+            return candidates[0]
+        filter_regex = re.compile(r'[^\u4e00-\u9fa5a-zA-Z0-9\ ]')
+        og_filtered = filter_regex.sub('', og_title or '').lower().strip()
+        if og_filtered:
+            for candidate in candidates:
+                if og_filtered in filter_regex.sub('', candidate).lower():
+                    return candidate
+        return max(candidates, key=len)
+
     def get_title(self, doc):
         """Fetch the article title and analyze it
 
@@ -253,12 +272,31 @@ class ContentExtractor(object):
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
-        # no title found
-        if title_element is None or len(title_element) == 0:
-            return title
+        title_text_fb = (
+            self.get_meta_content(doc, 'meta[property="og:title"]') or
+            self.get_meta_content(doc, 'meta[name="og:title"]') or ''
+        )
 
-        # title elem found
-        title_text = self.parser.getText(title_element[0])
+        # no title found, fallback to og:title
+        if title_element is None or len(title_element) == 0:
+            title_text = title_text_fb
+            if not title_text:
+                return title
+        else:
+            # some sites (e.g. Medium) emit multiple <title> tags, one of which
+            # is a bare site name ("Medium"). Blindly taking the first element
+            # can yield the useless site name, so pick the best candidate:
+            # prefer the one matching og:title, otherwise the longest text.
+            title_candidates = [self.parser.getText(el).strip()
+                                for el in title_element]
+            title_candidates = [c for c in title_candidates if c]
+            if not title_candidates:
+                title_text = title_text_fb
+                if not title_text:
+                    return title
+            else:
+                title_text = self._choose_title_candidate(title_candidates,
+                                                          title_text_fb)
         used_delimeter = False
 
         # title from h1
@@ -279,11 +317,6 @@ class ContentExtractor(object):
                 title_text_h1 = ''
             # clean double spaces
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
-
-        # title from og:title
-        title_text_fb = (
-        self.get_meta_content(doc, 'meta[property="og:title"]') or
-        self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -449,25 +482,33 @@ class ContentExtractor(object):
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
+        try_one = None if self.image_is_ignored(try_one) else try_one
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
             elems = self.parser.getElementsByTag(doc, use_regex=True, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
-
+            try_two = None if self.image_is_ignored(try_two) else try_two
             if not try_two:
                 try_three = self.get_meta_content(doc, 'meta[name="og:image"]')
-
+                try_three = None if self.image_is_ignored(try_three) else try_three
                 if not try_three:
                     link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
                     elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
                     try_four = elems[0].get('href') if elems else None
+                    try_four = None if self.image_is_ignored(try_four) else try_four
 
         top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
             return urljoin(article_url, top_meta_image)
         return ''
+
+    def image_is_ignored(self, image):
+        return any([True for x in self.config.ignored_images_suffix_list if image and image != '' and self.match_image(x, os.path.basename(image))])
+
+    def match_image(self, pattern, image):
+        return re.search(pattern, image) is not None
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
@@ -575,6 +616,7 @@ class ContentExtractor(object):
                 for img_tag in img_tags if img_tag.get('src')]
         img_links = set([urljoin(article_url, url)
                          for url in urls])
+        img_links = set([x for x in img_links if not self.image_is_ignored(x)])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -1014,9 +1056,16 @@ class ContentExtractor(object):
         on like paragraphs and tables
         """
         nodes_to_check = []
-        for tag in ['p', 'pre', 'td']:
-            items = self.parser.getElementsByTag(doc, tag=tag)
-            nodes_to_check += items
+        articles = self.parser.getElementsByTag(doc, tag='article')
+        if len(articles) > 0 and self.get_meta_site_name(doc) == 'Medium':
+            # Specific heuristic for Medium articles
+            sections = self.parser.getElementsByTag(articles[0], tag='section')
+            if len(sections) > 1:
+                nodes_to_check = sections
+        if len(nodes_to_check) == 0:
+            for tag in ['p', 'pre', 'td', 'ol', 'ul']:
+                items = self.parser.getElementsByTag(doc, tag=tag)
+                nodes_to_check += items
         return nodes_to_check
 
     def is_table_and_no_para_exist(self, e):

@@ -153,6 +153,9 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
+        # The final URL after redirects and meta refresh
+        self.final_url = None
+
     def build(self):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
@@ -173,7 +176,9 @@ class Article(object):
 
     def _parse_scheme_http(self):
         try:
-            return network.get_html_2XX_only(self.url, self.config)
+            html, final_url = network.get_html_2XX_only(self.url, self.config, return_final_url=True)
+            self.final_url = final_url
+            return html
         except requests.exceptions.RequestException as e:
             self.download_state = ArticleDownloadState.FAILED_RESPONSE
             self.download_exception_msg = str(e)
@@ -190,18 +195,27 @@ class Article(object):
             parsed_url = urlparse(self.url)
             if parsed_url.scheme == "file":
                 html = self._parse_scheme_file(parsed_url.path)
+                # For file scheme, the final URL is the same as the initial URL
+                if self.final_url is None:
+                    self.final_url = self.url
             else:
                 html = self._parse_scheme_http()
+                # final_url is already set in _parse_scheme_http
             if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
                 return
         else:
             html = input_html
+            # If HTML is provided directly and final_url not set, use the current URL
+            if self.final_url is None:
+                self.final_url = self.url
 
         if self.config.follow_meta_refresh:
             meta_refresh_url = extract_meta_refresh(html)
             if meta_refresh_url and recursion_counter < 1:
+                # Update final_url to the meta refresh URL
+                self.final_url = meta_refresh_url
                 return self.download(
                     input_html=network.get_html(meta_refresh_url),
                     recursion_counter=recursion_counter + 1)
@@ -213,18 +227,21 @@ class Article(object):
         self.throw_if_not_downloaded_verbose()
 
         self.doc = self.config.get_parser().fromstring(self.html)
-        self.clean_doc = copy.deepcopy(self.doc)
 
         if self.doc is None:
             # `parse` call failed, return nothing
             return
 
+        document_cleaner = DocumentCleaner(self.config)
+        output_formatter = OutputFormatter(self.config)
+
+        self.clean_doc = copy.deepcopy(self.doc)
+        # Before any computations on the body, clean DOM object
+        self.clean_doc = document_cleaner.clean(self.clean_doc)
+
         # TODO: Fix this, sync in our fix_url() method
         parse_candidate = self.get_parse_candidate()
         self.link_hash = parse_candidate.link_hash  # MD5
-
-        document_cleaner = DocumentCleaner(self.config)
-        output_formatter = OutputFormatter(self.config)
 
         title = self.extractor.get_title(self.clean_doc)
         self.set_title(title)
@@ -267,16 +284,23 @@ class Article(object):
             self.url,
             self.clean_doc)
 
-        # Before any computations on the body, clean DOM object
-        self.doc = document_cleaner.clean(self.doc)
-
         self.top_node = self.extractor.calculate_best_node(self.doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.calculate_best_node(self.clean_doc)
+        if self.top_node is None:
+            self.top_node = self.extractor.parser.getElementById(self.doc, 'content')
+        if self.top_node is None:
+            for tag in ['article', 'main']:
+                nodes = self.extractor.parser.getElementsByTag(self.doc, tag=tag)
+                if len(nodes) > 0:
+                    self.top_node = nodes[0]
+                    break
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
 
-            self.top_node = self.extractor.post_cleanup(self.top_node)
             self.clean_top_node = copy.deepcopy(self.top_node)
+            self.clean_top_node = self.extractor.post_cleanup(self.clean_top_node)
 
             text, article_html = output_formatter.get_formatted(
                 self.top_node)

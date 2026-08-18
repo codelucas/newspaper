@@ -9,6 +9,7 @@ __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 from html import unescape
 import logging
+import copy
 
 from .text import innerTrim
 
@@ -42,7 +43,7 @@ class OutputFormatter(object):
         """Returns the body text of an article, and also the body article
         html if specified. Returns in (text, html) form
         """
-        self.top_node = top_node
+        self.top_node = copy.deepcopy(top_node)
         html, text = '', ''
 
         self.remove_negativescores_nodes()
