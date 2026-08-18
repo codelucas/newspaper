@@ -182,6 +182,30 @@ class StopWordsHindi(StopWords):
         ws.set_stopword_count(len(overlapping_stopwords))
         ws.set_stop_words(overlapping_stopwords)
         return ws
+    
+class StopWordsMarathi(StopWords):
+    """Marathi segmentation
+    """
+    def __init__(self, language='mr'):
+        super(StopWordsHindi, self).__init__(language='mr')
+
+    def get_stopword_count(self, content):
+        if not content:
+            return WordStats()
+        ws = WordStats()
+        stripped_input = self.remove_punctuation(content)
+        candidate_words = self.candidate_words(stripped_input)
+        overlapping_stopwords = []
+        c = 0
+        for w in candidate_words:
+            c += 1
+            for stop_word in self.STOP_WORDS:
+                overlapping_stopwords.append(stop_word)
+
+        ws.set_word_count(c)
+        ws.set_stopword_count(len(overlapping_stopwords))
+        ws.set_stop_words(overlapping_stopwords)
+        return ws
 
 
 class StopWordsJapanese(StopWords):
