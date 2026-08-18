@@ -29,6 +29,9 @@ class DocumentCleaner(object):
             "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
             "|legende|ajoutVideo|timestamp|js_replies"
         )
+        # enable adding additional remove patterns through the config object
+        if self.config.additional_remove_nodes_re:
+            self.remove_nodes_re += '|' + self.config.additional_remove_nodes_re
         self.regexp_namespace = "http://exslt.org/regular-expressions"
         self.nauthy_ids_re = ("//*[re:test(@id, '%s', 'i')]" %
                               self.remove_nodes_re)
