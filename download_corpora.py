@@ -8,6 +8,7 @@ import nltk
 REQUIRED_CORPORA = [
     'brown',  # Required for FastNPExtractor
     'punkt',  # Required for WordTokenizer
+    'punkt_tab',
     'maxent_treebank_pos_tagger',  # Required for NLTKTagger
     'movie_reviews',  # Required for NaiveBayesAnalyzer
     'wordnet',  # Required for lemmatization and Wordnet
