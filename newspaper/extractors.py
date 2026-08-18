@@ -482,7 +482,10 @@ class ContentExtractor(object):
     def get_meta_description(self, doc):
         """If the article has meta description set in the source, use that
         """
-        return self.get_meta_content(doc, "meta[name=description]")
+        if len(self.get_meta_content(doc, "meta[name=description]")) > len(self.get_meta_content(doc, "meta[property=description]")):
+          return self.get_meta_content(doc, "meta[name=description]")
+      
+        return self.get_meta_content(doc, "meta[property=description]")
 
     def get_meta_keywords(self, doc):
         """If the article has meta keywords set in the source, use that
