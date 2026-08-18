@@ -135,7 +135,10 @@ class OutputFormatter(object):
                     and len(self.parser.getElementsByTag(
                         el, tag='object')) == 0 \
                     and len(self.parser.getElementsByTag(
-                        el, tag='embed')) == 0:
+                        el, tag='embed')) == 0 \
+                    and len(self.parser.getElementsByTag(
+                        el, tag='img')) == 0 \
+                    and tag not in {'img', }:
                 self.parser.remove(el)
 
     def remove_trailing_media_div(self):
