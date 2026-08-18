@@ -580,7 +580,7 @@ class ContentExtractor(object):
     def get_first_img_url(self, article_url, top_node):
         """Retrieves the first image in the 'top_node'
         The top node is essentially the HTML markdown where the main
-        article lies and the first image in that area is probably signifigcant.
+        article lies and the first image in that area is probably significant.
         """
         node_images = self.get_img_urls(article_url, top_node)
         node_images = list(node_images)
