@@ -88,9 +88,7 @@ class OutputFormatter(object):
         for e in self.parser.getElementsByTag(self.top_node, tag='ul'):
             li_list = self.parser.getElementsByTag(e, tag='li')
             for li in li_list[:-1]:
-                li.text = self.parser.getText(li) + r'\n'
-                for c in self.parser.getChildren(li):
-                    self.parser.remove(c)
+                li.tail = r'\n' if not li.tail else li.tail + r'\n'
 
     def links_to_text(self):
         """Cleans up and converts any nodes that should be considered
