@@ -135,8 +135,10 @@ class ContentExtractor(object):
 
         # Try 1: Search popular author tags for authors
 
-        ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline', 'dc.creator', 'byl']
+        ATTRS = ['property', 'name', 'rel', 'itemprop', 'class', 'id']
+        VALS = ['article:author', 'article:author_name', 'parsely-author',
+                'sailthru.author', 'citation_author', 'author', 'byline',
+                'dc.creator', 'byl']
         matches = []
         authors = []
 
