@@ -153,6 +153,9 @@ class Article(object):
         # A property dict for users to store custom data.
         self.additional_data = {}
 
+        # A property to store MIME type that will be retrieved from network
+        self.mime_type = ""
+
     def build(self):
         """Build a lone article from a URL independent of the source (newspaper).
         Don't normally call this method b/c it's good to multithread articles
@@ -179,7 +182,7 @@ class Article(object):
             self.download_exception_msg = str(e)
             return None
 
-    def download(self, input_html=None, title=None, recursion_counter=0):
+    def download(self, input_html=None, title=None, recursion_counter=0, mime_type=None):
         """Downloads the link's HTML content, don't use if you are batch async
         downloading articles
 
@@ -190,24 +193,32 @@ class Article(object):
             parsed_url = urlparse(self.url)
             if parsed_url.scheme == "file":
                 html = self._parse_scheme_file(parsed_url.path)
+                # Hard code to text/html for now
+                mime_type = None
             else:
-                html = self._parse_scheme_http()
+                result = self._parse_scheme_http()
+                html = result.html
+                mime_type = result.mime_type
             if html is None:
                 log.debug('Download failed on URL %s because of %s' %
                           (self.url, self.download_exception_msg))
                 return
         else:
             html = input_html
+            # For now, just add a literal MIME type if html is set
+            mime_type = "text/html"
 
         if self.config.follow_meta_refresh:
             meta_refresh_url = extract_meta_refresh(html)
             if meta_refresh_url and recursion_counter < 1:
                 return self.download(
-                    input_html=network.get_html(meta_refresh_url),
+                    input_html=network.get_html(meta_refresh_url).html,
+                    mime_type=mime_type,
                     recursion_counter=recursion_counter + 1)
 
         self.set_html(html)
         self.set_title(title)
+        self.set_mime_type(mime_type)
 
     def parse(self):
         self.throw_if_not_downloaded_verbose()
@@ -548,6 +559,9 @@ class Article(object):
         """
         movie_urls = [o.src for o in movie_objects if o and o.src]
         self.movies = movie_urls
+
+    def set_mime_type(self, mime_type):
+        self.mime_type = mime_type
 
     def throw_if_not_downloaded_verbose(self):
         """Parse ArticleDownloadState -> log readable status
