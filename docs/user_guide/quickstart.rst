@@ -267,27 +267,41 @@ of popular news source urls.. In case you need help choosing a news source!
     input code      full name
 
       ar              Arabic
+      be              Belarusian
+      bg              Bulgarian
+      da              Danish
       de              German
+      el              Greek
       en              English
       es              Spanish
+      et              Estonian
+      fa              Persian
+      fi              Finnish
       fr              French
       he              Hebrew
+      hi              Hindi
+      hr              Croatian
+      hu              Hungarian
+      id              Indonesian
       it              Italian
+      ja              Japanese
+      ka              Georgian
       ko              Korean
+      lt              Lithuanian
+      mk              Macedonian
+      nb              Norwegian (Bokmål)
+      nl              Dutch
       no              Norwegian
-      fa              Persian
       pl              Polish
       pt              Portuguese
-      sv              Swedish
-      zh              Chinese
-      uk              Ukrainian
-      sw              Swahili
-      bg              Bulgarian
-      hr              Croatian
       ro              Romanian
+      ru              Russian
       sl              Slovenian
       sr              Serbian
-      et              Estonian
-      ja              Japanese
-      be              Belarusian
-      lt              Lithuanian
+      sv              Swedish
+      sw              Swahili
+      th              Thai
+      tr              Turkish
+      uk              Ukrainian
+      vi              Vietnamese
+      zh              Chinese
