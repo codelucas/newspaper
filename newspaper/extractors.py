@@ -22,7 +22,7 @@ from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
 
 from . import urls
-from .utils import StringReplacement, StringSplitter
+from .utils import StringReplacement, StringSplitter, URLHelper
 
 log = logging.getLogger(__name__)
 
@@ -659,6 +659,12 @@ class ContentExtractor(object):
                 domain_tld = tldextract.extract(source_url)
                 child_subdomain_parts = child_tld.subdomain.split('.')
                 subdomain_contains = False
+                if not URLHelper.same_domain(child_tld, domain_tld):
+                    if not self.config.span_hosts:
+                        if self.config.verbose:
+                            print ("domain dismatch:", child_tld, domain_tld)
+                        continue
+
                 for part in child_subdomain_parts:
                     if part == domain_tld.domain:
                         if self.config.verbose:
