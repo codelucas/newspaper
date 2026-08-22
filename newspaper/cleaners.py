@@ -28,6 +28,12 @@ class DocumentCleaner(object):
             "|date|^print$|popup|author-dropdown|tools|socialtools|byline"
             "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
             "|legende|ajoutVideo|timestamp|js_replies"
+            "|date|^print$|popup|author-dropdown|tools|socialtools|byline"
+            "|konafilter|KonaFilter|breadcrumbs|^fn$|wp-caption-text"
+            "|legende|ajoutVideo|timestamp|js_replies|breadcrumb|^rating$""|^comment$|^share$|^like$|^icon$|^count$|^sharing$|^news-list$"
+            "|^vote$|^ad$|^Ad$|^rec$|^oneindia$|^inread$|^showmore$|^tags_scroll$""|^Share$|^date$|^related$|^fb-root$|^recommendation$|^recomment$"
+            "|^readalso$|^read-also$|^image_counter$|^yarp$|^navig$|^extranews$""|^arrow$|^slider__footer$|^socbuttons$|^see-more$|^subscribe$"
+            "|post-data|post-social|article__content__author-title|archive__posts__item""|user|^banner$|^flair$|^forlo$|append-news|^inject$|^rg-gallery_inj$|^tag$"
         )
         self.regexp_namespace = "http://exslt.org/regular-expressions"
         self.nauthy_ids_re = ("//*[re:test(@id, '%s', 'i')]" %

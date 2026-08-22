@@ -17,6 +17,7 @@ import re
 import re
 from collections import defaultdict
 
+from difflib import SequenceMatcher
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
@@ -344,10 +345,16 @@ class ContentExtractor(object):
         # (either it differs for case, for special chars, or it's truncated)
         # in these cases, we prefer the title_text_h1
         filter_title = filter_regex.sub('', title).lower()
-        if filter_title_text_h1 == filter_title:
+        if self.is_similar(filter_title_text_h1, filter_title):
             title = title_text_h1
 
         return title
+
+    def is_similar(self, text_a, text_b):
+        """used for comparison between the final title and title_text_h1
+            0.6 is an empirical value
+        """
+        return SequenceMatcher(None, text_a, text_b).ratio() > 0.6
 
     def split_title(self, title, splitter, hint=None):
         """Split the title to best part possible
