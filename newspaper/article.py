@@ -270,13 +270,15 @@ class Article(object):
         # Before any computations on the body, clean DOM object
         self.doc = document_cleaner.clean(self.doc)
 
+        # Extract clean_top_node from clean_doc
+        self.clean_top_node = self.extractor.calculate_best_node(self.clean_doc)
+
         self.top_node = self.extractor.calculate_best_node(self.doc)
         if self.top_node is not None:
             video_extractor = VideoExtractor(self.config, self.top_node)
             self.set_movies(video_extractor.get_videos())
 
             self.top_node = self.extractor.post_cleanup(self.top_node)
-            self.clean_top_node = copy.deepcopy(self.top_node)
 
             text, article_html = output_formatter.get_formatted(
                 self.top_node)
