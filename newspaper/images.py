@@ -13,6 +13,10 @@ import math
 import io
 import traceback
 import urllib.parse
+from concurrent.futures import as_completed
+from requests_futures.sessions import FuturesSession
+from cachetools import TTLCache
+from threading import Lock
 
 import requests
 from PIL import Image, ImageFile
@@ -83,91 +87,29 @@ def clean_url(url):
     return url
 
 
-def fetch_url(url, useragent, referer=None, retries=1, dimension=False):
-    cur_try = 0
-    nothing = None if dimension else (None, None)
-    url = clean_url(url)
-    if not url.startswith(('http://', 'https://')):
-        return nothing
-
-    response = None
-    while True:
+def start_get_image(session, url, useragent, referrer):
+    def on_response(resp, *args, **kwargs):
+        p = ImageFile.Parser()
         try:
-            response = requests.get(url, stream=True, timeout=5, headers={
+            p.feed(resp.content)
+            if p.image:
+                resp.image = p.image
+
+        except Exception as e:
+            print("Error processing {}: {}".format(url, e))
+            resp.image = None
+
+    return session.get(url, headers={
                 'User-Agent': useragent,
-                'Referer': referer,
-            })
-
-            # if we only need the dimension of the image, we may not
-            # need to download the entire thing
-            if dimension:
-                content = response.raw.read(chunk_size)
-            else:
-                content = response.raw.read()
-
-            content_type = response.headers.get('Content-Type')
-
-            if not content_type:
-                return nothing
-
-            if 'image' in content_type:
-                p = ImageFile.Parser()
-                new_data = content
-                while not p.image and new_data:
-                    try:
-                        p.feed(new_data)
-                    except IOError:
-                        traceback.print_exc()
-                        p = None
-                        break
-                    except ValueError:
-                        traceback.print_exc()
-                        p = None
-                        break
-                    except Exception as e:
-                        # For some favicon.ico images, the image is so small
-                        # that our PIL feed() method fails a length test.
-                        is_favicon = (urls.url_to_filetype(url) == 'ico')
-                        if is_favicon:
-                            pass
-                        else:
-                            raise e
-                        p = None
-                        break
-                    new_data = response.raw.read(chunk_size)
-                    content += new_data
-
-                if p is None:
-                    return nothing
-                # return the size, or return the data
-                if dimension and p.image:
-                    return p.image.size
-                elif dimension:
-                    return nothing
-            elif dimension:
-                # expected an image, but didn't get one
-                return nothing
-
-            return content_type, content
-
-        except requests.exceptions.RequestException as e:
-            cur_try += 1
-            if cur_try >= retries:
-                log.debug('error while fetching: %s refer: %s' %
-                          (url, referer))
-                return nothing
-        finally:
-            if response is not None:
-                response.raw.close()
-                if response.raw._connection:
-                    response.raw._connection.close()
-
-
-def fetch_image_dimension(url, useragent, referer=None, retries=1):
-    return fetch_url(url, useragent, referer, retries, dimension=True)
-
+                'Referer': referrer,
+            }, hooks={
+                "response": on_response
+                })
 
 class Scraper:
+    # cache invalidates after 5 hours
+    imagecache = TTLCache(maxsize=1024, ttl=60 * 60 * 5)
+    imagecachelock = Lock()
 
     def __init__(self, article):
         self.url = article.url
@@ -185,13 +127,36 @@ class Scraper:
 
         max_area = 0
         max_url = None
-        for img_url in self.imgs:
-            dimension = fetch_image_dimension(
-                img_url, self.useragent, referer=self.url)
-            area = self.calculate_area(img_url, dimension)
-            if area > max_area:
-                max_area = area
-                max_url = img_url
+
+        with FuturesSession(max_workers=16) as session:
+            images = []
+            futures = []
+            for img_url in self.imgs:
+                img_url = clean_url(img_url)
+                if imgurl.startswith(('http://', 'https://')):
+                    image = None
+                    with self.imagecachelock:
+                        image = self.imagecache.get(img_url)
+                    if image is not None:
+                        images.append((image, url))
+                    else:
+                        future = start_get_image(session, img_url, self.useragent, self.url)
+                        if future is not None:
+                            futures.append(future)
+
+            for future in as_completed(futures):
+                response = future.result()
+                if response.image is not None:
+                    images.append((response.image, response.url))
+                    with self.imagecachelock:
+                        self.imagecache[response.url] = response.image
+
+            for image, url in images:
+                area = self.calculate_area(url, image.size)
+                if area > max_area:
+                    max_area = area
+                    max_url = response.url
+
         log.debug('using max img {}'.format(max_url))
         return max_url
 
@@ -220,7 +185,7 @@ class Scraper:
         return area
 
     def satisfies_requirements(self, img_url):
-        dimension = fetch_image_dimension(
+        dimension = self.fetch_image_dimension(
             img_url, self.useragent, referer=self.url)
         area = self.calculate_area(img_url, dimension)
         return area > minimal_area
@@ -230,9 +195,8 @@ class Scraper:
         """
         image_url = self.largest_image_url()
         if image_url:
-            content_type, image_str = fetch_url(image_url, referer=self.url)
-            if image_str:
-                image = str_to_image(image_str)
+            image = fetch_url(image_url, referer=self.url)
+            if image:
                 try:
                     image = prepare_image(image)
                 except IOError as e:
@@ -240,3 +204,90 @@ class Scraper:
                         return None
                 return image, image_url
         return None, None
+
+    def fetch_url(self, url, useragent, referer=None, retries=1, dimension=False):
+        cur_try = 0
+        url = clean_url(url)
+        if not url.startswith(('http://', 'https://')):
+            return None
+
+        result_image = None
+        with self.imagecachelock:
+            result_image = self.imagecache.get(url)
+
+        while result_image is None:
+            response = None
+            try:
+                response = requests.get(url, stream=True, timeout=5, headers={
+                    'User-Agent': useragent,
+                    'Referer': referer,
+                })
+
+                # if we only need the dimension of the image, we may not
+                # need to download the entire thing
+                if dimension:
+                    content = response.raw.read(chunk_size)
+                else:
+                    content = response.raw.read()
+
+                content_type = response.headers.get('Content-Type')
+
+                if not content_type:
+                    return nothing
+
+                if 'image' in content_type:
+                    p = ImageFile.Parser()
+                    new_data = content
+                    while not p.image and new_data:
+                        try:
+                            p.feed(new_data)
+                        except IOError:
+                            traceback.print_exc()
+                            p = None
+                            break
+                        except ValueError:
+                            traceback.print_exc()
+                            p = None
+                            break
+                        except Exception as e:
+                            # For some favicon.ico images, the image is so small
+                            # that our PIL feed() method fails a length test.
+                            is_favicon = (urls.url_to_filetype(url) == 'ico')
+                            if is_favicon:
+                                pass
+                            else:
+                                raise e
+                            p = None
+                            break
+                        new_data = response.raw.read(chunk_size)
+                        content += new_data
+
+                    if p is not None:
+                        result_image = p.image
+                        with self.imagecachelock:
+                            self.imagecache[url] = p.image
+
+                    break # return result
+
+            except requests.exceptions.RequestException as e:
+                cur_try += 1
+                if cur_try >= retries:
+                    log.debug('error while fetching: %s refer: %s' %
+                              (url, referer))
+            finally:
+                if response is not None:
+                    response.raw.close()
+                    if response.raw._connection:
+                        response.raw._connection.close()
+
+        if result_image:
+            if dimension:
+                return result_image.size
+            else:
+                return result_image
+        else:
+            return None
+
+    def fetch_image_dimension(self, url, useragent, referer=None, retries=1):
+        return self.fetch_url(url, useragent, referer, retries, dimension=True)
+
