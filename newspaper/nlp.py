@@ -19,6 +19,9 @@ ideal = 20.0
 
 stopwords = set()
 
+NUM_KEYWORDS = 10
+
+
 def load_stopwords(language):
     """ 
     Loads language-specific stopwords for keyword selection
@@ -122,7 +125,6 @@ def keywords(text):
     sorts them in reverse natural order (so descending) by number of
     occurrences.
     """
-    NUM_KEYWORDS = 10
     text = split_words(text)
     # of words before removing blacklist words
     if text:

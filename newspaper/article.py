@@ -378,7 +378,10 @@ class Article(object):
         nlp.load_stopwords(self.config.get_language())
         text_keyws = list(nlp.keywords(self.text).keys())
         title_keyws = list(nlp.keywords(self.title).keys())
-        keyws = list(set(title_keyws + text_keyws))
+        keyws = set(title_keyws)
+        while len(keyws) < nlp.NUM_KEYWORDS and text_keyws:
+            keyws.add(text_keyws.pop(0))
+        keyws = list(keyws)
         self.set_keywords(keyws)
 
         max_sents = self.config.MAX_SUMMARY_SENT
