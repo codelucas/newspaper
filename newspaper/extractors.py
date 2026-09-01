@@ -227,7 +227,8 @@ class ContentExtractor(object):
             if meta_tags:
                 date_str = self.parser.getAttribute(
                     meta_tags[0],
-                    known_meta_tag['content'])
+                    known_meta_tag['content'])\
+                or self.parser.getText(meta_tags[0])
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
