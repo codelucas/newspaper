@@ -230,12 +230,17 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
                 modified = os.path.getmtime(filepath)
                 age_seconds = time.time() - modified
                 if age_seconds < seconds:
-                    return pickle.load(open(filepath, "rb"))
+                    cache_file = open(filepath, "rb")
+                    content = pickle.load(cache_file)
+                    cache_file.close()
+                    return content
 
             # call the decorated function...
             result = function(*args, **kwargs)
             # ... and save the cached object for next time
-            pickle.dump(result, open(filepath, "wb"))
+            cache_file = open(filepath, "wb")
+            pickle.dump(result, cache_file)
+            cache_file.close()
             return result
         return inner_function
     return do_cache
