@@ -58,7 +58,7 @@ Here is how to do so:
     u'<div> \n<p><strong>(CNN)</strong> -- Charles Smith insisted Sunda...'
 
 The lxml (dom object) and top_node (chunk of dom that contains our 'Article') are also
-cached incase users would like to use them.
+cached in case users would like to use them.
 
 Access **after parsing()** with:
 
@@ -157,7 +157,7 @@ for absolute control over how your sources are constructed.
     3100
 
 And voila, we have mimic'd the ``build()`` method. In the above sequence,
-every method is dependant on the method above it. Stop whenever you wish.
+every method is dependent on the method above it. Stop whenever you wish.
 
 Parameters and Configurations
 -----------------------------
