@@ -38,7 +38,7 @@ speed up the download time while being respectful.
 Keeping Html of main body article
 ---------------------------------
 
-Keeping the html of just an article's body text is helpbut because it allows you
+Keeping the html of just an article's body text is helpful because it allows you
 to retain some of the semantic information in the html. Also it will help if you
 end up displaying the extracted article somehow.
 
