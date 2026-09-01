@@ -109,6 +109,22 @@ A Glance:
     >>> text = fulltext(html)
 
 
+Newspaper can directly parse a string:
+
+.. code-block:: pycon
+
+    >>> from newspaper import Article
+
+    >>> a = Article('http://example.com/fake')  # Pass any url
+
+    >>> my_html = u'<html><title> ...'
+
+    >>> a.set_html(my_html)  
+
+    >>> a.parse()    
+    >>> ...
+
+
 Newspaper has *seamless* language extraction and detection.
 If no language is specified, Newspaper will attempt to auto detect a language.
 
