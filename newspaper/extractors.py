@@ -12,10 +12,12 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import copy
+import json
 import logging
-import re
+import os.path
 import re
 from collections import defaultdict
+from datetime import datetime
 
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
@@ -25,6 +27,11 @@ from . import urls
 from .utils import StringReplacement, StringSplitter
 
 log = logging.getLogger(__name__)
+
+# Anchors the fields a partial date leaves unspecified. Without it dateutil
+# fills them from the current moment, which makes '2014/04' resolve to a
+# different day depending on when you run it.
+DATE_DEFAULT = datetime(1, 1, 1)
 
 MOTLEY_REPLACEMENT = StringReplacement("&#65533;", "")
 ESCAPED_FRAGMENT_REPLACEMENT = StringReplacement(
@@ -170,31 +177,53 @@ class ContentExtractor(object):
         # return authors
 
     def get_publishing_date(self, url, doc):
-        """3 strategies for publishing date extraction. The strategies
-        are descending in accuracy and the next strategy is only
-        attempted if a preferred one fails.
+        """Strategies for publishing date extraction, in descending order of
+        accuracy. The next strategy is only attempted if a preferred one fails.
 
-        1. Pubdate from URL
+        1. Pubdate from the URL, when the URL names a day
         2. Pubdate from metadata
-        3. Raw regex searches in the HTML + added heuristics
+        3. Pubdate from schema.org JSON-LD, then a <time> publication element
+        4. Pubdate from the URL when it only names a year and a month
+
+        The URL is split across the first and last places on purpose. A URL
+        that names a day is as precise as anything the page can state, and it
+        cannot be poisoned by a template that stamps every page with the same
+        metadata. A '/2019/07/' URL is coarser than a datePublished the page
+        states about itself, so preferring it would push a page whose metadata
+        says 2022-03-25 back to 2019-07-01 — losing a date the page told us in
+        favour of one we rounded to the 1st. It is still better than no date at
+        all, so it stays as the last fallback.
         """
 
         def parse_date_str(date_str):
             if date_str:
                 try:
-                    return date_parser(date_str)
+                    # An explicit default matters more than it looks. Given
+                    # '2014/04' dateutil fills the missing day from TODAY, so
+                    # the same page yields a different date depending on when it
+                    # is parsed, and re-running an extraction silently moves the
+                    # answer. The 1st is the honest reading of a year-month.
+                    return date_parser(date_str, default=DATE_DEFAULT)
                 except (ValueError, OverflowError, AttributeError, TypeError):
-                    # near all parse failures are due to URL dates without a day
-                    # specifier, e.g. /2014/04/
                     return None
 
-        date_match = re.search(urls.STRICT_DATE_REGEX, url)
-        if date_match:
-            date_str = date_match.group(0)
-            datetime_obj = parse_date_str(date_str)
+        url_date_str = self._get_url_date(url)
+        # '2013-03-04' has a day, '2013-03' does not; only the former outranks
+        # what the page says about itself.
+        if url_date_str and url_date_str.count('-') == 2:
+            datetime_obj = parse_date_str(url_date_str)
             if datetime_obj:
                 return datetime_obj
 
+        # Names here are matched by SUBSTRING, not equality — getElementsByTag
+        # builds an xpath `contains(@name, value)`. That is survivable for the
+        # long, specific names below, and lethal for a short generic one: a
+        # `date` entry matches `name="last-updated"` (up-DATE-d), so a dev.to
+        # article whose JSON-LD says 2021-08-02 came back as its 2024-01-12
+        # modification date. A confidently wrong date is worse than none, so
+        # generic names (`date`, `dc.date`, `dcterms.created`) are deliberately
+        # absent; they would need equality matching to be safe, and JSON-LD
+        # below already covers the pages they were added for.
         PUBLISH_DATE_TAGS = [
             {'attribute': 'property', 'value': 'rnews:datePublished',
              'content': 'content'},
@@ -232,7 +261,135 @@ class ContentExtractor(object):
                 if datetime_obj:
                     return datetime_obj
 
+        # Schema.org JSON-LD, which is where most modern site generators put the
+        # date and where none of the meta tags above will find it. Tried after
+        # them so no existing page changes its answer, and before the raw text
+        # heuristics because a declared datePublished beats a regex over prose.
+        datetime_obj = parse_date_str(self._get_ld_json_date(doc))
+        if datetime_obj:
+            return datetime_obj
+
+        # <time datetime="..."> is the plain-HTML way to say the same thing.
+        # Only a time element the document marks as the publication date counts:
+        # a bare <time> is as likely to be a comment timestamp or a reading time.
+        for time_tag in self.parser.getElementsByTag(doc, tag='time'):
+            if self.parser.getAttribute(time_tag, 'pubdate') is None and \
+                    'publish' not in (
+                        self.parser.getAttribute(time_tag, 'itemprop') or
+                        self.parser.getAttribute(time_tag, 'class') or ''
+                    ).lower():
+                continue
+            datetime_obj = parse_date_str(
+                self.parser.getAttribute(time_tag, 'datetime'))
+            if datetime_obj:
+                return datetime_obj
+
+        # A year-month URL, now that nothing more precise has turned up. The
+        # day lands on the 1st; see parse_date_str for why it is not today's.
+        return parse_date_str(url_date_str)
+
+    def _get_url_date(self, url):
+        """Find a publication date in the URL path, or None.
+
+        This replaced a bare STRICT_DATE_REGEX search, which was wrong in both
+        directions.
+
+        It missed real dates: the regex captures the separators around the
+        match, so '/2014/04/' arrived as '2014/04/' and dateutil raises on the
+        trailing slash. Every year-month URL fell through, and a page with no
+        date metadata then had no date at all. The old comment blamed the
+        missing day specifier and sent everyone looking in the wrong place —
+        date_parser('2014/04') is fine, date_parser('2014/04/') is not.
+
+        And it invented dates that were not there, which is the worse
+        direction: 'kali-linux-2026-1-release' and a '...-2026-07-...' API
+        version both look like dates to a regex that scans anywhere in the
+        string. Those only ever parsed by accident, because the same trailing
+        separator that hid the real dates also hid them.
+
+        The discriminator is position, not shape. A date in a URL owns the start
+        of its path segment — '/2013/03/slug', '/2025-10-registry-directory' —
+        while a version buried in a slug does not.
+        """
+        segments = [seg for seg in urlparse(url).path.split('/') if seg]
+
+        for index, segment in enumerate(segments):
+            # '2013/03/slug' and '2013/03/04/slug': consecutive numeric
+            # segments, which is the shape almost every blog engine emits.
+            if re.fullmatch(r'(19|20)\d{2}', segment):
+                parts = [segment]
+                for following in segments[index + 1:index + 3]:
+                    if not re.fullmatch(r'\d{1,2}', following):
+                        break
+                    parts.append(following)
+                if len(parts) > 1:
+                    return '-'.join(parts)
+                continue
+
+            # '2025-10-registry-directory', '2026-08-21-the-new-experience':
+            # the date opens the segment and a slug follows it.
+            match = re.match(
+                r'(19|20)\d{2}[-_.](\d{1,2})([-_.](\d{1,2}))?(?![0-9])', segment)
+            if match:
+                return match.group(0).rstrip('-_.').replace('_', '-') \
+                    .replace('.', '-')
+
         return None
+
+    def _get_ld_json_date(self, doc):
+        """Pull datePublished out of any schema.org JSON-LD block.
+
+        The payload is author-controlled, so every shape here is one seen in the
+        wild: a bare object, a list of them, or a @graph wrapper. Malformed JSON
+        is common enough that it must never propagate — a page with a broken
+        script block still has the other strategies.
+        """
+        def find_date(node):
+            if isinstance(node, dict):
+                for key in ('datePublished', 'dateCreated'):
+                    value = node.get(key)
+                    if isinstance(value, str) and value.strip():
+                        return value
+                for nested in node.values():
+                    found = find_date(nested)
+                    if found:
+                        return found
+            elif isinstance(node, list):
+                for item in node:
+                    found = find_date(item)
+                    if found:
+                        return found
+            return None
+
+        for script in self.parser.getElementsByTag(
+                doc, tag='script', attr='type', value='application/ld+json'):
+            try:
+                payload = json.loads(self.parser.getText(script))
+            except (ValueError, TypeError):
+                continue
+            found = find_date(payload)
+            if found:
+                return found
+
+        return None
+
+    def _choose_title_candidate(self, candidates, og_title):
+        """Pick the best <title> when a document has more than one.
+
+        Prefer a candidate whose filtered text contains the og:title (the
+        descriptive article title), otherwise fall back to the longest
+        candidate. This avoids picking bare site names (e.g. Medium's second
+        <title>Medium</title>).
+        """
+        if len(candidates) == 1:
+            return candidates[0]
+        filter_regex = re.compile(r'[^\u4e00-\u9fa5a-zA-Z0-9\ ]')
+        og_filtered = filter_regex.sub('', og_title or '').lower().strip()
+        if og_filtered:
+            for candidate in candidates:
+                if og_filtered in filter_regex.sub('', candidate).lower():
+                    return candidate
+        return max(candidates, key=len)
 
     def get_title(self, doc):
         """Fetch the article title and analyze it
@@ -253,12 +410,31 @@ class ContentExtractor(object):
         """
         title = ''
         title_element = self.parser.getElementsByTag(doc, tag='title')
-        # no title found
-        if title_element is None or len(title_element) == 0:
-            return title
+        title_text_fb = (
+            self.get_meta_content(doc, 'meta[property="og:title"]') or
+            self.get_meta_content(doc, 'meta[name="og:title"]') or ''
+        )
 
-        # title elem found
-        title_text = self.parser.getText(title_element[0])
+        # no title found, fallback to og:title
+        if title_element is None or len(title_element) == 0:
+            title_text = title_text_fb
+            if not title_text:
+                return title
+        else:
+            # some sites (e.g. Medium) emit multiple <title> tags, one of which
+            # is a bare site name ("Medium"). Blindly taking the first element
+            # can yield the useless site name, so pick the best candidate:
+            # prefer the one matching og:title, otherwise the longest text.
+            title_candidates = [self.parser.getText(el).strip()
+                                for el in title_element]
+            title_candidates = [c for c in title_candidates if c]
+            if not title_candidates:
+                title_text = title_text_fb
+                if not title_text:
+                    return title
+            else:
+                title_text = self._choose_title_candidate(title_candidates,
+                                                          title_text_fb)
         used_delimeter = False
 
         # title from h1
@@ -279,11 +455,6 @@ class ContentExtractor(object):
                 title_text_h1 = ''
             # clean double spaces
             title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
-
-        # title from og:title
-        title_text_fb = (
-        self.get_meta_content(doc, 'meta[property="og:title"]') or
-        self.get_meta_content(doc, 'meta[name="og:title"]') or '')
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -449,25 +620,33 @@ class ContentExtractor(object):
         """
         top_meta_image, try_one, try_two, try_three, try_four = [None] * 5
         try_one = self.get_meta_content(doc, 'meta[property="og:image"]')
+        try_one = None if self.image_is_ignored(try_one) else try_one
         if not try_one:
             link_img_src_kwargs = \
                 {'tag': 'link', 'attr': 'rel', 'value': 'img_src|image_src'}
             elems = self.parser.getElementsByTag(doc, use_regex=True, **link_img_src_kwargs)
             try_two = elems[0].get('href') if elems else None
-
+            try_two = None if self.image_is_ignored(try_two) else try_two
             if not try_two:
                 try_three = self.get_meta_content(doc, 'meta[name="og:image"]')
-
+                try_three = None if self.image_is_ignored(try_three) else try_three
                 if not try_three:
                     link_icon_kwargs = {'tag': 'link', 'attr': 'rel', 'value': 'icon'}
                     elems = self.parser.getElementsByTag(doc, **link_icon_kwargs)
                     try_four = elems[0].get('href') if elems else None
+                    try_four = None if self.image_is_ignored(try_four) else try_four
 
         top_meta_image = try_one or try_two or try_three or try_four
 
         if top_meta_image:
             return urljoin(article_url, top_meta_image)
         return ''
+
+    def image_is_ignored(self, image):
+        return any([True for x in self.config.ignored_images_suffix_list if image and image != '' and self.match_image(x, os.path.basename(image))])
+
+    def match_image(self, pattern, image):
+        return re.search(pattern, image) is not None
 
     def get_meta_type(self, doc):
         """Returns meta type of article, open graph protocol
@@ -575,6 +754,7 @@ class ContentExtractor(object):
                 for img_tag in img_tags if img_tag.get('src')]
         img_links = set([urljoin(article_url, url)
                          for url in urls])
+        img_links = set([x for x in img_links if not self.image_is_ignored(x)])
         return img_links
 
     def get_first_img_url(self, article_url, top_node):
@@ -1014,9 +1194,16 @@ class ContentExtractor(object):
         on like paragraphs and tables
         """
         nodes_to_check = []
-        for tag in ['p', 'pre', 'td']:
-            items = self.parser.getElementsByTag(doc, tag=tag)
-            nodes_to_check += items
+        articles = self.parser.getElementsByTag(doc, tag='article')
+        if len(articles) > 0 and self.get_meta_site_name(doc) == 'Medium':
+            # Specific heuristic for Medium articles
+            sections = self.parser.getElementsByTag(articles[0], tag='section')
+            if len(sections) > 1:
+                nodes_to_check = sections
+        if len(nodes_to_check) == 0:
+            for tag in ['p', 'pre', 'td', 'ol', 'ul']:
+                items = self.parser.getElementsByTag(doc, tag=tag)
+                nodes_to_check += items
         return nodes_to_check
 
     def is_table_and_no_para_exist(self, e):

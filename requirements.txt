@@ -3,7 +3,7 @@ cssselect>=0.9.2
 feedfinder2>=0.0.4
 feedparser>=5.2.1
 jieba3k>=0.35.1
-lxml>=3.6.0
+lxml==5.1.0 # https://lxml.de/5.2/changes-5.2.0.html
 nltk>=3.2.1
 Pillow>=3.3.0
 pythainlp>=1.7.2
