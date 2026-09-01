@@ -18,14 +18,20 @@ from .source import Source
 from .utils import extend_config, print_available_languages
 
 
-def build(url='', dry=False, config=None, **kwargs) -> Source:
+def build(url='', dry=False, config=None, restrict_to_homepage_urls=False, **kwargs) -> Source:
     """Returns a constructed source object without
     downloading or parsing the articles
+
+    :param url: URL of the source (homepage)
+    :param dry: If True, don't build the source (download and parse)
+    :param config: Configuration object
+    :param restrict_to_homepage_urls: If True, only articles linked directly from the homepage will be processed
+    :param kwargs: Additional keyword arguments to pass to the Source constructor
     """
     config = config or Configuration()
     config = extend_config(config, kwargs)
     url = url or ''
-    s = Source(url, config=config)
+    s = Source(url, config=config, restrict_to_homepage_urls=restrict_to_homepage_urls)
     if not dry:
         s.build()
     return s
