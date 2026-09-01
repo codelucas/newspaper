@@ -26,6 +26,7 @@ URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 import newspaper
 from newspaper import Article, fulltext, Source, ArticleException, news_pool
 from newspaper.article import ArticleDownloadState
+from newspaper.source import Category
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
 
@@ -521,6 +522,27 @@ class SourceTestCase(unittest.TestCase):
         s.set_categories()
         self.assertCountEqual(saved_urls, s.category_urls())
 
+
+class FeedTestCase(unittest.TestCase):
+    @print_test
+    def test_feed_extraction(self):
+        """Test that feeds are matched properly
+        """
+        url = 'http://theatlantic.com'
+        html = mock_resource_with('theatlantic.com1', 'html')
+        s = Source(url, memoize_articles=False)
+        s.html = html
+        s.parse()
+        # mock in categories containing only homepage
+        #s.set_categories()
+        category = Category(url=url)
+        category.html = html
+        category.doc = s.doc
+        s.categories = [category,]
+        #s.parse_categories()
+        s.set_feeds()
+        self.assertEqual(len(s.feeds), 3)
+ 
 
 class UrlTestCase(unittest.TestCase):
     @print_test
