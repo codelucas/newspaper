@@ -88,7 +88,10 @@ class ContentExtractor(object):
                 if item.lower() in seen:
                     continue
                 seen[item.lower()] = 1
-                result.append(item.title())
+                if self.config.keep_authors_format:
+                    result.append(item)
+                else: 
+                    result.append(item.title())
             return result
 
         def parse_byline(search_str):
