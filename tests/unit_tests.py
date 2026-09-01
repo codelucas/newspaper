@@ -741,6 +741,17 @@ class MultiLanguageTestCase(unittest.TestCase):
         self.assertEqual(text, article.text)
         self.assertEqual(text, fulltext(article.html, 'th'))
 
+    @print_test
+    def test_latvian_fulltext_extract(self):
+        url = 'https://www.lsm.lv/raksts/zinas/arzemes/norvegija-pec-zemes-nogruvuma-pieci-bojagajusie.a387519/'
+        article = Article(url=url, language='lv')
+        html = mock_resource_with('latvian_article', 'html')
+        article.download(html)
+        article.parse()
+        text = mock_resource_with('latvian', 'txt')
+        self.assertEqual(text, article.text)
+        self.assertEqual(text, fulltext(article.html, 'lv'))
+
 
 class TestNewspaperLanguagesApi(unittest.TestCase):
     @print_test
