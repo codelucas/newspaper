@@ -2,7 +2,7 @@
 from .videos import Video
 
 VIDEOS_TAGS = ['iframe', 'embed', 'object', 'video']
-VIDEO_PROVIDERS = ['youtube', 'vimeo', 'dailymotion', 'kewego']
+VIDEO_PROVIDERS = ['youtube', 'youtu.be', 'vimeo', 'dailymotion', 'kewego']
 
 
 class VideoExtractor(object):
