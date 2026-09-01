@@ -331,12 +331,11 @@ def memoize_articles(source, articles):
 
 
 def get_useragent():
-    """Uses generator to return next useragent in saved file
+    """Returns a random useragent in saved file
     """
     with open(settings.USERAGENTS, 'r') as f:
         agents = f.readlines()
-        selection = random.randint(0, len(agents) - 1)
-        agent = agents[selection]
+        agent = random.choice(agents)
         return agent.strip()
 
 
