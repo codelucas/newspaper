@@ -24,7 +24,7 @@ HTML_FN = os.path.join(TEST_DIR, 'data', 'html')
 URLS_FILE = os.path.join(TEST_DIR, 'data', 'fulltext_url_list.txt')
 
 import newspaper
-from newspaper import Article, fulltext, Source, ArticleException, news_pool
+from newspaper import Article, Config, fulltext, Source, ArticleException, news_pool, images
 from newspaper.article import ArticleDownloadState
 from newspaper.configuration import Configuration
 from newspaper.urls import get_domain
@@ -375,6 +375,10 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<title>{}</title>'.format(title)
         self.assertEqual(self._get_title(html), title)
 
+    def test_get_title_fallback_to_og_title_when_title_missing(self):
+        html = '<meta property="og:title" content="Fallback title from og">'
+        self.assertEqual(self._get_title(html), 'Fallback title from og')
+
     def _get_canonical_link(self, article_url, html):
         doc = self.parser.fromstring(html)
         return self.extractor.get_canonical_link(article_url, doc)
@@ -406,9 +410,9 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<meta property="og:image" content="https://example.com/meta_img_filename.jpg" />' \
                '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
         html_empty_og_content = '<meta property="og:image" content="" />' \
-            '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
+                                '<meta name="og:image" content="https://example.com/meta_another_img_filename.jpg"/>'
         html_empty_all = '<meta property="og:image" content="" />' \
-            '<meta name="og:image" />'
+                         '<meta name="og:image" />'
         html_rel_img_src = html_empty_all + '<link rel="img_src" href="https://example.com/meta_link_image.jpg" />'
         html_rel_img_src2 = html_empty_all + '<link rel="image_src" href="https://example.com/meta_link_image2.jpg" />'
         html_rel_icon = html_empty_all + '<link rel="icon" href="https://example.com/meta_link_rel_icon.ico" />'
@@ -443,6 +447,166 @@ class ContentExtractorTestCase(unittest.TestCase):
             self.extractor.get_meta_img_url('http://www.example.com/article?foo=bar', doc),
             'https://example.com/meta_link_rel_icon.ico'
         )
+
+    def _get_publishing_date(self, url, html='<html><body></body></html>'):
+        return self.extractor.get_publishing_date(
+            url, self.parser.fromstring(html))
+
+    def test_get_publishing_date_from_url(self):
+        # Year-month paths are the common case and used to yield nothing at all:
+        # the regex captured the trailing separator and dateutil raised on it.
+        for url, expected in [
+            ('https://firebase.blog/posts/2013/03/power-your-extension',
+             '2013-03-01 00:00:00'),
+            ('https://mypy-lang.blogspot.com/2024/10/mypy-113-released.html',
+             '2024-10-01 00:00:00'),
+            ('https://techcrunch.com/2026/08/21/some-post/',
+             '2026-08-21 00:00:00'),
+            ('https://rubyonrails.org/2026/8/21/this-week-in-rails',
+             '2026-08-21 00:00:00'),
+            ('https://ui.shadcn.com/docs/changelog/2025-10-registry-directory',
+             '2025-10-01 00:00:00'),
+            ('https://github.blog/changelog/2026-08-21-the-new-experience',
+             '2026-08-21 00:00:00'),
+        ]:
+            self.assertEqual(expected, str(self._get_publishing_date(url)), url)
+
+    def test_get_publishing_date_ignores_versions_in_a_slug(self):
+        # A date owns the start of its path segment; a version buried in a slug
+        # does not. These parsed only by accident before, via the same trailing
+        # separator that hid the real dates.
+        for url in [
+            'https://www.kali.org/blog/kali-linux-2026-1-release/',
+            'https://shopify.dev/changelog/some-thing-2026-07-api-change',
+            'https://istio.io/latest/blog/2026/some-post/',
+            'https://example.com/no-date-at-all/',
+        ]:
+            self.assertIsNone(self._get_publishing_date(url), url)
+
+    def test_get_publishing_date_pins_the_day_of_a_year_month(self):
+        # dateutil fills an unspecified day from TODAY, so this asserts the
+        # answer does not depend on the day the test runs.
+        date = self._get_publishing_date('https://x.dd/blog/2013/03/slug')
+        self.assertEqual(1, date.day)
+
+    def test_get_publishing_date_from_ld_json(self):
+        for html, expected in [
+            ('<script type="application/ld+json">'
+             '{"@type":"BlogPosting","datePublished":"2017-01-25"}</script>',
+             '2017-01-25 00:00:00'),
+            ('<script type="application/ld+json">'
+             '{"@graph":[{"@type":"WebSite"},{"datePublished":"2019-06-02"}]}'
+             '</script>', '2019-06-02 00:00:00'),
+            ('<script type="application/ld+json">'
+             '[{"@type":"Person"},{"datePublished":"2021-11-09"}]</script>',
+             '2021-11-09 00:00:00'),
+        ]:
+            self.assertEqual(
+                expected, str(self._get_publishing_date('https://x.dd/p', html)))
+
+    def test_get_publishing_date_survives_malformed_ld_json(self):
+        # The payload is author-controlled, so a broken block must not stop the
+        # remaining strategies.
+        html = '<script type="application/ld+json">{oops,</script>'
+        self.assertIsNone(self._get_publishing_date('https://x.dd/p', html))
+
+    def test_get_publishing_date_from_time_element(self):
+        self.assertEqual(
+            '2018-04-03 00:00:00',
+            str(self._get_publishing_date(
+                'https://x.dd/p',
+                '<time datetime="2018-04-03" pubdate="pubdate">x</time>')))
+        self.assertEqual(
+            '2020-02-02 00:00:00',
+            str(self._get_publishing_date(
+                'https://x.dd/p',
+                '<time itemprop="datePublished" datetime="2020-02-02">x</time>')))
+        # A bare <time> is as likely to be a reading time or a comment stamp.
+        self.assertIsNone(self._get_publishing_date(
+            'https://x.dd/p', '<time datetime="2020-02-02">5 min read</time>'))
+
+    def test_publish_date_ignores_a_modification_date_meta(self):
+        # Meta names are matched by SUBSTRING, so a generic `date` entry matched
+        # `name="last-updated"` (up-DATE-d) and a dev.to article whose JSON-LD
+        # said 2021-08-02 came back as its 2024-01-12 modification date. The
+        # page's own datePublished must win over anything a modification stamp
+        # happens to look like.
+        html = (
+            '<html><head><title>T</title>'
+            '<meta name="last-updated" content="2024-01-12 13:13:27 UTC">'
+            '<script type="application/ld+json">'
+            '{"@type":"Article","datePublished":"2021-08-02T12:38:11Z"}'
+            '</script></head><body><article><p>%s</p></article></body></html>'
+        ) % ('Body text long enough to parse as an article. ' * 12)
+
+        article = Article('https://example.com/no-date-in-this-url')
+        article.download(input_html=html)
+        article.parse()
+
+        self.assertEqual('2021-08-02', article.publish_date.strftime('%Y-%m-%d'))
+
+    def test_publish_date_from_ld_json_through_a_full_parse(self):
+        # Through Article.parse rather than the extractor directly, because that
+        # is where this broke: parse() used to hand over the CLEANED doc, whose
+        # <script> tags the document cleaner has already removed, so a page
+        # carrying its date only in JSON-LD came back undated. Calling the
+        # extractor with a freshly parsed doc — as every other test here does —
+        # cannot catch that.
+        html = (
+            '<html><head><title>T</title>'
+            '<script type="application/ld+json">'
+            '{"@type":"NewsArticle","datePublished":"2026-02-16T09:00:00-05:00"}'
+            '</script></head><body><article><p>%s</p></article></body></html>'
+        ) % ('Body text long enough to parse as an article. ' * 12)
+
+        article = Article('https://example.com/some-post-with-no-date-in-the-url')
+        article.download(input_html=html)
+        article.parse()
+
+        self.assertIsNotNone(article.publish_date)
+        self.assertEqual('2026-02-16', article.publish_date.strftime('%Y-%m-%d'))
+
+    def test_get_publishing_date_prefers_meta_over_the_new_strategies(self):
+        html = ('<meta property="article:published_time" content="2015-05-05"/>'
+                '<script type="application/ld+json">'
+                '{"datePublished":"2001-01-01"}</script>')
+        self.assertEqual(
+            '2015-05-05 00:00:00',
+            str(self._get_publishing_date('https://x.dd/p', html)))
+
+    def test_get_publishing_date_prefers_page_metadata_over_a_year_month_url(self):
+        # A '/2019/07/' URL rounds to the 1st, so a page that states its own
+        # date must win — otherwise supabase's post moves from 2022-03-25 back
+        # to 2019-07-01, which is 2019 only because the slug lives there.
+        url = 'https://supabase.com/blog/2019/07/should-i-open-source-my-company'
+        for html in [
+            '<meta property="article:published_time" content="2022-03-25"/>',
+            '<script type="application/ld+json">'
+            '{"datePublished":"2022-03-25"}</script>',
+            '<time itemprop="datePublished" datetime="2022-03-25">x</time>',
+        ]:
+            self.assertEqual(
+                '2022-03-25 00:00:00',
+                str(self._get_publishing_date(url, html)), html)
+
+    def test_get_publishing_date_prefers_a_full_url_date_over_page_metadata(self):
+        # A URL that names the day is as precise as the page's own claim, and
+        # unlike shared template metadata it is per-article.
+        self.assertEqual(
+            '2026-08-21 00:00:00',
+            str(self._get_publishing_date(
+                'https://techcrunch.com/2026/08/21/some-post/',
+                '<meta property="article:published_time" content="2022-03-25"/>')))
+
+    def test_get_publishing_date_falls_back_to_a_year_month_url(self):
+        # Still the last resort: a page with no date of its own keeps the date
+        # its URL carries rather than none at all.
+        self.assertEqual(
+            '2019-07-01 00:00:00',
+            str(self._get_publishing_date(
+                'https://supabase.com/blog/2019/07/should-i-open-source-my-company',
+                '<time datetime="2022-03-25">5 min read</time>')))
+
 
 
 class SourceTestCase(unittest.TestCase):
@@ -544,7 +708,6 @@ class UrlTestCase(unittest.TestCase):
                 print('\t\turl: %s is supposed to be %s' % (url, truth_val))
                 raise
 
-
     @print_test
     def test_pubdate(self):
         """Checks that irrelevant data in url isn't considered as publishing date"""
@@ -567,7 +730,6 @@ class UrlTestCase(unittest.TestCase):
                     else:
                         print('\t\tpublishing date in %s should not be present' % (url))
                     raise
-
 
     @unittest.skip("Need to write an actual test")
     @print_test
@@ -635,9 +797,9 @@ class ConfigBuildTestCase(unittest.TestCase):
     NOTE: No need to mock responses as we are just initializing the
     objects, not actually calling download(..)
     """
+
     @print_test
     def test_article_default_params(self):
-
         a = Article(url='http://www.cnn.com/2013/11/27/'
                         'travel/weather-thanksgiving/index.html')
         self.assertEqual('en', a.config.language)
@@ -766,6 +928,31 @@ class TestDownloadPdf(unittest.TestCase):
         a = Article(url='https://www.adobe.com/pdf/pdfs/ISO32000-1PublicPatentLicense.pdf')
         a.download()
         self.assertNotEqual('%PDF-', a.html)
+
+
+class TestIgnoreImages(unittest.TestCase):
+
+    @print_test
+    def test_config_ignore_images(self):
+        config = Config()
+        config.ignored_images_suffix_list = ['think.png', '(.*)\.ico']
+        a = Article('https://www.reillywood.com/blog/why-nu/', config=config)
+        a.download()
+        a.parse()
+        self.assertEqual('https://d33wubrfki0l68.cloudfront.net/77d3013f91800257b3ca2adfb995ae24e49fff4e/b3086/img/main/headshot.jpg', a.top_img)
+
+
+class TestGetImageDimensionFallback(unittest.TestCase):
+
+    @print_test
+    def test_get_image_dimension_fallback(self):
+        config = Config()
+        config.image_dimension_ration = 32 / 9
+        a = Article('https://appwrite.io/blog/post/add-figma-oauth2-appwrite', config=config)
+        s = images.Scraper(a)
+        sr = s.satisfies_requirements('https://appwrite.io/images/blog/add-figma-oauth2-appwrite/cover.png')
+        self.assertTrue(sr)
+
 
 if __name__ == '__main__':
     argv = list(sys.argv)
