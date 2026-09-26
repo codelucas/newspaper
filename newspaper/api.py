@@ -89,5 +89,5 @@ def fulltext(html, language='en'):
 
     top_node = extractor.calculate_best_node(doc)
     top_node = extractor.post_cleanup(top_node)
-    text, article_html = output_formatter.get_formatted(top_node)
+    text, article_html, links = output_formatter.get_formatted(top_node)
     return text
