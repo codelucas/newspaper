@@ -143,6 +143,9 @@ class Article(object):
         # "most important part of the page"
         self.clean_top_node = None
 
+        # lxml DOM object is used to generate article_html
+        self.top_node_article_html = None
+
         # lxml DOM object generated from HTML
         self.doc = None
 
@@ -282,6 +285,7 @@ class Article(object):
                 self.top_node)
             self.set_article_html(article_html)
             self.set_text(text)
+            self.top_node_article_html = output_formatter.get_top_node_article_html()
 
         self.fetch_images()
 
