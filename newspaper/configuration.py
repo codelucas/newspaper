@@ -11,6 +11,7 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2014, Lucas Ou-Yang'
 
 import logging
+import requests
 
 from .parsers import Parser
 from .text import (StopWords, StopWordsArabic, StopWordsChinese,
@@ -63,6 +64,7 @@ class Configuration(object):
         # Unique stopword classes for oriental languages, don't toggle
         self.stopwords_class = StopWords
 
+        self.session = requests.Session()
         self.browser_user_agent = 'newspaper/%s' % __version__
         self.headers = {}
         self.request_timeout = 7

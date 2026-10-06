@@ -55,11 +55,12 @@ def get_html_2XX_only(url, config=None, response=None):
     timeout = config.request_timeout
     proxies = config.proxies
     headers = config.headers
+    session = config.session
 
     if response is not None:
         return _get_html_from_response(response, config)
 
-    response = requests.get(
+    response = session.get(
         url=url, **get_request_kwargs(timeout, useragent, proxies, headers))
 
     html = _get_html_from_response(response, config)
@@ -102,11 +103,12 @@ class MRequest(object):
         self.timeout = config.request_timeout
         self.proxies = config.proxies
         self.headers = config.headers
+        self.session = config.session
         self.resp = None
 
     def send(self):
         try:
-            self.resp = requests.get(self.url, **get_request_kwargs(
+            self.resp = self.session.get(self.url, **get_request_kwargs(
                 self.timeout, self.useragent, self.proxies, self.headers))
             if self.config.http_success_only:
                 self.resp.raise_for_status()

@@ -211,6 +211,11 @@ def valid_url(url, verbose=False, test=False):
                 if verbose: print('%s verified for being a slug' % url)
                 return True
 
+    # Allow for paths like /[numeric] (eg: https://carbon-pulse.com/226570/)
+    if len(path_chunks) == 1 and path_chunks[0].isnumeric():
+        if verbose: print('%s verified for isnumeric' % url)
+        return True
+
     # There must be at least 2 subpaths
     if len(path_chunks) <= 1:
         if verbose: print('%s caught for path chunks too small' % url)

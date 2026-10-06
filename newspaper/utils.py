@@ -235,6 +235,7 @@ def cache_disk(seconds=(86400 * 5), cache_folder="/tmp"):
             # call the decorated function...
             result = function(*args, **kwargs)
             # ... and save the cached object for next time
+            os.makedirs(cache_folder, exist_ok=True)
             pickle.dump(result, open(filepath, "wb"))
             return result
         return inner_function
@@ -324,6 +325,7 @@ def memoize_articles(source, articles):
         memo_text = ''
 
     # TODO if source: source.write_upload_times(prev_length, new_length)
+    os.makedirs(settings.MEMO_DIR, exist_ok=True)
     ff = codecs.open(d_pth, 'w', 'utf-8')
     ff.write(memo_text)
     ff.close()
