@@ -20,6 +20,7 @@ from collections import defaultdict
 from dateutil.parser import parse as date_parser
 from tldextract import tldextract
 from urllib.parse import urljoin, urlparse, urlunparse
+from dateparser.search import search_first_date
 
 from . import urls
 from .utils import StringReplacement, StringSplitter
@@ -136,7 +137,7 @@ class ContentExtractor(object):
         # Try 1: Search popular author tags for authors
 
         ATTRS = ['name', 'rel', 'itemprop', 'class', 'id']
-        VALS = ['author', 'byline', 'dc.creator', 'byl']
+        VALS = ['auth-nm lnk', 'mobile-auth-nm lnk', 'auth-nm no-lnk', 'mobile-auth-nm no-lnk', 'author', 'byline', 'dc.creator', 'publisher flt']
         matches = []
         authors = []
 
@@ -203,8 +204,10 @@ class ContentExtractor(object):
             {'attribute': 'name', 'value': 'OriginalPublicationDate',
              'content': 'content'},
             {'attribute': 'itemprop', 'value': 'datePublished',
-             'content': 'datetime'},
+             'content': 'content'},
             {'attribute': 'property', 'value': 'og:published_time',
+             'content': 'content'},
+            {'attribute': 'property', 'value': 'og:regDate',
              'content': 'content'},
             {'attribute': 'name', 'value': 'article_date_original',
              'content': 'content'},
@@ -216,9 +219,19 @@ class ContentExtractor(object):
              'content': 'content'},
             {'attribute': 'pubdate', 'value': 'pubdate',
              'content': 'datetime'},
+            {'attribute': 'name', 'value': 'publish-date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'created-date',
+             'content': 'content'},
+            {'attribute': 'name', 'value': 'modified-date',
+             'content': 'content'},
+ 
+            {'attribute': 'name', 'value': 'Last-Modified',
+             'content': 'content'},
             {'attribute': 'name', 'value': 'publish_date',
              'content': 'content'},
         ]
+
         for known_meta_tag in PUBLISH_DATE_TAGS:
             meta_tags = self.parser.getElementsByTag(
                 doc,
@@ -231,6 +244,18 @@ class ContentExtractor(object):
                 datetime_obj = parse_date_str(date_str)
                 if datetime_obj:
                     return datetime_obj
+
+        # SPECIAL CASES
+
+        # EconomicTimes India
+
+        title_element = self.parser.getElementsByTag(doc, tag='time')
+        if  title_element and len(title_element) > 0:
+            title_text = self.parser.getText(title_element[0])
+            sfd = search_first_date(title_text)
+            if sfd:
+                sfd = sfd[-1]
+            return sfd
 
         return None
 
