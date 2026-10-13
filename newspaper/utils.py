@@ -131,7 +131,7 @@ def timelimit(timeout):
                     self.result = None
                     self.error = None
 
-                    self.setDaemon(True)
+                    self.daemon = True
                     self.start()
 
                 def run(self):
