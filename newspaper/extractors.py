@@ -380,7 +380,7 @@ class ContentExtractor(object):
         """
         total_feed_urls = []
         for category in categories:
-            kwargs = {'attr': 'type', 'value': 'application\/rss\+xml'}
+            kwargs = {'attr': 'type', 'value': 'application/rss+xml'}
             feed_elements = self.parser.getElementsByTag(
                 category.doc, **kwargs)
             feed_urls = [e.get('href') for e in feed_elements if e.get('href')]
