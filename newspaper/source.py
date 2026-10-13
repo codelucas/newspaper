@@ -151,7 +151,7 @@ class Source(object):
         for index, _ in enumerate(common_feed_urls_as_categories):
             response = requests[index].resp
             if response and response.ok:
-                common_feed_urls_as_categories[index].html = network.get_html(
+                common_feed_urls_as_categories[index].html, common_feed_urls_as_categories[index].url = network.get_html(
                     response.url, response=response)
 
         common_feed_urls_as_categories = [c for c in common_feed_urls_as_categories if c.html]
@@ -177,7 +177,7 @@ class Source(object):
     def download(self):
         """Downloads html of source
         """
-        self.html = network.get_html(self.url, self.config)
+        self.html, self.url = network.get_html(self.url, self.config)
 
     def download_categories(self):
         """Download all category html, can use mthreading
@@ -188,7 +188,7 @@ class Source(object):
         for index, _ in enumerate(self.categories):
             req = requests[index]
             if req.resp is not None:
-                self.categories[index].html = network.get_html(
+                self.categories[index].html, self.categories[index].url = network.get_html(
                     req.url, response=req.resp)
             else:
                 log.warning(('Deleting category %s from source %s due to '
@@ -205,7 +205,7 @@ class Source(object):
         for index, _ in enumerate(self.feeds):
             req = requests[index]
             if req.resp is not None:
-                self.feeds[index].rss = network.get_html(
+                self.feeds[index].rss, _ = network.get_html(
                     req.url, response=req.resp)
             else:
                 log.warning(('Deleting feed %s from source %s due to '
@@ -344,7 +344,7 @@ class Source(object):
         if threads == 1:
             for index, article in enumerate(self.articles):
                 url = urls[index]
-                html = network.get_html(url, config=self.config)
+                html, url = network.get_html(url, config=self.config)
                 self.articles[index].set_html(html)
                 if not html:
                     failed_articles.append(self.articles[index])
@@ -356,7 +356,7 @@ class Source(object):
             filled_requests = network.multithread_request(urls, self.config)
             # Note that the responses are returned in original order
             for index, req in enumerate(filled_requests):
-                html = network.get_html(req.url, response=req.resp)
+                html, _ = network.get_html(req.url, response=req.resp)
                 self.articles[index].set_html(html)
                 if not req.resp:
                     failed_articles.append(self.articles[index])
