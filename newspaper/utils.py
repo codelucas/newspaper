@@ -357,6 +357,7 @@ def print_available_languages():
     language_dict = {
         'ar': 'Arabic',
         'be': 'Belarusian',
+        'bn': 'Bengali',
         'bg': 'Bulgarian',
         'da': 'Danish',
         'de': 'German',
