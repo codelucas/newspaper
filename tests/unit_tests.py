@@ -318,13 +318,15 @@ class ArticleTestCase(unittest.TestCase):
     @print_test
     def test_nlp_body(self):
         self.setup_stage('nlp')
-        self.article.nlp()
+        self.article.nlp(reference_corpus=os.path.join(TEST_DIR, 'data/text/space.com1.txt'))
         KEYWORDS = ['balloons', 'delays', 'flight', 'forecasters',
                     'good', 'sailing', 'smooth', 'storm', 'thanksgiving',
                     'travel', 'weather', 'winds', 'york']
+        KEYWORDS_RC = ['way', 'hit', 'night', 'snow', 'weather', 'winds', 'impact']
         SUMMARY = mock_resource_with('cnn_summary', 'txt')
         self.assertEqual(SUMMARY, self.article.summary)
         self.assertCountEqual(KEYWORDS, self.article.keywords)
+        self.assertCountEqual(KEYWORDS_RC, self.article.keywords_reference_corpus)
 
 
 class TestDownloadScheme(unittest.TestCase):
