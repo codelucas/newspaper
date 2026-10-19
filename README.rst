@@ -405,8 +405,59 @@ View a working online demo here: http://newspaper-demo.herokuapp.com
 This is another working online demo: http://newspaper.chinazt.cc/
 
 
+Scraping the local edition of any news site
+===========================================
+
+News sites don't serve everyone the same page. Front pages are localized by country, some stories are geo-restricted, and EU visitors often get a consent wall before they ever see an article. If your scraper always runs from one server, that server's edition is the only one you'll ever collect.
+
+`Decodo`_ lets you pick where every request comes from — residential IPs in 195+ locations, targetable by country, state, city, ZIP code, or ASN — so newspaper3k gets exactly the page a local reader would. Generate a proxy string per location in the Decodo dashboard (*Residential → Proxy setup*), then give each edition its own ``config``:
+
+.. code-block:: python
+
+    import newspaper
+    from newspaper import Config
+
+    # one proxy string per location, generated in the Decodo dashboard
+    EDITIONS = {
+        'us': 'http://US_USERNAME:PASSWORD@gate.decodo.com:7000',
+        'gb': 'http://GB_USERNAME:PASSWORD@gate.decodo.com:7000',
+        'de': 'http://DE_USERNAME:PASSWORD@gate.decodo.com:7000',
+    }
+
+    for country, proxy in EDITIONS.items():
+        config = Config()
+        config.proxies = {'http': proxy, 'https': proxy}
+        config.request_timeout = 20
+
+        paper = newspaper.build('https://www.bbc.com', config=config, memoize_articles=False)
+        print(f'[{country}] {paper.size()} articles')
+
+        for article in paper.articles[:5]:
+            article.download()
+            article.parse()
+            print('   ', article.title)
+
+``newspaper.build()`` hits the homepage, category pages, and feeds before a single article downloads. If a site sets cookies or consent state on that first visit, choose a sticky session when generating the proxy string: Decodo holds the same IP for up to 30 minutes, so the whole crawl looks like one reader browsing rather than a new stranger on every request.
+
+Get credentials and a 3-day, 100MB trial at `decodo.com <https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper>`_.
+
+.. _`Decodo`: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+
+
 Interested in scraping APIs & proxies?
 ======================================
+
+Scrape every news site the way local readers see it
+---------------------------------------------------
+
+.. image:: https://github.com/user-attachments/assets/0bbe6359-7b5b-4a7f-9ace-c6034ecac572
+        :target: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+        :alt: Decodo — residential proxies with exact location targeting across 195+ locations.
+
+`Try Decodo`_ — run high-volume automated requests through reliable residential IPs in 195+ locations. Get exact location data on demand, down to the country, city, ZIP code, or ASN, with unbroken connection stability and total request privacy. 115M+ ethically-sourced IPs, 99.99% uptime, unlimited concurrent sessions, and your choice of rotating IPs or sticky sessions of up to 30 minutes. Start with a 3-day, 100MB trial.
+
+.. _`Try Decodo`: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+
 
 Power your scraping and automation at real-world scale
 ------------------------------------------------------
