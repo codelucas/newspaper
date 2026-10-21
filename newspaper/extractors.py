@@ -43,6 +43,11 @@ UNDERSCORE_SPLITTER = StringSplitter("_")
 SLASH_SPLITTER = StringSplitter("/")
 ARROWS_SPLITTER = StringSplitter(" » ")
 COLON_SPLITTER = StringSplitter(":")
+# a separator between a headline and a site name, section or author: an ASCII
+# or typographic dash, a pipe, a middle dot, a guillemet, a slash or a colon,
+# always with whitespace on both sides so in-word hyphens and "Foo: bar" stay
+TITLE_SEGMENT_SEPARATOR = re.compile(r'\s+(?:[-–—|·•»/]|--|::?)\s+')
+TITLE_ELLIPSES = ('…', '...')
 SPACE_SPLITTER = StringSplitter(' ')
 NO_STRINGS = set()
 A_REL_TAG_SELECTOR = "a[rel=tag]"
@@ -391,6 +396,76 @@ class ContentExtractor(object):
                     return candidate
         return max(candidates, key=len)
 
+    @staticmethod
+    def _comparable(text):
+        """Title text reduced to lowercase letters and digits, for comparing
+        titles that differ only in punctuation, spacing or case"""
+        return re.sub(r'\W+', '', text or '').casefold()
+
+    def _strip_title_affixes(self, title, site_name, h1):
+        """Drop the site name, section or author that pages put before or
+        after the headline in <title>, when the page itself says which part
+        is the headline. Returns None when there is no such evidence, so the
+        caller's splitting heuristics still apply. Otherwise returns the
+        headline and whether it is final; after dropping a site name the rest
+        may still carry a section ("Post | Blog | web.dev"), which the
+        caller's splitting then handles.
+
+        Evidence, strongest first:
+        1. a contiguous run of segments equals the h1. Segments outside the
+           run are dropped unless they contain a digit ("Part 2", "v1.4"),
+           which is more likely part of the headline than a site name.
+        2. the first or last segments equal og:site_name.
+        """
+        spans = [m.span() for m in TITLE_SEGMENT_SEPARATOR.finditer(title)]
+        if not spans:
+            return None
+        starts = [0] + [end for _, end in spans]
+        ends = [start for start, _ in spans] + [len(title)]
+        segments = [title[a:b].strip() for a, b in zip(starts, ends)]
+        count = len(segments)
+
+        def run(i, j):
+            return title[starts[i]:ends[j - 1]].strip()
+
+        h1_key = self._comparable(h1)
+        if h1_key:
+            for i in range(count):
+                for j in range(count, i, -1):
+                    if j - i == count:
+                        continue
+                    if self._comparable(run(i, j)) != h1_key:
+                        continue
+                    dropped = segments[:i] + segments[j:]
+                    if any(re.search(r'\d', seg) for seg in dropped):
+                        break
+                    return run(i, j), True
+
+        site_key = self._comparable(site_name)
+        if site_key:
+            i, j = 0, count
+            while j - i > 1 and self._comparable(segments[j - 1]) == site_key:
+                j -= 1
+            while j - i > 1 and self._comparable(segments[i]) == site_key:
+                i += 1
+            if (i, j) != (0, count):
+                return run(i, j), j - i == 1
+
+        return None
+
+    def _restore_truncated_title(self, title, h1):
+        """Use the h1 when <title> was cut short with an ellipsis and the
+        h1 carries the full headline"""
+        for ellipsis in TITLE_ELLIPSES:
+            if not title.endswith(ellipsis):
+                continue
+            stem = self._comparable(title[:-len(ellipsis)])
+            h1_key = self._comparable(h1)
+            if len(title.split()) > 3 and len(h1_key) > len(stem) \
+                    and h1_key.startswith(stem):
+                return h1
+        return title
+
     def get_title(self, doc):
         """Fetch the article title and analyze it
 
@@ -442,6 +517,7 @@ class ContentExtractor(object):
         # - too short texts (fewer than 2 words) are discarded
         # - clean double spaces
         title_text_h1 = ''
+        site_name = self.get_meta_site_name(doc) or ''
         title_element_h1_list = self.parser.getElementsByTag(doc,
                                                              tag='h1') or []
         title_text_h1_list = [self.parser.getText(tag) for tag in
@@ -450,11 +526,16 @@ class ContentExtractor(object):
             # sort by len and set the longest
             title_text_h1_list.sort(key=len, reverse=True)
             title_text_h1 = title_text_h1_list[0]
+            # clean double spaces
+            title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
+            # an h1 that is just the site name (a blog header) says nothing
+            # about the article
+            if self._comparable(title_text_h1) == \
+                    self._comparable(site_name):
+                title_text_h1 = ''
             # discard too short texts
             if len(title_text_h1.split(' ')) <= 2:
                 title_text_h1 = ''
-            # clean double spaces
-            title_text_h1 = ' '.join([x for x in title_text_h1.split() if x])
 
         # create filtered versions of title_text, title_text_h1, title_text_fb
         # for finer comparison
@@ -464,7 +545,10 @@ class ContentExtractor(object):
         filter_title_text_fb = filter_regex.sub('', title_text_fb).lower()
 
         # check for better alternatives for title_text and possibly skip splitting
-        if title_text_h1 == title_text:
+        if title_text_h1 and \
+                self._comparable(title_text_h1) == \
+                self._comparable(title_text):
+            title_text = title_text_h1
             used_delimeter = True
         elif filter_title_text_h1 and filter_title_text_h1 == filter_title_text_fb:
             title_text = title_text_h1
@@ -478,6 +562,13 @@ class ContentExtractor(object):
                 and filter_title_text.startswith(filter_title_text_fb):
             title_text = title_text_fb
             used_delimeter = True
+
+        # drop a site name, section or author the page identifies
+        if not used_delimeter:
+            stripped = self._strip_title_affixes(title_text, site_name,
+                                                 title_text_h1)
+            if stripped:
+                title_text, used_delimeter = stripped
 
         # split title with |
         if not used_delimeter and '|' in title_text:
@@ -518,7 +609,7 @@ class ContentExtractor(object):
         if filter_title_text_h1 == filter_title:
             title = title_text_h1
 
-        return title
+        return self._restore_truncated_title(title, title_text_h1)
 
     def split_title(self, title, splitter, hint=None):
         """Split the title to best part possible

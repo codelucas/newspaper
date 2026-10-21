@@ -379,6 +379,133 @@ class ContentExtractorTestCase(unittest.TestCase):
         html = '<meta property="og:title" content="Fallback title from og">'
         self.assertEqual(self._get_title(html), 'Fallback title from og')
 
+    def _page(self, title, h1=None, site_name=None, og_title=None):
+        head = '<title>{}</title>'.format(title)
+        if og_title is not None:
+            head += '<meta property="og:title" content="{}">'.format(og_title)
+        if site_name is not None:
+            head += '<meta property="og:site_name" content="{}">'.format(
+                site_name)
+        body = '<h1>{}</h1>'.format(h1) if h1 is not None else ''
+        return '<html><head>{}</head><body>{}</body></html>'.format(head, body)
+
+    def test_get_title_drops_site_name_after_en_dash(self):
+        title = 'Tell Your Tech Career Story: Proof, CVs, and Interviews'
+        html = self._page(title + ' – Real Python', site_name='Real Python',
+                          og_title=title + ' – Real Python')
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_drops_site_name_after_em_dash_ignoring_case(self):
+        html = self._page('Shipping native tabs in Expo Router — Expo blog',
+                          site_name='Expo Blog')
+        self.assertEqual(self._get_title(html),
+                         'Shipping native tabs in Expo Router')
+
+    def test_get_title_drops_site_name_before_middle_dot(self):
+        html = self._page('Valkey · Announcing Planet Valkey',
+                          site_name='Valkey')
+        self.assertEqual(self._get_title(html), 'Announcing Planet Valkey')
+
+    def test_get_title_drops_site_name_after_colon(self):
+        html = self._page('Issue 545 :: Haskell Weekly',
+                          site_name='Haskell Weekly')
+        self.assertEqual(self._get_title(html), 'Issue 545')
+
+    def test_get_title_drops_suffix_when_rest_is_h1(self):
+        # no og:site_name, but the h1 is the headline without the suffix
+        title = 'Dutch Police Arrest Reformed Hacker in Shiny Hunters Investigation'
+        html = self._page(title + ' – Krebs on Security', h1=title)
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_drops_author_when_rest_is_h1(self):
+        html = self._page(
+            'The AI Bill Is the Cheap Part — Aviv Ben-Yosef',
+            h1='The AI Bill Is the Cheap Part',
+            og_title='The AI Bill Is the Cheap Part — Aviv Ben-Yosef')
+        self.assertEqual(self._get_title(html), 'The AI Bill Is the Cheap Part')
+
+    def test_get_title_drops_prefix_when_rest_is_h1(self):
+        html = self._page('Node.js — Node.js 26.12.1 (Current)',
+                          h1='Node.js 26.12.1 (Current)')
+        self.assertEqual(self._get_title(html), 'Node.js 26.12.1 (Current)')
+
+    def test_get_title_keeps_h1_run_with_separator_inside(self):
+        # the h1 itself contains an en dash; only the outer suffix goes
+        h1 = 'Web-Perf Wednesday 014 – Performance Budgets Need a Worst Case'
+        html = self._page(h1 + ' – CSS Wizardry', h1=h1)
+        self.assertEqual(self._get_title(html), h1)
+
+    def test_get_title_keeps_suffix_with_digit(self):
+        # "Part 2" belongs to the headline even when the h1 leaves it out
+        html = self._page('Building a parser in Rust – Part 2',
+                          h1='Building a parser in Rust')
+        self.assertEqual(self._get_title(html),
+                         'Building a parser in Rust – Part 2')
+
+    def test_get_title_keeps_en_dash_without_evidence(self):
+        title = ('Getting started with DSC 3.0 – Part 6: Using the DSC MCP '
+                 'server with your AI coding tools')
+        html = self._page(title, h1='What tools does the DSC MCP server offer?')
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_keeps_suffix_without_evidence(self):
+        # newsletter issues: no og:site_name and no h1, so nothing is dropped
+        title = 'Issue #805: Why developers use the platform — JavaScript Weekly'
+        html = self._page(title)
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_ignores_h1_that_is_the_site_name(self):
+        # a blog header h1 must not be picked over the headline
+        html = self._page(
+            'GPT-6 Astra Breaks an Old Enigma Message - Schneier on Security',
+            h1='Schneier on Security', site_name='Schneier on Security')
+        self.assertEqual(self._get_title(html),
+                         'GPT-6 Astra Breaks an Old Enigma Message')
+
+    def test_get_title_splits_section_left_after_site_name(self):
+        html = self._page('New to the web platform in June | Blog | web.dev',
+                          site_name='web.dev')
+        self.assertEqual(self._get_title(html),
+                         'New to the web platform in June')
+
+    def test_get_title_prefers_h1_differing_only_in_punctuation(self):
+        html = self._page('ArrangementView - Think Before You Arrange',
+                          h1='ArrangementView: Think Before You Arrange')
+        self.assertEqual(self._get_title(html),
+                         'ArrangementView: Think Before You Arrange')
+
+    def test_get_title_keeps_dunder_when_site_name_is_dropped(self):
+        title = "Python's .__call__() Method: Creating Callable Instances Quiz"
+        html = self._page(title + ' – Real Python', site_name='Real Python')
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_restores_truncated_title_from_h1(self):
+        h1 = '30 .NET System Design Interview Questions That Actually Get Asked in 2026'
+        html = self._page('30 .NET System Design Interview Questions That '
+                          'Actually Get Asked in…', h1=h1)
+        self.assertEqual(self._get_title(html), h1)
+
+    def test_get_title_keeps_ellipsis_when_h1_is_truncated_too(self):
+        title = 'Old tech is sometimes better – a case study from Now-Next…'
+        html = self._page(title, h1=title)
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_keeps_ellipsis_that_is_part_of_the_title(self):
+        title = "I think we're cooked..."
+        html = self._page(title, h1='Some other heading on the page')
+        self.assertEqual(self._get_title(html), title)
+
+    def test_get_title_fixtures_with_site_suffix(self):
+        cases = {
+            'flavorwire.com1.html':
+                'From The Interview to Iggy Azalea, 2014’s Worst Cultural Moments',
+            'thekitchn.com1.html':
+                'Before & After: Replacing Tiny Details in This Kitchen Made a Big Difference',
+        }
+        for fixture, expected in cases.items():
+            with open(os.path.join(HTML_FN, fixture), encoding='utf-8') as f:
+                self.assertEqual(self._get_title(f.read()), expected, fixture)
+
     def _get_canonical_link(self, article_url, html):
         doc = self.parser.fromstring(html)
         return self.extractor.get_canonical_link(article_url, doc)
