@@ -468,6 +468,14 @@ class ContentExtractorTestCase(unittest.TestCase):
         self.assertEqual(self._get_title(html),
                          'New to the web platform in June')
 
+    def test_get_title_keeps_product_prefix_before_site_name(self):
+        # only one splitter runs: dropping "Product Hunt" must not let the
+        # dash splitter cut the product name as well
+        title = 'Clarifai - Product Information, Latest Updates, and Reviews 2024'
+        html = self._page(title + ' | Product Hunt', h1='Clarifai',
+                          site_name='Product Hunt')
+        self.assertEqual(self._get_title(html), title)
+
     def test_get_title_prefers_h1_differing_only_in_punctuation(self):
         html = self._page('ArrangementView - Think Before You Arrange',
                           h1='ArrangementView: Think Before You Arrange')

@@ -406,16 +406,16 @@ class ContentExtractor(object):
         """Drop the site name, section or author that pages put before or
         after the headline in <title>, when the page itself says which part
         is the headline. Returns None when there is no such evidence, so the
-        caller's splitting heuristics still apply. Otherwise returns the
-        headline and whether it is final; after dropping a site name the rest
-        may still carry a section ("Post | Blog | web.dev"), which the
-        caller's splitting then handles.
+        caller's splitting heuristics still apply.
 
         Evidence, strongest first:
         1. a contiguous run of segments equals the h1. Segments outside the
            run are dropped unless they contain a digit ("Part 2", "v1.4"),
            which is more likely part of the headline than a site name.
-        2. the first or last segments equal og:site_name.
+        2. the first or last segments equal og:site_name, and what is left
+           has no separator. When more segments remain ("Product - Tagline |
+           Product Hunt"), the caller's splitting decides as before, on the
+           whole title, so a second splitter never cuts the rest again.
         """
         spans = [m.span() for m in TITLE_SEGMENT_SEPARATOR.finditer(title)]
         if not spans:
@@ -439,7 +439,7 @@ class ContentExtractor(object):
                     dropped = segments[:i] + segments[j:]
                     if any(re.search(r'\d', seg) for seg in dropped):
                         break
-                    return run(i, j), True
+                    return run(i, j)
 
         site_key = self._comparable(site_name)
         if site_key:
@@ -448,8 +448,8 @@ class ContentExtractor(object):
                 j -= 1
             while j - i > 1 and self._comparable(segments[i]) == site_key:
                 i += 1
-            if (i, j) != (0, count):
-                return run(i, j), j - i == 1
+            if j - i == 1 and (i, j) != (0, count):
+                return run(i, j)
 
         return None
 
@@ -568,7 +568,8 @@ class ContentExtractor(object):
             stripped = self._strip_title_affixes(title_text, site_name,
                                                  title_text_h1)
             if stripped:
-                title_text, used_delimeter = stripped
+                title_text = stripped
+                used_delimeter = True
 
         # split title with |
         if not used_delimeter and '|' in title_text:
