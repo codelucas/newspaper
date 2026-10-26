@@ -439,9 +439,9 @@ News sites don't serve everyone the same page. Front pages are localized by coun
 
 ``newspaper.build()`` hits the homepage, category pages, and feeds before a single article downloads. If a site sets cookies or consent state on that first visit, choose a sticky session when generating the proxy string: Decodo holds the same IP for up to 30 minutes, so the whole crawl looks like one reader browsing rather than a new stranger on every request.
 
-Get credentials and a 3-day, 100MB trial at `decodo.com <https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper>`_.
+Get credentials and a 3-day, 100MB trial at `decodo.com <https://visit.decodo.com/DWGVM2>`_.
 
-.. _`Decodo`: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+.. _`Decodo`: https://visit.decodo.com/DWGVM2
 
 
 Interested in scraping APIs & proxies?
@@ -451,12 +451,12 @@ Scrape every news site the way local readers see it
 ---------------------------------------------------
 
 .. image:: https://github.com/user-attachments/assets/0bbe6359-7b5b-4a7f-9ace-c6034ecac572
-        :target: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+        :target: https://visit.decodo.com/DWGVM2
         :alt: Decodo — residential proxies with exact location targeting across 195+ locations.
 
 `Try Decodo`_ — run high-volume automated requests through reliable residential IPs in 195+ locations. Get exact location data on demand, down to the country, city, ZIP code, or ASN, with unbroken connection stability and total request privacy. 115M+ ethically-sourced IPs, 99.99% uptime, unlimited concurrent sessions, and your choice of rotating IPs or sticky sessions of up to 30 minutes. Start with a 3-day, 100MB trial.
 
-.. _`Try Decodo`: https://decodo.com/deals/residential-offer?utm_source=github&utm_medium=referral&utm_campaign=codelucas_newspaper
+.. _`Try Decodo`: https://visit.decodo.com/DWGVM2
 
 
 Power your scraping and automation at real-world scale
